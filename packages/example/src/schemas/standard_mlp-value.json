@@ -1,0 +1,509 @@
+{
+  "name": "eu.driver.model.mlp.SlRep",
+  "namespace": "eu.driver.model.mlp",
+  "doc": "Mobile Location Protocol (MLP) Approved Version 3.1. http://www.openmobilealliance.org/release/MLP/V3_1-20110920-A/OMA-LIF-MLP-V3_1-20110920-A.pdf - Standard Location Report (5.2.3.7)",
+  "type": "record",
+  "fields": [
+    {
+      "name": "attr_ver",
+      "type": "string",
+	    "default": "3.0.0"
+    },
+    {
+      "name": "pos",
+      "type": {
+                  "name": "Pos",
+                  "namespace": "eu.driver.model.mlp",
+                  "type": "record",
+                  "fields": [
+                    {
+                      "name": "msid",
+                      "type": {
+                        "name": "Msid",
+                        "namespace": "eu.driver.model.mlp",
+                        "type": "record",
+                        "fields": [
+                          {
+                            "name": "msid",
+                            "type": "string"
+                          },
+                          {
+                            "name": "attr_type",
+                            "type": {
+                              "name": "AttrType",
+                              "namespace": "eu.driver.model.mlp",
+                              "type": "enum",
+                              "symbols": [
+                                "MSISDN",
+                                "IMSI",
+                                "IMEI",
+                                "MIN",
+                                "MDN",
+                                "EME_MSID",
+                                "ASID",
+                                "OPE_ID",
+                                "IPV4",
+                                "IPV6",
+                                "SESSID"
+                              ]
+                            }
+                          },
+                          {
+                            "name": "attr_enc",
+                            "namespace": "eu.driver.model.mlp",
+                            "type": {
+                              "name": "AttrEnc",
+                              "type": "enum",
+                              "symbols": [
+                                "ASC",
+                                "CRP"
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "pd",
+                      "type": ["null",
+                        {
+                          "name": "Pd",
+                          "namespace": "eu.driver.model.mlp",
+                          "type": "record",
+                          "fields": [
+                            {
+                              "name": "time",
+                              "type": {
+                                "name": "Time",
+                                "namespace": "eu.driver.model.mlp",
+                                "type": "record",
+                                "fields": [
+                                  {
+                                    "name": "time",
+                                    "type": "long",
+                                    "doc": "UTC Timestamp in milliseconds. Original MLP uses String: yyyyMMddhhmmss",
+                                    "logicalType": "timestamp-millis"
+                                  },
+                                  {
+                                    "name": "attr_utc_off",
+                                    "doc": "Specifies the UTC [UTC] offset in hours and minutes. Positive values indicate time zones east of Greenwich.",
+                                    "type": "string",
+                                    "default": "0000"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "name": "shape",
+                              "doc": "TODO: add  MultiLineString | MultiPoint | MultiPolygon if they are needed",
+                              "type": [
+                                {
+                                    "name": "Point",
+                                    "namespace": "eu.driver.model.mlp",
+                                    "type": "record",
+                                    "fields": [
+                                      { 
+                                        "name": "coord",
+                                        "type": {
+                                          "name": "Coord",
+                                          "namespace": "eu.driver.model.mlp",
+                                          "type": "record",
+                                          "fields": [
+                                            {
+                                              "name": "X",
+                                              "doc": "The first coordinate in a coordinate system (30 27 45.3N)",
+                                              "type": "string"
+                                            },
+                                            {
+                                              "name": "Y",
+                                              "doc": "Second ordinate in a coordinate.system (45 25 52.9E). This is optional if it is a linear coordinate system.",
+                                              "type": ["null", "string"],
+                                              "default": null
+                                            },
+                                            {
+                                              "name": "Z",
+                                              "doc": "Third ordinate in a coordinate system which has at least three ordinates.",
+                                              "type": ["null", "string"],
+                                              "default": null
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      {
+                                        "name": "attr_gid",
+                                        "type": ["null", "string"],
+                                        "default": null
+                                      },
+                                      {
+                                        "name": "attr_srsName",
+                                        "type": ["null", "string"],
+                                        "default": null
+                                      }
+                                    ]
+                                },
+                                {
+                                  "name": "LineString",
+                                  "namespace": "eu.driver.model.mlp",
+                                  "type": "record",
+                                  "fields": [
+                                    {
+                                      "name": "coord",
+                                      "type": {
+                                        "type": "array",
+                                        "items": "eu.driver.model.mlp.Coord"
+                                      },
+                                      "doc": "Must contain at least 2 coordinates"
+                                    },
+                                    {
+                                      "name": "attr_gid",
+                                      "type": ["null", "string"],
+                                      "default": null
+                                    },
+                                    {
+                                      "name": "attr_srsName",
+                                      "type": ["null", "string"],
+                                      "default": null
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "Polygon",
+                                  "namespace": "eu.driver.model.mlp",
+                                  "type": "record",
+                                  "fields": [
+                                    {
+                                      "name": "outerBoundaryIs",
+                                      "type": {
+                                        "name": "LinearRing",
+                                        "namespace": "eu.driver.model.mlp",
+                                        "type": "record",
+                                        "fields": [
+                                          {
+                                            "name": "coords",
+                                            "type": {
+                                              "type": "array",
+                                              "items": "eu.driver.model.mlp.Coord"
+                                            },
+                                            "doc": "Must contain at least 3 coordinates"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "innerBoundaryIs",
+                                      "type": ["null", {
+                                        "type": "array",
+                                        "items": "eu.driver.model.mlp.LinearRing"
+                                      }],
+                                      "default": null
+                                    },
+                                    {
+                                      "name": "attr_gid",
+                                      "type": ["null", "string"],
+                                      "default": null
+                                    },
+                                    {
+                                      "name": "attr_srsName",
+                                      "type": ["null", "string"],
+                                      "default": null
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "Box",
+                                  "namespace": "eu.driver.model.mlp",
+                                  "type": "record",
+                                  "doc": "TODO: fix coord top left and bottom right names to be compatible with schema",
+                                  "fields": [
+                                    {
+                                      "name": "coordTopLeft",
+                                      "type": "eu.driver.model.mlp.Coord"
+                                    },
+                                    {
+                                      "name": "coordBottomRight",
+                                      "type": "eu.driver.model.mlp.Coord"
+                                    },
+                                    {
+                                      "name": "attr_gid",
+                                      "type": ["null", "string"],
+                                      "default": null
+                                    },
+                                    {
+                                      "name": "attr_srsName",
+                                      "type": ["null", "string"],
+                                      "default": null
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "CircularArea",
+                                  "namespace": "eu.driver.model.mlp",
+                                  "type": "record",
+                                  "fields": [
+                                    {
+                                      "name": "coord",
+                                      "type": "eu.driver.model.mlp.Coord"
+                                    },
+                                    {
+                                      "name": "radius",
+                                      "type": "double"
+                                    },
+                                    {
+                                      "name": "distanceUnit",
+                                      "type": ["null", {
+                                        "name": "DistanceUnit",
+                                        "namespace": "eu.driver.model.mlp",
+                                        "type": "enum",
+                                        "symbols": [
+                                          "meter"
+                                        ]
+                                      }],
+                                      "default": null
+                                    },
+                                    {
+                                      "name": "attr_gid",
+                                      "type": ["null", "string"],
+                                      "default": null
+                                    },
+                                    {
+                                      "name": "attr_srsName",
+                                      "type": ["null", "string"],
+                                      "default": null
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "CircularArcArea",
+                                  "namespace": "eu.driver.model.mlp",
+                                  "type": "record",
+                                  "fields": [
+                                    {
+                                      "name": "coord",
+                                      "type": "eu.driver.model.mlp.Coord"
+                                    },
+                                    {
+                                      "name": "inRadius",
+                                      "type": "double"
+                                    },
+                                    {
+                                      "name": "outRadius",
+                                      "type": "double"
+                                    },
+                                    {
+                                      "name": "startAngle",
+                                      "type": "double"
+                                    },
+                                    {
+                                      "name": "stopAngle",
+                                      "type": "double"
+                                    },
+                                    {
+                                      "name": "angularUnit",
+                                      "type": ["null", {
+                                        "name": "AngularUnit",
+                                        "namespace": "eu.driver.model.mlp",
+                                        "type": "enum",
+                                        "symbols": [
+                                          "Degrees",
+                                          "Radians"
+                                        ]
+                                      }],
+                                      "default": null
+                                    },
+                                    {
+                                      "name": "distanceUnit",
+                                      "type": ["null", "eu.driver.model.mlp.DistanceUnit"],
+                                      "default": null
+                                    },
+                                    {
+                                      "name": "attr_gid",
+                                      "type": ["null", "string"],
+                                      "default": null
+                                    },
+                                    {
+                                      "name": "attr_srsName",
+                                      "type": ["null", "string"],
+                                      "default": null
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "EllipticalArea",
+                                  "namespace": "eu.driver.model.mlp",
+                                  "type": "record",
+                                  "fields": [
+                                    {
+                                      "name": "coord",
+                                      "type": "eu.driver.model.mlp.Coord"
+                                    },
+                                    {
+                                      "name": "angle",
+                                      "type": "double"
+                                    },
+                                    {
+                                      "name": "semiMajor",
+                                      "type": "double"
+                                    },
+                                    {
+                                      "name": "semiMinor",
+                                      "type": "double"
+                                    },
+                                    {
+                                      "name": "stopAngle",
+                                      "type": "double"
+                                    },
+                                    {
+                                      "name": "angularUnit",
+                                      "type": ["null", "eu.driver.model.mlp.AngularUnit"],
+                                      "default": null
+                                    },
+                                    {
+                                      "name": "distanceUnit",
+                                      "type": ["null", "eu.driver.model.mlp.DistanceUnit"],
+                                      "default": null
+                                    },
+                                    {
+                                      "name": "attr_gid",
+                                      "type": ["null", "string"],
+                                      "default": null
+                                    },
+                                    {
+                                      "name": "attr_srsName",
+                                      "type": ["null", "string"],
+                                      "default": null
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+							{
+								"name": "alt",
+								"type": ["null", {
+                                  "name": "Alt",
+                                  "namespace": "eu.driver.model.mlp",
+                                  "type": "record",
+                                  "fields": [
+                                    {
+                                      "name": "alt",
+                                      "type": "int",
+                                      "doc": "Altitude in meters"
+                                    }
+                                  ]
+                                }],
+								"default": null
+							},
+							{
+								"name": "altAcc",
+								"type": ["null", {
+                                  "name": "AltAcc",
+                                  "namespace": "eu.driver.model.mlp",
+                                  "type": "record",
+                                  "fields": [
+                                    {
+                                      "name": "alt_acc",
+                                      "type": ["null", "int"],
+                                      "default": null,
+                                      "doc": "Accuracy of Altitude in meters"
+                                    }
+                                  ]
+                                }],
+								"default": null
+							},
+                            {
+                              "name": "speed",
+                              "doc": "Speed in m/s",
+                              "type": ["null", "int"],
+                              "default": null
+                            },
+                            {
+                              "name": "direction",
+                              "doc": "Direction of movement in degrees",
+                              "type": ["null", "int"],
+                              "default": null
+                            },
+                            {
+                              "name": "lev_conf",
+                              "doc": "Probability in percent that the Mobile Station is located in the position area that is returned",
+                              "type": ["null", "int"],
+                              "default": null
+                            }
+                          ]
+                        }],
+						"default": null
+					},
+					{
+						"name": "poserr",
+						"type": ["null", {
+                          "name": "Poserr",
+                          "namespace": "eu.driver.model.mlp",
+                          "type": "record",
+                          "fields": [
+                            {
+                              "name": "result",
+                              "type": {
+                                "name": "Result",
+                                "namespace": "eu.driver.model.mlp",
+                                "type": "record",
+                                "fields": [
+                                  {
+                                    "name": "result",
+                                    "doc": "See MLP 3.1 specifications chapter 5.4 on Result Codes",
+                                    "type": {
+                                      "name": "ResultEnum",
+                                      "namespace": "eu.driver.model.mlp",
+                                      "type": "enum",
+                                      "symbols": [
+                                        "OK",
+                                        "SYSTEM_FAILURE",
+                                        "UNSPECIFIED_ERROR",
+                                        "UNAUTHORIZED_APPLICATION",
+                                        "UNKNOWN_SUBSCRIBER",
+                                        "ABSENT_SUBSCRIBER",
+                                        "POSITION_METHOD_FAILURE",
+                                        "CONGESTION_IN_LOCATION_SERVER",
+                                        "CONGESTION_IN_MOBILE_NETWORK",
+                                        "UNSUPPORTED_VERSION",
+                                        "TOO_MANY_POSITION_ITEMS",
+                                        "FORMAT_ERROR",
+                                        "SYNTAX_ERROR",
+                                        "PROTOCOL_ELEMENT_NOT_SUPPORTED",
+                                        "SERVICE_NOT_SUPPORTED",
+                                        "PROTOCOL_ELEMENT_ATTRIBUTE_NOT_SUPPORTED",
+                                        "INVALID_PROTOCOL_ELEMENT_VALUE",
+                                        "INVALID_PROTOCOL_ELEMENT_ATTRIBUTE_VALUE",
+                                        "PROTOCOL_ELEMENT_VALUE_NOT_SUPPORTED",
+                                        "PROTOCOL_ELEMENT_ATTRIBUTE_VALUE_NOT_SUPPORTED",
+                                        "QOP_NOT_ATTAINABLE",
+                                        "POSITIONING_NOT_ALLOWED",
+                                        "DISALLOWED_BY_LOCAL_REGULATIONS",
+                                        "MISCONFIGURATION_OF_LOCATION_SERVER"
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "name": "attr_resid",
+                                    "doc": "See MLP 3.1 specifications chapter 5.4 on Result Codes",
+                                    "type": "string"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "name": "add_info",
+                              "type": ["null", "string"],
+                              "default": null
+                            },
+                            {
+                              "name": "time",
+                              "type": "eu.driver.model.mlp.Time"
+                            }
+                          ]
+                        }
+                    ],
+					"default": null
+                  }
+                ]
+              }
+    }
+  ]
+}

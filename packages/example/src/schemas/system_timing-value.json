@@ -1,0 +1,34 @@
+{
+  "type": "record",
+  "name": "Timing",
+  "namespace": "eu.driver.model.core",
+  "doc": "Timing message to distribute the trial time.",
+  "fields": [
+    {
+      "name": "updatedAt",
+      "type": "long",
+      "logicalType": "timestamp-millis",
+      "doc":
+        "The date and time the trialTime was updated as the number of milliseconds from the unix epoch, 1 January 1970 00:00:00.000 UTC."
+    },
+    {
+      "name": "trialTime",
+      "type": "long",
+      "logicalType": "timestamp-millis",
+      "doc":
+        "The fictive date and time of the simulation / trial as the number of milliseconds from the unix epoch, 1 January 1970 00:00:00.000 UTC."
+    },
+    {
+      "name": "timeElapsed",
+      "type": "long",
+      "logicalType": "timestamp-millis",
+      "doc": "The number of milliseconds from the start of the trial."
+    },
+    {
+      "name": "trialTimeSpeed",
+      "type": "float",
+      "doc":
+        "Positive number, indicating how fast the simulation / trial time moves with respect to the actual time. A value of 0 means a pause, 1 is as fast as real-time."
+    }
+  ]
+}

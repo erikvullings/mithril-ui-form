@@ -1,0 +1,28 @@
+{
+  "type": "record",
+  "name": "TopicInvite",
+  "namespace": "eu.driver.model.core",
+  "doc": "The message send by the admin tool to tell the adaptor to which topic he is invited to join.",
+  "fields": [
+    {
+      "name": "id",
+      "doc": "Client id",
+      "type": "string"
+    },
+    {
+      "name": "topicName",
+      "type": "string",
+      "doc": "The name of the Topic to which the adaptor (client) is invited to join."
+    },
+    {
+      "name": "subscribeAllowed",
+      "type": "boolean",
+      "doc": "Indicates if the client is allowed to connect as subscriber."
+    },
+    {
+      "name": "publishAllowed",
+      "type": "boolean",
+      "doc": "Indicates if the client is allowed to connect as subscriber."
+    }
+  ]
+}

@@ -1,0 +1,247 @@
+{
+  "name": "FeatureCollection",
+  "namespace": "eu.driver.model.geojson",
+  "doc": "A GeoJSON FeatureCollection object. As the properties are generic, it should be replaced by a record with named properties.",
+  "type": "record",
+  "fields": [
+    {
+      "name": "type",
+      "type": {
+        "name": "FeatureCollectionType",
+        "type": "enum",
+        "symbols": [ "FeatureCollection" ]
+      },
+      "default": "FeatureCollection"
+    },
+    {
+      "name": "bbox",
+      "type": [
+        "null",
+        {
+          "name": "BoundingBox",
+          "namespace": "eu.driver.model.geojson",
+          "doc": "The value of the bbox member MUST be an array of length 2*n where n is the number of dimensions represented in the contained geometries, with all axes of the most southwesterly point followed by all axes of the more northeasterly point. The axes order of a bbox follows the axes order of geometries. The 'bbox' values define shapes with edges that follow lines of constant longitude, latitude, and elevation.",
+          "type": "array",
+          "items": "double"
+        }
+      ],
+      "default": null
+    },
+    {
+      "name": "features",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": {
+            "name": "Feature",
+            "namespace": "eu.driver.model.geojson",
+            "doc": "A GeoJSON Feature object",
+            "type": "record",
+            "fields": [
+              {
+                "name": "type",
+                "type": {
+                  "type": "enum",
+                  "name": "FeatureType",
+                  "symbols": [ "Feature" ]
+                },
+                "default": "Feature"
+              },
+              {
+                "name": "bbox",
+                "type": [
+                  "null",
+                  {
+                    "type": "array",
+                    "items": "double"
+                  }
+                ],
+                "default": null
+              },
+              {
+                "name": "geometry",
+                "type": [
+                  {
+                    "name": "Point",
+                    "namespace": "eu.driver.model.geojson",
+                    "doc": "Describes a point geometry",
+                    "type": "record",
+                    "fields": [
+                      {
+                        "name": "type",
+
+                        "type": {
+                          "type": "enum",
+                          "name": "PointType",
+                          "symbols": [ "Point" ]
+                        },
+                        "default": "Point"
+                      },
+                      {
+                        "name": "coordinates",
+                        "type": {
+                          "type": "array",
+                          "items": "double"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "LineString",
+                    "namespace": "eu.driver.model.geojson",
+                    "doc": "Describes a LineString geometry",
+                    "type": "record",
+                    "fields": [
+                      {
+                        "name": "type",
+                        "type": {
+                          "type": "enum",
+                          "name": "LineStringType",
+                          "symbols": [ "LineString" ]
+                        },
+                        "default": "LineString"
+                      },
+                      {
+                        "name": "coordinates",
+                        "type": {
+                          "type": "array",
+                          "name": "CoordinatesType",
+                          "items": {
+                            "type": "array",
+                            "items": "double"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "MultiLineString",
+                    "namespace": "eu.driver.model.geojson",
+                    "doc": "Describes a MultiLineString geometry",
+                    "type": "record",
+                    "fields": [
+                      {
+                        "name": "type",
+                        "type": {
+                          "type": "enum",
+                          "name": "MultiLineStringType",
+                          "symbols": [ "MultiLineString" ]
+                        },
+                        "default": "MultiLineString"
+                      },
+                      {
+                        "name": "coordinates",
+                        "type": {
+                          "type": "array",
+                          "name": "CoordinatesType",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "array",
+                              "items": "double"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Polygon",
+                    "namespace": "eu.driver.model.geojson",
+                    "doc": "Describes a Polygon geometry",
+                    "type": "record",
+                    "fields": [
+                      {
+                        "name": "type",
+                        "type": {
+                          "type": "enum",
+                          "name": "PolygonType",
+                          "symbols": [ "Polygon" ]
+                        },
+                        "default": "Polygon"
+                      },
+                      {
+                        "name": "coordinates",
+                        "type": {
+                          "type": "array",
+                          "name": "CoordinatesType",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "array",
+                              "items": "double"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "MultiPolygon",
+                    "namespace": "eu.driver.model.geojson",
+                    "doc": "Describes a MultiPolygon geometry",
+                    "type": "record",
+                    "fields": [
+                      {
+                        "name": "type",
+                        "type": {
+                          "type": "enum",
+                          "name": "MultiPolygonType",
+                          "symbols": [ "MultiPolygon" ]
+                        },
+                        "default": "MultiPolygon"
+                      },
+                      {
+                        "name": "coordinates",
+                        "type": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "array",
+                                "items": "double"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "properties",
+                "namespace": "eu.driver.model.geojson",
+                "doc": "Any type, without infinite nesting, should be replaced during actual usage with a record with named properties.",
+                "type": {
+                  "name": "Json",
+                  "type": "map",
+                  "values": [
+                    "null",
+                    "boolean",
+                    "string",
+                    "int",
+                    "long",
+                    "float",
+                    "double",
+                    {
+                      "type": "array",
+                      "items": [ "null", "boolean", "string", "int", "long", "float", "double" ]
+                    },
+                    {
+                      "type": "map",
+                      "values": [ "null", "boolean", "string", "int", "long", "float", "double" ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

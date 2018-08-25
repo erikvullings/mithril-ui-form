@@ -1,0 +1,55 @@
+{
+  "name": "MapLayerUpdate",
+  "namespace": "eu.driver.model.core",
+  "doc": "Message for indicating a new or updated map layer",
+  "type": "record",
+  "fields": [
+    {
+      "name": "url",
+      "doc": "Link to the layer",
+      "type": "string"
+    },
+    {
+      "name": "title",
+      "doc": "Optional title of the data file, e.g. to serve it via WMS or otherwise",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "description",
+      "doc": "Optional description of the file",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "username",
+      "doc": "Optional username when security is enabled",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "password",
+      "doc": "Optional password when security is enabled",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "updateType",
+      "doc": "Create, update, delete",
+      "type": {
+        "name": "UpdateType",
+        "type": "enum",
+        "symbols": ["CREATE", "UPDATE", "DELETE"]
+      }
+    },
+    {
+      "name": "layerType",
+      "doc": "The type of layer that is offered",
+      "type": {
+        "name": "LayerType",
+        "type": "enum",
+        "symbols": ["WMS", "WMTS", "WCS", "WFS", "OTHER"]
+      }
+    }
+  ]
+}

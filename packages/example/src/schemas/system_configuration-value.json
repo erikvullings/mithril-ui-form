@@ -1,0 +1,110 @@
+{
+  "type": "record",
+  "name": "Configuration",
+  "namespace": "eu.driver.model.core",
+  "doc": "Configuration message, mainly for inspecting what a client is producing and consuming.",
+  "fields": [
+    {
+      "name": "clientId",
+      "doc": "ID of the client",
+      "type": "string"
+    },
+    {
+      "name": "kafkaHost",
+      "doc": "URI of the Kafka broker",
+      "type": "string"
+    },
+    {
+      "name": "schemaRegistry",
+      "doc": "URI of the schema registry",
+      "type": "string"
+    },
+    {
+      "name": "heartbeatInterval",
+      "doc": "Time in msec how often you send out a heartbeat. Default 5000",
+      "type": "int",
+      "default": 5000
+    },
+    {
+      "name": "consume",
+      "doc": "Topics you are consuming",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": {
+            "name": "OffsetFetchRequest",
+            "type": "record",
+            "fields": [
+              {
+                "name": "topic",
+                "type": "string"
+              },
+              {
+                "name": "offset",
+                "type": ["null", "int"],
+                "default": null
+              },
+              {
+                "name": "partition",
+                "type": ["null", "int"],
+                "default": null
+              }
+            ]
+          }
+        }
+      ],
+      "default": null
+    },
+    {
+      "name": "produce",
+      "doc": "Topics you are producing",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "string"
+        }
+      ],
+      "default": null
+    },
+    {
+      "name": "logging",
+      "doc": "Logging details, may be replaced by an enum",
+      "type": [
+        "null",
+        {
+          "name": "LogSettings",
+          "type": "record",
+          "fields": [
+            {
+              "name": "logToFile",
+              "doc": "If set [0..5], log to file as specified in logFile",
+              "type": ["null", "int"],
+              "default": null
+            },
+            {
+              "name": "logFile",
+              "doc": "Name of the log file",
+              "type": ["null", "string"],
+              "default": null
+            },
+            {
+              "name": "logToConsole",
+              "doc": "If set [0..5], log to console. Number indicates logging level",
+              "type": ["null", "int"],
+              "default": null
+            },
+            {
+              "name": "logToKafka",
+              "doc": "If set [0..5], log to Kafka",
+              "type": ["null", "int"],
+              "default": null
+            }
+          ]
+        }
+      ],
+      "default": null
+    }
+  ]
+}

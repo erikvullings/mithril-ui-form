@@ -1,0 +1,55 @@
+{
+  "name": "LargeDataUpdate",
+  "namespace": "eu.driver.model.core",
+  "doc": "Message for indicating large data files updated and uploaded to a central server",
+  "type": "record",
+  "fields": [
+    {
+      "name": "url",
+      "doc": "Link of where to download the data file from",
+      "type": "string"
+    },
+    {
+      "name": "title",
+      "doc": "Optional title of the data file, e.g. to serve it via WMS or otherwise",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "description",
+      "doc": "Optional description of the file",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "dataType",
+      "doc": "The type of data that is sent",
+      "type": {
+        "name": "DataType",
+        "type": "enum",
+        "symbols": [
+          "msword",
+          "ogg",
+          "pdf",
+          "excel",
+          "powerpoint",
+          "zip",
+          "audio_mpeg",
+          "audio_vorbis",
+          "image_bmp",
+          "image_gif",
+          "image_geotiff",
+          "image_jpeg",
+          "image_png",
+          "json",
+          "geojson",
+          "text_plain",
+          "video_mpeg",
+          "video_msvideo",
+          "video_avi",
+          "other"
+        ]
+      }
+    }
+  ]
+}

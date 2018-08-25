@@ -1,0 +1,55 @@
+{
+  "type": "record",
+  "name": "TopicCreate",
+  "namespace": "eu.driver.model.core",
+  "doc":
+    "The message send to the admin tool to request a topic to be created and grant clients access as publisher/subscriber to them.",
+  "fields": [
+    {
+      "name": "id",
+      "doc": "Sender Client id",
+      "type": "string"
+    },
+    {
+      "name": "topicName",
+      "type": "string",
+      "doc": "The name of the Topic to be created by the admin tool."
+    },
+    {
+      "name": "subscribeAllowed",
+      "type": [
+        {
+          "name": "subscribeAllowed",
+          "namespace": "eu.driver.model.core",
+          "type": "record",
+          "fields": [
+            {
+              "name": "id",
+              "doc": "Sender Client id",
+              "type": "string"
+            }
+          ]
+        }
+      ],
+      "doc": "Indicates which clients are allowed to connect as subscriber."
+    },
+    {
+      "name": "publishedAllowed",
+      "type": [
+        {
+          "name": "publishedAllowed",
+          "namespace": "eu.driver.model.core",
+          "type": "record",
+          "fields": [
+            {
+              "name": "id",
+              "doc": "Sender Client id",
+              "type": "string"
+            }
+          ]
+        }
+      ],
+      "doc": "Indicates which clients are allowed to connect as publisher."
+    }
+  ]
+}

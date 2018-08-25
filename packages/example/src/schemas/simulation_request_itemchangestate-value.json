@@ -1,0 +1,33 @@
+{
+  "name": "RequestItemChangeState",
+  "namespace": "eu.driver.model.sim.request",
+  "doc":
+    "Request for changing an items state. *Copyright (C) 2017-2018 XVR Simulation B.V., Delft, The Netherlands, Martijn Hendriks <hendriks @ xvrsim.com>. This file is part of DRIVER+ WP923 Test-bed infrastructure project. This file is licensed under the MIT license : https://github.com/DRIVER-EU/avro-schemas/blob/master/LICENSE*",
+  "type": "record",
+  "fields": [
+    {
+      "name": "guid",
+      "doc": "Globally unique identifier for this request",
+      "type": "string"
+    },
+    {
+      "name": "owner",
+      "doc": "Identifier of the simulator currently responsible for this request",
+      "type": "string"
+    },
+    {
+      "name": "item",
+      "doc": "Globally unique identifier for the item that should change its state",
+      "type": "string"
+    },
+    {
+      "name": "state",
+      "doc": "Name of the state to change to",
+      "type": {
+        "name": "States",
+        "type": "enum",
+        "symbols": ["IDLE", "FRIGHTENED"]
+      }
+    }
+  ]
+}

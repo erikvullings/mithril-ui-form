@@ -1,0 +1,20 @@
+{
+  "type": "record",
+  "name": "Heartbeat",
+  "namespace": "eu.driver.model.core",
+  "doc": "Heartbeat message, indicating that the client is still alive.",
+  "fields": [
+    {
+      "doc": "ID of the client",
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "alive",
+      "type": "long",
+      "logicalType": "timestamp-millis",
+      "doc":
+        "The date and time the distribution message was sent as the number of milliseconds from the unix epoch, 1 January 1970 00:00:00.000 UTC."
+    }
+  ]
+}

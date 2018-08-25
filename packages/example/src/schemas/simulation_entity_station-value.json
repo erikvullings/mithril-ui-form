@@ -1,0 +1,145 @@
+{
+  "name": "Station",
+  "namespace": "eu.driver.model.sim.entity",
+  "doc":
+    "Common Simulation Space Location, representing a visual location (building or area) inside the simulation world. *Copyright (C) 2017-2018 XVR Simulation B.V., Delft, The Netherlands, Martijn Hendriks <hendriks @ xvrsim.com>. This file is part of DRIVER+ WP923 Test-bed infrastructure project. This file is licensed under the MIT license : https://github.com/DRIVER-EU/avro-schemas/blob/master/LICENSE*",
+  "type": "record",
+  "fields": [
+    {
+      "name": "guid",
+      "doc": "Globally unique identifier for this entity",
+      "type": "string"
+    },
+    {
+      "name": "name",
+      "doc": "Name of this entity",
+      "type": "string"
+    },
+    {
+      "name": "owner",
+      "doc": "Identifier of the simulator currently responsible for this entity",
+      "type": "string"
+    },
+    {
+      "name": "location",
+      "doc": "Geo-referenced location of this station",
+      "type": {
+        "name": "Location",
+        "namespace": "eu.driver.model.sim.geo",
+        "doc": "WGS84-based standard representation of a location on earth",
+        "type": "record",
+        "fields": [
+          {
+            "name": "latitude",
+            "doc": "Latitude in degrees (-90, 90] - 0 is equator",
+            "type": "double"
+          },
+          {
+            "name": "longitude",
+            "doc": "Longitude in degrees (-180, 180] - 0 is line [geographic north - Greenwich - geographic south]",
+            "type": "double"
+          },
+          {
+            "name": "altitude",
+            "doc": "Altitude in meters - 0 is surface of WGS84-based ellipsoid",
+            "type": "double"
+          }
+        ]
+      }
+    },
+    {
+      "name": "address",
+      "doc": "Address information regarding the station",
+      "type": {
+        "name": "Address",
+        "namespace": "eu.driver.model.sim.geo",
+        "doc": "Postal address information",
+        "type": "record",
+        "fields": [
+          {
+            "name": "street",
+            "doc": "The street name",
+            "type": "string"
+          },
+          {
+            "name": "postalCode",
+            "doc": "The postal code",
+            "type": "string"
+          },
+          {
+            "name": "city",
+            "doc": "The city name",
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "doc": "The state or province name",
+            "type": "string"
+          },
+          {
+            "name": "country",
+            "doc": "The country name",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "visibleForParticipant",
+      "doc": "Indication whether or not this station is visible for all participants",
+      "type": "boolean"
+    },
+    {
+      "name": "movable",
+      "doc": "Indication whether or not this station is movable in the simulation world",
+      "type": "boolean"
+    },
+    {
+      "name": "scenarioLabel",
+      "doc": "Scenario category of this station",
+      "type": [
+        "null",
+        {
+          "name": "ScenarioLabel",
+          "namespace": "eu.driver.model.sim.entity.station",
+          "type": "enum",
+          "symbols": [
+            "GENERIC",
+            "POLICE",
+            "AMBULANCE",
+            "FIRE",
+            "HOSPITAL",
+            "MILITARY",
+            "INCIDENT",
+            "INCIDENT_MANAGEMENT"
+          ]
+        }
+      ],
+      "default": null
+    },
+    {
+      "name": "userTags",
+      "doc": "List of all tags the user provided associated with this station",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "string"
+        }
+      ],
+      "default": null
+    },
+    {
+      "name": "items",
+      "doc": "List of physical item references (represented by their GUIDs) that are currently at the station",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "string"
+        }
+      ],
+      "default": null
+    }
+  ]
+}
