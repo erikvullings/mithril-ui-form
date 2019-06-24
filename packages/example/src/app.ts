@@ -6,9 +6,7 @@ import { FormView } from './components/form-view';
 import { Layout } from './components/layout';
 
 const routingTable: RouteDefs = {
-  '/': {
-    render: () => m(Layout, m(FormView)),
-  },
+  '/': { render: () => m(Layout, m(FormView)) },
 };
 
 m.route(document.body, '/', routingTable);

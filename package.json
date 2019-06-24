@@ -1,14 +1,15 @@
 {
-  "name": "mithril-tree-component",
-  "version": "0.0.1",
-  "description": "A tree component for the Mitrhil framework.",
+  "name": "mithril-ui-form-project",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Based on a JSON document, generate a UI form for the Mithril framework.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/erikvullings/mithril-tree-component.git"
   },
   "keywords": [
     "mithril",
-    "tree",
+    "form",
     "component",
     "typescript"
   ],
@@ -19,14 +20,17 @@
   },
   "homepage": "https://github.com/erikvullings/mithril-tree-component#readme",
   "scripts": {
-    "postinstall": "lerna bootstrap && lerna run buildcomp && lerna run link",
-    "build": "lerna run build",
-    "clean": "lerna run --parallel clean",
+    "postinstall": "npm run link && npm run build",
+    "link": "lerna run link --parallel",
+    "build": "lerna run build --parallel",
+    "clean:local": "rimraf -fr docs",
+    "clean": "npm run clean:local && lerna run --parallel clean",
     "start": "lerna run --parallel start",
-    "deploy": "lerna run --parallel deploy",
-    "publish": "lerna publish --force-publish=*"
+    "patch-release": "lerna run patch-release --parallel",
+    "minor-release": "lerna run minor-release --parallel"
   },
   "devDependencies": {
-    "lerna": "^3.1.4"
+    "lerna": "^3.15.0",
+    "rimraf": "^2.6.3"
   }
 }

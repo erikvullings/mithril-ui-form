@@ -1,0 +1,42 @@
+{
+  "name": "mithril-ui-form",
+  "version": "0.0.1",
+  "description": "Convert a JSON file to a dynamic, materialized form.",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erikvullings/mithril-ui-form.git"
+  },
+  "scripts": {
+    "link": "npm link",
+    "start": "tsc -w",
+    "build": "tsc",
+    "clean": "rimraf -fr dist",
+    "gen:schema": "typescript-json-schema.cmd tsconfig.json IQuestion > ./schema/question.json",
+    "patch-release": "npm version patch && npm publish && git push --follow-tags",
+    "minor-release": "npm version minor && npm publish && git push --follow-tags"
+  },
+  "keywords": [
+    "mithril",
+    "dynamic",
+    "json",
+    "form",
+    "materialize"
+  ],
+  "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
+  "license": "MIT",
+  "dependencies": {
+    "marked": "^0.6.2"
+  },
+  "devDependencies": {
+    "mithril": "^2.0.0-rc.6",
+    "@types/mithril": "github:MithrilJS/mithril.d.ts#v2",
+    "mithril-materialized": "^0.13.9",
+    "@types/marked": "^0.6.5",
+    "@types/materialize-css": "^1.0.6",
+    "rimraf": "^2.6.3",
+    "tslib": "^1.10.0",
+    "typescript": "^3.5.2",
+    "typescript-json-schema": "^0.38.3"
+  }
+}
