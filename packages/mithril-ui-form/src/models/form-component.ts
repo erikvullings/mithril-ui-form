@@ -13,7 +13,7 @@ export interface IFormComponent<T> {
   /** Can be used as a placeholder for text inputs */
   placeholder?: string;
   /** Type of component to use */
-  type: ComponentType | FormType<T[keyof T]>;
+  type: ComponentType | FormType<Extract<keyof T, string>>;
   /** Value that the component has, initially. Is also used to derive the type if not supplied. */
   value?: string | number | Date | boolean | string[];
   /**
@@ -21,7 +21,7 @@ export interface IFormComponent<T> {
    * it refers to an external pre-defined property that contains the options. E.g. a
    * list of countries.
    */
-  options?: Array<{ id: string; label: string; disabled?: boolean; icon?: string }> | string;
+  options?: Array<{ id: string; label: string; disabled?: boolean; icon?: string }>;
   /** When input type is a number, optionally specify the minimum value. */
   min?: number;
   /** When input type is a number, optionally specify the maximum value. */
@@ -36,6 +36,9 @@ export interface IFormComponent<T> {
   disabled?: boolean;
   /** CSS class name to attach to the element */
   className?: string;
+  /** Model of the Kanban items */
+  model: FormType<any>;
+  // model: FormType<T[Extract<keyof T, string>]>;
   /** Name of the icon */
   icon?: string;
   /** Class of the icon */
@@ -62,7 +65,7 @@ export const isFormComponent = <T>(
   x?: IFormComponent<T> | FormType<T>[Extract<keyof T, string>]
 ): x is IFormComponent<T> => (x ? x.hasOwnProperty('type') : false);
 
-export const isComponentType = <T>(x?: ComponentType | FormType<T[keyof T]>): x is ComponentType =>
+export const isComponentType = <T>(x?: ComponentType | FormType<T[Extract<keyof T, string>]>): x is ComponentType =>
   typeof x === 'string';
 
 /** A form (with multiple GUI components) or a single GUI component */

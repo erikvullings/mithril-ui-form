@@ -26,10 +26,50 @@ interface ILessonLearned {
   // };
 }
 
-const editor = {
-  name: { type: 'text', maxLength: 80, required: true, className: 'col.s6' },
-  role: { type: 'text', maxLength: 20 },
-} as FormType<IEditor>;
+const countries = [{
+  id: 'NL',
+  label: 'Nederland',
+}, {
+  id: 'B',
+  label: 'België',
+}, {
+  id: 'D',
+  label: 'Duitsland'
+}];
+
+const editorType = {
+  label: 'Editors',
+  type: 'kanban',
+  model: {
+    id: { label: 'ID', type: 'text' },
+    name: { label: 'Name', component: 'text', className: 'col s8', iconName: 'title', required: true },
+    role: { label: 'Role', component: 'text', className: 'col s4' },
+    country: { label: 'Country', component: 'select', options: countries, className: 'col s6' },
+  },
+  // xxx: [
+  //   {
+  //     id: 'id',
+  //     autogenerate: 'id',
+  //   },
+  //   {
+  //     id: 'name',
+  //     label: 'Name',
+  //     component: 'text',
+  //     className: 'col s8',
+  //     iconName: 'title',
+  //     required: true,
+  //   },
+  //   {
+  //     id: 'role',
+  //     label: 'Role',
+  //     component: 'text',
+  //     className: 'col s4',
+  //   },
+  // ],
+};
+//   name: { type: 'text', maxLength: 80, required: true, className: 'col.s6' },
+//   role: { type: 'text', maxLength: 20 },
+// } as FormType<IEditor>;
 
 const source = {
   title: { label: 'Title', type: 'text', maxLength: 80, required: true, icon: 'title' },
@@ -39,10 +79,10 @@ const source = {
 const info = {
   id: { type: 'text', maxLength: 80, required: true, className: 'col m6' },
   event: { type: 'text', maxLength: 80, required: true, className: 'col m6' },
-  description: { type: 'textarea', maxLength: 500, required: true },
+  description: { type: 'textarea', maxLength: 500, required: true, icon: 'note' },
   created: { type: 'date', required: true },
   edited: { type: 'date', required: true },
-  editors: { label: 'editors', type: editor },
+  editors: editorType,
   sources: {
     type: {
       title: { type: 'text', maxLength: 80, required: true, icon: 'title' },
