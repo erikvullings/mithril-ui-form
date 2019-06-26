@@ -1,19 +1,20 @@
 import { ComponentType } from './component-type';
+import { Form } from './form';
 
 /**
  * A form component represents the GUI used to create an object. The object that
  * is created has different properties. Each property is referenced by its ID
  * value.
  */
-export interface IFormComponent<T> {
+export interface IInputField<T> {
   /** Component label */
   label?: string;
   /** Optional description */
   description?: string;
-  /** Can be used as a placeholder for text inputs */
+  /** Can be used as a placeholder for text inputs or the first element of a Selection */
   placeholder?: string;
   /** Type of component to use */
-  type: ComponentType | FormType<Extract<keyof T, string>>;
+  type: ComponentType | Form<Extract<keyof T, string>>;
   /** Value that the component has, initially. Is also used to derive the type if not supplied. */
   value?: string | number | Date | boolean | string[];
   /**
@@ -37,7 +38,7 @@ export interface IFormComponent<T> {
   /** CSS class name to attach to the element */
   className?: string;
   /** Model of the Kanban items */
-  model: FormType<any>;
+  model: Form<any>;
   // model: FormType<T[Extract<keyof T, string>]>;
   /** Name of the icon */
   icon?: string;
@@ -61,71 +62,6 @@ export interface IFormComponent<T> {
   show?: string | string[];
 }
 
-export const isFormComponent = <T>(
-  x?: IFormComponent<T> | FormType<T>[Extract<keyof T, string>]
-): x is IFormComponent<T> => (x ? x.hasOwnProperty('type') : false);
-
-export const isComponentType = <T>(x?: ComponentType | FormType<T[Extract<keyof T, string>]>): x is ComponentType =>
-  typeof x === 'string';
-
-/** A form (with multiple GUI components) or a single GUI component */
-export type FormType<T> = { [K in Extract<keyof T, string>]?: IFormComponent<T> | FormType<T[K]> };
-
-/** Model */
-/*
-interface IEditor {
-  name: string;
-  role: string;
-  organisation: string;
-  email: string;
-}
-interface ISource {
-  title: string;
-  url: string;
-}
-
-interface ILessonLearned {
-  id: string;
-  event: string;
-  description: string;
-  created: Date;
-  edited: Date;
-  editors: IEditor[];
-  sources: ISource[];
-  // eventDescription: {
-  //   riskCategory: {};
-  // };
-}
-
-const editor = {
-  name: { type: 'text', maxLength: 80, required: true, className: 'col.s6' },
-  role: { type: 'text', maxLength: 20 },
-} as FormType<IEditor>;
-
-const source = {
-  title: { type: 'text', maxLength: 80, required: true, icon: 'title' },
-  url: { type: 'url', maxLength: 80, required: true },
-} as FormType<ISource>;
-
-const info = {
-  id: { type: 'text', maxLength: 80, required: true },
-  event: { type: 'text', maxLength: 80, required: true },
-  description: { type: 'textarea', maxLength: 500, required: true },
-  created: { type: 'date', required: true },
-  edited: { type: 'date', required: true },
-  editors: { label: 'editors', type: editor },
-  sources: {
-    type: {
-      title: { type: 'text', maxLength: 80, required: true, icon: 'title' },
-      url: { type: 'url', maxLength: 80, required: true },
-    },
-  },
-  // editors: { type: 'kanban', model: editor },
-} as FormType<ILessonLearned>;
-
-const ll = [
-  info,
-  source,
-  // eventDescription: {},
-] as Array<FormType<ILessonLearned>>;
-*/
+export const isInputField = <T>(
+  x?: IInputField<T> | Form<T>[Extract<keyof T, string>] | Form<T>
+): x is IInputField<T> => (x ? x.hasOwnProperty('type') : false);

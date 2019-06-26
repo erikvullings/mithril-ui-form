@@ -1,5 +1,5 @@
 import m from 'mithril';
-import { formFactory, FormType } from 'mithril-ui-form';
+import { LayoutForm, Form } from 'mithril-ui-form';
 import { TextArea } from 'mithril-materialized';
 
 interface IEditor {
@@ -26,25 +26,29 @@ interface ILessonLearned {
   // };
 }
 
-const countries = [{
-  id: 'NL',
-  label: 'Nederland',
-}, {
-  id: 'B',
-  label: 'België',
-}, {
-  id: 'D',
-  label: 'Duitsland'
-}];
+const countries = [
+  {
+    id: 'NL',
+    label: 'Nederland',
+  },
+  {
+    id: 'B',
+    label: 'België',
+  },
+  {
+    id: 'D',
+    label: 'Duitsland',
+  },
+];
 
 const editorType = {
   label: 'Editors',
-  type: 'kanban',
-  model: {
-    id: { label: 'ID', type: 'text' },
-    name: { label: 'Name', component: 'text', className: 'col s8', iconName: 'title', required: true },
-    role: { label: 'Role', component: 'text', className: 'col s4' },
-    country: { label: 'Country', component: 'select', options: countries, className: 'col s6' },
+  repeat: 0,
+  type: {
+    // id: { label: 'ID', autogenerate: 'id' },
+    name: { label: 'Name', type: 'text', className: 'col s8', iconName: 'title', required: true },
+    role: { label: 'Role', type: 'text', className: 'col s4' },
+    country: { label: 'Country', type: 'select', options: countries, className: 'col s6' },
   },
   // xxx: [
   //   {
@@ -69,12 +73,12 @@ const editorType = {
 };
 //   name: { type: 'text', maxLength: 80, required: true, className: 'col.s6' },
 //   role: { type: 'text', maxLength: 20 },
-// } as FormType<IEditor>;
+// } as Form<IEditor>;
 
 const source = {
   title: { label: 'Title', type: 'text', maxLength: 80, required: true, icon: 'title' },
   url: { label: 'URL', type: 'url', maxLength: 80, required: true },
-} as FormType<ISource>;
+} as Form<ISource>;
 
 const info = {
   id: { type: 'text', maxLength: 80, required: true, className: 'col m6' },
@@ -90,7 +94,7 @@ const info = {
     },
   },
   // editors: { type: 'kanban', model: editor },
-} as FormType<ILessonLearned>;
+} as Form<ILessonLearned>;
 
 export const FormView = () => {
   const state = {
@@ -107,7 +111,7 @@ export const FormView = () => {
   return {
     view: () => {
       const { result } = state;
-      const ui = formFactory(info, result, print);
+      // const ui = formFactory(info, result, print);
       return m('.row', [
         m('.col.s6', [
           m('h3', 'Schema'),
@@ -119,7 +123,7 @@ export const FormView = () => {
         ]),
         m('.col.s6', [
           m('h3', 'Generated Form'),
-          m('div', ui),
+          m('div', m(LayoutForm, { form: info, result, onchange: print })),
           // uiElement instanceof Array
           //   ? uiElement.map(element => m(UiForm, { element, rs }))
           //   : m(UiForm, { element: uiElement, rs }),

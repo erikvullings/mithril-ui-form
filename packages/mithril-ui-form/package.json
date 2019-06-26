@@ -26,10 +26,9 @@
   "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
   "license": "MIT",
   "dependencies": {
-    "marked": "^0.6.2"
+    "slimdown-js": "^0.1.3"
   },
   "devDependencies": {
-    "mithril": "^2.0.0-rc.6",
     "@types/mithril": "github:MithrilJS/mithril.d.ts#v2",
     "mithril-materialized": "^0.13.9",
     "@types/marked": "^0.6.5",
