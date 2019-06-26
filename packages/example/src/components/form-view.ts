@@ -81,7 +81,7 @@ const source = {
 } as Form<ISource>;
 
 const info = {
-  id: { type: 'text', maxLength: 80, required: true, className: 'col m6' },
+  id: { type: 'text', disabled: true, autogenerate: 'guid', required: true, className: 'col m6' },
   event: { type: 'text', maxLength: 80, required: true, className: 'col m6' },
   description: { type: 'textarea', maxLength: 500, required: true, icon: 'note' },
   created: { type: 'date', required: true },
@@ -106,7 +106,10 @@ export const FormView = () => {
   // const rs = ResultsService();
   // rs.on('update', (r: unknown) => console.log(JSON.stringify(r, null, 2)));
 
-  const print = () => console.log(JSON.stringify(state.result, null, 2));
+  const print = (isValid: boolean) => {
+    console.log(`Form is valid: ${isValid}`);
+    console.log(JSON.stringify(state.result, null, 2));
+  };
 
   return {
     view: () => {
@@ -124,9 +127,6 @@ export const FormView = () => {
         m('.col.s6', [
           m('h3', 'Generated Form'),
           m('div', m(LayoutForm, { form: info, result, onchange: print })),
-          // uiElement instanceof Array
-          //   ? uiElement.map(element => m(UiForm, { element, rs }))
-          //   : m(UiForm, { element: uiElement, rs }),
         ]),
       ]);
     },

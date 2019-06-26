@@ -1,7 +1,8 @@
-import { Form } from "./form";
+import { Form } from './form';
 
 /** The type of primitive components that can be used */
 export type ComponentType =
+  | 'autogenerate'
   | 'color'
   | 'checkbox'
   | 'date'

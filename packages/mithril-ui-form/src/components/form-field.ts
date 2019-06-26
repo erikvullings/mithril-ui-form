@@ -17,6 +17,8 @@ import {
   Kanban,
   IModelField,
   IConvertibleType,
+  uuid4,
+  uniqueId,
 } from 'mithril-materialized';
 import { IInputField } from '../models/input-field';
 import { capitalizeFirstLetter, toHourMin } from '../utils/helpers';
@@ -34,18 +36,20 @@ const unwrapComponent = <T>(
     iconClass,
     placeholder,
   }: IInputField<T>,
-  autofocus = false
-) => ({
-  label,
-  description,
-  placeholder,
-  isMandatory: required,
-  disabled,
-  className,
-  iconName: icon,
-  iconClass,
-  autofocus,
-});
+  autofocus = false,
+  isDisabled = false
+) => {
+  const result = { label } as { [key: string]: any };
+  if (description) { result.description = description; }
+  if (className) { result.className = className; }
+  if (icon) { result.iconName = icon; }
+  if (iconClass) { result.iconClass = iconClass; }
+  if (placeholder) { result.placeholder = placeholder; }
+  if (required) { result.isMandatory = true; }
+  if (disabled || isDisabled) { result.disabled = true; }
+  if (autofocus) { result.autofocus = true; }
+  return result;
+};
 
 export interface IFormField<T> extends Attributes {
   propKey: Extract<keyof T, string>;
@@ -53,14 +57,15 @@ export interface IFormField<T> extends Attributes {
   obj: T;
   autofocus?: boolean;
   onchange?: () => void;
+  disabled?: boolean;
 }
 
+/** A single input field in a form */
 export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }>(): Component<IFormField<T>> => {
   return {
-    view: ({ attrs: {  propKey, field, obj, autofocus, onchange: onFormChange } }) => {
-      const { value, description, required, repeat } = field;
-      // const { autofocus, onchange: onFormChange } = options;
-      const props = unwrapComponent(propKey, field);
+    view: ({ attrs: {  propKey, field, obj, autofocus, onchange: onFormChange, disabled } }) => {
+      const { value, description, required, repeat, autogenerate } = field;
+      const props = unwrapComponent(propKey, field, autofocus, disabled);
 
       const validate = required
         ? (v: string | number | Array<string | number>) =>
@@ -96,6 +101,11 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
         } as IRepeatList<T>);
       }
 
+      if (autogenerate && !obj[propKey]) {
+        debugger;
+        obj[propKey] = (autogenerate === 'guid' ? uuid4() : uniqueId()) as any;
+      }
+
       switch (type) {
         case 'color': {
           const initialValue = (obj[propKey] || value) as string;
@@ -104,6 +114,7 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
         case 'time': {
           const date = ((obj[propKey] || value) as Date) || new Date();
           const initialValue = toHourMin(date);
+          obj[propKey] = initialValue as any;
           return m(TimePicker, {
             twelveHour: false,
             initialValue,
@@ -112,6 +123,7 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
         }
         case 'date': {
           const initialValue = ((obj[propKey] || value) as Date) || new Date();
+          obj[propKey] = initialValue as any;
           return m(DatePicker, {
             ...props,
             format: 'mmmm d, yyyy',
@@ -211,8 +223,7 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
             initialValue,
           });
         }
-        case 'text':
-        default: {
+        case 'text': {
           const initialValue = (obj[propKey] || value) as string;
           return m(TextInput, {
             ...props,
@@ -222,6 +233,8 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
             initialValue,
           });
         }
+        default:
+          return undefined;
       }
     },
   };

@@ -9,15 +9,8 @@ export interface IRepeatList<T> extends Attributes {
   field: IInputField<T>;
   obj: T;
   // options: {
-    autofocus?: boolean;
-    onchange?: () => void;
-  // };
-  // key: Extract<keyof T, string>;
-  // obj: T;
-  // label?: string;
-  // type: IInputField<T> | Form<T>;
-  // items: T[];
-  // containerId?: string;
+  autofocus?: boolean;
+  onchange?: () => void;
 }
 
 /**
@@ -43,7 +36,8 @@ export const RepeatList = <T extends { [key: string]: any }>(): Component<IRepea
   const notify = () => state.onchange && state.onchange(state.items);
 
   return {
-    oninit: ({ attrs: { propKey: key, obj, field, label } }) => {
+    oninit: ({ attrs: { propKey: key, obj, field, label, onchange } }) => {
+      state.onchange = onchange;
       const id = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
       state.editId = 'edit_' + id;
       // state.deleteId = 'delete_' + id;
@@ -55,7 +49,9 @@ export const RepeatList = <T extends { [key: string]: any }>(): Component<IRepea
       state.field = field;
       state.onclick =
         typeof field.type === 'string'
-          ? () => { return; }
+          ? () => {
+              return;
+            }
           : () => {
               state.curItem = undefined;
               state.updatedItem = {} as T;
@@ -65,9 +61,6 @@ export const RepeatList = <T extends { [key: string]: any }>(): Component<IRepea
     view: ({ attrs: { field } }) => {
       const { items, onclick, editId } = state;
       const { label, type } = field;
-
-      // const items = (value || []) as Array<string | number | { [key: string]: any }>;
-      // obj[key] = items as any;
 
       return m('.repeat-component', [
         m(FlatButton, {
@@ -83,6 +76,7 @@ export const RepeatList = <T extends { [key: string]: any }>(): Component<IRepea
             ? undefined // e.g. use a tag editor
             : items.map(item =>
                 m(RepeatItem, {
+                  disabled: true,
                   item,
                   form: field.type as Form<any>,
                   ondelete: it => {
@@ -103,8 +97,15 @@ export const RepeatList = <T extends { [key: string]: any }>(): Component<IRepea
           description:
             typeof type === 'string' || !state.updatedItem
               ? undefined
-              : m('.form-item', m(LayoutForm, { form: field.type as Form<any>, result: state.updatedItem })),
-              // : m('.form-item', formFactory(field.type as Form<any>, state.updatedItem)),
+              : m(
+                  '.form-item',
+                  m(LayoutForm, {
+                    form: field.type as Form<any>,
+                    result: state.updatedItem,
+                    onchange: isValid => (state.canSave = isValid),
+                  })
+                ),
+          // : m('.form-item', formFactory(field.type as Form<any>, state.updatedItem)),
           buttons: [
             {
               iconName: 'cancel',

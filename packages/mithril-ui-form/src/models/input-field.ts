@@ -46,6 +46,8 @@ export interface IInputField<T> {
   iconClass?: string;
   /** If true, break to a new line */
   newLine?: boolean;
+  /** Autogenerate a GUID or ID value */
+  autogenerate?: 'id' | 'guid';
   /**
    * By default, repeat is 0. In case it is 1 or more, it means that we can repeat
    * (and delete) the element or group.
