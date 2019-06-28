@@ -47,7 +47,7 @@ const checkExpression = (expression: string, obj: IObject) => {
   }
   const match = expressionRegex.exec(expression);
   if (match) {
-    const [, path, operand, value] = match;
+    const [fullMatch, path, operand, value] = match;
     const v = getPath(obj, path.trim());
     if (typeof v === 'undefined' || (typeof v === 'string' && v.length === 0)) {
       return false;
@@ -60,7 +60,12 @@ const checkExpression = (expression: string, obj: IObject) => {
           return v <= val;
         case '>=':
           return v >= val;
+        case '<':
+          return v < val;
+        case '>':
+          return v > val;
         default:
+          console.error(`Unrecognized operand (${operand}) in expression: ${fullMatch}`);
           return false;
       }
     } else {
