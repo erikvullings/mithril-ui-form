@@ -3,19 +3,28 @@ import { Vnode } from 'mithril';
 import { isInputField, IInputField } from '../models/input-field';
 import { Form } from '../models/form';
 import { FormField } from './form-field';
+import { IObject } from '../models/object';
 
-export interface ILayoutForm<T extends { [x: string]: any }> extends Attributes {
-  form: Form<T>;
-  result: T;
+export interface ILayoutForm<T extends IObject, C extends IObject> extends Attributes {
+  /** The form to display */
+  form: Form<T, C>;
+  /** The resulting object */
+  obj: T;
+  /** Relevant context, i.e. the original object and other context from the environment */
+  context: T & C;
+  /** Callback function, invoked every time the original result object has changed */
   onchange?: (isValid: boolean) => void;
-  disabled?: boolean;
+  /** Disable the form, disallowing edits */
+  disabled?: boolean | string | string[];
 }
 
-export const LayoutForm = <T extends { [x: string]: any }>(): Component<ILayoutForm<T>> => {
-  const isValid = (item: T, form: Form<T>) => {
+export const LayoutForm = <T extends IObject, C extends IObject>(): Component<ILayoutForm<T, C>> => {
+  const isValid = (item: T, form: Form<T, C>) => {
     return Object.keys(form)
-      .filter(f => isInputField(form[f] as Form<T> | IInputField<T> | Form<T>[Extract<keyof T, string>] | undefined))
-      .map(id => ({ ...(form[id] as IInputField<T>), id }))
+      .filter(f =>
+        isInputField(form[f] as Form<T, C> | IInputField<T, C> | Form<T, C>[Extract<keyof T, string>] | undefined)
+      )
+      .map(id => ({ ...(form[id] as IInputField<T, C>), id }))
       .filter(f => f.required)
       .reduce(
         (acc, cur) =>
@@ -30,23 +39,25 @@ export const LayoutForm = <T extends { [x: string]: any }>(): Component<ILayoutF
   };
 
   return {
-    view: ({ attrs: { form, result, onchange: onChange, disabled } }) => {
-      const onchange = () => onChange && onChange(isValid(result, form));
+    view: ({ attrs: { form, obj, onchange: onChange, disabled, context } }) => {
+      const onchange = () => onChange && onChange(isValid(obj, form));
 
       return Object.keys(form).reduce(
         (acc, k) => {
           const propKey = k as Extract<keyof Partial<T>, string>;
           const field = form[propKey];
           if (isInputField(field)) {
-            return [...acc, m(FormField, { propKey, field, obj: result, onchange, disabled })];
+            return [...acc, m(FormField, { propKey, field, obj, onchange, disabled })];
           } else {
             return [
               ...acc,
               m(LayoutForm, {
-                form: field as Form<any>,
-                result: result[propKey] as { [key: string]: unknown },
+                label: field ? field.label : '',
+                form: field as Form<any, C>,
+                obj: obj[propKey] as IObject,
                 onchange,
                 disabled,
+                context,
               }),
             ];
           }

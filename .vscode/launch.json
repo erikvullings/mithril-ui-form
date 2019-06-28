@@ -18,7 +18,17 @@
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Launch Chrome against localhost",
+      "name": "NOT WORKING Launch Chrome against localhost",
+      "url": "http://localhost:1234",
+      "webRoot": "${workspaceFolder}/packages/example/src",
+      "trace": true,
+      "breakOnLoad": true,
+      "sourceMaps": true
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "OLD NOT WORKING Launch Chrome against localhost",
       "url": "http://localhost:62608",
       "webRoot": "${workspaceFolder}/packages/example/dist",
       "skipFiles": [

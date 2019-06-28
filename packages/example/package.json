@@ -5,6 +5,7 @@
   "description": "Example project, showing how to use the Mithril UI form component.",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf .cache dist",
     "link": "npm link mithril-ui-form",
     "start": "parcel index.html",
     "build": "parcel build index.html --out-dir ../../docs",
@@ -34,6 +35,7 @@
     "autoprefixer": "^9.6.0",
     "cssnano": "^4.1.10",
     "parcel-bundler": "^1.12.3",
+    "rimraf": "^2.6.3",
     "typescript": "^3.5.2"
   }
 }

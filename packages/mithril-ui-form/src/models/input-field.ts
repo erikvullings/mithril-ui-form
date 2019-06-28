@@ -6,7 +6,7 @@ import { Form } from './form';
  * is created has different properties. Each property is referenced by its ID
  * value.
  */
-export interface IInputField<T> {
+export interface IInputField<T, C> {
   /** Component label */
   label?: string;
   /** Optional description */
@@ -14,7 +14,7 @@ export interface IInputField<T> {
   /** Can be used as a placeholder for text inputs or the first element of a Selection */
   placeholder?: string;
   /** Type of component to use */
-  type: ComponentType | Form<Extract<keyof T, string>>;
+  type: ComponentType | Form<Extract<keyof T, string>, C>;
   /** Value that the component has, initially. Is also used to derive the type if not supplied. */
   value?: string | number | Date | boolean | string[];
   /**
@@ -22,7 +22,7 @@ export interface IInputField<T> {
    * it refers to an external pre-defined property that contains the options. E.g. a
    * list of countries.
    */
-  options?: Array<{ id: string; label: string; disabled?: boolean; icon?: string }>;
+  options?: Array<{ id: string; label: string; disabled?: boolean; icon?: string; show?: string | string[] }>;
   /** When input type is a number, optionally specify the minimum value. */
   min?: number;
   /** When input type is a number, optionally specify the maximum value. */
@@ -34,11 +34,9 @@ export interface IInputField<T> {
   /** If true, the property is required */
   required?: boolean;
   /** If true, the property is disabled */
-  disabled?: boolean;
+  disabled?: boolean | string | string[];
   /** CSS class name to attach to the element */
   className?: string;
-  /** Model of the Kanban items */
-  model: Form<any>;
   // model: FormType<T[Extract<keyof T, string>]>;
   /** Name of the icon */
   icon?: string;
@@ -64,6 +62,6 @@ export interface IInputField<T> {
   show?: string | string[];
 }
 
-export const isInputField = <T>(
-  x?: IInputField<T> | Form<T>[Extract<keyof T, string>] | Form<T>
-): x is IInputField<T> => (x ? x.hasOwnProperty('type') : false);
+export const isInputField = <T, C>(
+  x?: IInputField<T, C> | Form<T, C>[Extract<keyof T, string>] | Form<T, C>
+): x is IInputField<T, C> => (x ? x.hasOwnProperty('type') || x.hasOwnProperty('autogenerate') : false);

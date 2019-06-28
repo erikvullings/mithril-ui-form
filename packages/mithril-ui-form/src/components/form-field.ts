@@ -11,61 +11,97 @@ import {
   EmailInput,
   RadioButtons,
   Select,
+  Chips,
   Options,
-  IInputOption,
   Switch,
-  Kanban,
-  IModelField,
-  IConvertibleType,
   uuid4,
   uniqueId,
 } from 'mithril-materialized';
 import { IInputField } from '../models/input-field';
-import { capitalizeFirstLetter, toHourMin } from '../utils/helpers';
+import { capitalizeFirstLetter, toHourMin, evalExpression } from '../utils/helpers';
 import { RepeatList, IRepeatList } from './repeat-list';
+import { IObject } from '../models/object';
 
-const unwrapComponent = <T>(
+const unwrapComponent = <T, C>(
   key: string,
   {
     label = capitalizeFirstLetter(key),
     description,
     required,
-    disabled,
     className,
     icon,
     iconClass,
     placeholder,
-  }: IInputField<T>,
+  }: IInputField<T, C>,
   autofocus = false,
-  isDisabled = false
+  disabled = false
 ) => {
   const result = { label } as { [key: string]: any };
-  if (description) { result.description = description; }
-  if (className) { result.className = className; }
-  if (icon) { result.iconName = icon; }
-  if (iconClass) { result.iconClass = iconClass; }
-  if (placeholder) { result.placeholder = placeholder; }
-  if (required) { result.isMandatory = true; }
-  if (disabled || isDisabled) { result.disabled = true; }
-  if (autofocus) { result.autofocus = true; }
+  if (description) {
+    result.description = description;
+  }
+  if (className) {
+    result.className = className;
+  }
+  if (icon) {
+    result.iconName = icon;
+  }
+  if (iconClass) {
+    result.iconClass = iconClass;
+  }
+  if (placeholder) {
+    result.placeholder = placeholder;
+  }
+  if (required) {
+    result.isMandatory = true;
+  }
+  if (disabled) {
+    result.disabled = true;
+  }
+  if (autofocus) {
+    result.autofocus = true;
+  }
   return result;
 };
 
-export interface IFormField<T> extends Attributes {
+export interface IFormField<T, C> extends Attributes {
+  /** Key of the property that is being repeated. Do not use `key` as this has side-effects in mithril. */
   propKey: Extract<keyof T, string>;
-  field: IInputField<T>;
+  /** The input field (or form) that must be rendered repeatedly */
+  field: IInputField<T, C>;
+  /** The resulting object */
   obj: T;
   autofocus?: boolean;
+  /** Callback function, invoked every time the original result object has changed */
   onchange?: () => void;
-  disabled?: boolean;
+  /** Disable the form, disallowing edits */
+  disabled?: boolean | string | string[];
 }
 
 /** A single input field in a form */
-export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }>(): Component<IFormField<T>> => {
+export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }, C extends IObject>(): Component<
+  IFormField<T, C>
+> => {
   return {
-    view: ({ attrs: {  propKey, field, obj, autofocus, onchange: onFormChange, disabled } }) => {
-      const { value, description, required, repeat, autogenerate } = field;
-      const props = unwrapComponent(propKey, field, autofocus, disabled);
+    view: ({
+      attrs: { propKey, field, obj, autofocus, onchange: onFormChange, disabled = field.disabled, context },
+    }) => {
+      const { value, description, required, repeat, autogenerate, show } = field;
+
+      if (show && !evalExpression(show, obj, context)) {
+        return undefined;
+      }
+
+      const options = field.options ? field.options.filter(o => !o.show || evalExpression(o.show, obj, context)) : [];
+
+      const props = unwrapComponent(
+        propKey,
+        field,
+        autofocus,
+        typeof disabled === 'boolean' || typeof disabled === 'undefined'
+          ? disabled
+          : evalExpression(disabled, obj, context)
+      );
 
       const validate = required
         ? (v: string | number | Array<string | number>) =>
@@ -81,15 +117,17 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
 
       const type =
         field.type ||
-        (value
+        (autogenerate
+          ? 'none'
+          : value
           ? typeof value === 'string'
             ? 'text'
             : typeof value === 'number'
             ? 'number'
             : typeof value === 'boolean'
             ? 'checkbox'
-            : 'text'
-          : 'text');
+            : 'none'
+          : 'none');
 
       if (typeof repeat !== 'undefined') {
         return m(RepeatList, {
@@ -98,11 +136,11 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
           field,
           autofocus,
           onchange,
-        } as IRepeatList<T>);
+          context,
+        } as IRepeatList<T, C>);
       }
 
       if (autogenerate && !obj[propKey]) {
-        debugger;
         obj[propKey] = (autogenerate === 'guid' ? uuid4() : uniqueId()) as any;
       }
 
@@ -141,23 +179,6 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
             initialValue,
           });
         }
-        case 'kanban':
-          if (field.model) {
-            const items = (obj[propKey] || value) as IConvertibleType[];
-            const model = Object.keys(field.model).map(k => {
-              const { type: component, ...ct } = field.model[k] as IInputField<T[keyof T]>;
-              return {
-                id: k,
-                placeholder: component === 'select' ? 'Pick one' : undefined,
-                ...ct,
-                component,
-                iconName: ct.icon,
-              } as IModelField;
-            });
-            // console.log(JSON.stringify(model, null, 2));
-            return m(Kanban, { ...props, model, items, onchange });
-          }
-          return m('div', 'ERROR - no model present!');
         case 'number': {
           const initialValue = (obj[propKey] || value) as number;
           return m(NumberInput, {
@@ -172,11 +193,11 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
           return m('p', description);
         case 'radio': {
           const checkedId = (obj[propKey] || value) as string | number;
-          return m(RadioButtons, { ...props, options: field.options || ([] as IInputOption[]), checkedId, onchange });
+          return m(RadioButtons, { ...props, options, checkedId, onchange });
         }
         case 'options': {
           const checkedId = (obj[propKey] || value) as Array<string | number>;
-          return m(Options, { ...props, options: field.options || ([] as IInputOption[]), checkedId, onchange });
+          return m(Options, { ...props, options, checkedId, onchange });
         }
         case 'checkbox': {
           const checked = (obj[propKey] || value) as boolean;
@@ -187,7 +208,7 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
           return m(Select, {
             placeholder: 'Pick one',
             ...props,
-            options: field.options || ([] as IInputOption[]),
+            options,
             checkedId,
             onchange,
           });
@@ -200,6 +221,16 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
           const left = opt && opt.length > 0 ? opt[0].label : '';
           const right = opt && opt.length > 1 ? opt[1].label : '';
           return m(Switch, { ...props, left, right, checked, onchange });
+        }
+        case 'tags': {
+          const initialValue = (obj[propKey] || value || []) as string[];
+          const data = initialValue.map(chip => ({ tag: chip }));
+          return m(Chips, {
+            onchange: (chips: M.ChipData[]) => onchange(chips.map(chip => chip.tag)),
+            placeholder: 'Add a tag',
+            secondaryPlaceholder: '+tag',
+            data,
+          });
         }
         case 'textarea': {
           const initialValue = (obj[propKey] || value) as string;

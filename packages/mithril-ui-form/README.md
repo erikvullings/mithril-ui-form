@@ -6,6 +6,11 @@ A JSON file using a simple syntax is converted to a [materialized-css](https://m
 
 The form supports markdown input, repeating elements a (dynamic) number of times, and conditionally displaying certain elements.
 
+## TODO
+
+- Create a markdown component: put in markdown, and use slimdown or marked (configurable) to render HTML
+- Create a handlebars component: put in a template and an object, and render HTML
+
 ## Process
 
 Start with a TypeScript interface of the desired object.

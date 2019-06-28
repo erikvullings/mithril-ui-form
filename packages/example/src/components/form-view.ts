@@ -2,6 +2,15 @@ import m from 'mithril';
 import { LayoutForm, Form } from 'mithril-ui-form';
 import { TextArea } from 'mithril-materialized';
 
+export interface IContext {
+  admin: boolean;
+}
+
+/** Relevant context for the Form, can be used with show/disabling */
+const context = {
+  admin: true,
+};
+
 interface IEditor {
   name: string;
   role: string;
@@ -17,27 +26,46 @@ interface ILessonLearned {
   id: string;
   event: string;
   description: string;
+  categories: string[];
   created: Date;
   edited: Date;
   editors: IEditor[];
-  sources: ISource[];
+  sources?: ISource[];
   // eventDescription: {
   //   riskCategory: {};
   // };
 }
 
+const regions = [
+  { id: 'eu', label: 'Europe' },
+  { id: 'other', label: 'Rest of the world' },
+];
+
 const countries = [
   {
     id: 'NL',
     label: 'Nederland',
+    show: 'region = eu',
   },
   {
     id: 'B',
     label: 'België',
+    show: 'region = eu',
   },
   {
     id: 'D',
     label: 'Duitsland',
+    show: 'region = eu',
+  },
+  {
+    id: 'US',
+    label: 'United States',
+    show: 'region = other',
+  },
+  {
+    id: 'SA',
+    label: 'South America',
+    show: 'region = other',
   },
 ];
 
@@ -45,10 +73,11 @@ const editorType = {
   label: 'Editors',
   repeat: 0,
   type: {
-    // id: { label: 'ID', autogenerate: 'id' },
+    id: { autogenerate: 'id' },
     name: { label: 'Name', type: 'text', className: 'col s8', iconName: 'title', required: true },
     role: { label: 'Role', type: 'text', className: 'col s4' },
-    country: { label: 'Country', type: 'select', options: countries, className: 'col s6' },
+    region: { label: 'Region', type: 'select', options: regions, className: 'col s6' },
+    country: { label: 'Country', type: 'select', options: countries, className: 'col s6', disabled: '!region' },
   },
   // xxx: [
   //   {
@@ -78,12 +107,13 @@ const editorType = {
 const source = {
   title: { label: 'Title', type: 'text', maxLength: 80, required: true, icon: 'title' },
   url: { label: 'URL', type: 'url', maxLength: 80, required: true },
-} as Form<ISource>;
+} as Form<ISource, IContext>;
 
 const info = {
   id: { type: 'text', disabled: true, autogenerate: 'guid', required: true, className: 'col m6' },
   event: { type: 'text', maxLength: 80, required: true, className: 'col m6' },
-  description: { type: 'textarea', maxLength: 500, required: true, icon: 'note' },
+  categories: { type: 'tags' },
+  description: { type: 'textarea', maxLength: 500, required: false, icon: 'note', show: 'event' },
   created: { type: 'date', required: true },
   edited: { type: 'date', required: true },
   editors: editorType,
@@ -94,7 +124,7 @@ const info = {
     },
   },
   // editors: { type: 'kanban', model: editor },
-} as Form<ILessonLearned>;
+} as Form<ILessonLearned, IContext>;
 
 export const FormView = () => {
   const state = {
@@ -111,6 +141,19 @@ export const FormView = () => {
     console.log(JSON.stringify(state.result, null, 2));
   };
 
+  state.result = {
+    id: '31a0f2b7-522a-4d3e-bd6f-69d4507247e6',
+    created: new Date('2019-06-01T22:00:00.000Z'),
+    edited: new Date('2019-06-08T22:00:00.000Z'),
+    editors: [],
+    categories: [
+      'test',
+      'me',
+    ],
+    event: 'Test me event',
+    description: 'My improved description',
+  } as ILessonLearned;
+
   return {
     view: () => {
       const { result } = state;
@@ -126,7 +169,7 @@ export const FormView = () => {
         ]),
         m('.col.s6', [
           m('h3', 'Generated Form'),
-          m('div', m(LayoutForm, { form: info, result, onchange: print })),
+          m('div', m(LayoutForm, { form: info, obj: result, onchange: print, context })),
         ]),
       ]);
     },

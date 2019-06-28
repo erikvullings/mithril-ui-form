@@ -3,14 +3,17 @@ import { FlatButton, uniqueId, ModalPanel } from 'mithril-materialized';
 import { IInputField, Form, IUIEvent } from '../models';
 import { RepeatItem } from './repeat-item';
 import { LayoutForm } from './layout-form';
+import { IObject } from '../models/object';
 
-export interface IRepeatList<T> extends Attributes {
+export interface IRepeatList<T extends { [key: string]: any }, C extends IObject> extends Attributes {
+  /** Key of the property that is being repeated. Do not use `key` as this has side-effects in mithril. */
   propKey: Extract<keyof T, string>;
-  field: IInputField<T>;
+  /** The input field (or form) that must be rendered repeatedly */
+  field: IInputField<T, C>;
+  /** The result object */
   obj: T;
-  // options: {
-  autofocus?: boolean;
-  onchange?: () => void;
+  /** Callback function, invoked every time the original result object has changed */
+  onchange?: (items: T[]) => void;
 }
 
 /**
@@ -20,9 +23,9 @@ export interface IRepeatList<T> extends Attributes {
  * It creates an array of primitives when type is a IFormComponent, and an array of objects when its type
  * is a FormType.
  */
-export const RepeatList = <T extends { [key: string]: any }>(): Component<IRepeatList<T>> => {
+export const RepeatList = <T extends { [key: string]: any }, C extends IObject>(): Component<IRepeatList<T, C>> => {
   const state = {} as {
-    field: IInputField<T> | Form<T>;
+    field: IInputField<T, C> | Form<T, C>;
     containerId?: string;
     editId: string;
     deleteId: string;
@@ -40,8 +43,6 @@ export const RepeatList = <T extends { [key: string]: any }>(): Component<IRepea
       state.onchange = onchange;
       const id = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
       state.editId = 'edit_' + id;
-      // state.deleteId = 'delete_' + id;
-      // state.containerId = containerId;
       if (!obj.hasOwnProperty(key)) {
         obj[key] = [] as T[Extract<keyof T, string>];
       }
@@ -55,10 +56,9 @@ export const RepeatList = <T extends { [key: string]: any }>(): Component<IRepea
           : () => {
               state.curItem = undefined;
               state.updatedItem = {} as T;
-              // state.items.push(state.updatedItem);
             };
     },
-    view: ({ attrs: { field } }) => {
+    view: ({ attrs: { field, obj, context } }) => {
       const { items, onclick, editId } = state;
       const { label, type } = field;
 
@@ -73,12 +73,12 @@ export const RepeatList = <T extends { [key: string]: any }>(): Component<IRepea
         }),
         items && items.length
           ? typeof type === 'string'
-            ? undefined // e.g. use a tag editor
+            ? undefined
             : items.map(item =>
                 m(RepeatItem, {
                   disabled: true,
                   item,
-                  form: field.type as Form<any>,
+                  form: field.type as Form<any, C>,
                   ondelete: it => {
                     const i = state.items.indexOf(it);
                     if (i >= 0) {
@@ -88,24 +88,27 @@ export const RepeatList = <T extends { [key: string]: any }>(): Component<IRepea
                   onedit: i => {
                     return i;
                   },
+                  context,
                 })
               )
           : undefined,
         m(ModalPanel, {
           id: editId,
           title: `Create new ${label}`,
+          fixedFooter: true,
           description:
             typeof type === 'string' || !state.updatedItem
               ? undefined
               : m(
                   '.form-item',
                   m(LayoutForm, {
-                    form: field.type as Form<any>,
-                    result: state.updatedItem,
+                    key: Date.now(),
+                    form: field.type as Form<any, C>,
+                    obj: state.updatedItem,
                     onchange: isValid => (state.canSave = isValid),
+                    context: context instanceof Array ? [ obj, ...context] : [obj, context],
                   })
                 ),
-          // : m('.form-item', formFactory(field.type as Form<any>, state.updatedItem)),
           buttons: [
             {
               iconName: 'cancel',
