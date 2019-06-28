@@ -1,4 +1,5 @@
 dependencies:
+  material-icons: 0.3.1
   materialize-css: 1.0.0
   mithril: 2.0.0-rc.6
   mithril-materialized: 0.13.9_3b852593545ce557331b84a3b149cfef
@@ -3069,6 +3070,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
+  /material-icons/0.3.1:
+    dev: false
+    resolution:
+      integrity: sha512-5Hbj76A6xDPcDZEbM4oxTknhWuMwGWnAHVLLPCEq9eVlcHb0fn4koU9ZeyMy1wjARtDEPAHfd5ZdL2Re5hf0zQ==
   /materialize-css/1.0.0:
     dev: false
     resolution:
@@ -5171,6 +5176,7 @@ specifiers:
   '@types/mithril': 'github:MithrilJS/mithril.d.ts#v2'
   autoprefixer: ^9.6.0
   cssnano: ^4.1.10
+  material-icons: ^0.3.1
   materialize-css: ^1.0.0
   mithril: ^2.0.0-rc.6
   mithril-materialized: ^0.13.9

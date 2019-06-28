@@ -36,7 +36,7 @@ const unwrapComponent = <T, C>(
   autofocus = false,
   disabled = false
 ) => {
-  const result = { label } as { [key: string]: any };
+  const result = { label } as IObject;
   if (description) {
     result.description = description;
   }
@@ -108,7 +108,7 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
             v instanceof Array ? v && v.length > 0 : typeof v !== undefined
         : undefined;
 
-      const onchange = (v: string | number | Array<string | number | { [key: string]: any }> | Date | boolean) => {
+      const onchange = (v: string | number | Array<string | number | IObject> | Date | boolean) => {
         obj[propKey] = v as any;
         if (onFormChange) {
           onFormChange();

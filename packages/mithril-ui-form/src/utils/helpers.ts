@@ -46,40 +46,28 @@ const checkExpression = (expression: string, obj: IObject) => {
     return false;
   }
   const match = expressionRegex.exec(expression);
-  let result = false;
-  // let invertAnswer = false;
   if (match) {
     const [, path, operand, value] = match;
-    // match.forEach((_, __, [___, invert, path, operand, value]) => {
     const v = getPath(obj, path.trim());
-    // invertAnswer = invert ? true : false;
-    if (typeof v === 'undefined') {
-      result = false;
-      // return;
+    if (typeof v === 'undefined' || (typeof v === 'string' && v.length === 0)) {
+      return false;
     } else if (operand && value) {
       const val = !isNaN(+value) ? (+value ? value === 'true' : true ? value === 'false' : false) : value;
       switch (operand) {
         case '=':
-          v instanceof Array ? (result = v.indexOf(val) >= 0) : (result = v === val);
-          break;
+          return v instanceof Array ? (v.indexOf(val) >= 0) : (v === val);
         case '<=':
-          result = v <= val;
-          break;
+          return v <= val;
         case '>=':
-          result = v >= val;
-          break;
+          return v >= val;
         default:
-          result = false;
-          break;
+          return false;
       }
     } else {
-      result = true;
-      // return;
+      return true;
     }
-    // });
   }
-  return result;
-  // return invertAnswer ? result : !result;
+  return true;
 };
 
 const checkExpressions = (expression: string, objArr: IObject[]) => {
@@ -95,4 +83,37 @@ const checkExpressions = (expression: string, objArr: IObject[]) => {
 export const evalExpression = (expression: string | string[], ...objArr: IObject[]) => {
   const expr = expression instanceof Array ? expression : [expression];
   return expr.some(e => checkExpressions(e, objArr));
+};
+
+/**
+ * Deep copy function for TypeScript.
+ * @param T Generic type of target/copied value.
+ * @param target Target value to be copied.
+ * @see Source project, ts-deepcopy https://github.com/ykdr2017/ts-deepcopy
+ * @see Code pen https://codepen.io/erikvullings/pen/ejyBYg
+ */
+export const deepCopy = <T>(target: T): T => {
+  if (target === null) {
+    return target;
+  }
+  if (target instanceof Date) {
+    return new Date(target.getTime()) as any;
+  }
+  if (target instanceof Array) {
+    const cpy = [] as any[];
+    (target as any[]).forEach(v => {
+      cpy.push(v);
+    });
+    return cpy.map((n: any) => deepCopy<any>(n)) as any;
+  }
+  if (typeof target === 'object' && target !== {}) {
+    const cpy = { ...(target as { [key: string]: any }) } as {
+      [key: string]: any;
+    };
+    Object.keys(cpy).forEach(k => {
+      cpy[k] = deepCopy<any>(cpy[k]);
+    });
+    return cpy as T;
+  }
+  return target;
 };

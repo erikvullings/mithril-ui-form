@@ -1,11 +1,11 @@
 import m, { Component, Attributes } from 'mithril';
 import { FlatButton, uniqueId, ModalPanel } from 'mithril-materialized';
-import { IInputField, Form, IUIEvent } from '../models';
+import { IInputField, Form, IUIEvent, IObject } from '../models';
 import { RepeatItem } from './repeat-item';
 import { LayoutForm } from './layout-form';
-import { IObject } from '../models/object';
+import { deepCopy } from '../utils/helpers';
 
-export interface IRepeatList<T extends { [key: string]: any }, C extends IObject> extends Attributes {
+export interface IRepeatList<T extends IObject, C extends IObject> extends Attributes {
   /** Key of the property that is being repeated. Do not use `key` as this has side-effects in mithril. */
   propKey: Extract<keyof T, string>;
   /** The input field (or form) that must be rendered repeatedly */
@@ -23,7 +23,7 @@ export interface IRepeatList<T extends { [key: string]: any }, C extends IObject
  * It creates an array of primitives when type is a IFormComponent, and an array of objects when its type
  * is a FormType.
  */
-export const RepeatList = <T extends { [key: string]: any }, C extends IObject>(): Component<IRepeatList<T, C>> => {
+export const RepeatList = <T extends IObject, C extends IObject>(): Component<IRepeatList<T, C>> => {
   const state = {} as {
     field: IInputField<T, C> | Form<T, C>;
     containerId?: string;
@@ -32,9 +32,13 @@ export const RepeatList = <T extends { [key: string]: any }, C extends IObject>(
     items: T[];
     onchange?: (items: T[]) => void;
     onclick: (e: IUIEvent) => void;
+    editItem?: T;
     curItem?: T;
-    updatedItem?: T;
+    newItem?: T;
     canSave?: boolean;
+    editModal?: M.Modal;
+    delModal?: M.Modal;
+    modalKey?: string;
   };
   const notify = () => state.onchange && state.onchange(state.items);
 
@@ -43,6 +47,7 @@ export const RepeatList = <T extends { [key: string]: any }, C extends IObject>(
       state.onchange = onchange;
       const id = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
       state.editId = 'edit_' + id;
+      state.deleteId = 'delete_' + id;
       if (!obj.hasOwnProperty(key)) {
         obj[key] = [] as T[Extract<keyof T, string>];
       }
@@ -54,12 +59,13 @@ export const RepeatList = <T extends { [key: string]: any }, C extends IObject>(
               return;
             }
           : () => {
-              state.curItem = undefined;
-              state.updatedItem = {} as T;
+              state.modalKey = uniqueId();
+              state.editItem = undefined;
+              state.newItem = {} as T;
             };
     },
     view: ({ attrs: { field, obj, context } }) => {
-      const { items, onclick, editId } = state;
+      const { items, onclick, editId, modalKey } = state;
       const { label, type } = field;
 
       return m('.repeat-component', [
@@ -80,33 +86,39 @@ export const RepeatList = <T extends { [key: string]: any }, C extends IObject>(
                   item,
                   form: field.type as Form<any, C>,
                   ondelete: it => {
-                    const i = state.items.indexOf(it);
-                    if (i >= 0) {
-                      state.items.splice(i, 1);
+                    state.curItem = it;
+                    if (state.delModal) {
+                      state.delModal.open();
                     }
                   },
-                  onedit: i => {
-                    return i;
+                  onedit: it => {
+                    state.modalKey = uniqueId();
+                    state.curItem = it;
+                    state.editItem = deepCopy(it);
+                    if (state.editModal) {
+                      state.editModal.open();
+                    }
                   },
                   context,
                 })
               )
           : undefined,
         m(ModalPanel, {
+          onCreate: modal => (state.editModal = modal),
           id: editId,
           title: `Create new ${label}`,
           fixedFooter: true,
           description:
-            typeof type === 'string' || !state.updatedItem
+            typeof type === 'string' || !state.newItem
               ? undefined
               : m(
                   '.form-item',
                   m(LayoutForm, {
-                    key: Date.now(),
+                    key: modalKey,
                     form: field.type as Form<any, C>,
-                    obj: state.updatedItem,
+                    obj: state.editItem || state.newItem,
                     onchange: isValid => (state.canSave = isValid),
-                    context: context instanceof Array ? [ obj, ...context] : [obj, context],
+                    context: context instanceof Array ? [obj, ...context] : [obj, context],
                   })
                 ),
           buttons: [
@@ -119,15 +131,39 @@ export const RepeatList = <T extends { [key: string]: any }, C extends IObject>(
               label: 'Save',
               disabled: !state.canSave,
               onclick: () => {
-                if (state.curItem) {
-                  const curItem = state.curItem;
+                if (state.editItem && state.curItem) {
+                  const edited = state.editItem;
+                  const current = state.curItem;
                   Object.keys(field.type).forEach(f => {
-                    (curItem as any)[f] = (state.updatedItem as any)[f];
+                    (current as any)[f] = edited[f];
                   });
-                } else if (state.updatedItem) {
-                  state.items.push(state.updatedItem);
+                } else if (state.newItem) {
+                  state.items.push(state.newItem);
                 }
                 notify();
+              },
+            },
+          ],
+        }),
+        m(ModalPanel, {
+          onCreate: modal => (state.delModal = modal),
+          id: state.deleteId,
+          title: 'Delete item',
+          description: 'Are you sure?',
+          buttons: [
+            {
+              label: 'No',
+            },
+            {
+              label: 'Yes',
+              onclick: () => {
+                if (state.curItem) {
+                  const i = state.items.indexOf(state.curItem);
+                  if (i >= 0) {
+                    state.items.splice(i, 1);
+                  }
+                  notify();
+                }
               },
             },
           ],

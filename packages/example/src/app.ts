@@ -1,5 +1,6 @@
 import 'materialize-css/dist/css/materialize.min.css';
-import 'materialize-css/dist/js/materialize.min';
+// import 'materialize-css/dist/js/materialize.min';
+import 'material-icons/iconfont/material-icons.css';
 import './styles.css';
 import m, { RouteDefs } from 'mithril';
 import { FormView } from './components/form-view';
