@@ -21,6 +21,7 @@ import { IInputField } from '../models/input-field';
 import { capitalizeFirstLetter, toHourMin, evalExpression } from '../utils/helpers';
 import { RepeatList, IRepeatList } from './repeat-list';
 import { IObject } from '../models/object';
+import { SlimdownView } from './slimdown-view';
 
 const unwrapComponent = <T, C>(
   key: string,
@@ -145,6 +146,7 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
       }
 
       switch (type) {
+        case 'colour':
         case 'color': {
           const initialValue = (obj[propKey] || value) as string;
           return m(ColorInput, { ...props, initialValue, onchange });
@@ -189,8 +191,6 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
             initialValue,
           });
         }
-        case 'paragraph':
-          return m('p', description);
         case 'radio': {
           const checkedId = (obj[propKey] || value) as string | number;
           return m(RadioButtons, { ...props, options, checkedId, onchange });
@@ -213,8 +213,8 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
             onchange,
           });
         }
-        case 'span':
-          return m('span', description);
+        case 'md':
+          return m(SlimdownView, { md: (obj[propKey] || value) as string });
         case 'switch': {
           const checked = (obj[propKey] || value) as boolean;
           const { options: opt } = field;

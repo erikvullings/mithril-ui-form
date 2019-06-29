@@ -1,5 +1,5 @@
 import m from 'mithril';
-import { LayoutForm, Form } from 'mithril-ui-form';
+import { LayoutForm, Form, SlimdownView } from 'mithril-ui-form';
 import { TextArea } from 'mithril-materialized';
 
 export interface IContext {
@@ -110,6 +110,9 @@ const source = {
 } as Form<ISource, IContext>;
 
 const info = {
+  intro: { type: 'md', value: `#### Introduction
+
+You can also include _markdown_ in your form.` },
   id: { type: 'text', disabled: true, autogenerate: 'guid', required: true, className: 'col m6' },
   event: { type: 'text', maxLength: 80, required: true, className: 'col m6' },
   categories: { type: 'tags' },
@@ -123,7 +126,6 @@ const info = {
       url: { type: 'url', maxLength: 80, required: true },
     },
   },
-  // editors: { type: 'kanban', model: editor },
 } as Form<ILessonLearned, IContext>;
 
 export const FormView = () => {
@@ -132,9 +134,6 @@ export const FormView = () => {
     schema: '',
     error: '',
   };
-
-  // const rs = ResultsService();
-  // rs.on('update', (r: unknown) => console.log(JSON.stringify(r, null, 2)));
 
   const print = (isValid: boolean) => {
     console.log(`Form is valid: ${isValid}`);
@@ -165,6 +164,7 @@ export const FormView = () => {
             label: 'JSON form',
             onchange: (value: string) => (state.schema = value),
           }),
+          m(SlimdownView, { md: '# Hello world '}),
           state.error ? m('p', m('em.red', state.error)) : undefined,
         ]),
         m('.col.s6', [
