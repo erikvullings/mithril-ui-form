@@ -8,8 +8,8 @@ The form supports markdown input, repeating elements a (dynamic) number of times
 
 ## TODO
 
-- Create a markdown component: put in markdown, and use slimdown or marked (configurable) to render HTML
-- Create a handlebars component: put in a template and an object, and render HTML
+- Create a handlebars-like component: put in a template and an object, and render HTML
+- Add the map control
 
 ## Process
 

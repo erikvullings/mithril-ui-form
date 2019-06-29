@@ -1,7 +1,7 @@
 dependencies:
+  mithril-leaflet: 0.1.4
   slimdown-js: 0.1.3
 devDependencies:
-  '@types/marked': 0.6.5
   '@types/materialize-css': 1.0.6
   '@types/mithril': github.com/MithrilJS/mithril.d.ts/b5a1d389c2e83bdc6351c2d1cb3d909674644af1
   mithril-materialized: 0.13.9
@@ -21,10 +21,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-FhJvBninYD36v3k6c+bVk1DSZwh7B5Dpb/Pyk3HKVsiohn0nhbefZZ+3JXbWQhFyt0MxSl2jRDdGQPHeOHFXrQ==
-  /@types/marked/0.6.5:
-    dev: true
-    resolution:
-      integrity: sha512-6kBKf64aVfx93UJrcyEZ+OBM5nGv4RLsI6sR1Ar34bpgvGVRoyTgpxn4ZmtxOM5aDTAaaznYuYUH8bUX3Nk3YA==
   /@types/materialize-css/1.0.6:
     dependencies:
       '@types/cash': 0.0.3
@@ -258,6 +254,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
+  /mithril-leaflet/0.1.4:
+    dev: false
+    resolution:
+      integrity: sha512-Maz1d0epauypgdQSvdytaOOD0M5z0CuwlxjD44o2iJAicNmS/pabpcf5q5yfAdmgL1hcmi4kf+v/LR+ofHQl3g==
   /mithril-materialized/0.13.9:
     dev: true
     peerDependencies:
@@ -511,9 +511,9 @@ packages:
       tarball: 'https://codeload.github.com/MithrilJS/mithril.d.ts/tar.gz/b5a1d389c2e83bdc6351c2d1cb3d909674644af1'
     version: 1.2.0
 specifiers:
-  '@types/marked': ^0.6.5
   '@types/materialize-css': ^1.0.6
   '@types/mithril': 'github:MithrilJS/mithril.d.ts#v2'
+  mithril-leaflet: ^0.1.4
   mithril-materialized: ^0.13.9
   rimraf: ^2.6.3
   slimdown-js: ^0.1.3

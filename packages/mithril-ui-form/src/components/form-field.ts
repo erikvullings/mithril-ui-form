@@ -87,7 +87,7 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
     view: ({
       attrs: { propKey, field, obj, autofocus, onchange: onFormChange, disabled = field.disabled, context },
     }) => {
-      const { value, description, required, repeat, autogenerate, show } = field;
+      const { value, required, repeat, autogenerate, show } = field;
 
       if (show && !evalExpression(show, obj, context)) {
         return undefined;
