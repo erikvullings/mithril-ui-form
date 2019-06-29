@@ -1,3 +1,5 @@
+import resolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
 import sourceMaps from 'rollup-plugin-sourcemaps';
 import typescript from 'rollup-plugin-typescript2';
 import { terser } from 'rollup-plugin-terser';
@@ -7,10 +9,9 @@ const production = !process.env.ROLLUP_WATCH;
 
 export default {
   input: `src/index.ts`,
-  watch: 'src/**',
   output: [
     {
-      name: 'slimdown',
+      name: 'uiform',
       file: pkg.main,
       format: 'iife',
       sourcemap: true,
@@ -21,7 +22,18 @@ export default {
       sourcemap: true,
     },
   ],
+  external: ['mithril', 'materialize-css'],
   plugins: [
+    // Allow node_modules resolution, so you can use 'external' to control
+    // which external modules to include in the bundle
+    // https://github.com/rollup/rollup-plugin-node-resolve#usage
+    resolve({
+      customResolveOptions: {
+        moduleDirectory: 'node_modules',
+      },
+    }),
+    // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
+    commonjs(),
     // Compile TypeScript files
     typescript({
       rollupCommonJSResolveHack: true,

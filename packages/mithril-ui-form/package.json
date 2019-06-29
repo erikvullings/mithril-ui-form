@@ -2,19 +2,22 @@
   "name": "mithril-ui-form",
   "version": "0.0.1",
   "description": "Convert a JSON file to a dynamic, materialized form.",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/erikvullings/mithril-ui-form.git"
   },
   "scripts": {
     "link": "npm link",
-    "start": "tsc -w",
-    "build": "tsc",
-    "clean": "rimraf -fr dist",
-    "gen:schema": "typescript-json-schema.cmd tsconfig.json IQuestion > ./schema/question.json",
-    "patch-release": "npm version patch && npm publish && git push --follow-tags",
-    "minor-release": "npm version minor && npm publish && git push --follow-tags"
+    "clean": "rimraf .rpt2_cache lib dist",
+    "build": "rollup -c",
+    "start": "rollup -c -w",
+    "dry-run": "npm publish --dry-run",
+    "patch-release": "npm run clean && npm run build && npm version patch --force -m \"Patch release\" && npm publish && git push --follow-tags",
+    "minor-release": "npm run clean && npm run build && npm version minor --force -m \"Minor release\" && npm publish && git push --follow-tags",
+    "major-release": "npm run clean && npm run build && npm version major --force -m \"Major release\" && npm publish && git push --follow-tags",
+    "gen:schema": "typescript-json-schema.cmd tsconfig.json Form > ./schema/ui-form.json"
   },
   "keywords": [
     "mithril",
@@ -36,7 +39,13 @@
     "rimraf": "^2.6.3",
     "tslib": "^1.10.0",
     "typescript": "^3.5.2",
-    "typescript-json-schema": "^0.38.3"
+    "typescript-json-schema": "^0.38.3",
+    "rollup": "^1.16.2",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-node-resolve": "^5.0.2",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-terser": "^5.0.0",
+    "rollup-plugin-typescript2": "^0.21.2"
   },
   "peerDependencies": {
     "mithril-materialized": "^0.13.9",

@@ -36,10 +36,7 @@ interface ILessonLearned {
   // };
 }
 
-const regions = [
-  { id: 'eu', label: 'Europe' },
-  { id: 'other', label: 'Rest of the world' },
-];
+const regions = [{ id: 'eu', label: 'Europe' }, { id: 'other', label: 'Rest of the world' }];
 
 const countries = [
   {
@@ -110,9 +107,12 @@ const source = {
 } as Form<ISource, IContext>;
 
 const info = {
-  intro: { type: 'md', value: `#### Introduction
+  intro: {
+    type: 'md',
+    value: `#### Introduction
 
-You can also include _markdown_ in your form.` },
+You can also include _markdown_ in your form.`,
+  },
   id: { type: 'text', disabled: true, autogenerate: 'guid', required: true, className: 'col m6' },
   event: { type: 'text', maxLength: 80, required: true, className: 'col m6' },
   categories: { type: 'tags' },
@@ -131,11 +131,13 @@ You can also include _markdown_ in your form.` },
 export const FormView = () => {
   const state = {
     result: {} as ILessonLearned,
+    isValid: false,
     schema: '',
     error: '',
   };
 
   const print = (isValid: boolean) => {
+    state.isValid = isValid;
     console.log(`Form is valid: ${isValid}`);
     console.log(JSON.stringify(state.result, null, 2));
   };
@@ -145,17 +147,24 @@ export const FormView = () => {
     created: new Date('2019-06-01T22:00:00.000Z'),
     edited: new Date('2019-06-08T22:00:00.000Z'),
     editors: [],
-    categories: [
-      'test',
-      'me',
-    ],
+    categories: ['test', 'me'],
     event: 'Test me event',
     description: 'My improved description',
   } as ILessonLearned;
 
   return {
     view: () => {
-      const { result } = state;
+      const { result, isValid } = state;
+      const md = isValid
+        ? `
+# Generated result
+
+This form was created on ${result.created.toLocaleDateString()} by the following editors:
+
+${result.editors && result.editors.map(e => `- ${e.name}${e.role ? ` (${e.role})` : ''}`).join('\n')}
+`
+        : '**Warning** _form is invalid_';
+
       // const ui = formFactory(info, result, print);
       return m('.row', [
         m('.col.s6', [
@@ -164,7 +173,7 @@ export const FormView = () => {
             label: 'JSON form',
             onchange: (value: string) => (state.schema = value),
           }),
-          m(SlimdownView, { md: '# Hello world '}),
+          m(SlimdownView, { md }),
           state.error ? m('p', m('em.red', state.error)) : undefined,
         ]),
         m('.col.s6', [
