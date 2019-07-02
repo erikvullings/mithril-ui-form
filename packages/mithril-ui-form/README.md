@@ -8,8 +8,10 @@ The form supports markdown input, repeating elements a (dynamic) number of times
 
 ## TODO
 
+- Add pre-sets, overriding existing values.
+- Add support for getting the value of an option based on id.
 - Create a handlebars-like component: put in a template and an object, and render HTML
-- Add the map control
+- Use this tool to create your own form schemas. E.g. a two-column layout, where you define your schema in the left column, and see the results in the right column.
 
 ## Process
 

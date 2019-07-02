@@ -1,4 +1,6 @@
 import m, { Component, Attributes } from 'mithril';
+import { LeafletMap, geoJSON } from 'mithril-leaflet';
+import { LatLngExpression, FeatureGroup } from 'leaflet';
 import {
   InputCheckbox,
   TextInput,
@@ -10,6 +12,7 @@ import {
   ColorInput,
   EmailInput,
   RadioButtons,
+  Label,
   Select,
   Chips,
   Options,
@@ -18,10 +21,17 @@ import {
   uniqueId,
 } from 'mithril-materialized';
 import { IInputField } from '../models/input-field';
-import { capitalizeFirstLetter, toHourMin, evalExpression } from '../utils/helpers';
+import {
+  capitalizeFirstLetter,
+  toHourMin,
+  evalExpression,
+  canResolvePlaceholders,
+  resolvePlaceholders,
+} from '../utils/helpers';
 import { RepeatList, IRepeatList } from './repeat-list';
 import { IObject } from '../models/object';
 import { SlimdownView } from './slimdown-view';
+import { GeometryObject, FeatureCollection } from 'geojson';
 
 const unwrapComponent = <T, C>(
   key: string,
@@ -33,6 +43,10 @@ const unwrapComponent = <T, C>(
     icon,
     iconClass,
     placeholder,
+    maxLength,
+    minLength,
+    max,
+    min,
   }: IInputField<T, C>,
   autofocus = false,
   disabled = false
@@ -62,6 +76,18 @@ const unwrapComponent = <T, C>(
   if (autofocus) {
     result.autofocus = true;
   }
+  if (typeof maxLength !== 'undefined') {
+    result.maxLength = maxLength;
+  }
+  if (typeof minLength !== 'undefined') {
+    result.minLength = minLength;
+  }
+  if (typeof max !== 'undefined') {
+    result.max = max;
+  }
+  if (typeof min !== 'undefined') {
+    result.min = min;
+  }
   return result;
 };
 
@@ -87,9 +113,13 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
     view: ({
       attrs: { propKey, field, obj, autofocus, onchange: onFormChange, disabled = field.disabled, context },
     }) => {
-      const { value, required, repeat, autogenerate, show } = field;
+      const { value, required, repeat, autogenerate, show, label, description } = field;
 
-      if (show && !evalExpression(show, obj, context)) {
+      if (
+        (show && !evalExpression(show, obj, context)) ||
+        (label && !canResolvePlaceholders(label, obj, context)) ||
+        (description && !canResolvePlaceholders(description, obj, context))
+      ) {
         return undefined;
       }
 
@@ -103,6 +133,12 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
           ? disabled
           : evalExpression(disabled, obj, context)
       );
+      if (label) {
+        props.label = resolvePlaceholders(props.label, obj, context);
+      }
+      if (description) {
+        props.description = resolvePlaceholders(props.description, obj, context);
+      }
 
       const validate = required
         ? (v: string | number | Array<string | number>) =>
@@ -135,7 +171,6 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
           propKey,
           obj,
           field,
-          autofocus,
           onchange,
           context,
         } as IRepeatList<T, C>);
@@ -213,6 +248,26 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
             onchange,
           });
         }
+        case 'map': {
+          const overlay = (obj[propKey] ||
+            value || {
+              type: 'FeatureCollection',
+              features: [],
+            }) as FeatureCollection<GeometryObject>;
+          const overlays = {} as IObject;
+          overlays[propKey] = geoJSON(overlay);
+          return m(LeafletMap, {
+            className: 'col s12',
+            style: 'height: 400px;',
+            view: [50, 5] as LatLngExpression,
+            zoom: 4,
+            overlays,
+            visible: [propKey],
+            editable: [propKey],
+            showScale: { imperial: false },
+            onLayerEdited: (f: FeatureGroup) => onchange(f.toGeoJSON() as any),
+          });
+        }
         case 'md':
           return m(SlimdownView, { md: (obj[propKey] || value) as string });
         case 'switch': {
@@ -225,12 +280,15 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
         case 'tags': {
           const initialValue = (obj[propKey] || value || []) as string[];
           const data = initialValue.map(chip => ({ tag: chip }));
-          return m(Chips, {
-            onchange: (chips: M.ChipData[]) => onchange(chips.map(chip => chip.tag)),
-            placeholder: 'Add a tag',
-            secondaryPlaceholder: '+tag',
-            data,
-          });
+          return m('.input-field col s12', [
+            m(Label, { ...props }),
+            m(Chips, {
+              onchange: (chips: M.ChipData[]) => onchange(chips.map(chip => chip.tag)),
+              placeholder: 'Add a tag',
+              secondaryPlaceholder: '+tag',
+              data,
+            }),
+          ]);
         }
         case 'textarea': {
           const initialValue = (obj[propKey] || value) as string;

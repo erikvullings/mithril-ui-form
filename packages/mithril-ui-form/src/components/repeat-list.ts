@@ -12,6 +12,8 @@ export interface IRepeatList<T extends IObject, C extends IObject> extends Attri
   field: IInputField<T, C>;
   /** The result object */
   obj: T;
+  /** The context */
+  context: C;
   /** Callback function, invoked every time the original result object has changed */
   onchange?: (items: T[]) => void;
 }
@@ -106,17 +108,17 @@ export const RepeatList = <T extends IObject, C extends IObject>(): Component<IR
         m(ModalPanel, {
           onCreate: modal => (state.editModal = modal),
           id: editId,
-          title: `Create new ${label}`,
+          title: state.editItem ? 'Edit item' : 'Create new item',
           fixedFooter: true,
           description:
-            typeof type === 'string' || !state.newItem
-              ? undefined
+            typeof type === 'string'
+              ? 'undefined'
               : m(
                   '.form-item',
                   m(LayoutForm, {
                     key: modalKey,
                     form: field.type as Form<any, C>,
-                    obj: state.editItem || state.newItem,
+                    obj: state.editItem || state.newItem || {},
                     onchange: isValid => (state.canSave = isValid),
                     context: context instanceof Array ? [obj, ...context] : [obj, context],
                   })
