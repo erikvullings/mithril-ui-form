@@ -146,6 +146,7 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
         : undefined;
 
       const onchange = (v: string | number | Array<string | number | IObject> | Date | boolean) => {
+        console.warn(v);
         obj[propKey] = v as any;
         if (onFormChange) {
           onFormChange();
@@ -249,18 +250,35 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
           });
         }
         case 'map': {
+          const bbox = (area: L.GeoJSON) => {
+            const result = {
+              view: [50, 5] as LatLngExpression,
+              zoom: 4,
+            };
+            if (!area) {
+              return result;
+            }
+            try {
+              const bounds = area.getBounds();
+              result.view = bounds.getCenter();
+              result.zoom = 10;
+            } catch (e) {
+              console.warn(e);
+            }
+            return result;
+          };
           const overlay = (obj[propKey] ||
             value || {
               type: 'FeatureCollection',
               features: [],
             }) as FeatureCollection<GeometryObject>;
           const overlays = {} as IObject;
-          overlays[propKey] = geoJSON(overlay);
+          const o = geoJSON(overlay);
+          overlays[propKey] = o;
           return m(LeafletMap, {
+            ...bbox(o),
             className: 'col s12',
             style: 'height: 400px;',
-            view: [50, 5] as LatLngExpression,
-            zoom: 4,
             overlays,
             visible: [propKey],
             editable: [propKey],
