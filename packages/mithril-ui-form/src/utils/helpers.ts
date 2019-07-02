@@ -55,7 +55,7 @@ const checkExpression = (expression: string, obj: IObject) => {
       const val = !isNaN(+value) ? (+value ? value === 'true' : true ? value === 'false' : false) : value;
       switch (operand) {
         case '=':
-          return v instanceof Array ? (v.indexOf(val) >= 0) : (v === val);
+          return v instanceof Array ? v.indexOf(val) >= 0 : v === val;
         case '<=':
           return v <= val;
         case '>=':
@@ -80,7 +80,7 @@ const checkExpressions = (expression: string, objArr: IObject[]) => {
   return ands.reduce((acc, expr) => {
     const invert = invertExpression.test(expr);
     const e = invert ? expr.replace(invertExpression, '') : expr;
-    acc = acc && objArr.reduce((p, obj) => p || checkExpression(e.trim(), obj), false as boolean);
+    acc = acc && objArr.filter(Boolean).reduce((p, obj) => p || checkExpression(e.trim(), obj), false as boolean);
     return invert ? !acc : acc;
   }, true);
 };
@@ -88,6 +88,67 @@ const checkExpressions = (expression: string, objArr: IObject[]) => {
 export const evalExpression = (expression: string | string[], ...objArr: IObject[]) => {
   const expr = expression instanceof Array ? expression : [expression];
   return expr.some(e => checkExpressions(e, objArr));
+};
+
+const resolveExpression = (expression: string, objArr: IObject[]) =>
+  objArr.filter(Boolean).reduce((p, obj) => p || getPath(obj, expression.trim()), undefined as string | undefined);
+
+const canResolveExpression = (expression: string, objArr: IObject[]) =>
+  typeof resolveExpression(expression, objArr) !== undefined;
+
+const placeholderRegex = /&([^\s"'`]*)/g;
+
+export const canResolvePlaceholders = (str: string, ...objArr: IObject[]) => {
+  if (!placeholderRegex.test(str)) {
+    return true;
+  }
+  placeholderRegex.lastIndex = 0; // reset index, otherwise no match will occur for global regex.
+
+  let m: RegExpExecArray | null;
+  let canResolve = true;
+
+  do {
+    m = placeholderRegex.exec(str);
+    if (m) {
+      // This is necessary to avoid infinite loops with zero-width matches
+      if (m.index === placeholderRegex.lastIndex) {
+        placeholderRegex.lastIndex++;
+      }
+
+      m.forEach((_, __, [, expression]) => {
+        canResolve = canResolve && canResolveExpression(expression, objArr);
+      });
+    }
+  } while (canResolve && m !== null);
+  return canResolve;
+};
+
+export const resolvePlaceholders = (str: string, ...objArr: IObject[]) => {
+  if (!placeholderRegex.test(str)) {
+    return str;
+  }
+  placeholderRegex.lastIndex = 0; // reset index, otherwise no match will occur for global regex.
+
+  let m: RegExpExecArray | null;
+
+  do {
+    m = placeholderRegex.exec(str);
+    if (m) {
+      // This is necessary to avoid infinite loops with zero-width matches
+      if (m.index === placeholderRegex.lastIndex) {
+        placeholderRegex.lastIndex++;
+      }
+
+      // The result can be accessed through the `m`-variable.
+      m.forEach((_, __, [fullMatch, expression]) => {
+        const resolved = resolveExpression(expression, objArr);
+        if (resolved) {
+          str = str.replace(fullMatch, resolved);
+        }
+      });
+    }
+  } while (m !== null);
+  return str;
 };
 
 /**
