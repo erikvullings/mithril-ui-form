@@ -4,10 +4,12 @@ import { Layout } from '../components/layout';
 import { Intro } from '../components/intro';
 import { AboutPage } from '../components/about/about-page';
 import { FormView } from '../components/form-view';
+import { CreateForm } from '../components/create-form/create-form';
 
 export const enum Dashboards {
   HOME = 'HOME',
   FORM = 'FORM',
+  EDITOR = 'EDITOR',
   ABOUT = 'ABOUT',
 }
 
@@ -66,6 +68,14 @@ export const dashboardSvc: DashboardService = new DashboardService(Layout, [
     route: '/playground',
     visible: true,
     component: FormView,
+  },
+  {
+    id: Dashboards.EDITOR,
+    title: 'EDITOR',
+    icon: 'border_color',
+    route: '/editor',
+    visible: true,
+    component: CreateForm,
   },
   {
     id: Dashboards.ABOUT,

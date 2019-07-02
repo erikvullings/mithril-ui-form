@@ -231,13 +231,18 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
           const checkedId = (obj[propKey] || value) as string | number;
           return m(RadioButtons, { ...props, options, checkedId, onchange });
         }
-        case 'options': {
-          const checkedId = (obj[propKey] || value) as Array<string | number>;
-          return m(Options, { ...props, options, checkedId, onchange });
-        }
         case 'checkbox': {
           const checked = (obj[propKey] || value) as boolean;
           return m(InputCheckbox, { ...props, checked, onchange });
+        }
+        case 'options': {
+          const checkedId = (obj[propKey] || value) as Array<string | number>;
+          return m(Options, {
+            ...props,
+            options,
+            checkedId: checkedId instanceof Array ? checkedId : [checkedId],
+            onchange: checkedIds => onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds),
+          });
         }
         case 'select': {
           const checkedId = (obj[propKey] || value) as Array<string | number>;
@@ -245,8 +250,8 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
             placeholder: 'Pick one',
             ...props,
             options,
-            checkedId,
-            onchange,
+            checkedId: checkedId instanceof Array ? checkedId : [checkedId],
+            onchange: checkedIds => onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds),
           });
         }
         case 'map': {
