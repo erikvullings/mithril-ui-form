@@ -7,8 +7,6 @@ export interface IMarkdownView extends Attributes {
 
 export const SlimdownView: FactoryComponent<IMarkdownView> = () => {
   return {
-    view: ({ attrs: { md } }) => {
-      return md ? m('.markdown', m.trust(Slimdown.render(md))) : undefined;
-    },
+    view: ({ attrs: { md } }) => md ? m('.markdown', m.trust(Slimdown.render(md))) : undefined,
   };
 };

@@ -15,3 +15,8 @@
 .main {
   padding: 10px;
 }
+
+.markdown ul > li {
+  list-style-type: circle !important;
+  text-indent: 2em;
+}
