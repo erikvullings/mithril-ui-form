@@ -15,6 +15,12 @@ export default {
       file: pkg.main,
       format: 'iife',
       sourcemap: true,
+      globals: {
+        mithril: 'm',
+        'materialize-css': 'M',
+        'leaflet': 'L',
+        'leaflet-draw': 'L',
+      }
     },
     {
       file: pkg.module,
@@ -22,7 +28,7 @@ export default {
       sourcemap: true,
     },
   ],
-  external: ['mithril', 'materialize-css'],
+  external: ['mithril', 'materialize-css', 'leaflet', 'leaflet-draw'],
   plugins: [
     // Allow node_modules resolution, so you can use 'external' to control
     // which external modules to include in the bundle
