@@ -94,7 +94,7 @@ You can also include _markdown_ in your form.`,
   area: { type: 'map', required: true, className: 'col s12' },
   categories: { type: 'tags' },
   description: { type: 'textarea', maxLength: 500, required: false, icon: 'note', show: 'event' },
-  created: { label: 'Created "&event" event on:', type: 'date', required: true },
+  created: { label: 'Created "{{event}}" event on:', type: 'date', required: true },
   edited: { type: 'date', required: true },
   editors: editorType,
   sources: {

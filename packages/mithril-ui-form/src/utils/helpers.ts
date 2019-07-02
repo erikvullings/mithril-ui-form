@@ -96,7 +96,7 @@ const resolveExpression = (expression: string, objArr: IObject[]) =>
 const canResolveExpression = (expression: string, objArr: IObject[]) =>
   typeof resolveExpression(expression, objArr) !== undefined;
 
-const placeholderRegex = /&([^\s"'`]*)/g;
+const placeholderRegex = /{{\s*([^\s"'`]*)\s*}}/g;
 
 export const canResolvePlaceholders = (str: string, ...objArr: IObject[]) => {
   if (!placeholderRegex.test(str)) {
