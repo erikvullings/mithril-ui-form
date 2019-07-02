@@ -1,10 +1,13 @@
 dependencies:
   mithril-leaflet: 0.1.4
-  slimdown-js: 0.1.3
+  slimdown-js: 0.1.4
 devDependencies:
+  '@types/geojson': 7946.0.7
+  '@types/leaflet': 1.4.4
+  '@types/leaflet-draw': 0.4.14
   '@types/materialize-css': 1.0.6
   '@types/mithril': github.com/MithrilJS/mithril.d.ts/b5a1d389c2e83bdc6351c2d1cb3d909674644af1
-  mithril-materialized: 0.13.9
+  mithril-materialized: 0.13.11
   rimraf: 2.6.3
   rollup: 1.16.3
   rollup-plugin-commonjs: 10.0.1_rollup@1.16.3
@@ -39,12 +42,28 @@ packages:
     dev: true
     resolution:
       integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
+  /@types/geojson/7946.0.7:
+    dev: true
+    resolution:
+      integrity: sha512-wE2v81i4C4Ol09RtsWFAqg3BUitWbHSpSlIo+bNdsCJijO9sjme+zm+73ZMCa/qMC8UEERxzGbvmr1cffo2SiQ==
   /@types/jquery/3.3.29:
     dependencies:
       '@types/sizzle': 2.3.2
     dev: true
     resolution:
       integrity: sha512-FhJvBninYD36v3k6c+bVk1DSZwh7B5Dpb/Pyk3HKVsiohn0nhbefZZ+3JXbWQhFyt0MxSl2jRDdGQPHeOHFXrQ==
+  /@types/leaflet-draw/0.4.14:
+    dependencies:
+      '@types/leaflet': 1.4.4
+    dev: true
+    resolution:
+      integrity: sha512-TyOZtr5SZf9ELR5EMLFwDlZuCGyjG0saUA6hEguZNEoratDiag1G/2eAVeYwK2NOX9N0zxQ9eDCRsjJK420X9g==
+  /@types/leaflet/1.4.4:
+    dependencies:
+      '@types/geojson': 7946.0.7
+    dev: true
+    resolution:
+      integrity: sha512-CROxHvsRDFyR1OQKZv/WJsCVFv8Wj6wFF/FOI/yiGwX7GMivyvF8Ks5AT3/JYk269pGiE43wP9JOgcr7EK2eUw==
   /@types/materialize-css/1.0.6:
     dependencies:
       '@types/cash': 0.0.3
@@ -843,13 +862,13 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Maz1d0epauypgdQSvdytaOOD0M5z0CuwlxjD44o2iJAicNmS/pabpcf5q5yfAdmgL1hcmi4kf+v/LR+ofHQl3g==
-  /mithril-materialized/0.13.9:
+  /mithril-materialized/0.13.11:
     dev: true
     peerDependencies:
       materialize-css: ^1.0.0
       mithril: next
     resolution:
-      integrity: sha512-0pSlRFErlRXx9LS4PALgF7MAzbIyOdb+9ZGNf6lMhTRm5B9XwDL1stCZN8RAo04WQ+PUVXJ4cjYn4hkCxZFJlw==
+      integrity: sha512-nd+Z0nMSNuGzEeMzkO7yf+T/9SsLdIbj61+mGYlohdbuIu+WWD7vQnbGKgwu9iLJ4a9ZwHwfN8dzGXPVGedXww==
   /mixin-deep/1.3.2:
     dependencies:
       for-in: 1.0.2
@@ -1231,10 +1250,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
-  /slimdown-js/0.1.3:
+  /slimdown-js/0.1.4:
     dev: false
     resolution:
-      integrity: sha512-GO/gqvJRGR/45iKsCKPaICkx//n/PiSWfGa6bKEexIEJc7QjoNlCR0e4kdJxoC1z4hbBwSVumoDUsxXqx5YrNg==
+      integrity: sha512-TEqF783G5RXbhVd8plTReVgbKwGYyWL9yX1Cff8N3z1Jrltf1gqj9iIZxW3QHIo7I0otDNQYQWyo0ZTvTGuYFA==
   /snapdragon-node/2.1.1:
     dependencies:
       define-property: 1.0.0
@@ -1532,10 +1551,13 @@ packages:
       tarball: 'https://codeload.github.com/MithrilJS/mithril.d.ts/tar.gz/b5a1d389c2e83bdc6351c2d1cb3d909674644af1'
     version: 1.2.0
 specifiers:
+  '@types/geojson': ^7946.0.7
+  '@types/leaflet': ^1.4.4
+  '@types/leaflet-draw': ^0.4.14
   '@types/materialize-css': ^1.0.6
   '@types/mithril': 'github:MithrilJS/mithril.d.ts#v2'
   mithril-leaflet: ^0.1.4
-  mithril-materialized: ^0.13.9
+  mithril-materialized: ^0.13.11
   rimraf: ^2.6.3
   rollup: ^1.16.2
   rollup-plugin-commonjs: ^10.0.0
@@ -1543,7 +1565,7 @@ specifiers:
   rollup-plugin-sourcemaps: ^0.4.2
   rollup-plugin-terser: ^5.0.0
   rollup-plugin-typescript2: ^0.21.2
-  slimdown-js: ^0.1.3
+  slimdown-js: ^0.1.4
   tslib: ^1.10.0
   typescript: ^3.5.2
   typescript-json-schema: ^0.38.3

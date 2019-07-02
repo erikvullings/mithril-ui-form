@@ -1,8 +1,10 @@
 dependencies:
+  leaflet: 1.5.1
+  leaflet-draw: 1.0.4
   material-icons: 0.3.1
   materialize-css: 1.0.0
   mithril: 2.0.0-rc.6
-  mithril-materialized: 0.13.9_3b852593545ce557331b84a3b149cfef
+  mithril-materialized: 0.13.11_3b852593545ce557331b84a3b149cfef
   mithril-ui-form: 'link:../mithril-ui-form'
 devDependencies:
   '@types/materialize-css': 1.0.6
@@ -2994,6 +2996,14 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA==
+  /leaflet-draw/1.0.4:
+    dev: false
+    resolution:
+      integrity: sha512-rsQ6saQO5ST5Aj6XRFylr5zvarWgzWnrg46zQ1MEOEIHsppdC/8hnN8qMoFvACsPvTioAuysya/TVtog15tyAQ==
+  /leaflet/1.5.1:
+    dev: false
+    resolution:
+      integrity: sha512-ekM9KAeG99tYisNBg0IzEywAlp0hYI5XRipsqRXyRTeuU8jcuntilpp+eFf5gaE0xubc9RuSNIVtByEKwqFV0w==
   /left-pad/1.3.0:
     deprecated: use String.prototype.padStart()
     dev: true
@@ -3179,7 +3189,7 @@ packages:
     dev: true
     resolution:
       integrity: sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
-  /mithril-materialized/0.13.9_3b852593545ce557331b84a3b149cfef:
+  /mithril-materialized/0.13.11_3b852593545ce557331b84a3b149cfef:
     dependencies:
       materialize-css: 1.0.0
       mithril: 2.0.0-rc.6
@@ -3188,7 +3198,7 @@ packages:
       materialize-css: ^1.0.0
       mithril: next
     resolution:
-      integrity: sha512-0pSlRFErlRXx9LS4PALgF7MAzbIyOdb+9ZGNf6lMhTRm5B9XwDL1stCZN8RAo04WQ+PUVXJ4cjYn4hkCxZFJlw==
+      integrity: sha512-nd+Z0nMSNuGzEeMzkO7yf+T/9SsLdIbj61+mGYlohdbuIu+WWD7vQnbGKgwu9iLJ4a9ZwHwfN8dzGXPVGedXww==
   /mithril/2.0.0-rc.6:
     dev: false
     hasBin: true
@@ -5176,10 +5186,12 @@ specifiers:
   '@types/mithril': 'github:MithrilJS/mithril.d.ts#v2'
   autoprefixer: ^9.6.0
   cssnano: ^4.1.10
+  leaflet: ^1.5.1
+  leaflet-draw: ^1.0.4
   material-icons: ^0.3.1
   materialize-css: ^1.0.0
   mithril: ^2.0.0-rc.6
-  mithril-materialized: ^0.13.9
+  mithril-materialized: ^0.13.11
   mithril-ui-form: ^0.0.1
   parcel-bundler: ^1.12.3
   rimraf: ^2.6.3
