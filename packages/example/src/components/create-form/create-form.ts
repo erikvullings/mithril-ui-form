@@ -13,6 +13,7 @@ const componentTypeOptions = [
   { id: 'md', label: 'md' },
   { id: 'none', label: 'none' },
   { id: 'number', label: 'number' },
+  { id: 'options', label: 'options' },
   { id: 'radio', label: 'radio' },
   { id: 'select', label: 'select' },
   { id: 'switch', label: 'switch' },

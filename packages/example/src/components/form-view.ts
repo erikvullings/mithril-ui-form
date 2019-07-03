@@ -1,5 +1,5 @@
 import m from 'mithril';
-import { LayoutForm, Form, SlimdownView } from 'mithril-ui-form';
+import { LayoutForm, Form, SlimdownView, IObject } from 'mithril-ui-form';
 import { TextArea } from 'mithril-materialized';
 
 export interface IContext {
@@ -66,49 +66,52 @@ const countries = [
 ];
 
 const editorType = {
+  id: 'editors',
   label: 'Editors',
   repeat: 0,
-  type: {
-    id: { autogenerate: 'id' },
-    name: { label: 'Name', type: 'text', className: 'col s8', iconName: 'title', required: true },
-    role: { label: 'Role', type: 'text', className: 'col s4' },
-    region: { label: 'Region', type: 'select', options: regions, className: 'col s6' },
-    country: { label: 'Country', type: 'select', options: countries, className: 'col s6', disabled: '!region' },
-  },
+  type: [
+    { id: 'id', autogenerate: 'id' },
+    { id: 'name', label: 'Name', type: 'text', className: 'col s8', iconName: 'title', required: true },
+    { id: 'role', label: 'Role', type: 'text', className: 'col s4' },
+    { id: 'region', label: 'Region', type: 'select', options: regions, className: 'col s6' },
+    { id: 'country', label: 'Country', type: 'select', options: countries, className: 'col s6', disabled: '!region' },
+  ],
 };
 
-const source = {
-  title: { label: 'Title', type: 'text', maxLength: 80, required: true, icon: 'title', className: 'col s4' },
-  url: { label: 'URL', type: 'url', maxLength: 80, required: true, icon: 'link', className: 'col s8' },
-} as Form<ISource, IContext>;
+const source = [
+  { id: 'title', label: 'Title', type: 'text', maxLength: 80, required: true, icon: 'title', className: 'col s4' },
+  { id: 'url', label: 'URL', type: 'url', maxLength: 80, required: true, icon: 'link', className: 'col s8' },
+] as Form;
 
-const info = {
-  intro: {
+const info = [
+  {
+    id: 'intro',
     type: 'md',
     value: `#### Introduction
 
 You can also include _markdown_ in your form.`,
   },
-  id: { type: 'text', disabled: true, autogenerate: 'guid', required: true, className: 'col m6' },
-  event: { type: 'text', maxLength: 80, required: true, className: 'col m6' },
-  area: { type: 'map', required: true, className: 'col s12' },
-  categories: { type: 'tags' },
-  description: { type: 'textarea', maxLength: 500, required: false, icon: 'note', show: 'event' },
-  created: { label: 'Created "{{event}}" event on:', type: 'date', required: true },
-  edited: { type: 'date', required: true },
-  editors: editorType,
-  sources: {
+  { id: 'id', type: 'text', disabled: true, autogenerate: 'guid', required: true, className: 'col m6' },
+  { id: 'event', type: 'text', maxLength: 80, required: true, className: 'col m6' },
+  { id: 'area', type: 'map', required: true, className: 'col s12' },
+  { id: 'categories', type: 'tags' },
+  { id: 'description', type: 'textarea', maxLength: 500, required: false, icon: 'note', show: 'event' },
+  { id: 'created', label: 'Created "{{event}}" event on:', type: 'date', required: true },
+  { id: 'edited', type: 'date', required: true },
+  editorType,
+  {
+    id: 'sources',
     label: 'Input sources',
     repeat: 0,
     type: source,
   },
-} as Form<ILessonLearned, IContext>;
+] as Form;
 
 export const FormView = () => {
   const state = {
     result: {} as ILessonLearned,
     isValid: false,
-    form: {},
+    form: [] as Form,
     error: '',
   };
 
@@ -175,9 +178,11 @@ ${result.sources ? result.sources.map((s, i) => `${i + 1}. [${s.title}](${s.url}
       // const ui = formFactory(info, result, print);
       return m('.row', [
         m('.col.s6.l4', [
-          m(SlimdownView, { md: `### JSON FORM
+          m(SlimdownView, {
+            md: `### JSON FORM
 
-          Feel free to edit me.` }),
+          Feel free to edit me.`,
+          }),
           m(TextArea, {
             label: 'JSON form',
             initialValue: JSON.stringify(form, null, 2),

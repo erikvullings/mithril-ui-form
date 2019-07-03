@@ -1,4 +1,4 @@
-import m, { Component, Attributes } from 'mithril';
+import m, { FactoryComponent, Attributes } from 'mithril';
 import { LeafletMap, geoJSON } from 'mithril-leaflet';
 import { LatLngExpression, FeatureGroup } from 'leaflet';
 import {
@@ -32,11 +32,12 @@ import { RepeatList, IRepeatList } from './repeat-list';
 import { IObject } from '../models/object';
 import { SlimdownView } from './slimdown-view';
 import { GeometryObject, FeatureCollection } from 'geojson';
+import { LayoutForm } from './layout-form';
 
-const unwrapComponent = <T, C>(
-  key: string,
+const unwrapComponent = (
   {
-    label = capitalizeFirstLetter(key),
+    id,
+    label = capitalizeFirstLetter(id),
     description,
     required,
     className,
@@ -47,11 +48,11 @@ const unwrapComponent = <T, C>(
     minLength,
     max,
     min,
-  }: IInputField<T, C>,
+  }: IInputField,
   autofocus = false,
   disabled = false
 ) => {
-  const result = { label } as IObject;
+  const result = { id, label } as IObject;
   if (description) {
     result.description = description;
   }
@@ -91,13 +92,11 @@ const unwrapComponent = <T, C>(
   return result;
 };
 
-export interface IFormField<T, C> extends Attributes {
-  /** Key of the property that is being repeated. Do not use `key` as this has side-effects in mithril. */
-  propKey: Extract<keyof T, string>;
+export interface IFormField extends Attributes {
   /** The input field (or form) that must be rendered repeatedly */
-  field: IInputField<T, C>;
+  field: IInputField;
   /** The resulting object */
-  obj: T;
+  obj: IObject;
   autofocus?: boolean;
   /** Callback function, invoked every time the original result object has changed */
   onchange?: () => void;
@@ -106,14 +105,10 @@ export interface IFormField<T, C> extends Attributes {
 }
 
 /** A single input field in a form */
-export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }, C extends IObject>(): Component<
-  IFormField<T, C>
-> => {
+export const FormField: FactoryComponent<IFormField> = () => {
   return {
-    view: ({
-      attrs: { propKey, field, obj, autofocus, onchange: onFormChange, disabled = field.disabled, context },
-    }) => {
-      const { value, required, repeat, autogenerate, show, label, description } = field;
+    view: ({ attrs: { field, obj, autofocus, onchange: onFormChange, disabled = field.disabled, context } }) => {
+      const { id, value, required, repeat, autogenerate, show, label, description } = field;
 
       if (
         (show && !evalExpression(show, obj, context)) ||
@@ -126,7 +121,6 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
       const options = field.options ? field.options.filter(o => !o.show || evalExpression(o.show, obj, context)) : [];
 
       const props = unwrapComponent(
-        propKey,
         field,
         autofocus,
         typeof disabled === 'boolean' || typeof disabled === 'undefined'
@@ -147,7 +141,7 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
 
       const onchange = (v: string | number | Array<string | number | IObject> | Date | boolean) => {
         console.warn(v);
-        obj[propKey] = v as any;
+        obj[id] = v as any;
         if (onFormChange) {
           onFormChange();
         }
@@ -169,28 +163,40 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
 
       if (typeof repeat !== 'undefined') {
         return m(RepeatList, {
-          propKey,
           obj,
           field,
           onchange,
           context,
-        } as IRepeatList<T, C>);
+        } as IRepeatList);
       }
 
-      if (autogenerate && !obj[propKey]) {
-        obj[propKey] = (autogenerate === 'guid' ? uuid4() : uniqueId()) as any;
+      if (type instanceof Array) {
+        if (!obj.hasOwnProperty(field.id)) {
+          obj[field.id] = {};
+        }
+        return m(LayoutForm, {
+          ...props,
+          form: type,
+          obj: obj[field.id],
+          context: [obj, context],
+          onchange,
+        });
+      }
+
+      if (autogenerate && !obj[id]) {
+        obj[id] = (autogenerate === 'guid' ? uuid4() : uniqueId()) as any;
       }
 
       switch (type) {
         case 'colour':
         case 'color': {
-          const initialValue = (obj[propKey] || value) as string;
+          const initialValue = (obj[id] || value) as string;
           return m(ColorInput, { ...props, initialValue, onchange });
         }
         case 'time': {
-          const date = ((obj[propKey] || value) as Date) || new Date();
+          const date = ((obj[id] || value) as Date) || new Date();
           const initialValue = toHourMin(date);
-          obj[propKey] = initialValue as any;
+          obj[id] = initialValue as any;
           return m(TimePicker, {
             twelveHour: false,
             initialValue,
@@ -198,8 +204,8 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
           });
         }
         case 'date': {
-          const initialValue = ((obj[propKey] || value) as Date) || new Date();
-          obj[propKey] = initialValue as any;
+          const initialValue = ((obj[id] || value) as Date) || new Date();
+          obj[id] = initialValue as any;
           return m(DatePicker, {
             ...props,
             format: 'mmmm d, yyyy',
@@ -208,7 +214,7 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
           });
         }
         case 'email': {
-          const initialValue = (obj[propKey] || value) as string;
+          const initialValue = (obj[id] || value) as string;
           return m(EmailInput, {
             ...props,
             validate,
@@ -218,7 +224,7 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
           });
         }
         case 'number': {
-          const initialValue = (obj[propKey] || value) as number;
+          const initialValue = (obj[id] || value) as number;
           return m(NumberInput, {
             ...props,
             validate,
@@ -228,15 +234,15 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
           });
         }
         case 'radio': {
-          const checkedId = (obj[propKey] || value) as string | number;
+          const checkedId = (obj[id] || value) as string | number;
           return m(RadioButtons, { ...props, options, checkedId, onchange });
         }
         case 'checkbox': {
-          const checked = (obj[propKey] || value) as boolean;
+          const checked = (obj[id] || value) as boolean;
           return m(InputCheckbox, { ...props, checked, onchange });
         }
         case 'options': {
-          const checkedId = (obj[propKey] || value) as Array<string | number>;
+          const checkedId = (obj[id] || value) as Array<string | number>;
           return m(Options, {
             ...props,
             options,
@@ -245,7 +251,7 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
           });
         }
         case 'select': {
-          const checkedId = (obj[propKey] || value) as Array<string | number>;
+          const checkedId = (obj[id] || value) as Array<string | number>;
           return m(Select, {
             placeholder: 'Pick one',
             ...props,
@@ -272,36 +278,36 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
             }
             return result;
           };
-          const overlay = (obj[propKey] ||
+          const overlay = (obj[id] ||
             value || {
               type: 'FeatureCollection',
               features: [],
             }) as FeatureCollection<GeometryObject>;
           const overlays = {} as IObject;
           const o = geoJSON(overlay);
-          overlays[propKey] = o;
+          overlays[id] = o;
           return m(LeafletMap, {
             ...bbox(o),
             className: 'col s12',
             style: 'height: 400px;',
             overlays,
-            visible: [propKey],
-            editable: [propKey],
+            visible: [id],
+            editable: [id],
             showScale: { imperial: false },
             onLayerEdited: (f: FeatureGroup) => onchange(f.toGeoJSON() as any),
           });
         }
         case 'md':
-          return m(SlimdownView, { md: (obj[propKey] || value) as string });
+          return m(SlimdownView, { md: (obj[id] || value) as string });
         case 'switch': {
-          const checked = (obj[propKey] || value) as boolean;
+          const checked = (obj[id] || value) as boolean;
           const { options: opt } = field;
           const left = opt && opt.length > 0 ? opt[0].label : '';
           const right = opt && opt.length > 1 ? opt[1].label : '';
           return m(Switch, { ...props, left, right, checked, onchange });
         }
         case 'tags': {
-          const initialValue = (obj[propKey] || value || []) as string[];
+          const initialValue = (obj[id] || value || []) as string[];
           const data = initialValue.map(chip => ({ tag: chip }));
           return m('.input-field col s12', [
             m(Label, { ...props }),
@@ -314,7 +320,7 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
           ]);
         }
         case 'textarea': {
-          const initialValue = (obj[propKey] || value) as string;
+          const initialValue = (obj[id] || value) as string;
           return m(TextArea, {
             ...props,
             validate,
@@ -326,7 +332,7 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
         case 'time':
           return m('div', 'todo');
         case 'url': {
-          const initialValue = (obj[propKey] || value) as string;
+          const initialValue = (obj[id] || value) as string;
           return m(UrlInput, {
             ...props,
             validate,
@@ -336,7 +342,7 @@ export const FormField = <T extends { [K in Extract<keyof T, string>]: unknown }
           });
         }
         case 'text': {
-          const initialValue = (obj[propKey] || value) as string;
+          const initialValue = (obj[id] || value) as string;
           return m(TextInput, {
             ...props,
             validate,

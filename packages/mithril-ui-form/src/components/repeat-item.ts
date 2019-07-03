@@ -6,7 +6,7 @@ import { IObject } from '../models/object';
 
 export interface IRepeatItem extends Attributes {
   item: any;
-  form: Form<any, any>;
+  form: Form;
   ondelete: (item: any) => void;
   onedit: (item: any) => void;
   context: IObject;

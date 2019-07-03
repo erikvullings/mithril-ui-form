@@ -6,7 +6,9 @@ import { Form } from './form';
  * is created has different properties. Each property is referenced by its ID
  * value.
  */
-export interface IInputField<T, C> {
+export interface IInputField {
+  /** Property key */
+  id: string;
   /** Component label */
   label?: string;
   /** Optional description */
@@ -14,7 +16,7 @@ export interface IInputField<T, C> {
   /** Can be used as a placeholder for text inputs or the first element of a Selection */
   placeholder?: string;
   /** Type of component to use */
-  type: ComponentType | Form<Extract<keyof T, string>, C>;
+  type?: ComponentType | Form; // Form<T[Extract<keyof T, string>], C | [T, C]>;
   /** Value that the component has, initially. Is also used to derive the type if not supplied. */
   value?: string | number | Date | boolean | string[];
   /**
@@ -61,7 +63,3 @@ export interface IInputField<T, C> {
    */
   show?: string | string[];
 }
-
-export const isInputField = <T, C>(
-  x?: IInputField<T, C> | Form<T, C>[Extract<keyof T, string>] | Form<T, C>
-): x is IInputField<T, C> => (x ? x.hasOwnProperty('type') || x.hasOwnProperty('autogenerate') : false);

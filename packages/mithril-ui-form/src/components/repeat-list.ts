@@ -1,21 +1,19 @@
-import m, { Component, Attributes } from 'mithril';
+import m, { FactoryComponent, Attributes } from 'mithril';
 import { FlatButton, uniqueId, ModalPanel } from 'mithril-materialized';
 import { IInputField, Form, IUIEvent, IObject } from '../models';
 import { RepeatItem } from './repeat-item';
 import { LayoutForm } from './layout-form';
 import { deepCopy } from '../utils/helpers';
 
-export interface IRepeatList<T extends IObject, C extends IObject> extends Attributes {
-  /** Key of the property that is being repeated. Do not use `key` as this has side-effects in mithril. */
-  propKey: Extract<keyof T, string>;
+export interface IRepeatList extends Attributes {
   /** The input field (or form) that must be rendered repeatedly */
-  field: IInputField<T, C>;
+  field: IInputField;
   /** The result object */
-  obj: T;
+  obj: IObject;
   /** The context */
-  context: C;
+  context: IObject;
   /** Callback function, invoked every time the original result object has changed */
-  onchange?: (items: T[]) => void;
+  onchange?: (items: IObject[]) => void;
 }
 
 /**
@@ -25,18 +23,18 @@ export interface IRepeatList<T extends IObject, C extends IObject> extends Attri
  * It creates an array of primitives when type is a IFormComponent, and an array of objects when its type
  * is a FormType.
  */
-export const RepeatList = <T extends IObject, C extends IObject>(): Component<IRepeatList<T, C>> => {
+export const RepeatList: FactoryComponent<IRepeatList> = () => {
   const state = {} as {
-    field: IInputField<T, C> | Form<T, C>;
+    field: IInputField | Form;
     containerId?: string;
     editId: string;
     deleteId: string;
-    items: T[];
-    onchange?: (items: T[]) => void;
+    items: IObject[];
+    onchange?: (items: IObject[]) => void;
     onclick: (e: IUIEvent) => void;
-    editItem?: T;
-    curItem?: T;
-    newItem?: T;
+    editItem?: IObject;
+    curItem?: IObject;
+    newItem?: IObject;
     canSave?: boolean;
     editModal?: M.Modal;
     delModal?: M.Modal;
@@ -45,15 +43,17 @@ export const RepeatList = <T extends IObject, C extends IObject>(): Component<IR
   const notify = () => state.onchange && state.onchange(state.items);
 
   return {
-    oninit: ({ attrs: { propKey: key, obj, field, label, onchange } }) => {
+    oninit: ({ attrs: { obj, field, label, onchange } }) => {
+      const { id } = field;
       state.onchange = onchange;
-      const id = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
-      state.editId = 'edit_' + id;
-      state.deleteId = 'delete_' + id;
-      if (!obj.hasOwnProperty(key)) {
-        obj[key] = [] as T[Extract<keyof T, string>];
+      const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
+      state.editId = 'edit_' + compId;
+      state.deleteId = 'delete_' + compId;
+      debugger;
+      if (!obj.hasOwnProperty(id)) {
+        obj[id] = [];
       }
-      state.items = obj[key];
+      state.items = obj[id];
       state.field = field;
       state.onclick =
         typeof field.type === 'string'
@@ -63,7 +63,7 @@ export const RepeatList = <T extends IObject, C extends IObject>(): Component<IR
           : () => {
               state.modalKey = uniqueId();
               state.editItem = undefined;
-              state.newItem = {} as T;
+              state.newItem = {} as IObject;
             };
     },
     view: ({ attrs: { field, obj, context } }) => {
@@ -86,7 +86,7 @@ export const RepeatList = <T extends IObject, C extends IObject>(): Component<IR
                 m(RepeatItem, {
                   disabled: true,
                   item,
-                  form: field.type as Form<any, C>,
+                  form: field.type as Form,
                   ondelete: it => {
                     state.curItem = it;
                     if (state.delModal) {
@@ -105,48 +105,47 @@ export const RepeatList = <T extends IObject, C extends IObject>(): Component<IR
                 })
               )
           : undefined,
-        m(ModalPanel, {
-          onCreate: modal => (state.editModal = modal),
-          id: editId,
-          title: state.editItem ? 'Edit item' : 'Create new item',
-          fixedFooter: true,
-          description:
-            typeof type === 'string'
-              ? 'undefined'
-              : m(
-                  '.form-item',
-                  m(LayoutForm, {
-                    key: modalKey,
-                    form: field.type as Form<any, C>,
-                    obj: state.editItem || state.newItem || {},
-                    onchange: isValid => (state.canSave = isValid),
-                    context: context instanceof Array ? [obj, ...context] : [obj, context],
-                  })
-                ),
-          buttons: [
-            {
-              iconName: 'cancel',
-              label: 'Cancel',
-            },
-            {
-              iconName: 'save',
-              label: 'Save',
-              disabled: !state.canSave,
-              onclick: () => {
-                if (state.editItem && state.curItem) {
-                  const edited = state.editItem;
-                  const current = state.curItem;
-                  Object.keys(field.type).forEach(f => {
-                    (current as any)[f] = edited[f];
-                  });
-                } else if (state.newItem) {
-                  state.items.push(state.newItem);
-                }
-                notify();
-              },
-            },
-          ],
-        }),
+        typeof type === 'string' || typeof type === 'undefined'
+          ? undefined
+          : m(ModalPanel, {
+              onCreate: modal => (state.editModal = modal),
+              id: editId,
+              title: state.editItem ? 'Edit item' : 'Create new item',
+              fixedFooter: true,
+              description: m(
+                '.form-item',
+                m(LayoutForm, {
+                  key: modalKey,
+                  form: type,
+                  obj: state.editItem || state.newItem || {},
+                  onchange: isValid => (state.canSave = isValid),
+                  context: context instanceof Array ? [obj, ...context] : [obj, context],
+                })
+              ),
+              buttons: [
+                {
+                  iconName: 'cancel',
+                  label: 'Cancel',
+                },
+                {
+                  iconName: 'save',
+                  label: 'Save',
+                  disabled: !state.canSave,
+                  onclick: () => {
+                    if (state.editItem && state.curItem) {
+                      const edited = state.editItem;
+                      const current = state.curItem;
+                      type.forEach(f => {
+                        (current as any)[f.id] = edited[f.id];
+                      });
+                    } else if (state.newItem) {
+                      state.items.push(state.newItem);
+                    }
+                    notify();
+                  },
+                },
+              ],
+            }),
         m(ModalPanel, {
           onCreate: modal => (state.delModal = modal),
           id: state.deleteId,
