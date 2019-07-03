@@ -94,7 +94,7 @@ const resolveExpression = (expression: string, objArr: IObject[]) =>
   objArr.filter(Boolean).reduce((p, obj) => p || getPath(obj, expression.trim()), undefined as string | undefined);
 
 const canResolveExpression = (expression: string, objArr: IObject[]) =>
-  typeof resolveExpression(expression, objArr) !== undefined;
+  typeof resolveExpression(expression, objArr) !== 'undefined';
 
 const placeholderRegex = /{{\s*([^\s"'`]*)\s*}}/g;
 
