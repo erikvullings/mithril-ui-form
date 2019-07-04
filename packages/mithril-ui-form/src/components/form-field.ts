@@ -1,5 +1,6 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
 import { LeafletMap, geoJSON } from 'mithril-leaflet';
+import { Slimdown } from 'slimdown-js';
 import { LatLngExpression, FeatureGroup } from 'leaflet';
 import {
   InputCheckbox,
@@ -34,10 +35,10 @@ import { SlimdownView } from './slimdown-view';
 import { GeometryObject, FeatureCollection } from 'geojson';
 import { LayoutForm } from './layout-form';
 
-const unwrapComponent = (
-  {
+const unwrapComponent = (field: IInputField, autofocus = false, disabled = false) => {
+  const {
     id,
-    label = capitalizeFirstLetter(id),
+    label,
     description,
     required,
     className,
@@ -48,13 +49,13 @@ const unwrapComponent = (
     minLength,
     max,
     min,
-  }: IInputField,
-  autofocus = false,
-  disabled = false
-) => {
+  } = field;
   const result = { id, label } as IObject;
+  if (!label && id) {
+    result.label = capitalizeFirstLetter(id);
+  }
   if (description) {
-    result.description = description;
+    result.helperText = Slimdown.render(description);
   }
   if (className) {
     result.className = className;
@@ -96,7 +97,7 @@ export interface IFormField extends Attributes {
   /** The input field (or form) that must be rendered repeatedly */
   field: IInputField;
   /** The resulting object */
-  obj: IObject;
+  obj: IObject | IObject[];
   autofocus?: boolean;
   /** Callback function, invoked every time the original result object has changed */
   onchange?: () => void;
@@ -118,7 +119,11 @@ export const FormField: FactoryComponent<IFormField> = () => {
         return undefined;
       }
 
-      const options = field.options ? field.options.filter(o => !o.show || evalExpression(o.show, obj, context)) : [];
+      const options = field.options
+        ? field.options
+          .filter(o => !o.show || evalExpression(o.show, obj, context))
+          .map(o => o.label ? o : { ...o, label: capitalizeFirstLetter(o.id) })
+        : [];
 
       const props = unwrapComponent(
         field,
@@ -139,14 +144,6 @@ export const FormField: FactoryComponent<IFormField> = () => {
             v instanceof Array ? v && v.length > 0 : typeof v !== undefined
         : undefined;
 
-      const onchange = (v: string | number | Array<string | number | IObject> | Date | boolean) => {
-        console.warn(v);
-        obj[id] = v as any;
-        if (onFormChange) {
-          onFormChange();
-        }
-      };
-
       const type =
         field.type ||
         (autogenerate
@@ -165,10 +162,24 @@ export const FormField: FactoryComponent<IFormField> = () => {
         return m(RepeatList, {
           obj,
           field,
-          onchange,
+          onchange: onFormChange,
           context,
         } as IRepeatList);
       }
+
+      if (obj instanceof Array) {
+        return undefined; // Only a repeat list can deal with arrays
+      }
+
+      const onchange = (v: string | number | Array<string | number | IObject> | Date | boolean) => {
+        if (typeof v === 'undefined' || v === 'undefined') {
+          return;
+        }
+        obj[id] = v as any;
+        if (onFormChange) {
+          onFormChange();
+        }
+      };
 
       if (type instanceof Array) {
         if (!obj.hasOwnProperty(field.id)) {
@@ -271,6 +282,9 @@ export const FormField: FactoryComponent<IFormField> = () => {
             }
             try {
               const bounds = area.getBounds();
+              if (Object.keys(bounds).length === 0) {
+                return result;
+              }
               result.view = bounds.getCenter();
               result.zoom = 10;
             } catch (e) {
