@@ -9,7 +9,7 @@ export interface IRepeatList extends Attributes {
   /** The input field (or form) that must be rendered repeatedly */
   field: IInputField;
   /** The result object */
-  obj: IObject;
+  obj: IObject | IObject[];
   /** The context */
   context: IObject;
   /** Callback function, invoked every time the original result object has changed */
@@ -49,11 +49,14 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
       const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
       state.editId = 'edit_' + compId;
       state.deleteId = 'delete_' + compId;
-      debugger;
-      if (!obj.hasOwnProperty(id)) {
-        obj[id] = [];
+      if (obj instanceof Array) {
+        state.items = obj;
+      } else {
+        if (!obj.hasOwnProperty(id)) {
+          obj[id] = [];
+        }
+        state.items = obj[id];
       }
-      state.items = obj[id];
       state.field = field;
       state.onclick =
         typeof field.type === 'string'

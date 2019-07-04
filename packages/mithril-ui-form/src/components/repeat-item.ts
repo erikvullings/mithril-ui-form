@@ -15,10 +15,10 @@ export interface IRepeatItem extends Attributes {
 /** A single item that has been repeated. Used for displaying and invoking the edit and delete functionality. */
 export const RepeatItem: FactoryComponent<IRepeatItem> = () => {
   return {
-    view: ({ attrs: { item, form, ondelete, onedit, disabled, context }}) => {
+    view: ({ attrs: { item, form, ondelete, onedit, disabled, context } }) => {
       return m('.repeated-item', [
         // formFactory(form, item),
-        m(LayoutForm, { disabled, form, obj: item, context }),
+        m('.row', m(LayoutForm, { disabled, form, obj: item, context })),
         m('.row', [
           m(FlatButton, { iconName: 'delete_forever', onclick: () => ondelete(item) }),
           m(FlatButton, { iconName: 'edit', onclick: () => onedit(item) }),
