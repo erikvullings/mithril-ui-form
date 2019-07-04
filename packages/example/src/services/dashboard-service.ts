@@ -5,10 +5,12 @@ import { Intro } from '../components/intro';
 import { AboutPage } from '../components/about/about-page';
 import { FormView } from '../components/form-view';
 import { CreateForm } from '../components/create-form/create-form';
+import { LLFView } from '../components/llf-test';
 
 export const enum Dashboards {
   HOME = 'HOME',
   FORM = 'FORM',
+  LLF = 'LLF',
   EDITOR = 'EDITOR',
   ABOUT = 'ABOUT',
 }
@@ -68,6 +70,14 @@ export const dashboardSvc: DashboardService = new DashboardService(Layout, [
     route: '/playground',
     visible: true,
     component: FormView,
+  },
+  {
+    id: Dashboards.LLF,
+    title: 'LLF',
+    route: '/llf',
+    icon: 'assignment',
+    visible: true,
+    component: LLFView,
   },
   {
     id: Dashboards.EDITOR,
