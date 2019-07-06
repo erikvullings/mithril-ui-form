@@ -35,10 +35,14 @@ export interface IInputField {
   maxLength?: number;
   /** If true, the property is required */
   required?: boolean;
+  /** If true, the select property allows for multiple selections */
+  multiple?: boolean;
   /** If true, the property is disabled */
   disabled?: boolean | string | string[];
   /** CSS class name to attach to the element */
   className?: string;
+  /** CSS class for the content, e.g. for grouping an options list */
+  checkboxClass?: string;
   // model: FormType<T[Extract<keyof T, string>]>;
   /** Name of the icon */
   icon?: string;
@@ -48,12 +52,8 @@ export interface IInputField {
   newLine?: boolean;
   /** Autogenerate a GUID or ID value */
   autogenerate?: 'id' | 'guid';
-  /**
-   * By default, repeat is 0. In case it is 1 or more, it means that we can repeat
-   * (and delete) the element or group.
-   * In case of a string, the resolved value should be a number too.
-   */
-  repeat?: number | string;
+  /** If true, repeat the item multiple times (indicates it is an array) */
+  repeat?: boolean;
   /**
    * By default, show every element, except when this property is defined. In that case, show when:
    * - show is a string with a elementID, and elementID is selected (as an answer)
