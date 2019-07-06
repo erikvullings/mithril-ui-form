@@ -8,10 +8,17 @@ The form supports markdown input, repeating elements a (dynamic) number of times
 
 ## TODO
 
+- Split a long form into parts by adding section type
+- repeat: true, min: 2, max: 5, should limit the number of repeats to 5 and require a minimum of 2.
 - Add pre-sets, overriding existing values.
-- Add support for getting the value of an option based on id.
+- Add support for getting the value of an option based on id. E.g. extract all options to a new object (key is the id of the field, value is the list of options), so we can resolve their values easily later.
 - Create a handlebars-like component: put in a template and an object, and render HTML
 - Use this tool to create your own form schemas. E.g. a two-column layout, where you define your schema in the left column, and see the results in the right column.
+
+## Remarks about the LLF
+
+- Start with the event description
+- End with editors and sources
 
 ## Process
 
