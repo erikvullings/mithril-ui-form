@@ -8,7 +8,6 @@ The form supports markdown input, repeating elements a (dynamic) number of times
 
 ## TODO
 
-- Split a long form into parts by adding section type
 - repeat: true, min: 2, max: 5, should limit the number of repeats to 5 and require a minimum of 2.
 - Add pre-sets, overriding existing values.
 - Add support for getting the value of an option based on id. E.g. extract all options to a new object (key is the id of the field, value is the list of options), so we can resolve their values easily later.
