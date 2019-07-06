@@ -24,13 +24,13 @@
   },
   "homepage": "https://github.com/erikvullings/mithril-tree-component#readme",
   "dependencies": {
-    "material-icons":"^0.3.1",
+    "leaflet": "^1.5.1",
+    "leaflet-draw": "^1.0.4",
+    "material-icons": "^0.3.1",
     "materialize-css": "^1.0.0",
     "mithril": "^2.0.0-rc.6",
-    "mithril-ui-form": "^0.0.1",
-    "mithril-materialized": "^0.13.11",
-    "leaflet": "^1.5.1",
-    "leaflet-draw": "^1.0.4"
+    "mithril-materialized": "^0.13.12",
+    "mithril-ui-form": "^0.0.1"
   },
   "devDependencies": {
     "@types/materialize-css": "^1.0.6",

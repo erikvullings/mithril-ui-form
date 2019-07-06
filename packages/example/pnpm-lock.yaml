@@ -4,7 +4,7 @@ dependencies:
   material-icons: 0.3.1
   materialize-css: 1.0.0
   mithril: 2.0.0-rc.6
-  mithril-materialized: 0.13.11_3b852593545ce557331b84a3b149cfef
+  mithril-materialized: 0.13.12_3b852593545ce557331b84a3b149cfef
   mithril-ui-form: 'link:../mithril-ui-form'
 devDependencies:
   '@types/materialize-css': 1.0.6
@@ -3189,7 +3189,7 @@ packages:
     dev: true
     resolution:
       integrity: sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
-  /mithril-materialized/0.13.11_3b852593545ce557331b84a3b149cfef:
+  /mithril-materialized/0.13.12_3b852593545ce557331b84a3b149cfef:
     dependencies:
       materialize-css: 1.0.0
       mithril: 2.0.0-rc.6
@@ -3198,7 +3198,7 @@ packages:
       materialize-css: ^1.0.0
       mithril: next
     resolution:
-      integrity: sha512-nd+Z0nMSNuGzEeMzkO7yf+T/9SsLdIbj61+mGYlohdbuIu+WWD7vQnbGKgwu9iLJ4a9ZwHwfN8dzGXPVGedXww==
+      integrity: sha512-MIUIT6DMu5Z+EBVW4e4J5Mxm5fhlMuZVPlzmOULgG+YeGBtkalb2laRzuj/ufKcA8oBDKETBZn2+5esylSKzFQ==
   /mithril/2.0.0-rc.6:
     dev: false
     hasBin: true
@@ -5191,7 +5191,7 @@ specifiers:
   material-icons: ^0.3.1
   materialize-css: ^1.0.0
   mithril: ^2.0.0-rc.6
-  mithril-materialized: ^0.13.11
+  mithril-materialized: ^0.13.12
   mithril-ui-form: ^0.0.1
   parcel-bundler: ^1.12.3
   rimraf: ^2.6.3

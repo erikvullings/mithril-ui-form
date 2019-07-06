@@ -30,8 +30,8 @@
   "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
   "license": "MIT",
   "dependencies": {
-    "mithril-leaflet": "^0.1.4",
-    "slimdown-js": "^0.1.4"
+    "slimdown-js": "^0.1.4",
+    "mithril-leaflet": "0.1.5"
   },
   "devDependencies": {
     "@types/leaflet": "^1.4.4",
@@ -39,13 +39,13 @@
     "@types/materialize-css": "^1.0.6",
     "@types/mithril": "github:MithrilJS/mithril.d.ts#v2",
     "@types/geojson": "^7946.0.7",
-    "mithril-materialized": "^0.13.11",
+    "mithril-materialized": "^0.13.12",
     "rimraf": "^2.6.3",
-    "rollup": "^1.16.2",
-    "rollup-plugin-commonjs": "^10.0.0",
-    "rollup-plugin-node-resolve": "^5.0.2",
+    "rollup": "^1.16.4",
+    "rollup-plugin-commonjs": "^10.0.1",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-sourcemaps": "^0.4.2",
-    "rollup-plugin-terser": "^5.0.0",
+    "rollup-plugin-terser": "^5.1.0",
     "rollup-plugin-typescript2": "^0.21.2",
     "tslib": "^1.10.0",
     "typescript": "^3.5.2",
@@ -53,7 +53,7 @@
   },
   "peerDependencies": {
     "mithril": "^2.0.0-rc.6",
-    "mithril-materialized": "^0.13.10",
+    "mithril-materialized": "^0.13.12",
     "materialize-css": "^1.0.0",
     "leaflet": "^1.5.1",
     "leaflet-draw": "^1.0.4"
