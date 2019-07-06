@@ -15,6 +15,7 @@ export type ComponentType =
   | 'number'
   | 'options'
   | 'radio'
+  | 'section'
   | 'select'
   | 'switch'
   | 'tags'

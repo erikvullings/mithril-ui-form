@@ -1,5 +1,6 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
-import { LeafletMap, geoJSON } from 'mithril-leaflet';
+import { LeafletMap } from 'mithril-leaflet';
+import { geoJSON } from 'leaflet';
 import { Slimdown } from 'slimdown-js';
 import { LatLngExpression, FeatureGroup } from 'leaflet';
 import {
@@ -41,7 +42,9 @@ const unwrapComponent = (field: IInputField, autofocus = false, disabled = false
     label,
     description,
     required,
+    multiple,
     className,
+    checkboxClass,
     icon,
     iconClass,
     placeholder,
@@ -66,11 +69,17 @@ const unwrapComponent = (field: IInputField, autofocus = false, disabled = false
   if (iconClass) {
     result.iconClass = iconClass;
   }
+  if (checkboxClass) {
+    result.checkboxClass = checkboxClass;
+  }
   if (placeholder) {
     result.placeholder = placeholder;
   }
   if (required) {
     result.isMandatory = true;
+  }
+  if (multiple) {
+    result.multiple = multiple;
   }
   if (disabled) {
     result.disabled = true;
@@ -103,13 +112,17 @@ export interface IFormField extends Attributes {
   onchange?: () => void;
   /** Disable the form, disallowing edits */
   disabled?: boolean | string | string[];
+  /** Section ID to display - can be used to split up the form and only show a part */
+  section?: string;
 }
 
 /** A single input field in a form */
 export const FormField: FactoryComponent<IFormField> = () => {
   return {
-    view: ({ attrs: { field, obj, autofocus, onchange: onFormChange, disabled = field.disabled, context } }) => {
-      const { id, value, required, repeat, autogenerate, show, label, description } = field;
+    view: ({
+      attrs: { field, obj, autofocus, onchange: onFormChange, disabled = field.disabled, context, section },
+    }) => {
+      const { id, type, value, required, repeat, autogenerate, show, label, description } = field;
 
       if (
         (show && !evalExpression(show, obj, context)) ||
@@ -121,8 +134,8 @@ export const FormField: FactoryComponent<IFormField> = () => {
 
       const options = field.options
         ? field.options
-          .filter(o => !o.show || evalExpression(o.show, obj, context))
-          .map(o => o.label ? o : { ...o, label: capitalizeFirstLetter(o.id) })
+            .filter(o => !o.show || evalExpression(o.show, obj, context))
+            .map(o => (o.label ? o : { ...o, label: capitalizeFirstLetter(o.id) }))
         : [];
 
       const props = unwrapComponent(
@@ -143,20 +156,6 @@ export const FormField: FactoryComponent<IFormField> = () => {
         ? (v: string | number | Array<string | number>) =>
             v instanceof Array ? v && v.length > 0 : typeof v !== undefined
         : undefined;
-
-      const type =
-        field.type ||
-        (autogenerate
-          ? 'none'
-          : value
-          ? typeof value === 'string'
-            ? 'text'
-            : typeof value === 'number'
-            ? 'number'
-            : typeof value === 'boolean'
-            ? 'checkbox'
-            : 'none'
-          : 'none');
 
       if (typeof repeat !== 'undefined') {
         return m(RepeatList, {
@@ -191,6 +190,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
           obj: obj[field.id],
           context: [obj, context],
           onchange,
+          section,
         });
       }
 
@@ -257,6 +257,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
           return m(Options, {
             ...props,
             options,
+            checkboxClass: 'col s6 m4 l3',
             checkedId: checkedId instanceof Array ? checkedId : [checkedId],
             onchange: checkedIds => onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds),
           });
@@ -312,7 +313,9 @@ export const FormField: FactoryComponent<IFormField> = () => {
           });
         }
         case 'md':
-          return m(SlimdownView, { md: (obj[id] || value) as string });
+          return m(SlimdownView, { md: (id ? obj[id] : value || label) as string, className: props.className });
+        case 'section':
+          return m('.divider');
         case 'switch': {
           const checked = (obj[id] || value) as boolean;
           const { options: opt } = field;

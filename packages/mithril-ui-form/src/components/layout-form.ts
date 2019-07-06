@@ -1,7 +1,7 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
 import { Vnode } from 'mithril';
 import { FormField } from './form-field';
-import { Form, IObject } from '../models';
+import { Form, IObject, IInputField } from '../models';
 
 export interface ILayoutForm extends Attributes {
   /** The form to display */
@@ -14,38 +14,62 @@ export interface ILayoutForm extends Attributes {
   onchange?: (isValid: boolean) => void;
   /** Disable the form, disallowing edits */
   disabled?: boolean | string | string[];
+  /** Section ID to display - can be used to split up the form and only show a part */
+  section?: string;
 }
 
 export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
   const isValid = (item: IObject, form: Form) => {
-    return (
-      form
-        .filter(f => f.required)
-        .reduce(
-          (acc, cur) =>
-            acc &&
-            !(
-              typeof item[cur.id] === 'undefined' ||
-              ((item[cur.id] as any) instanceof Array && item[cur.id].length === 0) ||
-              (typeof item[cur.id] === 'string' && (item[cur.id] as string).length === 0)
-            ),
-          true
-        )
-    );
+    return form
+      .filter(f => f.required)
+      .reduce(
+        (acc, cur) =>
+          acc &&
+          !(
+            typeof item[cur.id] === 'undefined' ||
+            ((item[cur.id] as any) instanceof Array && item[cur.id].length === 0) ||
+            (typeof item[cur.id] === 'string' && (item[cur.id] as string).length === 0)
+          ),
+        true
+      );
   };
 
   return {
-    view: ({ attrs: { form, obj, onchange: onChange, disabled, context } }) => {
+    view: ({ attrs: { form, obj, onchange: onChange, disabled, context, section } }) => {
       const onchange = () => onChange && onChange(isValid(obj, form));
-
-      return form.reduce(
-        (acc, field) => {
-          const type = field.type;
-          if (typeof type === 'undefined') {
-            return acc;
-          } else {
-            return [...acc, m(FormField, { field, obj, onchange, disabled, context })];
+      const sectionFilter = () => {
+        if (!section) {
+          return (_: IInputField) => true;
+        }
+        let state = false;
+        return ({ type, id }: IInputField): boolean => {
+          if (type === 'section') {
+            state = id === section;
           }
+          return state;
+        };
+      };
+
+      return form.filter(sectionFilter()).reduce(
+        (acc, field) => {
+          console.log(field);
+          const { autogenerate, value, options, type } = field;
+          if (!type) {
+            field.type = autogenerate
+              ? 'none'
+              : value
+              ? typeof value === 'string'
+                ? 'md'
+                : typeof value === 'number'
+                ? 'number'
+                : typeof value === 'boolean'
+                ? 'checkbox'
+                : 'none'
+              : options && options.length > 0
+              ? 'select'
+              : 'none';
+          }
+          return [...acc, m(FormField, { field, obj, onchange, disabled, context, section })];
         },
         [] as Array<Vnode<any, any>>
       );

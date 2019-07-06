@@ -14,6 +14,8 @@ export interface IRepeatList extends Attributes {
   context: IObject;
   /** Callback function, invoked every time the original result object has changed */
   onchange?: (items: IObject[]) => void;
+  /** Section ID to display - can be used to split up the form and only show a part */
+  section?: string;
 }
 
 /**
@@ -69,18 +71,18 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
               state.newItem = {} as IObject;
             };
     },
-    view: ({ attrs: { field, obj, context } }) => {
+    view: ({ attrs: { field, obj, context, className = '.col.s12', section } }) => {
       const { items, onclick, editId, modalKey } = state;
       const { label, type } = field;
 
-      return m('.repeat-component', [
+      return m(`.repeat-list.input-field${className}`, [
         m(FlatButton, {
           iconName: 'add',
           iconClass: 'right',
           label,
           onclick,
           modalId: editId,
-          style: 'padding-left: 8px;',
+          style: 'padding: 0',
         }),
         items && items.length
           ? typeof type === 'string'
@@ -105,6 +107,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                     }
                   },
                   context,
+                  section,
                 })
               )
           : undefined,
