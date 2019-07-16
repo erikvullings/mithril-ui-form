@@ -52,7 +52,6 @@ export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
 
       return form.filter(sectionFilter()).reduce(
         (acc, field) => {
-          console.log(field);
           const { autogenerate, value, options, type } = field;
           if (!type) {
             field.type = autogenerate
