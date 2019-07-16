@@ -1,6 +1,5 @@
 import m from 'mithril';
-import { LayoutForm, Form, SlimdownView, IObject } from 'mithril-ui-form';
-import { TextArea } from 'mithril-materialized';
+import { LayoutForm, Form } from 'mithril-ui-form';
 
 export interface IContext {
   admin: boolean;
@@ -607,22 +606,6 @@ const costLevels = [
   },
 ];
 
-const templateInfo = {
-  author: 'Dirk Stolk',
-  created: '2018-10-23',
-  version: 'v0.0.1',
-  tableOfContent: 'Table of Content',
-  and: 'and',
-  docInfoTitle: 'Document info',
-  authorLabel: 'Author',
-  releaseLabel: 'Comments',
-  versionLabel: 'Version',
-  createdLabel: 'Created on',
-  updatedLabel: 'Updated on',
-  nextLabel: 'Next',
-  prevLabel: 'Previous',
-  showTemplateSelector: true,
-};
 
 const source = [
   {
