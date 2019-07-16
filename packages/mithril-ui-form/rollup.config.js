@@ -18,6 +18,8 @@ export default {
       globals: {
         mithril: 'm',
         'materialize-css': 'M',
+        'mithril-materialized': 'm',
+        'mithril-leaflet': 'm',
         'leaflet': 'L',
         'leaflet-draw': 'L',
       }
@@ -28,7 +30,7 @@ export default {
       sourcemap: true,
     },
   ],
-  external: ['mithril', 'materialize-css', 'leaflet', 'leaflet-draw'],
+  external: ['mithril', 'mithril-materialized', 'materialize-css', 'mithril-leaflet', 'leaflet', 'leaflet-draw'],
   plugins: [
     // Allow node_modules resolution, so you can use 'external' to control
     // which external modules to include in the bundle
