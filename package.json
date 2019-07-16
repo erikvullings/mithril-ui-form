@@ -26,6 +26,7 @@
     "clean:local": "rimraf -fr docs",
     "clean": "npm run clean:local && lerna run --parallel clean",
     "start": "lerna run --parallel start",
+    "dry-run": "lerna run --parallel dry-run",
     "patch-release": "lerna run patch-release --parallel",
     "minor-release": "lerna run minor-release --parallel"
   },
