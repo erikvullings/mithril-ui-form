@@ -123,7 +123,6 @@ export const FormField: FactoryComponent<IFormField> = () => {
       attrs: { field, obj, autofocus, onchange: onFormChange, disabled = field.disabled, context, section },
     }) => {
       const { id, type, value, required, repeat, autogenerate, show, label, description } = field;
-
       if (
         (show && !evalExpression(show, obj, context)) ||
         (label && !canResolvePlaceholders(label, obj, context)) ||
@@ -255,9 +254,9 @@ export const FormField: FactoryComponent<IFormField> = () => {
         case 'options': {
           const checkedId = (obj[id] || value) as Array<string | number>;
           return m(Options, {
+            checkboxClass: 'col s6 m4 l3',
             ...props,
             options,
-            checkboxClass: 'col s6 m4 l3',
             checkedId: checkedId instanceof Array ? checkedId : [checkedId],
             onchange: checkedIds => onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds),
           });
@@ -265,7 +264,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
         case 'select': {
           const checkedId = (obj[id] || value) as Array<string | number>;
           return m(Select, {
-            placeholder: 'Pick one',
+            placeholder: props.multiple ? 'Pick one or more' : 'Pick one',
             ...props,
             options,
             checkedId: checkedId instanceof Array ? checkedId : [checkedId],
