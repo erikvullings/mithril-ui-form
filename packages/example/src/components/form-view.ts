@@ -1,5 +1,5 @@
 import m from 'mithril';
-import { LayoutForm, Form, SlimdownView, IObject } from 'mithril-ui-form';
+import { LayoutForm, Form, SlimdownView } from 'mithril-ui-form';
 import { TextArea } from 'mithril-materialized';
 
 export interface IContext {
