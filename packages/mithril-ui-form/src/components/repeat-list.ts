@@ -27,11 +27,6 @@ export interface IRepeatList extends Attributes {
  */
 export const RepeatList: FactoryComponent<IRepeatList> = () => {
   const state = {} as {
-    field: IInputField | Form;
-    containerId?: string;
-    editId: string;
-    deleteId: string;
-    items: IObject[];
     onchange?: (items: IObject[]) => void;
     onclick: (e: IUIEvent) => void;
     editItem?: IObject;
@@ -42,24 +37,22 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
     delModal?: M.Modal;
     modalKey?: string;
   };
-  const notify = () => state.onchange && state.onchange(state.items);
+  const notify = (items: IObject[]) => state.onchange && state.onchange(items);
+
+  const getItems = (obj: IObject | IObject[], id: string): IObject[] => {
+    if (obj instanceof Array) {
+      return obj;
+    } else {
+      if (!obj.hasOwnProperty(id)) {
+        obj[id] = [];
+      }
+      return obj[id];
+    }
+  };
 
   return {
-    oninit: ({ attrs: { obj, field, label, onchange } }) => {
-      const { id } = field;
+    oninit: ({ attrs: { field, onchange } }) => {
       state.onchange = onchange;
-      const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
-      state.editId = 'edit_' + compId;
-      state.deleteId = 'delete_' + compId;
-      if (obj instanceof Array) {
-        state.items = obj;
-      } else {
-        if (!obj.hasOwnProperty(id)) {
-          obj[id] = [];
-        }
-        state.items = obj[id];
-      }
-      state.field = field;
       state.onclick =
         typeof field.type === 'string'
           ? () => {
@@ -72,8 +65,12 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
             };
     },
     view: ({ attrs: { field, obj, context, className = '.col.s12', section } }) => {
-      const { items, onclick, editId, modalKey } = state;
-      const { label, type } = field;
+      const { onclick, modalKey } = state;
+      const { id, label, type } = field;
+      const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
+      const editId = 'edit_' + compId;
+      const deleteId = 'delete_' + compId;
+      const items = getItems(obj, id);
 
       return m(`.repeat-list.input-field${className}`, [
         m(FlatButton, {
@@ -116,10 +113,10 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
           : m(ModalPanel, {
               onCreate: modal => (state.editModal = modal),
               id: editId,
-              title: state.editItem ? 'Edit item' : 'Create new item',
+              title: (state.editItem ? 'Edit ' : 'Create new ') + id,
               fixedFooter: true,
               description: m(
-                '.form-item',
+                '.row.form-item',
                 m(LayoutForm, {
                   key: modalKey,
                   form: type,
@@ -139,22 +136,23 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   disabled: !state.canSave,
                   onclick: () => {
                     if (state.editItem && state.curItem) {
+                      console.warn('edited');
                       const edited = state.editItem;
                       const current = state.curItem;
                       type.forEach(f => {
                         (current as any)[f.id] = edited[f.id];
                       });
                     } else if (state.newItem) {
-                      state.items.push(state.newItem);
+                      items.push(state.newItem);
                     }
-                    notify();
+                    notify(items);
                   },
                 },
               ],
             }),
         m(ModalPanel, {
           onCreate: modal => (state.delModal = modal),
-          id: state.deleteId,
+          id: deleteId,
           title: 'Delete item',
           description: 'Are you sure?',
           buttons: [
@@ -165,11 +163,11 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
               label: 'Yes',
               onclick: () => {
                 if (state.curItem) {
-                  const i = state.items.indexOf(state.curItem);
+                  const i = items.indexOf(state.curItem);
                   if (i >= 0) {
-                    state.items.splice(i, 1);
+                    items.splice(i, 1);
                   }
-                  notify();
+                  notify(items);
                 }
               },
             },
