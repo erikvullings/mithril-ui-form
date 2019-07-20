@@ -257,8 +257,9 @@ export const FormField: FactoryComponent<IFormField> = () => {
             checkboxClass: 'col s6 m4 l3',
             ...props,
             options,
-            checkedId: checkedId instanceof Array ? checkedId : [checkedId],
-            onchange: checkedIds => onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds),
+            checkedId,
+            onchange: checkedIds =>
+              onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter(v => v !== null)),
           });
         }
         case 'select': {
@@ -267,8 +268,9 @@ export const FormField: FactoryComponent<IFormField> = () => {
             placeholder: props.multiple ? 'Pick one or more' : 'Pick one',
             ...props,
             options,
-            checkedId: checkedId instanceof Array ? checkedId : [checkedId],
-            onchange: checkedIds => onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds),
+            checkedId,
+            onchange: checkedIds =>
+              onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter(v => v !== null)),
           });
         }
         case 'map': {
@@ -308,7 +310,10 @@ export const FormField: FactoryComponent<IFormField> = () => {
             visible: [id],
             editable: [id],
             showScale: { imperial: false },
-            onLayerEdited: (f: FeatureGroup) => onchange(f.toGeoJSON() as any),
+            onLayerEdited: (f: FeatureGroup) => {
+              onchange(f.toGeoJSON() as any);
+              m.redraw();
+            },
           });
         }
         case 'md':
