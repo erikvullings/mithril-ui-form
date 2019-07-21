@@ -1,4 +1,4 @@
-import { IObject } from '../models/object';
+import { IObject, Form, IInputField } from '../models';
 
 export const capitalizeFirstLetter = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -182,4 +182,53 @@ export const deepCopy = <T>(target: T): T => {
     return cpy as T;
   }
   return target;
+};
+
+/** Create a resolver that translates an ID and value (or values) to a human readable representation */
+export const labelResolver = (form: Form) => {
+  const createDict = (ff: IInputField[], label = '') => {
+    const d = ff
+      .filter(f => f.type !== 'section')
+      .reduce(
+        (acc, cur) => {
+          const fieldId = (label ? `${label}.` : '') + cur.id;
+          const type = cur.type || (cur.options && cur.options.length > 0 ? 'select' : 'text');
+          if (typeof type === 'string') {
+            acc[fieldId] = cur;
+          } else {
+            acc = { ...acc, ...createDict(type, fieldId) };
+          }
+          return acc;
+        },
+        {} as { [key: string]: IInputField }
+      );
+    return d;
+  };
+  const dict = createDict(form);
+  return (id: string, value?: string | string[]) => {
+    if (typeof value === 'undefined') {
+      return '';
+    }
+    if (!dict.hasOwnProperty(id)) {
+      return value;
+    }
+    const ff = dict[id];
+    const values = value instanceof Array ? value.filter(v => v !== null && v !== undefined) : [value];
+    const type = ff.type || (ff.options ? 'options' : 'none');
+    switch (type) {
+      default:
+        return value;
+      case 'radio':
+      case 'select':
+      case 'options':
+        return values
+          .map(v =>
+            ff
+              .options!.filter(o => o.id === v)
+              .map(o => o.label || capitalizeFirstLetter(o.id))
+              .shift()
+          )
+          .join(', ');
+    }
+  };
 };
