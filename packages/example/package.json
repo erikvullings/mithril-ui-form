@@ -8,8 +8,7 @@
     "clean": "rimraf .cache dist",
     "link": "npm link mithril-ui-form",
     "start": "parcel index.html",
-    "build": "parcel build index.html --out-dir ../../docs",
-    "deploy": "npm run build"
+    "build": "npm run clean && parcel build index.html --out-dir ../../docs --public-url https://erikvullings.github.io/mithril-ui-form"
   },
   "keywords": [
     "mithril",
