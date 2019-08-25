@@ -50,7 +50,7 @@ export interface IInputField {
   iconClass?: string;
   /** If true, break to a new line */
   newLine?: boolean;
-  /** Autogenerate a GUID or ID value */
+  /** Autogenerate a GUID or ID (shorter, starting with `id`) value */
   autogenerate?: 'id' | 'guid';
   /** If true, repeat the item multiple times (indicates it is an array) */
   repeat?: boolean;
