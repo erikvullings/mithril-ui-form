@@ -35,6 +35,9 @@ export const getPath = (o: IObject, s: string) => {
   return o as any;
 };
 
+const flatten = <T>(arr: T[]) =>
+  arr.reduce((acc, cur) => (cur instanceof Array ? [...acc, ...cur] : [...acc, cur]), [] as T[]);
+
 // const isSet = (a: any) =>
 //   typeof a === 'undefined' ? false : typeof a === 'boolean' ? a : typeof +a === 'number' ? +a !== 0 : true;
 
@@ -77,10 +80,11 @@ const checkExpression = (expression: string, obj: IObject) => {
 
 const checkExpressions = (expression: string, objArr: IObject[]) => {
   const ands = expression.split('&');
+  const flattened = flatten(objArr);
   return ands.reduce((acc, expr) => {
     const invert = invertExpression.test(expr);
     const e = invert ? expr.replace(invertExpression, '') : expr;
-    acc = acc && objArr.filter(Boolean).reduce((p, obj) => p || checkExpression(e.trim(), obj), false as boolean);
+    acc = acc && flattened.filter(Boolean).reduce((p, obj) => p || checkExpression(e.trim(), obj), false as boolean);
     return invert ? !acc : acc;
   }, true);
 };
