@@ -50,6 +50,8 @@ export interface IInputField {
   iconClass?: string;
   /** If true, break to a new line */
   newLine?: boolean;
+  /** Only valid for type='section', indicates section level */
+  level?: number;
   /** Autogenerate a GUID or ID (shorter, starting with `id`) value */
   autogenerate?: 'id' | 'guid';
   /** If true, repeat the item multiple times (indicates it is an array) */
