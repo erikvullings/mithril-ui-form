@@ -21,14 +21,15 @@ export interface ILayoutForm extends Attributes {
 export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
   const isValid = (item: IObject, form: Form) => {
     return form
-      .filter(f => f.required)
+      .filter(f => f.required && typeof f.id !== undefined)
       .reduce(
         (acc, cur) =>
           acc &&
           !(
-            typeof item[cur.id] === 'undefined' ||
-            ((item[cur.id] as any) instanceof Array && item[cur.id].length === 0) ||
-            (typeof item[cur.id] === 'string' && (item[cur.id] as string).length === 0)
+            cur.id &&
+            (typeof item[cur.id] === 'undefined' ||
+              ((item[cur.id] as any) instanceof Array && item[cur.id].length === 0) ||
+              (typeof item[cur.id] === 'string' && (item[cur.id] as string).length === 0))
           ),
         true
       );

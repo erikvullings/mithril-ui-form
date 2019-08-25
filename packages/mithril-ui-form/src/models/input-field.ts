@@ -7,8 +7,8 @@ import { Form } from './form';
  * value.
  */
 export interface IInputField {
-  /** Property key */
-  id: string;
+  /** Property key, not required for markdown blocks */
+  id?: string;
   /** Component label */
   label?: string;
   /** Optional description */

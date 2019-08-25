@@ -66,7 +66,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
     },
     view: ({ attrs: { field, obj, context, className = '.col.s12', section } }) => {
       const { onclick, modalKey } = state;
-      const { id, label, type } = field;
+      const { id = '', label, type } = field;
       const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
       const editId = 'edit_' + compId;
       const deleteId = 'delete_' + compId;
@@ -140,7 +140,9 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                       const edited = state.editItem;
                       const current = state.curItem;
                       type.forEach(f => {
-                        (current as any)[f.id] = edited[f.id];
+                        if (f.id) {
+                          (current as any)[f.id] = edited[f.id];
+                        }
                       });
                     } else if (state.newItem) {
                       items.push(state.newItem);

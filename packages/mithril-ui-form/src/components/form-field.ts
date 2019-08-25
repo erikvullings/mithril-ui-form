@@ -122,7 +122,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
     view: ({
       attrs: { field, obj, autofocus, onchange: onFormChange, disabled = field.disabled, context, section },
     }) => {
-      const { id, type, value, required, repeat, autogenerate, show, label, description } = field;
+      const { id = '', type, value, required, repeat, autogenerate, show, label, description } = field;
       if (
         (show && !evalExpression(show, obj, context)) ||
         (label && !canResolvePlaceholders(label, obj, context)) ||
@@ -180,17 +180,19 @@ export const FormField: FactoryComponent<IFormField> = () => {
       };
 
       if (type instanceof Array) {
-        if (!obj.hasOwnProperty(field.id)) {
-          obj[field.id] = {};
+        if (field.id) {
+          if (!obj.hasOwnProperty(field.id)) {
+            obj[field.id] = {};
+          }
+          return m(LayoutForm, {
+            ...props,
+            form: type,
+            obj: obj[field.id],
+            context: [obj, context],
+            onchange,
+            section,
+          });
         }
-        return m(LayoutForm, {
-          ...props,
-          form: type,
-          obj: obj[field.id],
-          context: [obj, context],
-          onchange,
-          section,
-        });
       }
 
       if (autogenerate && !obj[id]) {
