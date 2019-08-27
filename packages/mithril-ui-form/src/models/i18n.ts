@@ -4,5 +4,4 @@ export interface I18n {
   editRepeat: string;
   /** Label for the create button of the RepeatList */
   createRepeat: string;
-  [key: string]: string;
 }
