@@ -103,7 +103,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                       state.editModal.open();
                     }
                   },
-                  context,
+                  context: [obj, context],
                   section,
                 })
               )
