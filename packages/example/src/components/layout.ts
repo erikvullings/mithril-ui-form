@@ -44,7 +44,7 @@ export const Layout = () => ({
             // tslint:disable-next-line:max-line-length
             '.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}'
           ),
-          m('a.brand-logo[href=#]', { style: 'margin-left: 80px; '}, 'MITHRIL-UI-FORM'),
+          m('a.brand-logo[href=#]', { style: 'margin-left: 80px; ' }, 'MITHRIL-UI-FORM'),
           m(
             'ul.right',
             dashboardSvc
@@ -54,8 +54,8 @@ export const Layout = () => ({
                 m(
                   `li${isActive(d.route)}`,
                   m(
-                    'a',
-                    { href: d.route, oncreate: m.route.link },
+                    m.route.Link,
+                    { href: d.route },
                     m('i.material-icons.right', d.icon ? m('i.material-icons', d.icon) : d.title)
                   )
                 )

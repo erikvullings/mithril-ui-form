@@ -117,13 +117,25 @@ export interface IFormField extends Attributes {
   section?: string;
   /** Translation keys, read once on initialization */
   i18n?: I18n;
+  /** Optional container ID for DatePicker and TimePicker to render their content in */
+  containerId?: string;
 }
 
 /** A single input field in a form */
 export const FormField: FactoryComponent<IFormField> = () => {
   return {
     view: ({
-      attrs: { field, obj, autofocus, onchange: onFormChange, disabled = field.disabled, context, section, i18n },
+      attrs: {
+        field,
+        obj,
+        autofocus,
+        onchange: onFormChange,
+        disabled = field.disabled,
+        context,
+        section,
+        i18n,
+        containerId,
+      },
     }) => {
       const { id = '', type, value, required, repeat, autogenerate, show, label, description } = field;
       if (
@@ -166,6 +178,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
           onchange: onFormChange,
           context,
           i18n,
+          containerId,
         } as IRepeatList);
       }
 
@@ -195,6 +208,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             context: [obj, context],
             onchange,
             section,
+            containerId,
           });
         }
       }
@@ -217,6 +231,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             twelveHour: false,
             initialValue,
             onchange,
+            container: containerId,
           });
         }
         case 'date': {
@@ -227,6 +242,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             format: 'mmmm d, yyyy',
             initialValue,
             onchange,
+            container: (containerId as any),
           });
         }
         case 'email': {

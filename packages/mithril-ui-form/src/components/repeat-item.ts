@@ -12,14 +12,16 @@ export interface IRepeatItem extends Attributes {
   context: IObject;
   /** Section ID to display - can be used to split up the form and only show a part */
   section?: string;
+  /** Optional container ID for DatePicker and TimePicker to render their content in */
+  containerId?: string;
 }
 
 /** A single item that has been repeated. Used for displaying and invoking the edit and delete functionality. */
 export const RepeatItem: FactoryComponent<IRepeatItem> = () => {
   return {
-    view: ({ attrs: { item, form, ondelete, onedit, disabled, context, section } }) => {
+    view: ({ attrs: { item, form, ondelete, onedit, disabled, context, section, containerId } }) => {
       return m(`.repeated-item.row`, [
-        m(LayoutForm, { disabled, form, obj: item, context, section }),
+        m(LayoutForm, { disabled, form, obj: item, context, section, containerId }),
         m('.col.s12', [
           m(FlatButton, { iconName: 'delete_forever', onclick: () => ondelete(item) }),
           m(FlatButton, { iconName: 'edit', onclick: () => onedit(item) }),

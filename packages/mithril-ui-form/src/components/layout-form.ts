@@ -72,7 +72,10 @@ export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
               ? 'select'
               : 'none';
           }
-          return [...acc, m(FormField, { field, obj, onchange, disabled, context, section, i18n })];
+          return [
+            ...acc,
+            m(FormField, { field, obj, onchange, disabled, context, section, i18n, containerId: 'body' }),
+          ];
         },
         [] as Array<Vnode<any, any>>
       );

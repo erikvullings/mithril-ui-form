@@ -18,7 +18,9 @@ export interface IRepeatList extends Attributes {
   /** Section ID to display - can be used to split up the form and only show a part */
   section?: string;
   /** Translation keys, read once on initialization */
-  i18n?: I18n;
+  i18n?: Partial<I18n>;
+  /** Optional container ID for DatePicker and TimePicker to render their content in */
+  containerId?: string;
 }
 
 /**
@@ -71,7 +73,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
               state.newItem = {} as IObject;
             };
     },
-    view: ({ attrs: { field, obj, context, className = '.col.s12', section } }) => {
+    view: ({ attrs: { field, obj, context, className = '.col.s12', section, containerId } }) => {
       const { onclick, modalKey } = state;
       const { id = '', label, type } = field;
       const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
@@ -96,6 +98,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   disabled: true,
                   item,
                   form: field.type as Form,
+                  containerId,
                   ondelete: it => {
                     state.curItem = it;
                     if (state.delModal) {
@@ -130,6 +133,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   obj: state.editItem || state.newItem || {},
                   onchange: isValid => (state.canSave = isValid),
                   context: context instanceof Array ? [obj, ...context] : [obj, context],
+                  containerId,
                 })
               ),
               buttons: [
