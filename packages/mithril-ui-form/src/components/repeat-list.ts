@@ -4,6 +4,7 @@ import { IInputField, Form, IUIEvent, IObject } from '../models';
 import { RepeatItem } from './repeat-item';
 import { LayoutForm } from './layout-form';
 import { deepCopy } from '../utils/helpers';
+import { I18n } from '../models/i18n';
 
 export interface IRepeatList extends Attributes {
   /** The input field (or form) that must be rendered repeatedly */
@@ -16,6 +17,8 @@ export interface IRepeatList extends Attributes {
   onchange?: (items: IObject[]) => void;
   /** Section ID to display - can be used to split up the form and only show a part */
   section?: string;
+  /** Translation keys, read once on initialization */
+  i18n?: I18n;
 }
 
 /**
@@ -36,6 +39,8 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
     editModal?: M.Modal;
     delModal?: M.Modal;
     modalKey?: string;
+    editLabel: string;
+    createLabel: string;
   };
   const notify = (items: IObject[]) => state.onchange && state.onchange(items);
 
@@ -51,8 +56,10 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
   };
 
   return {
-    oninit: ({ attrs: { field, onchange } }) => {
+    oninit: ({ attrs: { field, onchange, i18n, field: { id = '' } } }) => {
       state.onchange = onchange;
+      state.editLabel = i18n && i18n.editRepeat ? i18n.editRepeat : 'Edit ' + id;
+      state.createLabel = i18n && i18n.createRepeat ? i18n.createRepeat : 'Create new ' + id;
       state.onclick =
         typeof field.type === 'string'
           ? () => {
@@ -113,7 +120,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
           : m(ModalPanel, {
               onCreate: modal => (state.editModal = modal),
               id: editId,
-              title: (state.editItem ? 'Edit ' : 'Create new ') + id,
+              title: state.editItem ? state.editLabel : state.createLabel,
               fixedFooter: true,
               description: m(
                 '.row.form-item',

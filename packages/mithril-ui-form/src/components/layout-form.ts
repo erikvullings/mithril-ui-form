@@ -2,6 +2,7 @@ import m, { FactoryComponent, Attributes } from 'mithril';
 import { Vnode } from 'mithril';
 import { FormField } from './form-field';
 import { Form, IObject, IInputField } from '../models';
+import { I18n } from '../models/i18n';
 
 export interface ILayoutForm extends Attributes {
   /** The form to display */
@@ -16,6 +17,8 @@ export interface ILayoutForm extends Attributes {
   disabled?: boolean | string | string[];
   /** Section ID to display - can be used to split up the form and only show a part */
   section?: string;
+  /** Translation keys, read once on initialization */
+  i18n?: I18n;
 }
 
 export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
@@ -36,7 +39,7 @@ export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
   };
 
   return {
-    view: ({ attrs: { form, obj, onchange: onChange, disabled, context, section } }) => {
+    view: ({ attrs: { form, obj, onchange: onChange, disabled, context, section, i18n } }) => {
       const onchange = () => onChange && onChange(isValid(obj, form));
       const sectionFilter = () => {
         if (!section) {
@@ -69,7 +72,7 @@ export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
               ? 'select'
               : 'none';
           }
-          return [...acc, m(FormField, { field, obj, onchange, disabled, context, section })];
+          return [...acc, m(FormField, { field, obj, onchange, disabled, context, section, i18n })];
         },
         [] as Array<Vnode<any, any>>
       );
