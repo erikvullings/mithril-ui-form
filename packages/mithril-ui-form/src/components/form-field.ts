@@ -35,7 +35,6 @@ import { IObject } from '../models/object';
 import { SlimdownView } from './slimdown-view';
 import { GeometryObject, FeatureCollection } from 'geojson';
 import { LayoutForm } from './layout-form';
-import { I18n } from '../models/i18n';
 
 const unwrapComponent = (field: IInputField, autofocus = false, disabled = false) => {
   const {
@@ -115,8 +114,6 @@ export interface IFormField extends Attributes {
   disabled?: boolean | string | string[];
   /** Section ID to display - can be used to split up the form and only show a part */
   section?: string;
-  /** Translation keys, read once on initialization */
-  i18n?: I18n;
   /** Optional container ID for DatePicker and TimePicker to render their content in */
   containerId?: string;
 }
@@ -133,11 +130,10 @@ export const FormField: FactoryComponent<IFormField> = () => {
         disabled = field.disabled,
         context,
         section,
-        i18n,
         containerId,
+        field: { id = '', type, value, required, repeat, autogenerate, show, label, description, i18n },
       },
     }) => {
-      const { id = '', type, value, required, repeat, autogenerate, show, label, description } = field;
       if (
         (show && !evalExpression(show, obj, context)) ||
         (label && !canResolvePlaceholders(label, obj, context)) ||
@@ -242,7 +238,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             format: 'mmmm d, yyyy',
             initialValue,
             onchange,
-            container: (containerId as any),
+            container: containerId as any,
           });
         }
         case 'email': {
@@ -377,6 +373,9 @@ export const FormField: FactoryComponent<IFormField> = () => {
         case 'url': {
           const initialValue = (obj[id] || value) as string;
           return m(UrlInput, {
+            placeholder: 'http(s)://...',
+            dataError: 'http(s)://www.example.com',
+            dataSuccess: 'OK',
             ...props,
             validate,
             autofocus,

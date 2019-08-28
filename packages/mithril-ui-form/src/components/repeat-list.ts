@@ -60,8 +60,8 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
   return {
     oninit: ({ attrs: { field, onchange, i18n, field: { id = '' } } }) => {
       state.onchange = onchange;
-      state.editLabel = i18n && i18n.editRepeat ? i18n.editRepeat : 'Edit ' + id;
-      state.createLabel = i18n && i18n.createRepeat ? i18n.createRepeat : 'Create new ' + id;
+      state.editLabel = i18n && i18n.editRepeat ? i18n.editRepeat : `Edit ${id}`;
+      state.createLabel = i18n && i18n.createRepeat ? i18n.createRepeat : `Create new ${id}`;
       state.onclick =
         typeof field.type === 'string'
           ? () => {

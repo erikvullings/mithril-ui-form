@@ -1,5 +1,6 @@
 import { ComponentType } from './component-type';
 import { Form } from './form';
+import { I18n } from './i18n';
 
 /**
  * A form component represents the GUI used to create an object. The object that
@@ -64,4 +65,6 @@ export interface IInputField {
    * elements have been selected (AND condition).
    */
   show?: string | string[];
+  /** Translation keys, read once on initialization */
+  i18n?: I18n;
 }
