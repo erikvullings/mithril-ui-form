@@ -28,8 +28,8 @@
     "material-icons": "^0.3.1",
     "materialize-css": "^1.0.0",
     "mithril": "^2.0.4",
-    "mithril-materialized": "^0.14.2",
-    "mithril-ui-form": "^0.2.0"
+    "mithril-materialized": "^0.14.3",
+    "mithril-ui-form": "^0.3.0"
   },
   "devDependencies": {
     "@types/materialize-css": "^1.0.6",
