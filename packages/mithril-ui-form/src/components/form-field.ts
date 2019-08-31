@@ -326,7 +326,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             style: 'height: 400px;',
             overlays,
             visible: [id],
-            editable: [id],
+            editable: disabled ? undefined : [id],
             showScale: { imperial: false },
             onLayerEdited: (f: FeatureGroup) => {
               onchange(f.toGeoJSON() as any);

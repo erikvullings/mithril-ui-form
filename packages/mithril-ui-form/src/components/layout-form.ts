@@ -9,7 +9,7 @@ export interface ILayoutForm extends Attributes {
   /** The resulting object */
   obj: IObject | IObject[];
   /** Relevant context, i.e. the original object and other context from the environment */
-  context: IObject | IObject[]; // TODO Check this type, may be an array of contexts
+  context?: IObject | IObject[]; // TODO Check this type, may be an array of contexts
   /** Callback function, invoked every time the original result object has changed */
   onchange?: (isValid: boolean) => void;
   /** Disable the form, disallowing edits */

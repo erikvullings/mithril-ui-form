@@ -188,11 +188,15 @@ export const deepCopy = <T>(target: T): T => {
   return target;
 };
 
-/** Create a resolver that translates an ID and value (or values) to a human readable representation */
+/**
+ * Create a resolver that translates an ID and value (or values) to a human readable representation
+ * by replacing the keys with their form labels, making it easier to render the object into a human
+ * readable form.
+ */
 export const labelResolver = (form: Form) => {
   const createDict = (ff: IInputField[], label = '') => {
     const d = ff
-      .filter(f => f.type !== 'section')
+      .filter(f => f.type !== 'section' && f.type !== 'md')
       .reduce(
         (acc, cur) => {
           const fieldId = (label ? `${label}.` : '') + cur.id;
@@ -208,13 +212,12 @@ export const labelResolver = (form: Form) => {
       );
     return d;
   };
+
   const dict = createDict(form);
-  return (id: string, value?: string | string[]) => {
-    if (typeof value === 'undefined') {
-      return '';
-    }
-    if (!dict.hasOwnProperty(id)) {
-      return value;
+
+  const resolver = (id: string, value?: string | string[]) => {
+    if (!dict.hasOwnProperty(id) || typeof value === 'undefined') {
+      return undefined;
     }
     const ff = dict[id];
     const values = value instanceof Array ? value.filter(v => v !== null && v !== undefined) : [value];
@@ -226,13 +229,49 @@ export const labelResolver = (form: Form) => {
       case 'select':
       case 'options':
         return values
-          .map(v =>
-            ff
-              .options!.filter(o => o.id === v)
-              .map(o => o.label || capitalizeFirstLetter(o.id))
-              .shift()
-          )
-          .join(', ');
+          .map(v => ff
+            .options!.filter(o => o.id === v)
+            .map(o => o.label || capitalizeFirstLetter(o.id))
+            .shift())
+          .filter(v => typeof v !== 'undefined');
     }
   };
+
+  /** Resolve an object by replacing all keys with their label counterpart. */
+  const resolveObj = <T>(obj: any, parent = ''): T | undefined => {
+    if (!obj || (typeof obj === 'object' && Object.keys(obj).length === 0)) {
+      return undefined;
+    }
+    if (obj instanceof Array) {
+      return obj.map(o => resolveObj(o, parent)) as any;
+    } else {
+      const resolved = {} as { [key: string]: any };
+      Object.keys(obj).forEach(key => {
+        const fullKey = parent ? `${parent}.${key}` : key;
+        const value = obj[key as keyof T];
+        if (typeof value === 'number' || typeof value === 'boolean') {
+          resolved[key] = value;
+        } else if (typeof value === 'string') {
+          const r = resolver(fullKey, value);
+          if (r) {
+            resolved[key] = r;
+          }
+        } else if (value instanceof Array) {
+          if (typeof value[0] === 'string' || value[0] === null) {
+            const r = resolver(fullKey, value);
+            if (r) {
+              resolved[key] = r;
+            }
+          } else {
+            resolved[key] = resolveObj(value, key);
+          }
+        } else if (typeof value === 'object') {
+          resolved[key] = value;
+        }
+      });
+      return resolved as T;
+    }
+  };
+
+  return resolveObj;
 };
