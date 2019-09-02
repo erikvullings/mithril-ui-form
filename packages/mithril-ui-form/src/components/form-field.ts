@@ -184,6 +184,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
 
       const onchange = (v: string | number | Array<string | number | IObject> | Date | boolean) => {
         if (typeof v === 'undefined' || v === 'undefined') {
+          delete obj[id];
           return;
         }
         obj[id] = v as any;
@@ -288,7 +289,9 @@ export const FormField: FactoryComponent<IFormField> = () => {
             options,
             checkedId,
             onchange: checkedIds =>
-              onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter(v => v !== null)),
+              onchange(
+                checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter(v => v !== null || typeof v !== 'undefined')
+              ),
           });
         }
         case 'map': {
