@@ -227,7 +227,10 @@ export const FormField: FactoryComponent<IFormField> = () => {
           return m(TimePicker, {
             twelveHour: false,
             initialValue,
-            onchange,
+            onchange: time => {
+              onchange(time);
+              m.redraw();
+            },
             container: containerId,
           });
         }
@@ -238,7 +241,10 @@ export const FormField: FactoryComponent<IFormField> = () => {
             ...props,
             format: 'mmmm d, yyyy',
             initialValue,
-            onchange,
+            onchange: date => {
+              onchange(date);
+              m.redraw();
+            },
             container: containerId as any,
           });
         }
