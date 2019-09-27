@@ -684,9 +684,10 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
   { id: 'editors', type: 'section' },
   {
     id: 'editors',
-    label: 'Editors',
+    label: 'Add Editors',
     className: 'col s12',
     repeat: true,
+    inline: true,
     type: [
       {
         id: 'name',
@@ -717,6 +718,7 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
     id: 'sources',
     label: 'Publications',
     repeat: true,
+    inline: false,
     type: source,
   },
   {
