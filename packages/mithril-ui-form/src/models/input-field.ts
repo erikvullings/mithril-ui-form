@@ -38,6 +38,8 @@ export interface IInputField {
   required?: boolean;
   /** If true, the select property allows for multiple selections */
   multiple?: boolean;
+  /** If true, create the form inline */
+  inline?: boolean;
   /** If true, the property is disabled */
   disabled?: boolean | string | string[];
   /** CSS class name to attach to the element */

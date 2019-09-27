@@ -131,7 +131,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
         context,
         section,
         containerId,
-        field: { id = '', type, value, required, repeat, autogenerate, show, label, description, i18n },
+        field: { id = '', type, value, required, repeat, autogenerate, show, label, description, inline, i18n },
       },
     }) => {
       if (
@@ -174,6 +174,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
           onchange: onFormChange,
           context,
           i18n,
+          inline,
           containerId,
         } as IRepeatList);
       }
