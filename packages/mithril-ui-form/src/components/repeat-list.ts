@@ -134,7 +134,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                         m(LayoutForm, {
                           form: field.type as Form,
                           obj: item,
-                          context,
+                          context: [obj, context],
                           section,
                           containerId,
                         }),
