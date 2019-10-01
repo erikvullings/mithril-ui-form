@@ -137,6 +137,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                           context: [obj, context],
                           section,
                           containerId,
+                          onchange: () => notify(items),
                         }),
                         m(
                           '.clearfix',
