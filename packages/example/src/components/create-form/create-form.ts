@@ -32,7 +32,7 @@ export const CreateForm: FactoryComponent = () => {
       {
         id: 'properties',
         label: 'Properties',
-        repeat: 0,
+        repeat: true,
         type: [
           { id: 'id', type: 'text' },
           { id: 'type', type: 'select', options: componentTypeOptions, className: 'col s8' },

@@ -53,7 +53,7 @@ const unwrapComponent = (field: IInputField, autofocus = false, disabled = false
     max,
     min,
   } = field;
-  const result = { id, label } as IObject;
+  const result = { id: `${id}-${uniqueId()}`, label } as IObject;
   if (!label && id) {
     result.label = capitalizeFirstLetter(id);
   }
@@ -383,9 +383,9 @@ export const FormField: FactoryComponent<IFormField> = () => {
         case 'url': {
           const initialValue = (obj[id] || value) as string;
           return m(UrlInput, {
-            placeholder: 'http(s)://...',
-            dataError: 'http(s)://www.example.com',
-            dataSuccess: 'OK',
+            placeholder: 'http(s)://www.example.com',
+            // dataError: 'http(s)://www.example.com',
+            // dataSuccess: 'OK',
             ...props,
             validate,
             autofocus,
