@@ -51,7 +51,8 @@ const checkExpression = (expression: string, obj: IObject) => {
   const match = expressionRegex.exec(expression);
   if (match) {
     const [fullMatch, path, operand, value] = match;
-    const v = getPath(obj, path.trim());
+    const resolved = getPath(obj, path.trim());
+    const v = typeof resolved === 'boolean' ? (resolved ? 'true' : 'false') : resolved;
     if (typeof v === 'undefined' || (typeof v === 'string' && v.length === 0)) {
       return false;
     } else if (operand && value) {
@@ -229,10 +230,12 @@ export const labelResolver = (form: Form) => {
       case 'select':
       case 'options':
         return values
-          .map(v => ff
-            .options!.filter(o => o.id === v)
-            .map(o => o.label || capitalizeFirstLetter(o.id))
-            .shift())
+          .map(v =>
+            ff
+              .options!.filter(o => o.id === v)
+              .map(o => o.label || capitalizeFirstLetter(o.id))
+              .shift()
+          )
           .filter(v => typeof v !== 'undefined');
     }
   };

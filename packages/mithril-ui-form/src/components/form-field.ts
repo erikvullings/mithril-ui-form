@@ -29,7 +29,7 @@ import {
   evalExpression,
   canResolvePlaceholders,
   resolvePlaceholders,
-} from '../utils/helpers';
+} from '../utils';
 import { RepeatList, IRepeatList } from './repeat-list';
 import { IObject } from '../models/object';
 import { SlimdownView } from './slimdown-view';
@@ -236,10 +236,11 @@ export const FormField: FactoryComponent<IFormField> = () => {
           });
         }
         case 'date': {
-          const initialValue = ((obj[id] || value) as Date) || new Date();
+          const initialValue = ((obj[id] || value) as Date) || undefined;
           obj[id] = initialValue as any;
           return m(DatePicker, {
             ...props,
+            setDefaultDate: initialValue ? true : false,
             format: 'mmmm d, yyyy',
             initialValue,
             onchange: date => {

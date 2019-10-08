@@ -3,7 +3,7 @@ import { FlatButton, uniqueId, ModalPanel, RoundIconButton } from 'mithril-mater
 import { IInputField, Form, IUIEvent, IObject } from '../models';
 import { RepeatItem } from './repeat-item';
 import { LayoutForm } from './layout-form';
-import { deepCopy } from '../utils/helpers';
+import { deepCopy } from '../utils';
 import { I18n } from '../models/i18n';
 
 export interface IRepeatList extends Attributes {

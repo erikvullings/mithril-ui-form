@@ -1,4 +1,4 @@
 export * from './models';
 export * from './components';
-export { labelResolver, deepCopy, padLeft, getPath } from './utils/helpers';
+export { labelResolver, deepCopy, padLeft, getPath } from './utils';
 export { Slimdown } from 'slimdown-js';
