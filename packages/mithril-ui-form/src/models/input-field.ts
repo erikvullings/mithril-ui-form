@@ -26,9 +26,9 @@ export interface IInputField {
    * list of countries.
    */
   options?: Array<{ id: string; label: string; disabled?: boolean; icon?: string; show?: string | string[] }>;
-  /** When input type is a number, optionally specify the minimum value. */
+  /** When input type is a number or a date, optionally specify the minimum value (or min date). */
   min?: number;
-  /** When input type is a number, optionally specify the maximum value. */
+  /** When input type is a number or a date, optionally specify the maximum value (or a date). */
   max?: number;
   /** When input type is a text or text area, optionally specify the minimum length. */
   minLength?: number;

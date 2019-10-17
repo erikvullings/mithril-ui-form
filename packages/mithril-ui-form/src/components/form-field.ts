@@ -238,8 +238,15 @@ export const FormField: FactoryComponent<IFormField> = () => {
         case 'date': {
           const initialValue = ((obj[id] || value) as Date) || undefined;
           obj[id] = initialValue as any;
+          const { min, max } = props;
+          const minDate = min ? new Date(min) : undefined;
+          const maxDate = max ? new Date(max) : undefined;
+          console.log(minDate);
+          // console.log(maxDate);
           return m(DatePicker, {
             ...props,
+            minDate,
+            maxDate,
             setDefaultDate: initialValue ? true : false,
             format: 'mmmm d, yyyy',
             initialValue,
@@ -282,6 +289,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
           const checkedId = (obj[id] || value) as Array<string | number>;
           return m(Options, {
             checkboxClass: 'col s6 m4 l3',
+            className: 'input-field col s12',
             ...props,
             options,
             checkedId,
