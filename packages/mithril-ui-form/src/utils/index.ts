@@ -218,7 +218,7 @@ export const labelResolver = (form: Form) => {
 
   const resolver = (id: string, value?: number | string | string[]) => {
     if (!dict.hasOwnProperty(id) || typeof value === 'undefined') {
-      return undefined;
+      return value;
     }
     const ff = dict[id];
     const values = value instanceof Array ? value.filter(v => v !== null && v !== undefined) : [value];
