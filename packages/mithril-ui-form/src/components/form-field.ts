@@ -139,6 +139,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
         (label && !canResolvePlaceholders(label, obj, context)) ||
         (description && !canResolvePlaceholders(description, obj, context))
       ) {
+        // console.table({ show, obj, context });
         return undefined;
       }
 
@@ -176,6 +177,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
           i18n,
           inline,
           containerId,
+          disabled,
         } as IRepeatList);
       }
 
@@ -236,13 +238,13 @@ export const FormField: FactoryComponent<IFormField> = () => {
           });
         }
         case 'date': {
-          const initialValue = ((obj[id] || value) as Date) || undefined;
-          obj[id] = initialValue as any;
+          const iv = ((obj[id] || value) as Date) || undefined;
+          const initialValue = typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : iv;
+          obj[id] = initialValue ? initialValue.valueOf() : initialValue;
+          // console.log(initialValue && initialValue.toUTCString());
           const { min, max } = props;
           const minDate = min ? new Date(min) : undefined;
           const maxDate = max ? new Date(max) : undefined;
-          console.log(minDate);
-          // console.log(maxDate);
           return m(DatePicker, {
             ...props,
             minDate,

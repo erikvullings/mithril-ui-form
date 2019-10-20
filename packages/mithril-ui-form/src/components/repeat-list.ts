@@ -26,6 +26,8 @@ export interface IRepeatList extends Attributes {
   i18n?: Partial<I18n>;
   /** Optional container ID for DatePicker and TimePicker to render their content in */
   containerId?: string;
+  /** If true, the repeat component is disabled, and adding, deleting or editing items is prohibited */
+  disabled?: boolean;
 }
 
 /**
@@ -85,7 +87,9 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
               state.newItem = {} as IObject;
             };
     },
-    view: ({ attrs: { field, obj, context, className = '.col.s12', section, containerId, inline = true } }) => {
+    view: ({
+      attrs: { field, obj, context, className = '.col.s12', section, containerId, inline = true, disabled },
+    }) => {
       const { onclick, modalKey } = state;
       const { id = '', label, type } = field;
       const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
@@ -125,6 +129,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                 label,
                 onclick: () => items.push({}),
                 style: 'padding: 0',
+                disabled,
               }),
               items && items.length
                 ? typeof type === 'string'
@@ -137,15 +142,17 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                           context: [obj, context],
                           section,
                           containerId,
+                          disabled,
                           onchange: () => notify(items),
                         }),
-                        m(
+                        !disabled && m(
                           '.clearfix',
                           m(RoundIconButton, {
                             className: 'btn-small right',
                             iconName: 'delete',
                             iconClass: 'red',
                             style: 'margin: 0 10px 10px 0;',
+                            disabled,
                             onclick: () => {
                               state.curItem = item;
                               if (state.delModal) {
@@ -166,6 +173,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                 onclick,
                 modalId: editId,
                 style: 'padding: 0',
+                disabled,
               }),
               items && items.length
                 ? typeof type === 'string'
@@ -211,6 +219,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                         onchange: isValid => (state.canSave = isValid),
                         context: context instanceof Array ? [obj, ...context] : [obj, context],
                         containerId,
+                        disabled,
                       })
                     ),
                     buttons: [
