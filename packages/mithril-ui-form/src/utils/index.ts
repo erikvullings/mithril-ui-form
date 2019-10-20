@@ -216,7 +216,7 @@ export const labelResolver = (form: Form) => {
 
   const dict = createDict(form);
 
-  const resolver = (id: string, value?: string | string[]) => {
+  const resolver = (id: string, value?: number | string | string[]) => {
     if (!dict.hasOwnProperty(id) || typeof value === 'undefined') {
       return undefined;
     }
@@ -252,9 +252,9 @@ export const labelResolver = (form: Form) => {
       Object.keys(obj).forEach(key => {
         const fullKey = parent ? `${parent}.${key}` : key;
         const value = obj[key as keyof T];
-        if (typeof value === 'number' || typeof value === 'boolean') {
+        if (typeof value === 'boolean') {
           resolved[key] = value;
-        } else if (typeof value === 'string') {
+        } else if (typeof value === 'number' || typeof value === 'string') {
           const r = resolver(fullKey, value);
           if (r) {
             resolved[key] = r;
