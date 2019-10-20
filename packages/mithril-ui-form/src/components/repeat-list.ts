@@ -64,6 +64,16 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
     }
   };
 
+  const nextKeyGen = () => {
+    let i = 0;
+    return () => {
+      i++;
+      return i;
+    };
+  };
+
+  const nextKey = nextKeyGen();
+
   return {
     oninit: ({
       attrs: {
@@ -99,6 +109,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
 
       return [
         m(ModalPanel, {
+          key: nextKey(),
           onCreate: modal => (state.delModal = modal),
           id: deleteId,
           title: 'Delete item',
@@ -122,7 +133,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
           ],
         }),
         inline
-          ? m(`.row.repeat-list.input-field${className}`, [
+          ? m(`.row.repeat-list.input-field${className}`, { key: nextKey() }, [
               m(FlatButton, {
                 iconName: disabled ? '' : 'add',
                 iconClass: 'right',
@@ -165,7 +176,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                     ])
                 : undefined,
             ])
-          : m(`.repeat-list.input-field${className}`, [
+          : m(`.repeat-list.input-field${className}`, { key: nextKey() }, [
               m(FlatButton, {
                 iconName: disabled ? '' : 'add',
                 iconClass: 'right',
