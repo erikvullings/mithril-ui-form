@@ -243,8 +243,8 @@ export const FormField: FactoryComponent<IFormField> = () => {
           obj[id] = initialValue ? initialValue.valueOf() : initialValue;
           // console.log(initialValue && initialValue.toUTCString());
           const { min, max } = props;
-          const minDate = min ? new Date(min) : undefined;
-          const maxDate = max ? new Date(max) : undefined;
+          const minDate = min && (!initialValue || min < initialValue.valueOf()) ? new Date(min) : undefined;
+          const maxDate = max && (!initialValue || max > initialValue.valueOf()) ? new Date(max) : undefined;
           return m(DatePicker, {
             ...props,
             minDate,
