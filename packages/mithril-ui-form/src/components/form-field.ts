@@ -289,15 +289,18 @@ export const FormField: FactoryComponent<IFormField> = () => {
         }
         case 'options': {
           const checkedId = (obj[id] || value) as Array<string | number>;
-          return m(Options, {
-            checkboxClass: 'col s6 m4 l3',
-            className: 'input-field col s12',
-            ...props,
-            options,
-            checkedId,
-            onchange: checkedIds =>
-              onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter(v => v !== null)),
-          });
+          return m(
+            '.row',
+            m(Options, {
+              checkboxClass: 'col s6 m4 l3',
+              className: 'input-field col s12',
+              ...props,
+              options,
+              checkedId,
+              onchange: checkedIds =>
+                onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter(v => v !== null)),
+            })
+          );
         }
         case 'select': {
           const checkedId = (obj[id] || value) as Array<string | number>;
