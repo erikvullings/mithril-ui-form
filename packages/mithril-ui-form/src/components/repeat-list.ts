@@ -124,7 +124,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
         inline
           ? m(`.row.repeat-list.input-field${className}`, [
               m(FlatButton, {
-                iconName: 'add',
+                iconName: disabled ? '' : 'add',
                 iconClass: 'right',
                 label,
                 onclick: () => items.push({}),
@@ -167,7 +167,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
             ])
           : m(`.repeat-list.input-field${className}`, [
               m(FlatButton, {
-                iconName: 'add',
+                iconName: disabled ? '' : 'add',
                 iconClass: 'right',
                 label,
                 onclick,
