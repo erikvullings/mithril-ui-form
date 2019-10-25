@@ -788,7 +788,8 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
     label: 'End date of the event',
     className: 'col s12 m6',
   },
-  { id: 'location', type: 'map', className: 'col s12' },
+  { id: 'showMap', type: 'checkbox', value: false, },
+  { id: 'location', show: 'showMap = true', type: 'map', className: 'col s12' },
   {
     id: 'areaType',
     type: 'select',
