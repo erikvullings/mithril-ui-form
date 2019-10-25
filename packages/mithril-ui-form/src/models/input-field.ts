@@ -28,7 +28,10 @@ export interface IInputField {
   options?: Array<{ id: string; label: string; disabled?: boolean; icon?: string; show?: string | string[] }>;
   /** When input type is a number or a date, optionally specify the minimum value (or min date). */
   min?: number;
-  /** When input type is a number or a date, optionally specify the maximum value (or a date). */
+  /**
+   * When input type is a number or a date, optionally specify the maximum value (or a date).
+   * When dealing with a repeated item, max indicates the maximum number of entries that you want to show.
+   */
   max?: number;
   /** When input type is a text or text area, optionally specify the minimum length. */
   minLength?: number;
@@ -55,8 +58,8 @@ export interface IInputField {
   newLine?: boolean;
   /** Only valid for type='section', indicates section level */
   level?: number;
-  /** Autogenerate a GUID or ID (shorter, starting with `id`) value */
-  autogenerate?: 'id' | 'guid';
+  /** Autogenerate a GUID, ID (shorter, starting with `id`) value or add a timestamp (msec since 1/1/1970) */
+  autogenerate?: 'id' | 'guid' | 'timestamp';
   /** If true, repeat the item multiple times (indicates it is an array) */
   repeat?: boolean;
   /**
@@ -69,4 +72,11 @@ export interface IInputField {
   show?: string | string[];
   /** Translation keys, read once on initialization */
   i18n?: I18n;
+  /**
+   * pageSize is only used for repeated items, where the item list is very long. Adds a pagination control.
+   * If used, max is ignored.
+   */
+  pageSize?: number;
+  /** propertyFilter is only used for repeated items, to filter the list of items based on the provided property. */
+  propertyFilter?: string;
 }

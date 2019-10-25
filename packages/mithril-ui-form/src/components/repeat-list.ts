@@ -1,9 +1,9 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
-import { FlatButton, uniqueId, ModalPanel, RoundIconButton } from 'mithril-materialized';
+import { FlatButton, uniqueId, ModalPanel, Pagination, RoundIconButton, TextInput } from 'mithril-materialized';
 import { IInputField, Form, IUIEvent, IObject } from '../models';
 import { RepeatItem } from './repeat-item';
 import { LayoutForm } from './layout-form';
-import { deepCopy } from '../utils';
+import { deepCopy, range, stripSpaces } from '../utils';
 import { I18n } from '../models/i18n';
 
 export interface IRepeatList extends Attributes {
@@ -50,7 +50,20 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
     modalKey?: string;
     editLabel: string;
     createLabel: string;
+    /** When dealing with a large list, you may add a property filter */
+    filterValue?: string;
   };
+
+  // const nextKeyGen = () => {
+  //   let i = 0;
+  //   return () => {
+  //     i++;
+  //     return i;
+  //   };
+  // };
+
+  // const nextKey = nextKeyGen();
+
   const notify = (items: IObject[]) => state.onchange && state.onchange(items);
 
   const getItems = (obj: IObject | IObject[], id: string): IObject[] => {
@@ -63,16 +76,6 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
       return obj[id];
     }
   };
-
-  const nextKeyGen = () => {
-    let i = 0;
-    return () => {
-      i++;
-      return i;
-    };
-  };
-
-  const nextKey = nextKeyGen();
 
   return {
     oninit: ({
@@ -100,16 +103,154 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
     view: ({
       attrs: { field, obj, context, className = '.col.s12', section, containerId, inline = true, disabled },
     }) => {
-      const { onclick, modalKey } = state;
-      const { id = '', label, type } = field;
+      const { onclick, modalKey, filterValue } = state;
+      const { id = '', label, type, max, pageSize, propertyFilter } = field;
       const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
       const editId = 'edit_' + compId;
       const deleteId = 'delete_' + compId;
-      const items = getItems(obj, id);
+      const allItems = getItems(obj, id);
+      const strippedFilterValue = filterValue ? stripSpaces(filterValue) : undefined;
+      const items =
+        propertyFilter && strippedFilterValue && strippedFilterValue.length > 2
+          ? allItems.filter(o => {
+              const prop = o[propertyFilter];
+              return prop && (prop.indexOf(strippedFilterValue) >= 0 || prop.indexOf(filterValue) >= 0);
+            })
+          : allItems;
+      const page = m.route.param(id) ? +m.route.param(id) : 1;
+      const curPage = pageSize && items && (page - 1) * pageSize < items.length ? page : 1;
+      const delimitter = pageSize
+        ? (_: any, i: number) => (curPage - 1) * pageSize <= i && i < curPage * pageSize
+        : max
+        ? (_: any, i: number) => i < max
+        : () => true;
+      const regex = new RegExp(`\\??\\&?${id}=\\d+`);
+      const route = pageSize ? m.route.get().replace(regex, '') : '';
+      const maxPages = pageSize ? Math.ceil(items.length / pageSize) : 0;
+      console.table({ id: field.id, page, curPage, maxPages, length: items.length });
 
       return [
+        [
+          inline
+            ? m(
+                `.row.repeat-list.input-field${className}`,
+                // { key: nextKey() },
+                [
+                  m('.col.s12', [
+                    m(FlatButton, {
+                      iconName: disabled ? '' : 'add',
+                      iconClass: 'right',
+                      label,
+                      onclick: () => items.push({}),
+                      style: 'padding: 0',
+                      className: 'left',
+                      disabled,
+                    }),
+                    propertyFilter
+                      ? m(TextInput, {
+                          style: 'margin-top: -6px; margin-bottom: -1rem;',
+                          iconName: 'filter_list',
+                          iconClass: 'small',
+                          onkeyup: (_: KeyboardEvent, v?: string) => (state.filterValue = v),
+                          className: 'right',
+                          disabled,
+                        })
+                      : undefined,
+                  ]),
+                  items && items.length
+                    ? typeof type === 'string'
+                      ? undefined
+                      : items.filter(delimitter).map(item => [
+                          m('.row.z-depth-1', [
+                            m(LayoutForm, {
+                              form: field.type as Form,
+                              obj: item,
+                              context: [obj, context],
+                              section,
+                              containerId,
+                              disabled,
+                              onchange: () => notify(items),
+                            }),
+                            !disabled &&
+                              m(
+                                '.clearfix',
+                                m(RoundIconButton, {
+                                  className: 'btn-small right',
+                                  iconName: 'delete',
+                                  iconClass: 'red',
+                                  style: 'margin: 0 10px 10px 0;',
+                                  disabled,
+                                  onclick: () => {
+                                    state.curItem = item;
+                                    if (state.delModal) {
+                                      state.delModal.open();
+                                    }
+                                  },
+                                })
+                              ),
+                          ]),
+                        ])
+                    : undefined,
+                ]
+              )
+            : m(
+                `.repeat-list.input-field${className}`,
+                // { key: nextKey() },
+                [
+                  m(FlatButton, {
+                    iconName: disabled ? '' : 'add',
+                    iconClass: 'right',
+                    label,
+                    onclick,
+                    modalId: editId,
+                    style: 'padding: 0',
+                    disabled,
+                  }),
+                  items && items.length
+                    ? typeof type === 'string'
+                      ? undefined
+                      : items.filter(delimitter).map(item =>
+                          m(RepeatItem, {
+                            disabled: true,
+                            item,
+                            form: field.type as Form,
+                            containerId,
+                            ondelete: it => {
+                              state.curItem = it;
+                              if (state.delModal) {
+                                state.delModal.open();
+                              }
+                            },
+                            onedit: it => {
+                              state.modalKey = uniqueId();
+                              state.curItem = it;
+                              state.editItem = deepCopy(it);
+                              if (state.editModal) {
+                                state.editModal.open();
+                              }
+                            },
+                            context: [obj, context],
+                            section,
+                          })
+                        )
+                    : undefined,
+                ]
+              ),
+        ],
+        maxPages > 1 &&
+          m(
+            '.row',
+            m(
+              '.right',
+              m(Pagination, {
+                curPage,
+                items: range(1, maxPages).map(i => ({
+                  href: `${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${i}`,
+                })),
+              })
+            )
+          ),
         m(ModalPanel, {
-          key: nextKey(),
           onCreate: modal => (state.delModal = modal),
           id: deleteId,
           title: 'Delete item',
@@ -121,6 +262,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
             {
               label: 'Yes',
               onclick: () => {
+                alert(state.curItem);
                 if (state.curItem) {
                   const i = items.indexOf(state.curItem);
                   if (i >= 0) {
@@ -132,135 +274,51 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
             },
           ],
         }),
-        inline
-          ? m(`.row.repeat-list.input-field${className}`, { key: nextKey() }, [
-              m(FlatButton, {
-                iconName: disabled ? '' : 'add',
-                iconClass: 'right',
-                label,
-                onclick: () => items.push({}),
-                style: 'padding: 0',
-                disabled,
-              }),
-              items && items.length
-                ? typeof type === 'string'
-                  ? undefined
-                  : items.map(item => [
-                      m('.row.z-depth-1', [
-                        m(LayoutForm, {
-                          form: field.type as Form,
-                          obj: item,
-                          context: [obj, context],
-                          section,
-                          containerId,
-                          disabled,
-                          onchange: () => notify(items),
-                        }),
-                        !disabled && m(
-                          '.clearfix',
-                          m(RoundIconButton, {
-                            className: 'btn-small right',
-                            iconName: 'delete',
-                            iconClass: 'red',
-                            style: 'margin: 0 10px 10px 0;',
-                            disabled,
-                            onclick: () => {
-                              state.curItem = item;
-                              if (state.delModal) {
-                                state.delModal.open();
-                              }
-                            },
-                          })
-                        ),
-                      ]),
-                    ])
-                : undefined,
-            ])
-          : m(`.repeat-list.input-field${className}`, { key: nextKey() }, [
-              m(FlatButton, {
-                iconName: disabled ? '' : 'add',
-                iconClass: 'right',
-                label,
-                onclick,
-                modalId: editId,
-                style: 'padding: 0',
-                disabled,
-              }),
-              items && items.length
-                ? typeof type === 'string'
-                  ? undefined
-                  : items.map(item =>
-                      m(RepeatItem, {
-                        disabled: true,
-                        item,
-                        form: field.type as Form,
-                        containerId,
-                        ondelete: it => {
-                          state.curItem = it;
-                          if (state.delModal) {
-                            state.delModal.open();
-                          }
-                        },
-                        onedit: it => {
-                          state.modalKey = uniqueId();
-                          state.curItem = it;
-                          state.editItem = deepCopy(it);
-                          if (state.editModal) {
-                            state.editModal.open();
-                          }
-                        },
-                        context: [obj, context],
-                        section,
-                      })
-                    )
-                : undefined,
-              typeof type === 'string' || typeof type === 'undefined'
-                ? undefined
-                : m(ModalPanel, {
-                    onCreate: modal => (state.editModal = modal),
-                    id: editId,
-                    title: state.editItem ? state.editLabel : state.createLabel,
-                    fixedFooter: true,
-                    description: m(
-                      '.row.form-item',
-                      m(LayoutForm, {
-                        key: modalKey,
-                        form: type,
-                        obj: state.editItem || state.newItem || {},
-                        onchange: isValid => (state.canSave = isValid),
-                        context: context instanceof Array ? [obj, ...context] : [obj, context],
-                        containerId,
-                        disabled,
-                      })
-                    ),
-                    buttons: [
-                      {
-                        iconName: 'cancel',
-                        label: 'Cancel',
-                      },
-                      {
-                        iconName: 'save',
-                        label: 'Save',
-                        disabled: !state.canSave,
-                        onclick: () => {
-                          if (state.editItem && state.curItem) {
-                            console.warn('edited');
-                            const edited = state.editItem;
-                            const current = state.curItem;
-                            type.forEach(f => {
-                              if (f.id) {
-                                (current as any)[f.id] = edited[f.id];
-                              }
-                            });
-                          } else if (state.newItem) {
-                            items.push(state.newItem);
-                          }
-                          notify(items);
-                        },
-                      },
-                    ],
-                  }),
-            ]),
+        inline || typeof type === 'string' || typeof type === 'undefined'
+          ? undefined
+          : m(ModalPanel, {
+              onCreate: modal => (state.editModal = modal),
+              id: editId,
+              title: state.editItem ? state.editLabel : state.createLabel,
+              fixedFooter: true,
+              description: m(
+                '.row.form-item',
+                m(LayoutForm, {
+                  key: modalKey,
+                  form: type,
+                  obj: state.editItem || state.newItem || {},
+                  onchange: isValid => (state.canSave = isValid),
+                  context: context instanceof Array ? [obj, ...context] : [obj, context],
+                  containerId,
+                  disabled,
+                })
+              ),
+              buttons: [
+                {
+                  iconName: 'cancel',
+                  label: 'Cancel',
+                },
+                {
+                  iconName: 'save',
+                  label: 'Save',
+                  disabled: !state.canSave,
+                  onclick: () => {
+                    if (state.editItem && state.curItem) {
+                      const edited = state.editItem;
+                      const current = state.curItem;
+                      type.forEach(f => {
+                        if (f.id) {
+                          (current as any)[f.id] = edited[f.id];
+                        }
+                      });
+                    } else if (state.newItem) {
+                      items.push(state.newItem);
+                    }
+                    notify(items);
+                  },
+                },
+              ],
+            }),
       ];
     },
   };
