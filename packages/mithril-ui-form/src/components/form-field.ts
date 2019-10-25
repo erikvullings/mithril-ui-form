@@ -122,18 +122,22 @@ export interface IFormField extends Attributes {
 export const FormField: FactoryComponent<IFormField> = () => {
   return {
     view: ({
-      attrs: {
-        field,
-        obj,
-        autofocus,
-        onchange: onFormChange,
-        disabled = field.disabled,
-        context,
-        section,
-        containerId,
-        field: { id = '', type, value, required, repeat, autogenerate, show, label, description, inline, i18n },
-      },
+      attrs: { field, obj, autofocus, onchange: onFormChange, context, section, containerId, disabled: d },
     }) => {
+      const {
+        id = '',
+        type,
+        disabled = d,
+        value,
+        required,
+        repeat,
+        autogenerate,
+        show,
+        label,
+        description,
+        inline,
+        i18n,
+      } = field;
       if (
         (show && !evalExpression(show, obj, context)) ||
         (label && !canResolvePlaceholders(label, obj, context)) ||
@@ -156,6 +160,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
           ? disabled
           : evalExpression(disabled, obj, context)
       );
+
       if (label) {
         props.label = resolvePlaceholders(props.label, obj, context);
       }
@@ -214,7 +219,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
       }
 
       if (autogenerate && !obj[id]) {
-        obj[id] = (autogenerate === 'guid' ? uuid4() : uniqueId()) as any;
+        obj[id] = (autogenerate === 'guid' ? uuid4() : autogenerate === 'id' ? uniqueId() : Date.now()) as any;
       }
 
       switch (type) {
@@ -253,8 +258,8 @@ export const FormField: FactoryComponent<IFormField> = () => {
             format: 'mmmm d, yyyy',
             initialValue,
             onchange: date => {
-              onchange(date);
-              m.redraw();
+              onchange(new Date(date).valueOf());
+              // m.redraw();
             },
             container: containerId as any,
           });
