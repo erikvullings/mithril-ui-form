@@ -96,13 +96,21 @@ export const evalExpression = (expression: string | string[], ...objArr: IObject
 };
 
 const resolveExpression = (expression: string, objArr: IObject[]) =>
-  objArr.filter(Boolean).reduce((p, obj) => p || getPath(obj, expression.trim()), undefined as string | undefined);
+  objArr
+    .filter(Boolean)
+    .reduce((p, obj) => p || getPath(obj, expression.trim()), undefined as
+      | string
+      | number
+      | Date
+      | boolean
+      | undefined);
 
 const canResolveExpression = (expression: string, objArr: IObject[]) =>
   typeof resolveExpression(expression, objArr) !== 'undefined';
 
-const placeholderRegex = /{{\s*([^\s"'`]*)\s*}}/g;
+const placeholderRegex = /{{\s*([^\s"'`:]*):?([^\s]*)\s*}}/g;
 
+/** Can the placeholders be resolved by the object, i.e. do we have a match in the active object or its context. */
 export const canResolvePlaceholders = (str: string, ...objArr: IObject[]) => {
   if (!placeholderRegex.test(str)) {
     return true;
@@ -128,6 +136,43 @@ export const canResolvePlaceholders = (str: string, ...objArr: IObject[]) => {
   return canResolve;
 };
 
+/**
+ * A placeholder optionally needs to be converted, e.g. a number to a date string.
+ * Supported formatters are: date, time, iso, utc and A:B for booleans.
+ * In the latter case, A is returned when true, B otherwise.
+ */
+const formatExpression = (
+  value?: string | number | boolean | Date | Array<string | number>,
+  exprType?: 'date' | 'time' | 'iso' | 'utc' | string
+): string => {
+  if (typeof value === 'undefined') {
+    return '';
+  }
+  if (value instanceof Array) {
+    return value.map(v => formatExpression(v, exprType)).join(', ');
+  }
+  if (!exprType) {
+    return value.toString();
+  }
+  if (typeof value === 'boolean') {
+    const i = exprType.indexOf(':');
+    return value ? exprType.substring(0, i) : exprType.substring(i + 1);
+  }
+  switch (exprType) {
+    default:
+      return value.toString();
+    case 'date':
+      return new Date(value).toLocaleDateString();
+    case 'time':
+      return new Date(value).toLocaleTimeString();
+    case 'iso':
+      return new Date(value).toISOString();
+    case 'utc':
+      return new Date(value).toUTCString();
+  }
+};
+
+/** Replace the placeholder with the appropriate value. */
 export const resolvePlaceholders = (str: string, ...objArr: IObject[]) => {
   if (!placeholderRegex.test(str)) {
     return str;
@@ -145,10 +190,10 @@ export const resolvePlaceholders = (str: string, ...objArr: IObject[]) => {
       }
 
       // The result can be accessed through the `m`-variable.
-      m.forEach((_, __, [fullMatch, expression]) => {
+      m.forEach((_, __, [fullMatch, expression, exprType]) => {
         const resolved = resolveExpression(expression, objArr);
         if (resolved) {
-          str = str.replace(fullMatch, resolved);
+          str = str.replace(fullMatch, formatExpression(resolved, exprType));
         }
       });
     }
