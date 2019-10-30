@@ -606,7 +606,6 @@ const costLevels = [
   },
 ];
 
-
 const source = [
   {
     id: 'title',

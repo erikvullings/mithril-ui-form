@@ -179,28 +179,28 @@ ${result.sources ? result.sources.map((s, i) => `${i + 1}. [${s.title}](${s.url}
       return m('.row', [
         m('.col.s6.l4', [
           m(SlimdownView, {
-            md: `### JSON FORM
+            md: `##### JSON FORM
 
           Feel free to edit me.`,
           }),
           m(TextArea, {
             label: 'JSON form',
+            helperText: '_Switch to another element to show the result._',
             initialValue: JSON.stringify(form, null, 2),
-            onchange: (value: string) => (state.form = JSON.parse(value)),
+            onchange: (value: string) => {
+              state.form = JSON.parse(value);
+              state.result = {} as any;
+            },
           }),
           state.error ? m('p', m('em.red', state.error)) : undefined,
         ]),
         m('.col.s6.l4', [
-          m('h3', 'Generated Form'),
+          m('h5', 'Generated Form'),
           m('div', m(LayoutForm, { form, obj: result, onchange: print, context })),
         ]),
         m('.col.s6.l4', [
-          m('h3', 'Resulting object'),
-          m(TextArea, {
-            label: 'Result',
-            initialValue: JSON.stringify(result, null, 2),
-            disabled: true,
-          }),
+          m('h5', 'Resulting object'),
+          m('pre', JSON.stringify(state.result, null, 2)),
           m(SlimdownView, { md: md2 }),
         ]),
       ]);

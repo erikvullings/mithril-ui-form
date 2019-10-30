@@ -4,7 +4,37 @@ Create dynamic forms based on JSON as input.
 
 A JSON file using a simple syntax is converted to a [materialized-css](https://materialized-css.com) form. The entered data is returned as an object.
 
-The form supports markdown input, repeating elements a (dynamic) number of times, and conditionally displaying certain elements.
+The form supports markdown input, repeating elements a (dynamic) number of times, and conditionally displaying or disabling certain fields.
+
+## Placeholders
+
+If your form generates an object, e.g.
+
+```ts
+const obj = {
+  checked: true,
+  date: 1572416907856
+}
+```
+
+And you use a very simple form:
+
+```json
+const form = [
+  { "id": "date", "type": "date", "label": "Select a date" },
+  { "id": "checked", "disabled": "!date", "type": "checkbox", "label": "Check me" },
+  { "type": "md",  "show":"checked", "value": "The current time is {{date:time}} and checked is {{checked:yes:no}}" }
+]
+```
+
+```ts
+m(LayoutForm, {
+  form,
+  obj,
+}),
+```
+
+It would render `The current time is 7:28:27 AM and checked is yes`.
 
 ## TODO
 
