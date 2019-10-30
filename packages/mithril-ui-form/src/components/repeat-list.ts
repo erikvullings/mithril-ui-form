@@ -127,7 +127,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
       const regex = new RegExp(`\\??\\&?${id}=\\d+`);
       const route = pageSize ? m.route.get().replace(regex, '') : '';
       const maxPages = pageSize ? Math.ceil(items.length / pageSize) : 0;
-      console.table({ id: field.id, page, curPage, maxPages, length: items.length });
+      // console.table({ id: field.id, page, curPage, maxPages, length: items.length });
 
       return [
         [
@@ -146,7 +146,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                       className: 'left',
                       disabled,
                     }),
-                    propertyFilter
+                    propertyFilter && !disabled
                       ? m(TextInput, {
                           style: 'margin-top: -6px; margin-bottom: -1rem;',
                           iconName: 'filter_list',
