@@ -153,12 +153,14 @@ export const FormField: FactoryComponent<IFormField> = () => {
             .map(o => (o.label ? o : { ...o, label: capitalizeFirstLetter(o.id) }))
         : [];
 
+      const parentIsDisabled = typeof d === 'boolean' && d;
+
       const props = unwrapComponent(
         field,
         autofocus,
         typeof disabled === 'boolean' || typeof disabled === 'undefined'
-          ? disabled
-          : evalExpression(disabled, obj, context)
+          ? parentIsDisabled || disabled
+          : parentIsDisabled || evalExpression(disabled, obj, context)
       );
 
       if (label) {
@@ -364,7 +366,8 @@ export const FormField: FactoryComponent<IFormField> = () => {
           });
         }
         case 'md':
-          return m(SlimdownView, { md: (id ? obj[id] : value || label) as string, className: props.className });
+          const md = resolvePlaceholders(id ? obj[id] : value || label, obj, context);
+          return m(SlimdownView, { md, className: props.className });
         case 'section':
           return m('.divider');
         case 'switch': {
