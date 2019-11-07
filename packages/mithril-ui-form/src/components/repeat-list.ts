@@ -140,7 +140,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                     label,
                     onclick: () => {
                       items.push({});
-                      m.route.set(`${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${page + 1}`);
+                      m.route.set(`${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${items.length}`);
                     },
                     style: 'padding: 0',
                     className: 'left',
@@ -262,7 +262,6 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
             {
               label: 'Yes',
               onclick: () => {
-                alert(state.curItem);
                 if (state.curItem) {
                   const i = items.indexOf(state.curItem);
                   if (i >= 0) {
