@@ -16,3 +16,7 @@
   list-style-type: circle !important;
   text-indent: 2em;
 }
+
+.repeat-list .pagination {
+  margin: 0;
+}

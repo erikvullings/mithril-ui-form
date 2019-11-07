@@ -687,6 +687,9 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
     className: 'col s12',
     repeat: true,
     inline: true,
+    propertyFilter: 'name',
+    filterLabel: 'Search by name',
+    pageSize: 1,
     type: [
       {
         id: 'name',
@@ -1271,6 +1274,7 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
     id: 'lessons',
     label: 'Lesson',
     repeat: true,
+    pageSize: 1,
     type: [
       {
         id: 'title',

@@ -104,7 +104,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
       attrs: { field, obj, context, className = '.col.s12', section, containerId, inline = true, disabled },
     }) => {
       const { onclick, modalKey, filterValue } = state;
-      const { id = '', label, type, max, pageSize, propertyFilter } = field;
+      const { id = '', label, type, max, pageSize, propertyFilter, filterLabel } = field;
       const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
       const editId = 'edit_' + compId;
       const deleteId = 'delete_' + compId;
@@ -117,7 +117,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
               return prop && (prop.indexOf(strippedFilterValue) >= 0 || prop.indexOf(filterValue) >= 0);
             })
           : allItems;
-      const page = m.route.param(id) ? +m.route.param(id) : 1;
+      const page = m.route.param(id) ? Math.min(items.length, +m.route.param(id)) : 1;
       const curPage = pageSize && items && (page - 1) * pageSize < items.length ? page : 1;
       const delimitter = pageSize
         ? (_: any, i: number) => (curPage - 1) * pageSize <= i && i < curPage * pageSize
@@ -132,67 +132,80 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
       return [
         [
           inline
-            ? m(
-                `.row.repeat-list.input-field${className}`,
-                // { key: nextKey() },
-                [
-                  m('.col.s12', [
-                    m(FlatButton, {
-                      iconName: disabled ? '' : 'add',
-                      iconClass: 'right',
-                      label,
-                      onclick: () => items.push({}),
-                      style: 'padding: 0',
-                      className: 'left',
+            ? m(`.row.repeat-list.input-field${className}`, [
+                m('.row', [
+                  m(FlatButton, {
+                    iconName: disabled ? '' : 'add',
+                    iconClass: 'right',
+                    label,
+                    onclick: () => {
+                      items.push({});
+                      m.route.set(`${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${page + 1}`);
+                    },
+                    style: 'padding: 0',
+                    className: 'left',
+                    disabled,
+                  }),
+                  maxPages > 1 &&
+                    m(
+                      '.right',
+                      m(Pagination, {
+                        curPage,
+                        items: range(1, maxPages).map(i => ({
+                          href: `${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${i}`,
+                        })),
+                      })
+                    ),
+                  (items.length > 1 || filterValue) &&
+                    propertyFilter &&
+                    !disabled &&
+                    m(TextInput, {
+                      style: 'margin-top: -6px; margin-bottom: -1rem;',
+                      iconName: 'filter_list',
+                      iconClass: 'small',
+                      placeholder: filterLabel,
+                      onkeyup: (_: KeyboardEvent, v?: string) => (state.filterValue = v),
+                      className: 'right',
                       disabled,
                     }),
-                    propertyFilter && !disabled
-                      ? m(TextInput, {
-                          style: 'margin-top: -6px; margin-bottom: -1rem;',
-                          iconName: 'filter_list',
-                          iconClass: 'small',
-                          onkeyup: (_: KeyboardEvent, v?: string) => (state.filterValue = v),
-                          className: 'right',
-                          disabled,
-                        })
-                      : undefined,
-                  ]),
-                  items && items.length
-                    ? typeof type === 'string'
-                      ? undefined
-                      : items.filter(delimitter).map(item => [
-                          m('.row.z-depth-1', [
-                            m(LayoutForm, {
-                              form: field.type as Form,
-                              obj: item,
-                              context: [obj, context],
-                              section,
-                              containerId,
-                              disabled,
-                              onchange: () => notify(items),
-                            }),
-                            !disabled &&
-                              m(
-                                '.clearfix',
-                                m(RoundIconButton, {
-                                  className: 'btn-small right',
-                                  iconName: 'delete',
-                                  iconClass: 'red',
-                                  style: 'margin: 0 10px 10px 0;',
-                                  disabled,
-                                  onclick: () => {
-                                    state.curItem = item;
-                                    if (state.delModal) {
-                                      state.delModal.open();
-                                    }
-                                  },
-                                })
-                              ),
-                          ]),
-                        ])
-                    : undefined,
-                ]
-              )
+                ]),
+                items && items.length
+                  ? typeof type === 'string'
+                    ? undefined
+                    : items.filter(delimitter).map(item => [
+                        m('.row.z-depth-1', [
+                          m(LayoutForm, {
+                            key: page,
+                            form: field.type as Form,
+                            obj: item,
+                            context: [obj, context],
+                            section,
+                            containerId,
+                            disabled,
+                            onchange: () => notify(items),
+                          }),
+                          !disabled &&
+                            m(
+                              '.clearfix',
+                              { key: 0 },
+                              m(RoundIconButton, {
+                                className: 'btn-small right',
+                                iconName: 'delete',
+                                iconClass: 'red',
+                                style: 'margin: 0 10px 10px 0;',
+                                disabled,
+                                onclick: () => {
+                                  state.curItem = item;
+                                  if (state.delModal) {
+                                    state.delModal.open();
+                                  }
+                                },
+                              })
+                            ),
+                        ]),
+                      ])
+                  : undefined,
+              ])
             : m(
                 `.repeat-list.input-field${className}`,
                 // { key: nextKey() },
@@ -237,19 +250,6 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                 ]
               ),
         ],
-        maxPages > 1 &&
-          m(
-            '.row',
-            m(
-              '.right',
-              m(Pagination, {
-                curPage,
-                items: range(1, maxPages).map(i => ({
-                  href: `${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${i}`,
-                })),
-              })
-            )
-          ),
         m(ModalPanel, {
           onCreate: modal => (state.delModal = modal),
           id: deleteId,

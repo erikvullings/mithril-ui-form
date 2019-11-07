@@ -79,4 +79,6 @@ export interface IInputField {
   pageSize?: number;
   /** propertyFilter is only used for repeated items, to filter the list of items based on the provided property. */
   propertyFilter?: string;
+  /** filterLabel is only used for repeated items with a property filter, to set its label. */
+  filterLabel?: string;
 }
