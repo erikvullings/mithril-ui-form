@@ -125,7 +125,8 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
         ? (_: any, i: number) => i < max
         : () => true;
       const regex = new RegExp(`\\??\\&?${id}=\\d+`);
-      const route = pageSize ? m.route.get().replace(regex, '') : '';
+      const route = m.route.get().replace(regex, '');
+      console.table({ route, routeGet: m.route.get() });
       const maxPages = pageSize ? Math.ceil(items.length / pageSize) : 0;
       // console.table({ id: field.id, page, curPage, maxPages, length: items.length });
 
