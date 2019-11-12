@@ -173,9 +173,9 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   ? typeof type === 'string'
                     ? undefined
                     : items.filter(delimitter).map(item => [
-                        m('.row.z-depth-1', [
+                        m('.row.z-depth-1', { key: page }, [
                           m(LayoutForm, {
-                            key: page,
+                            // key: page,
                             form: field.type as Form,
                             obj: item,
                             context: [obj, context],
@@ -187,7 +187,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                           !disabled &&
                             m(
                               '.clearfix',
-                              { key: 0 },
+                              // { key: 0 },
                               m(RoundIconButton, {
                                 className: 'btn-small right',
                                 iconName: 'delete',
