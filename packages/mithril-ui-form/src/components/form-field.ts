@@ -213,8 +213,8 @@ export const FormField: FactoryComponent<IFormField> = () => {
             form: type,
             obj: obj[field.id],
             context: [obj, context],
-            onchange,
             section,
+            onchange: () => onFormChange && onFormChange(),
             containerId,
           });
         }
@@ -288,7 +288,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
         }
         case 'radio': {
           const checkedId = (obj[id] || value) as string | number;
-          return m(RadioButtons, { ...props, options, checkedId, onchange });
+          return m(RadioButtons, { ...props, inline, options, checkedId, onchange });
         }
         case 'checkbox': {
           const checked = (obj[id] || value) as boolean;

@@ -324,8 +324,8 @@ export const labelResolver = (form: Form) => {
   return resolveObj;
 };
 
-/** Remove all spaces, dots and commas from a string */
-export const stripSpaces = (s: string) => s.replace(/\s|,|\./g, '');
+/** Remove all spaces, dots and commas from a string, and turn to lower case */
+export const stripSpaces = (s = '') => s.replace(/\s|,|\./g, '').toLowerCase();
 
 /**
  * Generate a sequence of numbers between from and to with step size: [from, to].

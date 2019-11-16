@@ -1,5 +1,12 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
-import { FlatButton, uniqueId, ModalPanel, Pagination, RoundIconButton, TextInput } from 'mithril-materialized';
+import {
+  FlatButton,
+  uniqueId,
+  ModalPanel,
+  Pagination,
+  RoundIconButton,
+  TextInput,
+} from 'mithril-materialized';
 import { IInputField, Form, IUIEvent, IObject } from '../models';
 import { RepeatItem } from './repeat-item';
 import { LayoutForm } from './layout-form';
@@ -87,8 +94,10 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
       },
     }) => {
       state.onchange = onchange;
-      state.editLabel = i18n && i18n.editRepeat ? i18n.editRepeat : `Edit ${id}`;
-      state.createLabel = i18n && i18n.createRepeat ? i18n.createRepeat : `Create new ${id}`;
+      state.editLabel =
+        i18n && i18n.editRepeat ? i18n.editRepeat : `Edit ${id}`;
+      state.createLabel =
+        i18n && i18n.createRepeat ? i18n.createRepeat : `Create new ${id}`;
       state.onclick =
         typeof field.type === 'string'
           ? () => {
@@ -101,26 +110,50 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
             };
     },
     view: ({
-      attrs: { field, obj, context, className = '.col.s12', section, containerId, inline = true, disabled },
+      attrs: {
+        field,
+        obj,
+        context,
+        className = '.col.s12',
+        section,
+        containerId,
+        inline = true,
+        disabled,
+      },
     }) => {
       const { onclick, modalKey, filterValue } = state;
-      const { id = '', label, type, max, pageSize, propertyFilter, filterLabel } = field;
-      const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
+      const {
+        id = '',
+        label,
+        type,
+        max,
+        pageSize,
+        propertyFilter,
+        filterLabel,
+      } = field;
+      const compId = label
+        ? label.toLowerCase().replace(/\s/gi, '_')
+        : uniqueId();
       const editId = 'edit_' + compId;
       const deleteId = 'delete_' + compId;
       const allItems = getItems(obj, id);
-      const strippedFilterValue = filterValue ? stripSpaces(filterValue) : undefined;
+      const strippedFilterValue = filterValue
+        ? stripSpaces(filterValue)
+        : undefined;
       const items =
         propertyFilter && strippedFilterValue && strippedFilterValue.length > 2
-          ? allItems.filter(o => {
-              const prop = o[propertyFilter];
-              return prop && (prop.indexOf(strippedFilterValue) >= 0 || prop.indexOf(filterValue) >= 0);
-            })
+          ? allItems.filter(
+              o => stripSpaces(`${o[propertyFilter]}`).indexOf(strippedFilterValue) >= 0
+            )
           : allItems;
-      const page = m.route.param(id) ? Math.min(items.length, +m.route.param(id)) : 1;
-      const curPage = pageSize && items && (page - 1) * pageSize < items.length ? page : 1;
+      const page = m.route.param(id)
+        ? Math.min(items.length, +m.route.param(id))
+        : 1;
+      const curPage =
+        pageSize && items && (page - 1) * pageSize < items.length ? page : 1;
       const delimitter = pageSize
-        ? (_: any, i: number) => (curPage - 1) * pageSize <= i && i < curPage * pageSize
+        ? (_: any, i: number) =>
+            (curPage - 1) * pageSize <= i && i < curPage * pageSize
         : max
         ? (_: any, i: number) => i < max
         : () => true;
@@ -140,7 +173,11 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                     label,
                     onclick: () => {
                       items.push({});
-                      m.route.set(`${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${items.length}`);
+                      m.route.set(
+                        `${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${
+                          items.length
+                        }`
+                      );
                     },
                     style: 'padding: 0',
                     className: 'left',
@@ -152,7 +189,9 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                       m(Pagination, {
                         curPage,
                         items: range(1, maxPages).map(i => ({
-                          href: `${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${i}`,
+                          href: `${route}${
+                            route.indexOf('?') >= 0 ? '&' : '?'
+                          }${id}=${i}`,
                         })),
                       })
                     ),
@@ -164,7 +203,8 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                       iconName: 'filter_list',
                       iconClass: 'small',
                       placeholder: filterLabel,
-                      onkeyup: (_: KeyboardEvent, v?: string) => (state.filterValue = v),
+                      onkeyup: (_: KeyboardEvent, v?: string) =>
+                        (state.filterValue = v),
                       className: 'right',
                       disabled,
                     }),
@@ -173,7 +213,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   ? typeof type === 'string'
                     ? undefined
                     : items.filter(delimitter).map(item => [
-                        m('.row.z-depth-1', { key: page }, [
+                        m('.row.z-depth-1.repeat-item', { key: page }, [
                           m(LayoutForm, {
                             // key: page,
                             form: field.type as Form,
@@ -287,7 +327,10 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   form: type,
                   obj: state.editItem || state.newItem || {},
                   onchange: isValid => (state.canSave = isValid),
-                  context: context instanceof Array ? [obj, ...context] : [obj, context],
+                  context:
+                    context instanceof Array
+                      ? [obj, ...context]
+                      : [obj, context],
                   containerId,
                   disabled,
                 })
