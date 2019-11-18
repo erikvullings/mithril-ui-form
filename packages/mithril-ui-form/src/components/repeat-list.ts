@@ -119,6 +119,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
         containerId,
         inline = true,
         disabled,
+        readonly: r,
       },
     }) => {
       const { onclick, modalKey, filterValue } = state;
@@ -130,6 +131,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
         pageSize,
         propertyFilter,
         filterLabel,
+        readonly = r,
       } = field;
       const compId = label
         ? label.toLowerCase().replace(/\s/gi, '_')
@@ -143,7 +145,10 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
       const items =
         propertyFilter && strippedFilterValue && strippedFilterValue.length > 2
           ? allItems.filter(
-              o => stripSpaces(`${o[propertyFilter]}`).indexOf(strippedFilterValue) >= 0
+              o =>
+                stripSpaces(`${o[propertyFilter]}`).indexOf(
+                  strippedFilterValue
+                ) >= 0
             )
           : allItems;
       const page = m.route.param(id)
@@ -182,6 +187,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                     style: 'padding: 0',
                     className: 'left',
                     disabled,
+                    readonly,
                   }),
                   maxPages > 1 &&
                     m(
@@ -207,6 +213,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                         (state.filterValue = v),
                       className: 'right',
                       disabled,
+                      readonly,
                     }),
                 ]),
                 items && items.length
@@ -222,6 +229,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                             section,
                             containerId,
                             disabled,
+                            readonly,
                             onchange: () => notify(items),
                           }),
                           !disabled &&
@@ -234,6 +242,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                                 iconClass: 'red',
                                 style: 'margin: 0 10px 10px 0;',
                                 disabled,
+                                readonly,
                                 onclick: () => {
                                   state.curItem = item;
                                   if (state.delModal) {
@@ -258,6 +267,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                     modalId: editId,
                     style: 'padding: 0',
                     disabled,
+                    readonly,
                   }),
                   items && items.length
                     ? typeof type === 'string'
@@ -265,6 +275,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                       : items.filter(delimitter).map(item =>
                           m(RepeatItem, {
                             disabled: true,
+                            readonly,
                             item,
                             form: field.type as Form,
                             containerId,

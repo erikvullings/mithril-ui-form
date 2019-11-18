@@ -30,11 +30,9 @@ import {
   canResolvePlaceholders,
   resolvePlaceholders,
 } from '../utils';
-import { RepeatList, IRepeatList } from './repeat-list';
 import { IObject } from '../models/object';
-import { SlimdownView } from './slimdown-view';
 import { GeometryObject, FeatureCollection } from 'geojson';
-import { LayoutForm } from './layout-form';
+import { LayoutForm, ReadonlyComponent, RepeatList, IRepeatList, SlimdownView } from '.';
 
 const unwrapComponent = (field: IInputField, autofocus = false, disabled = false) => {
   const {
@@ -122,12 +120,13 @@ export interface IFormField extends Attributes {
 export const FormField: FactoryComponent<IFormField> = () => {
   return {
     view: ({
-      attrs: { field, obj, autofocus, onchange: onFormChange, context, section, containerId, disabled: d },
+      attrs: { field, obj, autofocus, onchange: onFormChange, context, section, containerId, disabled: d, readonly: r },
     }) => {
       const {
         id = '',
         type,
         disabled = d,
+        readonly = r,
         value,
         required,
         repeat,
@@ -185,6 +184,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
           inline,
           containerId,
           disabled,
+          readonly,
         } as IRepeatList);
       }
 
@@ -224,209 +224,265 @@ export const FormField: FactoryComponent<IFormField> = () => {
         obj[id] = (autogenerate === 'guid' ? uuid4() : autogenerate === 'id' ? uniqueId() : Date.now()) as any;
       }
 
-      switch (type) {
-        case 'colour':
-        case 'color': {
-          const initialValue = (obj[id] || value) as string;
-          return m(ColorInput, { ...props, initialValue, onchange });
+      if (readonly && type && ['md', 'map', 'none'].indexOf(type as string) < 0) {
+        switch (type) {
+          case 'time': {
+            const date = ((obj[id] || value) as Date) || new Date();
+            const initialValue = toHourMin(date);
+            return m(ReadonlyComponent, { props, label: props.label, initialValue });
+          }
+          case 'date': {
+            const iv = (obj[id] || value) as Date | undefined;
+            const initialValue =
+              typeof iv === 'number' || typeof iv === 'string' || iv instanceof Date
+                ? new Date(iv).toLocaleDateString()
+                : '';
+            return m(ReadonlyComponent, { props, label: props.label, initialValue });
+          }
+          case 'checkbox': {
+            const checked = (obj[id] || value) as boolean;
+            const initialValue = checked ? '✔' : '✘';
+            return m(ReadonlyComponent, { props, label: props.label, initialValue, inline: true });
+          }
+          case 'tags': {
+            const initialValue = (obj[id] || value || []) as string[];
+            return m(ReadonlyComponent, { props, label: props.label, initialValue });
+          }
+          case 'options':
+          case 'select': {
+            const checkedIds = (obj[id] || value || []) as Array<string | number>;
+            const selected = options.filter(o => checkedIds.indexOf(o.id) >= 0);
+            const initialValue =
+              selected && selected.length === 0
+                ? '?'
+                : selected.length === 1
+                ? selected[0].label
+                : selected.map(o => o.label);
+            return m(ReadonlyComponent, { props, label: props.label, initialValue });
+          }
+          case 'radio': {
+            const checkedId = (obj[id] || value) as string | number;
+            const selected = options.filter(o => o.id === checkedId);
+            const initialValue = selected && selected.length ? selected[0].label : '?';
+            return m(ReadonlyComponent, { props, label: props.label, initialValue });
+          }
+          default: {
+            const initialValue = (obj[id] || value) as string;
+            console.table({ type, initialValue });
+            return m(ReadonlyComponent, { props, label: props.label, initialValue });
+          }
         }
-        case 'time': {
-          const date = ((obj[id] || value) as Date) || new Date();
-          const initialValue = toHourMin(date);
-          obj[id] = initialValue as any;
-          return m(TimePicker, {
-            twelveHour: false,
-            initialValue,
-            onchange: time => {
-              onchange(time);
-              m.redraw();
-            },
-            container: containerId,
-          });
-        }
-        case 'date': {
-          const iv = ((obj[id] || value) as Date) || undefined;
-          const initialValue = typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : iv;
-          obj[id] = initialValue ? initialValue.valueOf() : initialValue;
-          // console.log(initialValue && initialValue.toUTCString());
-          const { min, max } = props;
-          const minDate = min && (!initialValue || min < initialValue.valueOf()) ? new Date(min) : undefined;
-          const maxDate = max && (!initialValue || max > initialValue.valueOf()) ? new Date(max) : undefined;
-          return m(DatePicker, {
-            ...props,
-            minDate,
-            maxDate,
-            setDefaultDate: initialValue ? true : false,
-            format: 'mmmm d, yyyy',
-            initialValue,
-            onchange: date => {
-              onchange(new Date(date).valueOf());
-              // m.redraw();
-            },
-            container: containerId as any,
-          });
-        }
-        case 'email': {
-          const initialValue = (obj[id] || value) as string;
-          return m(EmailInput, {
-            ...props,
-            validate,
-            autofocus,
-            onchange,
-            initialValue,
-          });
-        }
-        case 'number': {
-          const initialValue = (obj[id] || value) as number;
-          return m(NumberInput, {
-            ...props,
-            validate,
-            autofocus,
-            onchange,
-            initialValue,
-          });
-        }
-        case 'radio': {
-          const checkedId = (obj[id] || value) as string | number;
-          return m(RadioButtons, { ...props, inline, options, checkedId, onchange });
-        }
-        case 'checkbox': {
-          const checked = (obj[id] || value) as boolean;
-          return m(InputCheckbox, { ...props, checked, onchange });
-        }
-        case 'options': {
-          const checkedId = (obj[id] || value) as Array<string | number>;
-          return m(
-            '.row',
-            m(Options, {
-              checkboxClass: 'col s6 m4 l3',
-              className: 'input-field col s12',
+      } else {
+        switch (type) {
+          case 'colour':
+          case 'color': {
+            const initialValue = (obj[id] || value) as string;
+            return m(ColorInput, { ...props, initialValue, onchange });
+          }
+          case 'time': {
+            const date = ((obj[id] || value) as Date) || new Date();
+            const initialValue = toHourMin(date);
+            obj[id] = initialValue as any;
+            return m(TimePicker, {
+              twelveHour: false,
+              initialValue,
+              onchange: time => {
+                onchange(time);
+                m.redraw();
+              },
+              container: containerId,
+            });
+          }
+          case 'date': {
+            const iv = ((obj[id] || value) as Date) || undefined;
+            const initialValue = typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : iv;
+            obj[id] = initialValue ? initialValue.valueOf() : initialValue;
+            // console.log(initialValue && initialValue.toUTCString());
+            const { min, max } = props;
+            const minDate = min && (!initialValue || min < initialValue.valueOf()) ? new Date(min) : undefined;
+            const maxDate = max && (!initialValue || max > initialValue.valueOf()) ? new Date(max) : undefined;
+            return m(DatePicker, {
+              ...props,
+              minDate,
+              maxDate,
+              setDefaultDate: initialValue ? true : false,
+              format: 'mmmm d, yyyy',
+              initialValue,
+              onchange: date => {
+                onchange(new Date(date).valueOf());
+                // m.redraw();
+              },
+              container: containerId as any,
+            });
+          }
+          case 'email': {
+            const initialValue = (obj[id] || value) as string;
+            return m(EmailInput, {
+              ...props,
+              validate,
+              autofocus,
+              onchange,
+              initialValue,
+            });
+          }
+          case 'number': {
+            const initialValue = (obj[id] || value) as number;
+            return m(NumberInput, {
+              ...props,
+              validate,
+              autofocus,
+              onchange,
+              initialValue,
+            });
+          }
+          case 'radio': {
+            const checkedId = (obj[id] || value) as string | number;
+            return m(RadioButtons, {
+              ...props,
+              inline,
+              options,
+              checkedId,
+              onchange,
+            });
+          }
+          case 'checkbox': {
+            const checked = (obj[id] || value) as boolean;
+            return m(InputCheckbox, { ...props, checked, onchange });
+          }
+          case 'options': {
+            const checkedId = (obj[id] || value) as Array<string | number>;
+            return m(
+              '.row',
+              m(Options, {
+                checkboxClass: 'col s6 m4 l3',
+                className: 'input-field col s12',
+                ...props,
+                options,
+                checkedId,
+                onchange: checkedIds =>
+                  onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter(v => v !== null)),
+              })
+            );
+          }
+          case 'select': {
+            const checkedId = (obj[id] || value) as Array<string | number>;
+            return m(Select, {
+              placeholder: props.multiple ? 'Pick one or more' : 'Pick one',
               ...props,
               options,
               checkedId,
               onchange: checkedIds =>
-                onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter(v => v !== null)),
-            })
-          );
-        }
-        case 'select': {
-          const checkedId = (obj[id] || value) as Array<string | number>;
-          return m(Select, {
-            placeholder: props.multiple ? 'Pick one or more' : 'Pick one',
-            ...props,
-            options,
-            checkedId,
-            onchange: checkedIds =>
-              onchange(
-                checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter(v => v !== null || typeof v !== 'undefined')
-              ),
-          });
-        }
-        case 'map': {
-          const bbox = (area: L.GeoJSON) => {
-            const result = {
-              view: [50, 5] as LatLngExpression,
-              zoom: 4,
-            };
-            if (!area) {
-              return result;
-            }
-            try {
-              const bounds = area.getBounds();
-              if (Object.keys(bounds).length === 0) {
+                onchange(
+                  checkedIds.length === 1
+                    ? checkedIds[0]
+                    : checkedIds.filter(v => v !== null || typeof v !== 'undefined')
+                ),
+            });
+          }
+          case 'map': {
+            const bbox = (area: L.GeoJSON) => {
+              const result = {
+                view: [50, 5] as LatLngExpression,
+                zoom: 4,
+              };
+              if (!area) {
                 return result;
               }
-              result.view = bounds.getCenter();
-              result.zoom = 10;
-            } catch (e) {
-              console.warn(e);
-            }
-            return result;
-          };
-          const overlay = (obj[id] ||
-            value || {
-              type: 'FeatureCollection',
-              features: [],
-            }) as FeatureCollection<GeometryObject>;
-          const overlays = {} as IObject;
-          const o = geoJSON(overlay);
-          overlays[id] = o;
-          return m(LeafletMap, {
-            ...bbox(o),
-            className: 'col s12',
-            style: 'height: 400px;',
-            overlays,
-            visible: [id],
-            editable: disabled ? undefined : [id],
-            showScale: { imperial: false },
-            onLayerEdited: (f: FeatureGroup) => {
-              onchange(f.toGeoJSON() as any);
-              m.redraw();
-            },
-          });
+              try {
+                const bounds = area.getBounds();
+                if (Object.keys(bounds).length === 0) {
+                  return result;
+                }
+                result.view = bounds.getCenter();
+                result.zoom = 10;
+              } catch (e) {
+                console.warn(e);
+              }
+              return result;
+            };
+            const overlay = (obj[id] ||
+              value || {
+                type: 'FeatureCollection',
+                features: [],
+              }) as FeatureCollection<GeometryObject>;
+            const overlays = {} as IObject;
+            const o = geoJSON(overlay);
+            overlays[id] = o;
+            return m(LeafletMap, {
+              ...bbox(o),
+              className: 'col s12',
+              style: 'height: 400px;',
+              overlays,
+              visible: [id],
+              editable: disabled ? undefined : [id],
+              showScale: { imperial: false },
+              onLayerEdited: (f: FeatureGroup) => {
+                onchange(f.toGeoJSON() as any);
+                m.redraw();
+              },
+            });
+          }
+          case 'md':
+            const md = resolvePlaceholders(id ? obj[id] : value || label, obj, context);
+            return m(SlimdownView, { md, className: props.className });
+          case 'section':
+            return m('.divider');
+          case 'switch': {
+            const checked = (obj[id] || value) as boolean;
+            const { options: opt } = field;
+            const left = opt && opt.length > 0 ? opt[0].label : '';
+            const right = opt && opt.length > 1 ? opt[1].label : '';
+            return m(Switch, { ...props, left, right, checked, onchange });
+          }
+          case 'tags': {
+            const initialValue = (obj[id] || value || []) as string[];
+            const data = initialValue.map(chip => ({ tag: chip }));
+            return m('.input-field col s12', [
+              m(Label, { ...props }),
+              m(Chips, {
+                onchange: (chips: M.ChipData[]) => onchange(chips.map(chip => chip.tag)),
+                placeholder: 'Add a tag',
+                secondaryPlaceholder: '+tag',
+                data,
+              }),
+            ]);
+          }
+          case 'textarea': {
+            const initialValue = (obj[id] || value) as string;
+            return m(TextArea, {
+              ...props,
+              validate,
+              autofocus,
+              onchange,
+              initialValue,
+            });
+          }
+          case 'url': {
+            const initialValue = (obj[id] || value) as string;
+            return m(UrlInput, {
+              placeholder: 'http(s)://www.example.com',
+              // dataError: 'http(s)://www.example.com',
+              // dataSuccess: 'OK',
+              ...props,
+              validate,
+              autofocus,
+              onchange,
+              initialValue,
+            });
+          }
+          case 'text': {
+            const initialValue = (obj[id] || value) as string;
+            return m(TextInput, {
+              ...props,
+              validate,
+              autofocus,
+              onchange,
+              initialValue,
+            });
+          }
+          default:
+            return undefined;
         }
-        case 'md':
-          const md = resolvePlaceholders(id ? obj[id] : value || label, obj, context);
-          return m(SlimdownView, { md, className: props.className });
-        case 'section':
-          return m('.divider');
-        case 'switch': {
-          const checked = (obj[id] || value) as boolean;
-          const { options: opt } = field;
-          const left = opt && opt.length > 0 ? opt[0].label : '';
-          const right = opt && opt.length > 1 ? opt[1].label : '';
-          return m(Switch, { ...props, left, right, checked, onchange });
-        }
-        case 'tags': {
-          const initialValue = (obj[id] || value || []) as string[];
-          const data = initialValue.map(chip => ({ tag: chip }));
-          return m('.input-field col s12', [
-            m(Label, { ...props }),
-            m(Chips, {
-              onchange: (chips: M.ChipData[]) => onchange(chips.map(chip => chip.tag)),
-              placeholder: 'Add a tag',
-              secondaryPlaceholder: '+tag',
-              data,
-            }),
-          ]);
-        }
-        case 'textarea': {
-          const initialValue = (obj[id] || value) as string;
-          return m(TextArea, {
-            ...props,
-            validate,
-            autofocus,
-            onchange,
-            initialValue,
-          });
-        }
-        case 'time':
-          return m('div', 'todo');
-        case 'url': {
-          const initialValue = (obj[id] || value) as string;
-          return m(UrlInput, {
-            placeholder: 'http(s)://www.example.com',
-            // dataError: 'http(s)://www.example.com',
-            // dataSuccess: 'OK',
-            ...props,
-            validate,
-            autofocus,
-            onchange,
-            initialValue,
-          });
-        }
-        case 'text': {
-          const initialValue = (obj[id] || value) as string;
-          return m(TextInput, {
-            ...props,
-            validate,
-            autofocus,
-            onchange,
-            initialValue,
-          });
-        }
-        default:
-          return undefined;
       }
     },
   };

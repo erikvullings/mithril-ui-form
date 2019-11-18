@@ -36,7 +36,7 @@ export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
   };
 
   return {
-    view: ({ attrs: { form, obj, onchange: onChange, disabled, context, section } }) => {
+    view: ({ attrs: { form, obj, onchange: onChange, disabled, readonly, context, section } }) => {
       const onchange = () => onChange && onChange(isValid(obj, form));
       const sectionFilter = () => {
         if (!section) {
@@ -71,7 +71,7 @@ export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
           }
           return [
             ...acc,
-            m(FormField, { field, obj, onchange, disabled, context, section, containerId: 'body' }),
+            m(FormField, { field, obj, onchange, disabled, readonly, context, section, containerId: 'body' }),
           ];
         },
         [] as Array<Vnode<any, any>>

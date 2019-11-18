@@ -45,6 +45,8 @@ export interface IInputField {
   inline?: boolean;
   /** If true, the property is disabled */
   disabled?: boolean | string | string[];
+  /** If true, the property is shown in readonly mode */
+  readonly?: boolean;
   /** CSS class name to attach to the element */
   className?: string;
   /** CSS class for the content, e.g. for grouping an options list */
