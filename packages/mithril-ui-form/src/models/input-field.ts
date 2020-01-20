@@ -33,6 +33,8 @@ export interface IInputField {
    * When dealing with a repeated item, max indicates the maximum number of entries that you want to show.
    */
   max?: number;
+  /** Step size when dealing with numbers. */
+  step?: number;
   /** When input type is a text or text area, optionally specify the minimum length. */
   minLength?: number;
   /** When input type is a text or text area, optionally specify the maximum length. */
@@ -83,4 +85,9 @@ export interface IInputField {
   propertyFilter?: string;
   /** filterLabel is only used for repeated items with a property filter, to set its label. */
   filterLabel?: string;
+  /**
+   * Only for options, allow the user to check all properties at once. It is a string, e.g.
+   * "Select all|Unselect all", where the pipe separates the two modes.
+   */
+  checkAllOptions?: string;
 }

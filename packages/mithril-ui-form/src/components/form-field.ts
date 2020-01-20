@@ -21,6 +21,7 @@ import {
   Switch,
   uuid4,
   uniqueId,
+  Button,
 } from 'mithril-materialized';
 import { IInputField } from '../models/input-field';
 import {
@@ -50,6 +51,7 @@ const unwrapComponent = (field: IInputField, autofocus = false, disabled = false
     minLength,
     max,
     min,
+    step,
   } = field;
   const result = { id: `${id}-${uniqueId()}`, label } as IObject;
   if (!label && id) {
@@ -97,6 +99,9 @@ const unwrapComponent = (field: IInputField, autofocus = false, disabled = false
   if (typeof min !== 'undefined') {
     result.min = min;
   }
+  if (typeof step !== 'undefined') {
+    result.step = step;
+  }
   return result;
 };
 
@@ -118,6 +123,8 @@ export interface IFormField extends Attributes {
 
 /** A single input field in a form */
 export const FormField: FactoryComponent<IFormField> = () => {
+  const state = { key: Date.now() } as { key: number };
+
   return {
     view: ({
       attrs: { field, obj, autofocus, onchange: onFormChange, context, section, containerId, disabled: d, readonly: r },
@@ -136,6 +143,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
         description,
         inline,
         i18n,
+        checkAllOptions,
       } = field;
       if (
         (show && !evalExpression(show, obj, context)) ||
@@ -224,12 +232,18 @@ export const FormField: FactoryComponent<IFormField> = () => {
         obj[id] = (autogenerate === 'guid' ? uuid4() : autogenerate === 'id' ? uniqueId() : Date.now()) as any;
       }
 
+      const [selectAll, unselectAll] = checkAllOptions ? checkAllOptions.split('|') : ['', ''];
+
       if (readonly && type && ['md', 'map', 'none'].indexOf(type as string) < 0) {
         switch (type) {
           case 'time': {
             const date = ((obj[id] || value) as Date) || new Date();
             const initialValue = toHourMin(date);
-            return m(ReadonlyComponent, { props, label: props.label, initialValue });
+            return m(ReadonlyComponent, {
+              props,
+              label: props.label,
+              initialValue,
+            });
           }
           case 'date': {
             const iv = (obj[id] || value) as Date | undefined;
@@ -237,16 +251,29 @@ export const FormField: FactoryComponent<IFormField> = () => {
               typeof iv === 'number' || typeof iv === 'string' || iv instanceof Date
                 ? new Date(iv).toLocaleDateString()
                 : '';
-            return m(ReadonlyComponent, { props, label: props.label, initialValue });
+            return m(ReadonlyComponent, {
+              props,
+              label: props.label,
+              initialValue,
+            });
           }
           case 'checkbox': {
             const checked = (obj[id] || value) as boolean;
             const initialValue = checked ? '✔' : '✘';
-            return m(ReadonlyComponent, { props, label: props.label, initialValue, inline: true });
+            return m(ReadonlyComponent, {
+              props,
+              label: props.label,
+              initialValue,
+              inline: true,
+            });
           }
           case 'tags': {
             const initialValue = (obj[id] || value || []) as string[];
-            return m(ReadonlyComponent, { props, label: props.label, initialValue });
+            return m(ReadonlyComponent, {
+              props,
+              label: props.label,
+              initialValue,
+            });
           }
           case 'options':
           case 'select': {
@@ -258,18 +285,29 @@ export const FormField: FactoryComponent<IFormField> = () => {
                 : selected.length === 1
                 ? selected[0].label
                 : selected.map(o => o.label);
-            return m(ReadonlyComponent, { props, label: props.label, initialValue });
+            return m(ReadonlyComponent, {
+              props,
+              label: props.label,
+              initialValue,
+            });
           }
           case 'radio': {
             const checkedId = (obj[id] || value) as string | number;
             const selected = options.filter(o => o.id === checkedId);
             const initialValue = selected && selected.length ? selected[0].label : '?';
-            return m(ReadonlyComponent, { props, label: props.label, initialValue });
+            return m(ReadonlyComponent, {
+              props,
+              label: props.label,
+              initialValue,
+            });
           }
           default: {
             const initialValue = (obj[id] || value) as string;
-            console.table({ type, initialValue });
-            return m(ReadonlyComponent, { props, label: props.label, initialValue });
+            return m(ReadonlyComponent, {
+              props,
+              label: props.label,
+              initialValue,
+            });
           }
         }
       } else {
@@ -299,8 +337,16 @@ export const FormField: FactoryComponent<IFormField> = () => {
             obj[id] = initialValue ? initialValue.valueOf() : initialValue;
             // console.log(initialValue && initialValue.toUTCString());
             const { min, max } = props;
-            const minDate = min && (!initialValue || min < initialValue.valueOf()) ? new Date(min) : undefined;
-            const maxDate = max && (!initialValue || max > initialValue.valueOf()) ? new Date(max) : undefined;
+            const minDate = min
+              ? !initialValue || min < initialValue.valueOf()
+                ? new Date(min)
+                : initialValue
+              : undefined;
+            const maxDate = max
+              ? !initialValue || max > initialValue.valueOf()
+                ? new Date(max)
+                : initialValue
+              : undefined;
             return m(DatePicker, {
               ...props,
               minDate,
@@ -351,18 +397,47 @@ export const FormField: FactoryComponent<IFormField> = () => {
           }
           case 'options': {
             const checkedId = (obj[id] || value) as Array<string | number>;
-            return m(
-              '.row',
-              m(Options, {
-                checkboxClass: 'col s6 m4 l3',
-                className: 'input-field col s12',
-                ...props,
-                options,
-                checkedId,
-                onchange: checkedIds =>
-                  onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter(v => v !== null)),
-              })
-            );
+            return [
+              m(
+                '.row',
+                [
+                  m(Options, {
+                    key: state.key,
+                    checkboxClass: 'col s6 m4 l3',
+                    className: 'input-field col s12',
+                    ...props,
+                    options,
+                    checkedId,
+                    onchange: checkedIds =>
+                      onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter(v => v !== null)),
+                  }),
+                ],
+                checkAllOptions &&
+                  m('.col.s12.option-buttons', [
+                    m(Button, {
+                      disabled: props.disabled,
+                      label: selectAll,
+                      iconName: 'check',
+                      onclick: () => {
+                        state.key = Date.now();
+                        onchange(options.map(o => o.id));
+                      },
+                    }),
+                    unselectAll &&
+                      m(Button, {
+                        disabled: props.disabled,
+                        label: unselectAll,
+                        iconName: 'check_box_outline_blank',
+                        onclick: () => {
+                          const ids = (obj[id] || []) as Array<string | number>;
+                          ids.length = 0;
+                          state.key = Date.now();
+                          onchange(ids);
+                        },
+                      }),
+                  ])
+              ),
+            ];
           }
           case 'select': {
             const checkedId = (obj[id] || value) as Array<string | number>;
