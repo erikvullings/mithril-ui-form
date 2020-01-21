@@ -2,22 +2,22 @@ dependencies:
   slimdown-js: 0.1.5
 devDependencies:
   '@types/geojson': 7946.0.7
-  '@types/leaflet': 1.5.5
+  '@types/leaflet': 1.5.8
   '@types/leaflet-draw': 1.0.1
-  '@types/materialize-css': 1.0.6
+  '@types/materialize-css': 1.0.7
   '@types/mithril': github.com/MithrilJS/mithril.d.ts/b5a1d389c2e83bdc6351c2d1cb3d909674644af1
-  mithril-leaflet: 0.1.6
-  mithril-materialized: 0.15.4
+  mithril-leaflet: 0.1.7
+  mithril-materialized: 0.16.0
   rimraf: 3.0.0
-  rollup: 1.27.0
-  rollup-plugin-commonjs: 10.1.0_rollup@1.27.0
-  rollup-plugin-node-resolve: 5.2.0_rollup@1.27.0
-  rollup-plugin-sourcemaps: 0.4.2_rollup@1.27.0
-  rollup-plugin-terser: 5.1.2_rollup@1.27.0
-  rollup-plugin-typescript2: 0.25.2_rollup@1.27.0+typescript@3.7.2
+  rollup: 1.29.1
+  rollup-plugin-commonjs: 10.1.0_rollup@1.29.1
+  rollup-plugin-node-resolve: 5.2.0_rollup@1.29.1
+  rollup-plugin-sourcemaps: 0.5.0_rollup@1.29.1
+  rollup-plugin-terser: 5.2.0_rollup@1.29.1
+  rollup-plugin-typescript2: 0.25.3_rollup@1.29.1+typescript@3.7.5
   tslib: 1.10.0
-  typescript: 3.7.2
-  typescript-json-schema: 0.40.0
+  typescript: 3.7.5
+  typescript-json-schema: 0.42.0
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.5.5:
@@ -34,6 +34,17 @@ packages:
     dev: true
     resolution:
       integrity: sha512-7dV4eu9gBxoM0dAnj/BCFDW9LFU0zvTrkq0ugM7pnHEgguOEeOz1so2ZghEdzviYzQEED0r4EAgpsBChKy1TRQ==
+  /@rollup/pluginutils/3.0.4_rollup@1.29.1:
+    dependencies:
+      estree-walker: 0.6.1
+      rollup: 1.29.1
+    dev: true
+    engines:
+      node: '>= 8.0.0'
+    peerDependencies:
+      rollup: ^1.20.0
+    resolution:
+      integrity: sha512-buc0oeq2zqQu2mpMyvZgAaQvitikYjT/4JYhA4EXwxX8/g0ZGHoGiX+0AwmfhrNqH4oJv67gn80sTZFQ/jL1bw==
   /@types/cash/0.0.3:
     dev: true
     resolution:
@@ -68,13 +79,19 @@ packages:
     dev: true
     resolution:
       integrity: sha512-Eyh1LMmW4OFgafL6rjLyGkMqFS5IzgwWHMSgTKbrsvwLjLaWH8Ae8CV5liRe8HSM731oOVDwAMIZgg9P0SO9tg==
-  /@types/materialize-css/1.0.6:
+  /@types/leaflet/1.5.8:
+    dependencies:
+      '@types/geojson': 7946.0.7
+    dev: true
+    resolution:
+      integrity: sha512-qpi5n4LmwenUFZ+VZ7ytRgHK+ZAclIvloL2zoKCmmj244WD2hBcLbUZ6Szvajfe3sIkSYEJ8WZ1p9VYl8tRsMA==
+  /@types/materialize-css/1.0.7:
     dependencies:
       '@types/cash': 0.0.3
       '@types/jquery': 3.3.31
     dev: true
     resolution:
-      integrity: sha512-H/QXdgih11880Rx+yhLU5mDCm3SVGF7CYyQjEmRYGrn/fGrPc+s2SQBwbB9gZCw2a/39bDkH/v+wyysj0nWXCQ==
+      integrity: sha512-nKsxFTAjUHK7gxnMcbd+Lynp1v8N+1mvrfleWmy5u0Bxd337l9O0U11FfKX3fKZlxE4hD7N4bw8BFhH5hxhXCQ==
   /@types/node/12.12.7:
     dev: true
     resolution:
@@ -381,21 +398,21 @@ packages:
     dev: true
     resolution:
       integrity: sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
-  /mithril-leaflet/0.1.6:
+  /mithril-leaflet/0.1.7:
     dev: true
     peerDependencies:
       leaflet: ^1.5.1
       leaflet-draw: ^1.0.4
       mithril: ^2.0.4
     resolution:
-      integrity: sha512-amVfw2T1+eo8H4VSRaBq3OSWQkV+FNc80FwQ/MZ3ofLlkx5+9Bt6AM5zicjAsM/RnONJ/PA2tPr8Q/DSGpqZPg==
-  /mithril-materialized/0.15.4:
+      integrity: sha512-8f56fJsglSmEpVAjH/4bpgcjXr587+r8ZttLet9gcOl6C78ZXrCwrz5twIo2NLqmLuLGv77vmKyzIf7XVuqoRw==
+  /mithril-materialized/0.16.0:
     dev: true
     peerDependencies:
       materialize-css: ^1.0.0
       mithril: ^2.0.4
     resolution:
-      integrity: sha512-r2UYWJvpnTGifCGs/YP27TnhBvcwqF7cv+ES6k1WfRTUWwkn6gug3SiJ8yh6/gA3sGCc3+mY28rZYHAC4JQ2mg==
+      integrity: sha512-exWUe1qMNNUu2sc0VDg06vtnYtcscFtenuzUAIAPPM7t69G7d4lvmvJpV57vNZKRpmfs16TQLBirWDSh9pNn8A==
   /once/1.4.0:
     dependencies:
       wrappy: 1.0.2
@@ -489,73 +506,73 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-NDGVxTsjqfunkds7CqsOiEnxln4Bo7Nddl3XhS4pXg5OzwkLqJ971ZVAAnB+DDLnF76N+VnDEiBHaVV8I06SUg==
-  /rollup-plugin-commonjs/10.1.0_rollup@1.27.0:
+  /rollup-plugin-commonjs/10.1.0_rollup@1.29.1:
     dependencies:
       estree-walker: 0.6.1
       is-reference: 1.1.4
       magic-string: 0.25.4
       resolve: 1.12.0
-      rollup: 1.27.0
+      rollup: 1.29.1
       rollup-pluginutils: 2.8.2
     dev: true
     peerDependencies:
       rollup: '>=1.12.0'
     resolution:
       integrity: sha512-jlXbjZSQg8EIeAAvepNwhJj++qJWNJw1Cl0YnOqKtP5Djx+fFGkp3WRh+W0ASCaFG5w1jhmzDxgu3SJuVxPF4Q==
-  /rollup-plugin-node-resolve/5.2.0_rollup@1.27.0:
+  /rollup-plugin-node-resolve/5.2.0_rollup@1.29.1:
     dependencies:
       '@types/resolve': 0.0.8
       builtin-modules: 3.1.0
       is-module: 1.0.0
       resolve: 1.12.0
-      rollup: 1.27.0
+      rollup: 1.29.1
       rollup-pluginutils: 2.8.2
     dev: true
     peerDependencies:
       rollup: '>=1.11.0'
     resolution:
       integrity: sha512-jUlyaDXts7TW2CqQ4GaO5VJ4PwwaV8VUGA7+km3n6k6xtOEacf61u0VXwN80phY/evMcaS+9eIeJ9MOyDxt5Zw==
-  /rollup-plugin-sourcemaps/0.4.2_rollup@1.27.0:
+  /rollup-plugin-sourcemaps/0.5.0_rollup@1.29.1:
     dependencies:
-      rollup: 1.27.0
-      rollup-pluginutils: 2.8.2
-      source-map-resolve: 0.5.2
+      '@rollup/pluginutils': 3.0.4_rollup@1.29.1
+      rollup: 1.29.1
+      source-map-resolve: 0.5.3
     dev: true
     engines:
-      node: '>=4.5.0'
-      npm: '>=2.15.9'
+      node: '>=8.0.0'
     peerDependencies:
+      '@types/node': '>=8.0.0'
       rollup: '>=0.31.2'
     resolution:
-      integrity: sha1-YhJaqUCHqt97g+9N+vYptHMTXoc=
-  /rollup-plugin-terser/5.1.2_rollup@1.27.0:
+      integrity: sha512-xp2vvRvgnYiXydgf/JFFFgYxrqMaQaOrK/g6yZvgwT9R1TSYjD3HKku1pD7iQNjQHkl5yGpokvJLp7cP/lR+aQ==
+  /rollup-plugin-terser/5.2.0_rollup@1.29.1:
     dependencies:
       '@babel/code-frame': 7.5.5
       jest-worker: 24.9.0
-      rollup: 1.27.0
+      rollup: 1.29.1
       rollup-pluginutils: 2.8.2
-      serialize-javascript: 1.9.1
-      terser: 4.4.0
+      serialize-javascript: 2.1.2
+      terser: 4.6.3
     dev: true
     peerDependencies:
       rollup: '>=0.66.0 <2'
     resolution:
-      integrity: sha512-sWKBCOS+vUkRtHtEiJPAf+WnBqk/C402fBD9AVHxSIXMqjsY7MnYWKYEUqGixtr0c8+1DjzUEPlNgOYQPVrS1g==
-  /rollup-plugin-typescript2/0.25.2_rollup@1.27.0+typescript@3.7.2:
+      integrity: sha512-jQI+nYhtDBc9HFRBz8iGttQg7li9klmzR62RG2W2nN6hJ/FI2K2ItYQ7kJ7/zn+vs+BP1AEccmVRjRN989I+Nw==
+  /rollup-plugin-typescript2/0.25.3_rollup@1.29.1+typescript@3.7.5:
     dependencies:
       find-cache-dir: 3.1.0
       fs-extra: 8.1.0
       resolve: 1.12.0
-      rollup: 1.27.0
+      rollup: 1.29.1
       rollup-pluginutils: 2.8.1
       tslib: 1.10.0
-      typescript: 3.7.2
+      typescript: 3.7.5
     dev: true
     peerDependencies:
       rollup: '>=1.26.3'
       typescript: '>=2.4.0'
     resolution:
-      integrity: sha512-+tpZj/ZIf2lwjyjX6xEW1S5Y38/21TB3p6poLodISIia8owMMfIKuFFnWcESE4FPBHkR8XPKqjY0PH9IUJJK+Q==
+      integrity: sha512-ADkSaidKBovJmf5VBnZBZe+WzaZwofuvYdzGAKTN/J4hN7QJCFYAq7IrH9caxlru6T5qhX41PNFS1S4HqhsGQg==
   /rollup-pluginutils/2.8.1:
     dependencies:
       estree-walker: 0.6.1
@@ -568,7 +585,7 @@ packages:
     dev: true
     resolution:
       integrity: sha512-EEp9NhnUkwY8aif6bxgovPHMoMoNr2FulJziTndpt5H9RdwC47GSGuII9XxpSdzVGM0GWrNPHV6ie1LTNJPaLQ==
-  /rollup/1.27.0:
+  /rollup/1.29.1:
     dependencies:
       '@types/estree': 0.0.39
       '@types/node': 12.12.7
@@ -576,16 +593,16 @@ packages:
     dev: true
     hasBin: true
     resolution:
-      integrity: sha512-yaMna4MJ8LLEHhHl1ilgHakylf0LKeQctDxhngZLQ+W57GnXa5vtH7XKaK8zlAhNEhlWiH5YFVFt+QCDPUmNkw==
+      integrity: sha512-dGQ+b9d1FOX/gluiggTAVnTvzQZUEkCi/TwZcax7ujugVRHs0nkYJlV9U4hsifGEMojnO+jvEML2CJQ6qXgbHA==
   /semver/6.3.0:
     dev: true
     hasBin: true
     resolution:
       integrity: sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
-  /serialize-javascript/1.9.1:
+  /serialize-javascript/2.1.2:
     dev: true
     resolution:
-      integrity: sha512-0Vb/54WJ6k5v8sSWN09S0ora+Hnr+cX40r9F170nT+mSkaxltoE/7R3OrIdBSUv1OoiobH1QoWQbCnAO+e8J1A==
+      integrity: sha512-rs9OggEUF0V4jUSecXazOYsLfu7OGK2qIn3c7IPBiffz32XniEp/TX9Xmc9LQfK2nQ2QKHvZ2oygKUGU0lG4jQ==
   /set-blocking/2.0.0:
     dev: true
     resolution:
@@ -594,7 +611,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-CfvUmEE+KHVN1IZKyBxLDwHOUX9rkUDSAJuDswlCmuESU1U+5Q8sFkSCsDDdVBuZ2oWiLlIBa+gM5Ceius4JuA==
-  /source-map-resolve/0.5.2:
+  /source-map-resolve/0.5.3:
     dependencies:
       atob: 2.1.2
       decode-uri-component: 0.2.0
@@ -603,7 +620,7 @@ packages:
       urix: 0.1.0
     dev: true
     resolution:
-      integrity: sha512-MjqsvNwyz1s0k81Goz/9vRBe9SZdB09Bdw+/zYyO+3CuPk6fouTaxscHkgtE8jKvf01kVfl8riHzERQ/kefaSA==
+      integrity: sha512-Htz+RnsXWk5+P2slx5Jh3Q66vhQj1Cllm0zvnaY98+NFx+Dv2CF/f5O/t8x+KaNdrdIAsruNzoh/KpialbqAnw==
   /source-map-support/0.5.16:
     dependencies:
       buffer-from: 1.1.1
@@ -659,7 +676,7 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-qe1jfm1Mg7Nq/NSh6XE24gPXROEVsWHxC1LIx//XNlD9iw7YZQGjZNjYN7xGaEG6iKdA8EtNFW6R0gjnVXp+wQ==
-  /terser/4.4.0:
+  /terser/4.6.3:
     dependencies:
       commander: 2.20.3
       source-map: 0.6.1
@@ -669,29 +686,29 @@ packages:
       node: '>=6.0.0'
     hasBin: true
     resolution:
-      integrity: sha512-oDG16n2WKm27JO8h4y/w3iqBGAOSCtq7k8dRmrn4Wf9NouL0b2WpMHGChFGZq4nFAQy1FsNJrVQHfurXOSTmOA==
+      integrity: sha512-Lw+ieAXmY69d09IIc/yqeBqXpEQIpDGZqT34ui1QWXIUpR2RjbqEkT8X7Lgex19hslSqcWM5iMN2kM11eMsESQ==
   /tslib/1.10.0:
     dev: true
     resolution:
       integrity: sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
-  /typescript-json-schema/0.40.0:
+  /typescript-json-schema/0.42.0:
     dependencies:
       '@types/json-schema': 7.0.3
       glob: 7.1.6
       json-stable-stringify: 1.0.1
-      typescript: 3.7.2
+      typescript: 3.7.5
       yargs: 14.2.0
     dev: true
     hasBin: true
     resolution:
-      integrity: sha512-C8D3Ca6+1x3caWOR+u45Shn3KqkRZi5M3+E8ePpEmYMqOh3xhhLdq+39pqT0Bf8+fCgAmpTFSJMT6Xwqbm0Tkw==
-  /typescript/3.7.2:
+      integrity: sha512-9WO+lVmlph7Ecb7lPd9tU84XFUQh44kpAf3cWe/Ym4G5EKw/SS6XGpi1DZDthvxqkIdNSDlWi7FhKfxuIV/3yw==
+  /typescript/3.7.5:
     dev: true
     engines:
       node: '>=4.2.0'
     hasBin: true
     resolution:
-      integrity: sha512-ml7V7JfiN2Xwvcer+XAf2csGO1bPBdRbFCkYBczNZggrBZ9c7G3riSUeJmqEU5uOtXNPMhE3n+R4FA/3YOAWOQ==
+      integrity: sha512-/P5lkRXkWHNAbcJIiHPfRoKqyd7bsyCma1hZNUGfn20qm64T6ZBlrzprymeu918H+mB/0rIg2gGK/BXkhhYgBw==
   /universalify/0.1.2:
     dev: true
     engines:
@@ -756,20 +773,20 @@ packages:
     version: 1.2.0
 specifiers:
   '@types/geojson': ^7946.0.7
-  '@types/leaflet': ^1.5.5
+  '@types/leaflet': ^1.5.8
   '@types/leaflet-draw': ^1.0.1
-  '@types/materialize-css': ^1.0.6
+  '@types/materialize-css': ^1.0.7
   '@types/mithril': 'github:MithrilJS/mithril.d.ts#v2'
-  mithril-leaflet: 0.1.6
-  mithril-materialized: ^0.15.4
+  mithril-leaflet: 0.1.7
+  mithril-materialized: ^0.16.0
   rimraf: ^3.0.0
-  rollup: ^1.27.0
+  rollup: ^1.29.1
   rollup-plugin-commonjs: ^10.1.0
   rollup-plugin-node-resolve: ^5.2.0
-  rollup-plugin-sourcemaps: ^0.4.2
-  rollup-plugin-terser: ^5.1.2
-  rollup-plugin-typescript2: ^0.25.2
+  rollup-plugin-sourcemaps: ^0.5.0
+  rollup-plugin-terser: ^5.2.0
+  rollup-plugin-typescript2: ^0.25.3
   slimdown-js: ^0.1.5
   tslib: ^1.10.0
-  typescript: ^3.7.2
-  typescript-json-schema: ^0.40.0
+  typescript: ^3.7.5
+  typescript-json-schema: ^0.42.0

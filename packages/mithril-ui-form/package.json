@@ -33,23 +33,23 @@
     "slimdown-js": "^0.1.5"
   },
   "devDependencies": {
-    "@types/leaflet": "^1.5.5",
+    "@types/leaflet": "^1.5.8",
     "@types/leaflet-draw": "^1.0.1",
-    "@types/materialize-css": "^1.0.6",
+    "@types/materialize-css": "^1.0.7",
     "@types/mithril": "github:MithrilJS/mithril.d.ts#v2",
     "@types/geojson": "^7946.0.7",
-    "mithril-materialized": "^0.15.4",
+    "mithril-materialized": "^0.16.0",
     "mithril-leaflet": "0.1.7",
     "rimraf": "^3.0.0",
-    "rollup": "^1.27.0",
+    "rollup": "^1.29.1",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-sourcemaps": "^0.4.2",
-    "rollup-plugin-terser": "^5.1.2",
-    "rollup-plugin-typescript2": "^0.25.2",
+    "rollup-plugin-sourcemaps": "^0.5.0",
+    "rollup-plugin-terser": "^5.2.0",
+    "rollup-plugin-typescript2": "^0.25.3",
     "tslib": "^1.10.0",
-    "typescript": "^3.7.2",
-    "typescript-json-schema": "^0.40.0"
+    "typescript": "^3.7.5",
+    "typescript-json-schema": "^0.42.0"
   },
   "peerDependencies": {
     "mithril": "^2.0.4",

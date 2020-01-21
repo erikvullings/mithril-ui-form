@@ -27,11 +27,11 @@
     "clean": "npm run clean:local && lerna run --parallel clean",
     "start": "lerna run --parallel start",
     "dry-run": "lerna run --parallel dry-run",
-    "patch-release": "lerna run patch-release --parallel",
-    "minor-release": "lerna run minor-release --parallel"
+    "patch-release": "npm run clean && npm run build && lerna run patch-release --parallel",
+    "minor-release": "npm run clean && npm run build && lerna run minor-release --parallel"
   },
   "devDependencies": {
-    "lerna": "^3.16.4",
+    "lerna": "^3.20.2",
     "rimraf": "^3.0.0"
   }
 }
