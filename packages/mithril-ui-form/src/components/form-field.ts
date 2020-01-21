@@ -127,7 +127,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
 
   return {
     view: ({
-      attrs: { field, obj, autofocus, onchange: onFormChange, context, section, containerId, disabled: d, readonly: r },
+      attrs: { field, obj, autofocus, onchange: onFormChange, context, containerId, disabled: d, readonly: r },
     }) => {
       const {
         id = '',
@@ -216,15 +216,21 @@ export const FormField: FactoryComponent<IFormField> = () => {
           if (!obj.hasOwnProperty(field.id)) {
             obj[field.id] = {};
           }
-          return m(LayoutForm, {
-            ...props,
-            form: type,
-            obj: obj[field.id],
-            context: [obj, context],
-            section,
-            onchange: () => onFormChange && onFormChange(),
-            containerId,
-          });
+          return [
+            m(
+              'div',
+              { className: field.className },
+              m.trust(Slimdown.render(field.label || capitalizeFirstLetter(field.id)))
+            ),
+            m(LayoutForm, {
+              ...props,
+              form: type,
+              obj: obj[field.id],
+              context: [obj, context],
+              onchange: () => onFormChange && onFormChange(),
+              containerId,
+            }),
+          ];
         }
       }
 
@@ -258,7 +264,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'checkbox': {
-            const checked = (obj[id] || value) as boolean;
+            const checked = (obj.hasOwnProperty(id) ? obj[id] : value) as boolean;
             const initialValue = checked ? '✔' : '✘';
             return m(ReadonlyComponent, {
               props,
@@ -372,7 +378,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'number': {
-            const initialValue = (obj[id] || value) as number;
+            const initialValue = (obj.hasOwnProperty(id) ? obj[id] : value) as number;
             return m(NumberInput, {
               ...props,
               validate,
@@ -392,7 +398,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'checkbox': {
-            const checked = (obj[id] || value) as boolean;
+            const checked = (obj.hasOwnProperty(id) ? obj[id] : value) as boolean;
             return m(InputCheckbox, { ...props, checked, onchange });
           }
           case 'options': {

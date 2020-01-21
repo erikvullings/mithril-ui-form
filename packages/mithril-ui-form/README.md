@@ -38,7 +38,7 @@ It would render `The current time is 7:28:27 AM and checked is yes`.
 
 ## TODO
 
-- repeat: true, min: 2, max: 5, should limit the number of repeats to 5 and require a minimum of 2.
+- When repeat = true, min: 2, max: 5 should limit the number of repeats to 5 and require a minimum of 2.
 - Add pre-sets, overriding existing values.
 - Add support for getting the value of an option based on id. E.g. extract all options to a new object (key is the id of the field, value is the list of options), so we can resolve their values easily later.
 - Create a handlebars-like component: put in a template and an object, and render HTML
