@@ -90,4 +90,6 @@ export interface IInputField {
    * "Select all|Unselect all", where the pipe separates the two modes.
    */
   checkAllOptions?: string;
+  /** URL for FileInput (file) component type */
+  url?: string;
 }

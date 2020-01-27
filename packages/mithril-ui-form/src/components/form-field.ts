@@ -7,6 +7,7 @@ import {
   InputCheckbox,
   TextInput,
   TextArea,
+  FileInput,
   UrlInput,
   NumberInput,
   DatePicker,
@@ -535,6 +536,32 @@ export const FormField: FactoryComponent<IFormField> = () => {
               validate,
               autofocus,
               onchange,
+              initialValue,
+            });
+          }
+          case 'file': {
+            const initialValue = (obj[id] || value) as string;
+            console.log(initialValue);
+            const { url, placeholder } = field;
+            if (!url) {
+              throw Error('Input field "url" not defined, which indicates the URL to the upload folder.')
+            }
+            const upload = (file: FileList) => {
+              if (!file || file.length < 1) {
+                return console.warn('File is undefined');
+              }
+              const body = new FormData();
+              body.append('file', file[0]);
+              m.request<string>({
+                method: 'POST',
+                url,
+                body,
+              }).then(res => onchange(res));
+            };
+            return m(FileInput, {
+              ...props,
+              placeholder: initialValue || placeholder,
+              onchange: upload,
               initialValue,
             });
           }

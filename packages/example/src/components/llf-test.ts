@@ -671,6 +671,12 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
 `,
   },
   {
+    id: 'url',
+    label: 'Upload a file',
+    type: 'file',
+    url: 'http://localhost:3030/upload/test',
+  },
+  {
     id: 'event',
     label: 'Title of the evaluated event',
     description: '_Short name to indicate the event and its evaluation (max. 70 characters)._',
@@ -719,14 +725,17 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
   {
     id: 'sources',
     label: 'Publications',
+    pageSize: 5,
     repeat: true,
-    inline: false,
+    // inline: false,
     type: source,
   },
   {
     id: 'multimedia',
     label: 'Multimedia sources',
+    pageSize: 5,
     repeat: true,
+    inline: false,
     type: [
       { id: 'desc', label: 'Short description', type: 'textarea' },
       { id: 'owner', label: 'Owner', type: 'text', className: 'col s6' },
