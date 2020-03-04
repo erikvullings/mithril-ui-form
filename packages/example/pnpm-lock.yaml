@@ -4,10 +4,10 @@ dependencies:
   material-icons: 0.3.1
   materialize-css: 1.0.0
   mithril: 2.0.4
-  mithril-materialized: 0.16.0_f3d9df6f4766fd28b6cfb8072ccbc3ca
+  mithril-materialized: 0.16.1_f3d9df6f4766fd28b6cfb8072ccbc3ca
   mithril-ui-form: 'link:../mithril-ui-form'
 devDependencies:
-  '@babel/types': 7.8.3
+  '@babel/types': 7.8.6
   '@types/materialize-css': 1.0.7
   '@types/mithril': 2.0.2
   autoprefixer: 9.7.4
@@ -15,9 +15,9 @@ devDependencies:
   lodash: 4.17.15
   mixin-deep: 2.0.1
   parcel-bundler: 1.12.4
-  rimraf: 3.0.0
+  rimraf: 3.0.2
   set-value: 3.0.1
-  typescript: 3.7.5
+  typescript: 3.8.3
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.5.5:
@@ -797,6 +797,14 @@ packages:
     dev: true
     resolution:
       integrity: sha512-jBD+G8+LWpMBBWvVcdr4QysjUE4mU/syrhN17o1u3gx0/WzJB1kwiVZAXRtWbsIPOwW8pF/YJV5+nmetPzepXg==
+  /@babel/types/7.8.6:
+    dependencies:
+      esutils: 2.0.3
+      lodash: 4.17.15
+      to-fast-properties: 2.0.0
+    dev: true
+    resolution:
+      integrity: sha512-wqz7pgWMIrht3gquyEFPVXeXCti72Rm8ep9b5tQKz9Yg9LzJA3HxosF1SB3Kc81KD1A3XBkkVYtJvCKS2Z/QrA==
   /@iarna/toml/2.2.3:
     dev: true
     resolution:
@@ -3261,7 +3269,7 @@ packages:
     dev: true
     resolution:
       integrity: sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
-  /mithril-materialized/0.16.0_f3d9df6f4766fd28b6cfb8072ccbc3ca:
+  /mithril-materialized/0.16.1_f3d9df6f4766fd28b6cfb8072ccbc3ca:
     dependencies:
       materialize-css: 1.0.0
       mithril: 2.0.4
@@ -3270,7 +3278,7 @@ packages:
       materialize-css: ^1.0.0
       mithril: ^2.0.4
     resolution:
-      integrity: sha512-exWUe1qMNNUu2sc0VDg06vtnYtcscFtenuzUAIAPPM7t69G7d4lvmvJpV57vNZKRpmfs16TQLBirWDSh9pNn8A==
+      integrity: sha512-Y6r+X5spyE5SiTAiyKN2hdXqyfIw+ZV2t8Qg4usD50royGK8KDA5kDN979tR9JZphsIr3PYif5FUz/TGl1baSQ==
   /mithril/2.0.4:
     dev: false
     hasBin: true
@@ -4514,13 +4522,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==
-  /rimraf/3.0.0:
+  /rimraf/3.0.2:
     dependencies:
       glob: 7.1.6
     dev: true
     hasBin: true
     resolution:
-      integrity: sha512-NDGVxTsjqfunkds7CqsOiEnxln4Bo7Nddl3XhS4pXg5OzwkLqJ971ZVAAnB+DDLnF76N+VnDEiBHaVV8I06SUg==
+      integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==
   /ripemd160/2.0.2:
     dependencies:
       hash-base: 3.0.4
@@ -5108,13 +5116,13 @@ packages:
     dev: true
     resolution:
       integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
-  /typescript/3.7.5:
+  /typescript/3.8.3:
     dev: true
     engines:
       node: '>=4.2.0'
     hasBin: true
     resolution:
-      integrity: sha512-/P5lkRXkWHNAbcJIiHPfRoKqyd7bsyCma1hZNUGfn20qm64T6ZBlrzprymeu918H+mB/0rIg2gGK/BXkhhYgBw==
+      integrity: sha512-MYlEfn5VrLNsgudQTVJeNaQFUAI7DkhnOjdpAp4T+ku1TfQClewlbSuTVHiA+8skNBgaf02TL/kLOvig4y3G8w==
   /uncss/0.17.2:
     dependencies:
       commander: 2.20.3
@@ -5408,7 +5416,7 @@ packages:
     resolution:
       integrity: sha512-/is78VKbKs70bVZH7w4YaZea6xcJWOAwkhbR0CFuZBmYtfTYF0xjGJF43AYd8g2Uii1yJwmS5GR2vBmrc32sbg==
 specifiers:
-  '@babel/types': 7.8.3
+  '@babel/types': 7.8.6
   '@types/materialize-css': ^1.0.7
   '@types/mithril': ^2.0.2
   autoprefixer: ^9.7.4
@@ -5419,10 +5427,10 @@ specifiers:
   material-icons: ^0.3.1
   materialize-css: ^1.0.0
   mithril: ^2.0.4
-  mithril-materialized: ^0.16.0
-  mithril-ui-form: ^0.4.8
+  mithril-materialized: ^0.16.1
+  mithril-ui-form: ^0.5.0
   mixin-deep: '>=2.0.1'
   parcel-bundler: ^1.12.4
-  rimraf: ^3.0.0
+  rimraf: ^3.0.2
   set-value: '>=3.0.1'
-  typescript: ^3.7.5
+  typescript: ^3.8.3
