@@ -2,7 +2,7 @@ import m, { FactoryComponent, Attributes } from 'mithril';
 import { LeafletMap } from 'mithril-leaflet';
 import { geoJSON } from 'leaflet';
 import { render } from 'slimdown-js';
-import { LatLngExpression, FeatureGroup } from 'leaflet';
+import { FeatureGroup } from 'leaflet';
 import {
   InputCheckbox,
   TextInput,
@@ -220,11 +220,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             obj[field.id] = {};
           }
           return [
-            m(
-              'div',
-              { className: field.className },
-              m.trust(render(field.label || capitalizeFirstLetter(field.id)))
-            ),
+            m('div', { className: field.className }, m.trust(render(field.label || capitalizeFirstLetter(field.id)))),
             m(LayoutForm, {
               ...props,
               readonly,
@@ -489,26 +485,6 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'map': {
-            const bbox = (area: L.GeoJSON) => {
-              const result = {
-                view: [50, 5] as LatLngExpression,
-                zoom: 4,
-              };
-              if (!area) {
-                return result;
-              }
-              try {
-                const bounds = area.getBounds();
-                if (Object.keys(bounds).length === 0) {
-                  return result;
-                }
-                result.view = bounds.getCenter();
-                result.zoom = 10;
-              } catch (e) {
-                console.warn(e);
-              }
-              return result;
-            };
             const overlay = (obj[id] ||
               value || {
                 type: 'FeatureCollection',
@@ -518,7 +494,17 @@ export const FormField: FactoryComponent<IFormField> = () => {
             const o = geoJSON(overlay);
             overlays[id] = o;
             return m(LeafletMap, {
-              ...bbox(o),
+              baseLayers: {
+                osm: {
+                  url: 'http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+                  options: {
+                    subdomains: ['a', 'b'],
+                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+                    maxZoom: 19,
+                    maxNativeZoom: 17,
+                  },
+                },
+              },
               className: 'col s12',
               style: 'height: 400px;',
               overlays,

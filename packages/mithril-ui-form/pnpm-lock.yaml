@@ -6,7 +6,7 @@ devDependencies:
   '@types/leaflet-draw': 1.0.2
   '@types/materialize-css': 1.0.7
   '@types/mithril': github.com/MithrilJS/mithril.d.ts/b5a1d389c2e83bdc6351c2d1cb3d909674644af1
-  mithril-leaflet: 0.2.0
+  mithril-leaflet: 0.2.2
   mithril-materialized: 0.16.1
   rimraf: 3.0.2
   rollup: 1.32.0
@@ -392,14 +392,14 @@ packages:
     dev: true
     resolution:
       integrity: sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
-  /mithril-leaflet/0.2.0:
+  /mithril-leaflet/0.2.2:
     dev: true
     peerDependencies:
       leaflet: ^1.5.1
       leaflet-draw: ^1.0.4
       mithril: ^2.0.4
     resolution:
-      integrity: sha512-lLfQ3YO1/JkmHQD3ae+0Ae0O4VPQor35MdpisQ3yRYEz4znRKBWrEyrpRjEqa5enJnhV4aozknYvIhjkTwB5Dw==
+      integrity: sha512-wWJqp2mNHthMsIug9YG9BkCkixxJlffsaaB1jxgi6hrhn3o0OYOUHwQpzdo3Crnw9H9UXd1piAmMcXnQt1m3Pg==
   /mithril-materialized/0.16.1:
     dev: true
     peerDependencies:
@@ -782,7 +782,7 @@ specifiers:
   '@types/leaflet-draw': ^1.0.2
   '@types/materialize-css': ^1.0.7
   '@types/mithril': 'github:MithrilJS/mithril.d.ts#v2'
-  mithril-leaflet: 0.2.0
+  mithril-leaflet: 0.2.2
   mithril-materialized: ^0.16.1
   rimraf: ^3.0.2
   rollup: ^1.32.0
