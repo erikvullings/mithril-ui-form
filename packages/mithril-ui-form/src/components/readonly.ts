@@ -16,6 +16,8 @@ export const ReadonlyComponent: FactoryComponent<IReadonlyComponent> = () => {
       const cn = { className: props.className || 'col s12' };
       if (iv instanceof Array && iv.length > 3) {
         return m('.readonly', cn, [m('label', label), m(SlimdownView, { md: '\n- ' + iv.join('\n- ') })]);
+      } else if (typeof iv === 'string') {
+        return m('.readonly', cn, [m('label', label), m(SlimdownView, { md: iv })]);
       }
       const v = iv instanceof Array ? iv.join(', ') : iv;
       return m('.readonly', cn, [
