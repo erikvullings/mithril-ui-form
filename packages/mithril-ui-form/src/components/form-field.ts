@@ -1,7 +1,7 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
 import { LeafletMap } from 'mithril-leaflet';
 import { geoJSON } from 'leaflet';
-import { Slimdown } from 'slimdown-js';
+import { render } from 'slimdown-js';
 import { LatLngExpression, FeatureGroup } from 'leaflet';
 import {
   InputCheckbox,
@@ -59,7 +59,7 @@ const unwrapComponent = (field: IInputField, autofocus = false, disabled = false
     result.label = capitalizeFirstLetter(id);
   }
   if (description) {
-    result.helperText = Slimdown.render(description);
+    result.helperText = render(description);
   }
   if (className) {
     result.className = className;
@@ -120,6 +120,8 @@ export interface IFormField extends Attributes {
   section?: string;
   /** Optional container ID for DatePicker and TimePicker to render their content in */
   containerId?: string;
+  /** Set to true when the view should return only readonly components */
+  readonly?: boolean;
 }
 
 /** A single input field in a form */
@@ -221,10 +223,11 @@ export const FormField: FactoryComponent<IFormField> = () => {
             m(
               'div',
               { className: field.className },
-              m.trust(Slimdown.render(field.label || capitalizeFirstLetter(field.id)))
+              m.trust(render(field.label || capitalizeFirstLetter(field.id)))
             ),
             m(LayoutForm, {
               ...props,
+              readonly,
               form: type,
               obj: obj[field.id],
               context: [obj, context],
@@ -307,6 +310,30 @@ export const FormField: FactoryComponent<IFormField> = () => {
               label: props.label,
               initialValue,
             });
+          }
+          case 'file': {
+            const initialValue = (obj[id] || value) as string | string[];
+            const iv = initialValue instanceof Array ? initialValue : [initialValue];
+            return m(
+              'div',
+              props,
+              iv.map(f => {
+                const isImg = /.jpg$|.jpeg$|.png$|.gif$|.svg$|.bmp$|.tif$|.tiff$/i.test(f);
+                const origin = new URL(field.url || '/').origin;
+                const url = `${origin}${f}`;
+                return m(
+                  'a[target=_blank]',
+                  { href: url },
+                  isImg
+                    ? m('img', { src: url, alt: url, style: `max-height: ${field.max || 50}` })
+                    : m(ReadonlyComponent, {
+                        props,
+                        label: field.placeholder || 'File',
+                        initialValue: f,
+                      })
+                );
+              })
+            );
           }
           default: {
             const initialValue = (obj[id] || value) as string;
@@ -541,10 +568,9 @@ export const FormField: FactoryComponent<IFormField> = () => {
           }
           case 'file': {
             const initialValue = (obj[id] || value) as string;
-            console.log(initialValue);
             const { url, placeholder } = field;
             if (!url) {
-              throw Error('Input field "url" not defined, which indicates the URL to the upload folder.')
+              throw Error('Input field "url" not defined, which indicates the URL to the upload folder.');
             }
             const upload = (file: FileList) => {
               if (!file || file.length < 1) {

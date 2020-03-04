@@ -1,4 +1,13 @@
 export * from './models';
 export * from './components';
-export { labelResolver, deepCopy, padLeft, getPath } from './utils';
-export { Slimdown } from 'slimdown-js';
+export * from 'slimdown-js';
+export {
+  capitalizeFirstLetter,
+  range,
+  labelResolver,
+  deepCopy,
+  padLeft,
+  getPath,
+  stripSpaces,
+  toHourMin,
+} from './utils';
