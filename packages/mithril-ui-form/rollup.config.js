@@ -45,7 +45,7 @@ export default {
     // Compile TypeScript files
     typescript({
       rollupCommonJSResolveHack: true,
-      objectHashIgnoreUnknownHack: true,
+      // objectHashIgnoreUnknownHack: true,
       // tsconfigOverride: { compilerOptions: { module: 'ES2015' } },
       typescript: require('typescript'),
     }),
