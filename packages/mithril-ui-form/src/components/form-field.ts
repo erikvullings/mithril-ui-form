@@ -352,6 +352,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             const initialValue = toHourMin(date);
             obj[id] = initialValue as any;
             return m(TimePicker, {
+              ...props,
               twelveHour: false,
               initialValue,
               onchange: time => {
