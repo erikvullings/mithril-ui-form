@@ -11,7 +11,7 @@ export interface ILayoutForm extends Attributes {
   /** Relevant context, i.e. the original object and other context from the environment */
   context?: IObject | IObject[]; // TODO Check this type, may be an array of contexts
   /** Callback function, invoked every time the original result object has changed */
-  onchange?: (isValid: boolean) => void;
+  onchange?: (isValid: boolean, obj?: IObject) => void;
   /** Disable the form, disallowing edits */
   disabled?: boolean | string | string[];
   /** Section ID to display - can be used to split up the form and only show a part */
@@ -37,7 +37,7 @@ export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
 
   return {
     view: ({ attrs: { form, obj, onchange: onChange, disabled, readonly, context, section } }) => {
-      const onchange = () => onChange && onChange(isValid(obj, form));
+      const onchange = () => onChange && onChange(isValid(obj, form), obj);
       const sectionFilter = () => {
         if (!section) {
           return (_: IInputField) => true;
