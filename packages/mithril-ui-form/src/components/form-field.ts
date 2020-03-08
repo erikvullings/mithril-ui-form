@@ -114,7 +114,7 @@ export interface IFormField extends Attributes {
   autofocus?: boolean;
   /** Callback function, invoked every time the original result object has changed */
   onchange?: () => void;
-  /** Disable the form, disallowing edits */
+  /** Disable the form field, disallowing edits */
   disabled?: boolean | string | string[];
   /** Section ID to display - can be used to split up the form and only show a part */
   section?: string;
@@ -147,6 +147,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
         inline,
         i18n,
         checkAllOptions,
+        transform,
       } = field;
       if (
         (show && !evalExpression(show, obj, context)) ||
@@ -208,7 +209,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
           delete obj[id];
           return;
         }
-        obj[id] = v as any;
+        obj[id] = transform ? transform('to', v) : (v as any);
         if (onFormChange) {
           onFormChange();
         }
@@ -234,6 +235,13 @@ export const FormField: FactoryComponent<IFormField> = () => {
         }
       }
 
+      const iv =
+        obj.hasOwnProperty(id) && typeof obj[id] !== 'undefined'
+          ? transform
+            ? transform('from', obj[id])
+            : obj[id]
+          : value;
+
       if (autogenerate && !obj[id]) {
         obj[id] = (autogenerate === 'guid' ? uuid4() : autogenerate === 'id' ? uniqueId() : Date.now()) as any;
       }
@@ -243,7 +251,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
       if (readonly && type && ['md', 'map', 'none'].indexOf(type as string) < 0) {
         switch (type) {
           case 'time': {
-            const date = ((obj[id] || value) as Date) || new Date();
+            const date = (iv as Date) || new Date();
             const initialValue = toHourMin(date);
             return m(ReadonlyComponent, {
               props,
@@ -252,10 +260,10 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'date': {
-            const iv = (obj[id] || value) as Date | undefined;
+            const iv3 = iv as Date | undefined;
             const initialValue =
-              typeof iv === 'number' || typeof iv === 'string' || iv instanceof Date
-                ? new Date(iv).toLocaleDateString()
+              typeof iv3 === 'number' || typeof iv3 === 'string' || iv3 instanceof Date
+                ? new Date(iv3).toLocaleDateString()
                 : '';
             return m(ReadonlyComponent, {
               props,
@@ -264,7 +272,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'checkbox': {
-            const checked = (obj.hasOwnProperty(id) ? obj[id] : value) as boolean;
+            const checked = iv as boolean;
             const initialValue = checked ? '✔' : '✘';
             return m(ReadonlyComponent, {
               props,
@@ -274,7 +282,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'tags': {
-            const initialValue = (obj[id] || value || []) as string[];
+            const initialValue = (iv || []) as string[];
             return m(ReadonlyComponent, {
               props,
               label: props.label,
@@ -283,7 +291,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
           }
           case 'options':
           case 'select': {
-            const checkedIds = (obj[id] || value || []) as Array<string | number>;
+            const checkedIds = (iv || []) as Array<string | number>;
             const selected = options.filter(o => checkedIds.indexOf(o.id) >= 0);
             const initialValue =
               selected && selected.length === 0
@@ -298,7 +306,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'radio': {
-            const checkedId = (obj[id] || value) as string | number;
+            const checkedId = iv as string | number;
             const selected = options.filter(o => o.id === checkedId);
             const initialValue = selected && selected.length ? selected[0].label : '?';
             return m(ReadonlyComponent, {
@@ -308,12 +316,12 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'file': {
-            const initialValue = (obj[id] || value) as string | string[];
-            const iv = initialValue instanceof Array ? initialValue : [initialValue];
+            const initialValue = iv as string | string[];
+            const ivFinal = initialValue instanceof Array ? initialValue : [initialValue];
             return m(
               'div',
               props,
-              iv.map(f => {
+              ivFinal.map(f => {
                 const isImg = /.jpg$|.jpeg$|.png$|.gif$|.svg$|.bmp$|.tif$|.tiff$/i.test(f);
                 const origin = new URL(field.url || '/').origin;
                 const url = `${origin}${f}`;
@@ -332,7 +340,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             );
           }
           default: {
-            const initialValue = (obj[id] || value) as string;
+            const initialValue = iv as string;
             return m(ReadonlyComponent, {
               props,
               label: props.label,
@@ -344,28 +352,34 @@ export const FormField: FactoryComponent<IFormField> = () => {
         switch (type) {
           case 'colour':
           case 'color': {
-            const initialValue = (obj[id] || value) as string;
+            const initialValue = iv as string;
             return m(ColorInput, { ...props, initialValue, onchange });
           }
           case 'time': {
-            const date = ((obj[id] || value) as Date) || new Date();
+            const date = (iv as Date) || new Date();
             const initialValue = toHourMin(date);
-            obj[id] = initialValue as any;
+            obj[id] = transform ? transform('to', date) : (date as any);
             return m(TimePicker, {
-              ...props,
               twelveHour: false,
+              ...props,
               initialValue,
               onchange: time => {
-                onchange(time);
-                m.redraw();
+                const tt = time.split(':').map(n => +n);
+                const dd = new Date();
+                dd.setHours(tt[0], tt[1]);
+                onchange(dd);
               },
               container: containerId,
             });
           }
           case 'date': {
-            const iv = ((obj[id] || value) as Date) || undefined;
-            const initialValue = typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : iv;
-            obj[id] = initialValue ? initialValue.valueOf() : initialValue;
+            const iv3 = (iv as Date) || undefined;
+            const initialValue = typeof iv3 === 'number' || typeof iv3 === 'string' ? new Date(iv3) : iv3;
+            obj[id] = initialValue
+              ? transform
+                ? transform('to', initialValue.valueOf())
+                : initialValue.valueOf()
+              : initialValue;
             // console.log(initialValue && initialValue.toUTCString());
             const { min, max } = props;
             const minDate = min
@@ -393,7 +407,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'email': {
-            const initialValue = (obj[id] || value) as string;
+            const initialValue = iv as string;
             return m(EmailInput, {
               ...props,
               validate,
@@ -403,7 +417,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'number': {
-            const initialValue = (obj.hasOwnProperty(id) ? obj[id] : value) as number;
+            const initialValue = iv as number;
             return m(NumberInput, {
               ...props,
               validate,
@@ -413,7 +427,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'radio': {
-            const checkedId = (obj[id] || value) as string | number;
+            const checkedId = iv as string | number;
             return m(RadioButtons, {
               ...props,
               inline,
@@ -423,11 +437,11 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'checkbox': {
-            const checked = (obj.hasOwnProperty(id) ? obj[id] : value) as boolean;
+            const checked = iv as boolean;
             return m(InputCheckbox, { ...props, checked, onchange });
           }
           case 'options': {
-            const checkedId = (obj[id] || value) as Array<string | number>;
+            const checkedId = iv as Array<string | number>;
             return [
               m(
                 '.row',
@@ -471,7 +485,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             ];
           }
           case 'select': {
-            const checkedId = (obj[id] || value) as Array<string | number>;
+            const checkedId = iv as Array<string | number>;
             return m(Select, {
               placeholder: props.multiple ? 'Pick one or more' : 'Pick one',
               ...props,
@@ -524,14 +538,14 @@ export const FormField: FactoryComponent<IFormField> = () => {
           case 'section':
             return m('.divider');
           case 'switch': {
-            const checked = (obj[id] || value) as boolean;
+            const checked = iv as boolean;
             const { options: opt } = field;
             const left = opt && opt.length > 0 ? opt[0].label : '';
             const right = opt && opt.length > 1 ? opt[1].label : '';
             return m(Switch, { ...props, left, right, checked, onchange });
           }
           case 'tags': {
-            const initialValue = (obj[id] || value || []) as string[];
+            const initialValue = (iv || []) as string[];
             const data = initialValue.map(chip => ({ tag: chip }));
             return m('.input-field col s12', [
               m(Label, { ...props }),
@@ -544,7 +558,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             ]);
           }
           case 'textarea': {
-            const initialValue = (obj[id] || value) as string;
+            const initialValue = iv as string;
             return m(TextArea, {
               ...props,
               validate,
@@ -554,7 +568,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'file': {
-            const initialValue = (obj[id] || value) as string;
+            const initialValue = iv as string;
             const { url, placeholder } = field;
             if (!url) {
               throw Error('Input field "url" not defined, which indicates the URL to the upload folder.');
@@ -579,7 +593,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'url': {
-            const initialValue = (obj[id] || value) as string;
+            const initialValue = iv as string;
             return m(UrlInput, {
               placeholder: 'http(s)://www.example.com',
               // dataError: 'http(s)://www.example.com',
@@ -592,7 +606,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'text': {
-            const initialValue = (obj[id] || value) as string;
+            const initialValue = iv as string;
             return m(TextInput, {
               ...props,
               validate,

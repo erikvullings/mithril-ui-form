@@ -1,6 +1,4 @@
-import { ComponentType } from './component-type';
-import { Form } from './form';
-import { I18n } from './i18n';
+import { ComponentType, Form, I18n } from '.';
 
 /**
  * A form component represents the GUI used to create an object. The object that
@@ -92,4 +90,10 @@ export interface IInputField {
   checkAllOptions?: string;
   /** URL for FileInput (file) component type */
   url?: string;
+  /**
+   * Transform function from the object's property U to the field's property V.
+   * 'from': From the obj[id] to the field
+   * 'to': From the field value to the obj[id]
+   */
+  transform?: <U, V>(dir: 'from' | 'to', value: U | V) => V | U;
 }
