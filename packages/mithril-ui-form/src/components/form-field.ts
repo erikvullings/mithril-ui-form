@@ -241,7 +241,9 @@ export const FormField: FactoryComponent<IFormField> = () => {
             ? transform('from', obj[id])
             : obj[id]
           : value;
-
+      if (id && value && iv) {
+        obj[id] = value; // Initial value was set, so use it.
+      }
       if (autogenerate && !obj[id]) {
         obj[id] = (autogenerate === 'guid' ? uuid4() : autogenerate === 'id' ? uniqueId() : Date.now()) as any;
       }
