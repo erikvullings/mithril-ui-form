@@ -7,7 +7,7 @@ devDependencies:
   '@types/materialize-css': 1.0.8
   '@types/mithril': 2.0.3
   microbundle: 0.12.2
-  mithril-leaflet: 0.4.2
+  mithril-leaflet: 0.4.3
   mithril-materialized: 0.16.1
   rimraf: 3.0.2
   tslib: 2.0.0
@@ -2374,14 +2374,14 @@ packages:
     dev: true
     resolution:
       integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
-  /mithril-leaflet/0.4.2:
+  /mithril-leaflet/0.4.3:
     dev: true
     peerDependencies:
       leaflet: ^1.6.0
       leaflet-draw: ^1.0.4
       mithril: ^2.0.4
     resolution:
-      integrity: sha512-tfrJEivj4Ms+ecDaKLrR3T+Si3/b8WFF91ySukqdqJIsL6ARn6pCEiVjOhu890IGyTvpsY/4DyZCRTxvtLRWaQ==
+      integrity: sha512-vZh0qOQgSJawQpkYbyxqddLjPHTWdVUtv0FveUUBHo0GHjQotdSCTJzwaLQzC3lxPRsY58kh1Kv8QS2+Wk8CMw==
   /mithril-materialized/0.16.1:
     dev: true
     peerDependencies:
@@ -3606,7 +3606,7 @@ specifiers:
   '@types/materialize-css': ^1.0.8
   '@types/mithril': ^2.0.3
   microbundle: ^0.12.2
-  mithril-leaflet: 0.4.2
+  mithril-leaflet: 0.4.3
   mithril-materialized: ^0.16.1
   rimraf: ^3.0.2
   slimdown-js: ^0.2.1

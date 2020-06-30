@@ -358,7 +358,11 @@ export const FormField: FactoryComponent<IFormField> = () => {
             return m(ColorInput, { ...props, initialValue, onchange });
           }
           case 'time': {
-            const date = iv ? (typeof iv === 'number' ? new Date(iv) : (iv as Date)) : new Date();
+            const date = iv
+              ? typeof iv === 'number' || typeof iv === 'string'
+                ? new Date(iv)
+                : (iv as Date)
+              : new Date();
             const initialValue = toHourMin(date);
             obj[id] = transform ? transform('to', date) : date;
             return m(TimePicker, {
