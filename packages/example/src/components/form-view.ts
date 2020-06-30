@@ -1,5 +1,5 @@
 import m from 'mithril';
-import { LayoutForm, Form, SlimdownView } from 'mithril-ui-form';
+import { LayoutForm, UIForm, SlimdownView } from 'mithril-ui-form';
 import { TextArea } from 'mithril-materialized';
 
 export interface IContext {
@@ -35,7 +35,10 @@ interface ILessonLearned {
   sources?: ISource[];
 }
 
-const regions = [{ id: 'eu', label: 'Europe' }, { id: 'other', label: 'Rest of the world' }];
+const regions = [
+  { id: 'eu', label: 'Europe' },
+  { id: 'other', label: 'Rest of the world' },
+];
 
 const countries = [
   {
@@ -81,7 +84,7 @@ const editorType = {
 const source = [
   { id: 'title', label: 'Title', type: 'text', maxLength: 80, required: true, icon: 'title', className: 'col s4' },
   { id: 'url', label: 'URL', type: 'url', maxLength: 80, required: true, icon: 'link', className: 'col s8' },
-] as Form;
+] as UIForm;
 
 const info = [
   {
@@ -89,7 +92,7 @@ const info = [
     type: 'md',
     value: `#### Introduction
 
-You can also include _markdown_ in your form.`,
+You can also include _markdown_ in your UIForm.`,
   },
   { id: 'id', type: 'text', disabled: true, autogenerate: 'guid', required: true, className: 'col m6' },
   { id: 'event', type: 'text', maxLength: 80, required: true, className: 'col m6' },
@@ -105,19 +108,19 @@ You can also include _markdown_ in your form.`,
     repeat: 0,
     type: source,
   },
-] as Form;
+] as UIForm;
 
 export const FormView = () => {
   const state = {
     result: {} as ILessonLearned,
     isValid: false,
-    form: [] as Form,
+    form: [] as UIForm,
     error: '',
   };
 
   const print = (isValid: boolean) => {
     state.isValid = isValid;
-    console.log(`Form is valid: ${isValid}`);
+    console.log(`Form is ${isValid ? '' : 'in'}valid.`);
     console.log(JSON.stringify(state.result, null, 2));
   };
 
@@ -166,7 +169,7 @@ export const FormView = () => {
         ? `
 # Generated result
 
-This form was created on ${result.created.toLocaleDateString()} by the following editors:
+This form was created on ${new Date(result.created).toLocaleDateString()} by the following editors:
 
 ${result.editors && result.editors.map((e, i) => `${i + 1}. ${e.name}${e.role ? ` (${e.role})` : ''}`).join('\n')}
 

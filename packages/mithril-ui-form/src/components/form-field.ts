@@ -106,7 +106,7 @@ const unwrapComponent = (field: IInputField, autofocus = false, disabled = false
   return result;
 };
 
-export interface IFormField extends Attributes {
+interface IFormField extends Attributes {
   /** The input field (or form) that must be rendered repeatedly */
   field: IInputField;
   /** The resulting object */
@@ -160,8 +160,8 @@ export const FormField: FactoryComponent<IFormField> = () => {
 
       const options = field.options
         ? field.options
-            .filter(o => !o.show || evalExpression(o.show, obj, context))
-            .map(o => (o.label ? o : { ...o, label: capitalizeFirstLetter(o.id) }))
+            .filter((o) => !o.show || evalExpression(o.show, obj, context))
+            .map((o) => (o.label ? o : { ...o, label: capitalizeFirstLetter(o.id) }))
         : [];
 
       const parentIsDisabled = typeof d === 'boolean' && d;
@@ -294,13 +294,13 @@ export const FormField: FactoryComponent<IFormField> = () => {
           case 'options':
           case 'select': {
             const checkedIds = (iv || []) as Array<string | number>;
-            const selected = options.filter(o => checkedIds.indexOf(o.id) >= 0);
+            const selected = options.filter((o) => checkedIds.indexOf(o.id) >= 0);
             const initialValue =
               selected && selected.length === 0
                 ? '?'
                 : selected.length === 1
                 ? selected[0].label
-                : selected.map(o => o.label);
+                : selected.map((o) => o.label);
             return m(ReadonlyComponent, {
               props,
               label: props.label,
@@ -309,7 +309,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
           }
           case 'radio': {
             const checkedId = iv as string | number;
-            const selected = options.filter(o => o.id === checkedId);
+            const selected = options.filter((o) => o.id === checkedId);
             const initialValue = selected && selected.length ? selected[0].label : '?';
             return m(ReadonlyComponent, {
               props,
@@ -323,7 +323,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             return m(
               'div',
               props,
-              ivFinal.map(f => {
+              ivFinal.map((f) => {
                 const isImg = /.jpg$|.jpeg$|.png$|.gif$|.svg$|.bmp$|.tif$|.tiff$/i.test(f);
                 const origin = new URL(field.url || '/').origin;
                 const url = `${origin}${f}`;
@@ -358,25 +358,23 @@ export const FormField: FactoryComponent<IFormField> = () => {
             return m(ColorInput, { ...props, initialValue, onchange });
           }
           case 'time': {
-            const date = (iv as Date) || new Date();
+            const date = iv ? (typeof iv === 'number' ? new Date(iv) : (iv as Date)) : new Date();
             const initialValue = toHourMin(date);
-            obj[id] = transform ? transform('to', date) : (date as any);
+            obj[id] = transform ? transform('to', date) : date;
             return m(TimePicker, {
               twelveHour: false,
               ...props,
               initialValue,
-              onchange: time => {
-                const tt = time.split(':').map(n => +n);
-                const dd = new Date();
-                dd.setHours(tt[0], tt[1]);
-                onchange(dd);
+              onchange: (time) => {
+                const tt = time.split(':').map((n) => +n);
+                date.setHours(tt[0], tt[1]);
+                onchange(date);
               },
               container: containerId,
             });
           }
           case 'date': {
-            const iv3 = (iv as Date) || undefined;
-            const initialValue = typeof iv3 === 'number' || typeof iv3 === 'string' ? new Date(iv3) : iv3;
+            const initialValue = typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : iv;
             obj[id] = initialValue
               ? transform
                 ? transform('to', initialValue.valueOf())
@@ -401,8 +399,8 @@ export const FormField: FactoryComponent<IFormField> = () => {
               setDefaultDate: initialValue ? true : false,
               format: 'mmmm d, yyyy',
               initialValue,
-              onchange: date => {
-                onchange(new Date(date).valueOf());
+              onchange: (date) => {
+                onchange(new Date(date));
                 // m.redraw();
               },
               container: containerId as any,
@@ -455,8 +453,8 @@ export const FormField: FactoryComponent<IFormField> = () => {
                     ...props,
                     options,
                     checkedId,
-                    onchange: checkedIds =>
-                      onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter(v => v !== null)),
+                    onchange: (checkedIds) =>
+                      onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter((v) => v !== null)),
                   }),
                 ],
                 checkAllOptions &&
@@ -467,7 +465,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
                       iconName: 'check',
                       onclick: () => {
                         state.key = Date.now();
-                        onchange(options.map(o => o.id));
+                        onchange(options.map((o) => o.id));
                       },
                     }),
                     unselectAll &&
@@ -493,11 +491,11 @@ export const FormField: FactoryComponent<IFormField> = () => {
               ...props,
               options,
               checkedId,
-              onchange: checkedIds =>
+              onchange: (checkedIds) =>
                 onchange(
                   checkedIds.length === 1
                     ? checkedIds[0]
-                    : checkedIds.filter(v => v !== null || typeof v !== 'undefined')
+                    : checkedIds.filter((v) => v !== null || typeof v !== 'undefined')
                 ),
             });
           }
@@ -508,8 +506,8 @@ export const FormField: FactoryComponent<IFormField> = () => {
                 features: [],
               }) as FeatureCollection<GeometryObject>;
             const overlays = {} as IObject;
-            const o = geoJSON(overlay);
-            overlays[id] = o;
+            overlays[id] = geoJSON(overlay);
+            console.log(overlays);
             return m(LeafletMap, {
               baseLayers: {
                 osm: {
@@ -526,6 +524,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
               style: 'height: 400px;',
               overlays,
               visible: [id],
+              autoFit: true,
               editable: disabled ? undefined : [id],
               showScale: { imperial: false },
               onLayerEdited: (f: FeatureGroup) => {
@@ -548,11 +547,11 @@ export const FormField: FactoryComponent<IFormField> = () => {
           }
           case 'tags': {
             const initialValue = (iv || []) as string[];
-            const data = initialValue.map(chip => ({ tag: chip }));
+            const data = initialValue.map((chip) => ({ tag: chip }));
             return m('.input-field col s12', [
               m(Label, { ...props }),
               m(Chips, {
-                onchange: (chips: M.ChipData[]) => onchange(chips.map(chip => chip.tag)),
+                onchange: (chips: M.ChipData[]) => onchange(chips.map((chip) => chip.tag)),
                 placeholder: 'Add a tag',
                 secondaryPlaceholder: '+tag',
                 data,
@@ -585,7 +584,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
                 method: 'POST',
                 url,
                 body,
-              }).then(res => onchange(res));
+              }).then((res) => onchange(res));
             };
             return m(FileInput, {
               ...props,

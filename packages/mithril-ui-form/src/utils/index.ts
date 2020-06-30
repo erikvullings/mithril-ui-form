@@ -1,4 +1,4 @@
-import { IObject, Form, IInputField } from '../models';
+import { IObject, UIForm, IInputField } from '../models';
 
 export const capitalizeFirstLetter = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -92,18 +92,16 @@ const checkExpressions = (expression: string, objArr: IObject[]) => {
 
 export const evalExpression = (expression: string | string[], ...objArr: IObject[]) => {
   const expr = expression instanceof Array ? expression : [expression];
-  return expr.some(e => checkExpressions(e, objArr));
+  return expr.some((e) => checkExpressions(e, objArr));
 };
 
 const resolveExpression = (expression: string, objArr: IObject[]) =>
   objArr
     .filter(Boolean)
-    .reduce((p, obj) => p || getPath(obj, expression.trim()), undefined as
-      | string
-      | number
-      | Date
-      | boolean
-      | undefined);
+    .reduce(
+      (p, obj) => p || getPath(obj, expression.trim()),
+      undefined as string | number | Date | boolean | undefined
+    );
 
 const canResolveExpression = (expression: string, objArr: IObject[]) =>
   typeof resolveExpression(expression, objArr) !== 'undefined';
@@ -149,7 +147,7 @@ const formatExpression = (
     return '';
   }
   if (value instanceof Array) {
-    return value.map(v => formatExpression(v, exprType)).join(', ');
+    return value.map((v) => formatExpression(v, exprType)).join(', ');
   }
   if (!exprType) {
     return value.toString();
@@ -217,7 +215,7 @@ export const deepCopy = <T>(target: T): T => {
   }
   if (target instanceof Array) {
     const cpy = [] as any[];
-    (target as any[]).forEach(v => {
+    (target as any[]).forEach((v) => {
       cpy.push(v);
     });
     return cpy.map((n: any) => deepCopy<any>(n)) as any;
@@ -226,7 +224,7 @@ export const deepCopy = <T>(target: T): T => {
     const cpy = { ...(target as { [key: string]: any }) } as {
       [key: string]: any;
     };
-    Object.keys(cpy).forEach(k => {
+    Object.keys(cpy).forEach((k) => {
       cpy[k] = deepCopy<any>(cpy[k]);
     });
     return cpy as T;
@@ -239,23 +237,20 @@ export const deepCopy = <T>(target: T): T => {
  * by replacing the keys with their form labels, making it easier to render the object into a human
  * readable form.
  */
-export const labelResolver = (form: Form) => {
+export const labelResolver = (form: UIForm) => {
   const createDict = (ff: IInputField[], label = '') => {
     const d = ff
-      .filter(f => f.type !== 'section' && f.type !== 'md')
-      .reduce(
-        (acc, cur) => {
-          const fieldId = (label ? `${label}.` : '') + cur.id;
-          const type = cur.type || (cur.options && cur.options.length > 0 ? 'select' : 'text');
-          if (typeof type === 'string') {
-            acc[fieldId] = cur;
-          } else {
-            acc = { ...acc, ...createDict(type, fieldId) };
-          }
-          return acc;
-        },
-        {} as { [key: string]: IInputField }
-      );
+      .filter((f) => f.type !== 'section' && f.type !== 'md')
+      .reduce((acc, cur) => {
+        const fieldId = (label ? `${label}.` : '') + cur.id;
+        const type = cur.type || (cur.options && cur.options.length > 0 ? 'select' : 'text');
+        if (typeof type === 'string') {
+          acc[fieldId] = cur;
+        } else {
+          acc = { ...acc, ...createDict(type, fieldId) };
+        }
+        return acc;
+      }, {} as { [key: string]: IInputField });
     return d;
   };
 
@@ -266,7 +261,7 @@ export const labelResolver = (form: Form) => {
       return value;
     }
     const ff = dict[id];
-    const values = value instanceof Array ? value.filter(v => v !== null && v !== undefined) : [value];
+    const values = value instanceof Array ? value.filter((v) => v !== null && v !== undefined) : [value];
     const type = ff.type || (ff.options ? 'options' : 'none');
     switch (type) {
       default:
@@ -275,13 +270,13 @@ export const labelResolver = (form: Form) => {
       case 'select':
       case 'options':
         return values
-          .map(v =>
+          .map((v) =>
             ff
-              .options!.filter(o => o.id === v)
-              .map(o => o.label || capitalizeFirstLetter(o.id))
+              .options!.filter((o) => o.id === v)
+              .map((o) => o.label || capitalizeFirstLetter(o.id))
               .shift()
           )
-          .filter(v => typeof v !== 'undefined');
+          .filter((v) => typeof v !== 'undefined');
     }
   };
 
@@ -291,10 +286,10 @@ export const labelResolver = (form: Form) => {
       return undefined;
     }
     if (obj instanceof Array) {
-      return obj.map(o => resolveObj(o, parent)) as any;
+      return obj.map((o) => resolveObj(o, parent)) as any;
     } else {
       const resolved = {} as { [key: string]: any };
-      Object.keys(obj).forEach(key => {
+      Object.keys(obj).forEach((key) => {
         const fullKey = parent ? `${parent}.${key}` : key;
         const value = obj[key as keyof T];
         if (typeof value === 'boolean') {

@@ -29,19 +29,20 @@
     "materialize-css": "^1.0.0",
     "mithril": "^2.0.4",
     "mithril-materialized": "^0.16.1",
-    "mithril-ui-form": "^0.5.0"
+    "mithril-ui-form": "^0.7.1"
   },
   "devDependencies": {
-    "@types/materialize-css": "^1.0.7",
-    "@types/mithril": "^2.0.2",
-    "autoprefixer": "^9.7.4",
+    "@types/leaflet": "^1.5.4",
+    "@types/materialize-css": "^1.0.8",
+    "@types/mithril": "^2.0.3",
+    "autoprefixer": "^9.8.4",
     "cssnano": "^4.1.10",
     "parcel-bundler": "^1.12.4",
-    "@babel/types": "7.8.6",
+    "@babel/types": "7.10.3",
     "rimraf": "^3.0.2",
-    "typescript": "^3.8.3",
+    "typescript": "^3.9.5",
     "lodash": ">=4.17.15",
     "mixin-deep": ">=2.0.1",
-    "set-value": ">=3.0.1"
+    "set-value": ">=3.0.2"
   }
 }

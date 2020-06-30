@@ -1,12 +1,12 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
 import { FlatButton } from 'mithril-materialized';
-import { Form } from '..';
+import { UIForm } from '..';
 import { LayoutForm } from './layout-form';
 import { IObject } from '../models/object';
 
 export interface IRepeatItem extends Attributes {
   item: any;
-  form: Form;
+  form: UIForm;
   ondelete: (item: any) => void;
   onedit: (item: any) => void;
   context: IObject;

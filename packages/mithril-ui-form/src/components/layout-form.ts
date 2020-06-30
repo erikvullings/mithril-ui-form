@@ -1,11 +1,11 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
 import { Vnode } from 'mithril';
 import { FormField } from './form-field';
-import { Form, IObject, IInputField } from '../models';
+import { UIForm, IObject, IInputField } from '../models';
 
 export interface ILayoutForm extends Attributes {
   /** The form to display */
-  form: Form;
+  form: UIForm;
   /** The resulting object */
   obj: IObject | IObject[];
   /** Relevant context, i.e. the original object and other context from the environment */
@@ -19,9 +19,9 @@ export interface ILayoutForm extends Attributes {
 }
 
 export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
-  const isValid = (item: IObject, form: Form) => {
+  const isValid = (item: IObject, form: UIForm) => {
     return form
-      .filter(f => f.required && typeof f.id !== undefined)
+      .filter((f) => f.required && typeof f.id !== undefined)
       .reduce(
         (acc, cur) =>
           acc &&
@@ -51,31 +51,28 @@ export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
         };
       };
 
-      return form.filter(sectionFilter()).reduce(
-        (acc, field) => {
-          const { autogenerate, value, options, type } = field;
-          if (!type) {
-            field.type = autogenerate
-              ? 'none'
-              : value
-              ? typeof value === 'string'
-                ? 'md'
-                : typeof value === 'number'
-                ? 'number'
-                : typeof value === 'boolean'
-                ? 'checkbox'
-                : 'none'
-              : options && options.length > 0
-              ? 'select'
-              : 'none';
-          }
-          return [
-            ...acc,
-            m(FormField, { field, obj, onchange, disabled, readonly, context, section, containerId: 'body' }),
-          ];
-        },
-        [] as Array<Vnode<any, any>>
-      );
+      return form.filter(sectionFilter()).reduce((acc, field) => {
+        const { autogenerate, value, options, type } = field;
+        if (!type) {
+          field.type = autogenerate
+            ? 'none'
+            : value
+            ? typeof value === 'string'
+              ? 'md'
+              : typeof value === 'number'
+              ? 'number'
+              : typeof value === 'boolean'
+              ? 'checkbox'
+              : 'none'
+            : options && options.length > 0
+            ? 'select'
+            : 'none';
+        }
+        return [
+          ...acc,
+          m(FormField, { field, obj, onchange, disabled, readonly, context, section, containerId: 'body' }),
+        ];
+      }, [] as Array<Vnode<any, any>>);
     },
   };
 };

@@ -5,19 +5,20 @@ dependencies:
   materialize-css: 1.0.0
   mithril: 2.0.4
   mithril-materialized: 0.16.1_f3d9df6f4766fd28b6cfb8072ccbc3ca
-  mithril-ui-form: 0.5.0_e7aaa12ac59af2eaa7ea791b802e2765
+  mithril-ui-form: 'link:../mithril-ui-form'
 devDependencies:
-  '@babel/types': 7.8.6
-  '@types/materialize-css': 1.0.7
-  '@types/mithril': 2.0.2
-  autoprefixer: 9.7.4
+  '@babel/types': 7.10.3
+  '@types/leaflet': 1.5.12
+  '@types/materialize-css': 1.0.8
+  '@types/mithril': 2.0.3
+  autoprefixer: 9.8.4
   cssnano: 4.1.10
   lodash: 4.17.15
   mixin-deep: 2.0.1
   parcel-bundler: 1.12.4
   rimraf: 3.0.2
-  set-value: 3.0.1
-  typescript: 3.8.3
+  set-value: 3.0.2
+  typescript: 3.9.5
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.5.5:
@@ -200,6 +201,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-HgYSI8rH08neWlAH3CcdkFg9qX9YsZysZI5GD8LjhQib/mM0jGOZOVkoUiiV2Hu978fRtjtsGsW6w0pKHUWtqA==
+  /@babel/helper-validator-identifier/7.10.3:
+    dev: true
+    resolution:
+      integrity: sha512-bU8JvtlYpJSBPuj1VUmKpFGaDZuLxASky3LhaKj3bmpSTY6VWooSM8msk+Z0CZoErFye2tlABF6yDkT3FOPAXw==
   /@babel/helper-wrap-function/7.7.0:
     dependencies:
       '@babel/helper-function-name': 7.7.0
@@ -781,6 +786,14 @@ packages:
     dev: true
     resolution:
       integrity: sha512-TM01cXib2+rgIZrGJOLaHV/iZUAxf4A0dt5auY6KNZ+cm6aschuJGqKJM3ROTt3raPUdIDk9siAufIFEleRwtw==
+  /@babel/types/7.10.3:
+    dependencies:
+      '@babel/helper-validator-identifier': 7.10.3
+      lodash: 4.17.15
+      to-fast-properties: 2.0.0
+    dev: true
+    resolution:
+      integrity: sha512-nZxaJhBXBQ8HVoIcGsf9qWep3Oh3jCENK54V4mRF7qaJabVsAYdbTtmSD8WmAp1R6ytPiu5apMwSXyxB1WlaBA==
   /@babel/types/7.7.2:
     dependencies:
       esutils: 2.0.3
@@ -797,14 +810,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-jBD+G8+LWpMBBWvVcdr4QysjUE4mU/syrhN17o1u3gx0/WzJB1kwiVZAXRtWbsIPOwW8pF/YJV5+nmetPzepXg==
-  /@babel/types/7.8.6:
-    dependencies:
-      esutils: 2.0.3
-      lodash: 4.17.15
-      to-fast-properties: 2.0.0
-    dev: true
-    resolution:
-      integrity: sha512-wqz7pgWMIrht3gquyEFPVXeXCti72Rm8ep9b5tQKz9Yg9LzJA3HxosF1SB3Kc81KD1A3XBkkVYtJvCKS2Z/QrA==
   /@iarna/toml/2.2.3:
     dev: true
     resolution:
@@ -868,27 +873,33 @@ packages:
       node: '>= 6.0.0'
     resolution:
       integrity: sha512-USSjRAAQYsZFlv43FUPdD+jEGML5/8oLF0rUzPQTtK4q9kvaXr49F5ZplyLz5lox78cLZ0TxN2bIDQ1xhOkulQ==
-  /@types/cash/0.0.3:
+  /@types/geojson/7946.0.7:
     dev: true
     resolution:
-      integrity: sha512-gS24kdFuVwfo5h7IlStnXyBSIH4e9aFIhNHb4w+o5DwbYDeQJv+i9heh7u7nSvqnOP3v34tQMTe7VoJp2US08w==
+      integrity: sha512-wE2v81i4C4Ol09RtsWFAqg3BUitWbHSpSlIo+bNdsCJijO9sjme+zm+73ZMCa/qMC8UEERxzGbvmr1cffo2SiQ==
   /@types/jquery/3.3.31:
     dependencies:
       '@types/sizzle': 2.3.2
     dev: true
     resolution:
       integrity: sha512-Lz4BAJihoFw5nRzKvg4nawXPzutkv7wmfQ5121avptaSIXlDNJCUuxZxX/G+9EVidZGuO0UBlk+YjKbwRKJigg==
-  /@types/materialize-css/1.0.7:
+  /@types/leaflet/1.5.12:
     dependencies:
-      '@types/cash': 0.0.3
+      '@types/geojson': 7946.0.7
+    dev: true
+    resolution:
+      integrity: sha512-61HRMIng+bWvnnAIqUWLBlrd/TQZc4gU+gN1JL4K47EDtwIrcMEhWgi7PdcpbG1YmpH4F0EfOimkvV82gJIl9w==
+  /@types/materialize-css/1.0.8:
+    dependencies:
       '@types/jquery': 3.3.31
+      cash-dom: 8.0.0
     dev: true
     resolution:
-      integrity: sha512-nKsxFTAjUHK7gxnMcbd+Lynp1v8N+1mvrfleWmy5u0Bxd337l9O0U11FfKX3fKZlxE4hD7N4bw8BFhH5hxhXCQ==
-  /@types/mithril/2.0.2:
+      integrity: sha512-KEfzuNfftNWt4ULrwqu7YdRJLjk42LuKxeLJ8ek91w+L9rReIAAYAbpAghUwcfgMTdEN6ykJ718KAHapDZCndA==
+  /@types/mithril/2.0.3:
     dev: true
     resolution:
-      integrity: sha512-q0W5GGjWNxwmKPcfkkQJqSUIVr7yvMz1zH2enWDab8yDqvZuEgkR4+mcf1O70Wnreawg8OH4axfACDVdg2zskQ==
+      integrity: sha512-cZHOdO2IiXYeyjeDYdbOisSdfaJRzfmRo3zVzgu33IWTMA0KEQObp9fdvqcuYdPz93iJ1yCl19GcEjo/9yv+yA==
   /@types/q/1.5.2:
     dev: true
     resolution:
@@ -1073,21 +1084,19 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
-  /autoprefixer/9.7.4:
+  /autoprefixer/9.8.4:
     dependencies:
-      browserslist: 4.8.4
-      caniuse-lite: 1.0.30001022
-      chalk: 2.4.2
+      browserslist: 4.12.2
+      caniuse-lite: 1.0.30001090
+      colorette: 1.2.0
       normalize-range: 0.1.2
       num2fraction: 1.2.2
-      postcss: 7.0.26
-      postcss-value-parser: 4.0.2
+      postcss: 7.0.32
+      postcss-value-parser: 4.1.0
     dev: true
-    engines:
-      node: '>=6.0.0'
     hasBin: true
     resolution:
-      integrity: sha512-g0Ya30YrMBAEZk60lp+qfX5YQllG+S5W3GYCFvyHTvhOki0AEQJLPEcIuGRsqVwLi8FvXPVtwTGhfr38hVpm0g==
+      integrity: sha512-84aYfXlpUe45lvmS+HoAWKCkirI/sw4JK0/bTeeqgHYco3dcsOn0NqdejISjptsYwNji/21dnkDri9PsYKk89A==
   /aws-sign2/0.7.0:
     dev: true
     resolution:
@@ -1267,6 +1276,18 @@ packages:
     dev: true
     resolution:
       integrity: sha512-Z942RysHXmJrhqk88FmKBVq/v5tqmSkDz7p54G/MGyjMnCFFnC79XWNbg+Vta8W6Wb2qtSZTSxIGkJrRpCFEiA==
+  /browserslist/4.12.2:
+    dependencies:
+      caniuse-lite: 1.0.30001090
+      electron-to-chromium: 1.3.483
+      escalade: 3.0.1
+      node-releases: 1.1.58
+    dev: true
+    engines:
+      node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7
+    hasBin: true
+    resolution:
+      integrity: sha512-MfZaeYqR8StRZdstAK9hCKDd2StvePCYp5rHzQCPicUjfFliDgmuaBNPHYUTpAywBN8+Wc/d7NYVFkO0aqaBUw==
   /browserslist/4.7.2:
     dependencies:
       caniuse-lite: 1.0.30001008
@@ -1376,10 +1397,18 @@ packages:
     dev: true
     resolution:
       integrity: sha512-FjwPPtt/I07KyLPkBQ0g7/XuZg6oUkYBVnPHNj3VHJbOjmmJ/GdSo/GUY6MwINEQvjhP6WZVbX8Tvms8xh0D5A==
+  /caniuse-lite/1.0.30001090:
+    dev: true
+    resolution:
+      integrity: sha512-QzPRKDCyp7RhjczTPZaqK3CjPA5Ht2UnXhZhCI4f7QiB5JK6KEuZBxIzyWnB3wO4hgAj4GMRxAhuiacfw0Psjg==
   /caseless/0.12.0:
     dev: true
     resolution:
       integrity: sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
+  /cash-dom/8.0.0:
+    dev: true
+    resolution:
+      integrity: sha512-uUv7JX91CQeACoovHur8eGV8Z3rnd3jjvU1t2EQzW0kOd96VzOnjZCDjbC0FP3LgMpWLcweQjK2UZ1rQ6MbljA==
   /chalk/1.1.3:
     dependencies:
       ansi-styles: 2.2.1
@@ -1519,6 +1548,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-vXTJhHebByxZn3lDvDJYw4lR5+uB3vuoHsuYA5AKuxRVn5wzzIfQKGLBmgdVRHKTJYeK5rvJcHnrd0Li49CFpg==
+  /colorette/1.2.0:
+    dev: true
+    resolution:
+      integrity: sha512-soRSroY+OF/8OdA3PTQXwaDJeMc7TfknKKrxeSCencL2a4+Tx5zhxmmv7hdpCjhKBjehzp8+bwe/T68K0hpIjw==
   /combined-stream/1.0.8:
     dependencies:
       delayed-stream: 1.0.0
@@ -2041,6 +2074,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-wlmfixuHEc9CkfOKgcqdtzBmRW4NStM9ptl5oPILY2UDyHuSXb3Yit+yLVyLObTgGuMMU36hhnfs2GDJId7ctA==
+  /electron-to-chromium/1.3.483:
+    dev: true
+    resolution:
+      integrity: sha512-+05RF8S9rk8S0G8eBCqBRBaRq7+UN3lDs2DAvnG8SBSgQO3hjy0+qt4CmRk5eiuGbTcaicgXfPmBi31a+BD3lg==
   /elliptic/6.5.1:
     dependencies:
       bn.js: 4.11.8
@@ -2111,6 +2148,12 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==
+  /escalade/3.0.1:
+    dev: true
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-DR6NO3h9niOT+MZs7bjxlj2a1k+POu5RN8CLTPX2+i78bRi9eLe7+0zXgUHMnGXWybYcL61E9hGhPKqedy8tQA==
   /escape-html/1.0.3:
     dev: true
     resolution:
@@ -3279,23 +3322,6 @@ packages:
       mithril: ^2.0.4
     resolution:
       integrity: sha512-Y6r+X5spyE5SiTAiyKN2hdXqyfIw+ZV2t8Qg4usD50royGK8KDA5kDN979tR9JZphsIr3PYif5FUz/TGl1baSQ==
-  /mithril-ui-form/0.5.0_e7aaa12ac59af2eaa7ea791b802e2765:
-    dependencies:
-      leaflet: 1.6.0
-      leaflet-draw: 1.0.4
-      materialize-css: 1.0.0
-      mithril: 2.0.4
-      mithril-materialized: 0.16.1_f3d9df6f4766fd28b6cfb8072ccbc3ca
-      slimdown-js: 0.1.5
-    dev: false
-    peerDependencies:
-      leaflet: ^1.5.1
-      leaflet-draw: ^1.0.4
-      materialize-css: ^1.0.0
-      mithril: ^2.0.4
-      mithril-materialized: ^0.16.0
-    resolution:
-      integrity: sha512-6PtV90O1474VkUhNMEUTAtqFlDFztl80Hvd2NlbKpMuzoxsdi2dz/2osOfqETC1incX1mOvh742/kNU5HhxuHg==
   /mithril/2.0.4:
     dev: false
     hasBin: true
@@ -3410,6 +3436,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-YOjdx+Uoh9FbRO7yVYbnbt1puRWPQMemR3SutLeyv2XfxKs1ihpe0OLAUwBPEP2ImNH/PZC7SEiC6j32dwRZ7g==
+  /node-releases/1.1.58:
+    dev: true
+    resolution:
+      integrity: sha512-NxBudgVKiRh/2aPWMgPR7bPTX0VPmGx5QBwCtdHitnqFE5/O8DeBXuIMH1nwNnw/aMo6AjOrpsHzfY3UbUJ7yg==
   /normalize-html-whitespace/1.0.0:
     dev: true
     engines:
@@ -4125,10 +4155,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-pISE66AbVkp4fDQ7VHBwRNXzAAKJjw4Vw7nWI/+Q3vuly7SNfgYXvm6i5IgFylHGK5sP/xHAbB7N49OS4gWNyQ==
-  /postcss-value-parser/4.0.2:
+  /postcss-value-parser/4.1.0:
     dev: true
     resolution:
-      integrity: sha512-LmeoohTpp/K4UiyQCwuGWlONxXamGzCMtFxLq4W1nZVGIQLYvMCJx3yAF9qyyuFpflABI9yVdtJAqbihOsCsJQ==
+      integrity: sha512-97DXOFbQJhk71ne5/Mt6cOu6yxsSfM0QGQyl0L25Gca4yGWEGJaig7l7gbCX623VqTBNGLRLaVUCnNkcedlRSQ==
   /postcss/6.0.1:
     dependencies:
       chalk: 1.1.3
@@ -4159,6 +4189,16 @@ packages:
       node: '>=6.0.0'
     resolution:
       integrity: sha512-IY4oRjpXWYshuTDFxMVkJDtWIk2LhsTlu8bZnbEJA4+bYT16Lvpo8Qv6EvDumhYRgzjZl489pmsY3qVgJQ08nA==
+  /postcss/7.0.32:
+    dependencies:
+      chalk: 2.4.2
+      source-map: 0.6.1
+      supports-color: 6.1.0
+    dev: true
+    engines:
+      node: '>=6.0.0'
+    resolution:
+      integrity: sha512-03eXong5NLnNCD05xscnGKGDZ98CyzoqPSMjOe6SuoQY7Z2hIj0Ld1g/O/UQRuOle2aRtiIRDg9tDcTGAkLfKw==
   /posthtml-parser/0.4.2:
     dependencies:
       htmlparser2: 3.10.1
@@ -4645,14 +4685,14 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-JxHc1weCN68wRY0fhCoXpyK55m/XPHafOmK4UWD7m2CI14GMcFypt4w/0+NV5f/ZMby2F6S2wwA7fgynh9gWSw==
-  /set-value/3.0.1:
+  /set-value/3.0.2:
     dependencies:
       is-plain-object: 2.0.4
     dev: true
     engines:
       node: '>=6.0'
     resolution:
-      integrity: sha512-w6n3GUPYAWQj4ZyHWzD7K2FnFXHx9OTwJYbWg+6nXjG8sCLfs9DGv+KlqglKIIJx+ks7MlFuwFW2RBPb+8V+xg==
+      integrity: sha512-npjkVoz+ank0zjlV9F47Fdbjfj/PfXyVhZvGALWsyIYU/qrMzpi6avjKW3/7KeSU2Df3I46BrN1xOI1+6vW0hA==
   /setimmediate/1.0.5:
     dev: true
     resolution:
@@ -4697,10 +4737,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-pNprY1/8zMoz9w0Xy5JZLeleVXo=
-  /slimdown-js/0.1.5:
-    dev: false
-    resolution:
-      integrity: sha512-CfvUmEE+KHVN1IZKyBxLDwHOUX9rkUDSAJuDswlCmuESU1U+5Q8sFkSCsDDdVBuZ2oWiLlIBa+gM5Ceius4JuA==
   /snapdragon-node/2.1.1:
     dependencies:
       define-property: 1.0.0
@@ -5137,13 +5173,13 @@ packages:
     dev: true
     resolution:
       integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
-  /typescript/3.8.3:
+  /typescript/3.9.5:
     dev: true
     engines:
       node: '>=4.2.0'
     hasBin: true
     resolution:
-      integrity: sha512-MYlEfn5VrLNsgudQTVJeNaQFUAI7DkhnOjdpAp4T+ku1TfQClewlbSuTVHiA+8skNBgaf02TL/kLOvig4y3G8w==
+      integrity: sha512-hSAifV3k+i6lEoCJ2k6R2Z/rp/H3+8sdmcn5NrS3/3kE7+RyZXm9aqvxWqjEXHAd8b0pShatpcdMTvEdvAJltQ==
   /uncss/0.17.2:
     dependencies:
       commander: 2.20.3
@@ -5437,10 +5473,11 @@ packages:
     resolution:
       integrity: sha512-/is78VKbKs70bVZH7w4YaZea6xcJWOAwkhbR0CFuZBmYtfTYF0xjGJF43AYd8g2Uii1yJwmS5GR2vBmrc32sbg==
 specifiers:
-  '@babel/types': 7.8.6
-  '@types/materialize-css': ^1.0.7
-  '@types/mithril': ^2.0.2
-  autoprefixer: ^9.7.4
+  '@babel/types': 7.10.3
+  '@types/leaflet': ^1.5.4
+  '@types/materialize-css': ^1.0.8
+  '@types/mithril': ^2.0.3
+  autoprefixer: ^9.8.4
   cssnano: ^4.1.10
   leaflet: ^1.6.0
   leaflet-draw: ^1.0.4
@@ -5449,9 +5486,9 @@ specifiers:
   materialize-css: ^1.0.0
   mithril: ^2.0.4
   mithril-materialized: ^0.16.1
-  mithril-ui-form: ^0.5.0
+  mithril-ui-form: ^0.7.1
   mixin-deep: '>=2.0.1'
   parcel-bundler: ^1.12.4
   rimraf: ^3.0.2
-  set-value: '>=3.0.1'
-  typescript: ^3.8.3
+  set-value: '>=3.0.2'
+  typescript: ^3.9.5

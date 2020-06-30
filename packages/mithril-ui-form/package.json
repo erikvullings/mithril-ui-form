@@ -12,8 +12,8 @@
   "scripts": {
     "link": "npm link",
     "clean": "rimraf .rpt2_cache lib dist",
-    "build": "rollup -c",
-    "start": "rollup -c -w",
+    "build": "microbundle",
+    "start": "microbundle watch",
     "dry-run": "npm publish --dry-run",
     "patch-release": "npm run clean && npm run build && npm version patch --force -m \"Patch release\" && npm publish && git push --follow-tags",
     "minor-release": "npm run clean && npm run build && npm version minor --force -m \"Minor release\" && npm publish && git push --follow-tags",
@@ -33,29 +33,30 @@
     "slimdown-js": "^0.2.1"
   },
   "devDependencies": {
-    "@types/leaflet": "^1.5.9",
-    "@types/leaflet-draw": "^1.0.2",
-    "@types/materialize-css": "^1.0.7",
-    "@types/mithril": "github:MithrilJS/mithril.d.ts#v2",
+    "@types/leaflet": "^1.5.12",
+    "@types/leaflet-draw": "^1.0.3",
+    "@types/materialize-css": "^1.0.8",
+    "@types/mithril": "^2.0.3",
     "@types/geojson": "^7946.0.7",
     "mithril-materialized": "^0.16.1",
-    "mithril-leaflet": "0.2.2",
+    "mithril-leaflet": "0.4.2",
     "rimraf": "^3.0.2",
-    "rollup": "^1.32.0",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-sourcemaps": "^0.5.0",
-    "rollup-plugin-terser": "^5.2.0",
-    "rollup-plugin-typescript2": "^0.26.0",
-    "tslib": "^1.11.1",
-    "typescript": "^3.8.3",
+    "microbundle": "^0.12.2",
+    "typescript": "^3.9.5",
+    "tslib": "^2.0.0",
     "typescript-json-schema": "^0.42.0"
   },
   "peerDependencies": {
     "mithril": "^2.0.4",
     "mithril-materialized": "^0.16.1",
     "materialize-css": "^1.0.0",
-    "leaflet": "^1.5.1",
+    "leaflet": "^1.6.0",
     "leaflet-draw": "^1.0.4"
-  }
+  },
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ]
 }

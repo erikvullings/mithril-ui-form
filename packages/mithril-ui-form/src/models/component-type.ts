@@ -1,4 +1,4 @@
-import { Form } from './form';
+import { UIForm } from './form';
 
 /** The type of primitive components that can be used */
 export type ComponentType =
@@ -25,4 +25,4 @@ export type ComponentType =
   | 'time'
   | 'url';
 
-export const isComponentType = (x?: ComponentType | Form): x is ComponentType => typeof x === 'string';
+export const isComponentType = (x?: ComponentType | UIForm): x is ComponentType => typeof x === 'string';

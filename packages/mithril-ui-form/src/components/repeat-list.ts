@@ -1,6 +1,6 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
 import { FlatButton, uniqueId, ModalPanel, Pagination, RoundIconButton, TextInput } from 'mithril-materialized';
-import { IInputField, Form, IUIEvent, IObject } from '../models';
+import { IInputField, UIForm, IUIEvent, IObject } from '../models';
 import { RepeatItem } from './repeat-item';
 import { LayoutForm } from './layout-form';
 import { deepCopy, range, stripSpaces } from '../utils';
@@ -122,7 +122,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
       const strippedFilterValue = filterValue ? stripSpaces(filterValue) : undefined;
       const items =
         propertyFilter && strippedFilterValue && strippedFilterValue.length > 2
-          ? allItems.filter(o => stripSpaces(`${o[propertyFilter]}`).indexOf(strippedFilterValue) >= 0)
+          ? allItems.filter((o) => stripSpaces(`${o[propertyFilter]}`).indexOf(strippedFilterValue) >= 0)
           : allItems;
       const page = m.route.param(id) ? Math.min(items.length, +m.route.param(id)) : 1;
       const curPage = pageSize && items && (page - 1) * pageSize < items.length ? page : 1;
@@ -140,52 +140,55 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
         [
           inline
             ? m(`.row.repeat-list.input-field${className}`, [
-                m('.col.s12', m('.row', [
-                  m(FlatButton, {
-                    iconName: disabled ? '' : 'add',
-                    iconClass: 'right',
-                    label,
-                    onclick: () => {
-                      items.push({});
-                      m.route.set(`${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${items.length}`);
-                    },
-                    style: 'padding: 0',
-                    className: 'left',
-                    disabled,
-                    readonly,
-                  }),
-                  maxPages > 1 &&
-                    m(
-                      '.right',
-                      m(Pagination, {
-                        curPage,
-                        items: range(1, maxPages).map(i => ({
-                          href: `${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${i}`,
-                        })),
-                      })
-                    ),
-                  (items.length > 1 || filterValue) &&
-                    propertyFilter &&
-                    !disabled &&
-                    m(TextInput, {
-                      style: 'margin-top: -6px; margin-bottom: -1rem;',
-                      iconName: 'filter_list',
-                      iconClass: 'small',
-                      placeholder: filterLabel,
-                      onkeyup: (_: KeyboardEvent, v?: string) => (state.filterValue = v),
-                      className: 'right',
+                m(
+                  '.col.s12',
+                  m('.row', [
+                    m(FlatButton, {
+                      iconName: disabled ? '' : 'add',
+                      iconClass: 'right',
+                      label,
+                      onclick: () => {
+                        items.push({});
+                        m.route.set(`${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${items.length}`);
+                      },
+                      style: 'padding: 0',
+                      className: 'left',
                       disabled,
                       readonly,
                     }),
-                ])),
+                    maxPages > 1 &&
+                      m(
+                        '.right',
+                        m(Pagination, {
+                          curPage,
+                          items: range(1, maxPages).map((i) => ({
+                            href: `${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${i}`,
+                          })),
+                        })
+                      ),
+                    (items.length > 1 || filterValue) &&
+                      propertyFilter &&
+                      !disabled &&
+                      m(TextInput, {
+                        style: 'margin-top: -6px; margin-bottom: -1rem;',
+                        iconName: 'filter_list',
+                        iconClass: 'small',
+                        placeholder: filterLabel,
+                        onkeyup: (_: KeyboardEvent, v?: string) => (state.filterValue = v),
+                        className: 'right',
+                        disabled,
+                        readonly,
+                      }),
+                  ])
+                ),
                 items &&
                   items.length > 0 &&
                   typeof type !== 'string' &&
-                  items.filter(delimitter).map(item => [
+                  items.filter(delimitter).map((item) => [
                     m('.row.z-depth-1.repeat-item', { key: page }, [
                       m(LayoutForm, {
                         // key: page,
-                        form: field.type as Form,
+                        form: field.type as UIForm,
                         obj: item,
                         context: [obj, context],
                         section,
@@ -233,20 +236,20 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   items &&
                     items.length > 0 &&
                     typeof type !== 'string' &&
-                    items.filter(delimitter).map(item =>
+                    items.filter(delimitter).map((item) =>
                       m(RepeatItem, {
                         disabled: true,
                         readonly,
                         item,
-                        form: field.type as Form,
+                        form: field.type as UIForm,
                         containerId,
-                        ondelete: it => {
+                        ondelete: (it) => {
                           state.curItem = it;
                           if (state.delModal) {
                             state.delModal.open();
                           }
                         },
-                        onedit: it => {
+                        onedit: (it) => {
                           state.modalKey = uniqueId();
                           state.curItem = it;
                           state.editItem = deepCopy(it);
@@ -262,7 +265,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
               ),
         ],
         m(ModalPanel, {
-          onCreate: modal => (state.delModal = modal),
+          onCreate: (modal) => (state.delModal = modal),
           id: deleteId,
           title: 'Delete item',
           description: 'Are you sure?',
@@ -287,7 +290,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
         inline || typeof type === 'string' || typeof type === 'undefined'
           ? undefined
           : m(ModalPanel, {
-              onCreate: modal => (state.editModal = modal),
+              onCreate: (modal) => (state.editModal = modal),
               id: editId,
               title: state.editItem ? state.editLabel : state.createLabel,
               fixedFooter: true,
@@ -297,7 +300,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   key: modalKey,
                   form: type,
                   obj: state.editItem || state.newItem || {},
-                  onchange: isValid => (state.canSave = isValid),
+                  onchange: (isValid) => (state.canSave = isValid),
                   context: context instanceof Array ? [obj, ...context] : [obj, context],
                   containerId,
                   disabled,
@@ -316,7 +319,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                     if (state.editItem && state.curItem) {
                       const edited = state.editItem;
                       const current = state.curItem;
-                      type.forEach(f => {
+                      type.forEach((f) => {
                         if (f.id) {
                           (current as any)[f.id] = edited[f.id];
                         }

@@ -1,4 +1,4 @@
-import { ComponentType, Form, I18n } from '.';
+import { ComponentType, UIForm, I18n } from '.';
 
 /**
  * A form component represents the GUI used to create an object. The object that
@@ -15,7 +15,7 @@ export interface IInputField {
   /** Can be used as a placeholder for text inputs or the first element of a Selection */
   placeholder?: string;
   /** Type of component to use */
-  type?: ComponentType | Form; // Form<T[Extract<keyof T, string>], C | [T, C]>;
+  type?: ComponentType | UIForm; // Form<T[Extract<keyof T, string>], C | [T, C]>;
   /** Value that the component has, initially. Is also used to derive the type if not supplied. */
   value?: string | number | Date | boolean | string[];
   /**
