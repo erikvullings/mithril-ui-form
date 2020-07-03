@@ -1,7 +1,7 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
 import { Vnode } from 'mithril';
 import { FormField } from './form-field';
-import { UIForm, IObject, IInputField } from '../models';
+import { UIForm, IObject, IInputField, I18n } from '../models';
 
 export interface ILayoutForm extends Attributes {
   /** The form to display */
@@ -16,6 +16,8 @@ export interface ILayoutForm extends Attributes {
   disabled?: boolean | string | string[];
   /** Section ID to display - can be used to split up the form and only show a part */
   section?: string;
+  /** Localization options */
+  i18n?: I18n;
 }
 
 export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
@@ -36,8 +38,8 @@ export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
   };
 
   return {
-    view: ({ attrs: { form, obj, onchange: onChange, disabled, readonly, context, section } }) => {
-      const onchange = () => onChange && onChange(isValid(obj, form), obj);
+    view: ({ attrs: { i18n, form, obj, onchange: onChange, disabled, readonly, context, section } }) => {
+      const onchange = (res = obj) => onChange && onChange(isValid(res, form), res);
       const sectionFilter = () => {
         if (!section) {
           return (_: IInputField) => true;
@@ -70,7 +72,7 @@ export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
         }
         return [
           ...acc,
-          m(FormField, { field, obj, onchange, disabled, readonly, context, section, containerId: 'body' }),
+          m(FormField, { i18n, field, obj, onchange, disabled, readonly, context, section, containerId: 'body' }),
         ];
       }, [] as Array<Vnode<any, any>>);
     },
