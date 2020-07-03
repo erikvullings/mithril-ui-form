@@ -692,7 +692,6 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
     label: 'Add Editors',
     className: 'col s12',
     repeat: true,
-    inline: true,
     propertyFilter: 'name',
     filterLabel: 'Search by name',
     pageSize: 1,
@@ -727,7 +726,6 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
     label: 'Publications',
     pageSize: 5,
     repeat: true,
-    // inline: false,
     type: source,
   },
   {
@@ -735,7 +733,6 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
     label: 'Multimedia sources',
     pageSize: 5,
     repeat: true,
-    inline: false,
     type: [
       { id: 'desc', label: 'Short description', type: 'textarea' },
       { id: 'owner', label: 'Owner', type: 'text', className: 'col s6' },
@@ -799,7 +796,7 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
     label: 'End date of the event',
     className: 'col s12 m6',
   },
-  { id: 'showMap', type: 'checkbox', value: false, },
+  { id: 'showMap', type: 'checkbox', value: false },
   { id: 'location', show: 'showMap = true', type: 'map', className: 'col s12' },
   {
     id: 'areaType',

@@ -1,5 +1,5 @@
 import m from 'mithril';
-import { LayoutForm, UIForm, SlimdownView } from 'mithril-ui-form';
+import { LayoutForm, UIForm, SlimdownView, I18n } from 'mithril-ui-form';
 import { TextArea } from 'mithril-materialized';
 
 export interface IContext {
@@ -199,7 +199,20 @@ ${result.sources ? result.sources.map((s, i) => `${i + 1}. [${s.title}](${s.url}
         ]),
         m('.col.s6.l4', [
           m('h5', 'Generated Form'),
-          m('div', m(LayoutForm, { form, obj: result, onchange: print, context })),
+          m(
+            'div',
+            m(LayoutForm, {
+              form,
+              obj: result,
+              onchange: print,
+              context,
+              i18n: {
+                deleteItem: 'Verwijder het item',
+                agree: 'Ja',
+                disagree: 'Nee',
+              } as I18n,
+            })
+          ),
         ]),
         m('.col.s6.l4', [
           m('h5', 'Resulting object'),
