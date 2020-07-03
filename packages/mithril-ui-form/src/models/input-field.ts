@@ -1,4 +1,5 @@
 import { ComponentType, UIForm, I18n } from '.';
+import { IObject } from './object';
 
 /**
  * A form component represents the GUI used to create an object. The object that
@@ -41,7 +42,7 @@ export interface IInputField {
   required?: boolean;
   /** If true, the select property allows for multiple selections */
   multiple?: boolean;
-  /** If true, create the form inline */
+  /** If true, inline the radiobutton, or, in case of a readonly component, put label in front of value. */
   inline?: boolean;
   /** If true, the property is disabled */
   disabled?: boolean | string | string[];
@@ -81,6 +82,11 @@ export interface IInputField {
   pageSize?: number;
   /** propertyFilter is only used for repeated items, to filter the list of items based on the provided property. */
   propertyFilter?: string;
+  /**
+   * List may be sorted automatically based on a property with a string or number value.
+   * Prefix the property with an ! to sort in descending direction.
+   */
+  sortProperty?: 'string';
   /** filterLabel is only used for repeated items with a property filter, to set its label. */
   filterLabel?: string;
   /**
@@ -96,4 +102,6 @@ export interface IInputField {
    * 'to': From the field value to the obj[id]
    */
   transform?: <U, V>(dir: 'from' | 'to', value: U | V) => V | U;
+  /** Generate a side-effect after setting, and optionally transforming, the value. */
+  effect?: (obj?: IObject, value?: string | number | string[] | number[] | boolean | Date, context?: IObject[]) => void;
 }

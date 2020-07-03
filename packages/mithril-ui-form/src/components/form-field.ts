@@ -35,6 +35,7 @@ import {
 import { IObject } from '../models/object';
 import { GeometryObject, FeatureCollection } from 'geojson';
 import { LayoutForm, ReadonlyComponent, RepeatList, IRepeatList, SlimdownView } from '.';
+import { I18n } from '../models';
 
 const unwrapComponent = (field: IInputField, autofocus = false, disabled = false) => {
   const {
@@ -113,7 +114,7 @@ interface IFormField extends Attributes {
   obj: IObject | IObject[];
   autofocus?: boolean;
   /** Callback function, invoked every time the original result object has changed */
-  onchange?: () => void;
+  onchange: (result?: IObject | IObject[]) => void;
   /** Disable the form field, disallowing edits */
   disabled?: boolean | string | string[];
   /** Section ID to display - can be used to split up the form and only show a part */
@@ -122,6 +123,8 @@ interface IFormField extends Attributes {
   containerId?: string;
   /** Set to true when the view should return only readonly components */
   readonly?: boolean;
+  /** Localization options */
+  i18n?: I18n;
 }
 
 /** A single input field in a form */
@@ -130,7 +133,17 @@ export const FormField: FactoryComponent<IFormField> = () => {
 
   return {
     view: ({
-      attrs: { field, obj, autofocus, onchange: onFormChange, context, containerId, disabled: d, readonly: r },
+      attrs: {
+        i18n: formI18n,
+        field,
+        obj,
+        autofocus,
+        onchange: onFormChange,
+        context,
+        containerId,
+        disabled: d,
+        readonly: r,
+      },
     }) => {
       const {
         id = '',
@@ -145,9 +158,10 @@ export const FormField: FactoryComponent<IFormField> = () => {
         label,
         description,
         inline,
-        i18n,
+        i18n = formI18n,
         checkAllOptions,
         transform,
+        effect,
       } = field;
       if (
         (show && !evalExpression(show, obj, context)) ||
@@ -193,7 +207,6 @@ export const FormField: FactoryComponent<IFormField> = () => {
           onchange: onFormChange,
           context,
           i18n,
-          inline,
           containerId,
           disabled,
           readonly,
@@ -207,12 +220,12 @@ export const FormField: FactoryComponent<IFormField> = () => {
       const onchange = (v: string | number | Array<string | number | IObject> | Date | boolean) => {
         if (typeof v === 'undefined' || v === 'undefined') {
           delete obj[id];
+          onFormChange(obj);
           return;
         }
         obj[id] = transform ? transform('to', v) : (v as any);
-        if (onFormChange) {
-          onFormChange();
-        }
+        effect && effect(obj, obj[id], context);
+        onFormChange(obj);
       };
 
       if (type instanceof Array) {
@@ -228,7 +241,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
               form: type,
               obj: obj[field.id],
               context: [obj, context],
-              onchange: () => onFormChange && onFormChange(),
+              onchange: () => onFormChange(obj),
               containerId,
             }),
           ];
@@ -242,7 +255,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             : obj[id]
           : value;
       if (id && value && iv) {
-        obj[id] = value; // Initial value was set, so use it.
+        obj[id] = transform ? transform('to', iv) : iv; // Initial value was set, so use it.
       }
       if (autogenerate && !obj[id]) {
         obj[id] = (autogenerate === 'guid' ? uuid4() : autogenerate === 'id' ? uniqueId() : Date.now()) as any;
@@ -490,8 +503,9 @@ export const FormField: FactoryComponent<IFormField> = () => {
           }
           case 'select': {
             const checkedId = iv as Array<string | number>;
+            // console.log('select ' + id + ': ' + checkedId);
             return m(Select, {
-              placeholder: props.multiple ? 'Pick one or more' : 'Pick one',
+              placeholder: props.multiple ? i18n?.pickOneOrMore || 'Pick one or more' : i18n?.pickOne || 'Pick one',
               ...props,
               options,
               checkedId,
@@ -511,7 +525,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
               }) as FeatureCollection<GeometryObject>;
             const overlays = {} as IObject;
             overlays[id] = geoJSON(overlay);
-            console.log(overlays);
+            // console.log(overlays);
             return m(LeafletMap, {
               baseLayers: {
                 osm: {
