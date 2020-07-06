@@ -2,7 +2,7 @@ import m, { FactoryComponent, Attributes } from 'mithril';
 import { FlatButton, uniqueId, ModalPanel, Pagination, RoundIconButton, TextInput } from 'mithril-materialized';
 import { IInputField, UIForm, IObject } from '../models';
 import { LayoutForm } from './layout-form';
-import { range, stripSpaces } from '../utils';
+import { range, stripSpaces, hash } from '../utils';
 import { I18n } from '../models/i18n';
 
 export interface IRepeatList extends Attributes {
@@ -164,10 +164,11 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                 .sort(compareFn)
                 .filter(delimitter)
                 .map((item) => [
-                  m('.row.z-depth-1.repeat-item', { key: page }, [
+                  m('.row.z-depth-1.repeat-item', { key: page + hash(item) }, [
                     m(LayoutForm, {
                       form: field.type as UIForm,
                       obj: item,
+                      i18n,
                       context: [obj, context],
                       section,
                       containerId,
@@ -246,6 +247,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                 m(LayoutForm, {
                   key: modalKey,
                   form: type,
+                  i18n,
                   obj: state.editItem || state.newItem || {},
                   onchange: (isValid) => (state.canSave = isValid),
                   context: context instanceof Array ? [obj, ...context] : [obj, context],

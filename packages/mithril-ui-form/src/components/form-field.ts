@@ -158,7 +158,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
         label,
         description,
         inline,
-        i18n = formI18n,
+        i18n = formI18n || {},
         checkAllOptions,
         transform,
         effect,
@@ -237,6 +237,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             m('div', { className: field.className }, m.trust(render(field.label || capitalizeFirstLetter(field.id)))),
             m(LayoutForm, {
               ...props,
+              i18n,
               readonly,
               form: type,
               obj: obj[field.id],
@@ -468,6 +469,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
                     checkboxClass: 'col s6 m4 l3',
                     className: 'input-field col s12',
                     ...props,
+                    disabled: props.disabled || !options || options.length === 0,
                     options,
                     checkedId,
                     onchange: (checkedIds) =>
@@ -505,8 +507,9 @@ export const FormField: FactoryComponent<IFormField> = () => {
             const checkedId = iv as Array<string | number>;
             // console.log('select ' + id + ': ' + checkedId);
             return m(Select, {
-              placeholder: props.multiple ? i18n?.pickOneOrMore || 'Pick one or more' : i18n?.pickOne || 'Pick one',
+              placeholder: props.multiple ? i18n.pickOneOrMore || 'Pick one or more' : i18n.pickOne || 'Pick one',
               ...props,
+              disabled: props.disabled || !options || options.length === 0,
               options,
               checkedId,
               onchange: (checkedIds) =>
