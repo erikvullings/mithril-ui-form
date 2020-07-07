@@ -31,7 +31,7 @@
     "minor-release": "npm run clean && npm run build && lerna run minor-release --parallel"
   },
   "devDependencies": {
-    "lerna": "^3.20.2",
-    "rimraf": "^3.0.0"
+    "lerna": "^3.22.1",
+    "rimraf": "^3.0.2"
   }
 }

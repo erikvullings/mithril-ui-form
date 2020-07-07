@@ -4,7 +4,7 @@
   "description": "Convert a JSON file or object to a dynamic, materialized form.",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
-  "typings": "lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/erikvullings/mithril-ui-form.git"
@@ -33,25 +33,25 @@
     "slimdown-js": "^0.2.1"
   },
   "devDependencies": {
-    "@types/leaflet": "^1.5.12",
+    "@types/geojson": "^7946.0.7",
+    "@types/leaflet": "^1.5.13",
     "@types/leaflet-draw": "^1.0.3",
     "@types/materialize-css": "^1.0.8",
     "@types/mithril": "^2.0.3",
-    "@types/geojson": "^7946.0.7",
-    "mithril-materialized": "^0.16.1",
-    "mithril-leaflet": "0.4.3",
-    "rimraf": "^3.0.2",
     "microbundle": "^0.12.2",
-    "typescript": "^3.9.5",
+    "mithril-leaflet": "0.4.3",
+    "mithril-materialized": "^0.16.1",
+    "rimraf": "^3.0.2",
     "tslib": "^2.0.0",
+    "typescript": "^3.9.6",
     "typescript-json-schema": "^0.42.0"
   },
   "peerDependencies": {
-    "mithril": "^2.0.4",
-    "mithril-materialized": "^0.16.1",
-    "materialize-css": "^1.0.0",
     "leaflet": "^1.6.0",
-    "leaflet-draw": "^1.0.4"
+    "leaflet-draw": "^1.0.4",
+    "materialize-css": "^1.0.0",
+    "mithril": "^2.0.4",
+    "mithril-materialized": "^0.16.1"
   },
   "browserslist": [
     "last 2 version",

@@ -1,11 +1,11 @@
 import m from 'mithril';
-import { LayoutForm, Form } from 'mithril-ui-form';
+import { LayoutForm, UIForm } from 'mithril-ui-form';
 
 export interface IContext {
   admin: boolean;
 }
 
-/** Relevant context for the Form, can be used with show/disabling */
+/** Relevant context for the UIForm, can be used with show/disabling */
 const context = {
   admin: true,
 };
@@ -655,7 +655,7 @@ const source = [
     options: languages,
     className: 'col s3',
   },
-] as Form;
+] as UIForm;
 
 const info = [
   { id: 'intake', type: 'section' },
@@ -1817,19 +1817,19 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
       },
     ],
   },
-] as Form;
+] as UIForm;
 
 export const LLFView = () => {
   const state = {
     result: {} as ILessonLearned,
     isValid: false,
-    form: [] as Form,
+    form: [] as UIForm,
     error: '',
   };
 
   const print = (isValid: boolean) => {
     state.isValid = isValid;
-    console.log(`Form is valid: ${isValid}`);
+    console.log(`UIForm is valid: ${isValid}`);
     console.log(JSON.stringify(state.result, null, 2));
   };
 
