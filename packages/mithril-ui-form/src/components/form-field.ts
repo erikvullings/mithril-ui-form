@@ -224,8 +224,15 @@ export const FormField: FactoryComponent<IFormField> = () => {
           return;
         }
         obj[id] = transform ? transform('to', v) : (v as any);
-        effect && effect(obj, obj[id], context);
-        onFormChange(obj);
+        if (!effect) {
+          return onFormChange(obj);
+        }
+        const res = effect(obj, obj[id], context);
+        if (res) {
+          res.then((r) => r && onFormChange(r));
+        } else {
+          onFormChange(obj);
+        }
       };
 
       if (type instanceof Array) {
@@ -521,7 +528,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'map': {
-            const overlay = (obj[id] ||
+            const overlay = (iv ||
               value || {
                 type: 'FeatureCollection',
                 features: [],
@@ -555,7 +562,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             });
           }
           case 'md':
-            const md = resolvePlaceholders(id ? obj[id] : value || label, obj, context);
+            const md = resolvePlaceholders(id ? iv : value || label, obj, context);
             return m(SlimdownView, { md, className: props.className });
           case 'section':
             return m('.divider');

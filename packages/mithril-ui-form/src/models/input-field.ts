@@ -103,5 +103,9 @@ export interface IInputField {
    */
   transform?: <U, V>(dir: 'from' | 'to', value: U | V) => V | U;
   /** Generate a side-effect after setting, and optionally transforming, the value. */
-  effect?: (obj?: IObject, value?: string | number | string[] | number[] | boolean | Date, context?: IObject[]) => void;
+  effect?: (
+    obj?: IObject,
+    value?: string | number | string[] | number[] | boolean | Date,
+    context?: IObject[]
+  ) => Promise<IObject | undefined> | undefined;
 }
