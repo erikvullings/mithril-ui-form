@@ -24,7 +24,7 @@ export interface IInputField {
    * it refers to an external pre-defined property that contains the options. E.g. a
    * list of countries.
    */
-  options?: Array<{ id: string; label: string; disabled?: boolean; icon?: string; show?: string | string[] }>;
+  options?: Array<{ id: string; label?: string; disabled?: boolean; icon?: string; show?: string | string[] }>;
   /** When input type is a number or a date, optionally specify the minimum value (or min date). */
   min?: number;
   /**
