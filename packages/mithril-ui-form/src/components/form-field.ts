@@ -172,11 +172,11 @@ export const FormField: FactoryComponent<IFormField> = () => {
         return undefined;
       }
 
-      const options = field.options
+      const options = (field.options
         ? field.options
             .filter((o) => !o.show || evalExpression(o.show, obj, context))
             .map((o) => (o.label ? o : { ...o, label: capitalizeFirstLetter(o.id) }))
-        : [];
+        : []) as Array<{ id: string; label: string; disabled?: boolean; icon?: string; show?: string | string[] }>;
 
       const parentIsDisabled = typeof d === 'boolean' && d;
 
@@ -229,7 +229,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
         }
         const res = effect(obj, obj[id], context);
         if (res) {
-          res.then((r) => r && onFormChange(r));
+          res.then((r) => (r ? onFormChange(r) : onFormChange(obj)));
         } else {
           onFormChange(obj);
         }
@@ -576,6 +576,17 @@ export const FormField: FactoryComponent<IFormField> = () => {
           case 'tags': {
             const initialValue = (iv || []) as string[];
             const data = initialValue.map((chip) => ({ tag: chip }));
+            const autocompleteOptions =
+              options && options.length > 0
+                ? {
+                    data: options.reduce((acc, cur) => {
+                      acc[cur.id] = null;
+                      return acc;
+                    }, {} as { [key: string]: null }),
+                    limit: Infinity,
+                    minLenght: field.minLength || 1,
+                  }
+                : undefined;
             return m('.input-field col s12', [
               m(Label, { ...props }),
               m(Chips, {
@@ -583,6 +594,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
                 placeholder: 'Add a tag',
                 secondaryPlaceholder: '+tag',
                 data,
+                autocompleteOptions,
               }),
             ]);
           }
