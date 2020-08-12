@@ -30,20 +30,20 @@
   "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
   "license": "MIT",
   "dependencies": {
-    "slimdown-js": "^0.2.1"
+    "slimdown-js": "^0.3.0"
   },
   "devDependencies": {
     "@types/geojson": "^7946.0.7",
-    "@types/leaflet": "^1.5.13",
+    "@types/leaflet": "^1.5.17",
     "@types/leaflet-draw": "^1.0.3",
     "@types/materialize-css": "^1.0.8",
     "@types/mithril": "^2.0.3",
-    "microbundle": "^0.12.2",
+    "microbundle": "^0.12.3",
     "mithril-leaflet": "0.4.3",
-    "mithril-materialized": "^0.16.1",
+    "mithril-materialized": "^0.16.4",
     "rimraf": "^3.0.2",
-    "tslib": "^2.0.0",
-    "typescript": "^3.9.6",
+    "tslib": "^2.0.1",
+    "typescript": "^3.9.7",
     "typescript-json-schema": "^0.42.0"
   },
   "peerDependencies": {
