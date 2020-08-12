@@ -297,7 +297,7 @@ export const labelResolver = (form: UIForm) => {
         } else if (typeof value === 'number' || typeof value === 'string') {
           const r = resolver(fullKey, value);
           if (r) {
-            resolved[key] = r;
+            resolved[key] = r instanceof Array && r.length === 1 ? r[0] : r;
           }
         } else if (value instanceof Array) {
           if (typeof value[0] === 'string' || value[0] === null) {
