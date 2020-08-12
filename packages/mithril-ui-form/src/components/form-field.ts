@@ -583,7 +583,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
                       acc[cur.id] = null;
                       return acc;
                     }, {} as { [key: string]: null }),
-                    limit: Infinity,
+                    limit: field.maxLength || Infinity,
                     minLenght: field.minLength || 1,
                   }
                 : undefined;
