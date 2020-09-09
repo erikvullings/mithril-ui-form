@@ -240,8 +240,8 @@ export const FormField: FactoryComponent<IFormField> = () => {
           if (!obj.hasOwnProperty(field.id)) {
             obj[field.id] = {};
           }
-          return [
-            m('div', { className: field.className }, m.trust(render(field.label || capitalizeFirstLetter(field.id)))),
+          return m('div', { className: field.className }, [
+            m('div', m.trust(render(field.label || capitalizeFirstLetter(field.id)))),
             m(LayoutForm, {
               ...props,
               i18n,
@@ -252,7 +252,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
               onchange: () => onFormChange(obj),
               containerId,
             }),
-          ];
+          ]);
         }
       }
 
