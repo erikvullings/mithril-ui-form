@@ -4,7 +4,7 @@ import { SlimdownView } from './slimdown-view';
 
 export interface IReadonlyComponent extends Attributes {
   props: IObject;
-  label: string;
+  label?: string;
   initialValue: string | number | Array<string | number>;
   /** If true, put label in front of value. Default false */
   inline?: boolean;
@@ -21,7 +21,7 @@ export const ReadonlyComponent: FactoryComponent<IReadonlyComponent> = () => {
       }
       const v = iv instanceof Array ? iv.join(', ') : iv;
       return m('.readonly', cn, [
-        m('label', label),
+        label && m('label', label),
         inline ? m('span', v ? `: ${v}` : m.trust('&nbsp;')) : m('p', v || m.trust('&nbsp;')),
       ]);
     },

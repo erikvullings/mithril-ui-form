@@ -34,8 +34,11 @@ import {
 } from '../utils';
 import { IObject } from '../models/object';
 import { GeometryObject, FeatureCollection } from 'geojson';
-import { LayoutForm, ReadonlyComponent, RepeatList, IRepeatList, SlimdownView } from '.';
 import { I18n } from '../models';
+import { RepeatList, IRepeatList } from './repeat-list';
+import { LayoutForm } from './layout-form';
+import { ReadonlyComponent } from './readonly';
+import { SlimdownView } from './slimdown-view';
 
 const unwrapComponent = (field: IInputField, autofocus = false, disabled = false) => {
   const {
@@ -334,7 +337,6 @@ export const FormField: FactoryComponent<IFormField> = () => {
             const initialValue = selected && selected.length ? selected[0].label : '?';
             return m(ReadonlyComponent, {
               props,
-              label: props.label,
               initialValue,
             });
           }
@@ -455,6 +457,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             const checkedId = iv as string | number;
             return m(RadioButtons, {
               ...props,
+              label: '',
               inline,
               options,
               checkedId,
