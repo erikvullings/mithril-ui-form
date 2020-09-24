@@ -577,7 +577,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             return m(Switch, { ...props, left, right, checked, onchange });
           }
           case 'tags': {
-            const initialValue = (iv || []) as string[];
+            const initialValue = (iv ? (iv instanceof Array ? iv : [iv]) : []) as string[];
             const data = initialValue.map((chip) => ({ tag: chip }));
             const autocompleteOptions =
               options && options.length > 0
