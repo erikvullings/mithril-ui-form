@@ -23,6 +23,7 @@ export interface IInputField {
    * Options for checkboxes, selects, dropdowns, and switches. In case it is a string,
    * it refers to an external pre-defined property that contains the options. E.g. a
    * list of countries.
+   * For file inputs, the option.id is used to build the accept list of acceptable file types.
    */
   options?: Array<{ id: string; label?: string; disabled?: boolean; icon?: string; show?: string | string[] }>;
   /** When input type is a number or a date, optionally specify the minimum value (or min date). */

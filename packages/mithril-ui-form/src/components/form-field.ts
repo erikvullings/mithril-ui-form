@@ -617,6 +617,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             if (!url) {
               throw Error('Input field "url" not defined, which indicates the URL to the upload folder.');
             }
+            const accept = options ? options.map((o) => o.id) : undefined;
             const upload = (file: FileList) => {
               if (!file || file.length < 1) {
                 return console.warn('File is undefined');
@@ -631,6 +632,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             };
             return m(FileInput, {
               ...props,
+              accept,
               placeholder: initialValue || placeholder,
               onchange: upload,
               initialValue,
