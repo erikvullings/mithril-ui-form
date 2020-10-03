@@ -216,6 +216,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
               section,
               containerId,
               readonly: true,
+              i18n,
             }),
             buttons: [
               {
