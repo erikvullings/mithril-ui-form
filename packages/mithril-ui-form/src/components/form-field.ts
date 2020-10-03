@@ -63,7 +63,7 @@ const unwrapComponent = (field: IInputField, autofocus = false, disabled = false
     result.label = capitalizeFirstLetter(id);
   }
   if (description) {
-    result.helperText = render(description);
+    result.helperText = render(description, true);
   }
   if (className) {
     result.className = className;
@@ -220,7 +220,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
         return undefined; // Only a repeat list can deal with arrays
       }
 
-      const onchange = (v: string | number | Array<string | number | IObject> | Date | boolean) => {
+      const onchange = async (v: string | number | Array<string | number | IObject> | Date | boolean) => {
         if (typeof v === 'undefined' || v === 'undefined') {
           delete obj[id];
           onFormChange(obj);
@@ -230,9 +230,10 @@ export const FormField: FactoryComponent<IFormField> = () => {
         if (!effect) {
           return onFormChange(obj);
         }
-        const res = effect(obj, obj[id], context);
-        if (res) {
-          res.then((r) => (r ? onFormChange(r) : onFormChange(obj)));
+        const res = await effect(obj, obj[id], context);
+        if (typeof res !== 'undefined') {
+          // res.then((r) => (r ? onFormChange(r) : onFormChange(obj)));
+          onFormChange(res);
         } else {
           onFormChange(obj);
         }
@@ -244,7 +245,8 @@ export const FormField: FactoryComponent<IFormField> = () => {
             obj[field.id] = {};
           }
           return m('div', { className: field.className }, [
-            m('div', m.trust(render(field.label || capitalizeFirstLetter(field.id)))),
+            m('div', m.trust(render(props.label || capitalizeFirstLetter(field.id), true))),
+            props.description && m('div', m.trust(render(props.description))),
             m(LayoutForm, {
               ...props,
               i18n,
@@ -458,7 +460,6 @@ export const FormField: FactoryComponent<IFormField> = () => {
             return m(RadioButtons, {
               ...props,
               label: '',
-              inline,
               options,
               checkedId,
               onchange,
@@ -524,7 +525,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
               checkedId,
               onchange: (checkedIds) =>
                 onchange(
-                  checkedIds.length === 1
+                  checkedIds.length === 1 && !props.multiple
                     ? checkedIds[0]
                     : checkedIds.filter((v) => v !== null || typeof v !== 'undefined')
                 ),

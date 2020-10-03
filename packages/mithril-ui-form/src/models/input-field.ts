@@ -43,7 +43,7 @@ export interface IInputField {
   required?: boolean;
   /** If true, the select property allows for multiple selections */
   multiple?: boolean;
-  /** If true, inline the radiobutton, or, in case of a readonly component, put label in front of value. */
+  /** If true, in case of a readonly component, put label in front of value. */
   inline?: boolean;
   /** If true, the property is disabled */
   disabled?: boolean | string | string[];
@@ -51,7 +51,7 @@ export interface IInputField {
   readonly?: boolean;
   /** CSS class name to attach to the element */
   className?: string;
-  /** CSS class for the content, e.g. for grouping an options list */
+  /** CSS class for the content, e.g. for grouping an options list or to inline radio options */
   checkboxClass?: string;
   // model: FormType<T[Extract<keyof T, string>]>;
   /** Name of the icon */
