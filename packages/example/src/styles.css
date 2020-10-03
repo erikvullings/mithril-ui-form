@@ -20,3 +20,8 @@
 .repeat-list .pagination {
   margin: 0;
 }
+
+/* For the options' label */
+.input-field.options > label {
+  top: -2.5rem;
+}
