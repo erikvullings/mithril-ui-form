@@ -28,15 +28,15 @@
     "material-icons": "^0.3.1",
     "materialize-css": "^1.0.0",
     "mithril": "^2.0.4",
-    "mithril-materialized": "^0.16.4",
-    "mithril-ui-form": "^0.8.5"
+    "mithril-materialized": "^0.16.5",
+    "mithril-ui-form": "workspace:^0.8.7"
   },
   "devDependencies": {
     "@babel/types": "7.11.5",
     "@types/leaflet": "^1.5.17",
     "@types/materialize-css": "^1.0.8",
     "@types/mithril": "^2.0.4",
-    "autoprefixer": "^10.0.0",
+    "autoprefixer": "^10.0.1",
     "cssnano": "^4.1.10",
     "lodash": "^4.17.20",
     "mixin-deep": "^2.0.1",
