@@ -160,7 +160,6 @@ export const FormField: FactoryComponent<IFormField> = () => {
         show,
         label,
         description,
-        inline,
         i18n = formI18n || {},
         checkAllOptions,
         transform,
