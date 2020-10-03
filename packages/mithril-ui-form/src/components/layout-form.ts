@@ -39,7 +39,7 @@ export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
 
   return {
     view: ({ attrs: { i18n, form, obj, onchange: onChange, disabled, readonly, context, section } }) => {
-      const onchange = (res = obj) => onChange && onChange(isValid(res, form), res);
+      const onchange = (res: IObject) => onChange && onChange(isValid(res, form), res);
       const sectionFilter = () => {
         if (!section) {
           return (_: IInputField) => true;

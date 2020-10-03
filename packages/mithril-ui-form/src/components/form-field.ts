@@ -117,7 +117,7 @@ interface IFormField extends Attributes {
   obj: IObject | IObject[];
   autofocus?: boolean;
   /** Callback function, invoked every time the original result object has changed */
-  onchange: (result?: IObject | IObject[]) => void;
+  onchange: (result: IObject | IObject[]) => void;
   /** Disable the form field, disallowing edits */
   disabled?: boolean | string | string[];
   /** Section ID to display - can be used to split up the form and only show a part */

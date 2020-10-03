@@ -33,7 +33,6 @@ export interface IRepeatList extends Attributes {
  */
 export const RepeatList: FactoryComponent<IRepeatList> = () => {
   const state = {} as {
-    onchange?: (result: IObject | IObject[]) => void;
     editItem?: IObject;
     curItem?: IObject;
     newItem?: IObject;
@@ -45,18 +44,6 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
     /** When dealing with a large list, you may add a property filter */
     filterValue?: string;
   };
-
-  // const nextKeyGen = () => {
-  //   let i = 0;
-  //   return () => {
-  //     i++;
-  //     return i;
-  //   };
-  // };
-
-  // const nextKey = nextKeyGen();
-
-  const notify = (result: IObject | IObject[]) => state.onchange && state.onchange(result);
 
   const getItems = (obj: IObject | IObject[], id: string): IObject[] => {
     if (obj instanceof Array) {
@@ -72,18 +59,28 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
   return {
     oninit: ({
       attrs: {
-        onchange,
         i18n = {},
         field: { id = '' },
       },
     }) => {
-      state.onchange = onchange;
       state.editLabel = i18n.editRepeat || `Edit ${id}`;
       state.createLabel = i18n.createRepeat || `Create new ${id}`;
     },
     view: ({
-      attrs: { field, obj, context, className = '.col.s12', section, containerId, disabled, readonly: r, i18n = {} },
+      attrs: {
+        field,
+        obj,
+        context,
+        className = '.col.s12',
+        section,
+        containerId,
+        disabled,
+        readonly: r,
+        i18n = {},
+        onchange,
+      },
     }) => {
+      const notify = (result: IObject | IObject[]) => onchange && onchange(result);
       const { modalKey, filterValue } = state;
       const { id = '', label, type, max, pageSize, propertyFilter, sortProperty, filterLabel, readonly = r } = field;
       const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
