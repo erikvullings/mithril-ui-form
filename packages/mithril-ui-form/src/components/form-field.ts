@@ -619,7 +619,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             }
             const accept = options ? options.map((o) => o.id) : undefined;
             const upload = (file: FileList) => {
-              if (!file || file.length < 1) {
+              if (!file || !file.length || file.length < 1) {
                 return console.warn('File is undefined');
               }
               const body = new FormData();
