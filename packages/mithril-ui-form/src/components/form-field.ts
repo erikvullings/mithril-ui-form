@@ -633,7 +633,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
             return m(FileInput, {
               ...props,
               accept,
-              placeholder: initialValue || placeholder,
+              placeholder,
               onchange: upload,
               initialValue,
             });
