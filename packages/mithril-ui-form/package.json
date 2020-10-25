@@ -14,6 +14,7 @@
     "clean": "rimraf .rpt2_cache lib dist",
     "build": "microbundle",
     "start": "microbundle watch",
+    "dev": "npm start",
     "dry-run": "npm publish --dry-run",
     "patch-release": "npm run clean && npm run build && npm version patch --force -m \"Patch release\" && npm publish && git push --follow-tags",
     "minor-release": "npm run clean && npm run build && npm version minor --force -m \"Minor release\" && npm publish && git push --follow-tags",
