@@ -29,14 +29,14 @@
     "material-icons": "^0.3.1",
     "materialize-css": "^1.0.0",
     "mithril": "^2.0.4",
-    "mithril-materialized": "^0.16.5",
+    "mithril-materialized": "^0.17.1",
     "mithril-ui-form": "workspace:^0.8.9"
   },
   "devDependencies": {
-    "@babel/types": "7.11.5",
+    "@babel/types": "7.12.6",
     "@types/leaflet": "^1.5.19",
     "@types/materialize-css": "^1.0.8",
-    "@types/mithril": "^2.0.5",
+    "@types/mithril": "^2.0.6",
     "autoprefixer": "^10.0.1",
     "cssnano": "^4.1.10",
     "lodash": "^4.17.20",
@@ -44,6 +44,6 @@
     "parcel-bundler": "^1.12.4",
     "rimraf": "^3.0.2",
     "set-value": "^3.0.2",
-    "typescript": "^4.0.3"
+    "typescript": "^4.0.5"
   }
 }

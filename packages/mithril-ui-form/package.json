@@ -43,6 +43,7 @@
     "mithril-leaflet": "0.4.3",
     "rimraf": "^3.0.2",
     "tslib": "^2.0.3",
+    "mithril-materialized": "^0.17.1",
     "typescript": "^4.0.5",
     "typescript-json-schema": "^0.43.0"
   },
