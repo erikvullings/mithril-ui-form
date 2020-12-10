@@ -176,7 +176,7 @@ export const FormField: FactoryComponent<IFormField> = () => {
 
       const options = (field.options
         ? field.options
-            .filter((o) => !o.show || evalExpression(o.show, obj, context))
+            .filter((o) => o.id && (!o.show || evalExpression(o.show, obj, context)))
             .map((o) => (o.label ? o : { ...o, label: capitalizeFirstLetter(o.id) }))
         : []) as Array<{ id: string; label: string; disabled?: boolean; icon?: string; show?: string | string[] }>;
 
