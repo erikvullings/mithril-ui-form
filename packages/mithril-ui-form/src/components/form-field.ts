@@ -457,8 +457,8 @@ export const FormField: FactoryComponent<IFormField> = () => {
           case 'radio': {
             const checkedId = iv as string | number;
             return m(RadioButtons, {
-              ...props,
               label: '',
+              ...props,
               options,
               checkedId,
               onchange,
