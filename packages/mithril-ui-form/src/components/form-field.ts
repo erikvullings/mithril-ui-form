@@ -1,7 +1,7 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
 import { LeafletMap } from 'mithril-leaflet';
 import { geoJSON } from 'leaflet';
-import { render } from 'slimdown-js';
+import { render } from '../utils/slimdown-js';
 import { FeatureGroup } from 'leaflet';
 import {
   InputCheckbox,

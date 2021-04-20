@@ -1,5 +1,5 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
-import { render } from 'slimdown-js';
+import { render } from '../utils/slimdown-js';
 
 export interface IMarkdownView extends Attributes {
   md?: string;

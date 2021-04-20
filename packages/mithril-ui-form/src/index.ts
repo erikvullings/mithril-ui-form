@@ -1,6 +1,6 @@
 export * from './models';
 export * from './components';
-export * from 'slimdown-js';
+export * from './utils/slimdown-js';
 export {
   capitalizeFirstLetter,
   range,

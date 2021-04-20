@@ -30,7 +30,7 @@
     "minor-release": "npm run clean && npm run build && pnpm minor-release"
   },
   "devDependencies": {
-    "pnpm": "^6.0.1",
+    "pnpm": "^6.0.2",
     "rimraf": "^3.0.2"
   }
 }
