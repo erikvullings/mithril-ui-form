@@ -191,10 +191,10 @@ export const FormField: FactoryComponent<IFormField> = () => {
       );
 
       if (label) {
-        props.label = resolvePlaceholders(props.label, obj, context);
+        props.label = render(resolvePlaceholders(props.label || label, obj, context), true);
       }
       if (description) {
-        props.description = resolvePlaceholders(props.description, obj, context);
+        props.description = render(resolvePlaceholders(props.description || description, obj, context), true);
       }
 
       const validate = required
