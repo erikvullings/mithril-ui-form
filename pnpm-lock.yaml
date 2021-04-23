@@ -18,27 +18,25 @@ importers:
       '@types/mithril': ^2.0.7
       autoprefixer: ^10.2.5
       cssnano: ^4.1.11
-      leaflet: ^1.7.1
-      leaflet-draw: ^1.0.4
       lodash: ^4.17.21
       material-icons: ^0.6.1
       materialize-css: ^1.0.0
       mithril: ^2.0.4
       mithril-materialized: ^0.19.0
       mithril-ui-form: workspace:^0.9.2
+      mithril-ui-form-leaflet-plugin: workspace:^0.1.0
       mixin-deep: ^2.0.1
       parcel-bundler: ^1.12.5
       rimraf: ^3.0.2
       set-value: ^3.0.2
       typescript: ^4.2.4
     dependencies:
-      leaflet: 1.7.1
-      leaflet-draw: 1.0.4
       material-icons: 0.6.1
       materialize-css: 1.0.0
       mithril: 2.0.4
       mithril-materialized: 0.19.0_f3d9df6f4766fd28b6cfb8072ccbc3ca
       mithril-ui-form: link:../mithril-ui-form
+      mithril-ui-form-leaflet-plugin: link:../mithril-ui-form-leaflet-plugin
     devDependencies:
       '@babel/types': 7.13.14
       '@types/leaflet': 1.7.0
@@ -63,6 +61,7 @@ importers:
       microbundle: ^0.13.0
       mithril-leaflet: 0.4.3
       mithril-materialized: ^0.19.0
+      mithril-ui-form-plugin: workspace:*
       rimraf: ^3.0.2
       tslib: ^2.2.0
       typescript: ^4.2.4
@@ -76,10 +75,52 @@ importers:
       microbundle: 0.13.0
       mithril-leaflet: 0.4.3
       mithril-materialized: 0.19.0
+      mithril-ui-form-plugin: link:../mithril-ui-form-plugin
       rimraf: 3.0.2
       tslib: 2.2.0
       typescript: 4.2.4
       typescript-json-schema: 0.50.0
+
+  packages/mithril-ui-form-leaflet-plugin:
+    specifiers:
+      '@types/geojson': ^7946.0.7
+      '@types/leaflet': ^1.7.0
+      '@types/leaflet-draw': ^1.0.3
+      '@types/mithril': ^2.0.7
+      leaflet: ^1.7.1
+      leaflet-draw: ^1.0.4
+      microbundle: ^0.13.0
+      mithril-leaflet: 0.4.3
+      mithril-ui-form-plugin: workspace:*
+      rimraf: ^3.0.2
+      tslib: ^2.2.0
+      typescript: ^4.2.4
+    dependencies:
+      leaflet: 1.7.1
+      leaflet-draw: 1.0.4
+      mithril-leaflet: 0.4.3_leaflet-draw@1.0.4+leaflet@1.7.1
+    devDependencies:
+      '@types/geojson': 7946.0.7
+      '@types/leaflet': 1.7.0
+      '@types/leaflet-draw': 1.0.3
+      '@types/mithril': 2.0.7
+      microbundle: 0.13.0
+      mithril-ui-form-plugin: link:../mithril-ui-form-plugin
+      rimraf: 3.0.2
+      tslib: 2.2.0
+      typescript: 4.2.4
+
+  packages/mithril-ui-form-plugin:
+    specifiers:
+      '@types/mithril': ^2.0.7
+      rimraf: ^3.0.2
+      tslib: ^2.2.0
+      typescript: ^4.2.4
+    devDependencies:
+      '@types/mithril': 2.0.7
+      rimraf: 3.0.2
+      tslib: 2.2.0
+      typescript: 4.2.4
 
 packages:
 
@@ -4125,6 +4166,17 @@ packages:
       leaflet-draw: ^1.0.4
       mithril: ^2.0.4
     dev: true
+
+  /mithril-leaflet/0.4.3_leaflet-draw@1.0.4+leaflet@1.7.1:
+    resolution: {integrity: sha512-vZh0qOQgSJawQpkYbyxqddLjPHTWdVUtv0FveUUBHo0GHjQotdSCTJzwaLQzC3lxPRsY58kh1Kv8QS2+Wk8CMw==}
+    peerDependencies:
+      leaflet: ^1.6.0
+      leaflet-draw: ^1.0.4
+      mithril: ^2.0.4
+    dependencies:
+      leaflet: 1.7.1
+      leaflet-draw: 1.0.4
+    dev: false
 
   /mithril-materialized/0.19.0:
     resolution: {integrity: sha512-mNOJuENrTdsmDla7gq1cd6gAHv5Tc97usvXZp+TAS/P8KLI9zod01fsS63mJfiBCkmGS9iQojDqMgEadgfaxXQ==}

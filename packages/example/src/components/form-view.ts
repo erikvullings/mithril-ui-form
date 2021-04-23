@@ -1,6 +1,7 @@
 import m from 'mithril';
-import { LayoutForm, UIForm, SlimdownView, I18n } from 'mithril-ui-form';
+import { LayoutForm, registerPlugin, UIForm, SlimdownView, I18n } from 'mithril-ui-form';
 import { TextArea } from 'mithril-materialized';
+import { leafletPlugin } from 'mithril-ui-form-leaflet-plugin';
 
 export interface IContext {
   admin: boolean;
@@ -111,6 +112,8 @@ You can also include _markdown_ in your UIForm.`,
 ] as UIForm;
 
 export const FormView = () => {
+  registerPlugin('map', leafletPlugin);
+
   const state = {
     result: {} as ILessonLearned,
     isValid: false,

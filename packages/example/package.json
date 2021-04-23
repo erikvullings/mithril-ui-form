@@ -23,13 +23,12 @@
   },
   "homepage": "https://github.com/erikvullings/mithril-tree-component#readme",
   "dependencies": {
-    "leaflet": "^1.7.1",
-    "leaflet-draw": "^1.0.4",
     "material-icons": "^0.6.1",
     "materialize-css": "^1.0.0",
     "mithril": "^2.0.4",
     "mithril-materialized": "^0.19.0",
-    "mithril-ui-form": "workspace:^0.9.2"
+    "mithril-ui-form": "workspace:^0.9.2",
+    "mithril-ui-form-leaflet-plugin": "workspace:^0.1.0"
   },
   "devDependencies": {
     "@babel/types": "7.13.14",
