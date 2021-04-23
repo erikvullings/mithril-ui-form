@@ -1,7 +1,9 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
+import { PluginType } from 'mithril-ui-form-plugin';
 import { Vnode } from 'mithril';
-import { FormField } from './form-field';
+import { formFieldFactory } from './form-field';
 import { UIForm, IObject, IInputField, I18n } from '../models';
+import { IRepeatList, RepeatList } from './repeat-list';
 
 export interface ILayoutForm extends Attributes {
   /** The form to display */
@@ -20,7 +22,16 @@ export interface ILayoutForm extends Attributes {
   i18n?: I18n;
 }
 
-export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
+const plugins = {} as { [key: string]: PluginType };
+const readonlyPlugins = {} as { [key: string]: PluginType };
+
+/** Register a plugin that converts a particular type to a Mithril component */
+export const registerPlugin = (name: string, plugin: PluginType, readonlyPlugin?: PluginType) => {
+  plugins[name] = plugin;
+  if (readonlyPlugin) readonlyPlugins[name] = readonlyPlugin;
+};
+
+const LayoutFormFactory = () => {
   const isValid = (item: IObject, form: UIForm) => {
     return form
       .filter((f) => f.required && typeof f.id !== undefined)
@@ -37,44 +48,78 @@ export const LayoutForm: FactoryComponent<ILayoutForm> = () => {
       );
   };
 
-  return {
-    view: ({ attrs: { i18n, form, obj, onchange: onChange, disabled, readonly, context, section } }) => {
-      const onchange = (res: IObject) => onChange && onChange(isValid(res, form), res);
-      const sectionFilter = () => {
-        if (!section) {
-          return (_: IInputField) => true;
-        }
-        let state = false;
-        return ({ type, id }: IInputField): boolean => {
-          if (type === 'section') {
-            state = id === section;
-          }
-          return state;
-        };
-      };
+  const guessType = (field: IInputField) => {
+    const { autogenerate, value, options } = field;
+    return autogenerate
+      ? 'none'
+      : value
+      ? typeof value === 'string'
+        ? 'md'
+        : typeof value === 'number'
+        ? 'number'
+        : typeof value === 'boolean'
+        ? 'checkbox'
+        : 'none'
+      : options && options.length > 0
+      ? 'select'
+      : 'none';
+  };
 
-      return form.filter(sectionFilter()).reduce((acc, field) => {
-        const { autogenerate, value, options, type } = field;
-        if (!type) {
-          field.type = autogenerate
-            ? 'none'
-            : value
-            ? typeof value === 'string'
-              ? 'md'
-              : typeof value === 'number'
-              ? 'number'
-              : typeof value === 'boolean'
-              ? 'checkbox'
-              : 'none'
-            : options && options.length > 0
-            ? 'select'
-            : 'none';
-        }
-        return [
-          ...acc,
-          m(FormField, { i18n, field, obj, onchange, disabled, readonly, context, section, containerId: 'body' }),
-        ];
-      }, [] as Array<Vnode<any, any>>);
-    },
+  const createLayoutForm = (): FactoryComponent<ILayoutForm> => () => {
+    const formField = formFieldFactory(plugins, readonlyPlugins).createFormField();
+
+    return {
+      view: ({ attrs: { i18n, form, obj, onchange: onChange, disabled, readonly, context, section } }) => {
+        const onchange = (res: IObject) => onChange && onChange(isValid(res, form), res);
+        const sectionFilter = () => {
+          if (!section) {
+            return (_: IInputField) => true;
+          }
+          let state = false;
+          return ({ type, id }: IInputField): boolean => {
+            if (type === 'section') {
+              state = id === section;
+            }
+            return state;
+          };
+        };
+
+        return form.filter(sectionFilter()).reduce((acc, field) => {
+          if (!field.type) field.type = guessType(field);
+          return [
+            ...acc,
+            typeof field.repeat === 'undefined'
+              ? m(formField, { i18n, field, obj, onchange, disabled, readonly, context, section, containerId: 'body' })
+              : m(RepeatList, {
+                  obj,
+                  field,
+                  onchange,
+                  context,
+                  i18n,
+                  containerId: 'body',
+                  disabled,
+                  readonly,
+                } as IRepeatList),
+          ];
+        }, [] as Array<Vnode<any, any>>);
+      },
+    };
+  };
+
+  return {
+    createLayoutForm,
+    isValid,
   };
 };
+
+export const LayoutForm = LayoutFormFactory().createLayoutForm();
+
+registerPlugin(
+  'test',
+  () => ({
+    view: () => m('p', 'TEST'),
+  }),
+  () => ({
+    view: ({ attrs: { label } }) => m('p', 'READONLY TEST: ' + label),
+  })
+);
