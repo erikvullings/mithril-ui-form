@@ -113,13 +113,3 @@ const LayoutFormFactory = () => {
 };
 
 export const LayoutForm = LayoutFormFactory().createLayoutForm();
-
-registerPlugin(
-  'test',
-  () => ({
-    view: () => m('p', 'TEST'),
-  }),
-  () => ({
-    view: ({ attrs: { label } }) => m('p', 'READONLY TEST: ' + label),
-  })
-);

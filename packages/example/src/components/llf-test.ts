@@ -658,7 +658,6 @@ const source = [
 ] as UIForm;
 
 const info = [
-  { id: 'test', type: 'test', readonly: true },
   { id: 'intake', type: 'section' },
   {
     type: 'md',
