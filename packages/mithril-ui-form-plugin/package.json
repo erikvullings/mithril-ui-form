@@ -1,0 +1,35 @@
+{
+  "name": "mithril-ui-form-plugin",
+  "version": "0.1.0",
+  "description": "Plugin type definition for Mithril-UI-Form.",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erikvullings/mithril-ui-form.git"
+  },
+  "scripts": {
+    "clean": "rimraf lib dist",
+    "build": "tsc -b",
+    "start": "tsc -w",
+    "dev": "npm start",
+    "dry-run": "npm publish --dry-run",
+    "patch-release": "npm run clean && npm run build && npm version patch --force -m \"Patch release\" && npm publish && git push --follow-tags",
+    "minor-release": "npm run clean && npm run build && npm version minor --force -m \"Minor release\" && npm publish && git push --follow-tags",
+    "major-release": "npm run clean && npm run build && npm version major --force -m \"Major release\" && npm publish && git push --follow-tags",
+    "gen:schema": "typescript-json-schema.cmd tsconfig.json Form > ./schema/ui-form.json"
+  },
+  "keywords": [
+    "mithril",
+    "ui",
+    "form",
+    "plugin"
+  ],
+  "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/mithril": "^2.0.7",
+    "rimraf": "^3.0.2",
+    "tslib": "^2.2.0",
+    "typescript": "^4.2.4"
+  }
+}
