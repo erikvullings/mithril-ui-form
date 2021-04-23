@@ -18,9 +18,7 @@ export const leafletPlugin: PluginType = () => {
   return {
     view: ({ attrs: { props, iv, field, onchange } }) => {
       const id = props.id;
-      const disabled = props.disabled;
-      const editable = disabled ? undefined : [id];
-      console.table({ id, disabled, editable });
+      const editable = props.disabled || props.readonly || field.readonly ? undefined : [id];
       const overlay = (iv ||
         field.value || {
           type: 'FeatureCollection',
