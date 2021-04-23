@@ -170,7 +170,6 @@ export const formFieldFactory = (
           (description && !canResolvePlaceholders(description, obj, context))
         ) {
           // console.table({ show, obj, context });
-          console.warn('Cannot resolve show, label or description!');
           return undefined;
         }
 
@@ -373,7 +372,10 @@ export const formFieldFactory = (
             }
           }
         } else {
-          if (type && plugins.hasOwnProperty(type))
+          console.log(type);
+          console.log(Object.keys(plugins));
+          if (type && plugins.hasOwnProperty(type)) {
+            console.log(type);
             return m(plugins[type], {
               iv,
               field,
@@ -381,6 +383,7 @@ export const formFieldFactory = (
               label: props.label,
               onchange,
             });
+          }
           switch (type) {
             case 'colour':
             case 'color': {
