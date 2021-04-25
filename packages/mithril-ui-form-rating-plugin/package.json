@@ -1,0 +1,49 @@
+{
+  "name": "mithril-ui-form-rating-plugin",
+  "version": "0.2.0",
+  "description": "Plugin to add a rating component to Mithril-UI-Form.",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erikvullings/mithril-ui-form.git"
+  },
+  "scripts": {
+    "clean": "rimraf lib dist",
+    "build": "microbundle",
+    "start": "microbundle watch",
+    "dev": "npm start",
+    "dry-run": "npm publish --dry-run",
+    "patch-release": "npm run clean && npm run build && npm version patch --force -m \"Patch release\" && npm publish && git push --follow-tags",
+    "minor-release": "npm run clean && npm run build && npm version minor --force -m \"Minor release\" && npm publish && git push --follow-tags",
+    "major-release": "npm run clean && npm run build && npm version major --force -m \"Major release\" && npm publish && git push --follow-tags",
+    "gen:schema": "typescript-json-schema.cmd tsconfig.json Form > ./schema/ui-form.json"
+  },
+  "keywords": [
+    "mithril",
+    "ui",
+    "form",
+    "leaflet",
+    "plugin"
+  ],
+  "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/mithril": "^2.0.7",
+    "mithril-ui-form-plugin": "^0.2.0",
+    "microbundle": "^0.13.0",
+    "rimraf": "^3.0.2",
+    "tslib": "^2.2.0",
+    "typescript": "^4.2.4"
+  },
+  "peerDependencies": {
+    "mithril": "^2.0.4"
+  },
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ]
+}
