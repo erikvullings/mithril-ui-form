@@ -17,7 +17,7 @@ L.Icon.Default.mergeOptions({
 export const leafletPlugin: PluginType = () => {
   return {
     view: ({ attrs: { props, iv, field, onchange } }) => {
-      const id = props.id;
+      const id = props.id || '';
       const editable = props.disabled || props.readonly || field.readonly ? undefined : [id];
       const overlay = (iv ||
         field.value || {

@@ -28,7 +28,8 @@
     "mithril": "^2.0.4",
     "mithril-materialized": "^0.19.0",
     "mithril-ui-form": "^1.0.0",
-    "mithril-ui-form-leaflet-plugin": "^0.2.0"
+    "mithril-ui-form-leaflet-plugin": "^0.2.0",
+    "mithril-ui-form-rating-plugin": "workspace:*"
   },
   "devDependencies": {
     "@babel/types": "7.13.14",

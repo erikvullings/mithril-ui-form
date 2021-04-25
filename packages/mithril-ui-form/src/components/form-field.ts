@@ -1,5 +1,5 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
-import { PluginType } from 'mithril-ui-form-plugin';
+import { PluginType, IInputField, I18n } from 'mithril-ui-form-plugin';
 import { render } from '../utils/slimdown-js';
 import {
   InputCheckbox,
@@ -22,7 +22,6 @@ import {
   uniqueId,
   Button,
 } from 'mithril-materialized';
-import { IInputField } from '../models/input-field';
 import {
   capitalizeFirstLetter,
   toHourMin,
@@ -30,8 +29,6 @@ import {
   canResolvePlaceholders,
   resolvePlaceholders,
 } from '../utils';
-import { IObject } from '../models/object';
-import { I18n } from '../models';
 import { LayoutForm } from './layout-form';
 import { ReadonlyComponent } from './readonly';
 import { SlimdownView } from './slimdown-view';
@@ -54,8 +51,8 @@ const unwrapComponent = (field: IInputField, autofocus = false, disabled = false
     min,
     step,
   } = field;
-  const result = { id: `${id}-${uniqueId()}`, label } as IObject;
-  if (!label && id) {
+  const result = { id: `${id}-${uniqueId()}`, label } as Record<string, any>;
+  if (typeof label === 'undefined' && id) {
     result.label = capitalizeFirstLetter(id);
   }
   if (description) {
@@ -110,10 +107,10 @@ interface IFormField extends Attributes {
   /** The input field (or form) that must be rendered repeatedly */
   field: IInputField;
   /** The resulting object */
-  obj: IObject | IObject[];
+  obj: Record<string, any> | Record<string, any>[];
   autofocus?: boolean;
   /** Callback function, invoked every time the original result object has changed */
-  onchange: (result: IObject | IObject[]) => void;
+  onchange: (result: Record<string, any> | Record<string, any>[]) => void;
   /** Disable the form field, disallowing edits */
   disabled?: boolean | string | string[];
   /** Section ID to display - can be used to split up the form and only show a part */
@@ -206,7 +203,7 @@ export const formFieldFactory = (
           return undefined; // Only a repeat list can deal with arrays
         }
 
-        const onchange = async (v: string | number | Array<string | number | IObject> | Date | boolean) => {
+        const onchange = async (v: string | number | Array<string | number | Record<string, any>> | Date | boolean) => {
           if (typeof v === 'undefined' || v === 'undefined') {
             delete obj[id];
             onFormChange(obj);
@@ -273,6 +270,15 @@ export const formFieldFactory = (
               props,
               label: props.label,
             });
+          if (type && plugins.hasOwnProperty(type)) {
+            return m(plugins[type], {
+              iv,
+              field,
+              props,
+              label: props.label,
+              onchange,
+            });
+          }
           switch (type) {
             case 'time': {
               const date = (iv as Date) || new Date();
@@ -372,10 +378,7 @@ export const formFieldFactory = (
             }
           }
         } else {
-          console.log(type);
-          console.log(Object.keys(plugins));
           if (type && plugins.hasOwnProperty(type)) {
-            console.log(type);
             return m(plugins[type], {
               iv,
               field,

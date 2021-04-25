@@ -25,6 +25,7 @@ importers:
       mithril-materialized: ^0.19.0
       mithril-ui-form: ^1.0.0
       mithril-ui-form-leaflet-plugin: ^0.2.0
+      mithril-ui-form-rating-plugin: workspace:*
       mixin-deep: ^2.0.1
       parcel-bundler: ^1.12.5
       rimraf: ^3.0.2
@@ -37,6 +38,7 @@ importers:
       mithril-materialized: 0.19.0_f3d9df6f4766fd28b6cfb8072ccbc3ca
       mithril-ui-form: link:../mithril-ui-form
       mithril-ui-form-leaflet-plugin: link:../mithril-ui-form-leaflet-plugin
+      mithril-ui-form-rating-plugin: link:../mithril-ui-form-rating-plugin
     devDependencies:
       '@babel/types': 7.13.14
       '@types/leaflet': 1.7.0

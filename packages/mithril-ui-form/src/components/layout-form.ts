@@ -1,19 +1,18 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
-import { PluginType } from 'mithril-ui-form-plugin';
+import { PluginType, UIForm, IInputField, I18n } from 'mithril-ui-form-plugin';
 import { Vnode } from 'mithril';
 import { formFieldFactory } from './form-field';
-import { UIForm, IObject, IInputField, I18n } from '../models';
 import { IRepeatList, RepeatList } from './repeat-list';
 
 export interface ILayoutForm extends Attributes {
   /** The form to display */
   form: UIForm;
   /** The resulting object */
-  obj: IObject | IObject[];
+  obj: Record<string, any> | Record<string, any>[];
   /** Relevant context, i.e. the original object and other context from the environment */
-  context?: IObject | IObject[]; // TODO Check this type, may be an array of contexts
+  context?: Record<string, any> | Record<string, any>[]; // TODO Check this type, may be an array of contexts
   /** Callback function, invoked every time the original result object has changed */
-  onchange?: (isValid: boolean, obj?: IObject) => void;
+  onchange?: (isValid: boolean, obj?: Record<string, any>) => void;
   /** Disable the form, disallowing edits */
   disabled?: boolean | string | string[];
   /** Section ID to display - can be used to split up the form and only show a part */
@@ -32,7 +31,7 @@ export const registerPlugin = (name: string, plugin: PluginType, readonlyPlugin?
 };
 
 const LayoutFormFactory = () => {
-  const isValid = (item: IObject, form: UIForm) => {
+  const isValid = (item: Record<string, any>, form: UIForm) => {
     return form
       .filter((f) => f.required && typeof f.id !== undefined)
       .reduce(
@@ -70,7 +69,7 @@ const LayoutFormFactory = () => {
 
     return {
       view: ({ attrs: { i18n, form, obj, onchange: onChange, disabled, readonly, context, section } }) => {
-        const onchange = (res: IObject) => onChange && onChange(isValid(res, form), res);
+        const onchange = (res: Record<string, any>) => onChange && onChange(isValid(res, form), res);
         const sectionFilter = () => {
           if (!section) {
             return (_: IInputField) => true;

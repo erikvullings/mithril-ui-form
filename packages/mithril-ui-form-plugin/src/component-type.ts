@@ -1,5 +1,3 @@
-import { UIForm } from './form';
-
 /** The type of primitive components that can be used */
 export type ComponentType =
   | 'autogenerate'
@@ -23,6 +21,5 @@ export type ComponentType =
   | 'text'
   | 'textarea'
   | 'time'
-  | 'url';
-
-export const isComponentType = (x?: ComponentType | UIForm): x is ComponentType => typeof x === 'string';
+  | 'url'
+  | string;

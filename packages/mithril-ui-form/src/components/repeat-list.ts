@@ -1,19 +1,18 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
 import { FlatButton, uniqueId, ModalPanel, Pagination, RoundIconButton, TextInput } from 'mithril-materialized';
-import { IInputField, UIForm, IObject } from '../models';
+import { I18n, IInputField, UIForm } from 'mithril-ui-form-plugin';
 import { LayoutForm } from './layout-form';
 import { range, stripSpaces, hash } from '../utils';
-import { I18n } from '../models/i18n';
 
 export interface IRepeatList extends Attributes {
   /** The input field (or form) that must be rendered repeatedly */
   field: IInputField;
   /** The result object */
-  obj: IObject | IObject[];
+  obj: Record<string, any> | Record<string, any>[];
   /** The context */
-  context: IObject;
+  context: Record<string, any>;
   /** Callback function, invoked every time the original result object has changed */
-  onchange?: (result: IObject | IObject[]) => void;
+  onchange?: (result: Record<string, any> | Record<string, any>[]) => void;
   /** Section ID to display - can be used to split up the form and only show a part */
   section?: string;
   /** Translation keys, read once on initialization */
@@ -33,9 +32,9 @@ export interface IRepeatList extends Attributes {
  */
 export const RepeatList: FactoryComponent<IRepeatList> = () => {
   const state = {} as {
-    editItem?: IObject;
-    curItem?: IObject;
-    newItem?: IObject;
+    editItem?: Record<string, any>;
+    curItem?: Record<string, any>;
+    newItem?: Record<string, any>;
     canSave?: boolean;
     editModal?: M.Modal;
     modalKey?: string;
@@ -45,7 +44,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
     filterValue?: string;
   };
 
-  const getItems = (obj: IObject | IObject[], id: string): IObject[] => {
+  const getItems = (obj: Record<string, any> | Record<string, any>[], id: string): Record<string, any>[] => {
     if (obj instanceof Array) {
       return obj;
     } else {
@@ -80,7 +79,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
         onchange,
       },
     }) => {
-      const notify = (result: IObject | IObject[]) => onchange && onchange(result);
+      const notify = (result: Record<string, any> | Record<string, any>[]) => onchange && onchange(result);
       const { modalKey, filterValue } = state;
       const { id = '', label, type, max, pageSize, propertyFilter, sortProperty, filterLabel, readonly = r } = field;
       const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
@@ -93,11 +92,11 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
           : allItems;
       const compareFn = sortProperty
         ? sortProperty[0] === '!'
-          ? (a: IObject, b: IObject) =>
+          ? (a: Record<string, any>, b: Record<string, any>) =>
               a[sortProperty] > b[sortProperty] ? -1 : a[sortProperty] < b[sortProperty] ? 1 : 0
-          : (a: IObject, b: IObject) =>
+          : (a: Record<string, any>, b: Record<string, any>) =>
               a[sortProperty] > b[sortProperty] ? 1 : a[sortProperty] < b[sortProperty] ? -1 : 0
-        : (_a: IObject, _b: IObject) => 0;
+        : (_a: Record<string, any>, _b: Record<string, any>) => 0;
       const page = m.route.param(id) ? Math.min(items.length, +m.route.param(id)) : 1;
       const curPage = pageSize && items && (page - 1) * pageSize < items.length ? page : 1;
       const delimitter = pageSize
@@ -208,7 +207,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
             title: i18n.deleteItem || 'Delete item',
             description: m(LayoutForm, {
               form: type as UIForm,
-              obj: state.curItem as IObject,
+              obj: state.curItem as Record<string, any>,
               context: [obj, context],
               section,
               containerId,

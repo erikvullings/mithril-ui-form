@@ -1,5 +1,6 @@
-import { ComponentType, UIForm, I18n } from '.';
-import { IObject } from './object';
+import { ComponentType } from './component-type';
+import { UIForm } from './form';
+import { I18n } from './i18n';
 
 /**
  * A form component represents the GUI used to create an object. The object that
@@ -105,8 +106,8 @@ export interface IInputField {
   transform?: <U, V>(dir: 'from' | 'to', value: U | V) => V | U;
   /** Generate a side-effect after setting, and optionally transforming, the value. */
   effect?: (
-    obj?: IObject,
+    obj?: Record<string, any>,
     value?: string | number | string[] | number[] | boolean | Date,
-    context?: IObject[]
-  ) => Promise<IObject | undefined> | undefined;
+    context?: Record<string, any>[]
+  ) => Promise<Record<string, any> | undefined> | undefined;
 }

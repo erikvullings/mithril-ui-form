@@ -1,6 +1,8 @@
-import { IObject, UIForm, IInputField } from '../models';
+import { UIForm, IInputField, ComponentType } from 'mithril-ui-form-plugin';
 
 export const capitalizeFirstLetter = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+export const isComponentType = (x?: ComponentType | UIForm): x is ComponentType => typeof x === 'string';
 
 /**
  * Pad the string with padding character.
@@ -20,7 +22,7 @@ export const toHourMin = (d: Date) => `${padLeft(d.getHours())}:${padLeft(d.getM
  * @param s: path, e.g. a.b[0].c
  * @see https://stackoverflow.com/a/6491621/319711
  */
-export const getPath = (o: IObject, s: string) => {
+export const getPath = (o: Record<string, any>, s: string) => {
   s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
   s = s.replace(/^\./, ''); // strip a leading dot
   const a = s.split('.');
@@ -44,7 +46,7 @@ const flatten = <T>(arr: T[]) =>
 const expressionRegex = /([^ =><]*)\s*([=><]*)\s*(\S*)/i;
 const invertExpression = /^\s*!\s*/;
 
-const checkExpression = (expression: string, obj: IObject) => {
+const checkExpression = (expression: string, obj: Record<string, any>) => {
   if (!obj || Object.keys(obj).length === 0) {
     return false;
   }
@@ -79,7 +81,7 @@ const checkExpression = (expression: string, obj: IObject) => {
   return true;
 };
 
-const checkExpressions = (expression: string, objArr: IObject[]) => {
+const checkExpressions = (expression: string, objArr: Record<string, any>[]) => {
   const ands = expression.split('&');
   const flattened = flatten(objArr);
   return ands.reduce((acc, expr) => {
@@ -90,12 +92,12 @@ const checkExpressions = (expression: string, objArr: IObject[]) => {
   }, true);
 };
 
-export const evalExpression = (expression: string | string[], ...objArr: IObject[]) => {
+export const evalExpression = (expression: string | string[], ...objArr: Record<string, any>[]) => {
   const expr = expression instanceof Array ? expression : [expression];
   return expr.some((e) => checkExpressions(e, objArr));
 };
 
-const resolveExpression = (expression: string, objArr: IObject[]) =>
+const resolveExpression = (expression: string, objArr: Record<string, any>[]) =>
   objArr
     .filter(Boolean)
     .reduce(
@@ -103,13 +105,13 @@ const resolveExpression = (expression: string, objArr: IObject[]) =>
       undefined as string | number | Date | boolean | undefined
     );
 
-const canResolveExpression = (expression: string, objArr: IObject[]) =>
+const canResolveExpression = (expression: string, objArr: Record<string, any>[]) =>
   typeof resolveExpression(expression, objArr) !== 'undefined';
 
 const placeholderRegex = /{{\s*([^\s"'`:]*):?([^\s]*)\s*}}/g;
 
 /** Can the placeholders be resolved by the object, i.e. do we have a match in the active object or its context. */
-export const canResolvePlaceholders = (str: string, ...objArr: IObject[]) => {
+export const canResolvePlaceholders = (str: string, ...objArr: Record<string, any>[]) => {
   if (!placeholderRegex.test(str)) {
     return true;
   }
@@ -171,7 +173,7 @@ const formatExpression = (
 };
 
 /** Replace the placeholder with the appropriate value. */
-export const resolvePlaceholders = (str: string, ...objArr: IObject[]) => {
+export const resolvePlaceholders = (str: string, ...objArr: Record<string, any>[]) => {
   if (!placeholderRegex.test(str)) {
     return str;
   }

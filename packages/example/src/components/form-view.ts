@@ -2,6 +2,7 @@ import m from 'mithril';
 import { LayoutForm, registerPlugin, UIForm, SlimdownView, I18n } from 'mithril-ui-form';
 import { TextArea } from 'mithril-materialized';
 import { leafletPlugin } from 'mithril-ui-form-leaflet-plugin';
+import { ratingPlugin } from 'mithril-ui-form-rating-plugin';
 
 export interface IContext {
   admin: boolean;
@@ -89,6 +90,24 @@ const source = [
 
 const info = [
   {
+    id: 'my_rating',
+    label: 'What do you think of this plugin?',
+    description: '_Please, be honest!_',
+    type: 'rating',
+    min: 0,
+    max: 5,
+    ratings: { '0': 'extremely<br>bad', '5': 'super<br>good' },
+  },
+  {
+    id: 'my_rating',
+    label: '',
+    disabled: true,
+    type: 'rating',
+    min: 0,
+    max: 5,
+    ratings: { '0': 'extremely<br>bad', '5': 'super<br>good' },
+  },
+  {
     id: 'intro',
     type: 'md',
     value: `#### Introduction
@@ -113,6 +132,7 @@ You can also include _markdown_ in your UIForm.`,
 
 export const FormView = () => {
   registerPlugin('map', leafletPlugin);
+  registerPlugin('rating', ratingPlugin);
 
   const state = {
     result: {} as ILessonLearned,
@@ -130,6 +150,7 @@ export const FormView = () => {
   state.form = info;
 
   state.result = {
+    my_rating: 5,
     id: '31a0f2b7-522a-4d3e-bd6f-69d4507247e6',
     created: new Date('2019-06-01T22:00:00.000Z'),
     edited: new Date('2019-06-08T22:00:00.000Z'),
@@ -183,7 +204,7 @@ ${result.sources ? result.sources.map((s, i) => `${i + 1}. [${s.title}](${s.url}
 
       // const ui = formFactory(info, result, print);
       return m('.row', [
-        m('.col.s6.l4', [
+        m('.col.s12.m4', [
           m(SlimdownView, {
             md: `##### JSON FORM
 
@@ -200,7 +221,7 @@ ${result.sources ? result.sources.map((s, i) => `${i + 1}. [${s.title}](${s.url}
           }),
           state.error ? m('p', m('em.red', state.error)) : undefined,
         ]),
-        m('.col.s6.l4', [
+        m('.col.s12.m8', [
           m('h5', 'Generated Form'),
           m(
             'div',
@@ -217,7 +238,7 @@ ${result.sources ? result.sources.map((s, i) => `${i + 1}. [${s.title}](${s.url}
             })
           ),
         ]),
-        m('.col.s6.l4', [
+        m('.col.s12', [
           m('h5', 'Resulting object'),
           m('pre', JSON.stringify(state.result, null, 2)),
           m(SlimdownView, { md: md2 }),
