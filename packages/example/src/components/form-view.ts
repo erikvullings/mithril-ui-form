@@ -105,7 +105,6 @@ const info = [
     type: 'rating',
     min: 0,
     max: 5,
-    ratings: { '0': 'extremely<br>bad', '5': 'super<br>good' },
   },
   {
     id: 'intro',

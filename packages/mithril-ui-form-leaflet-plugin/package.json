@@ -1,6 +1,6 @@
 {
   "name": "mithril-ui-form-leaflet-plugin",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Plugin to add a Leaflet-based map component to Mithril-UI-Form.",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
@@ -44,6 +44,9 @@
     "rimraf": "^3.0.2",
     "tslib": "^2.2.0",
     "typescript": "^4.2.4"
+  },
+  "peerDependencies": {
+    "mithril": "^2.0.4"
   },
   "browserslist": [
     "last 2 version",
