@@ -21,24 +21,23 @@ Please include the following CSS style to make it look good.
 ```css
 .muf-rating {
   width: 100%;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
 }
 .muf-rating > .label {
-  width: 50%; /* Room reserved for the label (question) */
+  width: 50%;
 }
 .muf-rating > .radios {
-  width: 50%; /* Room reserved for the radio buttons */
+  width: 50%;
   display: flex;
   justify-content: space-evenly;
   align-items: flex-end;
-  padding-bottom: 1rem;
 }
 .muf-rating > .radios > label {
   display: inline-block;
-  padding: 0 0.1rem;
+  padding: 0 0.1rem 1rem 0.1rem;
   text-align: center;
 }
 .muf-rating > .radios > label > input[type='radio'] {
