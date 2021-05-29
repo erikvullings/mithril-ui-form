@@ -1,6 +1,6 @@
 # mithril-ui-form
 
-A component for the [Mithril framework](https://mithril.js.org), which allows you to convert an object (or JSON file) to a dynamic form. 
+A component for the [Mithril framework](https://mithril.js.org), which allows you to convert an object (or JSON file) to a dynamic form.
 
 When dealing with complex forms, I noticed that I often needed to implement the same logic and code, over and over again. Therefore, I looked for an approach to avoid repeating code (and making similar mistakes), and this library was born. It allows you to create dynamic forms based on a JSON object as input. The JSON file is converted to a [materialized-css](https://materialized-css.com) form. The entered data is returned as an object.
 

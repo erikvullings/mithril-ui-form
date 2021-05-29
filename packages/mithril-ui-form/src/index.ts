@@ -8,7 +8,6 @@ export {
   labelResolver,
   deepCopy,
   padLeft,
-  getPath,
   stripSpaces,
   toHourMin,
 } from './utils';

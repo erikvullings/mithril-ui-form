@@ -22,14 +22,25 @@ export const toHourMin = (d: Date) => `${padLeft(d.getHours())}:${padLeft(d.getM
  * @param s: path, e.g. a.b[0].c
  * @see https://stackoverflow.com/a/6491621/319711
  */
-export const getPath = (o: Record<string, any>, s: string) => {
+const getPath = (obj: Record<string, any>, s: string) => {
   s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
   s = s.replace(/^\./, ''); // strip a leading dot
   const a = s.split('.');
+  let o = { ...obj };
   for (let i = 0, n = a.length; i < n; ++i) {
     const k = a[i];
     if (k in o) {
       o = o[k];
+    } else if (o instanceof Array) {
+      const id = obj[k] || k;
+      const m = /([A-Z]\w+)/.exec(k); // categoryId => match Id, myNameLabel => NameLabel
+      const key = (m && m[0][0].toLowerCase() + m[0].substr(1)) || k; // key = id or nameLabel
+      const found = o.filter((i) => i[key] === id).shift();
+      if (found) {
+        o = found;
+      } else {
+        return undefined;
+      }
     } else {
       return undefined;
     }
@@ -97,12 +108,18 @@ export const evalExpression = (expression: string | string[], ...objArr: Record<
   return expr.some((e) => checkExpressions(e, objArr));
 };
 
-const resolveExpression = (expression: string, objArr: Record<string, any>[]) =>
+export const resolveExpression = (expression: string, objArr: Record<string, any>[]) =>
   objArr
     .filter(Boolean)
     .reduce(
       (p, obj) => p || getPath(obj, expression.trim()),
-      undefined as string | number | Date | boolean | undefined
+      undefined as
+        | string
+        | number
+        | Date
+        | boolean
+        | Array<{ id: string; label?: string; disabled?: boolean; icon?: string; show?: string | string[] }>
+        | undefined
     );
 
 const canResolveExpression = (expression: string, objArr: Record<string, any>[]) =>
@@ -192,7 +209,7 @@ export const resolvePlaceholders = (str: string, ...objArr: Record<string, any>[
       // The result can be accessed through the `m`-variable.
       m.forEach((_, __, [fullMatch, expression, exprType]) => {
         const resolved = resolveExpression(expression, objArr);
-        if (resolved) {
+        if (resolved && !(resolved instanceof Array)) {
           str = str.replace(fullMatch, formatExpression(resolved, exprType));
         }
       });
@@ -271,10 +288,17 @@ export const labelResolver = (form: UIForm) => {
       case 'radio':
       case 'select':
       case 'options':
+        const opt =
+          typeof ff.options === 'string'
+            ? (resolveExpression(ff.options, [dict]) as Array<{
+                id: string;
+                label?: string | undefined;
+              }>)
+            : ff.options;
         return values
           .map((v) =>
-            ff
-              .options!.filter((o) => o.id === v)
+            opt!
+              .filter((o) => o.id === v)
               .map((o) => o.label || capitalizeFirstLetter(o.id))
               .shift()
           )

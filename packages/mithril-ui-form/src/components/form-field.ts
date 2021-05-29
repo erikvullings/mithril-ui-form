@@ -28,6 +28,7 @@ import {
   evalExpression,
   canResolvePlaceholders,
   resolvePlaceholders,
+  resolveExpression,
 } from '../utils';
 import { LayoutForm } from './layout-form';
 import { ReadonlyComponent } from './readonly';
@@ -170,11 +171,17 @@ export const formFieldFactory = (
           return undefined;
         }
 
-        const options = (field.options
-          ? field.options
-              .filter((o) => o.id && (!o.show || evalExpression(o.show, obj, context)))
-              .map((o) => (o.label ? o : { ...o, label: capitalizeFirstLetter(o.id) }))
-          : []) as Array<{ id: string; label: string; disabled?: boolean; icon?: string; show?: string | string[] }>;
+        const opt =
+          typeof field.options === 'string' ? resolveExpression(field.options, [obj, context]) : field.options;
+        const options = (
+          opt && opt instanceof Array
+            ? opt
+                .filter(
+                  (o) => o.id && (o.label || !/[0-9]/.test(o.id)) && (!o.show || evalExpression(o.show, obj, context))
+                )
+                .map((o) => (o.label ? o : { ...o, label: capitalizeFirstLetter(o.id) }))
+            : []
+        ) as Array<{ id: string; label: string; disabled?: boolean; icon?: string; show?: string | string[] }>;
 
         const parentIsDisabled = typeof d === 'boolean' && d;
 
@@ -549,9 +556,9 @@ export const formFieldFactory = (
               return m('.divider');
             case 'switch': {
               const checked = iv as boolean;
-              const { options: opt } = field;
-              const left = opt && opt.length > 0 ? opt[0].label : '';
-              const right = opt && opt.length > 1 ? opt[1].label : '';
+              // const { options: opt } = field;
+              const left = options && options.length > 0 ? options[0].label : '';
+              const right = options && options.length > 1 ? options[1].label : '';
               return m(Switch, { ...props, left, right, checked, onchange });
             }
             case 'tags': {
@@ -640,6 +647,7 @@ export const formFieldFactory = (
                 autofocus,
                 onchange,
                 initialValue,
+                tabindex: 15,
               });
             }
             default:
@@ -656,6 +664,3 @@ export const formFieldFactory = (
     createFormField,
   };
 };
-
-/** A single input field in a form */
-export const FormField = formFieldFactory().createFormField();

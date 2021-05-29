@@ -1,12 +1,12 @@
 # Mithril-UI-Form: Create dynamic forms based on JSON as input
 
-[Mithril-ui-form](https://www.npmjs.com/package/mithril-ui-form) is a declarative framwork to create forms using the front-end [Mithril framework](https://mithril.js.org/) and [mithril-materialized](https://www.npmjs.com/package/mithril-materialized) components using the [materialize-css](http://materializecss.com/) design theme.
+[Mithril-ui-form](https://www.npmjs.com/package/mithril-ui-form) is a declarative framework to create forms using the front-end [Mithril framework](https://mithril.js.org/) and [mithril-materialized](https://www.npmjs.com/package/mithril-materialized) components using the [materialize-css](http://materializecss.com/) design theme.
 
 A JSON file using a simple syntax is converted to a [materialized-css](https://materialized-css.com) form. The entered data is returned as an object.
 
-The form supports markdown input, repeating elements a (dynamic) number of times, and conditionally displaying or disabling certain fields. If `readonly` is `true`, the form becomes a static display.
+The form supports markdown input, repeating elements a (dynamic) number of times, and conditionally displaying or disabling certain fields. If `readonly` is `true`, the form becomes readonly.
 
-If the form is an object, you can also include a field transform (to and from) function.
+If the form is an object instead of a JSON file, you can also include a field transform (to and from) function.
 
 ## Placeholders
 
@@ -37,6 +37,45 @@ m(LayoutForm, {
 ```
 
 It would render `The current time is 7:28:27 AM and checked is yes`.
+
+## Dynamic selections
+
+Assume you want to define a number of categories, each with certain subcategories, and the user can submit a document based on a category and subcategory, you can create a form as follows:
+
+```ts
+{
+  id: 'categories',
+  label: 'Categories',
+  repeat: true,
+  type: [
+    { id: 'id', type: 'none', autogenerate: 'id' },
+    { id: 'label', type: 'text', label: 'Name', className: 'col s4', tabindex: 0 },
+    { id: 'desc', type: 'textarea', className: 'col s8', tabindex: 1 },
+    {
+      id: 'subcategories',
+      label: 'Subcategories',
+      repeat: true,
+      tabindex: 2,
+      className: 'col s8',
+      type: [
+        { id: 'id', type: 'none', autogenerate: 'id' },
+        { id: 'label', type: 'text', label: 'Name', className: 'col s4' },
+        { id: 'desc', type: 'textarea', className: 'col s8' },
+      ],
+    },
+  ],
+},
+{ id: 'categoryId', label: 'Category', type: 'select', options: 'categories', className: 'col s6' },
+{
+  id: 'subcategoryId',
+  label: 'Subcategory',
+  type: 'select',
+  options: 'categories.categoryId.subcategories',
+  className: 'col s6',
+},
+```
+
+Note especially the latter two fields: `categoryId` is a select component, whose options are defined above in `categories`. The `subcategoryId` receives its options from the `subcategories` of the category whose `id` property matches the `categoryId` value. The match is determined partially by the name, e.g. if instead of `categoryId` you would have used `categoryLabel`, the `label` field would have been matched. Since `options` need an `id` and `label` property, that would not work here.
 
 ## Plugin system
 
