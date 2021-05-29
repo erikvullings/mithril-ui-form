@@ -37,13 +37,13 @@
   "devDependencies": {
     "@types/geojson": "^7946.0.7",
     "@types/leaflet": "^1.7.0",
+    "@types/leaflet-draw": "^1.0.4",
     "@types/mithril": "^2.0.7",
+    "microbundle": "^0.13.1",
     "mithril-ui-form-plugin": "^0.2.0",
-    "@types/leaflet-draw": "^1.0.3",
-    "microbundle": "^0.13.0",
     "rimraf": "^3.0.2",
     "tslib": "^2.2.0",
-    "typescript": "^4.2.4"
+    "typescript": "^4.3.2"
   },
   "peerDependencies": {
     "mithril": "^2.0.4"
