@@ -1,6 +1,6 @@
 {
   "name": "mithril-ui-form",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Convert a JSON file or object to a dynamic, materialized form.",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
@@ -19,7 +19,7 @@
     "patch-release": "npm run clean && npm run build && npm version patch --force -m \"Patch release\" && npm publish && git push --follow-tags",
     "minor-release": "npm run clean && npm run build && npm version minor --force -m \"Minor release\" && npm publish && git push --follow-tags",
     "major-release": "npm run clean && npm run build && npm version major --force -m \"Major release\" && npm publish && git push --follow-tags",
-    "gen:schema": "typescript-json-schema.cmd tsconfig.json Form > ./schema/ui-form.json"
+    "gen:schema": "typescript-json-schema.cmd tsconfig.json UIForm > ./schema/ui-form.json"
   },
   "keywords": [
     "mithril",

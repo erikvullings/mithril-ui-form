@@ -1,0 +1,289 @@
+{
+    "$ref": "#/definitions/UIForm",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "I18n": {
+            "description": "Contains all the translatable keys",
+            "properties": {
+                "agree": {
+                    "description": "Label for the agree button of the RepeatList",
+                    "type": "string"
+                },
+                "cancel": {
+                    "description": "Cancel button text",
+                    "type": "string"
+                },
+                "createRepeat": {
+                    "description": "Label for the create button of the RepeatList",
+                    "type": "string"
+                },
+                "deleteItem": {
+                    "description": "Label for the delete button of the RepeatList",
+                    "type": "string"
+                },
+                "disagree": {
+                    "description": "Label for the disagree button of the RepeatList",
+                    "type": "string"
+                },
+                "editRepeat": {
+                    "description": "Label for the edit button of the RepeatList",
+                    "type": "string"
+                },
+                "pickOne": {
+                    "description": "Pick one",
+                    "type": "string"
+                },
+                "pickOneOrMore": {
+                    "description": "Pick one or more",
+                    "type": "string"
+                },
+                "save": {
+                    "description": "Save button text",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "IInputField": {
+            "description": "A form component represents the GUI used to create an object. The object that\nis created has different properties. Each property is referenced by its ID\nvalue.",
+            "properties": {
+                "autogenerate": {
+                    "description": "Autogenerate a GUID, ID (shorter, starting with `id`) value or add a timestamp (msec since 1/1/1970)",
+                    "enum": [
+                        "guid",
+                        "id",
+                        "timestamp"
+                    ],
+                    "type": "string"
+                },
+                "checkAllOptions": {
+                    "description": "Only for options, allow the user to check all properties at once. It is a string, e.g.\n\"Select all|Unselect all\", where the pipe separates the two modes.",
+                    "type": "string"
+                },
+                "checkboxClass": {
+                    "description": "CSS class for the content, e.g. for grouping an options list or to inline radio options",
+                    "type": "string"
+                },
+                "className": {
+                    "description": "CSS class name to attach to the element",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Optional description",
+                    "type": "string"
+                },
+                "disabled": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": [
+                                "string",
+                                "boolean"
+                            ]
+                        }
+                    ],
+                    "description": "If true, the property is disabled"
+                },
+                "effect": {
+                    "description": "Generate a side-effect after setting, and optionally transforming, the value.",
+                    "type": "object"
+                },
+                "filterLabel": {
+                    "description": "filterLabel is only used for repeated items with a property filter, to set its label.",
+                    "type": "string"
+                },
+                "i18n": {
+                    "$ref": "#/definitions/I18n",
+                    "description": "Translation keys, read once on initialization"
+                },
+                "icon": {
+                    "description": "Name of the icon",
+                    "type": "string"
+                },
+                "iconClass": {
+                    "description": "Class of the icon",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Property key, not required for markdown blocks",
+                    "type": "string"
+                },
+                "inline": {
+                    "description": "If true, in case of a readonly component, put label in front of value.",
+                    "type": "boolean"
+                },
+                "label": {
+                    "description": "Component label",
+                    "type": "string"
+                },
+                "level": {
+                    "description": "Only valid for type='section', indicates section level",
+                    "type": "number"
+                },
+                "max": {
+                    "description": "When input type is a number or a date, optionally specify the maximum value (or a date).\nWhen dealing with a repeated item, max indicates the maximum number of entries that you want to show.",
+                    "type": "number"
+                },
+                "maxLength": {
+                    "description": "When input type is a text or text area, optionally specify the maximum length.",
+                    "type": "number"
+                },
+                "min": {
+                    "description": "When input type is a number or a date, optionally specify the minimum value (or min date).",
+                    "type": "number"
+                },
+                "minLength": {
+                    "description": "When input type is a text or text area, optionally specify the minimum length.",
+                    "type": "number"
+                },
+                "multiple": {
+                    "description": "If true, the select property allows for multiple selections",
+                    "type": "boolean"
+                },
+                "newLine": {
+                    "description": "If true, break to a new line",
+                    "type": "boolean"
+                },
+                "options": {
+                    "description": "Options for checkboxes, selects, dropdowns, and switches. In case it is a string,\nit refers to an external pre-defined property that contains the options. E.g. a\nlist of countries.\nFor file inputs, the option.id is used to build the accept list of acceptable file types.",
+                    "items": {
+                        "properties": {
+                            "disabled": {
+                                "type": "boolean"
+                            },
+                            "icon": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "label": {
+                                "type": "string"
+                            },
+                            "show": {
+                                "anyOf": [
+                                    {
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    },
+                                    {
+                                        "type": "string"
+                                    }
+                                ]
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "pageSize": {
+                    "description": "pageSize is only used for repeated items, where the item list is very long. Adds a pagination control.\nIf used, max is ignored.",
+                    "type": "number"
+                },
+                "placeholder": {
+                    "description": "Can be used as a placeholder for text inputs or the first element of a Selection",
+                    "type": "string"
+                },
+                "propertyFilter": {
+                    "description": "propertyFilter is only used for repeated items, to filter the list of items based on the provided property.",
+                    "type": "string"
+                },
+                "readonly": {
+                    "description": "If true, the property is shown in readonly mode",
+                    "type": "boolean"
+                },
+                "repeat": {
+                    "description": "If true, repeat the item multiple times (indicates it is an array)",
+                    "type": "boolean"
+                },
+                "required": {
+                    "description": "If true, the property is required",
+                    "type": "boolean"
+                },
+                "show": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "By default, show every element, except when this property is defined. In that case, show when:\n- show is a string with a elementID, and elementID is selected (as an answer)\n- show is a string array, and one of the elementIDs is selected (OR condition)\nWhen the string contains commas, separating elementIDs, only show it when all of these\nelements have been selected (AND condition)."
+                },
+                "sortProperty": {
+                    "description": "List may be sorted automatically based on a property with a string or number value.\nPrefix the property with an ! to sort in descending direction.",
+                    "enum": [
+                        "string"
+                    ],
+                    "type": "string"
+                },
+                "step": {
+                    "description": "Step size when dealing with numbers.",
+                    "type": "number"
+                },
+                "transform": {
+                    "description": "Transform function from the object's property U to the field's property V.\n'from': From the obj[id] to the field\n'to': From the field value to the obj[id]",
+                    "type": "object"
+                },
+                "type": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/UIForm"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "Type of component to use"
+                },
+                "url": {
+                    "description": "URL for FileInput (file) component type",
+                    "type": "string"
+                },
+                "value": {
+                    "anyOf": [
+                        {
+                            "format": "date-time",
+                            "type": "string"
+                        },
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": [
+                                "string",
+                                "number",
+                                "boolean"
+                            ]
+                        }
+                    ],
+                    "description": "Value that the component has, initially. Is also used to derive the type if not supplied."
+                }
+            },
+            "type": "object"
+        },
+        "UIForm": {
+            "description": "A form with one or more input fields or forms (to allow for nested objects)",
+            "items": {
+                "$ref": "#/definitions/IInputField"
+            },
+            "type": "array"
+        }
+    },
+    "description": "A form with one or more input fields or forms (to allow for nested objects)"
+}
+
