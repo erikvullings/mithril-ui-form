@@ -172,7 +172,7 @@ export const formFieldFactory = (
         }
 
         const opt =
-          typeof field.options === 'string' ? resolveExpression(field.options, [obj, context]) : field.options;
+          typeof field.options === 'string' ? resolveExpression(field.options, [obj, ...context]) : field.options;
         const options = (
           opt && opt instanceof Array
             ? opt

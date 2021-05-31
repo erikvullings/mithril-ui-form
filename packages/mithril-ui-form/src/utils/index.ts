@@ -109,18 +109,22 @@ export const evalExpression = (expression: string | string[], ...objArr: Record<
 };
 
 export const resolveExpression = (expression: string, objArr: Record<string, any>[]) =>
-  objArr
-    .filter(Boolean)
-    .reduce(
-      (p, obj) => p || getPath(obj, expression.trim()),
-      undefined as
-        | string
-        | number
-        | Date
-        | boolean
-        | Array<{ id: string; label?: string; disabled?: boolean; icon?: string; show?: string | string[] }>
-        | undefined
-    );
+  getPath(
+    objArr.filter(Boolean).reduceRight((acc, obj) => ({ ...obj, ...acc })),
+    expression.trim()
+  );
+// objArr
+//   .filter(Boolean)
+//   .reduce(
+//     (p, obj) => p || getPath(obj, expression.trim()),
+//     undefined as
+//       | string
+//       | number
+//       | Date
+//       | boolean
+//       | Array<{ id: string; label?: string; disabled?: boolean; icon?: string; show?: string | string[] }>
+//       | undefined
+//   );
 
 const canResolveExpression = (expression: string, objArr: Record<string, any>[]) =>
   typeof resolveExpression(expression, objArr) !== 'undefined';

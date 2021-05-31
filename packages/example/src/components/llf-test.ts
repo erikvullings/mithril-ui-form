@@ -672,7 +672,7 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
   },
   {
     id: 'categories',
-    label: 'Categories',
+    label: 'Categories for capabilities',
     repeat: true,
     type: [
       { id: 'id', type: 'none', autogenerate: 'id' },
@@ -680,7 +680,7 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
       { id: 'desc', type: 'textarea', className: 'col s8', tabindex: 1 },
       {
         id: 'subcategories',
-        label: 'Sub-categories',
+        label: 'Subcategories',
         repeat: true,
         tabindex: 2,
         className: 'col s8',
@@ -692,13 +692,44 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
       },
     ],
   },
-  { id: 'categoryId', label: 'Category', type: 'select', options: 'categories', className: 'col s6' },
   {
-    id: 'subCategoryId',
-    label: 'Sub-category',
-    type: 'select',
-    options: 'categories.categoryId.subcategories',
-    className: 'col s6',
+    id: 'capabilities',
+    label: 'Capabilities',
+    repeat: true,
+    type: [
+      {
+        id: 'id',
+        label: 'ID',
+        type: 'text',
+        className: 'col s12 m2',
+      },
+      {
+        id: 'name',
+        label: 'Name',
+        type: 'text',
+        className: 'col s12 m4',
+      },
+      {
+        id: 'categoryId',
+        label: 'Category',
+        type: 'select',
+        options: 'categories',
+        className: 'col s12 m3',
+      },
+      {
+        id: 'subcategoryId',
+        label: 'Subcategory',
+        type: 'select',
+        options: 'categories.categoryId.subcategories',
+        className: 'col s12 m3',
+      },
+      {
+        id: 'desc',
+        label: 'Description',
+        type: 'textarea',
+        className: 'col m12',
+      },
+    ],
   },
   {
     id: 'url',
