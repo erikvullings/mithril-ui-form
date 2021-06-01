@@ -88,7 +88,7 @@ export interface IInputField {
    * List may be sorted automatically based on a property with a string or number value.
    * Prefix the property with an ! to sort in descending direction.
    */
-  sortProperty?: 'string';
+  sortProperty?: string;
   /** filterLabel is only used for repeated items with a property filter, to set its label. */
   filterLabel?: string;
   /**
