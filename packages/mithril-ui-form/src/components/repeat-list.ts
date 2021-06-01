@@ -70,7 +70,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
         field,
         obj,
         context,
-        className = '.col.s12',
+        className = field.className ? '.' + field.className.split(' ').join('.') : '.col.s12',
         section,
         containerId,
         disabled,
@@ -111,7 +111,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
 
       return [
         [
-          m(`.row.repeat-list.input-field${className}`, [
+          m(`#${id}.repeat-list${className}`, { style: 'position:relative' }, [
             m(
               '.row',
               m('.col.s12', [
