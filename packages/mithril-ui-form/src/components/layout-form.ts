@@ -67,23 +67,25 @@ const LayoutFormFactory = () => {
   const createLayoutForm = (): FactoryComponent<ILayoutForm> => () => {
     const formField = formFieldFactory(plugins, readonlyPlugins).createFormField();
 
+    const sectionFilter = (section?: string) => {
+      if (!section) {
+        return (_: IInputField) => true;
+      }
+      let state = false;
+      return ({ type, id }: IInputField): boolean => {
+        if (type === 'section') {
+          state = id === section;
+          return false; // Return false the first time, so we don't output the section too divider
+        }
+        return state;
+      };
+    };
+
     return {
       view: ({ attrs: { i18n, form, obj, onchange: onChange, disabled, readonly, context, section } }) => {
         const onchange = (res: Record<string, any>) => onChange && onChange(isValid(res, form), res);
-        const sectionFilter = () => {
-          if (!section) {
-            return (_: IInputField) => true;
-          }
-          let state = false;
-          return ({ type, id }: IInputField): boolean => {
-            if (type === 'section') {
-              state = id === section;
-            }
-            return state;
-          };
-        };
 
-        return form.filter(sectionFilter()).reduce((acc, field) => {
+        return form.filter(sectionFilter(section)).reduce((acc, field) => {
           if (!field.type) field.type = guessType(field);
           return [
             ...acc,
