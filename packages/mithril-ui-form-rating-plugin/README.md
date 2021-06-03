@@ -11,7 +11,7 @@ import { ratingPlugin } from "mithril-ui-form-rating-plugin";
 
 ...
 
-registerPlugin("map", ratingPlugin);
+registerPlugin("rating", ratingPlugin);
 ```
 
 ## Optional CSS style
