@@ -269,13 +269,15 @@ export const formFieldFactory = (
 
         const [selectAll, unselectAll] = checkAllOptions ? checkAllOptions.split('|') : ['', ''];
 
-        if (readonly && type && ['md', 'map', 'none'].indexOf(type as string) < 0) {
+        if (readonly && type && ['md', 'none'].indexOf(type as string) < 0) {
           if (readonlyPlugins.hasOwnProperty(type))
             return m(readonlyPlugins[type], {
               iv,
               field,
               props,
               label: props.label,
+              obj,
+              context,
             });
           if (type && plugins.hasOwnProperty(type)) {
             return m(plugins[type], {
@@ -284,6 +286,8 @@ export const formFieldFactory = (
               props,
               label: props.label,
               onchange,
+              obj,
+              context,
             });
           }
           switch (type) {
@@ -392,6 +396,8 @@ export const formFieldFactory = (
               props,
               label: props.label,
               onchange,
+              obj,
+              context,
             });
           }
           switch (type) {

@@ -10,4 +10,5 @@ export {
   padLeft,
   stripSpaces,
   toHourMin,
+  resolveExpression,
 } from './utils';
