@@ -12,4 +12,8 @@ export type PluginType = FactoryComponent<{
   label?: string;
   /** Only present when component is not readonly */
   onchange?: (value: string | number | Array<string | number | Record<string, any>> | Date | boolean) => Promise<void>;
+  /** The currently active object, which be the main object, or an item in an array */
+  obj: Record<string, any> | Record<string, any>[];
+  /** The active context */
+  context?: Record<string, any> | Record<string, any>[];
 }>;
