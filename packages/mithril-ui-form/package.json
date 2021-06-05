@@ -31,7 +31,7 @@
   "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
   "license": "MIT",
   "dependencies": {
-    "mithril-ui-form-plugin": "^0.3.2"
+    "mithril-ui-form-plugin": "^0.3.3"
   },
   "devDependencies": {
     "@types/materialize-css": "^1.0.9",
