@@ -110,4 +110,5 @@ export interface IInputField {
     value?: string | number | string[] | number[] | boolean | Date,
     context?: Record<string, any>[]
   ) => Promise<Record<string, any> | undefined> | undefined;
+  [key: string]: any;
 }
