@@ -243,7 +243,7 @@ export const formFieldFactory = (
                 readonly,
                 form: type,
                 obj: obj[field.id],
-                context: [obj, context],
+                context: [obj, ...context],
                 onchange: () => onFormChange(obj),
                 containerId,
               }),

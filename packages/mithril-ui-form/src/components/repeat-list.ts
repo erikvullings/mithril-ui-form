@@ -10,7 +10,7 @@ export interface IRepeatList extends Attributes {
   /** The result object */
   obj: Record<string, any> | Record<string, any>[];
   /** The context */
-  context: Record<string, any>;
+  context: Record<string, any> | Record<string, any>[];
   /** Callback function, invoked every time the original result object has changed */
   onchange?: (result: Record<string, any> | Record<string, any>[]) => void;
   /** Section ID to display - can be used to split up the form and only show a part */
@@ -165,7 +165,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                       form: field.type as UIForm,
                       obj: item,
                       i18n,
-                      context: [obj, context],
+                      context: context instanceof Array ? [obj, ...context] : [obj, context],
                       section,
                       containerId,
                       disabled,
@@ -208,7 +208,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
             description: m(LayoutForm, {
               form: type as UIForm,
               obj: state.curItem as Record<string, any>,
-              context: [obj, context],
+              context: context instanceof Array ? [obj, ...context] : [obj, context],
               section,
               containerId,
               readonly: true,
