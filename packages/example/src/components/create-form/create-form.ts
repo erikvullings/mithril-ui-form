@@ -1,6 +1,5 @@
 import m, { FactoryComponent } from 'mithril';
-import { IObject, LayoutForm, Form } from 'mithril-ui-form';
-import { range } from '../../utils';
+import { LayoutForm, UIForm } from 'mithril-ui-form';
 
 const componentTypeOptions = [
   { id: 'autogenerate', label: 'autogenerate' },
@@ -42,7 +41,11 @@ export const CreateForm: FactoryComponent = () => {
             show: ['type = autogenerate', 'type = text'],
             type: 'select',
             className: 'col s4',
-            options: [{ id: undefined, label: 'None' }, { id: 'guid', label: 'GUID' }, { id: 'id', label: 'ID' }],
+            options: [
+              { id: undefined, label: 'None' },
+              { id: 'guid', label: 'GUID' },
+              { id: 'id', label: 'ID' },
+            ],
           },
           {
             id: 'className',
@@ -67,11 +70,11 @@ export const CreateForm: FactoryComponent = () => {
   } as {
     isValid: boolean;
     /** Layout form for creating the editor */
-    editor: Form;
+    editor: UIForm;
     /** Generated form for creating another layout from */
-    form: Form;
-    result: IObject;
-    context: IObject;
+    form: UIForm;
+    result: Record<string, any>;
+    context: Record<string, any>;
   };
 
   const onchange = (isValid: boolean) => {

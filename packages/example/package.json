@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "description": "Example project, showing how to use the Mithril UI form component.",
   "main": "index.js",
+  "target": "web",
   "scripts": {
     "clean": "rimraf dist",
     "dev": "npm start",

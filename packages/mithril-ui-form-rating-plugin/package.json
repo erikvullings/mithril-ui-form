@@ -31,12 +31,13 @@
   "license": "MIT",
   "devDependencies": {
     "@types/mithril": "^2.0.7",
-    "microbundle": "^0.13.1",
+    "microbundle": "^0.13.3",
     "mithril-ui-form-plugin": "workspace:^0.3.3",
     "rimraf": "^3.0.2",
     "tslib": "^2.2.0",
     "typescript": "^4.3.2"
   },
+  "target": "web",
   "peerDependencies": {
     "mithril": "^2.0.4"
   },
