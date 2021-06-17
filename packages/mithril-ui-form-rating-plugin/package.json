@@ -1,6 +1,6 @@
 {
   "name": "mithril-ui-form-rating-plugin",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "Plugin to add a rating component to Mithril-UI-Form.",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
@@ -32,7 +32,7 @@
   "devDependencies": {
     "@types/mithril": "^2.0.7",
     "microbundle": "^0.13.1",
-    "mithril-ui-form-plugin": "^0.2.0",
+    "mithril-ui-form-plugin": "workspace:^0.3.3",
     "rimraf": "^3.0.2",
     "tslib": "^2.2.0",
     "typescript": "^4.3.2"

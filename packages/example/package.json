@@ -5,10 +5,12 @@
   "description": "Example project, showing how to use the Mithril UI form component.",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf .cache dist",
-    "start": "parcel index.html",
+    "clean": "rimraf dist",
     "dev": "npm start",
-    "build": "npm run clean && parcel build index.html --out-dir ../../docs --public-url https://erikvullings.github.io/mithril-ui-form"
+    "start": "webpack serve --env development --open",
+    "build": "webpack --env production",
+    "build:domain": "npm run clean && npm run build",
+    "build:old": "npm run clean && parcel build index.html --out-dir ../../docs --public-url https://erikvullings.github.io/mithril-ui-form"
   },
   "keywords": [
     "mithril",
@@ -19,30 +21,35 @@
   "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/erikvullings/mithril-tree-component/issues"
+    "url": "https://github.com/erikvullings/mithril-ui-form/issues"
   },
-  "homepage": "https://github.com/erikvullings/mithril-tree-component#readme",
+  "homepage": "https://github.com/erikvullings/mithril-ui-form#readme",
   "dependencies": {
     "material-icons": "^0.6.4",
     "materialize-css": "^1.0.0",
     "mithril": "^2.0.4",
     "mithril-materialized": "^0.19.0",
     "mithril-ui-form": "workspace:^1.0.2",
+    "mithril-ui-form-plugin": "workspace:^0.3.3",
     "mithril-ui-form-leaflet-plugin": "workspace:^0.2.2",
     "mithril-ui-form-rating-plugin": "workspace:^0.3.3"
   },
   "devDependencies": {
-    "@babel/types": "7.13.14",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2",
+    "css-loader": "^5.2.6",
+    "css-minimizer-webpack-plugin": "^2.0.0",
+    "dotenv-webpack": "^7.0.3",
+    "html-webpack-plugin": "^5.3.1",
+    "html-webpack-tags-plugin": "^3.0.1",
+    "mini-css-extract-plugin": "^1.6.0",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^8.3.0",
+    "webpack": "^5.38.1",
     "@types/leaflet": "^1.7.0",
     "@types/materialize-css": "^1.0.9",
     "@types/mithril": "^2.0.7",
-    "autoprefixer": "^10.2.6",
-    "cssnano": "^4.1.11",
-    "lodash": "^4.17.21",
-    "mixin-deep": "^2.0.1",
-    "parcel-bundler": "^1.12.5",
     "rimraf": "^3.0.2",
-    "set-value": "^3.0.2",
     "typescript": "^4.3.2"
   }
 }
