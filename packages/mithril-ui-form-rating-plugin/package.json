@@ -30,14 +30,13 @@
   "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
   "license": "MIT",
   "devDependencies": {
-    "@types/mithril": "^2.0.7",
-    "microbundle": "^0.13.3",
+    "@types/mithril": "^2.0.8",
+    "microbundle": "^0.14.1",
     "mithril-ui-form-plugin": "workspace:^0.3.3",
     "rimraf": "^3.0.2",
-    "tslib": "^2.2.0",
-    "typescript": "^4.3.2"
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.4"
   },
-  "target": "web",
   "peerDependencies": {
     "mithril": "^2.0.4"
   },

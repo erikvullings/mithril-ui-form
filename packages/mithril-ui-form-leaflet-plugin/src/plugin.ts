@@ -1,7 +1,6 @@
 import m from 'mithril';
 import { LeafletMap } from 'mithril-leaflet';
 import { geoJSON } from 'leaflet';
-import { FeatureGroup } from 'leaflet';
 import { GeometryObject, FeatureCollection } from 'geojson';
 import { PluginType } from 'mithril-ui-form-plugin';
 import L from 'leaflet';
@@ -46,7 +45,7 @@ export const leafletPlugin: PluginType = () => {
         editable,
         autoFit: true,
         showScale: { imperial: false },
-        onLayerEdited: (f: FeatureGroup) => {
+        onLayerEdited: (f) => {
           onchange && onchange(f.toGeoJSON() as any);
           m.redraw();
         },
