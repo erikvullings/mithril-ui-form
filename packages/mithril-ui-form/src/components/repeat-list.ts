@@ -55,6 +55,18 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
     }
   };
 
+  const addEmptyItem = (obj: Record<string, any> | Record<string, any>[], id: string) => {
+    if (obj instanceof Array) {
+      obj.push({});
+    } else {
+      if (!obj.hasOwnProperty(id)) {
+        obj[id] = [{}];
+      } else {
+        obj[id].push({});
+      }
+    }
+  };
+
   return {
     oninit: ({
       attrs: {
@@ -120,8 +132,10 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   iconClass: 'right',
                   label,
                   onclick: () => {
-                    items.push({});
+                    // items.push({});
+                    addEmptyItem(obj, id);
                     m.route.set(`${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${items.length}`);
+                    notify(obj);
                   },
                   style: 'padding: 0',
                   className: 'left',
