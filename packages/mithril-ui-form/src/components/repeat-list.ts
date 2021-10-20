@@ -33,7 +33,7 @@ export interface IRepeatList extends Attributes {
 export const RepeatList: FactoryComponent<IRepeatList> = () => {
   const state = {} as {
     editItem?: Record<string, any>;
-    curItem?: Record<string, any>;
+    curItemIdx?: number;
     newItem?: Record<string, any>;
     canSave?: boolean;
     editModal?: M.Modal;
@@ -173,7 +173,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
               items
                 .sort(compareFn)
                 .filter(delimitter)
-                .map((item) => [
+                .map((item, i) => [
                   m('.row.z-depth-1.repeat-item', { key: page + hash(item) }, [
                     m(LayoutForm, {
                       form: field.type as UIForm,
@@ -198,7 +198,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                           disabled,
                           readonly,
                           onclick: () => {
-                            state.curItem = item;
+                            state.curItemIdx = i;
                           },
                         })
                       ),
@@ -206,14 +206,14 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                 ]),
           ]),
         ],
-        state.curItem &&
+        typeof state.curItemIdx !== 'undefined' &&
           m(ModalPanel, {
             id: 'deleteItem',
             onCreate: (modal) => modal.open(),
             options: {
               onCloseStart: () => {
-                console.log('On Close');
-                state.curItem = undefined;
+                // console.log('On Close');
+                state.curItemIdx = undefined;
                 m.redraw();
               },
             },
@@ -221,7 +221,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
             title: i18n.deleteItem || 'Delete item',
             description: m(LayoutForm, {
               form: type as UIForm,
-              obj: state.curItem as Record<string, any>,
+              obj: items[state.curItemIdx] as Record<string, any>,
               context: context instanceof Array ? [obj, ...context] : [obj, context],
               section,
               containerId,
@@ -235,15 +235,12 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
               {
                 label: i18n.agree || 'Agree',
                 onclick: () => {
-                  if (state.curItem) {
-                    const i = items.indexOf(state.curItem);
-                    if (i >= 0) {
-                      items.splice(i, 1);
-                    }
+                  if (typeof state.curItemIdx !== 'undefined') {
+                    items.splice(state.curItemIdx, 1);
                     if (obj instanceof Array) {
-                      obj = items;
+                      obj = [...items];
                     } else {
-                      obj[id] = items;
+                      obj[id] = [...items];
                     }
                     notify(obj);
                   }
@@ -281,9 +278,9 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   label: i18n.save || 'Save',
                   disabled: !state.canSave,
                   onclick: () => {
-                    if (state.editItem && state.curItem) {
+                    if (state.editItem && typeof state.curItemIdx !== 'undefined') {
                       const edited = state.editItem;
-                      const current = state.curItem;
+                      const current = state.curItemIdx;
                       type.forEach((f) => {
                         if (f.id) {
                           (current as any)[f.id] = edited[f.id];
