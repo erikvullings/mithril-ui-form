@@ -51,6 +51,10 @@ const unwrapComponent = (field: IInputField, autofocus = false, disabled = false
     max,
     min,
     step,
+    dateTimeOutput,
+    dateTimeSeconds,
+    dateFormat,
+    twelveHour,
   } = field;
   const result = { id: `${id}-${uniqueId()}`, label } as Record<string, any>;
   if (typeof label === 'undefined' && id) {
@@ -100,6 +104,18 @@ const unwrapComponent = (field: IInputField, autofocus = false, disabled = false
   }
   if (typeof step !== 'undefined') {
     result.step = step;
+  }
+  if (dateTimeOutput) {
+    result.dateTimeOutput = dateTimeOutput;
+  }
+  if (dateTimeSeconds) {
+    result.dateTimeSeconds = dateTimeSeconds;
+  }
+  if (dateFormat) {
+    result.dateFormat = dateFormat;
+  }
+  if (twelveHour) {
+    result.twelveHour = twelveHour;
   }
   return result;
 };
@@ -407,7 +423,8 @@ export const formFieldFactory = (
               return m(ColorInput, { ...props, initialValue, onchange });
             }
             case 'time': {
-              const date = iv
+              const { twelveHour = false } = props;
+              const date: Date = iv
                 ? typeof iv === 'number' || typeof iv === 'string'
                   ? new Date(iv)
                   : (iv as Date)
@@ -415,8 +432,8 @@ export const formFieldFactory = (
               const initialValue = toHourMin(date);
               obj[id] = transform ? transform('to', date) : date;
               return m(TimePicker, {
-                twelveHour: false,
                 ...props,
+                twelveHour,
                 initialValue,
                 onchange: (time) => {
                   const tt = time.split(':').map((n) => +n);
@@ -427,7 +444,8 @@ export const formFieldFactory = (
               });
             }
             case 'date': {
-              const initialValue = typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : iv;
+              const { format = 'mmmm d, yyyy' } = props;
+              const initialValue: Date = typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : iv;
               obj[id] = initialValue
                 ? transform
                   ? transform('to', initialValue.valueOf())
@@ -450,7 +468,7 @@ export const formFieldFactory = (
                 minDate,
                 maxDate,
                 setDefaultDate: initialValue ? true : false,
-                format: 'mmmm d, yyyy',
+                format,
                 initialValue,
                 onchange: (date) => {
                   onchange(new Date(date));
@@ -458,6 +476,99 @@ export const formFieldFactory = (
                 },
                 container: containerId as any,
               });
+            }
+            case 'datetime': {
+              const {
+                label,
+                className = 'col s12',
+                dateTimeSeconds = false,
+                twelveHour = false,
+                format = 'mmmm d, yyyy',
+                ...params
+              } = props;
+              console.log(dateTimeSeconds);
+              const initialDateTime: Date = typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : iv;
+              const state = { initialDateTime };
+              const initialDate = initialDateTime ? initialDateTime : undefined;
+              const initialTime = initialDateTime ? toHourMin(initialDateTime) : '';
+              const { min, max } = props;
+              const minDate = min
+                ? !initialDateTime || min < initialDateTime.valueOf()
+                  ? new Date(min)
+                  : initialDateTime
+                : undefined;
+              const maxDate = max
+                ? !initialDateTime || max > initialDateTime.valueOf()
+                  ? new Date(max)
+                  : initialDateTime
+                : undefined;
+              const outputFormat = props.dateTimeOutput || 'UTC';
+              const notify = (d: Date) => {
+                state.initialDateTime = d;
+                onchange(
+                  outputFormat === 'UTC' ? d.toUTCString() : outputFormat === 'ISO' ? d.toISOString() : d.valueOf()
+                );
+              };
+              return m(
+                '.row',
+                m(
+                  'div',
+                  { className },
+                  m('.row', [
+                    m(
+                      dateTimeSeconds ? '.col.s6' : '.col.s8',
+                      { style: 'padding-right: 0' },
+                      m(DatePicker, {
+                        ...params,
+                        label,
+                        minDate,
+                        maxDate,
+                        setDefaultDate: initialDateTime ? true : false,
+                        format,
+                        initialValue: initialDate,
+                        container: containerId as any,
+                        onchange: (date) => {
+                          const d = new Date(state.initialDateTime);
+                          d.setFullYear(date.getFullYear());
+                          d.setMonth(date.getMonth());
+                          d.setDate(date.getDate());
+                          notify(d);
+                        },
+                      })
+                    ),
+                    m(
+                      '.col.s4',
+                      { style: 'min-width: 6rem; padding-right: 0; padding-left: 0' },
+                      m(TimePicker, {
+                        ...params,
+                        label: '',
+                        helperText: '',
+                        twelveHour,
+                        initialValue: initialTime,
+                        container: containerId,
+                        onchange: (time) => {
+                          const tt = time.split(':').map((n) => +n);
+                          const d = state.initialDateTime || new Date(new Date().setSeconds(0, 0));
+                          d.setHours(tt[0], tt[1]);
+                          notify(d);
+                        },
+                      })
+                    ),
+                    dateTimeSeconds &&
+                      m(NumberInput, {
+                        style: 'min-width: 4rem; padding-right: 0; padding-left: 0',
+                        className: 'col s2',
+                        min: 0,
+                        max: 59,
+                        onchange: (n) => {
+                          const d = state.initialDateTime || new Date(new Date().setSeconds(0, 0));
+                          d.setSeconds(n, 0);
+                          notify(d);
+                        },
+                      }),
+                  ])
+                )
+              );
             }
             case 'email': {
               const initialValue = iv as string;

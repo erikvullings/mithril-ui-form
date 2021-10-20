@@ -110,5 +110,14 @@ export interface IInputField {
     value?: string | number | string[] | number[] | boolean | Date,
     context?: Record<string, any>[]
   ) => Promise<Record<string, any> | undefined> | undefined;
+  /** Datetime format options: UTC, ISO or msec since 1 Jan 1970. Default 'UTC' */
+  dateTimeOutput?: 'UTC' | 'ISO' | 'MSEC';
+  /** Datetime format option: if true (default false), edit seconds too */
+  dateTimeSeconds?: boolean;
+  /** Date format */
+  dateFormat?: 'mmmm d, yyyy';
+  /** Time picker format: default false */
+  twelveHour?: boolean;
+  /** Allow to augment with any field, e.g. for plugins */
   [key: string]: any;
 }
