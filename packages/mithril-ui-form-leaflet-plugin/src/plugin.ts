@@ -25,7 +25,7 @@ export const leafletPlugin: PluginType = () => {
         }) as FeatureCollection<GeometryObject>;
       const overlays = {} as Record<string, any>;
       overlays[id] = geoJSON(overlay);
-      console.log(overlays);
+      // console.log(overlays);
       return m(LeafletMap, {
         baseLayers: {
           osm: {
