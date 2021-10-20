@@ -69,12 +69,14 @@ importers:
       '@types/mithril': ^2.0.8
       microbundle: ^0.14.1
       mithril-materialized: ^0.19.0
+      mithril-ui-form: ^1.2.1
       mithril-ui-form-plugin: ^0.3.3
       rimraf: ^3.0.2
       tslib: ^2.3.1
       typescript: ^4.4.4
       typescript-json-schema: ^0.51.0
     dependencies:
+      mithril-ui-form: 'link:'
       mithril-ui-form-plugin: link:../mithril-ui-form-plugin
     devDependencies:
       '@types/materialize-css': 1.0.11
@@ -3249,6 +3251,7 @@ packages:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
+    requiresBuild: true
     dev: true
     optional: true
 
