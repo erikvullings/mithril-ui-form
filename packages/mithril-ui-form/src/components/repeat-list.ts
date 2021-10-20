@@ -240,6 +240,11 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                     if (i >= 0) {
                       items.splice(i, 1);
                     }
+                    if (obj instanceof Array) {
+                      obj = items;
+                    } else {
+                      obj[id] = items;
+                    }
                     notify(obj);
                   }
                 },
