@@ -486,7 +486,6 @@ export const formFieldFactory = (
                 format = 'mmmm d, yyyy',
                 ...params
               } = props;
-              console.log(dateTimeSeconds);
               const initialDateTime: Date = typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : iv;
               const state = { initialDateTime };
               const initialDate = initialDateTime ? initialDateTime : undefined;
@@ -688,7 +687,7 @@ export const formFieldFactory = (
                       limit: field.maxLength || Infinity,
                       minLenght: field.minLength || 1,
                     }
-                  : undefined;
+                  : {};
               return m('.input-field col s12', [
                 m(Label, { ...props }),
                 m(Chips, {
