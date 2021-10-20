@@ -510,64 +510,61 @@ export const formFieldFactory = (
                 );
               };
               return m(
-                '.row',
-                m(
-                  'div',
-                  { className },
-                  m('.row', [
-                    m(
-                      dateTimeSeconds ? '.col.s6' : '.col.s8',
-                      { style: 'padding-right: 0' },
-                      m(DatePicker, {
-                        ...params,
-                        label,
-                        minDate,
-                        maxDate,
-                        setDefaultDate: initialDateTime ? true : false,
-                        format,
-                        initialValue: initialDate,
-                        container: containerId as any,
-                        onchange: (date) => {
-                          const d = new Date(state.initialDateTime);
-                          d.setFullYear(date.getFullYear());
-                          d.setMonth(date.getMonth());
-                          d.setDate(date.getDate());
-                          notify(d);
-                        },
-                      })
-                    ),
-                    m(
-                      '.col.s4',
-                      { style: 'min-width: 6rem; padding-right: 0; padding-left: 0' },
-                      m(TimePicker, {
-                        ...params,
-                        label: '',
-                        helperText: '',
-                        twelveHour,
-                        initialValue: initialTime,
-                        container: containerId,
-                        onchange: (time) => {
-                          const tt = time.split(':').map((n) => +n);
-                          const d = state.initialDateTime || new Date(new Date().setSeconds(0, 0));
-                          d.setHours(tt[0], tt[1]);
-                          notify(d);
-                        },
-                      })
-                    ),
-                    dateTimeSeconds &&
-                      m(NumberInput, {
-                        style: 'min-width: 4rem; padding-right: 0; padding-left: 0',
-                        className: 'col s2',
-                        min: 0,
-                        max: 59,
-                        onchange: (n) => {
-                          const d = state.initialDateTime || new Date(new Date().setSeconds(0, 0));
-                          d.setSeconds(n, 0);
-                          notify(d);
-                        },
-                      }),
-                  ])
-                )
+                'div',
+                { className },
+                m('.row', [
+                  m(
+                    dateTimeSeconds ? '.col.s6' : '.col.s8',
+                    { style: 'padding-right: 0' },
+                    m(DatePicker, {
+                      ...params,
+                      label,
+                      minDate,
+                      maxDate,
+                      setDefaultDate: initialDateTime ? true : false,
+                      format,
+                      initialValue: initialDate,
+                      container: containerId as any,
+                      onchange: (date) => {
+                        const d = new Date(state.initialDateTime);
+                        d.setFullYear(date.getFullYear());
+                        d.setMonth(date.getMonth());
+                        d.setDate(date.getDate());
+                        notify(d);
+                      },
+                    })
+                  ),
+                  m(
+                    '.col.s4',
+                    { style: 'min-width: 6rem; padding-right: 0; padding-left: 0' },
+                    m(TimePicker, {
+                      ...params,
+                      label: '',
+                      helperText: '',
+                      twelveHour,
+                      initialValue: initialTime,
+                      container: containerId,
+                      onchange: (time) => {
+                        const tt = time.split(':').map((n) => +n);
+                        const d = state.initialDateTime || new Date(new Date().setSeconds(0, 0));
+                        d.setHours(tt[0], tt[1]);
+                        notify(d);
+                      },
+                    })
+                  ),
+                  dateTimeSeconds &&
+                    m(NumberInput, {
+                      style: 'min-width: 4rem; padding-right: 0; padding-left: 0',
+                      className: 'col s2',
+                      min: 0,
+                      max: 59,
+                      onchange: (n) => {
+                        const d = state.initialDateTime || new Date(new Date().setSeconds(0, 0));
+                        d.setSeconds(n, 0);
+                        notify(d);
+                      },
+                    }),
+                ])
               );
             }
             case 'email': {
