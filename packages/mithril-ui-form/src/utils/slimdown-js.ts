@@ -75,7 +75,7 @@ const table = (_: string, headers: string, format: string, content: string) => {
       (row) =>
         `<tr>${row
           .split('|')
-          .filter((__, i) => i > 0 && i <= rows.length)
+          .filter((__, i, arr) => i > 0 && i < arr.length - 1)
           .map((cell, i) => `<td${td(i)}>${cell.trim()}</td>`)
           .join('')}</tr>`
     )
@@ -93,8 +93,8 @@ const header = (_: string, match: string, h = '') => {
 const rules = [
   [/\r\n/g, '\n'], // Remove \r
   [/\n(#+)(.*)/g, header], // headers
-  [/!\[([^\[]+)\]\((?:javascript:)?([^\)]+)\)/g, "<img src='$2' alt='$1'>"], // images, invoked before links
-  [/\[([^\[]+)\]\((?:javascript:)?([^\)]+)\)/g, "<a href='$2'>$1</a>"], // links
+  [/!\[([^\[]+)\]\((?:javascript:)?([^\)]+)\)/g, '<img src="$2" alt="$1">'], // images, invoked before links
+  [/\[([^\[]+)\]\((?:javascript:)?([^\)]+)\)/g, '<a href="$2">$1</a>'], // links
   [/(\*\*|__)(.*?)\1/g, '<strong>$2</strong>'], // bold
   [/\\_/g, '&#95;'], // underscores part 1
   [/(\*|_)(.*?)\1/g, '<em>$2</em>'], // emphasis
@@ -106,7 +106,7 @@ const rules = [
   [/\n[0-9]+\.(.*)/g, olList], // ol lists
   [/\n(&gt;|\>)(.*)/g, blockquote], // blockquotes
   [/\n-{5,}/g, '\n<hr />'], // horizontal rule
-  [/(\|[^\n]+\|\r?\n)((?:\|:?[-]+:?)+\|)(\n(?:\|[^\n]+\|\r?\n?)*)?/g, table],
+  [/( *\|[^\n]+\|\r?\n)((?: *\|:?[ -]+:?)+ *\|)(\n(?: *\|[^\n]+\|\r?\n?)*)?/g, table],
   [/\n([^\n]+)\n/g, para], // add paragraphs
   [/\s?<\/ul>\s?<ul>/g, ''], // fix extra ul
   [/\s?<\/ol>\s?<ol>/g, ''], // fix extra ol
@@ -116,20 +116,34 @@ const rules = [
 ] as Array<[RegExp, RegexReplacer | string]>;
 
 /**
- * Render some Markdown into HTML.
- * Optionally remove the paragraphs around the rendered HTML.
+ * Render Markdown text into HTML.
+ *
+ * @param markdown Markdown text
+ * @param removeParagraphs If true (default false), remove the \<p\>...\</p\> around paragraphs
+ * @param externalLinks If true (default false), replace \<a href...\> with \<a taget="_blank" href...\>
+ * to open them in a new page
+ * @returns
  */
-export const render = (markdown: string, removeParagraphs = false) => {
+export const render = (markdown: string, removeParagraphs = false, externalLinks = false) => {
   markdown = `\n${markdown}\n`;
   rules.forEach(([regex, subst]) => {
     markdown = markdown.replace(regex, subst as any);
   });
 
-  return removeParagraphs ? markdown.trim().replace(/^<p>(.*)<\/p>$/s, '$1') : markdown.trim();
+  return removeParagraphs
+    ? externalLinks
+      ? markdown
+          .trim()
+          .replace(/^<p>(.*)<\/p>$/s, '$1')
+          .replace(/<a href="/s, '<a target="_blank" href="')
+      : markdown.trim().replace(/^<p>(.*)<\/p>$/s, '$1')
+    : externalLinks
+    ? markdown.trim().replace(/<a href="/s, '<a target="_blank" href="')
+    : markdown.trim();
 };
 
 /**
- * Add a rule.
+ * Add a new rule.
  */
 export const addRule = (regex: RegExp, replacement: RegexReplacer | string) => {
   rules.push([regex, replacement]);
