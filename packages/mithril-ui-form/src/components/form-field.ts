@@ -168,7 +168,6 @@ export const formFieldFactory = (
           readonly = r,
           value,
           required,
-          // repeat,
           autogenerate,
           show,
           label,
@@ -246,19 +245,19 @@ export const formFieldFactory = (
         };
 
         if (type instanceof Array) {
-          if (field.id) {
-            if (!obj.hasOwnProperty(field.id)) {
-              obj[field.id] = {};
+          if (id) {
+            if (!obj.hasOwnProperty(id)) {
+              obj[id] = {};
             }
             return m('div', { className: field.className }, [
-              m('div', m.trust(render(props.label || capitalizeFirstLetter(field.id), true))),
+              m('div', m.trust(render(props.label || capitalizeFirstLetter(id), true))),
               props.description && m('div', m.trust(render(props.description))),
               m(LayoutForm, {
                 ...props,
                 i18n,
                 readonly,
                 form: type,
-                obj: obj[field.id],
+                obj: obj[id],
                 context: [obj, ...context],
                 onchange: () => onFormChange(obj),
                 containerId,
@@ -270,6 +269,10 @@ export const formFieldFactory = (
           }
         }
 
+        if (autogenerate && !obj[id]) {
+          obj[id] = (autogenerate === 'guid' ? uuid4() : autogenerate === 'id' ? uniqueId() : Date.now()) as any;
+        }
+
         const iv =
           obj.hasOwnProperty(id) && typeof obj[id] !== 'undefined'
             ? transform
@@ -278,9 +281,6 @@ export const formFieldFactory = (
             : value;
         if (id && value && iv) {
           obj[id] = transform ? transform('to', iv) : iv; // Initial value was set, so use it.
-        }
-        if (autogenerate && !obj[id]) {
-          obj[id] = (autogenerate === 'guid' ? uuid4() : autogenerate === 'id' ? uniqueId() : Date.now()) as any;
         }
 
         const [selectAll, unselectAll] = checkAllOptions ? checkAllOptions.split('|') : ['', ''];
