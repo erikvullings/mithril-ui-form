@@ -38,6 +38,96 @@ m(LayoutForm, {
 
 It would render `The current time is 7:28:27 AM and checked is yes`.
 
+## Default supported types
+
+Each type supports a `className` property to set the input's class value (default `col s12`), a `disabled` and `readonly` property.
+
+- text: Input a (single) line of text.
+
+```json
+[
+  {
+    "id": "firstName",
+    "label": "First name",
+    "type": "text"
+  }
+]
+```
+
+- textarea: Input multiple lines of text, returns a string.
+
+```json
+[
+  {
+    "id": "desc",
+    "label": "Description",
+    "type": "textarea"
+  }
+]
+```
+
+- markdown: As textarea, but in readonly mode, renders the markdown.
+- tags: Input multiple lines of text (as chips), returns a string array.
+
+```json
+[
+  {
+    "id": "hobbies",
+    "label": "My hobbies",
+    "type": "tags"
+  }
+]
+```
+
+- email: Input an email.
+- url: Input a url.
+- md: Render the value as markdown, no label.
+- number: Input a number.
+- date: Input a date (uses date picker).
+- time: Input a time (uses time picker).
+- datetime: Input a date and time (uses date and time picker).
+- checkbox: Input a boolean.
+- switch: Input a boolean.
+- radio: Select one option.
+- options: Select one (or more) options.
+
+```json
+[
+  {
+    "id": "hobbies",
+    "label": "My hobbies",
+    "type": "options",
+    "checkboxClass": "col s3",
+    "options": [
+      { "id": "o1", "label": "Reading" },
+      { "id": "o2", "label": "Watching TV", "disabled": true },
+      { "id": "o3", "label": "Walking" },
+    ]
+  }
+]
+```
+
+- select: Select one (or more if `multiple` is set) options.
+
+```json
+[
+  {
+    "id": "hobbies",
+    "label": "My hobbies",
+    "type": "select",
+    "multiple": true,
+    "checkboxClass": "col s3",
+    "options": [
+      { "id": "o1", "label": "Reading" },
+      { "id": "o2", "label": "Watching TV" },
+      { "id": "o3", "label": "Walking" },
+    ]
+  }
+]
+```
+
+- file: Uploads and posts a file to the provided `url`.
+
 ## Dynamic selections
 
 Assume you want to define a number of categories, each with certain subcategories, and the user can submit a document based on a category and subcategory, you can create a form as follows:

@@ -288,6 +288,8 @@ export const formFieldFactory = (
 
         const [selectAll, unselectAll] = checkAllOptions ? checkAllOptions.split('|') : ['', ''];
 
+        const { className } = props;
+
         if (readonly && type && ['md', 'none'].indexOf(type as string) < 0) {
           if (readonlyPlugins.hasOwnProperty(type))
             return m(readonlyPlugins[type], {
@@ -397,6 +399,14 @@ export const formFieldFactory = (
                   );
                 })
               );
+            }
+            case 'markdown': {
+              const initialValue = render(iv as string);
+              return m(ReadonlyComponent, {
+                props,
+                label: props.label,
+                initialValue,
+              });
             }
             default: {
               const initialValue = iv as string;
@@ -666,8 +676,9 @@ export const formFieldFactory = (
               });
             }
             case 'md':
+              console.log(iv);
               const md = resolvePlaceholders(id ? iv : value || label, obj, context);
-              return m(SlimdownView, { md, className: props.className });
+              return m(SlimdownView, { md, className });
             case 'section':
               return m('.divider');
             case 'switch': {
@@ -702,6 +713,7 @@ export const formFieldFactory = (
                 }),
               ]);
             }
+            case 'markdown':
             case 'textarea': {
               const initialValue = iv as string;
               return m(TextArea, {
