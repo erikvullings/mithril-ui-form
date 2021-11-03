@@ -249,19 +249,22 @@ export const formFieldFactory = (
             if (!obj.hasOwnProperty(id)) {
               obj[id] = {};
             }
-            return m('div', { className: field.className }, [
-              m('div', m.trust(render(props.label || capitalizeFirstLetter(id), true))),
+            return m('.muf-form', { className: field.className }, [
+              m('.muf-form-header', m.trust(render(props.label || capitalizeFirstLetter(id), true))),
               props.description && m('div', m.trust(render(props.description))),
-              m(LayoutForm, {
-                ...props,
-                i18n,
-                readonly,
-                form: type,
-                obj: obj[id],
-                context: [obj, ...context],
-                onchange: () => onFormChange(obj),
-                containerId,
-              }),
+              m(
+                '.row',
+                m(LayoutForm, {
+                  ...props,
+                  i18n,
+                  readonly,
+                  form: type,
+                  obj: obj[id],
+                  context: [obj, ...context],
+                  onchange: () => onFormChange(obj),
+                  containerId,
+                })
+              ),
             ]);
           } else {
             console.warn('Missing ID for type ' + JSON.stringify(type));
