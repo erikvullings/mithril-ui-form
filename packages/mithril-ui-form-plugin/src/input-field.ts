@@ -59,14 +59,15 @@ export interface IInputField {
   icon?: string;
   /** Class of the icon */
   iconClass?: string;
-  /** If true, break to a new line */
-  newLine?: boolean;
   /** Only valid for type='section', indicates section level */
   level?: number;
   /** Autogenerate a GUID, ID (shorter, starting with `id`) value or add a timestamp (msec since 1/1/1970) */
   autogenerate?: 'id' | 'guid' | 'timestamp';
-  /** If true, repeat the item multiple times (indicates it is an array) */
-  repeat?: boolean;
+  /**
+   * If true, repeat the item multiple times (indicates it is an array).
+   * If geojson, indicates we are dealing with a GeoJSON property.
+   */
+  repeat?: true | 'geojson';
   /**
    * By default, show every element, except when this property is defined. In that case, show when:
    * - show is a string with a elementID, and elementID is selected (as an answer)

@@ -18,4 +18,8 @@ export interface I18n {
   cancel?: string;
   /** Save button text */
   save?: string;
+  /** Raw tab */
+  raw?: string;
+  /** View tab */
+  view?: string;
 }

@@ -1,5 +1,5 @@
 import m from 'mithril';
-import { LayoutForm, registerPlugin, UIForm, SlimdownView, I18n } from 'mithril-ui-form';
+import { LayoutForm, registerPlugin, UIForm, SlimdownView, I18n, render } from 'mithril-ui-form';
 import { TextArea } from 'mithril-materialized';
 import { leafletPlugin } from 'mithril-ui-form-leaflet-plugin';
 import { ratingPlugin } from 'mithril-ui-form-rating-plugin';
@@ -89,6 +89,37 @@ const source = [
 ] as UIForm;
 
 const info = [
+  {
+    id: 'geojson',
+    label: 'GeoJSON editor',
+    description: '_My desc!_',
+    repeat: 'geojson',
+    onSelect: (i: number) => alert(i),
+    type: [
+      {
+        id: 'title',
+        type: 'text',
+        className: 'col s9',
+        required: true,
+      },
+      {
+        id: 'id',
+        type: 'text',
+        readonly: true,
+        autogenerate: 'id',
+        className: 'col s3',
+        required: true,
+      },
+      {
+        id: 'description',
+        type: 'textarea',
+        required: true,
+      },
+    ] as UIForm,
+  },
+] as UIForm;
+
+const info2 = [
   {
     id: 'my_rating',
     label: 'What do you think of this plugin?',
@@ -211,7 +242,7 @@ ${result.sources ? result.sources.map((s, i) => `${i + 1}. [${s.title}](${s.url}
           }),
           m(TextArea, {
             label: 'JSON form',
-            helperText: '_Switch to another element to show the result._',
+            helperText: render('_Switch to another element to show the result._'),
             initialValue: JSON.stringify(form, null, 2),
             onchange: (value: string) => {
               state.form = JSON.parse(value);
@@ -223,7 +254,7 @@ ${result.sources ? result.sources.map((s, i) => `${i + 1}. [${s.title}](${s.url}
         m('.col.s12.m8', [
           m('h5', 'Generated Form'),
           m(
-            'div',
+            '.row',
             m(LayoutForm, {
               form,
               obj: result,

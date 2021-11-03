@@ -50,3 +50,7 @@
 .muf-rating > .radios > label > input[type='radio'] {
   opacity: 1; /* only needed when using materialize-css */
 }
+
+.geojson-feature-list .collapsible-body {
+  padding: 0 1rem;
+}

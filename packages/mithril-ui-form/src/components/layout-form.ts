@@ -3,6 +3,7 @@ import { PluginType, UIForm, IInputField, I18n } from 'mithril-ui-form-plugin';
 import { Vnode } from 'mithril';
 import { formFieldFactory } from './form-field';
 import { IRepeatList, RepeatList } from './repeat-list';
+import { GeoJSONFeatureList, IGeoJSONFeatureList } from './geojson-feature-list';
 
 export interface ILayoutForm extends Attributes {
   /** The form to display */
@@ -91,6 +92,17 @@ const LayoutFormFactory = () => {
             ...acc,
             typeof field.repeat === 'undefined'
               ? m(formField, { i18n, field, obj, onchange, disabled, readonly, context, section, containerId: 'body' })
+              : field.repeat === 'geojson'
+              ? m(GeoJSONFeatureList, {
+                  obj,
+                  field,
+                  onchange,
+                  context,
+                  i18n,
+                  containerId: 'body',
+                  disabled,
+                  readonly,
+                } as IGeoJSONFeatureList)
               : m(RepeatList, {
                   obj,
                   field,
