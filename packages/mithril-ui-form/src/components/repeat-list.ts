@@ -85,7 +85,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
         className = field.className ? '.' + field.className.split(' ').join('.') : '.col.s12',
         section,
         containerId,
-        disabled,
+        disabled = typeof field.disabled === 'boolean' ? field.disabled : undefined,
         readonly: r,
         i18n = {},
         onchange,
@@ -93,7 +93,18 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
     }) => {
       const notify = (result: Record<string, any> | Record<string, any>[]) => onchange && onchange(result);
       const { modalKey, filterValue } = state;
-      const { id = '', label, type, max, pageSize, propertyFilter, sortProperty, filterLabel, readonly = r } = field;
+      const {
+        id = '',
+        label,
+        type,
+        min,
+        max,
+        pageSize,
+        propertyFilter,
+        sortProperty,
+        filterLabel,
+        readonly = r,
+      } = field;
       const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
       const editId = 'edit_' + compId;
       const allItems = getItems(obj, id);
@@ -113,13 +124,13 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
       const curPage = pageSize && items && (page - 1) * pageSize < items.length ? page : 1;
       const delimitter = pageSize
         ? (_: any, i: number) => (curPage - 1) * pageSize <= i && i < curPage * pageSize
-        : max
-        ? (_: any, i: number) => i < max
         : () => true;
       const regex = new RegExp(`\\??\\&?${id}=\\d+`);
       const route = m.route.get().replace(regex, '');
       const maxPages = pageSize ? Math.ceil(items.length / pageSize) : 0;
-      // console.table({ id: field.id, page, curPage, maxPages, length: items.length });
+      const maxItemsReached = max && items.length >= max ? true : false;
+      const canDeleteItems = disabled ? false : !min || items.length > min ? true : false;
+      console.table({ min, canDeleteItems });
 
       return [
         [
@@ -128,7 +139,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
               '.row',
               m('.col.s12', [
                 m(FlatButton, {
-                  iconName: disabled ? '' : 'add',
+                  iconName: disabled || maxItemsReached ? '' : 'add',
                   iconClass: 'right',
                   label,
                   onclick: () => {
@@ -139,7 +150,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   },
                   style: 'padding: 0',
                   className: 'left',
-                  disabled,
+                  disabled: disabled || maxItemsReached,
                   readonly,
                 }),
                 maxPages > 1 &&
@@ -186,7 +197,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                       readonly,
                       onchange: () => notify(obj),
                     }),
-                    !disabled &&
+                    canDeleteItems &&
                       m(
                         'div',
                         { style: 'position: absolute; right: -25px; margin-top: -10px;' },

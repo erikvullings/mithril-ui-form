@@ -672,8 +672,10 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
   },
   {
     id: 'categories',
-    label: 'Categories for capabilities',
+    label: 'Categories for capabilities (between 3 and 5)',
     repeat: true,
+    min: 3,
+    max: 5,
     type: [
       { id: 'id', type: 'none', autogenerate: 'id' },
       { id: 'label', type: 'text', label: 'Name', className: 'col s4', tabindex: 0 },
