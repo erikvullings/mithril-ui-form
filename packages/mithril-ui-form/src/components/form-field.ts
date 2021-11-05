@@ -401,7 +401,7 @@ export const formFieldFactory = (
               );
             }
             case 'markdown': {
-              const initialValue = render(iv as string);
+              const initialValue = typeof iv === 'string' && iv ? render(iv as string) : '';
               return m(ReadonlyComponent, {
                 props,
                 label: props.label,
