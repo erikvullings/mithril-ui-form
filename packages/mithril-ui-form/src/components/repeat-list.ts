@@ -130,7 +130,6 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
       const maxPages = pageSize ? Math.ceil(items.length / pageSize) : 0;
       const maxItemsReached = max && items.length >= max ? true : false;
       const canDeleteItems = disabled ? false : !min || items.length > min ? true : false;
-      console.table({ min, canDeleteItems });
 
       return [
         [
