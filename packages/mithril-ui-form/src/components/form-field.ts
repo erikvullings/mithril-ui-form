@@ -13,7 +13,6 @@ import {
   ColorInput,
   EmailInput,
   RadioButtons,
-  Label,
   Select,
   Chips,
   Options,
@@ -702,16 +701,18 @@ export const formFieldFactory = (
                       minLenght: field.minLength || 1,
                     }
                   : {};
-              return m('.input-field col s12', [
-                m(Label, { ...props }),
-                m(Chips, {
-                  onchange: (chips: M.ChipData[]) => onchange(chips.map((chip) => chip.tag)),
-                  placeholder: 'Add a tag',
-                  secondaryPlaceholder: '+tag',
-                  data,
-                  autocompleteOptions,
-                }),
-              ]);
+              const { label, isMandatory, className, helperText } = props;
+              return m(Chips, {
+                className,
+                label,
+                isMandatory,
+                helperText,
+                onchange: (chips: M.ChipData[]) => onchange(chips.map((chip) => chip.tag)),
+                placeholder: field.placeholder || 'Add a tag',
+                secondaryPlaceholder: field.secondaryPlaceholder || '+tag',
+                data,
+                autocompleteOptions,
+              });
             }
             case 'markdown':
             case 'textarea': {
