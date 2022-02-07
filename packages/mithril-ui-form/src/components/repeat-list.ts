@@ -42,6 +42,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
     createLabel: string;
     /** When dealing with a large list, you may add a property filter */
     filterValue?: string;
+    onNewItem?: (obj?: Record<string, any> | Record<string, any>[], id?: string) => Record<string, any>;
   };
 
   const getItems = (obj: Record<string, any> | Record<string, any>[], id: string): Record<string, any>[] => {
@@ -56,26 +57,43 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
   };
 
   const addEmptyItem = (obj: Record<string, any> | Record<string, any>[], id: string) => {
+    const newItem = state.onNewItem ? state.onNewItem(obj, id) : {};
     if (obj instanceof Array) {
-      obj.push({});
+      obj.push(newItem);
     } else {
       if (!obj.hasOwnProperty(id)) {
-        obj[id] = [{}];
+        obj[id] = [newItem];
       } else {
-        obj[id].push({});
+        obj[id].push(newItem);
       }
     }
   };
+
+  const compareFnFactory = (sortProperty?: string) => {
+    if (!sortProperty) {
+      return (_a: Record<string, any>, _b: Record<string, any>) => 0;
+    }
+    const reverse = sortProperty[0] === '!';
+    const key = reverse ? sortProperty.substring(1) : sortProperty;
+
+    return reverse
+      ? (a: Record<string, any>, b: Record<string, any>) => (a[key] > b[key] ? -1 : a[key] < b[key] ? 1 : 0)
+      : (a: Record<string, any>, b: Record<string, any>) => (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0);
+  };
+
+  let compareFn: (a: Record<string, any>, b: Record<string, any>) => number;
 
   return {
     oninit: ({
       attrs: {
         i18n = {},
-        field: { id = '' },
+        field: { id = '', sortProperty, onNewItem },
       },
     }) => {
       state.editLabel = i18n.editRepeat || `Edit ${id}`;
       state.createLabel = i18n.createRepeat || `Create new ${id}`;
+      state.onNewItem = onNewItem;
+      compareFn = compareFnFactory(sortProperty);
     },
     view: ({
       attrs: {
@@ -101,9 +119,9 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
         max,
         pageSize,
         propertyFilter,
-        sortProperty,
         filterLabel,
         readonly = r,
+        repeatItemClass = 'z-depth-1',
       } = field;
       const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
       const editId = 'edit_' + compId;
@@ -113,13 +131,6 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
         propertyFilter && strippedFilterValue && strippedFilterValue.length > 2
           ? allItems.filter((o) => stripSpaces(`${o[propertyFilter]}`).indexOf(strippedFilterValue) >= 0)
           : allItems;
-      const compareFn = sortProperty
-        ? sortProperty[0] === '!'
-          ? (a: Record<string, any>, b: Record<string, any>) =>
-              a[sortProperty] > b[sortProperty] ? -1 : a[sortProperty] < b[sortProperty] ? 1 : 0
-          : (a: Record<string, any>, b: Record<string, any>) =>
-              a[sortProperty] > b[sortProperty] ? 1 : a[sortProperty] < b[sortProperty] ? -1 : 0
-        : (_a: Record<string, any>, _b: Record<string, any>) => 0;
       const page = m.route.param(id) ? Math.min(items.length, +m.route.param(id)) : 1;
       const curPage = pageSize && items && (page - 1) * pageSize < items.length ? page : 1;
       const delimitter = pageSize
@@ -131,6 +142,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
       const maxItemsReached = max && items.length >= max ? true : false;
       const canDeleteItems = disabled ? false : !min || items.length > min ? true : false;
 
+      console.log('Repeat: ' + repeatItemClass);
       return [
         [
           m(`#${id}.repeat-list${className}`, { style: 'position:relative' }, [
@@ -184,7 +196,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                 .sort(compareFn)
                 .filter(delimitter)
                 .map((item, i) => [
-                  m('.row.z-depth-1.repeat-item', { key: page + hash(item) }, [
+                  m('.row.repeat-item', { className: repeatItemClass, key: page + hash(item) }, [
                     m(LayoutForm, {
                       form: field.type as UIForm,
                       obj: item,
@@ -201,9 +213,9 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                         'div',
                         { style: 'position: absolute; right: -25px; margin-top: -10px;' },
                         m(RoundIconButton, {
-                          className: 'btn-small right',
-                          iconName: 'delete',
-                          iconClass: 'red',
+                          className: 'mui-delete-item btn-small right',
+                          iconName: 'clear',
+                          iconClass: 'white black-text',
                           style: 'margin: 0 10px 10px 0;',
                           disabled,
                           readonly,
@@ -214,6 +226,18 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                       ),
                   ]),
                 ]),
+            !(disabled || maxItemsReached || readonly || !items || items.length === 0) &&
+              m(RoundIconButton, {
+                iconName: 'add',
+                iconClass: 'right white black-text',
+                onclick: () => {
+                  addEmptyItem(obj, id);
+                  m.route.set(`${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${items.length}`);
+                  notify(obj);
+                },
+                style: 'padding: 0; margin-top: -10px; margin-right: -25px',
+                className: 'mui-add-new-item btn-small right',
+              }),
           ]),
         ],
         typeof state.curItemIdx !== 'undefined' &&

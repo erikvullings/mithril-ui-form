@@ -698,6 +698,8 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
     id: 'capabilities',
     label: 'Capabilities',
     repeat: true,
+    repeatItemClass: '',
+    onNewItem: () => ({ name: 'New capability name...' }),
     type: [
       {
         id: 'id',
@@ -782,7 +784,7 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
   },
   { id: 'created', label: 'Created "{{event}}" event on:', type: 'date', required: true },
   { id: 'edited', type: 'date', required: true },
-  { type: 'md', value: '#### Sources of information' },
+  { type: 'md', value: '#### Sources of information', className: 'col s12' },
   { id: 'sources', type: 'section' },
   {
     id: 'sources',
@@ -803,7 +805,7 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
     ],
   },
   { id: 'event', label: 'Description of the event', type: 'section' },
-  { type: 'md', value: '#### General description of the event' },
+  { type: 'md', value: '#### General description of the event', className: 'col s12' },
   {
     id: 'eventType',
     type: 'select',
