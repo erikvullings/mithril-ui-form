@@ -32,17 +32,17 @@
   "license": "MIT",
   "dependencies": {
     "mithril": "^2.0.4",
-    "mithril-materialized": "^0.19.3",
+    "mithril-materialized": "^0.19.4",
     "mithril-ui-form-plugin": "^0.3.3"
   },
   "devDependencies": {
     "@types/materialize-css": "^1.0.11",
     "@types/mithril": "^2.0.8",
-    "microbundle": "^0.14.1",
+    "microbundle": "^0.14.2",
     "rimraf": "^3.0.2",
     "tslib": "^2.3.1",
-    "typescript": "^4.4.4",
-    "typescript-json-schema": "^0.51.0"
+    "typescript": "^4.5.5",
+    "typescript-json-schema": "^0.53.0"
   },
   "browserslist": [
     "last 2 version",
