@@ -177,7 +177,7 @@ export const FormView = () => {
     console.log(JSON.stringify(state.result, null, 2));
   };
 
-  state.form = info;
+  state.form = info2;
 
   state.result = {
     my_rating: 5,
