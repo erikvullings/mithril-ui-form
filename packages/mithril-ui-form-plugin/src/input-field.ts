@@ -69,6 +69,11 @@ export interface IInputField {
    */
   repeat?: true | 'geojson';
   /**
+   * Optional class that will be added to the repeating items,
+   * e.g. 'z-depth-1' to add a border to them.
+   */
+  repeatItemClass?: string;
+  /**
    * By default, show every element, except when this property is defined. In that case, show when:
    * - show is a string with a elementID, and elementID is selected (as an answer)
    * - show is a string array, and one of the elementIDs is selected (OR condition)

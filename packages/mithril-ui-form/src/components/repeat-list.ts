@@ -121,7 +121,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
         propertyFilter,
         filterLabel,
         readonly = r,
-        repeatItemClass = 'z-depth-1',
+        repeatItemClass = '',
       } = field;
       const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
       const editId = 'edit_' + compId;
@@ -142,10 +142,9 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
       const maxItemsReached = max && items.length >= max ? true : false;
       const canDeleteItems = disabled ? false : !min || items.length > min ? true : false;
 
-      console.log('Repeat: ' + repeatItemClass);
       return [
         [
-          m(`#${id}.repeat-list${className}`, { style: 'position:relative' }, [
+          m(`#${id}.repeat-list${className}`, [
             m(
               '.row',
               m('.col.s12', [
@@ -211,7 +210,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                     canDeleteItems &&
                       m(
                         'div',
-                        { style: 'position: absolute; right: -25px; margin-top: -10px;' },
+                        { style: 'position: absolute; right: 40px; margin-top: -10px;' },
                         m(RoundIconButton, {
                           className: 'mui-delete-item btn-small right',
                           iconName: 'clear',
