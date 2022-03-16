@@ -4,10 +4,10 @@ importers:
 
   .:
     specifiers:
-      pnpm: ^6.30.0
+      pnpm: ^6.32.3
       rimraf: ^3.0.2
     devDependencies:
-      pnpm: 6.30.0
+      pnpm: 6.32.3
       rimraf: 3.0.2
 
   packages/example:
@@ -4697,8 +4697,8 @@ packages:
       find-up: 4.1.0
     dev: true
 
-  /pnpm/6.30.0:
-    resolution: {integrity: sha512-qsnc5wxI5nIkdh7lDv2mQiniPdsSD46a1A1Nz+qzcMuh4FFiXAq1Ntfszdm21bVm0OFEn/FSgaQDZxYXYPmCTw==}
+  /pnpm/6.32.3:
+    resolution: {integrity: sha512-lMQgROSwiUA+kt+suAPinjNwqevS1Iz0rppWNZ3jHhzeP07RFRQ+Ksai2OlAnM+YjlbHT9niQ4ICBVSqcdQ04w==}
     engines: {node: '>=12.17'}
     hasBin: true
     dev: true
