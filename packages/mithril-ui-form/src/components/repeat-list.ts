@@ -195,47 +195,45 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                 .sort(compareFn)
                 .filter(delimitter)
                 .map((item, i) => [
-                  m('.row.repeat-item', { className: repeatItemClass, key: page + hash(item) }, [
-                    m(LayoutForm, {
-                      form: field.type as UIForm,
-                      obj: item,
-                      i18n,
-                      context: context instanceof Array ? [obj, ...context] : [obj, context],
-                      section,
-                      containerId,
+                  canDeleteItems &&
+                    m(RoundIconButton, {
+                      iconName: 'clear',
+                      iconClass: 'white black-text',
+                      className: 'row mui-delete-item btn-small right',
+                      style: 'padding: 0; margin-top: -10px; margin-right: -25px',
                       disabled,
                       readonly,
-                      onchange: () => notify(obj),
+                      onclick: () => {
+                        state.curItemIdx = i;
+                      },
                     }),
-                    canDeleteItems &&
-                      m(
-                        'div',
-                        { style: 'position: absolute; right: 40px; margin-top: -10px;' },
-                        m(RoundIconButton, {
-                          className: 'mui-delete-item btn-small right',
-                          iconName: 'clear',
-                          iconClass: 'white black-text',
-                          style: 'margin: 0 10px 10px 0;',
-                          disabled,
-                          readonly,
-                          onclick: () => {
-                            state.curItemIdx = i;
-                          },
-                        })
-                      ),
-                  ]),
+                  [
+                    m('.row.repeat-item', { className: repeatItemClass, key: page + hash(item) }, [
+                      m(LayoutForm, {
+                        form: field.type as UIForm,
+                        obj: item,
+                        i18n,
+                        context: context instanceof Array ? [obj, ...context] : [obj, context],
+                        section,
+                        containerId,
+                        disabled,
+                        readonly,
+                        onchange: () => notify(obj),
+                      }),
+                    ]),
+                  ],
                 ]),
             !(disabled || maxItemsReached || readonly || !items || items.length === 0) &&
               m(RoundIconButton, {
                 iconName: 'add',
-                iconClass: 'right white black-text',
+                iconClass: 'white black-text',
+                className: 'row mui-add-new-item btn-small right',
+                style: 'padding: 0; margin-top: -10px; margin-right: -25px',
                 onclick: () => {
                   addEmptyItem(obj, id);
                   m.route.set(`${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${items.length}`);
                   notify(obj);
                 },
-                style: 'padding: 0; margin-top: -10px; margin-right: -25px',
-                className: 'mui-add-new-item btn-small right',
               }),
           ]),
         ],
