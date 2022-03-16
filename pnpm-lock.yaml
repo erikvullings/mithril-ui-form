@@ -64,14 +64,14 @@ importers:
   packages/mithril-ui-form:
     specifiers:
       '@types/materialize-css': ^1.0.11
-      '@types/mithril': ^2.0.8
+      '@types/mithril': ^2.0.9
       microbundle: ^0.14.2
       mithril: ^2.0.4
       mithril-materialized: ^0.19.4
-      mithril-ui-form-plugin: ^0.3.3
+      mithril-ui-form-plugin: ^0.3.4
       rimraf: ^3.0.2
       tslib: ^2.3.1
-      typescript: ^4.5.5
+      typescript: ^4.6.2
       typescript-json-schema: ^0.53.0
     dependencies:
       mithril: 2.0.4
@@ -79,11 +79,11 @@ importers:
       mithril-ui-form-plugin: link:../mithril-ui-form-plugin
     devDependencies:
       '@types/materialize-css': 1.0.11
-      '@types/mithril': 2.0.8
+      '@types/mithril': 2.0.9
       microbundle: 0.14.2
       rimraf: 3.0.2
       tslib: 2.3.1
-      typescript: 4.5.5
+      typescript: 4.6.2
       typescript-json-schema: 0.53.0
 
   packages/mithril-ui-form-leaflet-plugin:
@@ -91,7 +91,7 @@ importers:
       '@types/geojson': ^7946.0.8
       '@types/leaflet': ^1.7.9
       '@types/leaflet-draw': ^1.0.5
-      '@types/mithril': ^2.0.8
+      '@types/mithril': ^2.0.9
       leaflet: ^1.7.1
       leaflet-draw: ^1.0.4
       microbundle: ^0.14.2
@@ -99,7 +99,7 @@ importers:
       mithril-ui-form-plugin: workspace:^0.3.3
       rimraf: ^3.0.2
       tslib: ^2.3.1
-      typescript: ^4.5.5
+      typescript: ^4.6.2
     dependencies:
       leaflet: 1.7.1
       leaflet-draw: 1.0.4
@@ -108,40 +108,40 @@ importers:
       '@types/geojson': 7946.0.8
       '@types/leaflet': 1.7.9
       '@types/leaflet-draw': 1.0.5
-      '@types/mithril': 2.0.8
+      '@types/mithril': 2.0.9
       microbundle: 0.14.2
       mithril-ui-form-plugin: link:../mithril-ui-form-plugin
       rimraf: 3.0.2
       tslib: 2.3.1
-      typescript: 4.5.5
+      typescript: 4.6.2
 
   packages/mithril-ui-form-plugin:
     specifiers:
-      '@types/mithril': ^2.0.8
+      '@types/mithril': ^2.0.9
       rimraf: ^3.0.2
       tslib: ^2.3.1
-      typescript: ^4.5.5
+      typescript: ^4.6.2
     devDependencies:
-      '@types/mithril': 2.0.8
+      '@types/mithril': 2.0.9
       rimraf: 3.0.2
       tslib: 2.3.1
-      typescript: 4.5.5
+      typescript: 4.6.2
 
   packages/mithril-ui-form-rating-plugin:
     specifiers:
-      '@types/mithril': ^2.0.8
+      '@types/mithril': ^2.0.9
       microbundle: ^0.14.2
       mithril-ui-form-plugin: workspace:^0.3.3
       rimraf: ^3.0.2
       tslib: ^2.3.1
-      typescript: ^4.5.5
+      typescript: ^4.6.2
     devDependencies:
-      '@types/mithril': 2.0.8
+      '@types/mithril': 2.0.9
       microbundle: 0.14.2
       mithril-ui-form-plugin: link:../mithril-ui-form-plugin
       rimraf: 3.0.2
       tslib: 2.3.1
-      typescript: 4.5.5
+      typescript: 4.6.2
 
 packages:
 
@@ -1631,6 +1631,10 @@ packages:
 
   /@types/mithril/2.0.8:
     resolution: {integrity: sha512-QzVV70DqUhWfLFpMFDBI9rRxtzeUUpbhiFDpUJYSV92AePgl+Qfficgv2MOb1Ceb+lBOQU8+L+Hjf2UielQjEw==}
+    dev: true
+
+  /@types/mithril/2.0.9:
+    resolution: {integrity: sha512-a8TMNdGsowAB0R+VppKKmJNAA9YKGVuBvMZcITWTHIZGSKdu3LtyBDKGyU6QkzKJSzq+pW2egxg+09nRK03qIg==}
     dev: true
 
   /@types/node/16.11.0:
@@ -4251,12 +4255,12 @@ packages:
       rollup-plugin-bundle-size: 1.0.3
       rollup-plugin-postcss: 4.0.0_postcss@8.3.5
       rollup-plugin-terser: 7.0.2_rollup@2.52.1
-      rollup-plugin-typescript2: 0.29.0_rollup@2.52.1+typescript@4.5.5
+      rollup-plugin-typescript2: 0.29.0_rollup@2.52.1+typescript@4.6.2
       sade: 1.7.4
       terser: 5.9.0
       tiny-glob: 0.2.9
       tslib: 2.3.1
-      typescript: 4.5.5
+      typescript: 4.6.2
     transitivePeerDependencies:
       - '@types/babel__core'
       - supports-color
@@ -5697,7 +5701,7 @@ packages:
       terser: 5.9.0
     dev: true
 
-  /rollup-plugin-typescript2/0.29.0_rollup@2.52.1+typescript@4.5.5:
+  /rollup-plugin-typescript2/0.29.0_rollup@2.52.1+typescript@4.6.2:
     resolution: {integrity: sha512-YytahBSZCIjn/elFugEGQR5qTsVhxhUwGZIsA9TmrSsC88qroGo65O5HZP/TTArH2dm0vUmYWhKchhwi2wL9bw==}
     peerDependencies:
       rollup: '>=1.26.3'
@@ -5709,7 +5713,7 @@ packages:
       resolve: 1.17.0
       rollup: 2.52.1
       tslib: 2.0.1
-      typescript: 4.5.5
+      typescript: 4.6.2
     dev: true
 
   /rollup-pluginutils/2.8.2:
@@ -6305,6 +6309,12 @@ packages:
 
   /typescript/4.5.5:
     resolution: {integrity: sha512-TCTIul70LyWe6IJWT8QSYeA54WQe8EjQFU4wY52Fasj5UKx88LNYKCgBEHcOMOrFF1rKGbD8v/xcNWVUq9SymA==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
+
+  /typescript/4.6.2:
+    resolution: {integrity: sha512-HM/hFigTBHZhLXshn9sN37H085+hQGeJHJ/X7LpBWLID/fbc2acUMfU+lGD98X81sKP+pFa9f0DZmCwB9GnbAg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
