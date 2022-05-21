@@ -30,23 +30,23 @@
   "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
   "license": "MIT",
   "dependencies": {
-    "leaflet": "^1.7.1",
+    "leaflet": "^1.8.0",
     "leaflet-draw": "^1.0.4",
     "mithril-leaflet": "0.4.3"
   },
   "devDependencies": {
     "@types/geojson": "^7946.0.8",
-    "@types/leaflet": "^1.7.9",
+    "@types/leaflet": "^1.7.10",
     "@types/leaflet-draw": "^1.0.5",
-    "@types/mithril": "^2.0.9",
-    "microbundle": "^0.14.2",
+    "@types/mithril": "^2.0.11",
+    "microbundle": "^0.15.0",
     "mithril-ui-form-plugin": "workspace:^0.3.3",
     "rimraf": "^3.0.2",
-    "tslib": "^2.3.1",
-    "typescript": "^4.6.2"
+    "tslib": "^2.4.0",
+    "typescript": "^4.6.4"
   },
   "peerDependencies": {
-    "mithril": "^2.0.4"
+    "mithril": "2.x"
   },
   "browserslist": [
     "last 2 version",
