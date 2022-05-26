@@ -137,7 +137,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
         ? (_: any, i: number) => (curPage - 1) * pageSize <= i && i < curPage * pageSize
         : () => true;
       const regex = new RegExp(`\\??\\&?${id}=\\d+`);
-      const route = m.route.get().replace(regex, '');
+      const route = (m.route.get() || '').replace(regex, '');
       const maxPages = pageSize ? Math.ceil(items.length / pageSize) : 0;
       const maxItemsReached = max && items.length >= max ? true : false;
       const canDeleteItems = disabled ? false : !min || items.length > min ? true : false;
