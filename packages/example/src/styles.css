@@ -54,3 +54,6 @@
 .geojson-feature-list .collapsible-body {
   padding: 0 1rem;
 }
+.mui-repeat-list-controls {
+  margin-bottom: 0;
+}

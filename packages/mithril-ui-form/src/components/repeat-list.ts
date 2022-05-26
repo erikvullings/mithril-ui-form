@@ -147,9 +147,9 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
 
       return [
         [
-          m(`#${id}.repeat-list${className}`, [
+          m(`#${id}.mui-repeat-list${className}`, [
             m(
-              '.row',
+              '.row.mui-repeat-list-controls',
               m('.col.s12', [
                 m(FlatButton, {
                   iconName: disabled || maxItemsReached ? '' : 'add',
