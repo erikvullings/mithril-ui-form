@@ -4,10 +4,10 @@ importers:
 
   .:
     specifiers:
-      pnpm: ^7.1.2
+      pnpm: ^7.1.5
       rimraf: ^3.0.2
     devDependencies:
-      pnpm: 7.1.2
+      pnpm: 7.1.5
       rimraf: 3.0.2
 
   packages/example:
@@ -67,15 +67,14 @@ importers:
       '@types/materialize-css': ^1.0.11
       '@types/mithril': ^2.0.11
       microbundle: ^0.15.0
-      mithril: ^2.2.0
+      mithril: ^2.2.2
       mithril-materialized: ^0.19.4
       mithril-ui-form-plugin: ^0.3.7
       rimraf: ^3.0.2
       tslib: ^2.4.0
-      typescript: ^4.6.4
+      typescript: ^4.7.2
       typescript-json-schema: ^0.53.1
     dependencies:
-      mithril: 2.2.0
       mithril-materialized: 0.19.4
       mithril-ui-form-plugin: link:../mithril-ui-form-plugin
     devDependencies:
@@ -83,9 +82,10 @@ importers:
       '@types/materialize-css': 1.0.11
       '@types/mithril': 2.0.11
       microbundle: 0.15.0
+      mithril: 2.2.2
       rimraf: 3.0.2
       tslib: 2.4.0
-      typescript: 4.6.4
+      typescript: 4.7.2
       typescript-json-schema: 0.53.1
 
   packages/mithril-ui-form-leaflet-plugin:
@@ -94,40 +94,44 @@ importers:
       '@types/leaflet': ^1.7.10
       '@types/leaflet-draw': ^1.0.5
       '@types/mithril': ^2.0.11
+      '@types/node': ^17.0.35
       leaflet: ^1.8.0
       leaflet-draw: ^1.0.4
       microbundle: ^0.15.0
+      mithril: 2.2.2
       mithril-leaflet: 0.4.3
       mithril-ui-form-plugin: workspace:^0.3.3
       rimraf: ^3.0.2
       tslib: ^2.4.0
-      typescript: ^4.6.4
+      typescript: ^4.7.2
     dependencies:
+      '@types/node': 17.0.35
       leaflet: 1.8.0
       leaflet-draw: 1.0.4
-      mithril-leaflet: 0.4.3_7xlzjinfubd7x7f336zb4gycoq
+      mithril-leaflet: 0.4.3_i34icd7rh6h2b2ikfigvpb4bcu
     devDependencies:
       '@types/geojson': 7946.0.8
       '@types/leaflet': 1.7.10
       '@types/leaflet-draw': 1.0.5
       '@types/mithril': 2.0.11
       microbundle: 0.15.0
+      mithril: 2.2.2
       mithril-ui-form-plugin: link:../mithril-ui-form-plugin
       rimraf: 3.0.2
       tslib: 2.4.0
-      typescript: 4.6.4
+      typescript: 4.7.2
 
   packages/mithril-ui-form-plugin:
     specifiers:
       '@types/mithril': ^2.0.11
       rimraf: ^3.0.2
       tslib: ^2.4.0
-      typescript: ^4.6.4
+      typescript: ^4.7.2
     devDependencies:
       '@types/mithril': 2.0.11
       rimraf: 3.0.2
       tslib: 2.4.0
-      typescript: 4.6.4
+      typescript: 4.7.2
 
   packages/mithril-ui-form-rating-plugin:
     specifiers:
@@ -136,14 +140,14 @@ importers:
       mithril-ui-form-plugin: workspace:^0.3.3
       rimraf: ^3.0.2
       tslib: ^2.4.0
-      typescript: ^4.6.4
+      typescript: ^4.7.2
     devDependencies:
       '@types/mithril': 2.0.11
       microbundle: 0.15.0
       mithril-ui-form-plugin: link:../mithril-ui-form-plugin
       rimraf: 3.0.2
       tslib: 2.4.0
-      typescript: 4.6.4
+      typescript: 4.7.2
 
 packages:
 
@@ -1624,6 +1628,9 @@ packages:
     resolution: {integrity: sha512-8MLkBIYQMuhRBQzGN9875bYsOhPnf/0rgXGo66S2FemHkhbn9qtsz9ywV1iCG+vbjigE4WUNVvw37Dx+L0qsPg==}
     dev: true
 
+  /@types/node/17.0.35:
+    resolution: {integrity: sha512-vu1SrqBjbbZ3J6vwY17jBs8Sr/BKA+/a/WtjRG+whKg1iuLFOosq872EXS0eXWILdO36DHQQeku/ZcL6hz2fpg==}
+
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
     dev: true
@@ -1643,7 +1650,7 @@ packages:
   /@types/resolve/1.17.1:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
     dependencies:
-      '@types/node': 16.11.0
+      '@types/node': 17.0.35
     dev: true
 
   /@types/retry/0.12.1:
@@ -3828,7 +3835,7 @@ packages:
     resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 16.11.0
+      '@types/node': 17.0.35
       merge-stream: 2.0.0
       supports-color: 7.2.0
     dev: true
@@ -4094,13 +4101,13 @@ packages:
       rollup-plugin-bundle-size: 1.0.3
       rollup-plugin-postcss: 4.0.0_postcss@8.4.12
       rollup-plugin-terser: 7.0.2_rollup@2.52.1
-      rollup-plugin-typescript2: 0.29.0_dvtdacqm4pfraztlfls5gwlnpy
+      rollup-plugin-typescript2: 0.29.0_xae65xkmyvvqs4q3scnjzvetjm
       rollup-plugin-visualizer: 5.6.0_rollup@2.52.1
       sade: 1.7.4
       terser: 5.9.0
       tiny-glob: 0.2.9
       tslib: 2.4.0
-      typescript: 4.6.4
+      typescript: 4.7.2
     transitivePeerDependencies:
       - '@types/babel__core'
       - supports-color
@@ -4172,7 +4179,7 @@ packages:
     resolution: {integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==}
     dev: true
 
-  /mithril-leaflet/0.4.3_7xlzjinfubd7x7f336zb4gycoq:
+  /mithril-leaflet/0.4.3_i34icd7rh6h2b2ikfigvpb4bcu:
     resolution: {integrity: sha512-vZh0qOQgSJawQpkYbyxqddLjPHTWdVUtv0FveUUBHo0GHjQotdSCTJzwaLQzC3lxPRsY58kh1Kv8QS2+Wk8CMw==}
     peerDependencies:
       leaflet: ^1.6.0
@@ -4181,13 +4188,14 @@ packages:
     dependencies:
       leaflet: 1.8.0
       leaflet-draw: 1.0.4
+      mithril: 2.2.2
     dev: false
 
   /mithril-materialized/0.19.4:
     resolution: {integrity: sha512-n+OYIMFqyXL1zaA2F4HA5UsEbiijvkXIJrBD2CWYVf+HQzYMxcgwbKaMkeJMqLyFqBrlFe60+S6VaNEnGBcTuQ==}
     dependencies:
       materialize-css: 1.0.0
-      mithril: 2.2.0
+      mithril: 2.2.2
     dev: false
 
   /mithril/2.2.0:
@@ -4196,6 +4204,12 @@ packages:
     dependencies:
       ospec: 4.0.0
     dev: false
+
+  /mithril/2.2.2:
+    resolution: {integrity: sha512-YRm6eLv2UUaWaWHdH8L+desW9+DN7+oM34CxJv6tT2e1lNVue8bxQlknQeDRn9aKlO8sIujm2wqUHwM+Hb1wGQ==}
+    hasBin: true
+    dependencies:
+      ospec: 4.0.0
 
   /mkdirp/0.5.5:
     resolution: {integrity: sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==}
@@ -4412,7 +4426,6 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.0
-    dev: false
 
   /p-finally/1.0.0:
     resolution: {integrity: sha1-P7z7FbiZpEEjs0ttzBi3JDNqLK4=}
@@ -4564,8 +4577,8 @@ packages:
       find-up: 4.1.0
     dev: true
 
-  /pnpm/7.1.2:
-    resolution: {integrity: sha512-nZieltHsIEvr5vGcDM4JchBixUk1Esq+XewDP9RCiPAPxRv5LzDhGujgsrtoETyXBsQ9mclXSPppNr80ya4Rnw==}
+  /pnpm/7.1.5:
+    resolution: {integrity: sha512-Mkdb7mHUPbzsPjvKbhvNgHPPIX5NZlLcm7S6uFJWPJrkiiWnrq7tbqWHC09Spzwvao92R64mo6a6gGbrERNbrA==}
     engines: {node: '>=14.19'}
     hasBin: true
     dev: true
@@ -5500,7 +5513,7 @@ packages:
       terser: 5.9.0
     dev: true
 
-  /rollup-plugin-typescript2/0.29.0_dvtdacqm4pfraztlfls5gwlnpy:
+  /rollup-plugin-typescript2/0.29.0_xae65xkmyvvqs4q3scnjzvetjm:
     resolution: {integrity: sha512-YytahBSZCIjn/elFugEGQR5qTsVhxhUwGZIsA9TmrSsC88qroGo65O5HZP/TTArH2dm0vUmYWhKchhwi2wL9bw==}
     peerDependencies:
       rollup: '>=1.26.3'
@@ -5512,7 +5525,7 @@ packages:
       resolve: 1.17.0
       rollup: 2.52.1
       tslib: 2.0.1
-      typescript: 4.6.4
+      typescript: 4.7.2
     dev: true
 
   /rollup-plugin-visualizer/5.6.0_rollup@2.52.1:
@@ -6131,6 +6144,12 @@ packages:
 
   /typescript/4.6.4:
     resolution: {integrity: sha512-9ia/jWHIEbo49HfjrLGfKbZSuWo9iTMwXO+Ca3pRsSpbsMbc7/IU8NKdCZVRRBafVPGnoJeFL76ZOAA84I9fEg==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
+
+  /typescript/4.7.2:
+    resolution: {integrity: sha512-Mamb1iX2FDUpcTRzltPxgWMKy3fhg0TN378ylbktPGPK/99KbDtMQ4W1hwgsbPAsG3a0xKa1vmw4VKZQbkvz5A==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
