@@ -83,6 +83,9 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
 
   let compareFn: (a: Record<string, any>, b: Record<string, any>) => number;
 
+  const clearRoute = new RegExp('.*/#!', 'i');
+  const getRoute = () => window.location.href.replace(clearRoute, '');
+
   return {
     oninit: ({
       attrs: {
@@ -137,7 +140,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
         ? (_: any, i: number) => (curPage - 1) * pageSize <= i && i < curPage * pageSize
         : () => true;
       const regex = new RegExp(`\\??\\&?${id}=\\d+`);
-      const route = (m.route.get() || '').replace(regex, '');
+      const route = getRoute().replace(regex, '');
       const maxPages = pageSize ? Math.ceil(items.length / pageSize) : 0;
       const maxItemsReached = max && items.length >= max ? true : false;
       const canDeleteItems = disabled ? false : !min || items.length > min ? true : false;
