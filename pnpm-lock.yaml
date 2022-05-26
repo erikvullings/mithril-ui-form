@@ -63,6 +63,7 @@ importers:
 
   packages/mithril-ui-form:
     specifiers:
+      '@types/geojson': ^7946.0.8
       '@types/materialize-css': ^1.0.11
       '@types/mithril': ^2.0.11
       microbundle: ^0.15.0
@@ -78,6 +79,7 @@ importers:
       mithril-materialized: 0.19.4
       mithril-ui-form-plugin: link:../mithril-ui-form-plugin
     devDependencies:
+      '@types/geojson': 7946.0.8
       '@types/materialize-css': 1.0.11
       '@types/mithril': 2.0.11
       microbundle: 0.15.0

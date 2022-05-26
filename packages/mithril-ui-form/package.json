@@ -38,6 +38,7 @@
   "devDependencies": {
     "@types/materialize-css": "^1.0.11",
     "@types/mithril": "^2.0.11",
+    "@types/geojson": "^7946.0.8",
     "microbundle": "^0.15.0",
     "rimraf": "^3.0.2",
     "tslib": "^2.4.0",
