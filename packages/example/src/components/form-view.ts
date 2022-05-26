@@ -121,6 +121,24 @@ const info = [
 
 const info2 = [
   {
+    id: 'hasIndDiff',
+    label: 'Has individual differences?',
+    type: 'select',
+    options: [
+      { id: 1, label: 'None' },
+      { id: 2, label: 'Unknown' },
+      { id: 3, label: 'Yes' },
+    ],
+    className: 'col s4',
+  },
+  {
+    id: 'diff',
+    label: 'Individual differences',
+    type: 'textarea',
+    className: 'col s8',
+    show: 'hasIndDiff = 3',
+  },
+  {
     id: 'my_rating',
     label: 'What do you think of this plugin?',
     description: '_Please, be honest!_',

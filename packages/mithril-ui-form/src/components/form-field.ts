@@ -675,7 +675,6 @@ export const formFieldFactory = (
               });
             }
             case 'md':
-              console.log(iv);
               const md = resolvePlaceholders(id ? iv : value || label, obj, context);
               return m(SlimdownView, { md, className });
             case 'section':

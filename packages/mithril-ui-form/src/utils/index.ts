@@ -63,13 +63,19 @@ const checkExpression = (expression: string, obj: Record<string, any>) => {
   }
   const match = expressionRegex.exec(expression);
   if (match) {
-    const [fullMatch, path, operand, value] = match;
+    const [fullMatch, path, operand, matchValue] = match;
     const resolved = getPath(obj, path.trim());
     const v = typeof resolved === 'boolean' ? (resolved ? 'true' : 'false') : resolved;
     if (typeof v === 'undefined' || (typeof v === 'string' && v.length === 0)) {
       return false;
-    } else if (operand && value) {
-      const val = !isNaN(+value) ? (+value ? value === 'true' : true ? value === 'false' : false) : value;
+    } else if (operand && matchValue) {
+      const val = isNaN(+matchValue)
+        ? matchValue === 'true'
+          ? true
+          : matchValue === 'false'
+          ? false
+          : matchValue
+        : +matchValue;
       switch (operand) {
         case '=':
           return v instanceof Array ? v.indexOf(val) >= 0 : v === val;
@@ -94,9 +100,11 @@ const checkExpression = (expression: string, obj: Record<string, any>) => {
 
 const checkExpressions = (expression: string, objArr: Record<string, any>[]) => {
   const ands = expression.split('&');
+  console.log(`ANDS: ${ands}`);
   const flattened = flatten(objArr);
   return ands.reduce((acc, expr) => {
     const invert = invertExpression.test(expr);
+    console.log(`INVERT: ${invert}`);
     const e = invert ? expr.replace(invertExpression, '') : expr;
     acc = acc && flattened.filter(Boolean).reduce((p, obj) => p || checkExpression(e.trim(), obj), false as boolean);
     return invert ? !acc : acc;
