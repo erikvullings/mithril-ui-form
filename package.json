@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/erikvullings/mithril-tree-component#readme",
   "scripts": {
-    "build": "pnpm build",
+    "build": "pnpm -r build",
     "clean:local": "rimraf -fr docs",
     "clean": "npm run clean:local",
     "start": "pnpm -r --parallel run dev",
@@ -29,7 +29,7 @@
     "minor-release": "pnpm  -r --parallel minor-release"
   },
   "devDependencies": {
-    "pnpm": "^7.1.2",
+    "pnpm": "^7.1.5",
     "rimraf": "^3.0.2"
   }
 }
