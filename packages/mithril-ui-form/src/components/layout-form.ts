@@ -4,6 +4,7 @@ import { Vnode } from 'mithril';
 import { formFieldFactory } from './form-field';
 import { IRepeatList, RepeatList } from './repeat-list';
 import { GeoJSONFeatureList, IGeoJSONFeatureList } from './geojson-feature-list';
+import { evalExpression } from '../utils';
 
 export interface ILayoutForm extends Attributes {
   /** The form to display */
@@ -86,35 +87,48 @@ const LayoutFormFactory = () => {
       view: ({ attrs: { i18n, form, obj, onchange: onChange, disabled, readonly, context, section } }) => {
         const onchange = (res: Record<string, any>) => onChange && onChange(isValid(res, form), res);
 
-        return form.filter(sectionFilter(section)).reduce((acc, field) => {
-          if (!field.type) field.type = guessType(field);
-          return [
-            ...acc,
-            typeof field.repeat === 'undefined'
-              ? m(formField, { i18n, field, obj, onchange, disabled, readonly, context, section, containerId: 'body' })
-              : field.repeat === 'geojson'
-              ? m(GeoJSONFeatureList, {
-                  obj,
-                  field,
-                  onchange,
-                  context,
-                  i18n,
-                  containerId: 'body',
-                  disabled,
-                  readonly,
-                } as IGeoJSONFeatureList)
-              : m(RepeatList, {
-                  obj,
-                  field,
-                  onchange,
-                  context,
-                  i18n,
-                  containerId: 'body',
-                  disabled,
-                  readonly,
-                } as IRepeatList),
-          ];
-        }, [] as Array<Vnode<any, any>>);
+        return form
+          .filter(sectionFilter(section))
+          .filter((field) => !field.show || evalExpression(field.show, obj, context || {}))
+          .reduce((acc, field) => {
+            if (!field.type) field.type = guessType(field);
+            return [
+              ...acc,
+              typeof field.repeat === 'undefined'
+                ? m(formField, {
+                    i18n,
+                    field,
+                    obj,
+                    onchange,
+                    disabled,
+                    readonly,
+                    context,
+                    section,
+                    containerId: 'body',
+                  })
+                : field.repeat === 'geojson'
+                ? m(GeoJSONFeatureList, {
+                    obj,
+                    field,
+                    onchange,
+                    context,
+                    i18n,
+                    containerId: 'body',
+                    disabled,
+                    readonly,
+                  } as IGeoJSONFeatureList)
+                : m(RepeatList, {
+                    obj,
+                    field,
+                    onchange,
+                    context,
+                    i18n,
+                    containerId: 'body',
+                    disabled,
+                    readonly,
+                  } as IRepeatList),
+            ];
+          }, [] as Array<Vnode<any, any>>);
       },
     };
   };

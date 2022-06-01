@@ -100,11 +100,11 @@ const checkExpression = (expression: string, obj: Record<string, any>) => {
 
 const checkExpressions = (expression: string, objArr: Record<string, any>[]) => {
   const ands = expression.split('&');
-  console.log(`ANDS: ${ands}`);
+  // console.log(`ANDS: ${ands}`);
   const flattened = flatten(objArr);
   return ands.reduce((acc, expr) => {
     const invert = invertExpression.test(expr);
-    console.log(`INVERT: ${invert}`);
+    // console.log(`INVERT: ${invert}`);
     const e = invert ? expr.replace(invertExpression, '') : expr;
     acc = acc && flattened.filter(Boolean).reduce((p, obj) => p || checkExpression(e.trim(), obj), false as boolean);
     return invert ? !acc : acc;
