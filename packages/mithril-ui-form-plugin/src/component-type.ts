@@ -7,6 +7,7 @@ export type ComponentType =
   | 'date'
   | 'date'
   | 'email'
+  | 'base64'
   | 'file'
   | 'map'
   | 'md'

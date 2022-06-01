@@ -66,7 +66,17 @@ Each type supports a `className` property to set the input's class value (defaul
 ]
 ```
 
-- markdown: As textarea, but in readonly mode, renders the markdown.
+- markdown (md): Render the value as markdown, no label. Edit as textarea, but in readonly mode, renders the markdown.
+
+```json
+[
+  {
+    "type": "md",
+    "value": "# Header 1"
+  }
+]
+```
+
 - tags: Input multiple lines of text (as chips), returns a string array.
 
 ```json
@@ -81,7 +91,6 @@ Each type supports a `className` property to set the input's class value (defaul
 
 - email: Input an email.
 - url: Input a url.
-- md: Render the value as markdown, no label.
 - number: Input a number.
 - date: Input a date (uses date picker).
 - time: Input a time (uses time picker).
@@ -126,7 +135,26 @@ Each type supports a `className` property to set the input's class value (defaul
 ]
 ```
 
-- file: Uploads and posts a file to the provided `url`.
+- file: Uploads and posts a file to the provided `url`. The `url` is required.
+
+```json
+[{
+  "id": "url",
+  "label": "Upload a file",
+  "type": "file",
+  "url": "http://localhost:3030/upload/test"
+}]
+```
+
+- base64: Uploads a file and returns the data as base64 string.
+
+```json
+[{
+  "id": "url",
+  "label": "Upload a file",
+  "type": "base64"
+}]
+```
 
 ## Dynamic selections
 

@@ -375,6 +375,7 @@ export const formFieldFactory = (
                 initialValue,
               });
             }
+            case 'base64':
             case 'file': {
               const initialValue = iv as string | string[];
               const ivFinal = initialValue instanceof Array ? initialValue : [initialValue];
@@ -382,7 +383,7 @@ export const formFieldFactory = (
                 'div',
                 props,
                 ivFinal.map((f) => {
-                  const isImg = /.jpg$|.jpeg$|.png$|.gif$|.svg$|.bmp$|.tif$|.tiff$/i.test(f);
+                  const isImg = /data:image|.jpg$|.jpeg$|.png$|.gif$|.svg$|.bmp$|.tif$|.tiff$/i.test(f);
                   const origin = new URL(field.url || '/').origin;
                   const url = `${origin}${f}`;
                   return m(
@@ -732,7 +733,7 @@ export const formFieldFactory = (
               }
               const accept = options ? options.map((o) => o.id) : undefined;
               const upload = (file: FileList) => {
-                if (!file || !file.length || file.length < 1) {
+                if (!file || file.length < 1) {
                   onchange('');
                   return;
                 }
@@ -745,6 +746,29 @@ export const formFieldFactory = (
                 })
                   .then((res) => onchange(res))
                   .catch(console.error);
+              };
+              return m(FileInput, {
+                ...props,
+                accept,
+                placeholder,
+                onchange: upload,
+                initialValue,
+              });
+            }
+            case 'base64': {
+              const initialValue = iv as string;
+              const { placeholder } = field;
+              const accept = options ? options.map((o) => o.id) : undefined;
+              const upload = (file: FileList) => {
+                if (!file || file.length < 1) {
+                  onchange('');
+                  return;
+                }
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                  typeof reader.result === 'string' && onchange(reader.result);
+                };
+                reader.readAsDataURL(file[0]);
               };
               return m(FileInput, {
                 ...props,
