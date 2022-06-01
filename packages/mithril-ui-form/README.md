@@ -8,6 +8,13 @@ The form supports markdown input, repeating elements a (dynamic) number of times
 
 If the form is an object instead of a JSON file, you can also include a field transform (to and from) function.
 
+## Installation
+
+```bash
+npm i       # Or `pnpm i`
+npm start   # Initially, you may need to run this twice, as their are inter-package dependencies
+```
+
 ## Placeholders
 
 If your form generates an object, e.g.
