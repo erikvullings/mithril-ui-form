@@ -382,11 +382,10 @@ export const formFieldFactory = (
                 isImg &&
                 m(
                   'div',
-                  props,
                   m('img.responsive-img', {
                     src: initialValue,
                     alt: obj.title || obj.alt || obj.name || '',
-                    style: `max-height: ${field.max || 50}`,
+                    style: `max-height: ${field.max || 50}px`,
                   })
                 )
               );
@@ -768,6 +767,7 @@ export const formFieldFactory = (
             }
             case 'base64': {
               const initialValue = iv as string;
+              const isImg = initialValue && /data:image/i.test(initialValue) ? true : false;
               const { placeholder } = field;
               const accept = options ? options.map((o) => o.id) : undefined;
               const upload = (file: FileList) => {
@@ -778,16 +778,29 @@ export const formFieldFactory = (
                 const reader = new FileReader();
                 reader.onloadend = () => {
                   typeof reader.result === 'string' && onchange(reader.result);
+                  m.redraw();
                 };
                 reader.readAsDataURL(file[0]);
               };
-              return m(FileInput, {
-                ...props,
-                accept,
-                placeholder,
-                onchange: upload,
-                initialValue,
-              });
+              return isImg
+                ? m('div', [
+                    m('img.responsive-img', {
+                      src: initialValue,
+                      alt: obj.title || obj.alt || obj.name || '',
+                      style: `max-height: ${field.max || 50}px`,
+                    }),
+                    m(FlatButton, {
+                      iconName: 'clear',
+                      onclick: () => (obj[id] = undefined),
+                    }),
+                  ])
+                : m(FileInput, {
+                    ...props,
+                    accept,
+                    placeholder,
+                    onchange: upload,
+                    initialValue,
+                  });
             }
             case 'url': {
               const initialValue = iv as string;
