@@ -105,7 +105,7 @@ Each type supports a `className` property to set the input's class value (defaul
 - checkbox: Input a boolean.
 - switch: Input a boolean.
 - radio: Select one option.
-- options: Select one (or more) options.
+- options: Select one (or more) options. The `checkboxClass`, which indicates how much room an option will take, and the `checkAllOptions`, which adds a select all or none option, are optional.
 
 ```json
 [
@@ -114,6 +114,7 @@ Each type supports a `className` property to set the input's class value (defaul
     "label": "My hobbies",
     "type": "options",
     "checkboxClass": "col s3",
+    "checkAllOptions": "Select all|Select none",
     "options": [
       { "id": "o1", "label": "Reading" },
       { "id": "o2", "label": "Watching TV", "disabled": true },
@@ -153,7 +154,7 @@ Each type supports a `className` property to set the input's class value (defaul
 }]
 ```
 
-- base64: Uploads a file and returns the data as base64 string.
+- base64: Uploads a file and returns the data as base64 string. If the parent object has a `title`, `alt`, or `name` property, it will be used as the image's `alt` text in a readonly component.  
 
 ```json
 [{
