@@ -383,6 +383,19 @@ export const hash = (s: string | { [key: string]: any }) => {
   return hash;
 };
 
+/** Create a new URL fragment (i.e. without the domain/port) by merging base parameters with overriding parameters */
+export const toQueryString = (
+  fragment: string,
+  baseParams: Record<string, any>,
+  overrideParams: Record<string, any>
+) => {
+  const mergedObj = Object.assign({}, baseParams, overrideParams);
+  return `${fragment}?${Object.keys(mergedObj)
+    .map((key) => `${key}=${mergedObj[key]}`)
+    .join('&')}`;
+};
+
+/** Extract all query parameters to an object */
 export const getAllUrlParams = (url: string) => {
   // get query string from url (optional) or window
   const queryString = url ? url.split('?')[1] : window.location.search.slice(1);

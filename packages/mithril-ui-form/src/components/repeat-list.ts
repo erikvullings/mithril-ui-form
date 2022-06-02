@@ -2,7 +2,7 @@ import m, { FactoryComponent, Attributes } from 'mithril';
 import { FlatButton, uniqueId, ModalPanel, Pagination, RoundIconButton, TextInput } from 'mithril-materialized';
 import { I18n, IInputField, UIForm } from 'mithril-ui-form-plugin';
 import { LayoutForm } from './layout-form';
-import { range, stripSpaces, hash, getAllUrlParams } from '../utils';
+import { range, stripSpaces, hash, getAllUrlParams, toQueryString } from '../utils';
 
 export interface IRepeatList extends Attributes {
   /** The input field (or form) that must be rendered repeatedly */
@@ -141,7 +141,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
       const maxItemsReached = max && items.length >= max ? true : false;
       const canDeleteItems = disabled ? false : !min || items.length > min ? true : false;
 
-      const baseRoute = route.split('?')[0];
+      const fragment = route.split('?')[0];
       const params = getAllUrlParams(route);
       return [
         [
@@ -155,7 +155,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   label,
                   onclick: () => {
                     addEmptyItem(obj, id);
-                    m.route.set(baseRoute, Object.assign(params, { [id]: items.length }));
+                    m.route.set(fragment, Object.assign(params, { [id]: items.length }));
                     notify(obj);
                   },
                   style: 'padding: 0',
@@ -169,9 +169,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                     m(Pagination, {
                       curPage,
                       items: range(1, maxPages).map((i) => ({
-                        href: `${baseRoute}?${Object.keys(params)
-                          .map((key) => (key === id ? `${key}=${i}` : `${key}=${params[key]}`))
-                          .join('&')}`,
+                        href: toQueryString(fragment, params, { [id]: i }),
                       })),
                     })
                   ),
@@ -234,7 +232,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                 style: 'padding: 0; margin-top: -10px; margin-right: -25px',
                 onclick: () => {
                   addEmptyItem(obj, id);
-                  m.route.set(baseRoute, Object.assign(params, { [id]: items.length }));
+                  m.route.set(fragment, Object.assign(params, { [id]: items.length }));
                   notify(obj);
                 },
               }),
