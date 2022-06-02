@@ -2,7 +2,7 @@ import m, { FactoryComponent, Attributes } from 'mithril';
 import { FlatButton, uniqueId, ModalPanel, Pagination, RoundIconButton, TextInput } from 'mithril-materialized';
 import { I18n, IInputField, UIForm } from 'mithril-ui-form-plugin';
 import { LayoutForm } from './layout-form';
-import { range, stripSpaces, hash } from '../utils';
+import { range, stripSpaces, hash, getAllUrlParams } from '../utils';
 
 export interface IRepeatList extends Attributes {
   /** The input field (or form) that must be rendered repeatedly */
@@ -83,9 +83,6 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
 
   let compareFn: (a: Record<string, any>, b: Record<string, any>) => number;
 
-  const clearRoute = new RegExp('.*/#!', 'i');
-  const getRoute = () => window.location.href.replace(clearRoute, '');
-
   return {
     oninit: ({
       attrs: {
@@ -139,12 +136,13 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
       const delimitter = pageSize
         ? (_: any, i: number) => (curPage - 1) * pageSize <= i && i < curPage * pageSize
         : () => true;
-      const regex = new RegExp(`\\??\\&?${id}=\\d+`);
-      const route = getRoute().replace(regex, '');
+      const route = m.route.get();
       const maxPages = pageSize ? Math.ceil(items.length / pageSize) : 0;
       const maxItemsReached = max && items.length >= max ? true : false;
       const canDeleteItems = disabled ? false : !min || items.length > min ? true : false;
 
+      const baseRoute = route.split('?')[0];
+      const params = getAllUrlParams(route);
       return [
         [
           m(`#${id}.mui-repeat-list${className}`, [
@@ -156,9 +154,8 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   iconClass: 'right',
                   label,
                   onclick: () => {
-                    // items.push({});
                     addEmptyItem(obj, id);
-                    m.route.set(`${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${items.length}`);
+                    m.route.set(baseRoute, Object.assign(params, { [id]: items.length }));
                     notify(obj);
                   },
                   style: 'padding: 0',
@@ -172,7 +169,9 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                     m(Pagination, {
                       curPage,
                       items: range(1, maxPages).map((i) => ({
-                        href: `${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${i}`,
+                        href: `${baseRoute}?${Object.keys(params)
+                          .map((key) => (key === id ? `${key}=${i}` : `${key}=${params[key]}`))
+                          .join('&')}`,
                       })),
                     })
                   ),
@@ -226,15 +225,16 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                     ]),
                   ],
                 ]),
-            !(disabled || maxItemsReached || readonly || !items || items.length === 0) &&
+            !(disabled || maxItemsReached || readonly || !items || items.length === 0 || pageSize === 1) &&
               m(RoundIconButton, {
                 iconName: 'add',
                 iconClass: 'white black-text',
                 className: 'row mui-add-new-item btn-small right',
+                title: label,
                 style: 'padding: 0; margin-top: -10px; margin-right: -25px',
                 onclick: () => {
                   addEmptyItem(obj, id);
-                  m.route.set(`${route}${route.indexOf('?') >= 0 ? '&' : '?'}${id}=${items.length}`);
+                  m.route.set(baseRoute, Object.assign(params, { [id]: items.length }));
                   notify(obj);
                 },
               }),

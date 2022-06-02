@@ -113,6 +113,7 @@ const checkExpressions = (expression: string, objArr: Record<string, any>[]) => 
 
 export const evalExpression = (expression: string | string[], ...objArr: Record<string, any>[]) => {
   const expr = expression instanceof Array ? expression : [expression];
+  if (expression.length === 0) return true;
   return expr.some((e) => checkExpressions(e, objArr));
 };
 
@@ -380,4 +381,59 @@ export const hash = (s: string | { [key: string]: any }) => {
     hash = hash & hash; // Convert to 32bit integer
   }
   return hash;
+};
+
+export const getAllUrlParams = (url: string) => {
+  // get query string from url (optional) or window
+  const queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+
+  // we'll store the parameters here
+  const result = {} as Record<string, string | boolean | string[]>;
+
+  // if query string exists
+  if (queryString) {
+    // split our query string into its component parts
+    const arr = queryString.split('&');
+
+    for (var i = 0; i < arr.length; i++) {
+      // separate the keys and the values
+      const a = arr[i].split('=');
+
+      // set parameter name and value (use 'true' if empty)
+      const paramName = a[0];
+      const paramValue = typeof a[1] === 'undefined' ? true : a[1];
+
+      // if the paramName ends with square brackets, e.g. colors[] or colors[2]
+      if (paramName.match(/\[(\d+)?\]$/)) {
+        // create key if it doesn't exist
+        const key = paramName.replace(/\[(\d+)?\]/, '');
+        const arr = (result[key] || []) as Array<string | boolean>;
+
+        // if it's an indexed array e.g. colors[2]
+        if (paramName.match(/\[\d+\]$/)) {
+          // get the index value and add the entry at the appropriate position
+          const index = +/\[(\d+)\]/.exec(paramName)![1];
+          arr[index] = paramValue;
+        } else {
+          // otherwise add the value to the end of the array
+          arr.push(paramValue);
+        }
+      } else {
+        // we're dealing with a string or true
+        if (!result[paramName]) {
+          // if it doesn't exist, create property
+          result[paramName] = paramValue;
+        } else if (typeof result[paramName] === 'string') {
+          // if property does exist and it's a string, convert it to an array
+          result[paramName] = [result[paramName] as string];
+          (result[paramName] as string[]).push(paramValue as string);
+        } else {
+          // otherwise add the property
+          (result[paramName] as string[]).push(paramValue as string);
+        }
+      }
+    }
+  }
+
+  return result;
 };
