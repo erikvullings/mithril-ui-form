@@ -19,7 +19,7 @@ import {
   Switch,
   uuid4,
   uniqueId,
-  Button,
+  FlatButton,
 } from 'mithril-materialized';
 import {
   capitalizeFirstLetter,
@@ -375,16 +375,31 @@ export const formFieldFactory = (
                 initialValue,
               });
             }
-            case 'base64':
+            case 'base64': {
+              const initialValue = iv as string | undefined;
+              const isImg = initialValue && /data:image/i.test(initialValue) ? true : false;
+              return (
+                isImg &&
+                m(
+                  'div',
+                  props,
+                  m('img.responsive-img', {
+                    src: initialValue,
+                    alt: obj.title || obj.alt || obj.name || '',
+                    style: `max-height: ${field.max || 50}`,
+                  })
+                )
+              );
+            }
             case 'file': {
-              const initialValue = iv as string | string[];
+              const initialValue = iv as string | string[] | undefined;
               const ivFinal = initialValue instanceof Array ? initialValue : [initialValue];
               return m(
                 'div',
                 props,
-                ivFinal.map((f) => {
+                ivFinal.map((f = '') => {
                   const isImg = /data:image|.jpg$|.jpeg$|.png$|.gif$|.svg$|.bmp$|.tif$|.tiff$/i.test(f);
-                  const origin = new URL(field.url || '/').origin;
+                  const origin = new URL(field.url!).origin;
                   const url = `${origin}${f}`;
                   return m(
                     'a[target=_blank]',
@@ -616,51 +631,47 @@ export const formFieldFactory = (
             case 'options': {
               const checkedId = iv as Array<string | number>;
               return [
-                m(
-                  '.row',
-                  [
-                    m(Options, {
-                      key: state.key,
-                      checkboxClass: 'col s6 m4 l3',
-                      className: 'input-field col s12',
-                      ...props,
-                      disabled: props.disabled || !options || options.length === 0,
-                      options,
-                      checkedId,
-                      onchange: (checkedIds) =>
-                        onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter((v) => v !== null)),
+                [
+                  m(Options, {
+                    key: state.key,
+                    checkboxClass: 'col s6 m4 l3',
+                    className: 'input-field col s12',
+                    ...props,
+                    disabled: props.disabled || !options || options.length === 0,
+                    options,
+                    checkedId,
+                    onchange: (checkedIds) =>
+                      onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter((v) => v !== null)),
+                  }),
+                ],
+                typeof checkAllOptions !== 'undefined' &&
+                  m('.col.s12.option-buttons', [
+                    m(FlatButton, {
+                      disabled: props.disabled,
+                      label: selectAll,
+                      iconName: 'check',
+                      onclick: () => {
+                        state.key = Date.now();
+                        onchange(options.map((o) => o.id));
+                      },
                     }),
-                  ],
-                  checkAllOptions &&
-                    m('.col.s12.option-buttons', [
-                      m(Button, {
+                    unselectAll &&
+                      m(FlatButton, {
                         disabled: props.disabled,
-                        label: selectAll,
-                        iconName: 'check',
+                        label: unselectAll,
+                        iconName: 'check_box_outline_blank',
                         onclick: () => {
+                          const ids = (obj[id] || []) as Array<string | number>;
+                          ids.length = 0;
                           state.key = Date.now();
-                          onchange(options.map((o) => o.id));
+                          onchange(ids);
                         },
                       }),
-                      unselectAll &&
-                        m(Button, {
-                          disabled: props.disabled,
-                          label: unselectAll,
-                          iconName: 'check_box_outline_blank',
-                          onclick: () => {
-                            const ids = (obj[id] || []) as Array<string | number>;
-                            ids.length = 0;
-                            state.key = Date.now();
-                            onchange(ids);
-                          },
-                        }),
-                    ])
-                ),
+                  ]),
               ];
             }
             case 'select': {
               const checkedId = iv as Array<string | number>;
-              // console.log('select ' + id + ': ' + checkedId);
               return m(Select, {
                 placeholder: props.multiple ? i18n.pickOneOrMore || 'Pick one or more' : i18n.pickOne || 'Pick one',
                 ...props,

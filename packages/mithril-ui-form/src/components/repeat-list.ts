@@ -143,6 +143,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
 
       const fragment = route.split('?')[0];
       const params = getAllUrlParams(route);
+
       return [
         [
           m(`#${id}.mui-repeat-list${className}`, [
@@ -194,7 +195,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
               items
                 .sort(compareFn)
                 .filter(delimitter)
-                .map((item, i) => [
+                .map((item) => [
                   canDeleteItems &&
                     m(RoundIconButton, {
                       iconName: 'clear',
@@ -204,7 +205,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                       disabled,
                       readonly,
                       onclick: () => {
-                        state.curItemIdx = i;
+                        state.curItemIdx = curPage - 1;
                       },
                     }),
                   [

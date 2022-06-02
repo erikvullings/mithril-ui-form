@@ -121,6 +121,74 @@ const info = [
 
 const info2 = [
   {
+    id: 'vignettes',
+    label: 'New vignette',
+    repeat: true,
+    pageSize: 1,
+    // "propertyFilter": "title",
+    // "filterLabel": "Filter by title",
+    type: [
+      {
+        id: 'id',
+        label: 'Number of the round',
+        type: 'number',
+        steps: 0,
+        className: 'col s4',
+      },
+      {
+        id: 'title',
+        label: 'Title',
+        type: 'text',
+        className: 'col s8',
+      },
+      {
+        id: 'selectedCards',
+        label: 'Selected cards',
+        type: 'options',
+        multipe: true,
+        options: [
+          {
+            id: 'id318c83bd',
+            label: 'JSM FOR F-35',
+          },
+        ],
+        className: 'col s12',
+        checkboxClass: 'col s6',
+      },
+      {
+        id: 'pages',
+        repeat: true,
+        min: 1,
+        max: 5,
+        label: 'Add page',
+        pageSize: 1,
+        type: [
+          {
+            id: 'title',
+            label: 'Title of the page',
+            type: 'text',
+            className: 'col s8',
+          },
+          {
+            id: 'image',
+            label: 'Image',
+            type: 'base64',
+            className: 'col s4',
+          },
+          {
+            id: 'text',
+            label: 'Text',
+            description: 'You can use [Markdown notation](https://www.markdownguide.org/basic-syntax/)',
+            type: 'textarea',
+          },
+        ],
+      },
+    ],
+  },
+] as UIForm;
+
+const llf = [
+  {
     id: 'hasIndDiff',
     label: 'Has individual differences?',
     type: 'select',
