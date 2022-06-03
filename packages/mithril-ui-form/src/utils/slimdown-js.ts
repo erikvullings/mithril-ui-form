@@ -100,6 +100,8 @@ const rules = [
   [/(\*|_)(.*?)\1/g, '<em>$2</em>'], // emphasis
   [/\~\~(.*?)\~\~/g, '<del>$1</del>'], // del
   [/\:\"(.*?)\"\:/g, '<q>$1</q>'], // quote
+  [/\~(.*?)\~/g, '<sub>$1</sub>'], // sub
+  [/\^(.*?)\^/g, '<sup>$1</sup>'], // sup
   [/\n\s*```\n([^]*?)\n\s*```\s*\n/g, '\n<pre>$1</pre>'], // codeblock
   [/`(.*?)`/g, (_: string, code: string) => `<code>${esc(code)}</code>`], // inline code
   [/\n(\*|\-|\+)(.*)/g, ulList], // ul lists using +, - or * to denote an entry
