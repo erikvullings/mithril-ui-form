@@ -154,13 +154,18 @@ Each type supports a `className` property to set the input's class value (defaul
 }]
 ```
 
-- base64: Uploads a file and returns the data as base64 string. If the parent object has a `title`, `alt`, or `name` property, it will be used as the image's `alt` text in a readonly component.  
+- base64: Uploads a file and returns the data as base64 string. If the parent object has a `title`, `alt`, or `name` property, it will be used as the image's `alt` text in a readonly component. If you supply the `options` property, the `id` field is used to limit the type of files you can open, e.g. image files. Alternatively, you can use the [MIME type](http://www.iana.org/assignments/media-types/media-types.xhtml), like `image/*`, `audio/*`, or `video/*`.
 
 ```json
 [{
   "id": "url",
   "label": "Upload a file",
-  "type": "base64"
+  "type": "base64",
+  "options": [
+     { "id": ".png" },
+     { "id": ".svg"  },
+     { "id": ".jpg" }
+   ]
 }]
 ```
 

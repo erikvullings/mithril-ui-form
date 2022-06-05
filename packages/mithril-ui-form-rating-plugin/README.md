@@ -63,3 +63,28 @@ Please include the following CSS style to make it look good.
   }
 },
 ```
+
+Or you can use the alternative syntax, so it is easier to switch between `options` and `select`. Just make sure that the `options`'s `id` property is a number (or a number converted to a string, e.g. "42").
+
+```json
+{
+    "id": "hasIndDiff",
+    "label": "Has individual differences?",
+    "type": "rating",
+    "options": [
+      {
+        "id": 1,
+        "label": "None"
+      },
+      {
+        "id": 2,
+        "label": "Unknown"
+      },
+      {
+        "id": 3,
+        "label": "Yes"
+      }
+    ],
+    "className": "col s12"
+  },
+  ```

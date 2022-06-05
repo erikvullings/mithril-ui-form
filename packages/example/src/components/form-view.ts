@@ -119,7 +119,7 @@ const info = [
   },
 ] as UIForm;
 
-const info2 = [
+const tartan = [
   {
     id: 'vignettes',
     label: 'New vignette',
@@ -174,6 +174,7 @@ const info2 = [
             label: 'Image',
             type: 'base64',
             className: 'col s4',
+            options: [{ id: 'image/*' }],
           },
           {
             id: 'text',
@@ -187,7 +188,7 @@ const info2 = [
   },
 ] as UIForm;
 
-const llf = [
+const info2 = [
   {
     id: 'hasIndDiff',
     label: 'Has individual differences?',
@@ -216,8 +217,8 @@ const llf = [
     ratings: { '0': 'extremely<br>bad', '5': 'super<br>good' },
   },
   {
-    id: 'my_rating',
-    label: '',
+    id: 'my_rating2',
+    label: 'Disabled rating',
     disabled: true,
     type: 'rating',
     min: 0,

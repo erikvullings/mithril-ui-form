@@ -1,6 +1,6 @@
 {
   "name": "mithril-ui-form-rating-plugin",
-  "version": "0.4.6",
+  "version": "0.4.8",
   "description": "Plugin to add a rating component to Mithril-UI-Form.",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
@@ -31,7 +31,7 @@
   "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
   "license": "MIT",
   "dependencies": {
-    "mithril-ui-form": "^1",
+    "mithril-ui-form-plugin": "workspace:^0.3.11",
     "mithril": "^2.2.2"
   },
   "devDependencies": {

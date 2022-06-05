@@ -769,7 +769,7 @@ export const formFieldFactory = (
               const initialValue = iv as string;
               const isImg = initialValue && /data:image/i.test(initialValue) ? true : false;
               const { placeholder } = field;
-              const accept = options ? options.map((o) => o.id) : undefined;
+              const accept = options ? options.map((o) => o.id).join(',') : undefined;
               const upload = (file: FileList) => {
                 if (!file || file.length < 1) {
                   onchange('');
