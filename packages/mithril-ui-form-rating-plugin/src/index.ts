@@ -44,7 +44,7 @@ export const ratingPlugin: PluginType = () => {
       emptyLabel = labelLength ? new Array(labelLength).join('&nbsp;') : '';
     },
     view: ({ attrs: { props, field, iv, onchange } }) => {
-      const { label, description } = props;
+      const { label, description, required } = props;
       const minmax = minMaxFromOptions(field.options);
       const {
         min = minmax.min,
@@ -55,7 +55,10 @@ export const ratingPlugin: PluginType = () => {
       const disabled = props.disabled || field.disabled;
       const radioWidth = Math.floor(1000 / (max - min + 1)) / 10;
       return m('.muf-rating', { className }, [
-        m('.label', [label && m('.label', m.trust(label)), description && m('.help', m.trust(description))]),
+        m('.label', [
+          label && m('.label', m.trust(label + required ? '*' : '')),
+          description && m('.help', m.trust(description)),
+        ]),
         m(
           '.radios',
           range(min, max).map((i) =>
