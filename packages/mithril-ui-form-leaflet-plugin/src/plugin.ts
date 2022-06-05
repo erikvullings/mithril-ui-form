@@ -2,7 +2,7 @@ import m from 'mithril';
 import { LeafletMap } from 'mithril-leaflet';
 import { geoJSON } from 'leaflet';
 import { GeometryObject, FeatureCollection } from 'geojson';
-import { PluginType } from 'mithril-ui-form-plugin';
+import { PluginType } from 'mithril-ui-form';
 import L from 'leaflet';
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;

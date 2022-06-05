@@ -1,5 +1,5 @@
 import m from 'mithril';
-import { PluginType } from 'mithril-ui-form-plugin';
+import { PluginType } from 'mithril-ui-form';
 
 const range = (start: number, end: number) => Array.from({ length: end - start + 1 }, (_, k) => k + start);
 
