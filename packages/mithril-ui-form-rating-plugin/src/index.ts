@@ -56,7 +56,7 @@ export const ratingPlugin: PluginType = () => {
       const radioWidth = Math.floor(1000 / (max - min + 1)) / 10;
       return m('.muf-rating', { className }, [
         m('.label', [
-          label && m('.label', m.trust(label + required ? '*' : '')),
+          label && m('.label', m.trust(label + (required ? '*' : ''))),
           description && m('.help', m.trust(description)),
         ]),
         m(
