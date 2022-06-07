@@ -780,6 +780,7 @@ export const formFieldFactory = (
                   typeof reader.result === 'string' && onchange(reader.result);
                   m.redraw();
                 };
+
                 reader.readAsDataURL(file[0]);
               };
               return isImg
@@ -791,7 +792,7 @@ export const formFieldFactory = (
                     }),
                     m(FlatButton, {
                       iconName: 'clear',
-                      onclick: () => (obj[id] = undefined),
+                      onclick: () => onchange(''),
                     }),
                   ])
                 : m(FileInput, {
