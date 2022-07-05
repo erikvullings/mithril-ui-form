@@ -37,14 +37,14 @@
     "mithril-leaflet": "0.4.3"
   },
   "devDependencies": {
-    "@types/node": "^17.0.40",
+    "@types/node": "^18.0.1",
     "@types/geojson": "^7946.0.8",
-    "@types/leaflet": "^1.7.10",
+    "@types/leaflet": "^1.7.11",
     "@types/leaflet-draw": "^1.0.5",
     "@types/mithril": "^2.0.11",
     "microbundle": "^0.15.0",
     "rimraf": "^3.0.2",
     "tslib": "^2.4.0",
-    "typescript": "^4.7.3"
+    "typescript": "^4.7.4"
   }
 }
