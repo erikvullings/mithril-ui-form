@@ -191,7 +191,10 @@ export const formFieldFactory = (
           opt && opt instanceof Array
             ? opt
                 .filter(
-                  (o) => o.id && (o.label || !/[0-9]/.test(o.id)) && (!o.show || evalExpression(o.show, obj, context))
+                  (o) =>
+                    typeof o.id !== 'undefined' &&
+                    (o.label || !/[0-9]/.test(o.id)) &&
+                    (!o.show || evalExpression(o.show, obj, context))
                 )
                 .map((o) => (o.label ? o : { ...o, label: capitalizeFirstLetter(o.id) }))
             : []
@@ -281,7 +284,7 @@ export const formFieldFactory = (
               ? transform('from', obj[id])
               : obj[id]
             : value;
-        if (id && value && iv) {
+        if (id && typeof value !== 'undefined' && typeof iv !== 'undefined') {
           obj[id] = transform ? transform('to', iv) : iv; // Initial value was set, so use it.
         }
 
@@ -352,7 +355,9 @@ export const formFieldFactory = (
             }
             case 'options':
             case 'select': {
-              const checkedIds = (iv || []) as Array<string | number>;
+              const checkedIds = (typeof iv !== 'undefined' ? (iv instanceof Array ? iv : [iv]) : []) as Array<
+                string | number
+              >;
               const selected = options.filter((o) => checkedIds.indexOf(o.id) >= 0);
               const initialValue =
                 selected && selected.length === 0
