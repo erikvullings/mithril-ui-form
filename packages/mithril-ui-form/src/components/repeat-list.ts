@@ -196,8 +196,9 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                 .sort(compareFn)
                 .filter(delimitter)
                 .map((item, i) => [
-                  canDeleteItems &&
+                  canDeleteItems && [
                     m(RoundIconButton, {
+                      type: 'button',
                       iconName: 'clear',
                       iconClass: 'white black-text',
                       className: 'row mui-delete-item btn-small right',
@@ -208,6 +209,9 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                         state.curItemIdx = pageSize ? (curPage - 1) * pageSize + i : i;
                       },
                     }),
+                    (!pageSize || pageSize > 1) &&
+                      m('span.mui-show-item-number', `[${(pageSize ? (curPage - 1) * pageSize + i : i) + 1}]`),
+                  ],
                   [
                     m('.row.repeat-item', { className: repeatItemClass, key: page + hash(item) }, [
                       m(LayoutForm, {
