@@ -1,6 +1,6 @@
 {
   "name": "mithril-ui-form",
-  "version": "1.5.11",
+  "version": "1.5.12",
   "description": "Convert a JSON file or object to a dynamic, materialized form.",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
@@ -38,7 +38,7 @@
     "mithril-ui-form-plugin": "workspace:^0.3.11",
     "@types/materialize-css": "^1.0.11",
     "@types/mithril": "^2.0.11",
-    "@types/geojson": "^7946.0.8",
+    "@types/geojson": "^7946.0.10",
     "microbundle": "^0.15.0",
     "rimraf": "^3.0.2",
     "tslib": "^2.4.0",

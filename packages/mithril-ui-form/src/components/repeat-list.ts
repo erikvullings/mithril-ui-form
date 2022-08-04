@@ -195,7 +195,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
               items
                 .sort(compareFn)
                 .filter(delimitter)
-                .map((item) => [
+                .map((item, i) => [
                   canDeleteItems &&
                     m(RoundIconButton, {
                       iconName: 'clear',
@@ -205,7 +205,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                       disabled,
                       readonly,
                       onclick: () => {
-                        state.curItemIdx = curPage - 1;
+                        state.curItemIdx = pageSize ? (curPage - 1) * pageSize + i : i;
                       },
                     }),
                   [
