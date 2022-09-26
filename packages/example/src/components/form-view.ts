@@ -1,5 +1,14 @@
 import m from 'mithril';
-import { LayoutForm, registerPlugin, UIForm, SlimdownView, I18n, render, IInputField } from 'mithril-ui-form';
+import {
+  LayoutForm,
+  registerPlugin,
+  UIForm,
+  SlimdownView,
+  I18n,
+  render,
+  IInputField,
+  ILayoutForm,
+} from 'mithril-ui-form';
 import { TextArea } from 'mithril-materialized';
 import { leafletPlugin } from 'mithril-ui-form-leaflet-plugin';
 import { ratingPlugin } from 'mithril-ui-form-rating-plugin';
@@ -9,10 +18,6 @@ export interface IContext {
 }
 
 /** Relevant context for the Form, can be used with show/disabling */
-const context = {
-  admin: true,
-};
-
 interface IEditor {
   name: string;
   role: string;
@@ -81,7 +86,7 @@ const editorType = {
     { id: 'region', label: 'Region', type: 'select', options: regions, className: 'col s6' },
     { id: 'country', label: 'Country', type: 'select', options: countries, className: 'col s6', disabled: '!region' },
   ],
-} as IInputField<ILessonLearned>;
+} as IInputField<ILessonLearned, 'editors'>;
 
 const source = [
   { id: 'title', label: 'Title', type: 'text', maxLength: 80, required: true, icon: 'title', className: 'col s4' },
@@ -92,7 +97,7 @@ const info = [
   {
     id: 'geojson',
     label: 'GeoJSON editor',
-    description: '_My desc!_',
+    description: '_My description_',
     repeat: 'geojson',
     onSelect: (i: number) => alert(i),
     type: [
@@ -115,9 +120,9 @@ const info = [
         type: 'textarea',
         required: true,
       },
-    ] as UIForm,
+    ] as UIForm<{ title: string; id: string; description: string }>,
   },
-] as UIForm;
+] as UIForm<{ geojson: any }>;
 
 const tartan = [
   {
@@ -186,7 +191,7 @@ const tartan = [
       },
     ],
   },
-] as UIForm;
+] as UIForm<any>;
 
 const info2 = [
   {
@@ -262,7 +267,7 @@ export const FormView = () => {
   const state = {
     result: {} as ILessonLearned,
     isValid: false,
-    form: [] as UIForm<any>,
+    form: [] as UIForm<ILessonLearned>,
     error: '',
   };
 
@@ -354,13 +359,12 @@ ${result.sources ? result.sources.map((s, i) => `${i + 1}. [${s.title}](${s.url}
               form,
               obj: result,
               onchange: print,
-              context,
               i18n: {
                 deleteItem: 'Verwijder het item',
                 agree: 'Ja',
                 disagree: 'Nee',
               } as I18n,
-            })
+            } as ILayoutForm<ILessonLearned>)
           ),
         ]),
         m('.col.s12', [

@@ -7,9 +7,9 @@ import { I18n } from './i18n';
  * is created has different properties. Each property is referenced by its ID
  * value.
  */
-export interface IInputField<O = Record<string, any>> {
+export interface IInputField<O extends Record<string, any> = {}, K extends keyof O = keyof O> {
   /** Property key, not required for markdown blocks */
-  id?: keyof O;
+  id?: K;
   /** Component label */
   label?: string;
   /** Optional description */
@@ -17,9 +17,9 @@ export interface IInputField<O = Record<string, any>> {
   /** Can be used as a placeholder for text inputs or the first element of a Selection */
   placeholder?: string;
   /** Type of component to use */
-  type?: ComponentType | UIForm; // Form<T[Extract<keyof T, string>], C | [T, C]>;
+  type?: ComponentType | UIForm<O[K]> | UIForm<O[K][0]>;
   /** Value that the component has, initially. Is also used to derive the type if not supplied. */
-  value?: string | number | Date | boolean | string[];
+  value?: O[K];
   /**
    * Options for checkboxes, selects, dropdowns, and switches. In case it is a string,
    * it refers to an external pre-defined property that contains the options. E.g. a
@@ -111,11 +111,7 @@ export interface IInputField<O = Record<string, any>> {
    */
   transform?: <U, V>(dir: 'from' | 'to', value: U | V) => V | U;
   /** Generate a side-effect after setting, and optionally transforming, the value. */
-  effect?: (
-    obj?: Record<string, any>,
-    value?: string | number | string[] | number[] | boolean | Date,
-    context?: Record<string, any>[]
-  ) => Promise<Record<string, any> | undefined> | undefined;
+  effect?: (obj?: O, value?: O[keyof O], context?: O[]) => Promise<O | undefined> | undefined;
   /** Datetime format options: UTC, ISO or msec since 1 Jan 1970. Default 'UTC' */
   dateTimeOutput?: 'UTC' | 'ISO' | 'MSEC';
   /** Datetime format option: if true (default false), edit seconds too */

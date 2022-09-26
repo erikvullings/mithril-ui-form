@@ -1,23 +1,25 @@
-import m, { FactoryComponent, Attributes } from 'mithril';
+import m, { Component, Vnode } from 'mithril';
 import { ITabItem, TextArea, Tabs, Collapsible } from 'mithril-materialized';
-import { I18n, IInputField, UIForm } from 'mithril-ui-form-plugin';
-import { LayoutForm } from '.';
+import { I18n, IInputField } from 'mithril-ui-form-plugin';
+import { ILayoutForm, LayoutForm } from '.';
 
-export interface IGeoJSONFeatureList extends Attributes {
+export interface IGeoJSONFeatureList<O extends Record<string, any> = {}, K extends keyof O = keyof O> {
+  id?: K;
   /** The input field (or form) that must be rendered repeatedly */
-  field: IInputField;
+  field: IInputField<O>;
   /** The result object */
-  obj: Record<string, any> | Record<string, any>[];
+  obj: O;
   /** The context */
-  context: Record<string, any> | Record<string, any>[];
+  context: Array<O | O[keyof O]>;
   /** Callback function, invoked every time the original result object has changed */
-  onchange?: (result: Record<string, any> | Record<string, any>[]) => void;
+  onchange?: (result: O) => void;
   /** Translation keys, read once on initialization */
   i18n?: Partial<I18n>;
   /** Optional container ID for DatePicker and TimePicker to render their content in */
   containerId?: string;
   /** If true, the repeat component is disabled, and adding, deleting or editing items is prohibited */
   disabled?: boolean;
+  readonly?: boolean;
 }
 
 /**
@@ -27,7 +29,10 @@ export interface IGeoJSONFeatureList extends Attributes {
  * It creates an array of primitives when type is a IFormComponent, and an array of objects when its type
  * is a FormType.
  */
-export const GeoJSONFeatureList: FactoryComponent<IGeoJSONFeatureList> = () => {
+
+export const GeoJSONFeatureList: <O extends Record<string, any> = {}>(
+  vnode: Vnode<IGeoJSONFeatureList<O>>
+) => Component<IGeoJSONFeatureList<O>> = () => {
   const state = {} as {
     dom: HTMLUListElement;
     raw: string;
@@ -44,7 +49,7 @@ export const GeoJSONFeatureList: FactoryComponent<IGeoJSONFeatureList> = () => {
     },
     view: ({
       attrs: {
-        field: { id = 'geojson', type, onSelect },
+        field: { id = '', type, onSelect },
         obj,
         // className = field.className ? '.' + field.className.split(' ').join('.') : '.col.s12',
         // section,
@@ -56,7 +61,6 @@ export const GeoJSONFeatureList: FactoryComponent<IGeoJSONFeatureList> = () => {
         onchange,
       },
     }) => {
-      const notify = (result: Record<string, any> | Record<string, any>[]) => onchange && onchange(result);
       // const { filterValue } = state;
       // const { id = '', label, type, max, propertyFilter, sortProperty, filterLabel, readonly = r } = field;
       // const strippedFilterValue = filterValue ? stripSpaces(filterValue) : undefined;
@@ -73,11 +77,12 @@ export const GeoJSONFeatureList: FactoryComponent<IGeoJSONFeatureList> = () => {
           class: 'col s12',
           initialValue: featureCollection ? JSON.stringify(featureCollection, null, 2) : undefined,
           placeholder: 'Enter GeoJSON',
-          onchange: (v) => (obj[id] = v),
+          onchange: (v) => (obj[id] = v as any),
         }),
       } as ITabItem;
 
-      const form = type as UIForm;
+      if (!type || typeof type === 'string') return;
+      const form = type;
       const firstTypeId = form.length > 0 ? form[0].id : undefined;
       const viewTab = {
         title: state.view,
@@ -101,14 +106,14 @@ export const GeoJSONFeatureList: FactoryComponent<IGeoJSONFeatureList> = () => {
                   id: 'erik_' + i,
                   key: i,
                   header: firstTypeId
-                    ? feature.properties[firstTypeId] || feature.geometry.type
+                    ? feature.properties[firstTypeId as string] || feature.geometry.type
                     : feature.geometry.type,
                   body: m(
                     '.row',
                     m(LayoutForm, {
                       class: 'col s12',
                       form,
-                      obj: feature.properties!,
+                      obj: feature.properties! as any,
                       i18n,
                       context: context instanceof Array ? [obj, ...context] : [obj, context],
                       containerId,
@@ -116,10 +121,10 @@ export const GeoJSONFeatureList: FactoryComponent<IGeoJSONFeatureList> = () => {
                       readonly,
                       onchange: (_, d) => {
                         if (d) features[i].properties = d;
-                        obj[id] = JSON.stringify(featureCollection, null, 2);
-                        notify(obj);
+                        obj[id] = JSON.stringify(featureCollection, null, 2) as any;
+                        onchange && onchange(obj);
                       },
-                    })
+                    } as ILayoutForm<any>)
                   ),
                 };
               }),

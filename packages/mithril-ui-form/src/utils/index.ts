@@ -22,7 +22,7 @@ export const toHourMin = (d: Date) => `${padLeft(d.getHours())}:${padLeft(d.getM
  * @param s: path, e.g. a.b[0].c
  * @see https://stackoverflow.com/a/6491621/319711
  */
-const getPath = (obj: Record<string, any>, s: string) => {
+const getPath = <O>(obj: O, s: string) => {
   s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
   s = s.replace(/^\./, ''); // strip a leading dot
   const a = s.split('.');
@@ -30,9 +30,9 @@ const getPath = (obj: Record<string, any>, s: string) => {
   for (let i = 0, n = a.length; i < n; ++i) {
     const k = a[i];
     if (k in o) {
-      o = o[k];
+      o = (o as Record<string, any>)[k];
     } else if (o instanceof Array) {
-      const id = obj[k] || k;
+      const id = (obj as any)[k] || k;
       const m = /([A-Z]\w+)/.exec(k); // categoryId => match Id, myNameLabel => NameLabel
       const key = (m && m[0][0].toLowerCase() + m[0].substr(1)) || k; // key = id or nameLabel
       const found = o.filter((i) => i[key] === id).shift();
@@ -57,7 +57,7 @@ const flatten = <T>(arr: T[]) =>
 const expressionRegex = /([^ =><]*)\s*([=><]*)\s*(\S*)/i;
 const invertExpression = /^\s*!\s*/;
 
-const checkExpression = (expression: string, obj: Record<string, any>) => {
+const checkExpression = <O>(expression: string, obj: O) => {
   if (!obj || Object.keys(obj).length === 0) {
     return false;
   }
@@ -98,7 +98,7 @@ const checkExpression = (expression: string, obj: Record<string, any>) => {
   return true;
 };
 
-const checkExpressions = (expression: string, objArr: Record<string, any>[]) => {
+const checkExpressions = <O>(expression: string, objArr: O[]) => {
   const ands = expression.split('&');
   // console.log(`ANDS: ${ands}`);
   const flattened = flatten(objArr);
@@ -111,25 +111,25 @@ const checkExpressions = (expression: string, objArr: Record<string, any>[]) => 
   }, true);
 };
 
-export const evalExpression = (expression: string | string[], ...objArr: Record<string, any>[]) => {
+export const evalExpression = <O>(expression: string | string[], ...objArr: Array<Partial<O> | O[keyof O]>) => {
   const expr = expression instanceof Array ? expression : [expression];
   if (expression.length === 0) return true;
   return expr.some((e) => checkExpressions(e, objArr));
 };
 
-export const resolveExpression = (expression: string, objArr: Record<string, any>[]) =>
+export const resolveExpression = <O>(expression: string, objArr: O[]) =>
   getPath(
     objArr.filter(Boolean).reduceRight((acc, obj) => ({ ...obj, ...acc })),
     expression.trim()
   );
 
-const canResolveExpression = (expression: string, objArr: Record<string, any>[]) =>
+const canResolveExpression = <O>(expression: string, objArr: Array<Partial<O> | O[keyof O]>) =>
   typeof resolveExpression(expression, objArr) !== 'undefined';
 
 const placeholderRegex = /{{\s*([^\s"'`:]*):?([^\s]*)\s*}}/g;
 
 /** Can the placeholders be resolved by the object, i.e. do we have a match in the active object or its context. */
-export const canResolvePlaceholders = (str: string, ...objArr: Record<string, any>[]) => {
+export const canResolvePlaceholders = <O>(str: string, ...objArr: Array<Partial<O> | O[keyof O]>) => {
   if (!placeholderRegex.test(str)) {
     return true;
   }
@@ -191,7 +191,7 @@ const formatExpression = (
 };
 
 /** Replace the placeholder with the appropriate value. */
-export const resolvePlaceholders = (str: string, ...objArr: Record<string, any>[]) => {
+export const resolvePlaceholders = <O>(str: string, ...objArr: Array<Partial<O> | O[keyof O]>) => {
   if (!placeholderRegex.test(str)) {
     return str;
   }
@@ -257,20 +257,20 @@ export const deepCopy = <T>(target: T): T => {
  * by replacing the keys with their form labels, making it easier to render the object into a human
  * readable form.
  */
-export const labelResolver = (form: UIForm) => {
-  const createDict = (ff: IInputField[], label = '') => {
+export const labelResolver = <O extends Record<string, any>>(form: UIForm<O>) => {
+  const createDict = (ff: UIForm<O | O[keyof O]>, label = '') => {
     const d = ff
       .filter((f) => f.type !== 'section' && f.type !== 'md')
       .reduce((acc, cur) => {
-        const fieldId = (label ? `${label}.` : '') + cur.id;
+        const fieldId = (label ? `${label}.` : '') + String(cur.id);
         const type = cur.type || (cur.options && cur.options.length > 0 ? 'select' : 'text');
         if (typeof type === 'string') {
           acc[fieldId] = cur;
         } else {
-          acc = { ...acc, ...createDict(type, fieldId) };
+          acc = { ...acc, ...createDict(type as UIForm<O | O[keyof O]>, fieldId) };
         }
         return acc;
-      }, {} as { [key: string]: IInputField });
+      }, {} as { [key: string]: IInputField<O> });
     return d;
   };
 

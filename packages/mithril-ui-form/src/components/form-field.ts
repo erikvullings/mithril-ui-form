@@ -29,13 +29,17 @@ import {
   resolvePlaceholders,
   resolveExpression,
 } from '../utils';
-import { LayoutForm } from './layout-form';
+import { ILayoutForm, LayoutForm } from './layout-form';
 import { ReadonlyComponent } from './readonly';
 import { SlimdownView } from './slimdown-view';
 
-const unwrapComponent = (field: IInputField, autofocus = false, disabled = false) => {
+const unwrapComponent = <O extends Record<string, any> = {}>(
+  field: IInputField<O>,
+  autofocus = false,
+  disabled = false
+) => {
   const {
-    id,
+    id = '',
     label,
     description,
     required,
@@ -55,9 +59,9 @@ const unwrapComponent = (field: IInputField, autofocus = false, disabled = false
     dateFormat,
     twelveHour,
   } = field;
-  const result = { id: `${id}-${uniqueId()}`, label } as Record<string, any>;
+  const result = { id: `${String(id)}-${uniqueId()}`, label } as Record<string, any>;
   if (typeof label === 'undefined' && id) {
-    result.label = capitalizeFirstLetter(id);
+    result.label = capitalizeFirstLetter(String(id));
   }
   if (description) {
     result.helperText = render(description, true);
@@ -119,14 +123,15 @@ const unwrapComponent = (field: IInputField, autofocus = false, disabled = false
   return result;
 };
 
-interface IFormField extends Attributes {
+interface IFormField<O extends Record<string, any> = {}> extends Attributes {
   /** The input field (or form) that must be rendered repeatedly */
-  field: IInputField;
+  field: IInputField<O>;
   /** The resulting object */
-  obj: Record<string, any> | Record<string, any>[];
+  obj: O;
+  context: Array<O | O[keyof O]>;
   autofocus?: boolean;
   /** Callback function, invoked every time the original result object has changed */
-  onchange: (result: Record<string, any> | Record<string, any>[]) => void;
+  onchange: (result: O) => void;
   /** Disable the form field, disallowing edits */
   disabled?: boolean | string | string[];
   /** Section ID to display - can be used to split up the form and only show a part */
@@ -139,11 +144,11 @@ interface IFormField extends Attributes {
   i18n?: I18n;
 }
 
-export const formFieldFactory = (
+export const formFieldFactory = <O extends Record<string, any> = {}>(
   plugins: Record<string, PluginType> = {},
   readonlyPlugins: Record<string, PluginType> = {}
 ) => {
-  const formField: FactoryComponent<IFormField> = () => {
+  const formField: FactoryComponent<IFormField<O>> = () => {
     const state = { key: Date.now() } as { key: number };
 
     return {
@@ -229,15 +234,15 @@ export const formFieldFactory = (
 
         const onchange = async (v: string | number | Array<string | number | Record<string, any>> | Date | boolean) => {
           if (typeof v === 'undefined' || v === 'undefined') {
-            delete obj[id];
+            delete obj[id as keyof O];
             onFormChange(obj);
             return;
           }
-          obj[id] = transform ? transform('to', v) : (v as any);
+          obj[id as keyof O] = transform ? transform('to', v) : (v as any);
           if (!effect) {
             return onFormChange(obj);
           }
-          const res = await effect(obj, obj[id], context);
+          const res = await effect(obj, obj[id as keyof O], context);
           if (typeof res !== 'undefined') {
             // res.then((r) => (r ? onFormChange(r) : onFormChange(obj)));
             onFormChange(res);
@@ -249,10 +254,10 @@ export const formFieldFactory = (
         if (type instanceof Array) {
           if (id) {
             if (!obj.hasOwnProperty(id)) {
-              obj[id] = {};
+              obj[id] = {} as O[keyof O];
             }
             return m('.muf-form', { className: field.className }, [
-              m('.muf-form-header', m.trust(render(props.label || capitalizeFirstLetter(id), true))),
+              m('.muf-form-header', m.trust(render(props.label || capitalizeFirstLetter(String(id)), true))),
               props.description && m('div', m.trust(render(props.description))),
               m(
                 '.row',
@@ -265,7 +270,7 @@ export const formFieldFactory = (
                   context: [obj, ...context],
                   onchange: () => onFormChange(obj),
                   containerId,
-                })
+                } as ILayoutForm<O[keyof O]>)
               ),
             ]);
           } else {
@@ -355,7 +360,7 @@ export const formFieldFactory = (
             }
             case 'options':
             case 'select': {
-              const checkedIds = (typeof iv !== 'undefined' ? (iv instanceof Array ? iv : [iv]) : []) as Array<
+              const checkedIds = (typeof iv !== 'undefined' ? ((iv as any) instanceof Array ? iv : [iv]) : []) as Array<
                 string | number
               >;
               const selected = options.filter((o) => checkedIds.indexOf(o.id) >= 0);
@@ -462,7 +467,7 @@ export const formFieldFactory = (
                   : (iv as Date)
                 : new Date();
               const initialValue = toHourMin(date);
-              obj[id] = transform ? transform('to', date) : date;
+              (obj[id] as any) = transform ? transform('to', date) : date;
               return m(TimePicker, {
                 ...props,
                 twelveHour,
@@ -477,8 +482,8 @@ export const formFieldFactory = (
             }
             case 'date': {
               const { format = 'mmmm d, yyyy' } = props;
-              const initialValue: Date = typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : iv;
-              obj[id] = initialValue
+              const initialValue: Date = typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : (iv as Date);
+              (obj[id] as any) = initialValue
                 ? transform
                   ? transform('to', initialValue.valueOf())
                   : initialValue.valueOf()
@@ -518,7 +523,8 @@ export const formFieldFactory = (
                 format = 'mmmm d, yyyy',
                 ...params
               } = props;
-              const initialDateTime: Date = typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : iv;
+              const initialDateTime: Date =
+                typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : (iv as Date);
               const state = { initialDateTime };
               const initialDate = initialDateTime ? initialDateTime : undefined;
               const initialTime = initialDateTime ? toHourMin(initialDateTime) : '';
@@ -691,7 +697,7 @@ export const formFieldFactory = (
               });
             }
             case 'md':
-              const md = resolvePlaceholders(id ? iv : value || label, obj, context);
+              const md = resolvePlaceholders((id ? iv : value || label) || '', obj, context);
               return m(SlimdownView, { md, className });
             case 'section':
               return m('.divider');
@@ -703,7 +709,7 @@ export const formFieldFactory = (
               return m(Switch, { ...props, left, right, checked, onchange });
             }
             case 'tags': {
-              const initialValue = (iv ? (iv instanceof Array ? iv : [iv]) : []) as string[];
+              const initialValue = (iv ? ((iv as any) instanceof Array ? iv : [iv]) : []) as string[];
               const data = initialValue.map((chip) => ({ tag: chip }));
               const autocompleteOptions =
                 options && options.length > 0

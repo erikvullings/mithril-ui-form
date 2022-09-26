@@ -1,5 +1,5 @@
 import m from 'mithril';
-import { LayoutForm, UIForm } from 'mithril-ui-form';
+import { ILayoutForm, LayoutForm, UIForm } from 'mithril-ui-form';
 
 export interface IContext {
   admin: boolean;
@@ -655,7 +655,7 @@ const source = [
     options: languages,
     className: 'col s3',
   },
-] as UIForm;
+] as UIForm<ISource>;
 
 const info = [
   { id: 'intake', type: 'section' },
@@ -1882,13 +1882,13 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
       },
     ],
   },
-] as UIForm;
+] as UIForm<ILessonLearned>;
 
 export const LLFView = () => {
   const state = {
     result: {} as ILessonLearned,
     isValid: false,
-    form: [] as UIForm,
+    form: [] as UIForm<ILessonLearned>,
     error: '',
   };
 
@@ -1921,7 +1921,7 @@ export const LLFView = () => {
         //   state.error ? m('p', m('em.red', state.error)) : undefined,
         // ]),
         // m('.col.s12', m(LayoutForm, { form, obj: result, onchange: print, context, section: 'geo' })),
-        m('.col.s12', m(LayoutForm, { form, obj: result, onchange: print, context })),
+        m('.col.s12', m(LayoutForm, { form, obj: result, onchange: print } as ILayoutForm<ILessonLearned>)),
       ]);
     },
   };

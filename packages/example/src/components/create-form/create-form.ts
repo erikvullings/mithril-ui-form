@@ -1,5 +1,5 @@
 import m, { FactoryComponent } from 'mithril';
-import { LayoutForm, UIForm } from 'mithril-ui-form';
+import { ILayoutForm, LayoutForm, UIForm } from 'mithril-ui-form';
 
 const componentTypeOptions = [
   { id: 'autogenerate', label: 'autogenerate' },
@@ -25,6 +25,18 @@ const componentTypeOptions = [
 ];
 
 export const CreateForm: FactoryComponent = () => {
+  type EditorField = {
+    id: string;
+    type: string;
+    autogenerate?: 'guid' | 'id';
+    className: string;
+    disabled: boolean;
+  };
+
+  type EditorFields = {
+    properties: EditorField[];
+  };
+
   const state = {
     isValid: false,
     editor: [
@@ -63,16 +75,16 @@ export const CreateForm: FactoryComponent = () => {
           },
         ],
       },
-    ],
+    ] as UIForm<EditorFields>,
     form: [],
     result: {},
     context: {},
   } as {
     isValid: boolean;
     /** Layout form for creating the editor */
-    editor: UIForm;
+    editor: UIForm<EditorFields>;
     /** Generated form for creating another layout from */
-    form: UIForm;
+    form: UIForm<any>;
     result: Record<string, any>;
     context: Record<string, any>;
   };
@@ -88,8 +100,14 @@ export const CreateForm: FactoryComponent = () => {
       const { editor, form, result, context } = state;
 
       return m('.row', [
-        m('.col.s12.m6', [m('h3', 'Editor'), m(LayoutForm, { form: editor, obj: form, context: {}, onchange })]),
-        m('.col.s12.m6', [m('h3', 'New form'), m(LayoutForm, { form, obj: result, onchange: print, context })]),
+        m('.col.s12.m6', [
+          m('h3', 'Editor'),
+          m(LayoutForm, { form: editor, obj: form, context: {}, onchange } as ILayoutForm<any>),
+        ]),
+        m('.col.s12.m6', [
+          m('h3', 'New form'),
+          m(LayoutForm, { form, obj: result, onchange: print } as ILayoutForm<any>),
+        ]),
       ]);
     },
   };

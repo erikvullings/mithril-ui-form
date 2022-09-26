@@ -6,13 +6,13 @@ import { IRepeatList, RepeatList } from './repeat-list';
 import { GeoJSONFeatureList, IGeoJSONFeatureList } from './geojson-feature-list';
 import { evalExpression } from '../utils';
 
-export interface ILayoutForm<O = Record<string, any>> extends Attributes {
+export interface ILayoutForm<O extends Record<string, any> = {}> extends Attributes {
   /** The form to display */
   form: UIForm<O>;
   /** The resulting object */
   obj: O;
   /** Relevant context, i.e. the original object and other context from the environment */
-  context?: O; // TODO Check this type, may be an array of contexts
+  context?: Array<Partial<O> | O[keyof O]>; // TODO Check this type, may be an array of contexts
   /** Callback function, invoked every time the original result object has changed */
   onchange?: (isValid: boolean, obj?: O) => void;
   /** Disable the form, disallowing edits */
@@ -32,8 +32,8 @@ export const registerPlugin = (name: string, plugin: PluginType, readonlyPlugin?
   if (readonlyPlugin) readonlyPlugins[name] = readonlyPlugin;
 };
 
-const LayoutFormFactory = () => {
-  const isValid = (item: Record<string, any>, form: UIForm) => {
+const LayoutFormFactory = <O extends Record<string, any> = {}>() => {
+  const isValid = (item: O, form: UIForm<O>) => {
     return form
       .filter((f) => f.required && typeof f.id !== undefined)
       .reduce(
@@ -49,7 +49,7 @@ const LayoutFormFactory = () => {
       );
   };
 
-  const guessType = (field: IInputField) => {
+  const guessType = (field: IInputField<O>) => {
     const { autogenerate, value, options } = field;
     return autogenerate
       ? 'none'
@@ -66,15 +66,15 @@ const LayoutFormFactory = () => {
       : 'none';
   };
 
-  const createLayoutForm = (): FactoryComponent<ILayoutForm> => () => {
+  const createLayoutForm = (): FactoryComponent<ILayoutForm<O>> => () => {
     const formField = formFieldFactory(plugins, readonlyPlugins).createFormField();
 
     const sectionFilter = (section?: string) => {
       if (!section) {
-        return (_: IInputField) => true;
+        return (_: IInputField<O>) => true;
       }
       let state = false;
-      return ({ type, id }: IInputField): boolean => {
+      return ({ type, id }: IInputField<O>): boolean => {
         if (type === 'section') {
           state = id === section;
           return false; // Return false the first time, so we don't output the section too divider
@@ -85,17 +85,17 @@ const LayoutFormFactory = () => {
 
     return {
       view: ({ attrs: { i18n, form, obj, onchange: onChange, disabled, readonly, context, section } }) => {
-        const onchange = (res: Record<string, any>) => onChange && onChange(isValid(res, form), res);
+        const onchange = (res: O) => onChange && onChange(isValid(res, form), res);
 
         return form
           .filter(sectionFilter(section))
-          .filter((field) => !field.show || evalExpression(field.show, obj, context || {}))
+          .filter((field) => !field.show || evalExpression(field.show, obj, ...(context || [])))
           .reduce((acc, field) => {
             if (!field.type) field.type = guessType(field);
             return [
               ...acc,
               typeof field.repeat === 'undefined'
-                ? m(formField, {
+                ? m(formField as FactoryComponent<any>, {
                     i18n,
                     field,
                     obj,
@@ -107,7 +107,7 @@ const LayoutFormFactory = () => {
                     containerId: 'body',
                   })
                 : field.repeat === 'geojson'
-                ? m(GeoJSONFeatureList, {
+                ? m(GeoJSONFeatureList<O>, {
                     obj,
                     field,
                     onchange,
@@ -116,8 +116,8 @@ const LayoutFormFactory = () => {
                     containerId: 'body',
                     disabled,
                     readonly,
-                  } as IGeoJSONFeatureList)
-                : m(RepeatList, {
+                  } as IGeoJSONFeatureList<O>)
+                : m(RepeatList<O>, {
                     obj,
                     field,
                     onchange,
@@ -126,7 +126,7 @@ const LayoutFormFactory = () => {
                     containerId: 'body',
                     disabled,
                     readonly,
-                  } as IRepeatList),
+                  } as IRepeatList<O>),
             ];
           }, [] as Array<Vnode<any, any>>);
       },

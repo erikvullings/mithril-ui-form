@@ -1,18 +1,19 @@
-import m, { FactoryComponent, Attributes } from 'mithril';
+import m, { Component } from 'mithril';
 import { FlatButton, uniqueId, ModalPanel, Pagination, RoundIconButton, TextInput } from 'mithril-materialized';
 import { I18n, IInputField, UIForm } from 'mithril-ui-form-plugin';
-import { LayoutForm } from './layout-form';
+import { ILayoutForm, LayoutForm } from './layout-form';
 import { range, stripSpaces, hash, getAllUrlParams, toQueryString } from '../utils';
 
-export interface IRepeatList extends Attributes {
+export interface IRepeatList<O extends Record<string, any> = {}> {
+  id?: keyof O;
   /** The input field (or form) that must be rendered repeatedly */
-  field: IInputField;
+  field: IInputField<O>;
   /** The result object */
-  obj: Record<string, any> | Record<string, any>[];
+  obj: O;
   /** The context */
-  context: Record<string, any> | Record<string, any>[];
+  context: Array<O | O[keyof O]>;
   /** Callback function, invoked every time the original result object has changed */
-  onchange?: (result: Record<string, any> | Record<string, any>[]) => void;
+  onchange?: (result: O) => void;
   /** Section ID to display - can be used to split up the form and only show a part */
   section?: string;
   /** Translation keys, read once on initialization */
@@ -21,6 +22,8 @@ export interface IRepeatList extends Attributes {
   containerId?: string;
   /** If true, the repeat component is disabled, and adding, deleting or editing items is prohibited */
   disabled?: boolean;
+  className?: string;
+  readonly?: boolean;
 }
 
 /**
@@ -30,11 +33,11 @@ export interface IRepeatList extends Attributes {
  * It creates an array of primitives when type is a IFormComponent, and an array of objects when its type
  * is a FormType.
  */
-export const RepeatList: FactoryComponent<IRepeatList> = () => {
+export const RepeatList = <O extends Record<string, any> = {}, K extends keyof O = ''>(): Component<IRepeatList<O>> => {
   const state = {} as {
-    editItem?: Record<string, any>;
+    editItem?: O;
     curItemIdx?: number;
-    newItem?: Record<string, any>;
+    newItem?: O;
     canSave?: boolean;
     editModal?: M.Modal;
     modalKey?: string;
@@ -42,27 +45,27 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
     createLabel: string;
     /** When dealing with a large list, you may add a property filter */
     filterValue?: string;
-    onNewItem?: (obj?: Record<string, any> | Record<string, any>[], id?: string) => Record<string, any>;
+    onNewItem?: (obj: O, id?: keyof O) => O[keyof O];
   };
 
-  const getItems = (obj: Record<string, any> | Record<string, any>[], id: string): Record<string, any>[] => {
+  const getItems = (obj: O, id: keyof O): Array<any> => {
     if (obj instanceof Array) {
       return obj;
     } else {
       if (!obj.hasOwnProperty(id)) {
-        obj[id] = [];
+        obj[id] = [] as O[keyof O];
       }
       return obj[id];
     }
   };
 
-  const addEmptyItem = (obj: Record<string, any> | Record<string, any>[], id: string) => {
-    const newItem = state.onNewItem ? state.onNewItem(obj, id) : {};
+  const addEmptyItem = (obj: O, id: keyof O) => {
+    const newItem = state.onNewItem ? state.onNewItem(obj, id) : ({} as O[keyof O]);
     if (obj instanceof Array) {
       obj.push(newItem);
     } else {
       if (!obj.hasOwnProperty(id)) {
-        obj[id] = [newItem];
+        obj[id] = [newItem] as O[keyof O];
       } else {
         obj[id].push(newItem);
       }
@@ -71,17 +74,17 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
 
   const compareFnFactory = (sortProperty?: string) => {
     if (!sortProperty) {
-      return (_a: Record<string, any>, _b: Record<string, any>) => 0;
+      return (_a: O, _b: O) => 0;
     }
     const reverse = sortProperty[0] === '!';
     const key = reverse ? sortProperty.substring(1) : sortProperty;
 
     return reverse
-      ? (a: Record<string, any>, b: Record<string, any>) => (a[key] > b[key] ? -1 : a[key] < b[key] ? 1 : 0)
-      : (a: Record<string, any>, b: Record<string, any>) => (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0);
+      ? (a: O, b: O) => (a[key] > b[key] ? -1 : a[key] < b[key] ? 1 : 0)
+      : (a: O, b: O) => (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0);
   };
 
-  let compareFn: (a: Record<string, any>, b: Record<string, any>) => number;
+  let compareFn: (a: O, b: O) => number;
 
   return {
     oninit: ({
@@ -90,8 +93,8 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
         field: { id = '', sortProperty, onNewItem },
       },
     }) => {
-      state.editLabel = i18n.editRepeat || `Edit ${id}`;
-      state.createLabel = i18n.createRepeat || `Create new ${id}`;
+      state.editLabel = i18n.editRepeat || `Edit ${String(id)}`;
+      state.createLabel = i18n.createRepeat || `Create new ${String(id)}`;
       state.onNewItem = onNewItem;
       compareFn = compareFnFactory(sortProperty);
     },
@@ -109,10 +112,9 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
         onchange,
       },
     }) => {
-      const notify = (result: Record<string, any> | Record<string, any>[]) => onchange && onchange(result);
       const { modalKey, filterValue } = state;
       const {
-        id = '',
+        id,
         label,
         type,
         min,
@@ -125,13 +127,13 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
       } = field;
       const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
       const editId = 'edit_' + compId;
-      const allItems = getItems(obj, id);
+      const allItems = getItems(obj, id!);
       const strippedFilterValue = filterValue ? stripSpaces(filterValue) : undefined;
       const items =
         propertyFilter && strippedFilterValue && strippedFilterValue.length > 2
           ? allItems.filter((o) => stripSpaces(`${o[propertyFilter]}`).indexOf(strippedFilterValue) >= 0)
           : allItems;
-      const page = m.route.param(id) ? Math.min(items.length, +m.route.param(id)) : 1;
+      const page = m.route.param(String(id)) ? Math.min(items.length, +m.route.param(String(id))) : 1;
       const curPage = pageSize && items && (page - 1) * pageSize < items.length ? page : 1;
       const delimitter = pageSize
         ? (_: any, i: number) => (curPage - 1) * pageSize <= i && i < curPage * pageSize
@@ -146,7 +148,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
 
       return [
         [
-          m(`#${id}.mui-repeat-list${className}`, [
+          m(`#${String(id)}.mui-repeat-list${className}`, [
             m(
               '.row.mui-repeat-list-controls',
               m('.col.s12', [
@@ -155,9 +157,9 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   iconClass: 'right',
                   label,
                   onclick: () => {
-                    addEmptyItem(obj, id);
-                    m.route.set(fragment, Object.assign(params, { [id]: items.length }));
-                    notify(obj);
+                    addEmptyItem(obj, String(id));
+                    if (id) m.route.set(fragment, Object.assign(params, { [id]: items.length }));
+                    onchange && onchange(obj);
                   },
                   style: 'padding: 0',
                   className: 'left',
@@ -170,7 +172,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                     m(Pagination, {
                       curPage,
                       items: range(1, maxPages).map((i) => ({
-                        href: toQueryString(fragment, params, { [id]: i }),
+                        href: toQueryString(fragment, params, { [id!]: i }),
                       })),
                     })
                   ),
@@ -215,7 +217,7 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   [
                     m('.row.repeat-item', { className: repeatItemClass, key: page + hash(item) }, [
                       m(LayoutForm, {
-                        form: field.type as UIForm,
+                        form: field.type as UIForm<O[keyof O]>,
                         obj: item,
                         i18n,
                         context: context instanceof Array ? [obj, ...context] : [obj, context],
@@ -223,8 +225,8 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                         containerId,
                         disabled,
                         readonly,
-                        onchange: () => notify(obj),
-                      }),
+                        onchange: () => onchange && onchange(obj),
+                      } as ILayoutForm<O[keyof O]>),
                     ]),
                   ],
                 ]),
@@ -236,9 +238,9 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                 title: label,
                 style: 'padding: 0; margin-top: -10px; margin-right: -25px',
                 onclick: () => {
-                  addEmptyItem(obj, id);
-                  m.route.set(fragment, Object.assign(params, { [id]: items.length }));
-                  notify(obj);
+                  addEmptyItem(obj, String(id));
+                  m.route.set(fragment, Object.assign(params, { [id!]: items.length }));
+                  onchange && onchange(obj);
                 },
               }),
           ]),
@@ -257,14 +259,14 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
             fixedFooter: true,
             title: i18n.deleteItem || 'Delete item',
             description: m(LayoutForm, {
-              form: type as UIForm,
-              obj: items[state.curItemIdx] as Record<string, any>,
+              form: type as UIForm<O[keyof O]>,
+              obj: items[state.curItemIdx] as O[keyof O],
               context: context instanceof Array ? [obj, ...context] : [obj, context],
               section,
               containerId,
               readonly: true,
               i18n,
-            }),
+            } as ILayoutForm<O[keyof O]>),
             buttons: [
               {
                 label: i18n.disagree || 'Disagree',
@@ -275,16 +277,17 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   if (typeof state.curItemIdx !== 'undefined') {
                     items.splice(state.curItemIdx, 1);
                     if (obj instanceof Array) {
-                      obj = [...items];
+                      obj = [...items] as O[K];
                     } else {
-                      obj[id] = [...items];
+                      obj[id as keyof O] = [...items] as O[K];
                     }
-                    notify(obj);
+                    onchange && onchange(obj);
                   }
                 },
               },
             ],
           }),
+        // TODO Check this code - do we ever get here
         typeof type === 'string' || typeof type === 'undefined'
           ? undefined
           : m(ModalPanel, {
@@ -298,12 +301,12 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                   key: modalKey,
                   form: type,
                   i18n,
-                  obj: state.editItem || state.newItem || {},
+                  obj: state.editItem || state.newItem || ({} as O[keyof O]),
                   onchange: (isValid) => (state.canSave = isValid),
                   context: context instanceof Array ? [obj, ...context] : [obj, context],
                   containerId,
                   disabled,
-                })
+                } as ILayoutForm<O[keyof O]>)
               ),
               buttons: [
                 {
@@ -320,13 +323,14 @@ export const RepeatList: FactoryComponent<IRepeatList> = () => {
                       const current = state.curItemIdx;
                       type.forEach((f) => {
                         if (f.id) {
-                          (current as any)[f.id] = edited[f.id];
+                          // TODO Check this code - a number is being indexed?
+                          (current as any)[f.id] = (edited as any)[f.id];
                         }
                       });
                     } else if (state.newItem) {
                       items.push(state.newItem);
                     }
-                    notify(obj);
+                    onchange && onchange(obj);
                   },
                 },
               ],
