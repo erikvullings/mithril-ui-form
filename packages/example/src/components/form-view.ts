@@ -1,5 +1,5 @@
 import m from 'mithril';
-import { LayoutForm, registerPlugin, UIForm, SlimdownView, I18n, render } from 'mithril-ui-form';
+import { LayoutForm, registerPlugin, UIForm, SlimdownView, I18n, render, IInputField } from 'mithril-ui-form';
 import { TextArea } from 'mithril-materialized';
 import { leafletPlugin } from 'mithril-ui-form-leaflet-plugin';
 import { ratingPlugin } from 'mithril-ui-form-rating-plugin';
@@ -73,7 +73,7 @@ const countries = [
 const editorType = {
   id: 'editors',
   label: 'Editors',
-  repeat: 0,
+  repeat: true,
   type: [
     { id: 'id', autogenerate: 'id' },
     { id: 'name', label: 'Name', type: 'text', className: 'col s8', iconName: 'title', required: true },
@@ -81,12 +81,12 @@ const editorType = {
     { id: 'region', label: 'Region', type: 'select', options: regions, className: 'col s6' },
     { id: 'country', label: 'Country', type: 'select', options: countries, className: 'col s6', disabled: '!region' },
   ],
-};
+} as IInputField<ILessonLearned>;
 
 const source = [
   { id: 'title', label: 'Title', type: 'text', maxLength: 80, required: true, icon: 'title', className: 'col s4' },
   { id: 'url', label: 'URL', type: 'url', maxLength: 80, required: true, icon: 'link', className: 'col s8' },
-] as UIForm;
+] as UIForm<ISource>;
 
 const info = [
   {
@@ -253,7 +253,7 @@ You can also include _markdown_ in your UIForm.`,
     repeat: 0,
     type: source,
   },
-] as UIForm;
+] as UIForm<ILessonLearned>;
 
 export const FormView = () => {
   registerPlugin('map', leafletPlugin);
@@ -262,7 +262,7 @@ export const FormView = () => {
   const state = {
     result: {} as ILessonLearned,
     isValid: false,
-    form: [] as UIForm,
+    form: [] as UIForm<any>,
     error: '',
   };
 

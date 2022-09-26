@@ -240,7 +240,7 @@ export const deepCopy = <T>(target: T): T => {
     });
     return cpy.map((n: any) => deepCopy<any>(n)) as any;
   }
-  if (typeof target === 'object' && target !== {}) {
+  if (typeof target === 'object') {
     const cpy = { ...(target as { [key: string]: any }) } as {
       [key: string]: any;
     };

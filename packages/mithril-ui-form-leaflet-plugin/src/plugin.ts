@@ -2,7 +2,7 @@ import m from 'mithril';
 import { LeafletMap } from 'mithril-leaflet';
 import { geoJSON } from 'leaflet';
 import { GeometryObject, FeatureCollection } from 'geojson';
-import { PluginType } from 'mithril-ui-form';
+import { PluginType } from 'mithril-ui-form-plugin';
 import L from 'leaflet';
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -13,7 +13,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
-export const leafletPlugin: PluginType = () => {
+export const leafletPlugin: PluginType<FeatureCollection> = () => {
   return {
     view: ({ attrs: { props, iv, field, onchange } }) => {
       const id = props.id || '';

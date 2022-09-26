@@ -6,15 +6,15 @@ import { IRepeatList, RepeatList } from './repeat-list';
 import { GeoJSONFeatureList, IGeoJSONFeatureList } from './geojson-feature-list';
 import { evalExpression } from '../utils';
 
-export interface ILayoutForm extends Attributes {
+export interface ILayoutForm<O = Record<string, any>> extends Attributes {
   /** The form to display */
-  form: UIForm;
+  form: UIForm<O>;
   /** The resulting object */
-  obj: Record<string, any> | Record<string, any>[];
+  obj: O;
   /** Relevant context, i.e. the original object and other context from the environment */
-  context?: Record<string, any> | Record<string, any>[]; // TODO Check this type, may be an array of contexts
+  context?: O; // TODO Check this type, may be an array of contexts
   /** Callback function, invoked every time the original result object has changed */
-  onchange?: (isValid: boolean, obj?: Record<string, any>) => void;
+  onchange?: (isValid: boolean, obj?: O) => void;
   /** Disable the form, disallowing edits */
   disabled?: boolean | string | string[];
   /** Section ID to display - can be used to split up the form and only show a part */

@@ -7,9 +7,9 @@ import { I18n } from './i18n';
  * is created has different properties. Each property is referenced by its ID
  * value.
  */
-export interface IInputField {
+export interface IInputField<O = Record<string, any>> {
   /** Property key, not required for markdown blocks */
-  id?: string;
+  id?: keyof O;
   /** Component label */
   label?: string;
   /** Optional description */

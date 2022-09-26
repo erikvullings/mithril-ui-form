@@ -1,6 +1,6 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
 import { PluginType, IInputField, I18n } from 'mithril-ui-form-plugin';
-import { render } from '../utils/slimdown-js';
+import { render } from 'slimdown-js';
 import {
   InputCheckbox,
   TextInput,

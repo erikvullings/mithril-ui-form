@@ -3,7 +3,17 @@ import { PluginType } from 'mithril-ui-form-plugin';
 
 const range = (start: number, end: number) => Array.from({ length: end - start + 1 }, (_, k) => k + start);
 
-export const ratingPlugin: PluginType = () => {
+export type RatingOptions = {
+  /** Minimum value of the rating */
+  min: number;
+  /** Maximum value of the rating */
+  max: number;
+  /** Rating labels, for each specified key (typically, min, max and median value), a label will be shown */
+  ratings: { [key: string | number]: string };
+};
+
+/** Rating plugin, a list of numeric radio buttons between min and max. */
+export const ratingPlugin: PluginType<number, RatingOptions> = () => {
   const optionsToRatings = (options?: string | Array<{ id: string; label?: string }>) =>
     !options || typeof options === 'string'
       ? {}

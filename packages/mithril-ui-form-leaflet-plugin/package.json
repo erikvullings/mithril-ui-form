@@ -30,21 +30,21 @@
   "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
   "license": "MIT",
   "dependencies": {
-    "mithril": "2.2.2",
-    "mithril-ui-form-plugin": "workspace:^0",
-    "leaflet": "^1.8.0",
+    "leaflet": "^1.9.1",
     "leaflet-draw": "^1.0.4",
-    "mithril-leaflet": "0.4.3"
+    "mithril": "2.2.2",
+    "mithril-leaflet": "0.4.3",
+    "mithril-ui-form-plugin": "workspace:^0.3.11"
   },
   "devDependencies": {
-    "@types/node": "^18.0.1",
-    "@types/geojson": "^7946.0.8",
-    "@types/leaflet": "^1.7.11",
+    "@types/geojson": "^7946.0.10",
+    "@types/leaflet": "^1.8.0",
     "@types/leaflet-draw": "^1.0.5",
     "@types/mithril": "^2.0.11",
-    "microbundle": "^0.15.0",
+    "@types/node": "^18.7.21",
+    "microbundle": "^0.15.1",
     "rimraf": "^3.0.2",
     "tslib": "^2.4.0",
-    "typescript": "^4.7.4"
+    "typescript": "^4.8.3"
   }
 }
