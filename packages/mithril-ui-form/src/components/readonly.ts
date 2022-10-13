@@ -14,7 +14,6 @@ export interface IReadonlyComponent extends Attributes {
 export const ReadonlyComponent: FactoryComponent<IReadonlyComponent> = () => {
   return {
     view: ({ attrs: { type, props, label = '', initialValue: iv, inline = false } }) => {
-      console.table({ type });
       const cn = { className: props.className || 'col s12' };
       if (iv instanceof Array && iv.length > 3) {
         return m('.readonly', cn, [m('label', label), m(SlimdownView, { md: '\n- ' + iv.join('\n- ') })]);
