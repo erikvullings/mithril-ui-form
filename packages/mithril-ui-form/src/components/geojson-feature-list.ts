@@ -77,7 +77,7 @@ export const GeoJSONFeatureList: <O extends Record<string, any> = {}>(
           class: 'col s12',
           initialValue: featureCollection ? JSON.stringify(featureCollection, null, 2) : undefined,
           placeholder: 'Enter GeoJSON',
-          onchange: (v) => (obj[id] = v as any),
+          onchange: (v: string) => (obj[id] = v as any),
         }),
       } as ITabItem;
 
@@ -90,7 +90,7 @@ export const GeoJSONFeatureList: <O extends Record<string, any> = {}>(
           ? m(Collapsible, {
               oncreate: ({ dom }) => (state.dom = dom as HTMLUListElement),
               onOpenStart: onSelect
-                ? (e) => {
+                ? (e: Element) => {
                     const children = state.dom.children || [];
                     for (let i = 0; i < children.length; i++) {
                       if (children[i] !== e) continue;

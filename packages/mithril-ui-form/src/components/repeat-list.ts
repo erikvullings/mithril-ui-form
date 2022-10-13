@@ -3,6 +3,7 @@ import { FlatButton, uniqueId, ModalPanel, Pagination, RoundIconButton, TextInpu
 import { I18n, IInputField, UIForm } from 'mithril-ui-form-plugin';
 import { ILayoutForm, LayoutForm } from './layout-form';
 import { range, stripSpaces, hash, getAllUrlParams, toQueryString } from '../utils';
+import { Modal } from 'materialize-css';
 
 export interface IRepeatList<O extends Record<string, any> = {}> {
   id?: keyof O;
@@ -248,7 +249,7 @@ export const RepeatList = <O extends Record<string, any> = {}, K extends keyof O
         typeof state.curItemIdx !== 'undefined' &&
           m(ModalPanel, {
             id: 'deleteItem',
-            onCreate: (modal) => modal.open(),
+            onCreate: (modal: Modal) => modal.open(),
             options: {
               onCloseStart: () => {
                 // console.log('On Close');
@@ -291,7 +292,7 @@ export const RepeatList = <O extends Record<string, any> = {}, K extends keyof O
         typeof type === 'string' || typeof type === 'undefined'
           ? undefined
           : m(ModalPanel, {
-              onCreate: (modal) => (state.editModal = modal),
+              onCreate: (modal: Modal) => (state.editModal = modal),
               id: editId,
               title: state.editItem ? state.editLabel : state.createLabel,
               fixedFooter: true,

@@ -436,6 +436,7 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
               const initialValue = iv as string;
               return m(ReadonlyComponent, {
                 props,
+                type,
                 label: props.label,
                 initialValue,
               });
@@ -472,7 +473,7 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
                 ...props,
                 twelveHour,
                 initialValue,
-                onchange: (time) => {
+                onchange: (time: string) => {
                   const tt = time.split(':').map((n) => +n);
                   date.setHours(tt[0], tt[1]);
                   onchange(date);
@@ -507,7 +508,7 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
                 setDefaultDate: initialValue ? true : false,
                 format,
                 initialValue,
-                onchange: (date) => {
+                onchange: (date: Date | string) => {
                   onchange(new Date(date));
                   // m.redraw();
                 },
@@ -562,7 +563,7 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
                       format,
                       initialValue: initialDate,
                       container: containerId as any,
-                      onchange: (date) => {
+                      onchange: (date: Date) => {
                         const d = new Date(state.initialDateTime);
                         d.setFullYear(date.getFullYear());
                         d.setMonth(date.getMonth());
@@ -581,7 +582,7 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
                       twelveHour,
                       initialValue: initialTime,
                       container: containerId,
-                      onchange: (time) => {
+                      onchange: (time: string) => {
                         const tt = time.split(':').map((n) => +n);
                         const d = state.initialDateTime || new Date(new Date().setSeconds(0, 0));
                         d.setHours(tt[0], tt[1]);
@@ -595,7 +596,7 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
                       className: 'col s2',
                       min: 0,
                       max: 59,
-                      onchange: (n) => {
+                      onchange: (n: number) => {
                         const d = state.initialDateTime || new Date(new Date().setSeconds(0, 0));
                         d.setSeconds(n, 0);
                         notify(d);
@@ -650,7 +651,7 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
                     disabled: props.disabled || !options || options.length === 0,
                     options,
                     checkedId,
-                    onchange: (checkedIds) =>
+                    onchange: (checkedIds: string[]) =>
                       onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter((v) => v !== null)),
                   }),
                 ],
@@ -688,7 +689,7 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
                 disabled: props.disabled || !options || options.length === 0,
                 options,
                 checkedId,
-                onchange: (checkedIds) =>
+                onchange: (checkedIds: string[]) =>
                   onchange(
                     checkedIds.length === 1 && !props.multiple
                       ? checkedIds[0]

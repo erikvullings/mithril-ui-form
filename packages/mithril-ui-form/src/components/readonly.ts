@@ -4,6 +4,7 @@ import { SlimdownView } from './slimdown-view';
 
 export interface IReadonlyComponent extends Attributes {
   props: IInputField;
+  type?: string;
   label?: string;
   initialValue: string | number | Array<string | number>;
   /** If true, put label in front of value. Default false */
@@ -12,12 +13,20 @@ export interface IReadonlyComponent extends Attributes {
 
 export const ReadonlyComponent: FactoryComponent<IReadonlyComponent> = () => {
   return {
-    view: ({ attrs: { props, label, initialValue: iv, inline = false } }) => {
+    view: ({ attrs: { type, props, label = '', initialValue: iv, inline = false } }) => {
+      console.table({ type });
       const cn = { className: props.className || 'col s12' };
       if (iv instanceof Array && iv.length > 3) {
         return m('.readonly', cn, [m('label', label), m(SlimdownView, { md: '\n- ' + iv.join('\n- ') })]);
       } else if (typeof iv === 'string') {
-        return m('.readonly', cn, [m('label', label), m(SlimdownView, { md: iv })]);
+        return type === 'url'
+          ? m('.readonly', cn, [m('label', `${label.trim()}: `), m('a[target=_blank]', { href: iv }, iv)])
+          : type === 'color'
+          ? m('.readonly', cn, [
+              m('label', `${label.trim()}: `),
+              m('.color', { style: `height: 1rem; width: 40px; border-radius: 4px; background-color: ${iv}` }),
+            ])
+          : m('.readonly', cn, [m('label', label), m(SlimdownView, { md: iv })]);
       }
       const v = iv instanceof Array ? iv.join(', ') : iv;
       return m('.readonly', cn, [
