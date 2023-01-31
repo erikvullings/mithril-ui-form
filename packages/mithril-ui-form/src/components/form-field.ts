@@ -267,7 +267,7 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
                   readonly,
                   form: type,
                   obj: obj[id],
-                  context: [obj, ...context],
+                  context: context instanceof Array ? [obj, ...context] : [obj, context],
                   onchange: () => onFormChange(obj),
                   containerId,
                 } as ILayoutForm<O[keyof O]>)
@@ -643,7 +643,7 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
               const checkedId = iv as Array<string | number>;
               return [
                 [
-                  m(Options, {
+                  m(Options<any>, {
                     key: state.key,
                     checkboxClass: 'col s6 m4 l3',
                     className: 'input-field col s12',
@@ -683,7 +683,7 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
             }
             case 'select': {
               const checkedId = iv as Array<string | number>;
-              return m(Select, {
+              return m(Select<any>, {
                 placeholder: props.multiple ? i18n.pickOneOrMore || 'Pick one or more' : i18n.pickOne || 'Pick one',
                 ...props,
                 disabled: props.disabled || !options || options.length === 0,
