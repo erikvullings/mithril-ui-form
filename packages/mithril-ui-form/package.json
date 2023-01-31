@@ -16,9 +16,9 @@
     "start": "microbundle watch",
     "dev": "npm start",
     "dry-run": "npm publish --dry-run",
-    "patch-release": "npm run clean && npm run build && npm version patch --force -m \"Patch release\" && npm publish && git push --follow-tags",
-    "minor-release": "npm run clean && npm run build && npm version minor --force -m \"Minor release\" && npm publish && git push --follow-tags",
-    "major-release": "npm run clean && npm run build && npm version major --force -m \"Major release\" && npm publish && git push --follow-tags",
+    "patch-release": "npm run clean && npm run build && npm version patch --force -m \"Patch release\" && git push --follow-tags && pnpm publish",
+    "minor-release": "npm run clean && npm run build && npm version minor --force -m \"Minor release\" && git push --follow-tags && pnpm publish",
+    "major-release": "npm run clean && npm run build && npm version major --force -m \"Major release\" && git push --follow-tags && pnpm publish",
     "gen:schema": "typescript-json-schema.cmd tsconfig.json UIForm > ./schema/ui-form.json"
   },
   "keywords": [
@@ -33,6 +33,7 @@
   "dependencies": {
     "mithril": "^2.2.2",
     "mithril-materialized": "^1.0.1",
+    "mithril-ui-form-plugin": "workspace:*",
     "slimdown-js": "^0.7.1"
   },
   "devDependencies": {
@@ -40,7 +41,6 @@
     "@types/materialize-css": "^1.0.11",
     "@types/mithril": "^2.0.12",
     "microbundle": "^0.15.1",
-    "mithril-ui-form-plugin": "workspace:^0.5.1",
     "rimraf": "^3.0.2",
     "tslib": "^2.5.0",
     "typescript": "^4.9.5",
