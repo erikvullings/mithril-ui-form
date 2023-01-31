@@ -22,7 +22,7 @@ export const toHourMin = (d: Date) => `${padLeft(d.getHours())}:${padLeft(d.getM
  * @param s: path, e.g. a.b[0].c
  * @see https://stackoverflow.com/a/6491621/319711
  */
-const getPath = <O>(obj: O, s: string) => {
+const getPath = <O extends {}>(obj: O, s: string) => {
   s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
   s = s.replace(/^\./, ''); // strip a leading dot
   const a = s.split('.');
@@ -117,14 +117,14 @@ export const evalExpression = <O>(expression: string | string[], ...objArr: Arra
   return expr.some((e) => checkExpressions(e, objArr));
 };
 
-export const resolveExpression = <O>(expression: string, objArr: O[]) =>
+export const resolveExpression = <O extends {}>(expression: string, objArr: O[]) =>
   getPath(
     objArr.filter(Boolean).reduceRight((acc, obj) => ({ ...obj, ...acc })),
     expression.trim()
   );
 
 const canResolveExpression = <O>(expression: string, objArr: Array<Partial<O> | O[keyof O]>) =>
-  typeof resolveExpression(expression, objArr) !== 'undefined';
+  typeof resolveExpression(expression, objArr as any) !== 'undefined';
 
 const placeholderRegex = /{{\s*([^\s"'`:]*):?([^\s]*)\s*}}/g;
 
@@ -209,7 +209,7 @@ export const resolvePlaceholders = <O>(str: string, ...objArr: Array<Partial<O> 
 
       // The result can be accessed through the `m`-variable.
       m.forEach((_, __, [fullMatch, expression, exprType]) => {
-        const resolved = resolveExpression(expression, objArr);
+        const resolved = resolveExpression(expression, objArr as any);
         if (resolved && !(resolved instanceof Array)) {
           str = str.replace(fullMatch, formatExpression(resolved, exprType));
         }
