@@ -94,7 +94,7 @@ const LayoutFormFactory = <O extends Record<string, any> = {}>() => {
             if (!field.type) field.type = guessType(field);
             return [
               ...acc,
-              typeof field.repeat === 'undefined'
+              typeof field.repeat === 'undefined' || (field.repeat as Boolean) === false
                 ? m(formField as FactoryComponent<any>, {
                     i18n,
                     field,
