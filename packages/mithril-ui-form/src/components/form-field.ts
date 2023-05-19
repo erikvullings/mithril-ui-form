@@ -20,6 +20,7 @@ import {
   uuid4,
   uniqueId,
   FlatButton,
+  Autocomplete,
 } from 'mithril-materialized';
 import {
   capitalizeFirstLetter,
@@ -233,6 +234,7 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
         }
 
         const onchange = async (v: string | number | Array<string | number | Record<string, any>> | Date | boolean) => {
+          console.log(`Onchange invoked: ${v}`);
           if (typeof v === 'undefined' || v === 'undefined') {
             delete obj[id as keyof O];
             onFormChange(obj);
@@ -240,6 +242,7 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
           }
           obj[id as keyof O] = transform ? transform('to', v) : (v as any);
           if (!effect) {
+            console.log(`onFormChange invoked: ${v}`);
             return onFormChange(obj);
           }
           const res = await effect(obj, obj[id as keyof O], context);
@@ -294,8 +297,6 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
         }
 
         const [selectAll, unselectAll] = checkAllOptions ? checkAllOptions.split('|') : ['', ''];
-
-        const { className } = props;
 
         if (readonly && type && ['md', 'none'].indexOf(type as string) < 0) {
           if (readonlyPlugins.hasOwnProperty(type))
@@ -424,6 +425,7 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
                 })
               );
             }
+            case 'md':
             case 'markdown': {
               const initialValue = typeof iv === 'string' && iv ? render(iv as string) : '';
               return m(ReadonlyComponent, {
@@ -443,6 +445,7 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
             }
           }
         } else {
+          // Editable
           if (type && plugins.hasOwnProperty(type)) {
             return m(plugins[type], {
               iv,
@@ -697,9 +700,12 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
                   ),
               });
             }
-            case 'md':
+            case 'markdown':
+            case 'md': {
+              const { label, className = 'col s12' } = props;
               const md = resolvePlaceholders((id ? iv : value || label) || '', obj, context);
               return m(SlimdownView, { md, className });
+            }
             case 'section':
               return m('.divider');
             case 'switch': {
@@ -720,7 +726,7 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
                         return acc;
                       }, {} as { [key: string]: null }),
                       limit: field.maxLength || Infinity,
-                      minLenght: field.minLength || 1,
+                      minLength: field.minLength || 1,
                     }
                   : {};
               const { label, isMandatory, className, helperText } = props;
@@ -736,7 +742,31 @@ export const formFieldFactory = <O extends Record<string, any> = {}>(
                 autocompleteOptions,
               });
             }
-            case 'markdown':
+            case 'autocomplete': {
+              const initialValue = iv as string;
+              const autocompleteOptions =
+                options && options.length > 0
+                  ? {
+                      data: options.reduce((acc, cur) => {
+                        acc[cur.id] = null;
+                        return acc;
+                      }, {} as { [key: string]: null }),
+                      limit: field.maxLength || Infinity,
+                      minLength: field.minLength || 1,
+                    }
+                  : { data: {} };
+              const { label, isMandatory, className, helperText } = props;
+              return m(Autocomplete, {
+                initialValue,
+                className,
+                label,
+                isMandatory,
+                helperText,
+                onchange,
+                placeholder: field.placeholder || '...',
+                ...autocompleteOptions,
+              });
+            }
             case 'textarea': {
               const initialValue = iv as string;
               return m(TextArea, {

@@ -708,6 +708,13 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
         className: 'col s12 m2',
       },
       {
+        id: 'mark',
+        label: 'Vehicle brand',
+        type: 'autocomplete',
+        options: [{ id: 'Audi' }, { id: 'Mercedes' }, { id: 'Citroën' }, { id: 'Peugot' }],
+        className: 'col s6',
+      },
+      {
         id: 'name',
         label: 'Name',
         type: 'text',
