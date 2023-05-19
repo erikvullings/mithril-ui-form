@@ -12,7 +12,7 @@ export interface ILayoutForm<O extends Record<string, any> = {}> extends Attribu
   /** The resulting object */
   obj: O;
   /** Relevant context, i.e. the original object and other context from the environment */
-  context?: Array<Partial<O> | O[keyof O]>; // TODO Check this type, may be an array of contexts
+  context?: Array<Partial<O> | O[keyof O] | any>; // TODO Check this type, may be an array of contexts
   /** Callback function, invoked every time the original result object has changed */
   onchange?: (isValid: boolean, obj?: O) => void;
   /** Disable the form, disallowing edits */
