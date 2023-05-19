@@ -41,10 +41,10 @@
     "@types/materialize-css": "^1.0.11",
     "@types/mithril": "^2.0.12",
     "microbundle": "^0.15.1",
-    "rimraf": "^3.0.2",
-    "tslib": "^2.5.0",
-    "typescript": "^4.9.5",
-    "typescript-json-schema": "^0.54.0"
+    "rimraf": "^5.0.1",
+    "tslib": "^2.5.2",
+    "typescript": "^5.0.4",
+    "typescript-json-schema": "^0.56.0"
   },
   "browserslist": [
     "last 2 version",
