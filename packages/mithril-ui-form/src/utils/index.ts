@@ -64,8 +64,8 @@ const checkExpression = <O>(expression: string, obj: O) => {
   const match = expressionRegex.exec(expression);
   if (match) {
     const [fullMatch, path, operand, matchValue] = match;
-    const resolved = getPath(obj, path.trim());
-    const v = typeof resolved === 'boolean' ? (resolved ? 'true' : 'false') : resolved;
+    const v = getPath(obj, path.trim());
+    // const v = typeof resolved === 'boolean' ? (resolved ? 'true' : 'false') : resolved;
     if (typeof v === 'undefined' || (typeof v === 'string' && v.length === 0)) {
       return false;
     } else if (operand && matchValue) {
