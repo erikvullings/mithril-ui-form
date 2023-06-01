@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/erikvullings/mithril-ui-form#readme",
   "dependencies": {
-    "material-icons": "^1.13.6",
+    "material-icons": "^1.13.7",
     "materialize-css": "^1.0.0",
     "mithril": "^2.2.2",
     "mithril-materialized": "^1.0.1",
@@ -45,9 +45,9 @@
     "mini-css-extract-plugin": "^2.7.6",
     "rimraf": "^5.0.1",
     "style-loader": "^3.3.3",
-    "ts-loader": "^9.4.2",
-    "typescript": "^5.0.4",
-    "webpack": "^5.83.1",
+    "ts-loader": "^9.4.3",
+    "typescript": "next",
+    "webpack": "^5.84.1",
     "webpack-cli": "^5.1.1",
     "webpack-dev-server": "^4.15.0"
   }
