@@ -1,4 +1,4 @@
-export { UIForm, I18n, IInputField, PluginType, ComponentType } from 'mithril-ui-form-plugin';
+export { UIForm, I18n, InputField, FormAttributes, PluginType, ComponentType } from 'mithril-ui-form-plugin';
 export * from './components';
 export * from 'slimdown-js';
 export {

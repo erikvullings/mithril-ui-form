@@ -1,3 +1,4 @@
+import { Attributes } from 'mithril';
 import { ComponentType } from './component-type';
 import { UIForm } from './form';
 import { I18n } from './i18n';
@@ -7,7 +8,7 @@ import { I18n } from './i18n';
  * is created has different properties. Each property is referenced by its ID
  * value.
  */
-export interface IInputField<O extends Record<string, any> = {}, K extends keyof O = keyof O> {
+export type InputField<O extends Attributes = {}, K extends keyof O = keyof O> = {
   /** Property key, not required for markdown blocks */
   id?: K;
   /** Component label */
@@ -17,7 +18,7 @@ export interface IInputField<O extends Record<string, any> = {}, K extends keyof
   /** Can be used as a placeholder for text inputs or the first element of a Selection */
   placeholder?: string;
   /** Type of component to use */
-  type?: ComponentType | UIForm<O[K]> | UIForm<O[K][0]>;
+  type?: ComponentType | UIForm<O[K]> | UIForm<O[K][number]> | UIForm<{}>;
   /** Value that the component has, initially. Is also used to derive the type if not supplied. */
   value?: O[K];
   /**
@@ -122,4 +123,4 @@ export interface IInputField<O extends Record<string, any> = {}, K extends keyof
   twelveHour?: boolean;
   /** Allow to augment with any field, e.g. for plugins */
   [key: string]: any;
-}
+};

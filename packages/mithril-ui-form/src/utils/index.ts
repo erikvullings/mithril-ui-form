@@ -1,4 +1,4 @@
-import { UIForm, IInputField, ComponentType } from 'mithril-ui-form-plugin';
+import { UIForm, InputField, ComponentType } from 'mithril-ui-form-plugin';
 
 export const capitalizeFirstLetter = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -270,7 +270,7 @@ export const labelResolver = <O extends Record<string, any>>(form: UIForm<O>) =>
           acc = { ...acc, ...createDict(type as UIForm<O | O[keyof O]>, fieldId) };
         }
         return acc;
-      }, {} as { [key: string]: IInputField<O> });
+      }, {} as { [key: string]: InputField<O> });
     return d;
   };
 

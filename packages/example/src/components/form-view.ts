@@ -6,8 +6,8 @@ import {
   SlimdownView,
   I18n,
   render,
-  IInputField,
-  ILayoutForm,
+  InputField,
+  FormAttributes,
 } from 'mithril-ui-form';
 import { TextArea } from 'mithril-materialized';
 import { leafletPlugin } from 'mithril-ui-form-leaflet-plugin';
@@ -86,112 +86,112 @@ const editorType = {
     { id: 'region', label: 'Region', type: 'select', options: regions, className: 'col s6' },
     { id: 'country', label: 'Country', type: 'select', options: countries, className: 'col s6', disabled: '!region' },
   ],
-} as IInputField<ILessonLearned, 'editors'>;
+} as InputField<ILessonLearned, 'editors'>;
 
 const source = [
   { id: 'title', label: 'Title', type: 'text', maxLength: 80, required: true, icon: 'title', className: 'col s4' },
   { id: 'url', label: 'URL', type: 'url', maxLength: 80, required: true, icon: 'link', className: 'col s8' },
 ] as UIForm<ISource>;
 
-const info = [
-  {
-    id: 'geojson',
-    label: 'GeoJSON editor',
-    description: '_My description_',
-    repeat: 'geojson',
-    onSelect: (i: number) => alert(i),
-    type: [
-      {
-        id: 'title',
-        type: 'text',
-        className: 'col s9',
-        required: true,
-      },
-      {
-        id: 'id',
-        type: 'text',
-        readonly: true,
-        autogenerate: 'id',
-        className: 'col s3',
-        required: true,
-      },
-      {
-        id: 'description',
-        type: 'textarea',
-        required: true,
-      },
-    ] as UIForm<{ title: string; id: string; description: string }>,
-  },
-] as UIForm<{ geojson: any }>;
+// const info = [
+//   {
+//     id: 'geojson',
+//     label: 'GeoJSON editor',
+//     description: '_My description_',
+//     repeat: 'geojson',
+//     onSelect: (i: number) => alert(i),
+//     type: [
+//       {
+//         id: 'title',
+//         type: 'text',
+//         className: 'col s9',
+//         required: true,
+//       },
+//       {
+//         id: 'id',
+//         type: 'text',
+//         readonly: true,
+//         autogenerate: 'id',
+//         className: 'col s3',
+//         required: true,
+//       },
+//       {
+//         id: 'description',
+//         type: 'textarea',
+//         required: true,
+//       },
+//     ] as UIForm<{ title: string; id: string; description: string }>,
+//   },
+// ] as UIForm<{ geojson: any }>;
 
-const tartan = [
-  {
-    id: 'vignettes',
-    label: 'New vignette',
-    repeat: true,
-    pageSize: 1,
-    // "propertyFilter": "title",
-    // "filterLabel": "Filter by title",
-    type: [
-      {
-        id: 'id',
-        label: 'Number of the round',
-        type: 'number',
-        steps: 0,
-        className: 'col s4',
-      },
-      {
-        id: 'title',
-        label: 'Title',
-        type: 'text',
-        className: 'col s8',
-      },
-      {
-        id: 'selectedCards',
-        label: 'Selected cards',
-        type: 'options',
-        multipe: true,
-        options: [
-          {
-            id: 'id318c83bd',
-            label: 'JSM FOR F-35',
-          },
-        ],
-        className: 'col s12',
-        checkboxClass: 'col s6',
-      },
-      {
-        id: 'pages',
-        repeat: true,
-        min: 1,
-        max: 5,
-        label: 'Add page',
-        pageSize: 1,
-        type: [
-          {
-            id: 'title',
-            label: 'Title of the page',
-            type: 'text',
-            className: 'col s8',
-          },
-          {
-            id: 'image',
-            label: 'Image',
-            type: 'base64',
-            className: 'col s4',
-            options: [{ id: 'image/*' }],
-          },
-          {
-            id: 'text',
-            label: 'Text',
-            description: 'You can use [Markdown notation](https://www.markdownguide.org/basic-syntax/)',
-            type: 'textarea',
-          },
-        ],
-      },
-    ],
-  },
-] as UIForm<any>;
+// const tartan = [
+//   {
+//     id: 'vignettes',
+//     label: 'New vignette',
+//     repeat: true,
+//     pageSize: 1,
+//     // "propertyFilter": "title",
+//     // "filterLabel": "Filter by title",
+//     type: [
+//       {
+//         id: 'id',
+//         label: 'Number of the round',
+//         type: 'number',
+//         steps: 0,
+//         className: 'col s4',
+//       },
+//       {
+//         id: 'title',
+//         label: 'Title',
+//         type: 'text',
+//         className: 'col s8',
+//       },
+//       {
+//         id: 'selectedCards',
+//         label: 'Selected cards',
+//         type: 'options',
+//         multipe: true,
+//         options: [
+//           {
+//             id: 'id318c83bd',
+//             label: 'JSM FOR F-35',
+//           },
+//         ],
+//         className: 'col s12',
+//         checkboxClass: 'col s6',
+//       },
+//       {
+//         id: 'pages',
+//         repeat: true,
+//         min: 1,
+//         max: 5,
+//         label: 'Add page',
+//         pageSize: 1,
+//         type: [
+//           {
+//             id: 'title',
+//             label: 'Title of the page',
+//             type: 'text',
+//             className: 'col s8',
+//           },
+//           {
+//             id: 'image',
+//             label: 'Image',
+//             type: 'base64',
+//             className: 'col s4',
+//             options: [{ id: 'image/*' }],
+//           },
+//           {
+//             id: 'text',
+//             label: 'Text',
+//             description: 'You can use [Markdown notation](https://www.markdownguide.org/basic-syntax/)',
+//             type: 'textarea',
+//           },
+//         ],
+//       },
+//     ],
+//   },
+// ] as UIForm<any>;
 
 const info2 = [
   {
@@ -364,7 +364,7 @@ ${result.sources ? result.sources.map((s, i) => `${i + 1}. [${s.title}](${s.url}
                 agree: 'Ja',
                 disagree: 'Nee',
               } as I18n,
-            } as ILayoutForm<ILessonLearned>)
+            } as FormAttributes)
           ),
         ]),
         m('.col.s12', [

@@ -31,25 +31,22 @@ class DashboardService {
   }
 
   public get defaultRoute() {
-    const dashboard = this.dashboards.filter(d => d.default).shift();
+    const dashboard = this.dashboards.filter((d) => d.default).shift();
     return dashboard ? dashboard.route : this.dashboards[0].route;
   }
 
-  public switchTo(dashboardId: Dashboards, fragment = '') {
-    const dashboard = this.dashboards.filter(d => d.id === dashboardId).shift();
+  public switchTo(dashboardId: Dashboards, _fragment = '') {
+    const dashboard = this.dashboards.filter((d) => d.id === dashboardId).shift();
     if (dashboard) {
       m.route.set(dashboard.route);
     }
   }
 
   public get routingTable() {
-    return this.dashboards.reduce(
-      (p, c) => {
-        p[c.route] = { render: () => m(this.layout, m(c.component)) };
-        return p;
-      },
-      {} as RouteDefs
-    );
+    return this.dashboards.reduce((p, c) => {
+      p[c.route] = { render: () => m(this.layout, m(c.component)) };
+      return p;
+    }, {} as RouteDefs);
   }
 }
 

@@ -1,9 +1,9 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
-import { IInputField } from 'mithril-ui-form-plugin';
+import { InputField } from 'mithril-ui-form-plugin';
 import { SlimdownView } from './slimdown-view';
 
 export interface IReadonlyComponent extends Attributes {
-  props: IInputField;
+  props: InputField;
   type?: string;
   label?: string;
   initialValue: string | number | Array<string | number>;

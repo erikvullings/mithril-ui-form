@@ -1,14 +1,14 @@
-import m, { Component } from 'mithril';
+import m, { Attributes, Component } from 'mithril';
 import { FlatButton, uniqueId, ModalPanel, Pagination, RoundIconButton, TextInput } from 'mithril-materialized';
-import { I18n, IInputField, UIForm } from 'mithril-ui-form-plugin';
-import { ILayoutForm, LayoutForm } from './layout-form';
+import { FormAttributes, I18n, InputField } from 'mithril-ui-form-plugin';
+import { LayoutForm } from './layout-form';
 import { range, stripSpaces, hash, getAllUrlParams, toQueryString } from '../utils';
 import { Modal } from 'materialize-css';
 
 export interface IRepeatList<O extends Record<string, any> = {}> {
   id?: keyof O;
   /** The input field (or form) that must be rendered repeatedly */
-  field: IInputField<O>;
+  field: InputField<O>;
   /** The result object */
   obj: O;
   /** The context */
@@ -34,7 +34,7 @@ export interface IRepeatList<O extends Record<string, any> = {}> {
  * It creates an array of primitives when type is a IFormComponent, and an array of objects when its type
  * is a FormType.
  */
-export const RepeatList = <O extends Record<string, any> = {}, K extends keyof O = ''>(): Component<IRepeatList<O>> => {
+export const RepeatList = <O extends Attributes = {}, K extends keyof O = ''>(): Component<IRepeatList<O>> => {
   const state = {} as {
     editItem?: O;
     curItemIdx?: number;
@@ -217,17 +217,18 @@ export const RepeatList = <O extends Record<string, any> = {}, K extends keyof O
                   ],
                   [
                     m('.row.repeat-item', { className: repeatItemClass, key: page + hash(item) }, [
-                      m(LayoutForm, {
-                        form: field.type as UIForm<O[keyof O]>,
-                        obj: item,
-                        i18n,
-                        context: context instanceof Array ? [obj, ...context] : [obj, context],
-                        section,
-                        containerId,
-                        disabled,
-                        readonly,
-                        onchange: () => onchange && onchange(obj),
-                      } as ILayoutForm<O[keyof O]>),
+                      type &&
+                        m(LayoutForm, {
+                          form: type,
+                          obj: item,
+                          i18n,
+                          // context: context instanceof Array ? [obj, ...context] : [obj, context],
+                          section,
+                          containerId,
+                          disabled,
+                          readonly,
+                          onchange: () => onchange && onchange(obj),
+                        } as FormAttributes),
                     ]),
                   ],
                 ]),
@@ -260,14 +261,14 @@ export const RepeatList = <O extends Record<string, any> = {}, K extends keyof O
             fixedFooter: true,
             title: i18n.deleteItem || 'Delete item',
             description: m(LayoutForm, {
-              form: type as UIForm<O[keyof O]>,
+              form: type,
               obj: items[state.curItemIdx] as O[keyof O],
               context: context instanceof Array ? [obj, ...context] : [obj, context],
               section,
               containerId,
               readonly: true,
               i18n,
-            } as ILayoutForm<O[keyof O]>),
+            } as FormAttributes),
             buttons: [
               {
                 label: i18n.disagree || 'Disagree',
@@ -307,7 +308,7 @@ export const RepeatList = <O extends Record<string, any> = {}, K extends keyof O
                   context: context instanceof Array ? [obj, ...context] : [obj, context],
                   containerId,
                   disabled,
-                } as ILayoutForm<O[keyof O]>)
+                } as FormAttributes)
               ),
               buttons: [
                 {

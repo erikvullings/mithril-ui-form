@@ -1,14 +1,14 @@
 import { Vnode, Component } from 'mithril';
-import { IInputField } from './input-field';
+import { InputField } from './input-field';
 
 export type PluginType<V = any, F = any, O = any> = (
   vnode: Vnode<{
     /** Initial value, typically a string, number or boolean */
     iv?: V;
     /** Original properties of the form field */
-    field: IInputField & F;
+    field: InputField & F;
     /** Partially converted properties, e.g. the ones containing placeholders for other variables, e.g. label, description, etc. */
-    props: IInputField;
+    props: InputField;
     /** Label, raw version of props.label */
     label?: string;
     /** Only present when component is not readonly */
@@ -22,9 +22,9 @@ export type PluginType<V = any, F = any, O = any> = (
   /** Initial value, typically a string, number or boolean */
   iv?: V;
   /** Original properties of the form field */
-  field: IInputField & F;
+  field: InputField & F;
   /** Partially converted properties, e.g. the ones containing placeholders for other variables, e.g. label, description, etc. */
-  props: IInputField;
+  props: InputField;
   /** Label, raw version of props.label */
   label?: string;
   /** Only present when component is not readonly */

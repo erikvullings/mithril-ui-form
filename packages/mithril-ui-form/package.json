@@ -16,6 +16,7 @@
     "start": "microbundle watch",
     "dev": "npm start",
     "dry-run": "npm publish --dry-run",
+    "pre-release": "npm run clean && npm run build && npm version prerelease --preid=next && git push --follow-tags && pnpm publish --no-git-checks",
     "patch-release": "npm run clean && npm run build && npm version patch --force -m \"Patch release\" && git push --follow-tags && pnpm publish --no-git-checks",
     "minor-release": "npm run clean && npm run build && npm version minor --force -m \"Minor release\" && git push --follow-tags && pnpm publish --no-git-checks",
     "major-release": "npm run clean && npm run build && npm version major --force -m \"Major release\" && git push --follow-tags && pnpm publish --no-git-checks",

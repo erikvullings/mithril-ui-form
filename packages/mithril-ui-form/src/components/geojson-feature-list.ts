@@ -1,12 +1,12 @@
-import m, { Component, Vnode } from 'mithril';
+import m, { Attributes, Component, Vnode } from 'mithril';
 import { ITabItem, TextArea, Tabs, Collapsible } from 'mithril-materialized';
-import { I18n, IInputField } from 'mithril-ui-form-plugin';
-import { ILayoutForm, LayoutForm } from '.';
+import { FormAttributes, I18n, InputField } from 'mithril-ui-form-plugin';
+import { LayoutForm } from '.';
 
-export interface IGeoJSONFeatureList<O extends Record<string, any> = {}, K extends keyof O = keyof O> {
+export interface IGeoJSONFeatureList<O extends Attributes = {}, K extends keyof O = keyof O> {
   id?: K;
   /** The input field (or form) that must be rendered repeatedly */
-  field: IInputField<O>;
+  field: InputField<O>;
   /** The result object */
   obj: O;
   /** The context */
@@ -30,7 +30,7 @@ export interface IGeoJSONFeatureList<O extends Record<string, any> = {}, K exten
  * is a FormType.
  */
 
-export const GeoJSONFeatureList: <O extends Record<string, any> = {}>(
+export const GeoJSONFeatureList: <O extends Attributes = {}>(
   vnode: Vnode<IGeoJSONFeatureList<O>>
 ) => Component<IGeoJSONFeatureList<O>> = () => {
   const state = {} as {
@@ -124,7 +124,7 @@ export const GeoJSONFeatureList: <O extends Record<string, any> = {}>(
                         obj[id] = JSON.stringify(featureCollection, null, 2) as any;
                         onchange && onchange(obj);
                       },
-                    } as ILayoutForm<any>)
+                    } as FormAttributes)
                   ),
                 };
               }),

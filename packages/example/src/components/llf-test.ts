@@ -1,14 +1,14 @@
 import m from 'mithril';
-import { ILayoutForm, LayoutForm, UIForm } from 'mithril-ui-form';
+import { FormAttributes, LayoutForm, UIForm } from 'mithril-ui-form';
 
 export interface IContext {
   admin: boolean;
 }
 
 /** Relevant context for the UIForm, can be used with show/disabling */
-const context = {
-  admin: true,
-};
+// const context = {
+//   admin: true,
+// };
 
 interface IEditor {
   name: string;
@@ -1928,7 +1928,7 @@ export const LLFView = () => {
         //   state.error ? m('p', m('em.red', state.error)) : undefined,
         // ]),
         // m('.col.s12', m(LayoutForm, { form, obj: result, onchange: print, context, section: 'geo' })),
-        m('.col.s12', m(LayoutForm, { form, obj: result, onchange: print } as ILayoutForm<ILessonLearned>)),
+        m('.col.s12', m(LayoutForm, { form, obj: result, onchange: print } as FormAttributes)),
       ]);
     },
   };

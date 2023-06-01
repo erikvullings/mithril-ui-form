@@ -1,5 +1,5 @@
 import m, { FactoryComponent } from 'mithril';
-import { ILayoutForm, LayoutForm, UIForm } from 'mithril-ui-form';
+import { FormAttributes, LayoutForm, UIForm } from 'mithril-ui-form';
 
 const componentTypeOptions = [
   { id: 'autogenerate', label: 'autogenerate' },
@@ -97,16 +97,16 @@ export const CreateForm: FactoryComponent = () => {
 
   return {
     view: () => {
-      const { editor, form, result, context } = state;
+      const { editor, form, result } = state;
 
       return m('.row', [
         m('.col.s12.m6', [
           m('h3', 'Editor'),
-          m(LayoutForm, { form: editor, obj: form, context: {}, onchange } as ILayoutForm<any>),
+          m(LayoutForm, { form: editor as UIForm<{}>, obj: form as UIForm<EditorFields>, onchange } as FormAttributes),
         ]),
         m('.col.s12.m6', [
           m('h3', 'New form'),
-          m(LayoutForm, { form, obj: result, onchange: print } as ILayoutForm<any>),
+          m(LayoutForm, { form, obj: result, onchange: print } as FormAttributes),
         ]),
       ]);
     },

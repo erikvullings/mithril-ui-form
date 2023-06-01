@@ -5,7 +5,7 @@ export type ComponentType =
   | 'color'
   | 'colour'
   | 'date'
-  | 'date'
+  | 'datetime'
   | 'email'
   | 'base64'
   | 'file'
