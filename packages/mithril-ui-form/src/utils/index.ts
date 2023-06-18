@@ -22,7 +22,7 @@ export const toHourMin = (d: Date) => `${padLeft(d.getHours())}:${padLeft(d.getM
  * @param s: path, e.g. a.b[0].c
  * @see https://stackoverflow.com/a/6491621/319711
  */
-const getPath = <O extends {}>(obj: O, s: string) => {
+export const getPath = <O extends {}>(obj: O, s: string) => {
   s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
   s = s.replace(/^\./, ''); // strip a leading dot
   const a = s.split('.');
@@ -48,7 +48,7 @@ const getPath = <O extends {}>(obj: O, s: string) => {
   return o as any;
 };
 
-const flatten = <T>(arr: T[]) =>
+export const flatten = <T>(arr: T[]) =>
   arr.reduce((acc, cur) => (cur instanceof Array ? [...acc, ...cur] : [...acc, cur]), [] as T[]);
 
 // const isSet = (a: any) =>
@@ -171,7 +171,7 @@ export const canResolvePlaceholders = <O>(str: string, ...objArr: Array<Partial<
  * Supported formatters are: date, time, iso, utc and A:B for booleans.
  * In the latter case, A is returned when true, B otherwise.
  */
-const formatExpression = (
+export const formatExpression = (
   value?: string | number | boolean | Date | Array<string | number>,
   exprType?: 'date' | 'time' | 'iso' | 'utc' | string
 ): string => {
