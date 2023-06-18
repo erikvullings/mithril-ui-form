@@ -11,4 +11,7 @@ export {
   stripSpaces,
   toHourMin,
   resolveExpression,
+  getPath,
+  flatten,
+  formatExpression,
 } from './utils';
