@@ -118,10 +118,22 @@ export const evalExpression = <O>(expression: string | string[], ...objArr: Arra
 };
 
 export const resolveExpression = <O extends {}>(expression: string, objArr: O[]) =>
-  getPath(
-    objArr.filter(Boolean).reduceRight((acc, obj) => ({ ...obj, ...acc })),
-    expression.trim()
-  );
+  objArr
+    .filter(Boolean)
+    .reduce(
+      (p, obj) => p || getPath(obj, expression.trim()),
+      undefined as
+        | string
+        | number
+        | Date
+        | boolean
+        | Array<{ id: string; label?: string; disabled?: boolean; icon?: string; show?: string | string[] }>
+        | undefined
+    );
+// getPath(
+//   objArr.filter(Boolean).reduceRight((acc, obj) => ({ ...obj, ...acc })),
+//   expression.trim()
+// );
 
 const canResolveExpression = <O>(expression: string, objArr: Array<Partial<O> | O[keyof O]>) =>
   typeof resolveExpression(expression, objArr as any) !== 'undefined';

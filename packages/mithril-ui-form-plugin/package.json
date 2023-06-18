@@ -1,6 +1,6 @@
 {
   "name": "mithril-ui-form-plugin",
-  "version": "0.5.1",
+  "version": "0.5.2-next.0",
   "description": "Plugin type definition for Mithril-UI-Form.",
   "types": "dist/index.d.ts",
   "repository": {
@@ -13,6 +13,7 @@
     "start": "tsc -w",
     "dev": "npm start",
     "dry-run": "npm publish --dry-run",
+    "pre-release": "npm run clean && npm run build && npm version prerelease --preid=next && git push --follow-tags && pnpm publish --no-git-checks",
     "patch-release": "npm run clean && npm run build && npm version patch --force -m \"Patch release\" && npm publish && git push --follow-tags",
     "minor-release": "npm run clean && npm run build && npm version minor --force -m \"Minor release\" && npm publish && git push --follow-tags",
     "major-release": "npm run clean && npm run build && npm version major --force -m \"Major release\" && npm publish && git push --follow-tags",
