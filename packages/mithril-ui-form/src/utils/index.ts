@@ -29,13 +29,15 @@ export const getPath = <O extends {}>(obj: O, s: string) => {
   let o = { ...obj };
   for (let i = 0, n = a.length; i < n; ++i) {
     const k = a[i];
-    if (k in o) {
+    if (typeof o === 'object' && k in o) {
       o = (o as Record<string, any>)[k];
+      // a.length > 1 && console.table({ k, o, obj });
     } else if (o instanceof Array) {
       const id = (obj as any)[k] || k;
       const m = /([A-Z]\w+)/.exec(k); // categoryId => match Id, myNameLabel => NameLabel
       const key = (m && m[0][0].toLowerCase() + m[0].substr(1)) || k; // key = id or nameLabel
       const found = o.filter((i) => i[key] === id).shift();
+      // a.length > 1 && console.table({ k, o, obj, id, m, key, found });
       if (found) {
         o = found;
       } else {
@@ -118,22 +120,10 @@ export const evalExpression = <O>(expression: string | string[], ...objArr: Arra
 };
 
 export const resolveExpression = <O extends {}>(expression: string, objArr: O[]) =>
-  objArr
-    .filter(Boolean)
-    .reduce(
-      (p, obj) => p || getPath(obj, expression.trim()),
-      undefined as
-        | string
-        | number
-        | Date
-        | boolean
-        | Array<{ id: string; label?: string; disabled?: boolean; icon?: string; show?: string | string[] }>
-        | undefined
-    );
-// getPath(
-//   objArr.filter(Boolean).reduceRight((acc, obj) => ({ ...obj, ...acc })),
-//   expression.trim()
-// );
+  getPath(
+    objArr.filter(Boolean).reduceRight((acc, obj) => ({ ...obj, ...acc })),
+    expression.trim()
+  );
 
 const canResolveExpression = <O>(expression: string, objArr: Array<Partial<O> | O[keyof O]>) =>
   typeof resolveExpression(expression, objArr as any) !== 'undefined';

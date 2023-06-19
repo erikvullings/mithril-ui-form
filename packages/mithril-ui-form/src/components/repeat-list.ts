@@ -222,7 +222,7 @@ export const RepeatList = <O extends Attributes = {}, K extends keyof O = ''>():
                           form: type,
                           obj: item,
                           i18n,
-                          // context: context instanceof Array ? [obj, ...context] : [obj, context],
+                          context: context instanceof Array ? [obj, ...context] : [obj, context],
                           section,
                           containerId,
                           disabled,
