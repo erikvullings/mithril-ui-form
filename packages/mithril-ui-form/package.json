@@ -43,9 +43,9 @@
     "@types/mithril": "^2.0.12",
     "microbundle": "^0.15.1",
     "rimraf": "^5.0.1",
-    "tslib": "^2.5.2",
-    "typescript": "^5.0.4",
-    "typescript-json-schema": "^0.56.0"
+    "tslib": "^2.6.0",
+    "typescript": "^5.1.6",
+    "typescript-json-schema": "^0.59.0"
   },
   "browserslist": [
     "last 2 version",

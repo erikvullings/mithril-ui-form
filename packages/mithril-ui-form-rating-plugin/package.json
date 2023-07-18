@@ -36,9 +36,9 @@
   "devDependencies": {
     "@types/mithril": "^2.0.12",
     "microbundle": "^0.15.1",
-    "mithril-ui-form-plugin": "workspace:^0.5.1",
+    "mithril-ui-form-plugin": "workspace:*",
     "rimraf": "^5.0.1",
-    "tslib": "^2.5.2",
-    "typescript": "^5.0.4"
+    "tslib": "^2.6.0",
+    "typescript": "^5.1.6"
   }
 }
