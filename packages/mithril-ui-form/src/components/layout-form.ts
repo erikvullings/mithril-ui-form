@@ -33,7 +33,7 @@ const isValid = <O extends Attributes = {}>(item: O, form: UIForm<O>) => {
     );
 };
 
-const guessType = <O = {}>(field: InputField<O>) => {
+const guessType = <O extends Attributes = {}>(field: InputField<O>) => {
   const { autogenerate, value, options } = field;
   return autogenerate
     ? 'none'

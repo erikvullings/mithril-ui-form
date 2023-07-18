@@ -3,7 +3,7 @@ import { ITabItem, TextArea, Tabs, Collapsible } from 'mithril-materialized';
 import { FormAttributes, I18n, InputField } from 'mithril-ui-form-plugin';
 import { LayoutForm } from '.';
 
-export interface IGeoJSONFeatureList<O = {}, K extends keyof O = keyof O> extends Attributes {
+export interface IGeoJSONFeatureList<O extends Attributes = {}, K extends keyof O = keyof O> extends Attributes {
   id?: K;
   /** The input field (or form) that must be rendered repeatedly */
   field: InputField<O>;
