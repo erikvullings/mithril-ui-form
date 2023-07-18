@@ -5,7 +5,7 @@ import { LayoutForm } from './layout-form';
 import { range, stripSpaces, hash, getAllUrlParams, toQueryString } from '../utils';
 import { Modal } from 'materialize-css';
 
-export interface IRepeatList<O extends Record<string, any> = {}> {
+export interface IRepeatList<O extends Attributes = {}> extends Attributes {
   id?: keyof O;
   /** The input field (or form) that must be rendered repeatedly */
   field: InputField<O>;
@@ -34,7 +34,9 @@ export interface IRepeatList<O extends Record<string, any> = {}> {
  * It creates an array of primitives when type is a IFormComponent, and an array of objects when its type
  * is a FormType.
  */
-export const RepeatList = <O extends Attributes = {}, K extends keyof O = ''>(): Component<IRepeatList<O>> => {
+// export const RepeatList = <O extends Attributes = {}, K extends keyof O = ''>(): Component<IRepeatList<O>> => {
+// export const RepeatList = <O extends Attributes, S = {}>() => {
+export const RepeatList = <O extends Attributes>() => {
   const state = {} as {
     editItem?: O;
     curItemIdx?: number;
@@ -279,9 +281,9 @@ export const RepeatList = <O extends Attributes = {}, K extends keyof O = ''>():
                   if (typeof state.curItemIdx !== 'undefined') {
                     items.splice(state.curItemIdx, 1);
                     if (obj instanceof Array) {
-                      obj = [...items] as O[K];
+                      obj = [...items] as O[keyof O];
                     } else {
-                      obj[id as keyof O] = [...items] as O[K];
+                      obj[id as keyof O] = [...items] as O[keyof O];
                     }
                     onchange && onchange(obj);
                   }
@@ -339,5 +341,5 @@ export const RepeatList = <O extends Attributes = {}, K extends keyof O = ''>():
             }),
       ];
     },
-  };
+  } as Component<IRepeatList<O>>;
 };

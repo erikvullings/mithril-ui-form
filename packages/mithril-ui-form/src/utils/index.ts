@@ -113,7 +113,7 @@ const checkExpressions = <O>(expression: string, objArr: O[]) => {
   }, true);
 };
 
-export const evalExpression = <O>(expression: string | string[], ...objArr: Array<Partial<O> | O[keyof O]>) => {
+export const evalExpression = <O = {}>(expression: string | string[], ...objArr: Array<Partial<O> | O[keyof O]>) => {
   const expr = expression instanceof Array ? expression : [expression];
   if (expression.length === 0) return true;
   return expr.some((e) => checkExpressions(e, objArr));

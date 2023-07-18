@@ -2,7 +2,7 @@ import { Attributes } from 'mithril';
 import { I18n } from './i18n';
 import { InputField } from './input-field';
 
-export type FormAttributes<O extends Attributes = {}> = {
+export type FormAttributes<O extends Attributes = {}> = Attributes & {
   /** The form to display */
   form: UIForm<O>;
   /** The resulting object */

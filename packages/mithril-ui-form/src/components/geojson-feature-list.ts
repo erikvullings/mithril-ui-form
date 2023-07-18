@@ -1,9 +1,9 @@
-import m, { Attributes, Component, Vnode } from 'mithril';
+import m, { Attributes, Component } from 'mithril';
 import { ITabItem, TextArea, Tabs, Collapsible } from 'mithril-materialized';
 import { FormAttributes, I18n, InputField } from 'mithril-ui-form-plugin';
 import { LayoutForm } from '.';
 
-export interface IGeoJSONFeatureList<O extends Attributes = {}, K extends keyof O = keyof O> {
+export interface IGeoJSONFeatureList<O = {}, K extends keyof O = keyof O> extends Attributes {
   id?: K;
   /** The input field (or form) that must be rendered repeatedly */
   field: InputField<O>;
@@ -30,9 +30,7 @@ export interface IGeoJSONFeatureList<O extends Attributes = {}, K extends keyof 
  * is a FormType.
  */
 
-export const GeoJSONFeatureList: <O extends Attributes = {}>(
-  vnode: Vnode<IGeoJSONFeatureList<O>>
-) => Component<IGeoJSONFeatureList<O>> = () => {
+export const GeoJSONFeatureList = <O extends Attributes = {}>() => {
   const state = {} as {
     dom: HTMLUListElement;
     raw: string;
@@ -135,5 +133,5 @@ export const GeoJSONFeatureList: <O extends Attributes = {}>(
       tabs.push(rawTab);
       return m(Tabs, { tabs, tabWidth: 'fill' });
     },
-  };
+  } as Component<IGeoJSONFeatureList<O>>;
 };

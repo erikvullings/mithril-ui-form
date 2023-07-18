@@ -1,7 +1,7 @@
-import m, { Attributes, Component, FactoryComponent } from 'mithril';
+import m, { Attributes, Component } from 'mithril';
 import { PluginType, UIForm, InputField, FormAttributes } from 'mithril-ui-form-plugin';
 import { Vnode } from 'mithril';
-import { CreateFormField } from './form-field';
+import { CreateFormField as FormFieldFactory, IFormField } from './form-field';
 import { IRepeatList, RepeatList } from './repeat-list';
 import { GeoJSONFeatureList, IGeoJSONFeatureList } from './geojson-feature-list';
 import { evalExpression } from '../utils';
@@ -17,7 +17,7 @@ export const registerPlugin = (name: string, plugin: PluginType, readonlyPlugin?
   if (readonlyPlugin) readonlyPlugins[name] = readonlyPlugin;
 };
 
-const isValid = <O extends Attributes>(item: O, form: UIForm<O>) => {
+const isValid = <O extends Attributes = {}>(item: O, form: UIForm<O>) => {
   return form
     .filter((f) => f.required && typeof f.id !== undefined)
     .reduce(
@@ -33,7 +33,7 @@ const isValid = <O extends Attributes>(item: O, form: UIForm<O>) => {
     );
 };
 
-const guessType = <O extends Attributes>(field: InputField<O>) => {
+const guessType = <O = {}>(field: InputField<O>) => {
   const { autogenerate, value, options } = field;
   return autogenerate
     ? 'none'
@@ -50,38 +50,22 @@ const guessType = <O extends Attributes>(field: InputField<O>) => {
     : 'none';
 };
 
-const formField = CreateFormField(plugins, readonlyPlugins);
+const FormField: { <O extends Attributes>(): Component<IFormField<O>> } = FormFieldFactory(plugins, readonlyPlugins);
 
-const sectionFilter = (section?: string) => {
-  if (!section) {
-    return (_: InputField) => true;
-  }
-  let state = false;
-  return ({ type, id }: InputField): boolean => {
-    if (type === 'section') {
-      state = id === section;
-      return false; // Return false the first time, so we don't output the section too divider
+export const LayoutForm = <O extends Partial<{}>>(): FormComponent<O> => {
+  const sectionFilter = (section?: string) => {
+    if (!section) {
+      return (_: InputField<O>) => true;
     }
-    return state;
+    let state = false;
+    return ({ type, id }: InputField<O>): boolean => {
+      if (type === 'section') {
+        state = id === section;
+        return false; // Return false the first time, so we don't output the section divider too
+      }
+      return state;
+    };
   };
-};
-
-export const LayoutForm = <O extends Attributes>(): FormComponent => {
-  // const formField = formFieldFactory(plugins, readonlyPlugins).createFormField();
-
-  // const sectionFilter = (section?: string) => {
-  //   if (!section) {
-  //     return (_: InputField<O>) => true;
-  //   }
-  //   let state = false;
-  //   return ({ type, id }: InputField<O>): boolean => {
-  //     if (type === 'section') {
-  //       state = id === section;
-  //       return false; // Return false the first time, so we don't output the section too divider
-  //     }
-  //     return state;
-  //   };
-  // };
 
   return {
     view: ({ attrs: { i18n, form, obj, onchange: onChange, disabled, readonly, context, section } }) => {
@@ -95,7 +79,8 @@ export const LayoutForm = <O extends Attributes>(): FormComponent => {
           return [
             ...acc,
             typeof field.repeat === 'undefined' || (field.repeat as Boolean) === false
-              ? m(formField as FactoryComponent<any>, {
+              ? m(FormField, {
+                  // <O extends m.Attributes>() => m.Component<IGeoJSONFeatureList<O, keyof O>, {}>
                   i18n,
                   field,
                   obj,
@@ -105,7 +90,7 @@ export const LayoutForm = <O extends Attributes>(): FormComponent => {
                   context,
                   section,
                   containerId: 'body',
-                })
+                } as IFormField<O>)
               : field.repeat === 'geojson'
               ? m(GeoJSONFeatureList, {
                   obj,
@@ -116,7 +101,7 @@ export const LayoutForm = <O extends Attributes>(): FormComponent => {
                   containerId: 'body',
                   disabled,
                   readonly,
-                } as IGeoJSONFeatureList)
+                } as IGeoJSONFeatureList<O>)
               : m(RepeatList, {
                   obj,
                   field,
@@ -126,7 +111,7 @@ export const LayoutForm = <O extends Attributes>(): FormComponent => {
                   containerId: 'body',
                   disabled,
                   readonly,
-                } as IRepeatList),
+                } as IRepeatList<O>),
           ];
         }, [] as Array<Vnode<any, any>>);
     },

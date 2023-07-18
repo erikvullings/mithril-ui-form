@@ -124,7 +124,7 @@ const unwrapComponent = <O extends Record<string, any> = {}>(
   return result;
 };
 
-interface IFormField<O extends Attributes = {}> {
+export interface IFormField<O extends Attributes = {}> extends Attributes {
   /** The input field (or form) that must be rendered repeatedly */
   field: InputField<O>;
   /** The resulting object */
@@ -879,5 +879,5 @@ export const CreateFormField =
           }
         }
       },
-    };
+    } as Component<IFormField<O>>;
   };

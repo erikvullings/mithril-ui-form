@@ -1928,7 +1928,14 @@ export const LLFView = () => {
         //   state.error ? m('p', m('em.red', state.error)) : undefined,
         // ]),
         // m('.col.s12', m(LayoutForm, { form, obj: result, onchange: print, context, section: 'geo' })),
-        m('.col.s12', m(LayoutForm, { form, obj: result, onchange: print } as FormAttributes)),
+        m(
+          '.col.s12',
+          m(LayoutForm, {
+            form,
+            obj: result,
+            onchange: print,
+          } as FormAttributes<ILessonLearned>)
+        ),
       ]);
     },
   };

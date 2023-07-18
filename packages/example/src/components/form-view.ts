@@ -364,7 +364,7 @@ ${result.sources ? result.sources.map((s, i) => `${i + 1}. [${s.title}](${s.url}
                 agree: 'Ja',
                 disagree: 'Nee',
               } as I18n,
-            } as FormAttributes)
+            } as FormAttributes<ILessonLearned>)
           ),
         ]),
         m('.col.s12', [
