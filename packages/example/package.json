@@ -26,29 +26,29 @@
   },
   "homepage": "https://github.com/erikvullings/mithril-ui-form#readme",
   "dependencies": {
-    "material-icons": "^1.13.7",
+    "material-icons": "^1.13.9",
     "materialize-css": "^1.0.0",
     "mithril": "^2.2.2",
     "mithril-materialized": "^1.0.1",
     "mithril-ui-form": "workspace:^1.7.1",
-    "mithril-ui-form-leaflet-plugin": "workspace:^0.5.1",
-    "mithril-ui-form-rating-plugin": "workspace:^0.6.1"
+    "mithril-ui-form-leaflet-plugin": "workspace:*",
+    "mithril-ui-form-rating-plugin": "workspace:*"
   },
   "devDependencies": {
     "@types/materialize-css": "^1.0.11",
     "@types/mithril": "^2.0.12",
-    "css-loader": "^6.7.4",
-    "css-minimizer-webpack-plugin": "^5.0.0",
+    "css-loader": "^6.8.1",
+    "css-minimizer-webpack-plugin": "^5.0.1",
     "dotenv-webpack": "^8.0.1",
-    "html-webpack-plugin": "^5.5.1",
+    "html-webpack-plugin": "^5.5.3",
     "html-webpack-tags-plugin": "^3.0.2",
     "mini-css-extract-plugin": "^2.7.6",
     "rimraf": "^5.0.1",
     "style-loader": "^3.3.3",
-    "ts-loader": "^9.4.3",
+    "ts-loader": "^9.4.4",
     "typescript": "next",
-    "webpack": "^5.84.1",
-    "webpack-cli": "^5.1.1",
-    "webpack-dev-server": "^4.15.0"
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   }
 }
