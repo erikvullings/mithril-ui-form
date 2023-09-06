@@ -32,6 +32,7 @@ interface ILessonLearned {
   edited: Date;
   editors: IEditor[];
   sources?: ISource[];
+  incidentType?: string[];
 }
 
 const countries = [
@@ -1908,7 +1909,7 @@ export const LLFView = () => {
   state.form = info;
 
   state.result = {} as ILessonLearned;
-
+  // state.result.incidentType = ['flash', 'river', 'drought'];
   return {
     view: () => {
       const { result, form } = state;
