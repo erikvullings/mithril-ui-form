@@ -80,7 +80,6 @@ export const LayoutForm = <O extends Partial<{}>>(): FormComponent<O> => {
             ...acc,
             typeof field.repeat === 'undefined' || (field.repeat as Boolean) === false
               ? m(FormField, {
-                  // <O extends m.Attributes>() => m.Component<IGeoJSONFeatureList<O, keyof O>, {}>
                   i18n,
                   field,
                   obj,

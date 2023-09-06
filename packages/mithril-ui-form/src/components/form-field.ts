@@ -60,7 +60,7 @@ const unwrapComponent = <O extends Record<string, any> = {}>(
     dateFormat,
     twelveHour,
   } = field;
-  const result = { id: `${String(id)}-${uniqueId()}`, label } as Record<string, any>;
+  const result = { id: `mui_${String(id)}-${uniqueId()}`, label } as Record<string, any>;
   if (typeof label === 'undefined' && id) {
     result.label = capitalizeFirstLetter(String(id));
   }
@@ -145,10 +145,6 @@ export interface IFormField<O extends Attributes = {}> extends Attributes {
   i18n?: I18n;
 }
 
-// export const formFieldFactory = <O extends Attributes = {}>(
-//   plugins: Record<string, PluginType> = {},
-//   readonlyPlugins: Record<string, PluginType> = {}
-// ) => {
 export const CreateFormField =
   (plugins: Record<string, PluginType> = {}, readonlyPlugins: Record<string, PluginType> = {}) =>
   <O extends Attributes = {}>(): Component<IFormField<O>> => {
@@ -690,13 +686,13 @@ export const CreateFormField =
               ];
             }
             case 'select': {
-              const checkedId = iv as Array<string | number>;
+              const initialValue = iv as Array<string | number>;
               return m(Select<any>, {
                 placeholder: props.multiple ? i18n.pickOneOrMore || 'Pick one or more' : i18n.pickOne || 'Pick one',
                 ...props,
                 disabled: props.disabled || !options || options.length === 0,
                 options,
-                checkedId,
+                initialValue,
                 onchange: (checkedIds: string[]) =>
                   onchange(
                     checkedIds.length === 1 && !props.multiple
