@@ -76,7 +76,7 @@ export const CreateForm: FactoryComponent = () => {
         ],
       },
     ] as UIForm<EditorFields>,
-    form: [],
+    form: { properties: [] },
     result: {},
     context: {},
   } as {
@@ -84,7 +84,7 @@ export const CreateForm: FactoryComponent = () => {
     /** Layout form for creating the editor */
     editor: UIForm<EditorFields>;
     /** Generated form for creating another layout from */
-    form: UIForm<any>;
+    form: { properties: UIForm<any> };
     result: Record<string, any>;
     context: Record<string, any>;
   };
@@ -102,11 +102,11 @@ export const CreateForm: FactoryComponent = () => {
       return m('.row', [
         m('.col.s12.m6', [
           m('h3', 'Editor'),
-          m(LayoutForm, { form: editor as UIForm<{}>, obj: form as UIForm<EditorFields>, onchange } as FormAttributes),
+          m(LayoutForm, { form: editor, obj: form, onchange } as FormAttributes<EditorFields>),
         ]),
         m('.col.s12.m6', [
           m('h3', 'New form'),
-          m(LayoutForm, { form, obj: result, onchange: print } as FormAttributes),
+          m(LayoutForm, { form: form.properties, obj: result, onchange: print } as FormAttributes<any>),
         ]),
       ]);
     },
