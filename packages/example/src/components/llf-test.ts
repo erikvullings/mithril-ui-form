@@ -935,6 +935,8 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
     label: 'Select all the incident types that apply:',
     checkboxClass: 'col s12 m6 l4',
     type: 'options',
+    // type: 'select',
+    // multiple: true,
     options: [
       {
         id: 'earthquake',
