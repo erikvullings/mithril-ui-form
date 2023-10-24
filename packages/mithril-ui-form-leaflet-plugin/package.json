@@ -37,14 +37,14 @@
     "mithril-ui-form-plugin": "workspace:*"
   },
   "devDependencies": {
-    "@types/geojson": "^7946.0.10",
-    "@types/leaflet": "^1.9.3",
-    "@types/leaflet-draw": "^1.0.7",
-    "@types/mithril": "^2.0.12",
-    "@types/node": "^20.4.4",
+    "@types/geojson": "^7946.0.12",
+    "@types/leaflet": "^1.9.7",
+    "@types/leaflet-draw": "^1.0.9",
+    "@types/mithril": "^2.2.3",
+    "@types/node": "^20.8.8",
     "microbundle": "^0.15.1",
-    "rimraf": "^5.0.1",
-    "tslib": "^2.6.1",
-    "typescript": "^5.1.6"
+    "rimraf": "^5.0.5",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2"
   }
 }
