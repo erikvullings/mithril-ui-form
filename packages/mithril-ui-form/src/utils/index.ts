@@ -13,7 +13,7 @@ export const isComponentType = (x?: ComponentType | UIForm): x is ComponentType 
 export const padLeft = (str: string | number, length = 2, padding = '0'): string =>
   str.toString().length >= length ? str.toString() : padLeft(padding + str, length, padding);
 
-export const toHourMin = (d: Date) => `${padLeft(d.getHours())}:${padLeft(d.getMinutes())}`;
+export const toHourMin = (d?: Date) => (d ? `${padLeft(d.getHours())}:${padLeft(d.getMinutes())}` : '00:00');
 
 /**
  * Retreive a value from an object using a dynamic path.
