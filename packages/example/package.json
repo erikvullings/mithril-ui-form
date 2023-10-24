@@ -30,7 +30,7 @@
     "materialize-css": "^1.0.0",
     "mithril": "^2.2.2",
     "mithril-materialized": "^1.1.1",
-    "mithril-ui-form": "workspace:^1.7.1",
+    "mithril-ui-form": "workspace:*",
     "mithril-ui-form-leaflet-plugin": "workspace:*",
     "mithril-ui-form-rating-plugin": "workspace:*"
   },
