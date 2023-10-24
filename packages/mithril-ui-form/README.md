@@ -40,7 +40,15 @@ const form = [
 m(LayoutForm, {
   form,
   obj,
-}),
+  onchange: () => { },
+  i18n: {
+    deleteItem: 'Delete item text',
+    agree: 'Yes',
+    disagree: 'No',
+    locales: ['en-UK'],
+    dateTimeOptions: { day: '2-digit', month: 'long', weekday: 'long', second: undefined },
+  } as I18n,
+} as FormAttributes<T>),
 ```
 
 It would render `The current time is 7:28:27 AM and checked is yes`.
@@ -226,6 +234,4 @@ The `type: 'map'` has been removed, and you now need to import it explicitly. Se
 
 ## TODO
 
-- When repeat = true, min: 2, max: 5 should limit the number of repeats to 5 and require a minimum of 2.
-- Add pre-sets, overriding existing values.
 - Use this tool to create your own form schemas. E.g. a two-column layout, where you define your schema in the left column, and see the results in the right column.

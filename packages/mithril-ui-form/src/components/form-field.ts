@@ -321,8 +321,22 @@ export const CreateFormField =
           }
           switch (type) {
             case 'time': {
-              const date = (iv as Date) || new Date();
-              const initialValue = toHourMin(date);
+              const d = iv as Date | number | string | undefined;
+              const dto: Intl.DateTimeFormatOptions | undefined = i18n.dateTimeOptions
+                ? {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: undefined,
+                    ...i18n.dateTimeOptions,
+                    weekday: undefined,
+                    month: undefined,
+                    day: undefined,
+                    year: undefined,
+                  }
+                : undefined;
+              const date =
+                typeof d === 'number' || typeof d === 'string' || d instanceof Date ? new Date(d) : undefined;
+              const initialValue = date ? date.toLocaleTimeString(i18n.locales, dto) : '';
               return m(ReadonlyComponent, {
                 props,
                 label: props.label,
@@ -330,11 +344,27 @@ export const CreateFormField =
               });
             }
             case 'date': {
-              const iv3 = iv as Date | undefined;
-              const initialValue =
-                typeof iv3 === 'number' || typeof iv3 === 'string' || iv3 instanceof Date
-                  ? new Date(iv3).toLocaleDateString()
-                  : '';
+              const d = iv as Date | number | string | undefined;
+              const dto: Intl.DateTimeFormatOptions | undefined = i18n.dateTimeOptions
+                ? { ...i18n.dateTimeOptions, hour: undefined, hour12: undefined, minute: undefined, second: undefined }
+                : undefined;
+              const date =
+                typeof d === 'number' || typeof d === 'string' || d instanceof Date ? new Date(d) : undefined;
+              const initialValue = date ? date.toLocaleDateString(i18n.locales, dto) : '';
+              return m(ReadonlyComponent, {
+                props,
+                label: props.label,
+                initialValue,
+              });
+            }
+            case 'datetime': {
+              const d = iv as Date | number | string | undefined;
+              const dto: Intl.DateTimeFormatOptions | undefined = i18n.dateTimeOptions
+                ? { hour: '2-digit', minute: '2-digit', month: 'numeric', day: 'numeric', ...i18n.dateTimeOptions }
+                : undefined;
+              const date =
+                typeof d === 'number' || typeof d === 'string' || d instanceof Date ? new Date(d) : undefined;
+              const initialValue = date ? date.toLocaleTimeString(i18n.locales, dto) : '';
               return m(ReadonlyComponent, {
                 props,
                 label: props.label,
@@ -557,7 +587,7 @@ export const CreateFormField =
                 m('.row', [
                   m(
                     dateTimeSeconds ? '.col.s6' : '.col.s8',
-                    { style: 'padding-right: 0' },
+                    { style: 'padding: 0' },
                     m(DatePicker, {
                       ...params,
                       label,

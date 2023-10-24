@@ -194,6 +194,12 @@ const source = [
 // ] as UIForm<any>;
 
 const info2 = [
+  // { id: 'datetime', label: 'Date and time', type: 'datetime', value: Date.now() },
+  // { id: 'date', label: 'Date', type: 'date', value: Date.now() },
+  // { id: 'time', label: 'Time', type: 'time', value: Date.now() },
+  // { id: 'datetime', label: 'Date and time', type: 'datetime', value: Date.now(), disabled: true },
+  // { id: 'date', label: 'Date', type: 'date', value: Date.now(), disabled: true },
+  // { id: 'time', label: 'Time', type: 'time', value: Date.now(), disabled: true },
   {
     id: 'hasIndDiff',
     label: 'Has individual differences?',
@@ -363,6 +369,8 @@ ${result.sources ? result.sources.map((s, i) => `${i + 1}. [${s.title}](${s.url}
                 deleteItem: 'Verwijder het item',
                 agree: 'Ja',
                 disagree: 'Nee',
+                locales: ['nl-NL'],
+                dateTimeOptions: { day: '2-digit', month: 'long', weekday: 'long', second: undefined },
               } as I18n,
             } as FormAttributes<ILessonLearned>)
           ),

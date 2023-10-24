@@ -24,4 +24,6 @@ export interface I18n {
   view?: string;
   /** Locales */
   locales?: string[];
+  /** Date Time format options */
+  dateTimeOptions?: Intl.DateTimeFormatOptions;
 }
