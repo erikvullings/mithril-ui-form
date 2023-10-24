@@ -22,4 +22,6 @@ export interface I18n {
   raw?: string;
   /** View tab */
   view?: string;
+  /** Locales */
+  locales?: string[];
 }
