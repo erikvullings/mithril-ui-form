@@ -38,13 +38,13 @@
     "slimdown-js": "^0.7.2"
   },
   "devDependencies": {
-    "@types/geojson": "^7946.0.12",
-    "@types/materialize-css": "^1.0.13",
-    "@types/mithril": "^2.2.3",
+    "@types/geojson": "^7946.0.13",
+    "@types/materialize-css": "^1.0.14",
+    "@types/mithril": "^2.2.6",
     "microbundle": "^0.15.1",
     "rimraf": "^5.0.5",
     "tslib": "^2.6.2",
-    "typescript": "^5.2.2",
+    "typescript": "^5.3.3",
     "typescript-json-schema": "^0.62.0"
   },
   "browserslist": [
