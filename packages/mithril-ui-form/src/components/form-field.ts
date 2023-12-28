@@ -145,7 +145,7 @@ export interface IFormField<O extends Attributes = {}> extends Attributes {
   i18n?: I18n;
 }
 
-export const CreateFormField =
+export const FormFieldFactory =
   (plugins: Record<string, PluginType> = {}, readonlyPlugins: Record<string, PluginType> = {}) =>
   <O extends Attributes = {}>(): Component<IFormField<O>> => {
     const state = { key: Date.now() } as { key: number };
@@ -185,7 +185,7 @@ export const CreateFormField =
           (label && !canResolvePlaceholders(label, obj, context)) ||
           (description && !canResolvePlaceholders(description, obj, context))
         ) {
-          // console.table({ show, obj, context });
+          console.table({ show, obj, context });
           return undefined;
         }
 

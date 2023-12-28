@@ -1,7 +1,7 @@
 import m, { Attributes, Component } from 'mithril';
 import { PluginType, UIForm, InputField, FormAttributes } from 'mithril-ui-form-plugin';
 import { Vnode } from 'mithril';
-import { CreateFormField as FormFieldFactory, IFormField } from './form-field';
+import { FormFieldFactory, IFormField } from './form-field';
 import { IRepeatList, RepeatList } from './repeat-list';
 import { GeoJSONFeatureList, IGeoJSONFeatureList } from './geojson-feature-list';
 import { evalExpression } from '../utils';
