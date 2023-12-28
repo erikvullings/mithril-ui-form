@@ -146,7 +146,7 @@ export const RepeatList = <O extends Attributes>() => {
       const maxItemsReached = max && items.length >= max ? true : false;
       const canDeleteItems = disabled ? false : !min || items.length > min ? true : false;
 
-      const fragment = route.split('?')[0];
+      const fragment = route ? route.split('?')[0] : '';
       const params = getAllUrlParams(route);
 
       return [
