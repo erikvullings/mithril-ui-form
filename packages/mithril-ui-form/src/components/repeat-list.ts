@@ -200,44 +200,52 @@ export const RepeatList = <O extends Attributes>() => {
               items
                 .sort(compareFn)
                 .filter(delimitter)
-                .map((item, i) => [
-                  canDeleteItems && [
-                    m(FlatButton, {
-                      type: 'button',
-                      iconName: 'clear',
-                      iconClass: 'white black-text',
-                      className: 'row mui-delete-item btn-small right',
-                      style: 'padding: 0; margin-top: -10px; margin-right: -25px',
-                      disabled,
-                      readonly,
-                      onclick: () => {
-                        state.curItemIdx = pageSize ? (curPage - 1) * pageSize + i : i;
-                      },
-                    }),
-                    (!pageSize || pageSize > 1) &&
-                      m('span.mui-show-item-number left', `[${(pageSize ? (curPage - 1) * pageSize + i : i) + 1}]`),
-                  ],
-                  [
-                    m(
-                      '.row.repeat-item',
-                      { className: repeatItemClass, key: page + hash(item), style: 'padding: 0 30px' },
-                      [
-                        type &&
-                          m(LayoutForm, {
-                            form: type,
-                            obj: item,
-                            i18n,
-                            context: context instanceof Array ? [obj, ...context] : [obj, context],
-                            section,
-                            containerId,
-                            disabled,
-                            readonly,
-                            onchange: () => onchange && onchange(obj),
-                          } as FormAttributes),
-                      ]
-                    ),
-                  ],
-                ]),
+                .map((item, i) =>
+                  m('.mui-repeat-item', { style: 'display: flex;' }, [
+                    canDeleteItems && [
+                      (!pageSize || pageSize > 1) &&
+                        m(
+                          'span.mui-show-item-number left',
+                          { style: 'flex: 0 0 auto;' },
+                          `[${(pageSize ? (curPage - 1) * pageSize + i : i) + 1}]`
+                        ),
+                    ],
+                    [
+                      m(
+                        '.row.repeat-item',
+                        { className: repeatItemClass, key: page + hash(item), style: 'flex: 1; padding: 0 15px' },
+                        [
+                          type &&
+                            m(LayoutForm, {
+                              form: type,
+                              obj: item,
+                              i18n,
+                              context: context instanceof Array ? [obj, ...context] : [obj, context],
+                              section,
+                              containerId,
+                              disabled,
+                              readonly,
+                              onchange: () => onchange && onchange(obj),
+                            } as FormAttributes),
+                        ]
+                      ),
+                    ],
+                    canDeleteItems && [
+                      m(FlatButton, {
+                        type: 'button',
+                        iconName: 'clear',
+                        iconClass: 'white black-text',
+                        className: 'row mui-delete-item btn-small',
+                        style: 'flex: 0 0 auto;',
+                        disabled,
+                        readonly,
+                        onclick: () => {
+                          state.curItemIdx = pageSize ? (curPage - 1) * pageSize + i : i;
+                        },
+                      }),
+                    ],
+                  ])
+                ),
             !(disabled || maxItemsReached || readonly || !items || items.length === 0 || pageSize === 1) &&
               m(RoundIconButton, {
                 type: 'button',
