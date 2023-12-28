@@ -67,7 +67,6 @@ const checkExpression = <O>(expression: string, obj: O) => {
   if (match) {
     const [fullMatch, path, operand, matchValue] = match;
     const v = getPath(obj, path.trim());
-    // const v = typeof resolved === 'boolean' ? (resolved ? 'true' : 'false') : resolved;
     if (typeof v === 'undefined' || (typeof v === 'string' && v.length === 0)) {
       return false;
     } else if (operand && matchValue) {
@@ -80,6 +79,8 @@ const checkExpression = <O>(expression: string, obj: O) => {
         : +matchValue;
       switch (operand) {
         case '=':
+        case '==':
+        case '===':
           return v instanceof Array ? v.indexOf(val) >= 0 : v === val;
         case '<=':
           return v <= val;
@@ -100,10 +101,8 @@ const checkExpression = <O>(expression: string, obj: O) => {
   return true;
 };
 
-const checkExpressions = <O>(expression: string, objArr: O[]) => {
+const checkExpressions = <O>(expression: string, flattened: O[]) => {
   const ands = expression.split('&');
-  // console.log(`ANDS: ${ands}`);
-  const flattened = flatten(objArr);
   return ands.reduce((acc, expr) => {
     const invert = invertExpression.test(expr);
     // console.log(`INVERT: ${invert}`);
@@ -113,10 +112,13 @@ const checkExpressions = <O>(expression: string, objArr: O[]) => {
   }, true);
 };
 
+/** Check if we are looking for a strict equal, e.g. == or ===, or if no comparison is needed and we just want the value to be defined. */
+const strictEqualOrNoComparison = /===?|[^<>=]/i;
+
 export const evalExpression = <O = {}>(expression: string | string[], ...objArr: Array<Partial<O> | O[keyof O]>) => {
   const expr = expression instanceof Array ? expression : [expression];
   if (expression.length === 0) return true;
-  return expr.some((e) => checkExpressions(e, objArr));
+  return expr.some((e) => checkExpressions(e, strictEqualOrNoComparison.test(e) ? [objArr[0]] : flatten(objArr)));
 };
 
 export const resolveExpression = <O extends {}>(expression: string, objArr: O[]) =>
