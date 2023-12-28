@@ -300,6 +300,12 @@ export const FormView = () => {
         region: 'eu',
         country: 'NL',
       },
+      {
+        name: 'John Doe',
+        role: 'Unknown guy, a.k.a. The Dude',
+        region: 'eu',
+        country: 'BE',
+      },
     ],
     area: {
       type: 'FeatureCollection',

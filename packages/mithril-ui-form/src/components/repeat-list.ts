@@ -202,7 +202,7 @@ export const RepeatList = <O extends Attributes>() => {
                 .filter(delimitter)
                 .map((item, i) => [
                   canDeleteItems && [
-                    m(RoundIconButton, {
+                    m(FlatButton, {
                       type: 'button',
                       iconName: 'clear',
                       iconClass: 'white black-text',
@@ -215,27 +215,32 @@ export const RepeatList = <O extends Attributes>() => {
                       },
                     }),
                     (!pageSize || pageSize > 1) &&
-                      m('span.mui-show-item-number', `[${(pageSize ? (curPage - 1) * pageSize + i : i) + 1}]`),
+                      m('span.mui-show-item-number left', `[${(pageSize ? (curPage - 1) * pageSize + i : i) + 1}]`),
                   ],
                   [
-                    m('.row.repeat-item', { className: repeatItemClass, key: page + hash(item) }, [
-                      type &&
-                        m(LayoutForm, {
-                          form: type,
-                          obj: item,
-                          i18n,
-                          context: context instanceof Array ? [obj, ...context] : [obj, context],
-                          section,
-                          containerId,
-                          disabled,
-                          readonly,
-                          onchange: () => onchange && onchange(obj),
-                        } as FormAttributes),
-                    ]),
+                    m(
+                      '.row.repeat-item',
+                      { className: repeatItemClass, key: page + hash(item), style: 'padding: 0 30px' },
+                      [
+                        type &&
+                          m(LayoutForm, {
+                            form: type,
+                            obj: item,
+                            i18n,
+                            context: context instanceof Array ? [obj, ...context] : [obj, context],
+                            section,
+                            containerId,
+                            disabled,
+                            readonly,
+                            onchange: () => onchange && onchange(obj),
+                          } as FormAttributes),
+                      ]
+                    ),
                   ],
                 ]),
             !(disabled || maxItemsReached || readonly || !items || items.length === 0 || pageSize === 1) &&
               m(RoundIconButton, {
+                type: 'button',
                 iconName: 'add',
                 iconClass: 'white black-text',
                 className: 'row mui-add-new-item btn-small right',
