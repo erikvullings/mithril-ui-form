@@ -148,7 +148,7 @@ export const RepeatList = <O extends Attributes>() => {
 
       const fragment = route ? route.split('?')[0] : '';
       const params = getAllUrlParams(route);
-      const numberColWidth = 30 + 10 * Math.ceil(Math.log10(items.length));
+      const numberColWidth = 30 + 10 * Math.floor(Math.log10(items.length));
 
       return [
         [
