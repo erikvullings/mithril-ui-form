@@ -144,10 +144,11 @@ export const RepeatList = <O extends Attributes>() => {
       const route = m.route.get();
       const maxPages = pageSize ? Math.ceil(items.length / pageSize) : 0;
       const maxItemsReached = max && items.length >= max ? true : false;
-      const canDeleteItems = disabled ? false : !min || items.length > min ? true : false;
+      const canDeleteItems = disabled || readonly ? false : !min || items.length > min ? true : false;
 
       const fragment = route ? route.split('?')[0] : '';
       const params = getAllUrlParams(route);
+      const numberColWidth = 30 + 10 * Math.ceil(Math.log10(items.length));
 
       return [
         [
@@ -156,7 +157,7 @@ export const RepeatList = <O extends Attributes>() => {
               '.row.mui-repeat-list-controls',
               m('.col.s12', [
                 m(FlatButton, {
-                  iconName: disabled || maxItemsReached ? '' : 'add',
+                  iconName: disabled || readonly || maxItemsReached ? '' : 'add',
                   iconClass: 'right',
                   label,
                   onclick: () => {
@@ -206,7 +207,7 @@ export const RepeatList = <O extends Attributes>() => {
                       (!pageSize || pageSize > 1) &&
                         m(
                           'span.mui-show-item-number left',
-                          { style: 'flex: 0 0 auto;' },
+                          { style: `flex: 0 0 ${numberColWidth}px;` },
                           `[${(pageSize ? (curPage - 1) * pageSize + i : i) + 1}]`
                         ),
                     ],
@@ -231,7 +232,7 @@ export const RepeatList = <O extends Attributes>() => {
                         type: 'button',
                         iconName: 'clear',
                         className: 'row mui-delete-item btn-small',
-                        style: 'flex: 0 0 auto;',
+                        style: 'flex: 0 0 48px;',
                         disabled,
                         readonly,
                         onclick: () => {
