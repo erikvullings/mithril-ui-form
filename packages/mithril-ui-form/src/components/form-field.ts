@@ -371,6 +371,7 @@ export const FormFieldFactory =
                 initialValue,
               });
             }
+            case 'switch':
             case 'checkbox': {
               const checked = iv as boolean;
               const initialValue = checked ? '✔' : '✘';
