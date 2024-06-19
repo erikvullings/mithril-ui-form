@@ -1,8 +1,8 @@
 import m, { Attributes, Component } from 'mithril';
-import { FlatButton, uniqueId, ModalPanel, Pagination, RoundIconButton, TextInput } from 'mithril-materialized';
+import { FlatButton, ModalPanel, Pagination, RoundIconButton, TextInput } from 'mithril-materialized';
 import { FormAttributes, I18n, InputField } from 'mithril-ui-form-plugin';
 import { LayoutForm } from './layout-form';
-import { range, stripSpaces, hash, getAllUrlParams, toQueryString } from '../utils';
+import { range, stripSpaces, hash, getAllUrlParams, toQueryString, getQueryParamById } from '../utils';
 import { Modal } from 'materialize-css';
 
 export interface IRepeatList<O extends Attributes = {}> extends Attributes {
@@ -48,7 +48,7 @@ export const RepeatList = <O extends Attributes>() => {
     createLabel: string;
     /** When dealing with a large list, you may add a property filter */
     filterValue?: string;
-    onNewItem?: (obj: O, id?: keyof O) => O[keyof O];
+    onNewItem?: (obj: O, id?: keyof O, index?: number) => Partial<O[keyof O]>;
   };
 
   const getItems = (obj: O, id: keyof O): Array<any> => {
@@ -63,7 +63,8 @@ export const RepeatList = <O extends Attributes>() => {
   };
 
   const addEmptyItem = (obj: O, id: keyof O) => {
-    const newItem = state.onNewItem ? state.onNewItem(obj, id) : ({} as O[keyof O]);
+    const index = obj instanceof Array ? obj.length : obj.hasOwnProperty(id) ? obj[id].length : 0;
+    const newItem = state.onNewItem ? state.onNewItem(obj, id, index) : ({} as O[keyof O]);
     if (obj instanceof Array) {
       obj.push(newItem);
     } else {
@@ -88,6 +89,24 @@ export const RepeatList = <O extends Attributes>() => {
   };
 
   let compareFn: (a: O, b: O) => number;
+
+  const handleDragStart = (event: DragEvent, index: number) => {
+    event.dataTransfer?.setData('text/plain', index.toString());
+  };
+
+  const handleDrop = (event: DragEvent, index: number, obj: O, id: keyof O, onchange?: (obj: O) => void) => {
+    const draggedIndex = parseInt(event.dataTransfer?.getData('text') || '0', 10);
+    const newItems: any = [...obj[id]];
+    const [movedItem] = newItems.splice(draggedIndex, 1);
+    newItems.splice(index, 0, movedItem);
+    obj[id] = newItems;
+    onchange && onchange(obj);
+    event.preventDefault();
+  };
+
+  const handleDragOver = (event: DragEvent) => {
+    event.preventDefault();
+  };
 
   return {
     oninit: ({
@@ -115,7 +134,7 @@ export const RepeatList = <O extends Attributes>() => {
         onchange,
       },
     }) => {
-      const { modalKey, filterValue } = state;
+      const { filterValue } = state;
       const {
         id,
         label,
@@ -128,20 +147,19 @@ export const RepeatList = <O extends Attributes>() => {
         readonly = r,
         repeatItemClass = '',
       } = field;
-      const compId = label ? label.toLowerCase().replace(/\s/gi, '_') : uniqueId();
-      const editId = 'edit_' + compId;
       const allItems = getItems(obj, id!);
       const strippedFilterValue = filterValue ? stripSpaces(filterValue) : undefined;
       const items =
         propertyFilter && strippedFilterValue && strippedFilterValue.length > 2
           ? allItems.filter((o) => stripSpaces(`${o[propertyFilter]}`).indexOf(strippedFilterValue) >= 0)
           : allItems;
-      const page = m.route.param(String(id)) ? Math.min(items.length, +m.route.param(String(id))) : 1;
+      const queryParam = getQueryParamById(String(id));
+      const page = queryParam ? Math.min(items.length, +queryParam) : 1;
       const curPage = pageSize && items && (page - 1) * pageSize < items.length ? page : 1;
       const delimitter = pageSize
         ? (_: any, i: number) => (curPage - 1) * pageSize <= i && i < curPage * pageSize
         : () => true;
-      const route = m.route.get();
+      const route = m.route.get() || location.href.replace(location.origin, '').replace('/#!', '');
       const maxPages = pageSize ? Math.ceil(items.length / pageSize) : 0;
       const maxItemsReached = max && items.length >= max ? true : false;
       const canDeleteItems = disabled || readonly ? false : !min || items.length > min ? true : false;
@@ -149,6 +167,8 @@ export const RepeatList = <O extends Attributes>() => {
       const fragment = route ? route.split('?')[0] : '';
       const params = getAllUrlParams(route);
       const numberColWidth = 30 + 10 * Math.floor(Math.log10(items.length));
+
+      const canDrag = maxPages === 0;
 
       return [
         [
@@ -162,10 +182,12 @@ export const RepeatList = <O extends Attributes>() => {
                   label,
                   onclick: () => {
                     addEmptyItem(obj, String(id));
-                    if (id) m.route.set(fragment, Object.assign(params, { [id]: items.length }));
+                    if (id) {
+                      m.route.set(fragment, Object.assign(params, { [id]: items.length }));
+                    }
                     onchange && onchange(obj);
                   },
-                  style: 'padding: 0',
+                  style: { padding: 0 },
                   className: 'left',
                   disabled: disabled || maxItemsReached,
                   readonly,
@@ -201,50 +223,67 @@ export const RepeatList = <O extends Attributes>() => {
               items
                 .sort(compareFn)
                 .filter(delimitter)
-                .map((item, i) =>
-                  m('.mui-repeat-item', { style: 'display: flex;' }, [
-                    canDeleteItems && [
-                      (!pageSize || pageSize > 1) &&
-                        m(
-                          'span.mui-show-item-number left',
-                          { style: `flex: 0 0 ${numberColWidth}px;` },
-                          `[${(pageSize ? (curPage - 1) * pageSize + i : i) + 1}]`
-                        ),
-                    ],
+                .map((item, index) =>
+                  m(
+                    '.mui-repeat-item',
+                    {
+                      key: index,
+                      draggable: canDrag,
+                      ondragstart: canDrag ? (event: DragEvent) => handleDragStart(event, index) : undefined,
+                      ondragover: canDrag ? handleDragOver : undefined,
+                      ondrop: canDrag ? (event: DragEvent) => handleDrop(event, index, obj, id!, onchange) : undefined,
+                      style: {
+                        display: 'flex',
+                        cursor: canDrag ? 'move' : undefined,
+                      },
+                    },
                     [
-                      m('.row.repeat-item', { className: repeatItemClass, key: page + hash(item), style: 'flex: 1;' }, [
-                        type &&
-                          m(LayoutForm, {
-                            form: type,
-                            obj: item,
-                            i18n,
-                            context: context instanceof Array ? [obj, ...context] : [obj, context],
-                            section,
-                            containerId,
-                            disabled,
-                            readonly,
-                            onchange: () => onchange && onchange(obj),
-                          } as FormAttributes),
-                      ]),
-                    ],
-                    canDeleteItems && [
-                      m(FlatButton, {
-                        type: 'button',
-                        iconName: 'clear',
-                        className: 'row mui-delete-item btn-small',
-                        style: 'flex: 0 0 48px;',
-                        disabled,
-                        readonly,
-                        onclick: () => {
-                          state.curItemIdx = pageSize ? (curPage - 1) * pageSize + i : i;
-                        },
-                      }),
-                    ],
-                  ])
+                      canDeleteItems && [
+                        (!pageSize || pageSize > 1) &&
+                          m(
+                            'span.mui-show-item-number left',
+                            { style: `flex: 0 0 ${numberColWidth}px;` },
+                            `[${(pageSize ? (curPage - 1) * pageSize + index : index) + 1}]`
+                          ),
+                      ],
+                      [
+                        m(
+                          '.row.repeat-item',
+                          { className: repeatItemClass, key: page + hash(item), style: 'flex: 1;' },
+                          [
+                            type &&
+                              m(LayoutForm, {
+                                form: type,
+                                obj: item,
+                                i18n,
+                                context: context instanceof Array ? [obj, ...context] : [obj, context],
+                                section,
+                                containerId,
+                                disabled,
+                                readonly,
+                                onchange: () => onchange && onchange(obj),
+                              } as FormAttributes),
+                          ]
+                        ),
+                      ],
+                      canDeleteItems && [
+                        m(FlatButton, {
+                          iconName: 'delete',
+                          className: 'mui-delete-item',
+                          iconClass: 'mui-delete-icon',
+                          style: { flex: '0 0 20px', padding: 0 },
+                          disabled,
+                          readonly,
+                          onclick: () => {
+                            state.curItemIdx = pageSize ? (curPage - 1) * pageSize + index : index;
+                          },
+                        }),
+                      ],
+                    ]
+                  )
                 ),
             !(disabled || maxItemsReached || readonly || !items || items.length === 0 || pageSize === 1) &&
               m(RoundIconButton, {
-                type: 'button',
                 iconName: 'add',
                 className: 'row mui-add-new-item btn-small right',
                 title: label,
@@ -299,54 +338,6 @@ export const RepeatList = <O extends Attributes>() => {
               },
             ],
           }),
-        // TODO Check this code - do we ever get here
-        typeof type === 'string' || typeof type === 'undefined'
-          ? undefined
-          : m(ModalPanel, {
-              onCreate: (modal: Modal) => (state.editModal = modal),
-              id: editId,
-              title: state.editItem ? state.editLabel : state.createLabel,
-              fixedFooter: true,
-              description: m(
-                '.row.form-item',
-                m(LayoutForm, {
-                  key: modalKey,
-                  form: type,
-                  i18n,
-                  obj: state.editItem || state.newItem || ({} as O[keyof O]),
-                  onchange: (isValid) => (state.canSave = isValid),
-                  context: context instanceof Array ? [obj, ...context] : [obj, context],
-                  containerId,
-                  disabled,
-                } as FormAttributes)
-              ),
-              buttons: [
-                {
-                  iconName: 'cancel',
-                  label: i18n.cancel || 'Cancel',
-                },
-                {
-                  iconName: 'save',
-                  label: i18n.save || 'Save',
-                  disabled: !state.canSave,
-                  onclick: () => {
-                    if (state.editItem && typeof state.curItemIdx !== 'undefined') {
-                      const edited = state.editItem;
-                      const current = state.curItemIdx;
-                      type.forEach((f) => {
-                        if (f.id) {
-                          // TODO Check this code - a number is being indexed?
-                          (current as any)[f.id] = (edited as any)[f.id];
-                        }
-                      });
-                    } else if (state.newItem) {
-                      items.push(state.newItem);
-                    }
-                    onchange && onchange(obj);
-                  },
-                },
-              ],
-            }),
       ];
     },
   } as Component<IRepeatList<O>>;

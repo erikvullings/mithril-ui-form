@@ -454,3 +454,12 @@ export const getAllUrlParams = (url: string) => {
 
   return result;
 };
+
+export const getQueryParamById = (paramId: string): string | null => {
+  const queryString = window.location.hash.split('?')[1]; // Extract everything after the '?' in the fragment identifier
+  if (queryString) {
+    const queryParams = new URLSearchParams(queryString);
+    return queryParams.get(paramId);
+  }
+  return null;
+};

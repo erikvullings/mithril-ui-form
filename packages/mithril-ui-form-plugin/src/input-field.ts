@@ -113,6 +113,8 @@ export type InputField<O extends Attributes = {}, K extends keyof O = keyof O> =
   transform?: <U, V>(dir: 'from' | 'to', value: U | V) => V | U;
   /** Generate a side-effect after setting, and optionally transforming, the value. */
   effect?: (obj?: O, value?: O[keyof O], context?: O[]) => Promise<O | undefined> | undefined;
+  /** Optional function to be called when creating a new (repeated) item */
+  onNewItem?: (obj: O, id?: keyof O, index?: number) => Partial<O[keyof O]>;
   /** Datetime format options: UTC, ISO or msec since 1 Jan 1970. Default 'UTC' */
   dateTimeOutput?: 'UTC' | 'ISO' | 'MSEC';
   /** Datetime format option: if true (default false), edit seconds too */
