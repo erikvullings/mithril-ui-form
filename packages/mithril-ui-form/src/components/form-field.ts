@@ -179,13 +179,16 @@ export const FormFieldFactory =
           checkAllOptions,
           transform,
           effect,
+          onkeyup,
+          onkeydown,
+          onblur,
         } = field;
         if (
           (show && !evalExpression(show, obj, context)) ||
           (label && !canResolvePlaceholders(label, obj, context)) ||
           (description && !canResolvePlaceholders(description, obj, context))
         ) {
-          console.table({ show, obj, context });
+          // console.table({ show, obj, context });
           return undefined;
         }
 
@@ -493,7 +496,7 @@ export const FormFieldFactory =
             case 'colour':
             case 'color': {
               const initialValue = iv as string;
-              return m(ColorInput, { ...props, initialValue, onchange });
+              return m(ColorInput, { ...props, initialValue, onchange, onblur });
             }
             case 'time': {
               const { twelveHour = false } = props;
@@ -648,6 +651,9 @@ export const FormFieldFactory =
                 autofocus,
                 onchange,
                 initialValue,
+                onkeydown,
+                onkeyup,
+                onblur,
               });
             }
             case 'number': {
@@ -658,6 +664,9 @@ export const FormFieldFactory =
                 autofocus,
                 onchange,
                 initialValue,
+                onkeydown,
+                onkeyup,
+                onblur,
               });
             }
             case 'radio': {
@@ -772,6 +781,7 @@ export const FormFieldFactory =
                 secondaryPlaceholder: field.secondaryPlaceholder || '+tag',
                 data,
                 autocompleteOptions,
+                onblur,
               });
             }
             case 'autocomplete': {
@@ -795,6 +805,7 @@ export const FormFieldFactory =
                 isMandatory,
                 helperText,
                 onchange,
+                onblur,
                 placeholder: field.placeholder || '...',
                 ...autocompleteOptions,
               });
@@ -807,6 +818,9 @@ export const FormFieldFactory =
                 autofocus,
                 onchange,
                 initialValue,
+                onkeyup,
+                onkeydown,
+                onblur,
               });
             }
             case 'file': {
@@ -888,6 +902,9 @@ export const FormFieldFactory =
                 autofocus,
                 onchange,
                 initialValue,
+                onkeydown,
+                onkeyup,
+                onblur,
               });
             }
             case 'text': {
@@ -898,7 +915,9 @@ export const FormFieldFactory =
                 autofocus,
                 onchange,
                 initialValue,
-                tabindex: 15,
+                onkeydown,
+                onkeyup,
+                onblur,
               });
             }
             default:
