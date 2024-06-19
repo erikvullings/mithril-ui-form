@@ -29,7 +29,7 @@
     "minor-release": "pnpm  -r --parallel minor-release"
   },
   "devDependencies": {
-    "pnpm": "^8.14.0",
-    "rimraf": "^5.0.5"
+    "pnpm": "^9.4.0",
+    "rimraf": "^5.0.7"
   }
 }
