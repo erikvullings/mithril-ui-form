@@ -94,8 +94,8 @@ importers:
         specifier: workspace:*
         version: link:../mithril-ui-form-plugin
       slimdown-js:
-        specifier: ^0.7.2
-        version: 0.7.2
+        specifier: ^0.7.3
+        version: 0.7.3
     devDependencies:
       '@types/geojson':
         specifier: ^7946.0.14
@@ -3484,8 +3484,8 @@ packages:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
 
-  slimdown-js@0.7.2:
-    resolution: {integrity: sha512-1SVtLhKe5AEboedFAdt/DWOSs0t6GdyLlcDKp0o9k2vHBv/udnD1AriYB/esv7Ihwh/y0N4rTdhpGVr1rrUjDQ==}
+  slimdown-js@0.7.3:
+    resolution: {integrity: sha512-WnlZep19Lrqw+mK9sDsvyIHChzFJGfYNrP+FNA3ZYOcypfW36mJUcG1AyTnUkP08HJAlVaDkF9eemmnAj7PXRQ==}
 
   sockjs@0.3.24:
     resolution: {integrity: sha512-GJgLTZ7vYb/JtPSSZ10hsOYIvEYsjbNU+zPdIHcUaWVNUEPivzxku31865sSSud0Da0W4lEeOPlmw93zLQchuQ==}
@@ -7621,7 +7621,7 @@ snapshots:
 
   slash@3.0.0: {}
 
-  slimdown-js@0.7.2: {}
+  slimdown-js@0.7.3: {}
 
   sockjs@0.3.24:
     dependencies:
