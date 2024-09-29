@@ -28,7 +28,7 @@
   "dependencies": {
     "material-icons": "^1.13.12",
     "materialize-css": "^1.0.0",
-    "mithril": "^2.2.2",
+    "mithril": "^2.2.5",
     "mithril-materialized": "^1.1.6",
     "mithril-ui-form": "workspace:*",
     "mithril-ui-form-leaflet-plugin": "workspace:*",
@@ -36,19 +36,19 @@
   },
   "devDependencies": {
     "@types/materialize-css": "^1.0.14",
-    "@types/mithril": "^2.2.6",
+    "@types/mithril": "^2.2.7",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.0",
     "dotenv-webpack": "^8.1.0",
     "html-webpack-plugin": "^5.6.0",
     "html-webpack-tags-plugin": "^3.0.2",
-    "mini-css-extract-plugin": "^2.9.0",
-    "rimraf": "^5.0.7",
+    "mini-css-extract-plugin": "^2.9.1",
+    "rimraf": "^6.0.1",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.1",
     "typescript": "next",
-    "webpack": "^5.92.0",
+    "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4"
+    "webpack-dev-server": "^5.1.0"
   }
 }
