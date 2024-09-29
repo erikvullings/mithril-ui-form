@@ -1,6 +1,6 @@
 {
   "name": "mithril-ui-form-rating-plugin",
-  "version": "0.7.4",
+  "version": "0.7.5",
   "description": "Plugin to add a rating component to Mithril-UI-Form.",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
