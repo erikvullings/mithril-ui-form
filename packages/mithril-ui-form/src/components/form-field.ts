@@ -200,7 +200,7 @@ export const FormFieldFactory =
                 .filter(
                   (o) =>
                     typeof o.id !== 'undefined' &&
-                    (o.label || !/[0-9]/.test(o.id)) &&
+                    (o.label || isNaN(Number(o.id))) &&
                     (!o.show || evalExpression(o.show, obj, context))
                 )
                 .map((o) => (o.label ? o : { ...o, label: capitalizeFirstLetter(o.id) }))
