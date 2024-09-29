@@ -1,6 +1,6 @@
 {
   "name": "mithril-ui-form-plugin",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "Plugin type definition for Mithril-UI-Form.",
   "types": "dist/index.d.ts",
   "repository": {
