@@ -34,7 +34,7 @@
   "dependencies": {
     "mithril": "^2.2.5",
     "mithril-ui-form-plugin": "workspace:*",
-    "slimdown-js": "^0.7.3"
+    "slimdown-js": "^0.7.4"
   },
   "devDependencies": {
     "mithril-materialized": "^1.1.6",
