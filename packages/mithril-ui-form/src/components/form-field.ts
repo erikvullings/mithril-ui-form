@@ -224,7 +224,6 @@ export const FormFieldFactory =
         }
         if (value) {
           props.value = resolvePlaceholders(props.value || value, obj, ...context);
-          console.log(`${value}: ${props.value}`);
         }
         if (description) {
           props.description = render(resolvePlaceholders(props.description || description, obj, ...context), true);
