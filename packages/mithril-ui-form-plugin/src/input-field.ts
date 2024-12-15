@@ -27,7 +27,20 @@ export type InputField<O extends Attributes = {}, K extends keyof O = keyof O> =
    * list of countries.
    * For file inputs, the option.id is used to build the accept list of acceptable file types.
    */
-  options?: string | Array<{ id: string; label?: string; disabled?: boolean; icon?: string; show?: string | string[] }>;
+  options?:
+    | string
+    | Array<{
+        /** Unique ID */
+        id: string;
+        /** Label to show, if missing, will be capitalized ID */
+        label?: string;
+        /** Option is disabled when true */
+        disabled?: boolean;
+        /** Optional select data-icon (image in select) */
+        img?: string;
+        /** If the condition is true, shows the option */
+        show?: string | string[];
+      }>;
   /** When input type is a number or a date, optionally specify the minimum value (or min date). */
   min?: number;
   /**
