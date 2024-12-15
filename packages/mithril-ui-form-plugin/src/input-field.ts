@@ -18,7 +18,7 @@ export type InputField<O extends Attributes = {}, K extends keyof O = keyof O> =
   /** Can be used as a placeholder for text inputs or the first element of a Selection */
   placeholder?: string;
   /** Type of component to use */
-  type?: ComponentType | UIForm<O[K]> | UIForm<O[K][number]> | UIForm<{}>;
+  type?: ComponentType | UIForm<O[K]> | UIForm<O[K] extends any[] ? O[K][number] : O[K]>;
   /** Value that the component has, initially. Is also used to derive the type if not supplied. */
   value?: O[K];
   /**

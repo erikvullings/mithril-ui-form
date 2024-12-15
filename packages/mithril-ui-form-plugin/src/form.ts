@@ -1,6 +1,7 @@
 import { Attributes } from 'mithril';
 import { I18n } from './i18n';
 import { InputField } from './input-field';
+import { ComponentType } from './component-type';
 
 export type FormAttributes<O extends Attributes = {}> = Attributes & {
   /** The form to display */
@@ -22,4 +23,8 @@ export type FormAttributes<O extends Attributes = {}> = Attributes & {
 };
 
 /** A form with one or more input fields or forms (to allow for nested objects) */
-export type UIForm<O extends Attributes = {}> = InputField<O>[];
+export type UIForm<O extends Attributes = {}> = Array<
+  InputField<O, keyof O> & {
+    type?: ComponentType | UIForm<O[keyof O]> | UIForm<O[keyof O] extends any[] ? O[keyof O][number] : O[keyof O]>;
+  }
+>;
