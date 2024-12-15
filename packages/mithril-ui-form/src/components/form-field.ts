@@ -29,6 +29,7 @@ import {
   canResolvePlaceholders,
   resolvePlaceholders,
   resolveExpression,
+  extractTitle,
 } from '../utils';
 import { LayoutForm } from './layout-form';
 import { ReadonlyComponent } from './readonly';
@@ -166,7 +167,7 @@ export const FormFieldFactory =
       }) => {
         const {
           id = '',
-          type,
+          type: fieldType,
           disabled = d,
           readonly = r,
           value,
@@ -184,9 +185,10 @@ export const FormFieldFactory =
           onblur,
         } = field;
         if (
-          (show && !evalExpression(show, obj, context)) ||
-          (label && !canResolvePlaceholders(label, obj, context)) ||
-          (description && !canResolvePlaceholders(description, obj, context))
+          (show && !evalExpression(show, obj, ...context)) ||
+          (label && !canResolvePlaceholders(label, obj, ...context)) ||
+          (value && !canResolvePlaceholders(value, obj, ...context)) ||
+          (description && !canResolvePlaceholders(description, obj, ...context))
         ) {
           // console.table({ show, obj, context });
           return undefined;
@@ -201,7 +203,7 @@ export const FormFieldFactory =
                   (o) =>
                     typeof o.id !== 'undefined' &&
                     (o.label || isNaN(Number(o.id))) &&
-                    (!o.show || evalExpression(o.show, obj, context))
+                    (!o.show || evalExpression(o.show, obj, ...context))
                 )
                 .map((o) => (o.label ? o : { ...o, label: capitalizeFirstLetter(o.id) }))
             : []
@@ -214,14 +216,17 @@ export const FormFieldFactory =
           autofocus,
           typeof disabled === 'boolean' || typeof disabled === 'undefined'
             ? parentIsDisabled || disabled
-            : parentIsDisabled || evalExpression(disabled, obj, context)
+            : parentIsDisabled || evalExpression(disabled, obj, ...context)
         );
 
         if (label) {
-          props.label = render(resolvePlaceholders(props.label || label, obj, context), true);
+          props.label = render(resolvePlaceholders(props.label || label, obj, ...context), true);
+        }
+        if (value) {
+          props.value = render(resolvePlaceholders(props.value || value, obj, ...context), true);
         }
         if (description) {
-          props.description = render(resolvePlaceholders(props.description || description, obj, context), true);
+          props.description = render(resolvePlaceholders(props.description || description, obj, ...context), true);
         }
 
         const validate = required
@@ -255,10 +260,10 @@ export const FormFieldFactory =
           }
         };
 
-        if (type instanceof Array) {
+        if (fieldType instanceof Array) {
           type P = O[keyof O];
           if (id) {
-            if (!obj.hasOwnProperty(id)) {
+            if (typeof obj === 'object' && !(obj as object).hasOwnProperty(id)) {
               obj[id] = {} as P;
             }
 
@@ -271,7 +276,7 @@ export const FormFieldFactory =
                   ...props,
                   i18n,
                   readonly,
-                  form: type as UIForm<P>[],
+                  form: fieldType as UIForm<P>[],
                   obj: obj[id],
                   context: context instanceof Array ? [obj, ...context] : [obj, context],
                   onchange: () => onFormChange && onFormChange(obj),
@@ -280,7 +285,7 @@ export const FormFieldFactory =
               ),
             ]);
           } else {
-            console.warn('Missing ID for type ' + JSON.stringify(type));
+            console.warn('Missing ID for type ' + JSON.stringify(fieldType));
             return undefined; // Only a repeat list can deal with arrays
           }
         }
@@ -290,7 +295,7 @@ export const FormFieldFactory =
         }
 
         const iv =
-          obj.hasOwnProperty(id) && typeof obj[id] !== 'undefined'
+          typeof obj === 'object' && (obj as object).hasOwnProperty(id) && typeof obj[id] !== 'undefined'
             ? transform
               ? transform('from', obj[id])
               : obj[id]
@@ -301,9 +306,9 @@ export const FormFieldFactory =
 
         const [selectAll, unselectAll] = checkAllOptions ? checkAllOptions.split('|') : ['', ''];
 
-        if (readonly && type && ['md', 'none'].indexOf(type as string) < 0) {
-          if (readonlyPlugins.hasOwnProperty(type))
-            return m(readonlyPlugins[type], {
+        if (readonly && fieldType && ['md', 'none'].indexOf(fieldType as string) < 0) {
+          if (readonlyPlugins.hasOwnProperty(fieldType))
+            return m(readonlyPlugins[fieldType], {
               iv,
               field,
               props,
@@ -311,8 +316,8 @@ export const FormFieldFactory =
               obj,
               context,
             });
-          if (type && plugins.hasOwnProperty(type)) {
-            return m(plugins[type], {
+          if (fieldType && plugins.hasOwnProperty(fieldType)) {
+            return m(plugins[fieldType], {
               iv,
               field,
               props,
@@ -322,7 +327,7 @@ export const FormFieldFactory =
               context,
             });
           }
-          switch (type) {
+          switch (fieldType) {
             case 'time': {
               const d = iv as Date | number | string | undefined;
               const dto: Intl.DateTimeFormatOptions | undefined = i18n.dateTimeOptions
@@ -430,7 +435,7 @@ export const FormFieldFactory =
                   'div',
                   m('img.responsive-img', {
                     src: initialValue,
-                    alt: obj.title || obj.alt || obj.name || '',
+                    alt: extractTitle(obj) || '',
                     style: `max-height: ${field.max || 50}px`,
                   })
                 )
@@ -473,7 +478,7 @@ export const FormFieldFactory =
               const initialValue = iv as string;
               return m(ReadonlyComponent, {
                 props,
-                type,
+                type: fieldType,
                 label: props.label,
                 initialValue,
               });
@@ -481,8 +486,8 @@ export const FormFieldFactory =
           }
         } else {
           // Editable
-          if (type && plugins.hasOwnProperty(type)) {
-            return m(plugins[type], {
+          if (fieldType && plugins.hasOwnProperty(fieldType)) {
+            return m(plugins[fieldType], {
               iv,
               field,
               props,
@@ -492,7 +497,7 @@ export const FormFieldFactory =
               context,
             });
           }
-          switch (type) {
+          switch (fieldType) {
             case 'colour':
             case 'color': {
               const initialValue = iv as string;
@@ -744,7 +749,7 @@ export const FormFieldFactory =
             case 'markdown':
             case 'md': {
               const { label, className = 'col s12' } = props;
-              const md = resolvePlaceholders((id ? iv : value || label) || '', obj, context);
+              const md = resolvePlaceholders((id ? iv : value || label) || '', obj, ...context);
               return m(SlimdownView, { md, className });
             }
             case 'section':
@@ -875,7 +880,7 @@ export const FormFieldFactory =
                 ? m('div', [
                     m('img.responsive-img', {
                       src: initialValue,
-                      alt: obj.title || obj.alt || obj.name || '',
+                      alt: extractTitle(obj) || '',
                       style: `max-height: ${field.max || 50}px`,
                     }),
                     m(FlatButton, {

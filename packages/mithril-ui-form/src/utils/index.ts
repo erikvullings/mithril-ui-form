@@ -121,6 +121,7 @@ export const evalExpression = <O = {}>(expression: string | string[], ...objArr:
   return expr.some((e) => checkExpressions(e, strictEqualOrNoComparison.test(e) ? [objArr[0]] : flatten(objArr)));
 };
 
+/** Finds the key in the object array and returns the value */
 export const resolveExpression = <O extends {}>(expression: string, objArr: O[]) =>
   getPath(
     objArr.filter(Boolean).reduceRight((acc, obj) => ({ ...obj, ...acc })),
@@ -462,4 +463,21 @@ export const getQueryParamById = (paramId: string): string | null => {
     return queryParams.get(paramId);
   }
   return null;
+};
+
+export const extractTitle = (param: unknown): string | undefined => {
+  // Check if the parameter is an object and not null
+  if (param !== null && typeof param === 'object') {
+    // Check for title, label, alt, or name properties
+    const possibleTitleProps = ['title', 'label', 'alt', 'name'];
+
+    for (const prop of possibleTitleProps) {
+      if (prop in param && typeof (param as Record<string, unknown>)[prop] === 'string') {
+        return (param as Record<string, unknown>)[prop] as string;
+      }
+    }
+  }
+
+  // Return undefined if no matching property is found
+  return undefined;
 };
