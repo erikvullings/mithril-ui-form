@@ -22,32 +22,41 @@ export const toHourMin = (d?: Date) => (d ? `${padLeft(d.getHours())}:${padLeft(
  * @param s: path, e.g. a.b[0].c
  * @see https://stackoverflow.com/a/6491621/319711
  */
-export const getPath = <O extends {}>(obj: O, s: string) => {
-  s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
-  s = s.replace(/^\./, ''); // strip a leading dot
-  const a = s.split('.');
-  let o = { ...obj };
-  for (let i = 0, n = a.length; i < n; ++i) {
-    const k = a[i];
-    if (typeof o === 'object' && k in o) {
-      o = (o as Record<string, any>)[k];
-      // a.length > 1 && console.table({ k, o, obj });
-    } else if (o instanceof Array) {
-      const id = (obj as any)[k] || k;
-      const m = /([A-Z]\w+)/.exec(k); // categoryId => match Id, myNameLabel => NameLabel
-      const key = (m && m[0][0].toLowerCase() + m[0].substr(1)) || k; // key = id or nameLabel
-      const found = o.filter((i) => i[key] === id).shift();
-      // a.length > 1 && console.table({ k, o, obj, id, m, key, found });
-      if (found) {
-        o = found;
-      } else {
-        return undefined;
+export const getPath = <O extends Record<string, any>>(obj: O, path: string): any => {
+  // Early return for empty or invalid inputs
+  if (!obj || !path) return undefined;
+
+  // Optimize path parsing
+  const keys = path
+    .replace(/\[(\w+)\]/g, '.$1') // Convert array bracket notation
+    .replace(/^\./, '') // Remove leading dot
+    .split('.');
+
+  // Use reduce for more efficient traversal with type-safe access
+  return keys.reduce((current, key) => {
+    // Handle undefined/null values early
+    if (current == null) return undefined;
+
+    // Specific handling for arrays with potential object matching
+    if (Array.isArray(current)) {
+      // Check for ID-based object lookup
+      const m = /([A-Z]\w+)/.exec(key);
+      if (m) {
+        const matchKey = m[0][0].toLowerCase() + m[0].substr(1) || key;
+        return current.find(
+          (item) => typeof item === 'object' && item !== null && matchKey in item && item[matchKey] === key
+        );
       }
-    } else {
-      return undefined;
+
+      // Standard array index access
+      return current[parseInt(key, 10)];
     }
-  }
-  return o as any;
+
+    // Type-safe object property access
+    return typeof current === 'object' && current !== null && key in current
+      ? current[key as keyof typeof current]
+      : undefined;
+  }, obj);
 };
 
 export const flatten = <T>(arr: T[]) =>
@@ -196,33 +205,14 @@ export const formatExpression = (
 };
 
 /** Replace the placeholder with the appropriate value. */
-export const resolvePlaceholders = <O>(str: string, ...objArr: Array<Partial<O> | O[keyof O]>) => {
-  if (!placeholderRegex.test(str)) {
-    return str;
-  }
-  placeholderRegex.lastIndex = 0; // reset index, otherwise no match will occur for global regex.
-
-  let m: RegExpExecArray | null;
-
-  do {
-    m = placeholderRegex.exec(str);
-    if (m) {
-      // This is necessary to avoid infinite loops with zero-width matches
-      if (m.index === placeholderRegex.lastIndex) {
-        placeholderRegex.lastIndex++;
-      }
-
-      // The result can be accessed through the `m`-variable.
-      m.forEach((_, __, [fullMatch, expression, exprType]) => {
-        const resolved = resolveExpression(expression, objArr as any);
-        if (resolved && !(resolved instanceof Array)) {
-          str = str.replace(fullMatch, formatExpression(resolved, exprType));
-        }
-      });
+export const resolvePlaceholders = <O>(str: string, ...objArr: Array<Partial<O> | O[keyof O]>) =>
+  str.replace(placeholderRegex, (fullMatch, expression, exprType) => {
+    const resolved = resolveExpression(expression.trim(), objArr as any);
+    if (resolved && !(resolved instanceof Array)) {
+      return formatExpression(resolved, exprType);
     }
-  } while (m !== null);
-  return str;
-};
+    return fullMatch;
+  });
 
 /**
  * Deep copy function for TypeScript.
