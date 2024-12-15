@@ -223,7 +223,8 @@ export const FormFieldFactory =
           props.label = render(resolvePlaceholders(props.label || label, obj, ...context), true);
         }
         if (value) {
-          props.value = render(resolvePlaceholders(props.value || value, obj, ...context), true);
+          props.value = resolvePlaceholders(props.value || value, obj, ...context);
+          console.log(`${value}: ${props.value}`);
         }
         if (description) {
           props.description = render(resolvePlaceholders(props.description || description, obj, ...context), true);
@@ -299,7 +300,7 @@ export const FormFieldFactory =
             ? transform
               ? transform('from', obj[id])
               : obj[id]
-            : value;
+            : props.value;
         if (id && typeof value !== 'undefined' && typeof iv !== 'undefined') {
           obj[id] = transform ? transform('to', iv) : iv; // Initial value was set, so use it.
         }
