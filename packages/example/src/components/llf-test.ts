@@ -1,5 +1,5 @@
 import m from 'mithril';
-import { FormAttributes, LayoutForm, UIForm } from 'mithril-ui-form';
+import { LayoutForm, UIForm } from 'mithril-ui-form';
 
 export interface IContext {
   admin: boolean;
@@ -782,7 +782,7 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
       { id: 'organisation', type: 'text', className: 'col s4' },
       { id: 'country', type: 'select', options: countries, className: 'col s6' },
       { id: 'lastEdit', label: 'Last edit on', type: 'date', className: 'col s6' },
-    ],
+    ] as UIForm<IEditor>,
   },
   {
     id: 'info',
@@ -1934,11 +1934,11 @@ export const LLFView = () => {
         // m('.col.s12', m(LayoutForm, { form, obj: result, onchange: print, context, section: 'geo' })),
         m(
           '.col.s12',
-          m(LayoutForm, {
+          m(LayoutForm<ILessonLearned>, {
             form,
             obj: result,
             onchange: print,
-          } as FormAttributes<ILessonLearned>)
+          })
         ),
       ]);
     },
