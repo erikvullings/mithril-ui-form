@@ -23,6 +23,7 @@ export {
   stripSpaces,
   toHourMin,
   resolveExpression,
+  resolvePlaceholders,
   getPath,
   flatten,
   formatExpression,
