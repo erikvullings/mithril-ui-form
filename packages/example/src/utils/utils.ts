@@ -7,10 +7,5 @@
  * @param {number} [step=1]
  * @returns
  */
-export const range = (from: number, to: number, step: number = 1) => {
-  const arr = [] as number[];
-  for (let i = from; i <= to; i += step) {
-    arr.push(i);
-  }
-  return arr;
-};
+export const range = (from: number, to: number, step: number = 1): number[] =>
+  Array.from({ length: Math.floor((to - from) / step) + 1 }, (_, i) => from + i * step);
