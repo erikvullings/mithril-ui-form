@@ -18,12 +18,20 @@ export const ReadonlyComponent: FactoryComponent<IReadonlyComponent> = () => {
       if (iv instanceof Array && iv.length > 3) {
         return m('.readonly', cn, [m('label', label), m(SlimdownView, { md: '\n- ' + iv.join('\n- ') })]);
       } else if (typeof iv === 'string') {
+        const trimmedLabel = `${label.trim()}: `;
         return type === 'url'
-          ? m('.readonly', cn, [m('label', `${label.trim()}: `), m('a[target=_blank]', { href: iv }, iv)])
+          ? m('.readonly', cn, [m('label', trimmedLabel), m('a[target=_blank]', { href: iv }, iv)])
           : type === 'color'
           ? m('.readonly', cn, [
-              m('label', `${label.trim()}: `),
-              m('.color', { style: `height: 1rem; width: 40px; border-radius: 4px; background-color: ${iv}` }),
+              m('label', trimmedLabel),
+              m('.color', {
+                style: {
+                  height: '1rem',
+                  width: '40px',
+                  borderRadius: '4px',
+                  backgroundColor: iv,
+                },
+              }),
             ])
           : m('.readonly', cn, [m('label', label), m(SlimdownView, { md: iv })]);
       }

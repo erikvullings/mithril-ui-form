@@ -65,7 +65,7 @@ export const flatten = <T>(arr: T[]) =>
 // const isSet = (a: any) =>
 //   typeof a === 'undefined' ? false : typeof a === 'boolean' ? a : typeof +a === 'number' ? +a !== 0 : true;
 
-const expressionRegex = /([^ =><]*)\s*([=><]*)\s*(\S*)/i;
+const expressionRegex = /([^ =><!]*)\s*([=><!]*)\s*(\S*)/i;
 const invertExpression = /^\s*!\s*/;
 
 const checkExpression = <O>(expression: string, obj: O) => {
@@ -75,6 +75,7 @@ const checkExpression = <O>(expression: string, obj: O) => {
   const match = expressionRegex.exec(expression);
   if (match) {
     const [fullMatch, path, operand, matchValue] = match;
+    // console.table([{ fullMatch, path, operand, matchValue }]);
     const v = getPath(obj, path.trim());
     if (typeof v === 'undefined' || (typeof v === 'string' && v.length === 0)) {
       return false;
@@ -91,6 +92,9 @@ const checkExpression = <O>(expression: string, obj: O) => {
         case '==':
         case '===':
           return v instanceof Array ? v.indexOf(val) >= 0 : v === val;
+        case '!=':
+        case '!==':
+          return v instanceof Array ? v.indexOf(val) >= 0 : v !== val;
         case '<=':
           return v <= val;
         case '>=':
@@ -111,10 +115,12 @@ const checkExpression = <O>(expression: string, obj: O) => {
 };
 
 const checkExpressions = <O>(expression: string, flattened: O[]) => {
-  const ands = expression.split('&');
+  const ands = expression.split(/&|;/).map((e) => e.trim());
+  // console.log(`expression: ${expression}, ANDS: ${ands.join(';')}`);
+  // console.log(`INVERT EXPRESSION: ${invertExpression}`)
   return ands.reduce((acc, expr) => {
     const invert = invertExpression.test(expr);
-    // console.log(`INVERT: ${invert}`);
+    // console.log(`AND: ${ands}, INVERT: ${invert}`);
     const e = invert ? expr.replace(invertExpression, '') : expr;
     acc = acc && flattened.filter(Boolean).reduce((p, obj) => p || checkExpression(e.trim(), obj), false as boolean);
     return invert ? !acc : acc;

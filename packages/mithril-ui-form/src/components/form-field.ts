@@ -436,7 +436,7 @@ export const FormFieldFactory =
                   m('img.responsive-img', {
                     src: initialValue,
                     alt: extractTitle(obj) || '',
-                    style: `max-height: ${field.max || 50}px`,
+                    style: { maxHeight: `${field.max || 50}px` },
                   })
                 )
               );
@@ -455,7 +455,7 @@ export const FormFieldFactory =
                     'a[target=_blank]',
                     { href: url },
                     isImg
-                      ? m('img', { src: url, alt: url, style: `max-height: ${field.max || 50}` })
+                      ? m('img', { src: url, alt: url, style: { maxHeight: `${field.max || 50}px` } })
                       : m(ReadonlyComponent, {
                           props,
                           label: field.placeholder || 'File',
@@ -774,19 +774,19 @@ export const FormFieldFactory =
                       limit: field.maxLength || Infinity,
                       minLength: field.minLength || 1,
                     }
-                  : {};
+                  : undefined;
               const { label, isMandatory, className, helperText } = props;
               return m(Chips, {
                 className,
                 label,
                 isMandatory,
                 helperText,
-                onchange: (chips: M.ChipData[]) => onchange(chips.map((chip) => chip.tag)),
                 placeholder: field.placeholder || 'Add a tag',
                 secondaryPlaceholder: field.secondaryPlaceholder || '+tag',
                 data,
+                onchange: (chips: M.ChipData[]) => onchange(chips.map((chip) => chip.tag)),
                 autocompleteOptions,
-                onblur,
+                // onblur,
               });
             }
             case 'autocomplete': {
@@ -881,7 +881,7 @@ export const FormFieldFactory =
                     m('img.responsive-img', {
                       src: initialValue,
                       alt: extractTitle(obj) || '',
-                      style: `max-height: ${field.max || 50}px`,
+                      style: { maxHeight: `${field.max || 50}px` },
                     }),
                     m(FlatButton, {
                       iconName: 'clear',
@@ -916,6 +916,7 @@ export const FormFieldFactory =
               const initialValue = iv as string;
               return m(TextInput, {
                 ...props,
+                maxLength: field.max || undefined,
                 validate,
                 autofocus,
                 onchange,

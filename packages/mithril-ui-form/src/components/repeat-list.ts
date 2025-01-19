@@ -55,7 +55,7 @@ export const RepeatList = <O extends Attributes>() => {
     if (obj instanceof Array) {
       return obj;
     } else {
-      if (!obj.hasOwnProperty(id)) {
+      if (!obj.hasOwnProperty(id) || !Array.isArray(obj[id])) {
         obj[id] = [] as O[keyof O];
       }
       return obj[id];
@@ -68,7 +68,7 @@ export const RepeatList = <O extends Attributes>() => {
     if (obj instanceof Array) {
       obj.push(newItem);
     } else {
-      if (!obj.hasOwnProperty(id)) {
+      if (!obj.hasOwnProperty(id) || !Array.isArray(obj[id])) {
         obj[id] = [newItem] as O[keyof O];
       } else {
         obj[id].push(newItem);
@@ -125,7 +125,7 @@ export const RepeatList = <O extends Attributes>() => {
         field,
         obj,
         context,
-        className = field.className ? '.' + field.className.split(' ').join('.') : '.col.s12',
+        className = field.className || 'col s12',
         section,
         containerId,
         disabled = typeof field.disabled === 'boolean' ? field.disabled : undefined,
@@ -170,131 +170,141 @@ export const RepeatList = <O extends Attributes>() => {
 
       const canDrag = maxPages === 0;
 
+      // console.log('Items', items);
       return [
         [
-          m(`#${String(id)}.mui-repeat-list${className}`, [
-            m(
-              '.row.mui-repeat-list-controls',
-              m('.col.s12', [
-                m(FlatButton, {
-                  iconName: disabled || readonly || maxItemsReached ? '' : 'add',
-                  iconClass: 'right',
-                  label,
-                  onclick: () => {
-                    addEmptyItem(obj, String(id));
-                    if (id) {
-                      m.route.set(fragment, Object.assign(params, { [id]: items.length }));
-                    }
-                    onchange && onchange(obj);
-                  },
-                  style: { padding: 0 },
-                  className: 'left',
-                  disabled: disabled || maxItemsReached,
-                  readonly,
-                }),
-                maxPages > 1 &&
-                  m(
-                    '.right',
-                    m(Pagination, {
-                      curPage,
-                      items: range(1, maxPages).map((i) => ({
-                        href: toQueryString(fragment, params, { [id!]: i }),
-                      })),
-                    })
-                  ),
-                (items.length > 1 || filterValue) &&
-                  propertyFilter &&
-                  !disabled &&
-                  m(TextInput, {
-                    style: 'margin-top: -6px; margin-bottom: -1rem;',
-                    iconName: 'filter_list',
-                    iconClass: 'small',
-                    placeholder: filterLabel,
-                    onkeyup: (_: KeyboardEvent, v?: string) => (state.filterValue = v),
-                    className: 'right',
-                    disabled,
+          m(
+            'div',
+            {
+              id: String(id),
+              className: 'mui-repeat-list ' + className,
+            },
+            [
+              m(
+                '.row.mui-repeat-list-controls',
+                m('.col.s12', [
+                  m(FlatButton, {
+                    iconName: disabled || readonly || maxItemsReached ? '' : 'add',
+                    iconClass: 'right',
+                    label,
+                    onclick: () => {
+                      addEmptyItem(obj, String(id));
+                      if (id) {
+                        m.route.set(fragment, Object.assign(params, { [id]: items.length }));
+                      }
+                      onchange && onchange(obj);
+                    },
+                    style: { padding: 0 },
+                    className: 'left',
+                    disabled: disabled || maxItemsReached,
                     readonly,
                   }),
-              ])
-            ),
-            items &&
-              items.length > 0 &&
-              typeof type !== 'string' &&
-              items
-                .sort(compareFn)
-                .filter(delimitter)
-                .map((item, index) =>
-                  m(
-                    '.mui-repeat-item',
-                    {
-                      key: index,
-                      draggable: canDrag,
-                      ondragstart: canDrag ? (event: DragEvent) => handleDragStart(event, index) : undefined,
-                      ondragover: canDrag ? handleDragOver : undefined,
-                      ondrop: canDrag ? (event: DragEvent) => handleDrop(event, index, obj, id!, onchange) : undefined,
-                      style: {
-                        display: 'flex',
-                        cursor: canDrag ? 'move' : undefined,
+                  maxPages > 1 &&
+                    m(
+                      '.right',
+                      m(Pagination, {
+                        curPage,
+                        items: range(1, maxPages).map((i) => ({
+                          href: toQueryString(fragment, params, { [id!]: i }),
+                        })),
+                      })
+                    ),
+                  (items.length > 1 || filterValue) &&
+                    propertyFilter &&
+                    !disabled &&
+                    m(TextInput, {
+                      style: 'margin-top: -6px; margin-bottom: -1rem;',
+                      iconName: 'filter_list',
+                      iconClass: 'small',
+                      placeholder: filterLabel,
+                      onkeyup: (_: KeyboardEvent, v?: string) => (state.filterValue = v),
+                      className: 'right',
+                      disabled,
+                      readonly,
+                    }),
+                ])
+              ),
+              items &&
+                items.length > 0 &&
+                typeof type !== 'string' &&
+                items
+                  .sort(compareFn)
+                  .filter(delimitter)
+                  .map((item, index) =>
+                    m(
+                      '.mui-repeat-item',
+                      {
+                        key: index,
+                        draggable: canDrag,
+                        ondragstart: canDrag ? (event: DragEvent) => handleDragStart(event, index) : undefined,
+                        ondragover: canDrag ? handleDragOver : undefined,
+                        ondrop: canDrag
+                          ? (event: DragEvent) => handleDrop(event, index, obj, id!, onchange)
+                          : undefined,
+                        style: {
+                          display: 'flex',
+                          cursor: canDrag ? 'move' : undefined,
+                        },
                       },
-                    },
-                    [
-                      canDeleteItems && [
-                        (!pageSize || pageSize > 1) &&
-                          m(
-                            'span.mui-show-item-number left',
-                            { style: `flex: 0 0 ${numberColWidth}px;` },
-                            `[${(pageSize ? (curPage - 1) * pageSize + index : index) + 1}]`
-                          ),
-                      ],
                       [
-                        m(
-                          '.row.repeat-item',
-                          { className: repeatItemClass, key: page + hash(item), style: 'flex: 1;' },
-                          [
-                            type &&
-                              m(LayoutForm, {
-                                form: type,
-                                obj: item,
-                                i18n,
-                                context: context instanceof Array ? [obj, ...context] : [obj, context],
-                                section,
-                                containerId,
-                                disabled,
-                                readonly,
-                                onchange: () => onchange && onchange(obj),
-                              } as FormAttributes),
-                          ]
-                        ),
-                      ],
-                      canDeleteItems && [
-                        m(FlatButton, {
-                          iconName: 'delete',
-                          className: 'mui-delete-item',
-                          iconClass: 'mui-delete-icon',
-                          style: { flex: '0 0 20px', padding: 0 },
-                          disabled,
-                          readonly,
-                          onclick: () => {
-                            state.curItemIdx = pageSize ? (curPage - 1) * pageSize + index : index;
-                          },
-                        }),
-                      ],
-                    ]
-                  )
-                ),
-            !(disabled || maxItemsReached || readonly || !items || items.length === 0 || pageSize === 1) &&
-              m(RoundIconButton, {
-                iconName: 'add',
-                className: 'row mui-add-new-item btn-small right',
-                title: label,
-                style: 'padding: 0; margin-top: -10px; margin-right: -25px',
-                onclick: () => {
-                  addEmptyItem(obj, String(id));
-                  m.route.set(fragment, Object.assign(params, { [id!]: items.length }));
-                  onchange && onchange(obj);
-                },
-              }),
-          ]),
+                        canDeleteItems && [
+                          (!pageSize || pageSize > 1) &&
+                            m(
+                              'span.mui-show-item-number left',
+                              { style: `flex: 0 0 ${numberColWidth}px;` },
+                              `[${(pageSize ? (curPage - 1) * pageSize + index : index) + 1}]`
+                            ),
+                        ],
+                        [
+                          m(
+                            '.row.repeat-item',
+                            { className: repeatItemClass, key: page + hash(item), style: 'flex: 1;' },
+                            [
+                              type &&
+                                m(LayoutForm, {
+                                  form: type,
+                                  obj: item,
+                                  i18n,
+                                  context: context instanceof Array ? [obj, ...context] : [obj, context],
+                                  section,
+                                  containerId,
+                                  disabled,
+                                  readonly,
+                                  onchange: () => onchange && onchange(obj),
+                                } as FormAttributes),
+                            ]
+                          ),
+                        ],
+                        canDeleteItems && [
+                          m(FlatButton, {
+                            iconName: 'delete',
+                            className: 'mui-delete-item',
+                            iconClass: 'mui-delete-icon',
+                            style: { flex: '0 0 20px', padding: 0 },
+                            disabled,
+                            readonly,
+                            onclick: () => {
+                              state.curItemIdx = pageSize ? (curPage - 1) * pageSize + index : index;
+                            },
+                          }),
+                        ],
+                      ]
+                    )
+                  ),
+              !(disabled || maxItemsReached || readonly || !items || items.length === 0 || pageSize === 1) &&
+                m(RoundIconButton, {
+                  iconName: 'add',
+                  className: 'row mui-add-new-item btn-small right',
+                  title: label,
+                  style: 'padding: 0; margin-top: -10px; margin-right: -25px',
+                  onclick: () => {
+                    addEmptyItem(obj, String(id));
+                    m.route.set(fragment, Object.assign(params, { [id!]: items.length }));
+                    onchange && onchange(obj);
+                  },
+                }),
+            ]
+          ),
         ],
         typeof state.curItemIdx !== 'undefined' &&
           m(ModalPanel, {
