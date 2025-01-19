@@ -1,88 +1,165 @@
 import m, { FactoryComponent } from 'mithril';
+import { FlatButton, Tabs } from 'mithril-materialized';
 import { FormAttributes, LayoutForm, UIForm } from 'mithril-ui-form';
+import { llf, tartan } from '../../utils/examples';
+import { ratingPlugin } from 'mithril-ui-form-rating-plugin';
+import { registerPlugin } from 'mithril-ui-form';
 
-const componentTypeOptions = [
-  { id: 'autogenerate', label: 'autogenerate' },
-  { id: 'checkbox', label: 'checkbox' },
-  { id: 'color', label: 'color' },
-  { id: 'colour', label: 'colour' },
-  { id: 'date', label: 'date' },
-  { id: 'date', label: 'date' },
-  { id: 'email', label: 'email' },
-  { id: 'map', label: 'map' },
-  { id: 'md', label: 'md' },
-  { id: 'none', label: 'none' },
-  { id: 'number', label: 'number' },
-  { id: 'options', label: 'options' },
-  { id: 'radio', label: 'radio' },
-  { id: 'select', label: 'select' },
-  { id: 'switch', label: 'switch' },
-  { id: 'tags', label: 'tags' },
-  { id: 'text', label: 'text' },
-  { id: 'textarea', label: 'textarea' },
-  { id: 'time', label: 'time' },
-  { id: 'url', label: 'url' },
-];
+registerPlugin('rating', ratingPlugin);
+
+type UILabel = {
+  id: string;
+  repeat?: boolean;
+  type?: string | UIForm<UILabel> | any;
+  label?: string;
+  index?: number;
+  min?: number;
+  max?: number;
+  placeholder?: string;
+  description?: string;
+  className?: string;
+  multiple?: boolean;
+  checkboxClass?: string;
+  show?: string;
+  required?: boolean;
+  options?: Array<{ id: string; label: string }>;
+};
+
+export const labelGeneratorForm = [
+  {
+    id: 'repeat',
+    label: 'Is group',
+    type: 'switch',
+    className: 'col s3',
+  },
+  {
+    id: 'id',
+    label: 'Property',
+    required: true,
+    placeholder: 'Property name',
+    type: 'text',
+    className: 'col s3',
+  },
+  { id: 'label', label: 'Property label', type: 'text', className: 'col s6' },
+  {
+    id: 'required',
+    label: 'Required',
+    type: 'switch',
+    value: 'true',
+    left: 'No',
+    right: 'Yes',
+    className: 'col s3',
+  },
+  {
+    id: 'type',
+    label: 'Property type',
+    type: 'select',
+    required: true,
+    value: 'text',
+    show: ['!repeat', 'repeat=false'],
+    className: 'col s3',
+    options: [
+      { id: 'text', label: 'Text' },
+      { id: 'textarea', label: 'Text area' },
+      { id: 'number', label: 'Number' },
+      { id: 'url', label: 'Link / URL' },
+      { id: 'email', label: 'E-mail' },
+      { id: 'checkbox', label: 'Checkbox' },
+      { id: 'radio', label: 'Radio button' },
+      { id: 'select', label: 'Dropdown' },
+      { id: 'options', label: 'Checkbox' },
+      { id: 'none', label: 'Hidden' },
+      { id: 'md', label: 'Markdown' },
+      { id: 'rating', label: 'Rating' },
+    ],
+  },
+  {
+    id: 'min',
+    label: 'Min',
+    placeholder: 'Min value/length',
+    type: 'number',
+    className: 'col s3',
+  },
+  {
+    id: 'max',
+    label: 'Max',
+    placeholder: 'Max value/length',
+    type: 'number',
+    className: 'col s3',
+  },
+  {
+    id: 'multiple',
+    label: 'Multiple',
+    type: 'switch',
+    className: 'col s3',
+    show: ['type=select', 'type=options'],
+  },
+  {
+    id: 'checkboxClass',
+    label: 'Option layout',
+    type: 'text',
+    className: 'col s4',
+    placeholder: 'col s4',
+    show: ['type=radio', 'type=options'],
+  },
+  { id: 'value', label: 'Intial value', type: 'textarea', show: ['type=md'], className: 'col s12' },
+  {
+    id: 'placeholder',
+    label: 'Placeholder',
+    type: 'text',
+    className: 'col s4',
+    show: ['!repeat', 'repeat=false'],
+  },
+  { id: 'description', label: 'Help text', type: 'text', className: 'col s4', show: ['!repeat', 'repeat=false'] },
+  {
+    id: 'className',
+    label: 'Layout instructions',
+    type: 'text',
+    placeholder: 'col s12',
+    className: 'col s4',
+    description: 'See [Materialize-CSS](https://materializecss.com/grid.html).',
+    show: ['repeat=false', '!repeat'],
+  },
+  {
+    id: 'show',
+    label: 'Show condition',
+    type: 'tags',
+    placeholder: 'id=value',
+    className: 'col s5',
+    description: 'key!=value',
+  },
+  {
+    id: 'options',
+    label: 'Options',
+    className: 'col s12',
+    show: ['type=select', 'type=options', 'type=radio', 'type=rating'],
+    repeat: true,
+    pageSize: 100,
+    required: true,
+    type: [
+      { id: 'id', label: 'Option ID', type: 'text', className: 'col s4' },
+      { id: 'label', label: 'Label', type: 'text', className: 'col s8' },
+    ],
+  },
+] as UIForm<UILabel>;
+
+labelGeneratorForm.push({
+  id: 'type',
+  label: 'Sub-labels',
+  show: ['repeat=true'],
+  repeat: true,
+  pageSize: 1,
+  type: labelGeneratorForm as UIForm<any>,
+});
 
 export const CreateForm: FactoryComponent = () => {
-  type EditorField = {
-    id: string;
-    type: string;
-    autogenerate?: 'guid' | 'id';
-    className: string;
-    disabled: boolean;
-  };
-
-  type EditorFields = {
-    properties: EditorField[];
-  };
-
   const state = {
     isValid: false,
-    editor: [
-      {
-        id: 'properties',
-        label: 'Properties',
-        repeat: true,
-        type: [
-          { id: 'id', type: 'text' },
-          { id: 'type', type: 'select', options: componentTypeOptions, className: 'col s8' },
-          {
-            id: 'autogenerate',
-            label: 'Auto-generated',
-            show: ['type = autogenerate', 'type = text'],
-            type: 'select',
-            className: 'col s4',
-            options: [
-              { id: undefined, label: 'None' },
-              { id: 'guid', label: 'GUID' },
-              { id: 'id', label: 'ID' },
-            ],
-          },
-          {
-            id: 'className',
-            label: 'CSS class',
-            description: `Determines the width of a field on different (s=small, m, l and xl) display sizes.
-            See [materialize-css](https://materializecss.com/grid.html) for the options.`,
-            type: 'text',
-            className: 'col s8',
-            value: 'col s12',
-          },
-          {
-            id: 'disabled',
-            type: 'switch',
-            className: 'col s4',
-          },
-        ],
-      },
-    ] as UIForm<EditorFields>,
     form: { properties: [] },
     result: {},
     context: {},
   } as {
     isValid: boolean;
-    /** Layout form for creating the editor */
-    editor: UIForm<EditorFields>;
     /** Generated form for creating another layout from */
     form: { properties: UIForm<any> };
     result: Record<string, any>;
@@ -95,20 +172,138 @@ export const CreateForm: FactoryComponent = () => {
     console.log(JSON.stringify(state.form, null, 2));
   };
 
+  const ex1: UIForm<any> = [
+    {
+      repeat: true,
+      id: 'facts',
+      label: 'Facts',
+      min: 1,
+      max: 3,
+      required: true,
+      type: [
+        {
+          required: true,
+          type: 'select',
+          id: 'type',
+          label: 'Type',
+          options: [
+            {
+              id: 'cocaine',
+              label: 'Cocaine',
+            },
+            {
+              id: 'money',
+              label: 'Money',
+            },
+          ],
+          className: 'col s4',
+        },
+        {
+          required: true,
+          type: 'number',
+          id: 'quantity',
+          label: 'Quantity',
+          className: 'col s4',
+        },
+        {
+          required: true,
+          type: 'text',
+          id: 'unit',
+          label: 'Unit',
+          className: 'col s4',
+        },
+      ],
+    },
+  ];
+
+  const ex2 = llf;
+
+  const ex3 = tartan;
+
+  const fullLabelGeneratorForm = [
+    {
+      id: 'properties',
+      label: 'Properties',
+      repeat: true,
+      pageSize: 1,
+      type: labelGeneratorForm,
+    },
+  ] as UIForm<any>;
+
   return {
     view: () => {
-      const { editor, form, result } = state;
+      const { form, result } = state;
 
-      return m('.row', [
-        m('.col.s12.m6', [
-          m('h3', 'Editor'),
-          m(LayoutForm, { form: editor, obj: form, onchange } as FormAttributes<EditorFields>),
-        ]),
-        m('.col.s12.m6', [
-          m('h3', 'New form'),
-          m(LayoutForm, { form: form.properties, obj: result, onchange: print } as FormAttributes<any>),
-        ]),
-      ]);
+      return m(
+        '.row',
+        {
+          style: {
+            width: '95%',
+            paddingTop: '10px',
+          },
+        },
+        [
+          m(
+            '.col.s12.m6',
+            m(Tabs, {
+              tabs: [
+                {
+                  title: 'Create Form',
+                  vnode: m(LayoutForm, {
+                    form: fullLabelGeneratorForm,
+                    obj: form,
+                    onchange,
+                  } as FormAttributes<any>),
+                },
+                {
+                  title: 'Examples',
+                  vnode: m(
+                    '.row.examples',
+                    m(FlatButton, {
+                      label: 'Lessons learned',
+                      iconName: 'looks_one',
+                      className: 'button',
+                      onclick: () => {
+                        state.form = { properties: ex2 };
+                      },
+                    }),
+                    m(FlatButton, {
+                      label: 'Facts',
+                      iconName: 'looks_two',
+                      className: 'button',
+                      onclick: () => {
+                        state.form = { properties: ex1 };
+                      },
+                    }),
+                    m(FlatButton, {
+                      label: 'Vignettes',
+                      iconName: 'looks_3',
+                      className: 'button',
+                      onclick: () => {
+                        state.form = { properties: ex3 };
+                      },
+                    })
+                  ),
+                },
+              ],
+            })
+          ),
+
+          m(
+            '.col.s12.m6',
+            m(Tabs, {
+              tabs: [
+                {
+                  title: 'Form',
+                  vnode: m(LayoutForm, { form: form.properties, obj: result, onchange } as FormAttributes<any>),
+                },
+                { title: 'JSON Output', vnode: m('pre', JSON.stringify(result, null, 2)) },
+                { title: 'JSON Form', vnode: m('pre', JSON.stringify(form.properties, null, 2)) },
+              ],
+            })
+          ),
+        ]
+      );
     },
   };
 };

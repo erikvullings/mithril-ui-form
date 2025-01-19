@@ -63,6 +63,6 @@ export const Layout = () => ({
           ),
         ])
       ),
-      m('.container', vnode.children),
+      m('div', { style: { width: '90%', margin: '0 auto' } }, vnode.children),
     ]),
 });

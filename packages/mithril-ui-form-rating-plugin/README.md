@@ -1,13 +1,16 @@
 # A rating plugin for Mithril-ui-form
 
-[Mithril-ui-form](https://www.npmjs.com/package/mithril-ui-form) is a declarative framwork to create forms using the front-end [Mithril framework](https://mithril.js.org/) and [mithril-materialized](https://www.npmjs.com/package/mithril-materialized) components using the [materialize-css](http://materializecss.com/) design theme.
+[Mithril-ui-form](https://www.npmjs.com/package/mithril-ui-form) is a declarative framework to create forms using the front-end [Mithril framework](https://mithril.js.org/) and [mithril-materialized](https://www.npmjs.com/package/mithril-materialized) components using the [materialize-css](http://materializecss.com/) design theme.
 
 A simple rating control, i.e. a horizontal list of radio buttons, with optional labels for each item.
 
 ## Include rating control
 
+Typically, in `app.ts`:
+
 ```ts
 import { ratingPlugin } from "mithril-ui-form-rating-plugin";
+import { registerPlugin } from 'mithril-ui-form';
 
 ...
 
