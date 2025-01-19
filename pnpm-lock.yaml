@@ -27,8 +27,8 @@ importers:
         specifier: ^2.2.12
         version: 2.2.12
       mithril-materialized:
-        specifier: ^1.3.0
-        version: 1.3.0
+        specifier: ^1.3.4
+        version: 1.3.4
       mithril-ui-form:
         specifier: workspace:*
         version: link:../mithril-ui-form
@@ -110,8 +110,8 @@ importers:
         specifier: 2.2.12
         version: 2.2.12
       mithril-materialized:
-        specifier: 1.3.0
-        version: 1.3.0
+        specifier: 1.3.4
+        version: 1.3.4
       rimraf:
         specifier: 6.0.1
         version: 6.0.1
@@ -196,11 +196,11 @@ importers:
         specifier: ^2.2.7
         version: 2.2.7
       '@types/node':
-        specifier: ^22.10.5
-        version: 22.10.5
+        specifier: ^22.10.7
+        version: 22.10.7
       microbundle:
         specifier: ^0.15.1
-        version: 0.15.1(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.7.3))
+        version: 0.15.1(ts-node@10.9.2(@types/node@22.10.7)(typescript@5.7.3))
       mithril-ui-form-plugin:
         specifier: workspace:*
         version: link:../mithril-ui-form-plugin
@@ -1061,6 +1061,9 @@ packages:
 
   '@types/node@22.10.5':
     resolution: {integrity: sha512-F8Q+SeGimwOo86fiovQh8qiXfFEh2/ocYv7tU5pJ3EXMSSxk1Joj5wefpFK2fHTf/N6HKGSxIDBT9f3gCxXPkQ==}
+
+  '@types/node@22.10.7':
+    resolution: {integrity: sha512-V09KvXxFiutGp6B7XkpaDXlNadZxrzajcY50EuoLIpQ6WWYCSvf19lVIazzfIzQvhUN2HjX12spLojTnhuKlGg==}
 
   '@types/parse-json@4.0.0':
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
@@ -2569,8 +2572,8 @@ packages:
       leaflet-draw: ^1.0.4
       mithril: ^2.0.4
 
-  mithril-materialized@1.3.0:
-    resolution: {integrity: sha512-GHvfJCkpKa4VTjinsPx0n0IGAEkVzX3rwo6r55Nui2tifu22w5CNnxqCGvGIylNJ7cn4Sl+b1/XIgSHnCPR0tg==}
+  mithril-materialized@1.3.4:
+    resolution: {integrity: sha512-kex43K1V6DClSqP0hsdoRvhP3swVWhydMeUHJZmD9r7xZGM7c3Vg98bSR9SR7LxdOmVLJKxp/GLKq5GVpzkEGA==}
 
   mithril-ui-form-plugin@0.6.7:
     resolution: {integrity: sha512-tm7rQususQQZKdDxCR4OcyrZW3RmkYhCU1GRkKTTNjIv24apDi6CQ4tBgm/+Q4zTwvedtYSG0El4SIkQrexkBA==}
@@ -4700,7 +4703,7 @@ snapshots:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.4
       '@types/istanbul-reports': 3.0.1
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
       '@types/yargs': 17.0.24
       chalk: 4.1.2
 
@@ -4821,20 +4824,20 @@ snapshots:
   '@types/body-parser@1.19.2':
     dependencies:
       '@types/connect': 3.4.35
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
 
   '@types/bonjour@3.5.13':
     dependencies:
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
 
   '@types/connect-history-api-fallback@1.5.4':
     dependencies:
       '@types/express-serve-static-core': 4.17.35
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
 
   '@types/connect@3.4.35':
     dependencies:
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
 
   '@types/eslint-scope@3.7.7':
     dependencies:
@@ -4852,7 +4855,7 @@ snapshots:
 
   '@types/express-serve-static-core@4.17.35':
     dependencies:
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
       '@types/send': 0.17.1
@@ -4872,7 +4875,7 @@ snapshots:
 
   '@types/http-proxy@1.17.11':
     dependencies:
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
 
   '@types/istanbul-lib-coverage@2.0.4': {}
 
@@ -4909,13 +4912,17 @@ snapshots:
 
   '@types/node-forge@1.3.11':
     dependencies:
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
 
   '@types/node@18.19.54':
     dependencies:
       undici-types: 5.26.5
 
   '@types/node@22.10.5':
+    dependencies:
+      undici-types: 6.20.0
+
+  '@types/node@22.10.7':
     dependencies:
       undici-types: 6.20.0
 
@@ -4927,14 +4934,14 @@ snapshots:
 
   '@types/resolve@1.17.1':
     dependencies:
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
 
   '@types/retry@0.12.2': {}
 
   '@types/send@0.17.1':
     dependencies:
       '@types/mime': 1.3.2
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
 
   '@types/serve-index@1.9.4':
     dependencies:
@@ -4943,18 +4950,18 @@ snapshots:
   '@types/serve-static@1.15.7':
     dependencies:
       '@types/http-errors': 2.0.4
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
       '@types/send': 0.17.1
 
   '@types/sizzle@2.3.8': {}
 
   '@types/sockjs@0.3.36':
     dependencies:
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
 
   '@types/ws@8.5.10':
     dependencies:
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
 
   '@types/yargs-parser@21.0.0': {}
 
@@ -6317,7 +6324,7 @@ snapshots:
   jest-util@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
       chalk: 4.1.2
       ci-info: 3.8.0
       graceful-fs: 4.2.11
@@ -6325,19 +6332,19 @@ snapshots:
 
   jest-worker@26.6.2:
     dependencies:
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
       merge-stream: 2.0.0
       supports-color: 7.2.0
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
   jest-worker@29.7.0:
     dependencies:
-      '@types/node': 22.10.5
+      '@types/node': 22.10.7
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
@@ -6555,6 +6562,55 @@ snapshots:
       - supports-color
       - ts-node
 
+  microbundle@0.15.1(ts-node@10.9.2(@types/node@22.10.7)(typescript@5.7.3)):
+    dependencies:
+      '@babel/core': 7.23.7
+      '@babel/plugin-proposal-class-properties': 7.12.1(@babel/core@7.23.7)
+      '@babel/plugin-syntax-import-meta': 7.10.4(@babel/core@7.23.7)
+      '@babel/plugin-syntax-jsx': 7.23.3(@babel/core@7.23.7)
+      '@babel/plugin-transform-flow-strip-types': 7.23.3(@babel/core@7.23.7)
+      '@babel/plugin-transform-react-jsx': 7.23.4(@babel/core@7.23.7)
+      '@babel/plugin-transform-regenerator': 7.23.3(@babel/core@7.23.7)
+      '@babel/preset-env': 7.23.8(@babel/core@7.23.7)
+      '@babel/preset-flow': 7.23.3(@babel/core@7.23.7)
+      '@babel/preset-react': 7.23.3(@babel/core@7.23.7)
+      '@rollup/plugin-alias': 3.1.9(rollup@2.79.1)
+      '@rollup/plugin-babel': 5.3.1(@babel/core@7.23.7)(rollup@2.79.1)
+      '@rollup/plugin-commonjs': 17.1.0(rollup@2.79.1)
+      '@rollup/plugin-json': 4.1.0(rollup@2.79.1)
+      '@rollup/plugin-node-resolve': 11.2.1(rollup@2.79.1)
+      '@surma/rollup-plugin-off-main-thread': 2.2.3
+      asyncro: 3.0.0
+      autoprefixer: 10.4.16(postcss@8.4.38)
+      babel-plugin-macros: 3.1.0
+      babel-plugin-transform-async-to-promises: 0.8.18
+      babel-plugin-transform-replace-expressions: 0.2.0(@babel/core@7.23.7)
+      brotli-size: 4.0.0
+      builtin-modules: 3.3.0
+      camelcase: 6.3.0
+      escape-string-regexp: 4.0.0
+      filesize: 6.4.0
+      gzip-size: 6.0.0
+      kleur: 4.1.5
+      lodash.merge: 4.6.2
+      postcss: 8.4.38
+      pretty-bytes: 5.6.0
+      rollup: 2.79.1
+      rollup-plugin-bundle-size: 1.0.3
+      rollup-plugin-postcss: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@22.10.7)(typescript@5.7.3))
+      rollup-plugin-terser: 7.0.2(rollup@2.79.1)
+      rollup-plugin-typescript2: 0.32.1(rollup@2.79.1)(typescript@4.9.5)
+      rollup-plugin-visualizer: 5.12.0(rollup@2.79.1)
+      sade: 1.8.1
+      terser: 5.26.0
+      tiny-glob: 0.2.9
+      tslib: 2.8.1
+      typescript: 4.9.5
+    transitivePeerDependencies:
+      - '@types/babel__core'
+      - supports-color
+      - ts-node
+
   micromatch@4.0.5:
     dependencies:
       braces: 3.0.2
@@ -6596,7 +6652,7 @@ snapshots:
       leaflet-draw: 1.0.4
       mithril: 2.2.12
 
-  mithril-materialized@1.3.0:
+  mithril-materialized@1.3.4:
     dependencies:
       materialize-css: 1.0.0
       mithril: 2.2.12
@@ -6857,6 +6913,14 @@ snapshots:
     optionalDependencies:
       postcss: 8.4.38
       ts-node: 10.9.2(@types/node@22.10.5)(typescript@5.7.3)
+
+  postcss-load-config@3.1.4(postcss@8.4.38)(ts-node@10.9.2(@types/node@22.10.7)(typescript@5.7.3)):
+    dependencies:
+      lilconfig: 2.1.0
+      yaml: 1.10.2
+    optionalDependencies:
+      postcss: 8.4.38
+      ts-node: 10.9.2(@types/node@22.10.7)(typescript@5.7.3)
 
   postcss-merge-longhand@5.1.7(postcss@8.4.38):
     dependencies:
@@ -7333,6 +7397,25 @@ snapshots:
     transitivePeerDependencies:
       - ts-node
 
+  rollup-plugin-postcss@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@types/node@22.10.7)(typescript@5.7.3)):
+    dependencies:
+      chalk: 4.1.2
+      concat-with-sourcemaps: 1.1.0
+      cssnano: 5.1.15(postcss@8.4.38)
+      import-cwd: 3.0.0
+      p-queue: 6.6.2
+      pify: 5.0.0
+      postcss: 8.4.38
+      postcss-load-config: 3.1.4(postcss@8.4.38)(ts-node@10.9.2(@types/node@22.10.7)(typescript@5.7.3))
+      postcss-modules: 4.3.1(postcss@8.4.38)
+      promise.series: 0.2.0
+      resolve: 1.22.8
+      rollup-pluginutils: 2.8.2
+      safe-identifier: 0.4.2
+      style-inject: 0.3.0
+    transitivePeerDependencies:
+      - ts-node
+
   rollup-plugin-terser@7.0.2(rollup@2.79.1):
     dependencies:
       '@babel/code-frame': 7.23.5
@@ -7781,6 +7864,25 @@ snapshots:
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
       '@types/node': 22.10.5
+      acorn: 8.14.0
+      acorn-walk: 8.3.1
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 5.7.3
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    optional: true
+
+  ts-node@10.9.2(@types/node@22.10.7)(typescript@5.7.3):
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.9
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.4
+      '@types/node': 22.10.7
       acorn: 8.14.0
       acorn-walk: 8.3.1
       arg: 4.1.3
