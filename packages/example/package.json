@@ -26,9 +26,9 @@
   },
   "homepage": "https://github.com/erikvullings/mithril-ui-form#readme",
   "dependencies": {
-    "material-icons": "^1.13.12",
+    "material-icons": "^1.13.13",
     "materialize-css": "^1.0.0",
-    "mithril": "^2.2.12",
+    "mithril": "^2.2.13",
     "mithril-materialized": "^1.3.5",
     "mithril-ui-form": "workspace:*",
     "mithril-ui-form-leaflet-plugin": "workspace:*",

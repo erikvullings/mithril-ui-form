@@ -31,11 +31,11 @@
   "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
   "license": "MIT",
   "dependencies": {
-    "mithril": "^2.2.12"
+    "mithril": "^2.2.13"
   },
   "devDependencies": {
     "@types/mithril": "^2.2.7",
-    "@types/node": "^22.10.7",
+    "@types/node": "^22.13.1",
     "microbundle": "^0.15.1",
     "mithril-ui-form-plugin": "workspace:*",
     "rimraf": "^6.0.1",
