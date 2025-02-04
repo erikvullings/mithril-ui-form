@@ -159,13 +159,12 @@ export const RepeatList = <O extends Attributes>() => {
       const delimitter = pageSize
         ? (_: any, i: number) => (curPage - 1) * pageSize <= i && i < curPage * pageSize
         : () => true;
-      const route = m.route.get() || location.href.replace(location.origin, '').replace('/#!', '');
       const maxPages = pageSize ? Math.ceil(items.length / pageSize) : 0;
       const maxItemsReached = max && items.length >= max ? true : false;
       const canDeleteItems = disabled || readonly ? false : !min || items.length > min ? true : false;
 
-      const fragment = route ? route.split('?')[0] : '';
-      const params = getAllUrlParams(route);
+      const fragment = location.hash ? location.hash.split('?')[0].replace('#!', '') : '';
+      const params = getAllUrlParams(location.hash);
       const numberColWidth = 30 + 10 * Math.floor(Math.log10(items.length));
 
       const canDrag = maxPages === 0;
