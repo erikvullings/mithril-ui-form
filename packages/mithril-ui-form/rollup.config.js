@@ -1,5 +1,5 @@
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import sourceMaps from 'rollup-plugin-sourcemaps';
 import typescript from 'rollup-plugin-typescript2';
 import { terser } from 'rollup-plugin-terser';
@@ -36,15 +36,12 @@ export default {
     // which external modules to include in the bundle
     // https://github.com/rollup/rollup-plugin-node-resolve#usage
     resolve({
-      customResolveOptions: {
-        moduleDirectory: 'node_modules',
-      },
+      moduleDirectories: ['node_modules'],
     }),
     // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
     commonjs(),
     // Compile TypeScript files
     typescript({
-      rollupCommonJSResolveHack: true,
       // objectHashIgnoreUnknownHack: true,
       // tsconfigOverride: { compilerOptions: { module: 'ES2015' } },
       typescript: require('typescript'),
@@ -62,6 +59,6 @@ export default {
     // Resolve source maps to the original source
     sourceMaps(),
     // minifies generated bundles
-    production && terser({ sourcemap: true }),
+    production && terser(),
   ],
 };
