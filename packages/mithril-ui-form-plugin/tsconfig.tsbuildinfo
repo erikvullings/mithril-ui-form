@@ -1,1 +1,1 @@
-{"root":["./src/component-type.ts","./src/form.ts","./src/i18n.ts","./src/index.ts","./src/input-field.ts","./src/plugin.ts"],"version":"5.9.2"}
+{"root":["./src/component-type.ts","./src/form.ts","./src/i18n.ts","./src/index.ts","./src/input-field.ts","./src/plugin.ts"],"errors":true,"version":"5.9.2"}

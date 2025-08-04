@@ -25,8 +25,12 @@ export type FormAttributes<O extends Record<string, any> = {}> = Attributes & {
   readonly?: boolean;
 };
 
-// Helper type to extract array element type
-type ArrayElement<T> = T extends readonly (infer U)[] ? U : never;
+// Helper type to extract array element type with proper constraint
+type ArrayElement<T> = T extends readonly (infer U)[] 
+  ? U extends Record<string, any> 
+    ? U 
+    : Record<string, any>
+  : Record<string, any>;
 
 // Improved UIForm type with better recursive handling
 export type UIFormField<O extends Record<string, any>, K extends keyof O = keyof O> = InputField<O, K> & {
