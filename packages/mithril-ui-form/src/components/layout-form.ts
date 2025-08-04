@@ -52,67 +52,71 @@ const guessType = <O extends Attributes = {}>(field: InputField<O>) => {
 
 const FormField: { <O extends Attributes>(): Component<IFormField<O>> } = FormFieldFactory(plugins, readonlyPlugins);
 
-export const LayoutForm = <O extends Partial<{}>>(): FormComponent<O> => {
-  const sectionFilter = (section?: string) => {
-    if (!section) {
-      return (_: InputField<O>) => true;
+export const LayoutForm = <O extends Record<string, any> = {}>(): FormComponent<O> => {
+  // Memoized section filter for performance
+  const sectionFilterCache = new Map<string | undefined, (field: InputField<O>) => boolean>();
+  
+  const getSectionFilter = (section?: string) => {
+    if (sectionFilterCache.has(section)) {
+      return sectionFilterCache.get(section)!;
     }
-    let state = false;
-    return ({ type, id }: InputField<O>): boolean => {
-      if (type === 'section') {
-        state = id === section;
-        return false; // Return false the first time, so we don't output the section divider too
-      }
-      return state;
-    };
+    
+    const filter = section ? (() => {
+      let state = false;
+      return ({ type, id }: InputField<O>): boolean => {
+        if (type === 'section') {
+          state = id === section;
+          return false; // Return false the first time, so we don't output the section divider too
+        }
+        return state;
+      };
+    })() : (_: InputField<O>) => true;
+    
+    sectionFilterCache.set(section, filter);
+    return filter;
   };
 
   return {
     view: ({ attrs: { i18n, form, obj, onchange: onChange, disabled, readonly, context, section } }) => {
       const onchange = (res: O) => onChange && onChange(isValid(res, form), res);
+      const sectionFilter = getSectionFilter(section);
+      const ctx = context || [];
 
-      return form
-        .filter(sectionFilter(section))
-        .filter((field) => !field.show || evalExpression(field.show, obj, ...(context || [])))
-        .reduce((acc, field) => {
-          if (!field.type) field.type = guessType(field);
-          return [
-            ...acc,
-            typeof field.repeat === 'undefined' || (field.repeat as Boolean) === false
-              ? m(FormField, {
-                  i18n,
-                  field,
-                  obj,
-                  onchange,
-                  disabled,
-                  readonly,
-                  context,
-                  section,
-                  containerId: 'body',
-                } as IFormField<O>)
-              : field.repeat === 'geojson'
-              ? m(GeoJSONFeatureList, {
-                  obj,
-                  field,
-                  onchange,
-                  context,
-                  i18n,
-                  containerId: 'body',
-                  disabled,
-                  readonly,
-                } as IGeoJSONFeatureList<O>)
-              : m(RepeatList, {
-                  obj,
-                  field,
-                  onchange,
-                  context,
-                  i18n,
-                  containerId: 'body',
-                  disabled,
-                  readonly,
-                } as IRepeatList<O>),
-          ];
-        }, [] as Array<Vnode<any, any>>);
+      // Optimized filtering with early returns and single pass
+      const visibleFields: Array<Vnode<any, any>> = [];
+      
+      for (const field of form) {
+        // Early return for section filtering
+        if (!sectionFilter(field)) continue;
+        
+        // Early return for conditional visibility
+        if (field.show && !evalExpression(field.show, obj, ...ctx)) continue;
+        
+        // Guess type if not provided
+        if (!field.type) field.type = guessType(field);
+        
+        const commonProps = {
+          i18n,
+          field,
+          obj,
+          onchange,
+          disabled,
+          readonly,
+          context: ctx,
+          section,
+          containerId: 'body',
+        };
+
+        if (typeof field.repeat === 'undefined' || (field.repeat as Boolean) === false) {
+          visibleFields.push(m(FormField, commonProps as IFormField<O>));
+        } else if (field.repeat === 'geojson') {
+          visibleFields.push(m(GeoJSONFeatureList, commonProps as IGeoJSONFeatureList<O>));
+        } else {
+          visibleFields.push(m(RepeatList, commonProps as IRepeatList<O>));
+        }
+      }
+      
+      return visibleFields;
     },
   };
 };

@@ -35,11 +35,29 @@ import { LayoutForm } from './layout-form';
 import { ReadonlyComponent } from './readonly';
 import { SlimdownView } from './slimdown-view';
 
+// Memoization cache for unwrapped components
+const componentCache = new WeakMap<object, Record<string, any>>();
+
+// Generate a unique ID with form-level scope to prevent collisions
+const generateFormFieldId = (fieldId: string, formContext = 'default'): string => {
+  return `mui_${formContext}_${fieldId}_${uniqueId()}`;
+};
+
 const unwrapComponent = <O extends Record<string, any> = {}>(
   field: InputField<O>,
   autofocus = false,
-  disabled = false
+  disabled = false,
+  formContext = 'default'
 ) => {
+  // Check cache first for performance
+  const cacheKey = `${autofocus}_${disabled}_${formContext}`;
+  if (componentCache.has(field)) {
+    const cached = componentCache.get(field)!;
+    if (cached._cacheKey === cacheKey) {
+      return cached;
+    }
+  }
+
   const {
     id = '',
     label,
@@ -61,7 +79,11 @@ const unwrapComponent = <O extends Record<string, any> = {}>(
     dateFormat,
     twelveHour,
   } = field;
-  const result = { id: `mui_${String(id)}-${uniqueId()}`, label } as Record<string, any>;
+  const result = { 
+    id: generateFormFieldId(String(id), formContext), 
+    label, 
+    _cacheKey: cacheKey 
+  } as Record<string, any>;
   if (typeof label === 'undefined' && id) {
     result.label = capitalizeFirstLetter(String(id));
   }
@@ -85,12 +107,14 @@ const unwrapComponent = <O extends Record<string, any> = {}>(
   }
   if (required) {
     result.isMandatory = true;
+    result['aria-required'] = 'true';
   }
   if (multiple) {
     result.multiple = multiple;
   }
   if (disabled) {
     result.disabled = true;
+    result['aria-disabled'] = 'true';
   }
   if (autofocus) {
     result.autofocus = true;
@@ -122,6 +146,9 @@ const unwrapComponent = <O extends Record<string, any> = {}>(
   if (twelveHour) {
     result.twelveHour = twelveHour;
   }
+  
+  // Cache the result for performance
+  componentCache.set(field, result);
   return result;
 };
 
@@ -211,12 +238,14 @@ export const FormFieldFactory =
 
         const parentIsDisabled = typeof d === 'boolean' && d;
 
+        const formContext = obj && typeof obj === 'object' && 'id' in obj ? String(obj.id) : 'default';
         const props = unwrapComponent(
           field,
           autofocus,
           typeof disabled === 'boolean' || typeof disabled === 'undefined'
             ? parentIsDisabled || disabled
-            : parentIsDisabled || evalExpression(disabled, obj, ...context)
+            : parentIsDisabled || evalExpression(disabled, obj, ...context),
+          formContext
         );
 
         if (label) {
@@ -429,13 +458,15 @@ export const FormFieldFactory =
             case 'base64': {
               const initialValue = iv as string | undefined;
               const isImg = initialValue && /data:image/i.test(initialValue) ? true : false;
+              const altText = field.label || extractTitle(obj) || field.placeholder || 'Uploaded image';
               return (
                 isImg &&
                 m(
                   'div',
+                  { role: 'img', 'aria-label': typeof altText === 'string' ? altText : 'Image' },
                   m('img.responsive-img', {
                     src: initialValue,
-                    alt: extractTitle(obj) || '',
+                    alt: typeof altText === 'string' ? altText : 'Image',
                     style: { maxHeight: `${field.max || 50}px` },
                   })
                 )
@@ -455,7 +486,11 @@ export const FormFieldFactory =
                     'a[target=_blank]',
                     { href: url },
                     isImg
-                      ? m('img', { src: url, alt: url, style: { maxHeight: `${field.max || 50}px` } })
+                      ? m('img', { 
+                          src: url, 
+                          alt: field.label || field.placeholder || f || 'File image', 
+                          style: { maxHeight: `${field.max || 50}px` } 
+                        })
                       : m(ReadonlyComponent, {
                           props,
                           label: field.placeholder || 'File',
@@ -876,15 +911,17 @@ export const FormFieldFactory =
 
                 reader.readAsDataURL(file[0]);
               };
+              const altText = field.label || extractTitle(obj) || field.placeholder || 'Uploaded image';
               return isImg
                 ? m('div', [
                     m('img.responsive-img', {
                       src: initialValue,
-                      alt: extractTitle(obj) || '',
+                      alt: typeof altText === 'string' ? altText : 'Uploaded image',
                       style: { maxHeight: `${field.max || 50}px` },
                     }),
                     m(FlatButton, {
                       iconName: 'clear',
+                      'aria-label': 'Remove image',
                       onclick: () => onchange(''),
                     }),
                   ])

@@ -477,3 +477,74 @@ export const extractTitle = (param: unknown): string | undefined => {
   // Return undefined if no matching property is found
   return undefined;
 };
+
+// Array manipulation utilities for ArrayLayoutForm
+export const arrayUtils = {
+  /**
+   * Move an item from one index to another in an array
+   */
+  moveItem: <T>(array: T[], fromIndex: number, toIndex: number): T[] => {
+    if (fromIndex === toIndex || fromIndex < 0 || toIndex < 0 || fromIndex >= array.length || toIndex >= array.length) {
+      return array;
+    }
+    
+    const newArray = [...array];
+    const [movedItem] = newArray.splice(fromIndex, 1);
+    newArray.splice(toIndex, 0, movedItem);
+    return newArray;
+  },
+
+  /**
+   * Insert an item at a specific index
+   */
+  insertAt: <T>(array: T[], index: number, item: T): T[] => {
+    const newArray = [...array];
+    newArray.splice(index, 0, item);
+    return newArray;
+  },
+
+  /**
+   * Remove an item at a specific index
+   */
+  removeAt: <T>(array: T[], index: number): T[] => {
+    if (index < 0 || index >= array.length) {
+      return array;
+    }
+    const newArray = [...array];
+    newArray.splice(index, 1);
+    return newArray;
+  },
+
+  /**
+   * Swap two items in an array
+   */
+  swap: <T>(array: T[], index1: number, index2: number): T[] => {
+    if (index1 === index2 || index1 < 0 || index2 < 0 || index1 >= array.length || index2 >= array.length) {
+      return array;
+    }
+    
+    const newArray = [...array];
+    [newArray[index1], newArray[index2]] = [newArray[index2], newArray[index1]];
+    return newArray;
+  },
+
+  /**
+   * Duplicate an item at a specific index
+   */
+  duplicate: <T>(array: T[], index: number): T[] => {
+    if (index < 0 || index >= array.length) {
+      return array;
+    }
+    
+    const item = array[index];
+    const duplicatedItem = typeof item === 'object' ? deepCopy(item) : item;
+    return arrayUtils.insertAt(array, index + 1, duplicatedItem);
+  },
+
+  /**
+   * Check if an array is valid according to min/max constraints
+   */
+  isValidArray: <T>(array: T[], min = 0, max?: number): boolean => {
+    return array.length >= min && (max === undefined || array.length <= max);
+  }
+};

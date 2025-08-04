@@ -3,13 +3,16 @@ import { I18n } from './i18n';
 import { InputField } from './input-field';
 import { ComponentType } from './component-type';
 
-export type FormAttributes<O extends Attributes = {}> = Attributes & {
+// Improved context typing for better type safety
+export type FormContext<O> = Array<Partial<O> | O[keyof O]>;
+
+export type FormAttributes<O extends Record<string, any> = {}> = Attributes & {
   /** The form to display */
   form: UIForm<O>;
   /** The resulting object */
   obj: O;
   /** Relevant context, i.e. the original object and other context from the environment */
-  context?: Array<Partial<O> | O[keyof O] | any>; // TODO Check this type, may be an array of contexts
+  context?: FormContext<O>;
   /** Callback function, invoked every time the original result object has changed */
   onchange?: (isValid: boolean, obj?: O) => void;
   /** Disable the form, disallowing edits */
@@ -22,9 +25,17 @@ export type FormAttributes<O extends Attributes = {}> = Attributes & {
   readonly?: boolean;
 };
 
+// Helper type to extract array element type
+type ArrayElement<T> = T extends readonly (infer U)[] ? U : never;
+
+// Improved UIForm type with better recursive handling
+export type UIFormField<O extends Record<string, any>, K extends keyof O = keyof O> = InputField<O, K> & {
+  type?: ComponentType | (O[K] extends any[] 
+    ? UIForm<ArrayElement<O[K]>> 
+    : O[K] extends Record<string, any> 
+      ? UIForm<O[K]> 
+      : ComponentType);
+};
+
 /** A form with one or more input fields or forms (to allow for nested objects) */
-export type UIForm<O extends Attributes = {}> = Array<
-  InputField<O, keyof O> & {
-    type?: ComponentType | UIForm<O[keyof O]> | UIForm<O[keyof O] extends any[] ? O[keyof O][number] : O[keyof O]>;
-  }
->;
+export type UIForm<O extends Record<string, any> = {}> = Array<UIFormField<O>>;

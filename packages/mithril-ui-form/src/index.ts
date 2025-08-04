@@ -5,8 +5,10 @@ export {
   IMarkdownView,
   IReadonlyComponent,
   IRepeatList,
+  IArrayLayoutForm,
   FormFieldFactory,
   LayoutForm,
+  ArrayLayoutForm,
   ReadonlyComponent,
   RepeatList,
   SlimdownView,
@@ -27,4 +29,5 @@ export {
   getPath,
   flatten,
   formatExpression,
+  arrayUtils,
 } from './utils';
