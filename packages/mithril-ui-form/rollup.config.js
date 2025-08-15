@@ -3,8 +3,10 @@ import commonjs from '@rollup/plugin-commonjs';
 import sourceMaps from 'rollup-plugin-sourcemaps';
 import typescript from 'rollup-plugin-typescript2';
 import { terser } from 'rollup-plugin-terser';
+import { readFileSync } from 'fs';
+import typescript_lib from 'typescript';
 
-const pkg = require('./package.json');
+const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
@@ -44,7 +46,7 @@ export default {
     typescript({
       // objectHashIgnoreUnknownHack: true,
       // tsconfigOverride: { compilerOptions: { module: 'ES2015' } },
-      typescript: require('typescript'),
+      typescript: typescript_lib,
     }),
     // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
     // commonjs(),
