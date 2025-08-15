@@ -1,0 +1,27 @@
+# <type>(<scope>): <subject>
+#
+# <body>
+#
+# <footer>
+
+# Types:
+# feat:     A new feature
+# fix:      A bug fix
+# docs:     Documentation only changes
+# style:    Changes that do not affect the meaning of the code
+# refactor: A code change that neither fixes a bug nor adds a feature
+# perf:     A code change that improves performance
+# test:     Adding missing tests or correcting existing tests
+# chore:    Changes to the build process or auxiliary tools
+
+# Scope (optional):
+# Specify the package affected: ui-form, plugin, leaflet-plugin, rating-plugin, example
+
+# Examples:
+# feat(ui-form): add support for custom validation rules
+# fix(plugin): resolve issue with date picker initialization
+# docs: update README with new API examples
+# chore: update dependencies to latest versions
+
+# Breaking changes:
+# Include "BREAKING CHANGE:" in the footer to trigger a major version bump
