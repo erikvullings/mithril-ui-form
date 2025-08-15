@@ -41,32 +41,8 @@ jobs:
       - name: Build packages
         run: pnpm build
 
-      - name: Release mithril-ui-form-plugin
-        working-directory: packages/mithril-ui-form-plugin
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm exec semantic-release
-
-      - name: Release mithril-ui-form
+      - name: Release mithril-ui-form (main package)
         working-directory: packages/mithril-ui-form
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm exec semantic-release
-
-      - name: Release mithril-ui-form-leaflet-plugin
-        working-directory: packages/mithril-ui-form-leaflet-plugin
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm exec semantic-release
-
-      - name: Release mithril-ui-form-rating-plugin
-        working-directory: packages/mithril-ui-form-rating-plugin
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
