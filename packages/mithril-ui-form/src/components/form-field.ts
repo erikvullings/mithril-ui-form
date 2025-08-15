@@ -579,7 +579,7 @@ export const FormFieldFactory =
                   ? new Date(max)
                   : initialValue
                 : undefined;
-              return m(DatePicker, {
+              return m(DatePicker as any, {
                 ...props,
                 minDate,
                 maxDate,
@@ -632,7 +632,7 @@ export const FormFieldFactory =
                   m(
                     dateTimeSeconds ? '.col.s6' : '.col.s8',
                     { style: 'padding: 0' },
-                    m(DatePicker, {
+                    m(DatePicker as any, {
                       ...params,
                       label,
                       minDate,

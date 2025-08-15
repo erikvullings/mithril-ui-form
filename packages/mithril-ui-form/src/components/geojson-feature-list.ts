@@ -1,5 +1,5 @@
 import m, { Attributes, Component } from 'mithril';
-import { ITabItem, TextArea, Tabs, Collapsible } from 'mithril-materialized';
+import { TabItem, TextArea, Tabs, Collapsible } from 'mithril-materialized';
 import { FormAttributes, I18n, InputField } from 'mithril-ui-form-plugin';
 import { LayoutForm } from '.';
 
@@ -68,7 +68,7 @@ export const GeoJSONFeatureList = <O extends Attributes = {}>() => {
       const iv = obj[id] as string;
       const featureCollection = iv ? (JSON.parse(iv) as GeoJSON.FeatureCollection) : undefined;
       const features = featureCollection ? featureCollection.features || [] : [];
-      const tabs = [] as ITabItem[];
+      const tabs = [] as TabItem[];
       const rawTab = {
         title: state.raw,
         vnode: m(TextArea, {
@@ -77,7 +77,7 @@ export const GeoJSONFeatureList = <O extends Attributes = {}>() => {
           placeholder: 'Enter GeoJSON',
           onchange: (v: string) => (obj[id] = v as any),
         }),
-      } as ITabItem;
+      } as TabItem;
 
       if (!type || typeof type === 'string') return;
       const form = type;
@@ -128,7 +128,7 @@ export const GeoJSONFeatureList = <O extends Attributes = {}>() => {
               }),
             })
           : m('span', '...'),
-      } as ITabItem;
+      } as TabItem;
       tabs.push(viewTab);
       tabs.push(rawTab);
       return m(Tabs, { tabs, tabWidth: 'fill' });
