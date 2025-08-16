@@ -28,7 +28,7 @@
   "dependencies": {
     "material-icons": "^1.13.14",
     "mithril": "^2.3.4",
-    "mithril-materialized": "^2.0.0-beta.3",
+    "mithril-materialized": "beta",
     "mithril-ui-form": "workspace:*",
     "mithril-ui-form-leaflet-plugin": "workspace:*",
     "mithril-ui-form-rating-plugin": "workspace:*"

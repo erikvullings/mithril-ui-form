@@ -36,8 +36,8 @@ importers:
         specifier: ^2.3.4
         version: 2.3.4
       mithril-materialized:
-        specifier: ^2.0.0-beta.3
-        version: 2.0.0-beta.3
+        specifier: beta
+        version: 2.0.0-beta.5
       mithril-ui-form:
         specifier: workspace:*
         version: link:../mithril-ui-form
@@ -94,8 +94,8 @@ importers:
   packages/mithril-ui-form:
     dependencies:
       mithril-ui-form-plugin:
-        specifier: 0.7.0
-        version: 0.7.0
+        specifier: workspace:*
+        version: link:../mithril-ui-form-plugin
       slimdown-js:
         specifier: 1.1.0
         version: 1.1.0
@@ -122,8 +122,8 @@ importers:
         specifier: 2.3.4
         version: 2.3.4
       mithril-materialized:
-        specifier: 2.0.0-beta.3
-        version: 2.0.0-beta.3
+        specifier: beta
+        version: 2.0.0-beta.5
       rimraf:
         specifier: 6.0.1
         version: 6.0.1
@@ -3336,11 +3336,8 @@ packages:
       leaflet-draw: ^1.0.4
       mithril: ^2.0.4
 
-  mithril-materialized@2.0.0-beta.3:
-    resolution: {integrity: sha512-1rT8rThrbkeXa46mET4cBl2oYnm1VCqjI9PAdmSGFgVehkIzJZ2TorrguKz9CKSan0Am0RRyAIRzJ/KabywAMw==}
-
-  mithril-ui-form-plugin@0.7.0:
-    resolution: {integrity: sha512-VuYXutj1AuFag6pxGVJ1goV98eg0kE+LP54oo7Zs3t31Fso47pS4gp3O2PZolWeVbN+2KN2kLaPXnYBPZ5W/hg==}
+  mithril-materialized@2.0.0-beta.5:
+    resolution: {integrity: sha512-hpPZ15IrAiqB96YK/Ajqpnl4ZM0y4RL46ZUHWr0g4qtwruPLZFkw4GCNygF+7FmzaEIipLN213D6KcYUBRUHXw==}
 
   mithril@2.3.4:
     resolution: {integrity: sha512-QHRqCJma2UfcxC4z107vVUKmb0n0q3o3Zy5T1qV8poeyz5lV9ZhMjnk7VAzmCPificyWJql2B/okjPaI5CVxKA==}
@@ -8639,11 +8636,9 @@ snapshots:
       leaflet-draw: 1.0.4
       mithril: 2.3.4
 
-  mithril-materialized@2.0.0-beta.3:
+  mithril-materialized@2.0.0-beta.5:
     dependencies:
       mithril: 2.3.4
-
-  mithril-ui-form-plugin@0.7.0: {}
 
   mithril@2.3.4: {}
 
