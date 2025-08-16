@@ -80,10 +80,10 @@ const unwrapComponent = <O extends Record<string, any> = {}>(
     dateFormat,
     twelveHour,
   } = field;
-  const result = { 
-    id: generateFormFieldId(String(id), formContext), 
-    label, 
-    _cacheKey: cacheKey 
+  const result = {
+    id: generateFormFieldId(String(id), formContext),
+    label,
+    _cacheKey: cacheKey,
   } as Record<string, any>;
   if (typeof label === 'undefined' && id) {
     result.label = capitalizeFirstLetter(String(id));
@@ -147,7 +147,7 @@ const unwrapComponent = <O extends Record<string, any> = {}>(
   if (twelveHour) {
     result.twelveHour = twelveHour;
   }
-  
+
   // Cache the result for performance
   componentCache.set(field, result);
   return result;
@@ -487,10 +487,10 @@ export const FormFieldFactory =
                     'a[target=_blank]',
                     { href: url },
                     isImg
-                      ? m('img', { 
-                          src: url, 
-                          alt: field.label || field.placeholder || f || 'File image', 
-                          style: { maxHeight: `${field.max || 50}px` } 
+                      ? m('img', {
+                          src: url,
+                          alt: field.label || field.placeholder || f || 'File image',
+                          style: { maxHeight: `${field.max || 50}px` },
                         })
                       : m(ReadonlyComponent, {
                           props,
