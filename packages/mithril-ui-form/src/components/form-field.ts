@@ -15,6 +15,7 @@ import {
   RadioButtons,
   Select,
   Chips,
+  ChipData,
   Options,
   Switch,
   uuid4,
@@ -819,7 +820,7 @@ export const FormFieldFactory =
                 placeholder: field.placeholder || 'Add a tag',
                 secondaryPlaceholder: field.secondaryPlaceholder || '+tag',
                 data,
-                onchange: (chips: M.ChipData[]) => onchange(chips.map((chip) => chip.tag)),
+                onchange: (chips: ChipData[]) => onchange(chips.map((chip) => chip.tag)),
                 autocompleteOptions,
                 // onblur,
               });

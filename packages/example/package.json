@@ -27,7 +27,6 @@
   "homepage": "https://github.com/erikvullings/mithril-ui-form#readme",
   "dependencies": {
     "material-icons": "^1.13.14",
-    "materialize-css": "^1.0.0",
     "mithril": "^2.3.4",
     "mithril-materialized": "^2.0.0-beta.3",
     "mithril-ui-form": "workspace:*",
@@ -35,7 +34,6 @@
     "mithril-ui-form-rating-plugin": "workspace:*"
   },
   "devDependencies": {
-    "@types/materialize-css": "^1.0.14",
     "@types/mithril": "^2.2.7",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.2",
