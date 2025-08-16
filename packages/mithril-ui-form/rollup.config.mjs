@@ -1,8 +1,7 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import sourceMaps from 'rollup-plugin-sourcemaps';
 import typescript from 'rollup-plugin-typescript2';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import { readFileSync } from 'fs';
 import typescript_lib from 'typescript';
 
@@ -19,7 +18,6 @@ export default {
       sourcemap: true,
       globals: {
         mithril: 'm',
-        'materialize-css': 'M',
         'mithril-materialized': 'm',
         'mithril-leaflet': 'm',
         'leaflet': 'L',
@@ -32,7 +30,7 @@ export default {
       sourcemap: true,
     },
   ],
-  external: ['mithril', 'mithril-materialized', 'materialize-css', 'mithril-leaflet', 'leaflet', 'leaflet-draw'],
+  external: ['mithril', 'mithril-materialized', 'mithril-leaflet', 'leaflet', 'leaflet-draw'],
   plugins: [
     // Allow node_modules resolution, so you can use 'external' to control
     // which external modules to include in the bundle
@@ -58,8 +56,7 @@ export default {
     //     moduleDirectory: 'node_modules',
     //   },
     // }),
-    // Resolve source maps to the original source
-    sourceMaps(),
+    // Sourcemaps are generated automatically by TypeScript plugin
     // minifies generated bundles
     production && terser(),
   ],
