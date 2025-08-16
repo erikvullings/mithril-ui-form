@@ -1,3 +1,15 @@
+# [1.0.0-beta.2](https://github.com/erikvullings/mithril-ui-form/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2025-08-16)
+
+
+### Bug Fixes
+
+* resolve rollup v4 peer dependency warnings and materialize-css imports ([d32aebf](https://github.com/erikvullings/mithril-ui-form/commit/d32aebf449feb8617431ae8f22bdd154b3636d24))
+
+
+### Features
+
+* prepare beta release with dependency updates and bug fixes ([6c7834d](https://github.com/erikvullings/mithril-ui-form/commit/6c7834d1c3c9a3db79e3924bb3611cc37199e107))
+
 # 1.0.0-beta.1 (2025-08-15)
 
 
