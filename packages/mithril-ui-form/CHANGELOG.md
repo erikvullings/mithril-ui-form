@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/erikvullings/mithril-ui-form/compare/v1.0.0...v1.0.1) (2025-08-26)
+
+
+### Bug Fixes
+
+* correct package version to match npm registry ([a2643a4](https://github.com/erikvullings/mithril-ui-form/commit/a2643a44634514dcb263cfb6a7c2862d1cfe0f7a))
+
 # 1.0.0 (2025-08-26)
 
 
