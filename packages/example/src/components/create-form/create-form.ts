@@ -166,7 +166,7 @@ export const CreateForm: FactoryComponent = () => {
     context: Record<string, any>;
   };
 
-  const onchange = (isValid: boolean) => {
+  const onchange = (isValid: boolean, _form: any) => {
     state.isValid = isValid;
     console.log(`Form is valid: ${isValid}`);
     console.log(JSON.stringify(state.form, null, 2));

@@ -1,18 +1,12 @@
 import m from 'mithril';
-import { LayoutForm, registerPlugin, UIForm, SlimdownView, I18n, render, FormAttributes } from 'mithril-ui-form';
+import { LayoutForm, UIForm, SlimdownView, I18n, render, FormAttributes } from 'mithril-ui-form';
 import { TextArea } from 'mithril-materialized';
-import { leafletPlugin } from 'mithril-ui-form-leaflet-plugin';
-import { ratingPlugin } from 'mithril-ui-form-rating-plugin';
 import { ILessonLearned, llf } from '../utils/examples';
-
 export interface IContext {
   admin: boolean;
 }
 
 export const FormView = () => {
-  registerPlugin('map', leafletPlugin);
-  registerPlugin('rating', ratingPlugin);
-
   const state = {
     result: {} as ILessonLearned,
     isValid: false,

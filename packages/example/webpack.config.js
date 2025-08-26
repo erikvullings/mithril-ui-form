@@ -19,6 +19,11 @@ module.exports = (env) => {
     devServer: {
       liveReload: true,
       port: 1233,
+      watchFiles: ['../mithril-ui-form/lib/**/*'],
+    },
+    watchOptions: {
+      followSymlinks: true,
+      ignored: /node_modules\/(?!mithril-ui-form)/,
     },
     plugins: [
       new Dotenv(),
@@ -122,6 +127,7 @@ module.exports = (env) => {
       alias: {
         mithril: path.resolve(__dirname, 'node_modules/mithril'),
       },
+      symlinks: true,
     },
     optimization: {
       minimizer: [

@@ -36,9 +36,6 @@ import { LayoutForm } from './layout-form';
 import { ReadonlyComponent } from './readonly';
 import { SlimdownView } from './slimdown-view';
 
-// Memoization cache for unwrapped components
-const componentCache = new WeakMap<object, Record<string, any>>();
-
 // Generate a unique ID with form-level scope to prevent collisions
 const generateFormFieldId = (fieldId: string, formContext = 'default'): string => {
   return `mui_${formContext}_${fieldId}_${uniqueId()}`;
@@ -48,17 +45,9 @@ const unwrapComponent = <O extends Record<string, any> = {}>(
   field: InputField<O>,
   autofocus = false,
   disabled = false,
-  formContext = 'default'
+  formContext = 'default',
+  _obj?: O
 ) => {
-  // Check cache first for performance
-  const cacheKey = `${autofocus}_${disabled}_${formContext}`;
-  if (componentCache.has(field)) {
-    const cached = componentCache.get(field)!;
-    if (cached._cacheKey === cacheKey) {
-      return cached;
-    }
-  }
-
   const {
     id = '',
     label,
@@ -83,7 +72,6 @@ const unwrapComponent = <O extends Record<string, any> = {}>(
   const result = {
     id: generateFormFieldId(String(id), formContext),
     label,
-    _cacheKey: cacheKey,
   } as Record<string, any>;
   if (typeof label === 'undefined' && id) {
     result.label = capitalizeFirstLetter(String(id));
@@ -148,8 +136,6 @@ const unwrapComponent = <O extends Record<string, any> = {}>(
     result.twelveHour = twelveHour;
   }
 
-  // Cache the result for performance
-  componentCache.set(field, result);
   return result;
 };
 
@@ -212,13 +198,15 @@ export const FormFieldFactory =
           onkeydown,
           onblur,
         } = field;
+        // Evaluate show condition
+        const showResult = show ? evalExpression(show, obj, ...context) : true;
+
         if (
-          (show && !evalExpression(show, obj, ...context)) ||
+          (show && !showResult) ||
           (label && !canResolvePlaceholders(label, obj, ...context)) ||
           (value && !canResolvePlaceholders(value, obj, ...context)) ||
           (description && !canResolvePlaceholders(description, obj, ...context))
         ) {
-          // console.table({ show, obj, context });
           return undefined;
         }
 
@@ -246,7 +234,8 @@ export const FormFieldFactory =
           typeof disabled === 'boolean' || typeof disabled === 'undefined'
             ? parentIsDisabled || disabled
             : parentIsDisabled || evalExpression(disabled, obj, ...context),
-          formContext
+          formContext,
+          obj
         );
 
         if (label) {
@@ -269,8 +258,7 @@ export const FormFieldFactory =
           return undefined; // Only a repeat list can deal with arrays
         }
 
-        const onchange = async (v: string | number | Array<string | number | Record<string, any>> | Date | boolean) => {
-          // console.log(`Onchange invoked: ${v}`);
+        const oninput = async (v: string | number | Array<string | number | Record<string, any>> | Date | boolean) => {
           if (typeof v === 'undefined' || v === 'undefined') {
             delete obj[id as keyof O];
             onFormChange(obj);
@@ -309,7 +297,7 @@ export const FormFieldFactory =
                   form: fieldType as UIForm<P>[],
                   obj: obj[id],
                   context: context instanceof Array ? [obj, ...context] : [obj, context],
-                  onchange: () => onFormChange && onFormChange(obj),
+                  oninput: () => onFormChange && onFormChange(obj),
                   containerId,
                 } as FormAttributes)
               ),
@@ -352,7 +340,7 @@ export const FormFieldFactory =
               field,
               props,
               label: props.label,
-              onchange,
+              onchange: oninput,
               obj,
               context,
             });
@@ -528,7 +516,7 @@ export const FormFieldFactory =
               field,
               props,
               label: props.label,
-              onchange,
+              onchange: oninput,
               obj,
               context,
             });
@@ -537,7 +525,7 @@ export const FormFieldFactory =
             case 'colour':
             case 'color': {
               const initialValue = iv as string;
-              return m(ColorInput, { ...props, initialValue, onchange, onblur });
+              return m(ColorInput, { ...props, initialValue, oninput, onblur });
             }
             case 'time': {
               const { twelveHour = false } = props;
@@ -552,10 +540,10 @@ export const FormFieldFactory =
                 ...props,
                 twelveHour,
                 initialValue,
-                onchange: (time: string) => {
+                oninput: (time: string) => {
                   const tt = time.split(':').map((n) => +n);
                   date.setHours(tt[0], tt[1]);
-                  onchange(date);
+                  oninput(date);
                 },
                 container: containerId,
               });
@@ -587,8 +575,8 @@ export const FormFieldFactory =
                 setDefaultDate: initialValue ? true : false,
                 format,
                 initialValue,
-                onchange: (date: Date | string) => {
-                  onchange(new Date(date));
+                oninput: (date: Date | string) => {
+                  oninput(new Date(date));
                   // m.redraw();
                 },
                 container: containerId as any,
@@ -622,7 +610,7 @@ export const FormFieldFactory =
               const outputFormat = props.dateTimeOutput || 'UTC';
               const notify = (d: Date) => {
                 state.initialDateTime = d;
-                onchange(
+                oninput(
                   outputFormat === 'UTC' ? d.toUTCString() : outputFormat === 'ISO' ? d.toISOString() : d.valueOf()
                 );
               };
@@ -642,7 +630,7 @@ export const FormFieldFactory =
                       format,
                       initialValue: initialDate,
                       container: containerId as any,
-                      onchange: (date: Date) => {
+                      oninput: (date: Date) => {
                         const d = new Date(state.initialDateTime);
                         d.setFullYear(date.getFullYear());
                         d.setMonth(date.getMonth());
@@ -661,7 +649,7 @@ export const FormFieldFactory =
                       twelveHour,
                       initialValue: initialTime,
                       container: containerId,
-                      onchange: (time: string) => {
+                      oninput: (time: string) => {
                         const tt = time.split(':').map((n) => +n);
                         const d = state.initialDateTime || new Date(new Date().setSeconds(0, 0));
                         d.setHours(tt[0], tt[1]);
@@ -675,7 +663,7 @@ export const FormFieldFactory =
                       className: 'col s2',
                       min: 0,
                       max: 59,
-                      onchange: (n: number) => {
+                      oninput: (n: number) => {
                         const d = state.initialDateTime || new Date(new Date().setSeconds(0, 0));
                         d.setSeconds(n, 0);
                         notify(d);
@@ -690,7 +678,7 @@ export const FormFieldFactory =
                 ...props,
                 validate,
                 autofocus,
-                onchange,
+                oninput,
                 initialValue,
                 onkeydown,
                 onkeyup,
@@ -703,7 +691,7 @@ export const FormFieldFactory =
                 ...props,
                 validate,
                 autofocus,
-                onchange,
+                oninput,
                 initialValue,
                 onkeydown,
                 onkeyup,
@@ -717,12 +705,12 @@ export const FormFieldFactory =
                 ...props,
                 options,
                 checkedId,
-                onchange,
+                onchange: oninput,
               });
             }
             case 'checkbox': {
-              const checked = iv as boolean;
-              return m(InputCheckbox, { ...props, checked, onchange });
+              const checked = Boolean(iv);
+              return m(InputCheckbox, { ...props, checked, oninput });
             }
             case 'options': {
               const checkedId = iv as Array<string | number>;
@@ -737,7 +725,7 @@ export const FormFieldFactory =
                     options,
                     checkedId,
                     onchange: (checkedIds: string[]) =>
-                      onchange(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter((v) => v !== null)),
+                      oninput(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter((v) => v !== null)),
                   }),
                 ],
                 typeof checkAllOptions !== 'undefined' &&
@@ -748,7 +736,7 @@ export const FormFieldFactory =
                       iconName: 'check',
                       onclick: () => {
                         state.key = Date.now();
-                        onchange(options.map((o) => o.id));
+                        oninput(options.map((o) => o.id));
                       },
                     }),
                     unselectAll &&
@@ -760,7 +748,7 @@ export const FormFieldFactory =
                           const ids = (obj[id] || []) as Array<string | number>;
                           ids.length = 0;
                           state.key = Date.now();
-                          onchange(ids);
+                          oninput(ids);
                         },
                       }),
                   ]),
@@ -775,7 +763,7 @@ export const FormFieldFactory =
                 options,
                 initialValue,
                 onchange: (checkedIds: string[]) =>
-                  onchange(
+                  oninput(
                     checkedIds.length === 1 && !props.multiple
                       ? checkedIds[0]
                       : checkedIds.filter((v) => v !== null || typeof v !== 'undefined')
@@ -795,7 +783,7 @@ export const FormFieldFactory =
               // const { options: opt } = field;
               const left = options && options.length > 0 ? options[0].label : '';
               const right = options && options.length > 1 ? options[1].label : '';
-              return m(Switch, { ...props, left, right, checked, onchange });
+              return m(Switch, { ...props, left, right, checked, oninput });
             }
             case 'tags': {
               const initialValue = (iv ? ((iv as any) instanceof Array ? iv : [iv]) : []) as string[];
@@ -820,7 +808,7 @@ export const FormFieldFactory =
                 placeholder: field.placeholder || 'Add a tag',
                 secondaryPlaceholder: field.secondaryPlaceholder || '+tag',
                 data,
-                onchange: (chips: ChipData[]) => onchange(chips.map((chip) => chip.tag)),
+                onchange: (chips: ChipData[]) => oninput(chips.map((chip) => chip.tag)),
                 autocompleteOptions,
                 // onblur,
               });
@@ -845,7 +833,7 @@ export const FormFieldFactory =
                 label,
                 isMandatory,
                 helperText,
-                onchange,
+                oninput,
                 onblur,
                 placeholder: field.placeholder || '...',
                 ...autocompleteOptions,
@@ -857,7 +845,7 @@ export const FormFieldFactory =
                 ...props,
                 validate,
                 autofocus,
-                onchange,
+                oninput,
                 initialValue,
                 onkeyup,
                 onkeydown,
@@ -873,7 +861,7 @@ export const FormFieldFactory =
               const accept = options ? options.map((o) => o.id) : undefined;
               const upload = (file: FileList) => {
                 if (!file || file.length < 1) {
-                  onchange('');
+                  oninput('');
                   return;
                 }
                 const body = new FormData();
@@ -883,14 +871,14 @@ export const FormFieldFactory =
                   url,
                   body,
                 })
-                  .then((res) => onchange(res))
+                  .then((res) => oninput(res))
                   .catch(console.error);
               };
               return m(FileInput, {
                 ...props,
                 accept,
                 placeholder,
-                onchange: upload,
+                oninput: upload,
                 initialValue,
               });
             }
@@ -901,12 +889,12 @@ export const FormFieldFactory =
               const accept = options ? options.map((o) => o.id).join(',') : undefined;
               const upload = (file: FileList) => {
                 if (!file || file.length < 1) {
-                  onchange('');
+                  oninput('');
                   return;
                 }
                 const reader = new FileReader();
                 reader.onloadend = () => {
-                  typeof reader.result === 'string' && onchange(reader.result);
+                  typeof reader.result === 'string' && oninput(reader.result);
                   m.redraw();
                 };
 
@@ -923,14 +911,14 @@ export const FormFieldFactory =
                     m(FlatButton, {
                       iconName: 'clear',
                       'aria-label': 'Remove image',
-                      onclick: () => onchange(''),
+                      onclick: () => oninput(''),
                     }),
                   ])
                 : m(FileInput, {
                     ...props,
                     accept,
                     placeholder,
-                    onchange: upload,
+                    oninput: upload,
                     initialValue,
                   });
             }
@@ -943,7 +931,7 @@ export const FormFieldFactory =
                 ...props,
                 validate,
                 autofocus,
-                onchange,
+                oninput,
                 initialValue,
                 onkeydown,
                 onkeyup,
@@ -957,7 +945,7 @@ export const FormFieldFactory =
                 maxLength: field.max || undefined,
                 validate,
                 autofocus,
-                onchange,
+                oninput,
                 initialValue,
                 onkeydown,
                 onkeyup,

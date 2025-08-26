@@ -37,8 +37,8 @@ While creating this, I had the following use cases in mind:
           m('ul.collection', [
             dashboardSvc
               .getList()
-              .filter(d => d.visible && !d.default)
-              .map(d => m('li.collection-item', m('a', { href: `#!${d.route}` }, d.title))),
+              .filter((d) => d.visible && !d.default)
+              .map((d) => m('li.collection-item', m('a', { href: `#!${d.route}` }, d.title))),
           ]),
         ]),
       ]);

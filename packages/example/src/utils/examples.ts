@@ -185,7 +185,7 @@ export const llf = [
   // { id: 'time', label: 'Time', type: 'time', value: Date.now(), disabled: true },
   {
     type: 'md',
-    value: `# Welcome to the playgrond
+    value: `# Welcome to the playground
 
 Please edit the definition to the left and see the result here.`,
   },

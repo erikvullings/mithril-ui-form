@@ -5,36 +5,55 @@ import { GeometryObject, FeatureCollection } from 'geojson';
 import { PluginType } from 'mithril-ui-form-plugin';
 import L from 'leaflet';
 
+// Fix for webpack/bundler compatibility - use URL strings instead of require()
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
 });
 
 export const leafletPlugin: PluginType<FeatureCollection> = () => {
+  // Store map state to prevent layer duplication
+  let mapInstance: { 
+    layerGroup?: L.LayerGroup;
+    lastFeatures?: FeatureCollection<GeometryObject>;
+  } = {};
+  
   return {
     view: ({ attrs: { props, iv, field, onchange } }) => {
-      const id = props.id || '';
+      const id = props.id || 'map';
       const editable = props.disabled || props.readonly || field.readonly ? undefined : [id];
       const overlay = (iv ||
         field.value || {
           type: 'FeatureCollection',
           features: [],
         }) as FeatureCollection<GeometryObject>;
-      const overlays = {} as Record<string, any>;
-      overlays[id] = geoJSON(overlay);
-      // console.log(overlays);
+      
+      // Only recreate overlay if features have actually changed
+      const featuresChanged = !mapInstance.lastFeatures || 
+        JSON.stringify(mapInstance.lastFeatures.features) !== JSON.stringify(overlay.features);
+      
+      let overlays = {} as Record<string, any>;
+      
+      if (featuresChanged || !mapInstance.layerGroup) {
+        // Create new layer only when features change
+        mapInstance.layerGroup = geoJSON(overlay);
+        mapInstance.lastFeatures = { ...overlay };
+        overlays[id] = mapInstance.layerGroup;
+      } else {
+        // Reuse existing layer
+        overlays[id] = mapInstance.layerGroup;
+      }
       return m(LeafletMap, {
         baseLayers: {
           osm: {
-            url: 'http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+            url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             options: {
-              subdomains: ['a', 'b'],
-              attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+              subdomains: ['a', 'b', 'c'],
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
               maxZoom: 19,
-              maxNativeZoom: 17,
             },
           },
         },
@@ -43,7 +62,9 @@ export const leafletPlugin: PluginType<FeatureCollection> = () => {
         overlays,
         visible: [id],
         editable,
-        autoFit: true,
+        autoFit: overlay && overlay.features && overlay.features.length > 0 ? true : false,
+        view: overlay && overlay.features && overlay.features.length > 0 ? undefined : [52.0, 5.0], // Default center (Netherlands)
+        zoom: overlay && overlay.features && overlay.features.length > 0 ? undefined : 8, // Default zoom level
         showScale: { imperial: false },
         onLayerEdited: (f) => {
           onchange && onchange(f.toGeoJSON() as any);

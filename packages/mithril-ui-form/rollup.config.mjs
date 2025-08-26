@@ -30,6 +30,10 @@ export default {
       sourcemap: true,
     },
   ],
+  watch: {
+    include: 'src/**',
+    clearScreen: false
+  },
   external: ['mithril', 'mithril-materialized', 'mithril-leaflet', 'leaflet', 'leaflet-draw'],
   plugins: [
     // Allow node_modules resolution, so you can use 'external' to control

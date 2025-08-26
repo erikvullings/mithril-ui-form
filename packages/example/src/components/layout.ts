@@ -1,5 +1,6 @@
 import m, { Vnode } from 'mithril';
 import { dashboardSvc } from '../services/dashboard-service';
+import { ThemeToggle } from 'mithril-materialized';
 
 const isActive = (path: string) => (m.route.get().indexOf(path) >= 0 ? '.active' : '');
 
@@ -53,13 +54,10 @@ export const Layout = () => ({
               .map((d) =>
                 m(
                   `li${isActive(d.route)}`,
-                  m(
-                    m.route.Link,
-                    { href: d.route },
-                    m('i.material-icons.right', d.icon ? m('i.material-icons', d.icon) : d.title)
-                  )
+                  m(m.route.Link, { href: d.route }, d.icon ? m('i.material-icons', d.icon) : d.title)
                 )
-              )
+              ),
+            m(ThemeToggle)
           ),
         ])
       ),

@@ -23,7 +23,8 @@
     "build": "pnpm -r build",
     "clean:local": "rimraf -fr docs",
     "clean": "npm run clean:local",
-    "start": "pnpm -r --parallel run dev",
+    "start": "pnpm run build:deps && pnpm -r --parallel run dev",
+    "build:deps": "pnpm --filter mithril-ui-form-plugin build && pnpm --filter mithril-ui-form-rating-plugin build && pnpm --filter mithril-ui-form-leaflet-plugin build && pnpm --filter mithril-ui-form build",
     "dry-run": "pnpm -r --parallel dry-run",
     "patch-release": "pnpm  -r --parallel patch-release",
     "minor-release": "pnpm  -r --parallel minor-release"
@@ -31,9 +32,9 @@
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "pnpm": "^10.14.0",
+    "pnpm": "^10.15.0",
     "rimraf": "^6.0.1",
-    "semantic-release": "^23.0.0",
+    "semantic-release": "^24.2.7",
     "semantic-release-monorepo": "^8.0.2"
   }
 }

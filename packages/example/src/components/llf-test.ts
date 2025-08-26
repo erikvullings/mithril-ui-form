@@ -659,7 +659,7 @@ const source = [
 ] as UIForm<ISource>;
 
 const info = [
-  { id: 'intake', type: 'section' },
+  // { id: 'intake', type: 'section' },
   {
     type: 'md',
     value: `### DRIVER+ Lessons Learned Framework
@@ -871,12 +871,14 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
     className: 'col s12 m6',
   },
   { id: 'showMap', type: 'checkbox', value: false },
+  // { id: 'location', show: 'showMap = true', type: 'map', className: 'col s12' },
   { id: 'location', show: 'showMap = true', type: 'map', className: 'col s12' },
   {
     id: 'areaType',
     type: 'select',
     label: 'Type of area:',
     className: 'col s6 m3',
+    show: 'showMap = true',
     options: [
       {
         id: 'mixed',
@@ -1936,6 +1938,7 @@ export const LLFView = () => {
           '.col.s12',
           m(LayoutForm<ILessonLearned>, {
             form,
+            // section: 'intake',
             obj: result,
             onchange: print,
           })
