@@ -1,3 +1,13 @@
+# [2.0.0](https://github.com/erikvullings/mithril-ui-form/compare/v1.0.1...v2.0.0) (2025-08-26)
+
+
+* feat!: finalize mithril-materialized v2.0.0 upgrade ([6ea3d60](https://github.com/erikvullings/mithril-ui-form/commit/6ea3d60dfe5c7d1d4283dbf71bb21bdb51c3a01f))
+
+
+### BREAKING CHANGES
+
+* This version completes the migration to mithril-materialized v2.0.0, introducing breaking changes in component APIs and styling. Applications using this library must update their mithril-materialized dependency to v2.0.0.
+
 ## [1.0.1](https://github.com/erikvullings/mithril-ui-form/compare/v1.0.0...v1.0.1) (2025-08-26)
 
 
