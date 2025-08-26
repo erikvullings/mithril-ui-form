@@ -27,9 +27,7 @@
     [
       "@semantic-release/npm",
       {
-        "npmPublish": true,
-        "pkgRoot": ".",
-        "publishCmd": "pnpm publish --no-git-checks"
+        "npmPublish": false
       }
     ],
     [

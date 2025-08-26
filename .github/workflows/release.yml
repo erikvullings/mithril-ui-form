@@ -48,3 +48,18 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: pnpm exec semantic-release
+
+      - name: Publish to npm with pnpm
+        working-directory: packages/mithril-ui-form
+        if: success()
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          # Check if there was a version change by comparing with previous commit
+          if git diff HEAD~1 --name-only | grep -q "package.json"; then
+            echo "New version detected, publishing with pnpm..."
+            # pnpm publish automatically resolves workspace dependencies
+            pnpm publish --no-git-checks
+          else
+            echo "No version change detected, skipping publish"
+          fi
