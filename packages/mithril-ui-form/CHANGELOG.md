@@ -1,3 +1,11 @@
+# [1.0.0-beta.3](https://github.com/erikvullings/mithril-ui-form/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2025-08-26)
+
+
+### Bug Fixes
+
+* complete tsup migration for plugin packages ([8a1ac20](https://github.com/erikvullings/mithril-ui-form/commit/8a1ac20397232d4033df5b58dd72039da4602c09))
+* replace deprecated microbundle with tsup to resolve dependency warnings ([1e39c19](https://github.com/erikvullings/mithril-ui-form/commit/1e39c19019f2075eb417eddfcdf9db3be9a11203))
+
 # [1.0.0-beta.2](https://github.com/erikvullings/mithril-ui-form/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2025-08-16)
 
 
