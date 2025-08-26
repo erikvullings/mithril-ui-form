@@ -1,6 +1,6 @@
 {
   "name": "mithril-ui-form",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Convert a JSON file or object to a dynamic, materialized form.",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
