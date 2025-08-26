@@ -1,3 +1,11 @@
+## [2.0.1](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.0...v2.0.1) (2025-08-26)
+
+
+### Bug Fixes
+
+* configure semantic-release to use pnpm for publishing workspace dependencies ([551b70a](https://github.com/erikvullings/mithril-ui-form/commit/551b70a3b69c5713547cd5e9855aa51f02eb4ec6))
+* replace workspace dependency with actual version for mithril-ui-form-plugin ([4641414](https://github.com/erikvullings/mithril-ui-form/commit/4641414673253314d332fc0163f2414c326d4a13))
+
 # [2.0.0](https://github.com/erikvullings/mithril-ui-form/compare/v1.0.1...v2.0.0) (2025-08-26)
 
 
