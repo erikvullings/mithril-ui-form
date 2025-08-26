@@ -35,7 +35,7 @@
   "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
   "license": "MIT",
   "dependencies": {
-    "mithril-ui-form-plugin": "workspace:*",
+    "mithril-ui-form-plugin": "^0.7.0",
     "slimdown-js": "1.1.0"
   },
   "devDependencies": {
