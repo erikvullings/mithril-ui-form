@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.1...v2.0.2) (2025-08-26)
+
+
+### Bug Fixes
+
+* separate semantic-release from npm publishing to properly resolve workspace dependencies ([c63bb96](https://github.com/erikvullings/mithril-ui-form/commit/c63bb9652bdf1a4a439d4e8ac2ca1b09daeff0e0))
+
 ## [2.0.1](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.0...v2.0.1) (2025-08-26)
 
 
