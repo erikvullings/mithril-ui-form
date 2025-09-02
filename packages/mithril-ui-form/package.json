@@ -10,8 +10,7 @@
     "url": "git+https://github.com/erikvullings/mithril-ui-form.git"
   },
   "scripts": {
-    "link": "npm link",
-    "clean": "rimraf .rpt2_cache lib dist",
+    "clean": "rimraf .rpt2_cache lib dist docs",
     "build": "rollup -c",
     "start": "rollup -c -w",
     "dev": "npm start",
@@ -23,7 +22,7 @@
     "patch-release": "npm run clean && npm run build && npm version patch --force -m \"Patch release\" && git push --follow-tags && pnpm publish --no-git-checks",
     "minor-release": "npm run clean && npm run build && npm version minor --force -m \"Minor release\" && git push --follow-tags && pnpm publish --no-git-checks",
     "major-release": "npm run clean && npm run build && npm version major --force -m \"Major release\" && git push --follow-tags && pnpm publish --no-git-checks",
-    "gen:schema": "typescript-json-schema.cmd tsconfig.json UIForm > ./schema/ui-form.json"
+    "gen:schema": "typescript-json-schema tsconfig.json UIForm > ./schema/ui-form.json"
   },
   "keywords": [
     "mithril",

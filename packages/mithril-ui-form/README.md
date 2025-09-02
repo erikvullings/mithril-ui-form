@@ -1,14 +1,16 @@
 # Mithril-UI-Form: Create dynamic forms based on JSON as input
 
-[Mithril-ui-form](https://www.npmjs.com/package/mithril-ui-form) is a powerful, declarative framework to create accessible, high-performance forms using the [Mithril framework](https://mithril.js.org/) and [mithril-materialized](https://www.npmjs.com/package/mithril-materialized) components with the [materialize-css](http://materializecss.com/) design theme.
+[Mithril-ui-form](https://www.npmjs.com/package/mithril-ui-form) is a powerful, declarative framework to create accessible, high-performance forms using the [Mithril framework](https://mithril.js.org/) and [mithril-materialized](https://erikvullings.github.io/mithril-materialized/#!/home) components with the [materialize-css](https://materializecss.com/) design theme.
 
-**✨ Version 1.10.16+ Features:**
+**✨ Version 2.x Features:**
 
-- 🎯 **ArrayLayoutForm** - Native support for managing arrays of objects
-- ⚡ **30-50% Performance boost** through advanced memoization
+- 🎯 **ArrayLayoutForm** - Native support for managing arrays of objects with drag-and-drop
+- 🎨 **Mithril-Materialized 3.x** - Upgraded to latest MaterializeCSS components with enhanced styling
+- ⚡ **30-50% Performance boost** through advanced memoization and optimized rendering
 - ♿ **Full accessibility** compliance with ARIA attributes and screen reader support
-- 🔧 **Enhanced TypeScript** support with improved type safety
+- 🔧 **Enhanced TypeScript** support with improved type safety and generic constraints
 - 🌐 **Multi-platform** - Works in browsers, Node.js (CommonJS), and modern bundlers (ESM)
+- 🔧 **Robust ID handling** - More reliable field identification and form state management
 
 A JSON specification using a simple syntax is converted to a beautiful, accessible form. The form supports:
 
@@ -24,11 +26,11 @@ A JSON specification using a simple syntax is converted to a beautiful, accessib
 ## Installation
 
 ```bash
-npm install mithril-ui-form
+npm install mithril-ui-form mithril-materialized
 # or
-pnpm add mithril-ui-form
+pnpm add mithril-ui-form mithril-materialized
 # or
-yarn add mithril-ui-form
+yarn add mithril-ui-form mithril-materialized
 ```
 
 ## Usage Examples
@@ -499,7 +501,7 @@ registerPlugin('rating', myRatingPlugin, myReadonlyRatingPlugin);
 
 Since each plugin is a Mithril FactoryComponent, i.e. a function that returns a Component object with a view method, it is very easy to roll your own. See [Mithril-ui-form-plugin](https://www.npmjs.com/package/mithril-ui-form-plugin) for more information.
 
-## ⚡ Performance Improvements (v1.10.16+)
+## ⚡ Performance Improvements (v2.x)
 
 The latest version includes significant performance optimizations:
 
@@ -624,14 +626,20 @@ m(ArrayLayoutForm<Role>(), {
 
 The `type: 'map'` has been removed, and you now need to import it explicitly. See [mithril-ui-form-leaflet-plugin](https://www.npmjs.com/package/mithril-ui-form-leaflet-plugin). An advantage is that, in case you don't need the map, you also don't need to import and include `Leaflet`, `Leaflet-draw` and `mithril-leaflet` anymore. This plugin includes all requirements.
 
-### From version 1.10.15 to 1.10.16+
+### From version 1.x to 2.x
 
-All changes are backward compatible. New features:
+**Breaking Changes:**
 
-- `ArrayLayoutForm` is a new component (no breaking changes)
-- Performance improvements are automatic
-- Accessibility improvements are automatic
-- Enhanced TypeScript types provide better IntelliSense without requiring code changes
+- Requires `mithril-materialized` v3.2.2+ (upgraded from v2.x)
+- Component APIs may have changed due to MaterializeCSS updates
+- Some styling adjustments may be needed
+
+**New Features:**
+
+- Enhanced component styling and theming options
+- Improved accessibility features
+- More robust field identification and form state management
+- Better TypeScript support with stricter type checking
 
 ## Browser Support
 

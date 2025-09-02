@@ -1,8 +1,19 @@
-export { UIForm, I18n, InputField, FormAttributes, PluginType, ComponentType } from 'mithril-ui-form-plugin';
+// Core types and interfaces from plugin package (with enhanced documentation)
+export {
+  UIForm,
+  I18n,
+  InputField,
+  FormAttributes,
+  PluginType,
+  ComponentType,
+  UIFormField,
+} from 'mithril-ui-form-plugin';
+
+// Main form components and utilities
 export {
   FormComponent,
   IFormField,
-  IMarkdownView,
+  SlimdownAttrs,
   IReadonlyComponent,
   IRepeatList,
   IArrayLayoutForm,
@@ -14,6 +25,8 @@ export {
   SlimdownView,
   registerPlugin,
 } from './components';
+
+// Markdown rendering functions from slimdown-js (re-exported with documentation)
 export { render, addRule, RegexReplacer } from 'slimdown-js';
 export {
   isComponentType,

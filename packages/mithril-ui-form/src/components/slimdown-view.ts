@@ -1,7 +1,7 @@
 import m, { FactoryComponent, Attributes } from 'mithril';
 import { render } from 'slimdown-js';
 
-export interface IMarkdownView extends Attributes {
+export interface SlimdownAttrs extends Attributes {
   /** Markdown text */
   md?: string;
   /** If true, remove the outer <p></p> tags. Default false. */
@@ -10,7 +10,11 @@ export interface IMarkdownView extends Attributes {
   externalLinks?: boolean;
 }
 
-export const SlimdownView: FactoryComponent<IMarkdownView> = () => ({
+/**
+ * Uses the `render` function from `slimdown-js` to convert markdown to HTML
+ * @returns Mithril component for rendering markdown
+ */
+export const SlimdownView: FactoryComponent<SlimdownAttrs> = () => ({
   view: ({ attrs: { md = '', removeParagraphs = false, externalLinks = false, ...params } }) =>
     m('.slimdown-view.markdown', params, m.trust(render(md, removeParagraphs, externalLinks))),
 });

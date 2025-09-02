@@ -269,7 +269,7 @@ export const RepeatList = <O extends Attributes>() => {
                                   disabled,
                                   readonly,
                                   onchange: () => onchange && onchange(obj),
-                                } as FormAttributes),
+                                } as FormAttributes<any>),
                             ]
                           ),
                         ],
@@ -323,7 +323,7 @@ export const RepeatList = <O extends Attributes>() => {
               containerId,
               readonly: true,
               i18n,
-            } as FormAttributes),
+            } as FormAttributes<any>),
             buttons: [
               {
                 label: i18n.disagree || 'Disagree',

@@ -117,12 +117,12 @@ export const GeoJSONFeatureList = <O extends Attributes = {}>() => {
                       containerId,
                       disabled,
                       readonly,
-                      onchange: (_, d) => {
+                      onchange: (_: boolean, d: any) => {
                         if (d) features[i].properties = d;
                         obj[id] = JSON.stringify(featureCollection, null, 2) as any;
                         onchange && onchange(obj);
                       },
-                    } as FormAttributes)
+                    } as FormAttributes<any>)
                   ),
                 };
               }),

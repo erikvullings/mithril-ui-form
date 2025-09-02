@@ -90,7 +90,9 @@ export const LayoutForm = <O extends Record<string, any> = {}>(): FormComponent<
         if (!sectionFilter(field)) continue;
         
         // Early return for conditional visibility
-        if (field.show && !evalExpression(field.show, obj, ...ctx)) continue;
+        if (field.show && !evalExpression(field.show, obj, ...ctx.filter((c): c is O[keyof O] | Partial<O> => 
+          typeof c === 'object' && c !== null && !('id' in c && 'label' in c)
+        ))) continue;
         
         // Guess type if not provided
         if (!field.type) field.type = guessType(field);

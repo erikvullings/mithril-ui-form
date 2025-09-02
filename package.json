@@ -1,11 +1,11 @@
 {
   "name": "mithril-ui-form-project",
   "private": true,
-  "version": "0.0.0",
+  "version": "v2",
   "description": "Based on a JSON document, generate a UI form for the Mithril framework.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/erikvullings/mithril-tree-component.git"
+    "url": "git+https://github.com/erikvullings/mithril-ui-form.git"
   },
   "keywords": [
     "mithril",
@@ -16,9 +16,9 @@
   "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/erikvullings/mithril-tree-component/issues"
+    "url": "https://github.com/erikvullings/mithril-ui-form/issues"
   },
-  "homepage": "https://github.com/erikvullings/mithril-tree-component#readme",
+  "homepage": "https://github.com/erikvullings/mithril-ui-form#readme",
   "scripts": {
     "build": "pnpm -r build",
     "clean:local": "rimraf -fr docs",
@@ -27,7 +27,12 @@
     "build:deps": "pnpm --filter mithril-ui-form-plugin build && pnpm --filter mithril-ui-form-rating-plugin build && pnpm --filter mithril-ui-form-leaflet-plugin build && pnpm --filter mithril-ui-form build",
     "dry-run": "pnpm -r --parallel dry-run",
     "patch-release": "pnpm  -r --parallel patch-release",
-    "minor-release": "pnpm  -r --parallel minor-release"
+    "minor-release": "pnpm  -r --parallel minor-release",
+    "docs": "rimraf docs/api && npx typedoc --entryPoints ./packages/mithril-ui-form/src/index.ts --entryPointStrategy resolve --excludeExternals false --html ./docs/api/ --tsconfig ./packages/mithril-ui-form/tsconfig.json",
+    "docs:serve": "npx http-server docs/api -p 8081 -o",
+    "docs:build": "npm run build && npm run docs",
+    "test": "pnpm -r test",
+    "test:coverage": "pnpm -r test:coverage"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
@@ -35,6 +40,8 @@
     "pnpm": "^10.15.1",
     "rimraf": "^6.0.1",
     "semantic-release": "^24.2.7",
-    "semantic-release-monorepo": "^8.0.2"
+    "semantic-release-monorepo": "^8.0.2",
+    "typedoc": "0.28.12",
+    "typedoc-github-theme": "^0.3.1"
   }
 }

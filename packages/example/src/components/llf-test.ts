@@ -665,7 +665,7 @@ const source = [
   },
 ] as UIForm<ISource>;
 
-const info = [
+const llfForm = [
   // { id: 'intake', type: 'section' },
   {
     type: 'md',
@@ -801,6 +801,38 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
   { id: 'created', label: 'Created "{{event}}" event on:', type: 'date', required: true },
   { id: 'edited', type: 'date', required: true },
   { type: 'md', value: '#### Sources of information', className: 'col s12' },
+  { id: 'measures', type: 'section' },
+  {
+    id: 'measures',
+    label: 'Measures',
+    pageSize: 5,
+    repeat: true,
+    type: [
+      {
+        id: 'id',
+        label: 'Measure ID',
+        type: 'text',
+        required: true,
+        icon: 'ID',
+        className: 'col s3',
+      },
+      {
+        id: 'label',
+        label: 'Measure',
+        type: 'text',
+        required: true,
+        icon: 'title',
+        className: 'col s6',
+      },
+      {
+        id: 'type',
+        label: 'Type',
+        type: 'select',
+        options: 'catTypes',
+        className: 'col s3',
+      },
+    ],
+  },
   { id: 'sources', type: 'section' },
   {
     id: 'sources',
@@ -1918,7 +1950,13 @@ export const LLFView = () => {
     console.log(JSON.stringify(state.result, null, 2));
   };
 
-  state.form = info;
+  const catTypes = [
+    { id: 'info', label: 'Information' },
+    { id: 'hw', label: 'Hardware' },
+    { id: 'sw', label: 'Software' },
+  ];
+
+  state.form = llfForm;
 
   // Example with pre-filled data to test initial value handling and data binding
   state.result = {
@@ -2007,6 +2045,11 @@ export const LLFView = () => {
             form,
             // section: 'intake',
             obj: result,
+            context: [
+              {
+                catTypes,
+              },
+            ],
             onchange: print,
           })
         ),

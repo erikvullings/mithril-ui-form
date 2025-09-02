@@ -18,8 +18,9 @@ export const toHourMin = (d?: Date) => (d ? `${padLeft(d.getHours())}:${padLeft(
 /**
  * Retreive a value from an object using a dynamic path.
  * If the attribute does not exist, return undefined.
- * @param o: object
- * @param s: path, e.g. a.b[0].c
+ * @param obj - The object to search in
+ * @param path - The path to traverse, e.g. a.b[0].c
+ * @returns The value at the given path or undefined
  * @see https://stackoverflow.com/a/6491621/319711
  */
 export const getPath = <O extends Record<string, any>>(obj: O, path: string): any => {
@@ -222,8 +223,8 @@ export const resolvePlaceholders = <O>(str: string, ...objArr: Array<Partial<O> 
 
 /**
  * Deep copy function for TypeScript.
- * @param T Generic type of target/copied value.
- * @param target Target value to be copied.
+ * @param target - Target value to be copied.
+ * @returns Deep copy of the target value
  * @see Source project, ts-deepcopy https://github.com/ykdr2017/ts-deepcopy
  * @see Code pen https://codepen.io/erikvullings/pen/ejyBYg
  */
@@ -367,11 +368,10 @@ export const stripSpaces = (s = '') => s.replace(/\s|,|\./g, '').toLowerCase();
 /**
  * Generate a sequence of numbers between from and to with step size: [from, to].
  *
- * @static
- * @param {number} from
- * @param {number} to : inclusive
- * @param {number} [step=1]
- * @returns
+ * @param from - Starting number
+ * @param to - Ending number (inclusive)
+ * @param step - Step size (default: 1)
+ * @returns Array of numbers
  */
 export const range = (from: number, to: number, step: number = 1) => {
   const arr = [] as number[];

@@ -1,5 +1,5 @@
 import m, { Attributes, Component } from 'mithril';
-import { PluginType, InputField, I18n, FormAttributes, UIForm } from 'mithril-ui-form-plugin';
+import { PluginType, InputField, I18n, FormAttributes, UIForm, Option } from 'mithril-ui-form-plugin';
 import { render } from 'slimdown-js';
 import {
   InputCheckbox,
@@ -247,7 +247,8 @@ export const FormFieldFactory =
                   return o.label ? o : { ...o, label: capitalizeFirstLetter(o.id) };
                 })
             : []
-        ) as Array<{ id: string; label: string; disabled?: boolean; icon?: string; show?: string | string[] }>;
+        ) as Array<Option>;
+        // { id: string; label: string; disabled?: boolean; icon?: string; show?: string | string[] }>;
 
         const parentIsDisabled = typeof d === 'boolean' && d;
 
@@ -324,7 +325,7 @@ export const FormFieldFactory =
                   context: context instanceof Array ? [obj, ...context] : [obj, context],
                   oninput: () => onFormChange && onFormChange(obj),
                   containerId,
-                } as FormAttributes)
+                } as FormAttributes<P>)
               ),
             ]);
           } else {
@@ -576,23 +577,11 @@ export const FormFieldFactory =
             case 'date': {
               const { format = 'mmmm d, yyyy' } = props;
               const value: Date = typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : (iv as Date);
-              (obj[id] as any) = value
-                ? transform
-                  ? transform('to', value.valueOf())
-                  : value.valueOf()
-                : value;
+              (obj[id] as any) = value ? (transform ? transform('to', value.valueOf()) : value.valueOf()) : value;
               // console.log(value && value.toUTCString());
               const { min, max } = props;
-              const minDate = min
-                ? !value || min < value.valueOf()
-                  ? new Date(min)
-                  : value
-                : undefined;
-              const maxDate = max
-                ? !value || max > value.valueOf()
-                  ? new Date(max)
-                  : value
-                : undefined;
+              const minDate = min ? (!value || min < value.valueOf() ? new Date(min) : value) : undefined;
+              const maxDate = max ? (!value || max > value.valueOf() ? new Date(max) : value) : undefined;
               return m(DatePicker as any, {
                 ...props,
                 minDate,
@@ -761,7 +750,7 @@ export const FormFieldFactory =
                       iconName: 'check',
                       onclick: () => {
                         state.key = Date.now();
-                        oninput(options.map((o) => typeof o === 'string' ? o : o.id));
+                        oninput(options.map((o) => (typeof o === 'string' ? o : o.id)));
                       },
                     }),
                     unselectAll &&
@@ -883,7 +872,7 @@ export const FormFieldFactory =
               if (!url) {
                 throw Error('Input field "url" not defined, which indicates the URL to the upload folder.');
               }
-              const accept = options ? options.map((o) => typeof o === 'string' ? o : o.id) : undefined;
+              const accept = options ? options.map((o) => (typeof o === 'string' ? o : String(o.id))) : undefined;
               const upload = (file: FileList) => {
                 if (!file || file.length < 1) {
                   oninput('');
@@ -903,7 +892,7 @@ export const FormFieldFactory =
                 ...props,
                 accept,
                 placeholder,
-                oninput: upload,
+                onchange: upload,
                 value,
               });
             }
@@ -911,7 +900,7 @@ export const FormFieldFactory =
               const value = iv as string;
               const isImg = value && /data:image/i.test(value) ? true : false;
               const { placeholder } = field;
-              const accept = options ? options.map((o) => typeof o === 'string' ? o : o.id).join(',') : undefined;
+              const accept = options ? options.map((o) => (typeof o === 'string' ? o : o.id)).join(',') : undefined;
               const upload = (file: FileList) => {
                 if (!file || file.length < 1) {
                   oninput('');
