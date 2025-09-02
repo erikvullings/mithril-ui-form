@@ -1,3 +1,10 @@
+## [2.0.5](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.4...v2.0.5) (2025-09-02)
+
+
+### Bug Fixes
+
+* select component did not use the checkedId attribute ([078cdb4](https://github.com/erikvullings/mithril-ui-form/commit/078cdb4c532b5dc5862cf084aa3d712aaad517b0))
+
 ## [2.0.4](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.3...v2.0.4) (2025-09-02)
 
 
