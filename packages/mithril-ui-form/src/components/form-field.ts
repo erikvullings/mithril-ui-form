@@ -46,7 +46,8 @@ const unwrapComponent = <O extends Record<string, any> = {}>(
   autofocus = false,
   disabled = false,
   formContext = 'default',
-  _obj?: O
+  _obj?: O,
+  stableId?: string
 ) => {
   const {
     id = '',
@@ -70,7 +71,7 @@ const unwrapComponent = <O extends Record<string, any> = {}>(
     twelveHour,
   } = field;
   const result = {
-    id: generateFormFieldId(String(id), formContext),
+    id: stableId || generateFormFieldId(String(id), formContext),
     label,
   } as Record<string, any>;
   if (typeof label === 'undefined' && id) {
@@ -163,9 +164,19 @@ export interface IFormField<O extends Attributes = {}> extends Attributes {
 export const FormFieldFactory =
   (plugins: Record<string, PluginType> = {}, readonlyPlugins: Record<string, PluginType> = {}) =>
   <O extends Attributes = {}>(): Component<IFormField<O>> => {
-    const state = { key: Date.now() } as { key: number };
+    // Create state in closure - this creates a new state per component instance
+    const state = {
+      key: Date.now(),
+      stableId: undefined as string | undefined,
+    };
 
     return {
+      oninit: ({ attrs: { field, obj } }) => {
+        const { id = '' } = field;
+        const formContext = obj && typeof obj === 'object' && 'id' in obj ? String(obj.id) : 'default';
+        // Generate stable ID once during initialization
+        state.stableId = generateFormFieldId(String(id), formContext);
+      },
       view: ({
         attrs: {
           i18n: formI18n,
@@ -215,13 +226,26 @@ export const FormFieldFactory =
         const options = (
           opt && opt instanceof Array
             ? opt
-                .filter(
-                  (o) =>
+                .filter((o) => {
+                  // Handle string options (convert to objects with id and label)
+                  if (typeof o === 'string') {
+                    return true;
+                  }
+                  // Handle object options (existing logic)
+                  return (
                     typeof o.id !== 'undefined' &&
                     (o.label || isNaN(Number(o.id))) &&
                     (!o.show || evalExpression(o.show, obj, ...context))
-                )
-                .map((o) => (o.label ? o : { ...o, label: capitalizeFirstLetter(o.id) }))
+                  );
+                })
+                .map((o) => {
+                  // Convert string options to objects
+                  if (typeof o === 'string') {
+                    return { id: o, label: capitalizeFirstLetter(o) };
+                  }
+                  // Handle object options (existing logic)
+                  return o.label ? o : { ...o, label: capitalizeFirstLetter(o.id) };
+                })
             : []
         ) as Array<{ id: string; label: string; disabled?: boolean; icon?: string; show?: string | string[] }>;
 
@@ -235,7 +259,8 @@ export const FormFieldFactory =
             ? parentIsDisabled || disabled
             : parentIsDisabled || evalExpression(disabled, obj, ...context),
           formContext,
-          obj
+          obj,
+          state.stableId
         );
 
         if (label) {
@@ -445,8 +470,8 @@ export const FormFieldFactory =
               });
             }
             case 'base64': {
-              const initialValue = iv as string | undefined;
-              const isImg = initialValue && /data:image/i.test(initialValue) ? true : false;
+              const value = iv as string | undefined;
+              const isImg = value && /data:image/i.test(value) ? true : false;
               const altText = field.label || extractTitle(obj) || field.placeholder || 'Uploaded image';
               return (
                 isImg &&
@@ -454,7 +479,7 @@ export const FormFieldFactory =
                   'div',
                   { role: 'img', 'aria-label': typeof altText === 'string' ? altText : 'Image' },
                   m('img.responsive-img', {
-                    src: initialValue,
+                    src: value,
                     alt: typeof altText === 'string' ? altText : 'Image',
                     style: { maxHeight: `${field.max || 50}px` },
                   })
@@ -462,8 +487,8 @@ export const FormFieldFactory =
               );
             }
             case 'file': {
-              const initialValue = iv as string | string[] | undefined;
-              const ivFinal = initialValue instanceof Array ? initialValue : [initialValue];
+              const value = iv as string | string[] | undefined;
+              const ivFinal = value instanceof Array ? value : [value];
               return m(
                 'div',
                 props,
@@ -524,8 +549,8 @@ export const FormFieldFactory =
           switch (fieldType) {
             case 'colour':
             case 'color': {
-              const initialValue = iv as string;
-              return m(ColorInput, { ...props, initialValue, oninput, onblur });
+              const value = iv as string;
+              return m(ColorInput, { ...props, value, oninput, onblur });
             }
             case 'time': {
               const { twelveHour = false } = props;
@@ -534,12 +559,12 @@ export const FormFieldFactory =
                   ? new Date(iv)
                   : (iv as Date)
                 : new Date();
-              const initialValue = toHourMin(date);
+              const value = toHourMin(date);
               (obj[id] as any) = transform ? transform('to', date) : date;
               return m(TimePicker, {
                 ...props,
                 twelveHour,
-                initialValue,
+                value,
                 oninput: (time: string) => {
                   const tt = time.split(':').map((n) => +n);
                   date.setHours(tt[0], tt[1]);
@@ -550,31 +575,31 @@ export const FormFieldFactory =
             }
             case 'date': {
               const { format = 'mmmm d, yyyy' } = props;
-              const initialValue: Date = typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : (iv as Date);
-              (obj[id] as any) = initialValue
+              const value: Date = typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : (iv as Date);
+              (obj[id] as any) = value
                 ? transform
-                  ? transform('to', initialValue.valueOf())
-                  : initialValue.valueOf()
-                : initialValue;
-              // console.log(initialValue && initialValue.toUTCString());
+                  ? transform('to', value.valueOf())
+                  : value.valueOf()
+                : value;
+              // console.log(value && value.toUTCString());
               const { min, max } = props;
               const minDate = min
-                ? !initialValue || min < initialValue.valueOf()
+                ? !value || min < value.valueOf()
                   ? new Date(min)
-                  : initialValue
+                  : value
                 : undefined;
               const maxDate = max
-                ? !initialValue || max > initialValue.valueOf()
+                ? !value || max > value.valueOf()
                   ? new Date(max)
-                  : initialValue
+                  : value
                 : undefined;
               return m(DatePicker as any, {
                 ...props,
                 minDate,
                 maxDate,
-                setDefaultDate: initialValue ? true : false,
+                setDefaultDate: value ? true : false,
                 format,
-                initialValue,
+                value,
                 oninput: (date: Date | string) => {
                   oninput(new Date(date));
                   // m.redraw();
@@ -628,7 +653,7 @@ export const FormFieldFactory =
                       maxDate,
                       setDefaultDate: initialDateTime ? true : false,
                       format,
-                      initialValue: initialDate,
+                      value: initialDate,
                       container: containerId as any,
                       oninput: (date: Date) => {
                         const d = new Date(state.initialDateTime);
@@ -647,7 +672,7 @@ export const FormFieldFactory =
                       label: '',
                       helperText: '',
                       twelveHour,
-                      initialValue: initialTime,
+                      value: initialTime,
                       container: containerId,
                       oninput: (time: string) => {
                         const tt = time.split(':').map((n) => +n);
@@ -673,26 +698,26 @@ export const FormFieldFactory =
               );
             }
             case 'email': {
-              const initialValue = iv as string;
+              const value = iv as string;
               return m(EmailInput, {
                 ...props,
                 validate,
                 autofocus,
                 oninput,
-                initialValue,
+                value,
                 onkeydown,
                 onkeyup,
                 onblur,
               });
             }
             case 'number': {
-              const initialValue = iv as number;
+              const value = iv as number;
               return m(NumberInput, {
                 ...props,
                 validate,
                 autofocus,
                 oninput,
-                initialValue,
+                value,
                 onkeydown,
                 onkeyup,
                 onblur,
@@ -736,7 +761,7 @@ export const FormFieldFactory =
                       iconName: 'check',
                       onclick: () => {
                         state.key = Date.now();
-                        oninput(options.map((o) => o.id));
+                        oninput(options.map((o) => typeof o === 'string' ? o : o.id));
                       },
                     }),
                     unselectAll &&
@@ -755,13 +780,13 @@ export const FormFieldFactory =
               ];
             }
             case 'select': {
-              const initialValue = iv as Array<string | number>;
+              const value = iv as Array<string | number>;
               return m(Select<any>, {
                 placeholder: props.multiple ? i18n.pickOneOrMore || 'Pick one or more' : i18n.pickOne || 'Pick one',
                 ...props,
                 disabled: props.disabled || !options || options.length === 0,
                 options,
-                initialValue,
+                value,
                 onchange: (checkedIds: string[]) =>
                   oninput(
                     checkedIds.length === 1 && !props.multiple
@@ -786,8 +811,8 @@ export const FormFieldFactory =
               return m(Switch, { ...props, left, right, checked, oninput });
             }
             case 'tags': {
-              const initialValue = (iv ? ((iv as any) instanceof Array ? iv : [iv]) : []) as string[];
-              const data = initialValue.map((chip) => ({ tag: chip }));
+              const value = (iv ? ((iv as any) instanceof Array ? iv : [iv]) : []) as string[];
+              const data = value.map((chip) => ({ tag: chip }));
               const autocompleteOptions =
                 options && options.length > 0
                   ? {
@@ -814,7 +839,7 @@ export const FormFieldFactory =
               });
             }
             case 'autocomplete': {
-              const initialValue = iv as string;
+              const value = iv as string;
               const autocompleteOptions =
                 options && options.length > 0
                   ? {
@@ -828,7 +853,7 @@ export const FormFieldFactory =
                   : { data: {} };
               const { label, isMandatory, className, helperText } = props;
               return m(Autocomplete, {
-                initialValue,
+                value,
                 className,
                 label,
                 isMandatory,
@@ -840,25 +865,25 @@ export const FormFieldFactory =
               });
             }
             case 'textarea': {
-              const initialValue = iv as string;
+              const value = iv as string;
               return m(TextArea, {
                 ...props,
                 validate,
                 autofocus,
                 oninput,
-                initialValue,
+                value,
                 onkeyup,
                 onkeydown,
                 onblur,
               });
             }
             case 'file': {
-              const initialValue = iv as string;
+              const value = iv as string;
               const { url, placeholder } = field;
               if (!url) {
                 throw Error('Input field "url" not defined, which indicates the URL to the upload folder.');
               }
-              const accept = options ? options.map((o) => o.id) : undefined;
+              const accept = options ? options.map((o) => typeof o === 'string' ? o : o.id) : undefined;
               const upload = (file: FileList) => {
                 if (!file || file.length < 1) {
                   oninput('');
@@ -879,14 +904,14 @@ export const FormFieldFactory =
                 accept,
                 placeholder,
                 oninput: upload,
-                initialValue,
+                value,
               });
             }
             case 'base64': {
-              const initialValue = iv as string;
-              const isImg = initialValue && /data:image/i.test(initialValue) ? true : false;
+              const value = iv as string;
+              const isImg = value && /data:image/i.test(value) ? true : false;
               const { placeholder } = field;
-              const accept = options ? options.map((o) => o.id).join(',') : undefined;
+              const accept = options ? options.map((o) => typeof o === 'string' ? o : o.id).join(',') : undefined;
               const upload = (file: FileList) => {
                 if (!file || file.length < 1) {
                   oninput('');
@@ -904,7 +929,7 @@ export const FormFieldFactory =
               return isImg
                 ? m('div', [
                     m('img.responsive-img', {
-                      src: initialValue,
+                      src: value,
                       alt: typeof altText === 'string' ? altText : 'Uploaded image',
                       style: { maxHeight: `${field.max || 50}px` },
                     }),
@@ -919,11 +944,11 @@ export const FormFieldFactory =
                     accept,
                     placeholder,
                     oninput: upload,
-                    initialValue,
+                    value,
                   });
             }
             case 'url': {
-              const initialValue = iv as string;
+              const value = iv as string;
               return m(UrlInput, {
                 placeholder: 'http(s)://www.example.com',
                 // dataError: 'http(s)://www.example.com',
@@ -932,21 +957,21 @@ export const FormFieldFactory =
                 validate,
                 autofocus,
                 oninput,
-                initialValue,
+                value,
                 onkeydown,
                 onkeyup,
                 onblur,
               });
             }
             case 'text': {
-              const initialValue = iv as string;
+              const value = iv as string;
               return m(TextInput, {
                 ...props,
                 maxLength: field.max || undefined,
                 validate,
                 autofocus,
                 oninput,
-                initialValue,
+                value,
                 onkeydown,
                 onkeyup,
                 onblur,

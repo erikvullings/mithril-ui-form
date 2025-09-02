@@ -300,8 +300,22 @@ export const labelResolver = <O extends Record<string, any>>(form: UIForm<O>) =>
         return values
           .map((v) =>
             opt!
-              .filter((o) => o.id === v)
-              .map((o) => o.label || capitalizeFirstLetter(o.id))
+              .filter((o) => {
+                // Handle string options
+                if (typeof o === 'string') {
+                  return o === v;
+                }
+                // Handle object options
+                return o.id === v;
+              })
+              .map((o) => {
+                // Handle string options
+                if (typeof o === 'string') {
+                  return capitalizeFirstLetter(o);
+                }
+                // Handle object options
+                return o.label || capitalizeFirstLetter(o.id);
+              })
               .shift()
           )
           .filter((v) => typeof v !== 'undefined');

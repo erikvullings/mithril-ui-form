@@ -2,7 +2,7 @@ import m, { Attributes, Component } from 'mithril';
 import { FlatButton, ModalPanel, Pagination, RoundIconButton, TextInput } from 'mithril-materialized';
 import { FormAttributes, I18n, InputField } from 'mithril-ui-form-plugin';
 import { LayoutForm } from './layout-form';
-import { range, stripSpaces, hash, getAllUrlParams, toQueryString, getQueryParamById } from '../utils';
+import { range, stripSpaces, getAllUrlParams, toQueryString, getQueryParamById } from '../utils';
 
 export interface IRepeatList<O extends Attributes = {}> extends Attributes {
   id?: keyof O;
@@ -232,7 +232,7 @@ export const RepeatList = <O extends Attributes>() => {
                     m(
                       '.mui-repeat-item',
                       {
-                        key: index,
+                        key: `item-${page}-${pageSize ? (curPage - 1) * pageSize + index : index}`,
                         draggable: canDrag,
                         ondragstart: canDrag ? (event: DragEvent) => handleDragStart(event, index) : undefined,
                         ondragover: canDrag ? handleDragOver : undefined,
@@ -256,7 +256,7 @@ export const RepeatList = <O extends Attributes>() => {
                         [
                           m(
                             '.row.repeat-item',
-                            { className: repeatItemClass, key: page + hash(item), style: 'flex: 1;' },
+                            { className: repeatItemClass, key: `repeat-${page}-${pageSize ? (curPage - 1) * pageSize + index : index}`, style: 'flex: 1;' },
                             [
                               type &&
                                 m(LayoutForm, {

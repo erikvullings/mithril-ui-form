@@ -21,13 +21,20 @@ interface ISource {
   url: string;
 }
 
+type Category = {
+  id: string;
+  subcategories?: Category[];
+  label: string;
+  desc?: string;
+};
+
 interface ILessonLearned {
   id: string;
   event: string;
   /** GeoJSON area definition */
   area: { [key: string]: any };
   description: string;
-  categories: string[]; // TODO Allow the user to specify defaults
+  categories: Category[];
   created: Date;
   edited: Date;
   editors: IEditor[];
@@ -1913,8 +1920,68 @@ export const LLFView = () => {
 
   state.form = info;
 
-  state.result = {} as ILessonLearned;
-  // state.result.incidentType = ['flash', 'river', 'drought'];
+  // Example with pre-filled data to test initial value handling and data binding
+  state.result = {
+    id: 'sample-lesson-2023',
+    event: 'European Flooding July 2023',
+    description:
+      'Heavy rainfall in central Europe caused widespread flooding across multiple river basins, affecting critical infrastructure and displacing thousands of residents. This event highlighted the need for improved cross-border coordination and early warning systems.',
+    area: {
+      type: 'Feature',
+      geometry: {
+        type: 'Polygon',
+        coordinates: [
+          [
+            [6.0, 50.0],
+            [15.0, 50.0],
+            [15.0, 54.0],
+            [6.0, 54.0],
+            [6.0, 50.0],
+          ],
+        ],
+      },
+      properties: { name: 'Central European Region' },
+    },
+    categories: [
+      { id: 'flood', label: 'Flood' },
+      { id: 'infra', label: 'Infrastructure' },
+    ],
+    incidentType: ['flash', 'river'],
+    created: new Date('2023-07-15'),
+    edited: new Date('2023-08-22'),
+    editors: [
+      {
+        name: 'Dr. Sarah Johnson',
+        role: 'Hydrologist',
+        region: 'Western Europe',
+        country: 'germany',
+      },
+      {
+        name: 'Prof. Marco Rossi',
+        role: 'Emergency Management Specialist',
+        region: 'Central Europe',
+        country: 'italy',
+      },
+      {
+        name: 'Dr. Elisabeth Müller',
+        role: 'Infrastructure Analyst',
+        region: 'Central Europe',
+        country: 'austria',
+      },
+    ],
+    sources: [
+      {
+        title: 'European Flood Alert System Report',
+        url: 'https://floods.jrc.ec.europa.eu/reports/2023-07',
+      },
+      {
+        title: 'National Weather Service Analysis',
+        url: 'https://weather.gov/reports/flooding-2023',
+      },
+    ],
+    cipInfo:
+      'Multiple critical infrastructure sectors were affected, including water treatment facilities, transportation networks, and telecommunications. The flooding demonstrated the cascading effects of extreme weather on interconnected systems.',
+  } as ILessonLearned;
   return {
     view: () => {
       const { result, form } = state;
