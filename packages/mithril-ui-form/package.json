@@ -50,7 +50,7 @@
     "jsdom": "^26.1.0",
     "jsdom-global": "^3.0.2",
     "mithril": "2.3.5",
-    "mithril-materialized": "beta",
+    "mithril-materialized": "3.2.2",
     "rimraf": "6.0.1",
     "rollup": "^4.49.0",
     "rollup-plugin-typescript2": "^0.36.0",
@@ -61,7 +61,7 @@
   },
   "peerDependencies": {
     "mithril": "^2.3.5",
-    "mithril-materialized": "2.0.0"
+    "mithril-materialized": "3.2.2"
   },
   "browserslist": [
     "last 2 version",
