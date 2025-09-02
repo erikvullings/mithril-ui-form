@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.2...v2.0.3) (2025-09-02)
+
+
+### Bug Fixes
+
+* more robust handling of id ([8763b20](https://github.com/erikvullings/mithril-ui-form/commit/8763b20061acd6d6330a4567a6b0e912f3f043d3))
+
 ## [2.0.2](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.1...v2.0.2) (2025-08-26)
 
 
