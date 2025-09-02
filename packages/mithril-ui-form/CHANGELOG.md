@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.3...v2.0.4) (2025-09-02)
+
+
+### Bug Fixes
+
+* Typedoc documentation, improved typings ([b638caf](https://github.com/erikvullings/mithril-ui-form/commit/b638caf8910d136eefd79af4168b72d7616b5517))
+
 ## [2.0.3](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.2...v2.0.3) (2025-09-02)
 
 
