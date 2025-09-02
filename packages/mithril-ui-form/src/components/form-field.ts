@@ -769,13 +769,13 @@ export const FormFieldFactory =
               ];
             }
             case 'select': {
-              const value = iv as Array<string | number>;
+              const checkedId = iv as Array<string | number>;
               return m(Select<any>, {
                 placeholder: props.multiple ? i18n.pickOneOrMore || 'Pick one or more' : i18n.pickOne || 'Pick one',
                 ...props,
                 disabled: props.disabled || !options || options.length === 0,
                 options,
-                value,
+                checkedId,
                 onchange: (checkedIds: string[]) =>
                   oninput(
                     checkedIds.length === 1 && !props.multiple

@@ -1984,6 +1984,7 @@ export const LLFView = () => {
       { id: 'flood', label: 'Flood' },
       { id: 'infra', label: 'Infrastructure' },
     ],
+    measures: [{ id: 'meas1', label: 'Measure 1', type: 'hw' }],
     incidentType: ['flash', 'river'],
     created: new Date('2023-07-15'),
     edited: new Date('2023-08-22'),
