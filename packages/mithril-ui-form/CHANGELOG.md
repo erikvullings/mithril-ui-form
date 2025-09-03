@@ -1,3 +1,10 @@
+## [2.0.6](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.5...v2.0.6) (2025-09-03)
+
+
+### Bug Fixes
+
+* type definitions, make utils more robust, added tests. ([8edb434](https://github.com/erikvullings/mithril-ui-form/commit/8edb434030305446ae54deb6e22ca18072720243))
+
 ## [2.0.5](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.4...v2.0.5) (2025-09-02)
 
 
