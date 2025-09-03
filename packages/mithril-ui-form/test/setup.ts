@@ -23,3 +23,28 @@ Object.defineProperty(HTMLElement.prototype, 'getBoundingClientRect', {
   })),
   writable: true,
 });
+
+// Suppress JSDOM navigation errors by intercepting them
+const originalError = console.error;
+console.error = (...args) => {
+  // Filter out JSDOM navigation errors
+  if (args[0] && args[0].toString && args[0].toString().includes('Not implemented: navigation')) {
+    return;
+  }
+  originalError.apply(console, args);
+};
+
+// Mock window.location to prevent JSDOM navigation errors
+delete (window as any).location;
+(window as any).location = {
+  search: '?param1=value1&param2=value2&array[]=item1&array[]=item2',
+  hash: '#section?id=123&name=test',
+  href: 'http://localhost',
+  hostname: 'localhost',
+  port: '',
+  protocol: 'http:',
+  pathname: '/',
+  assign: jest.fn(),
+  reload: jest.fn(),
+  replace: jest.fn(),
+};

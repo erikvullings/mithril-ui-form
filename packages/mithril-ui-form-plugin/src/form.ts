@@ -148,128 +148,34 @@ export type ArrayElement<T> = T extends readonly (infer U)[]
   : Record<string, any>;
 
 /**
- * Represents a single field within a UI form configuration.
+ * A single field definition for a given key of O.
  *
- * Extends InputField with enhanced type support for nested objects and arrays,
- * allowing for complex form structures with proper TypeScript inference.
- *
- * @template O - The type of the object being edited
- * @template K - The specific key of the object this field represents
- *
- * @example
- * ```typescript
- * interface User {
- *   name: string;
- *   address: {
- *     street: string;
- *     city: string;
- *   };
- *   hobbies: string[];
- * }
- *
- * // Simple text field
- * const nameField: UIFormField<User, 'name'> = {
- *   type: 'text',
- *   id: 'name',
- *   label: 'Full Name',
- *   required: true
- * };
- *
- * // Nested object field
- * const addressField: UIFormField<User, 'address'> = {
- *   type: [
- *     { type: 'text', id: 'street', label: 'Street' },
- *     { type: 'text', id: 'city', label: 'City' }
- *   ],
- *   id: 'address',
- *   label: 'Address Information'
- * };
- * ```
+ * If O[K] is:
+ *  - a primitive → field is a simple ComponentType
+ *  - an object → field is a nested UIForm
+ *  - an array of primitives → field is a ComponentType
+ *  - an array of objects → field is a nested UIForm for the array element type
  */
-export type UIFormField<O extends Record<string, any>, K extends keyof O = keyof O> = InputField<O, K> & {
-  /**
-   * The type of form field or nested form structure.
-   *
-   * - `ComponentType`: Standard form field type (text, number, select, etc.)
-   * - `UIForm<T>`: Nested form for object or array properties
-   *
-   * For array properties (O[K] extends any[]), the type can be:
-   * - A nested form for editing array elements: `UIForm<ArrayElement<O[K]>>`
-   * - A standard field type for primitive arrays
-   *
-   * For object properties (O[K] extends Record<string, any>), the type can be:
-   * - A nested form for the object structure: `UIForm<O[K]>`
-   * - A standard field type if treating the object as a single value
-   */
-  type?:
-    | ComponentType
-    | (O[K] extends any[]
-        ? UIForm<ArrayElement<O[K]>>
-        : O[K] extends Record<string, any>
-        ? UIForm<O[K]>
-        : ComponentType);
-};
+// export type UIFormField<O extends Record<string, any>, K extends keyof O = keyof O> = InputField<O, K> & {
+//   id: K;
+// } & (O[K] extends Record<string, any>
+//     ? { type: UIForm<O[K]> } // nested object
+//     : O[K] extends (infer U)[]
+//     ? U extends Record<string, any>
+//       ? { type: UIForm<U> } // array of objects
+//       : { type: ComponentType } // array of primitives
+//     : { type: ComponentType }); // primitive
+
+// This is the discriminated union that allows either:
+// 1. a plain input field, or
+// 2. a nested form (recursive case)
+export type UIFormField<T extends Record<string, any>, K extends keyof T = keyof T> =
+  | (InputField<T, K> & { id: K; type: ComponentType }) // leaf field
+  | (InputField<T, K> & { id: K; type: UIForm<T[K] extends Record<string, any> ? T[K] : any> }); // nested form
 
 /**
- * A complete form definition consisting of multiple form fields.
- *
- * The UIForm type represents the JSON configuration that defines the structure,
- * validation, and behavior of a dynamic form. It supports nested objects,
- * arrays, conditional field visibility, and complex validation rules.
- *
- * @template O - The type of the object being edited by the form
- *
- * @example
- * ```typescript
- * interface BlogPost {
- *   title: string;
- *   content: string;
- *   tags: string[];
- *   author: {
- *     name: string;
- *     email: string;
- *   };
- *   isPublished: boolean;
- * }
- *
- * const blogPostForm: UIForm<BlogPost> = [
- *   {
- *     type: 'text',
- *     id: 'title',
- *     label: 'Post Title',
- *     required: true,
- *     maxLength: 100
- *   },
- *   {
- *     type: 'textarea',
- *     id: 'content',
- *     label: 'Content',
- *     required: true,
- *     minLength: 10
- *   },
- *   {
- *     type: 'tags',
- *     id: 'tags',
- *     label: 'Tags',
- *     maxLength: 5
- *   },
- *   {
- *     type: [
- *       { type: 'text', id: 'name', label: 'Author Name', required: true },
- *       { type: 'email', id: 'email', label: 'Email', required: true }
- *     ],
- *     id: 'author',
- *     label: 'Author Information'
- *   },
- *   {
- *     type: 'checkbox',
- *     id: 'isPublished',
- *     label: 'Publish Post'
- *   }
- * ];
- * ```
- *
- * @see {@link UIFormField} for individual field configuration
- * @see {@link FormAttributes} for form component properties
+ * A form is an array of fields, where each field id is tied to O's keys.
  */
-export type UIForm<O extends Record<string, any> = {}> = Array<UIFormField<O>>;
+export type UIForm<O extends Record<string, any>> = {
+  [K in keyof O]: UIFormField<O, K>;
+}[keyof O][];

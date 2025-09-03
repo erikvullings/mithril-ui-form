@@ -1,8 +1,9 @@
-import { UIForm, InputField, ComponentType } from 'mithril-ui-form-plugin';
+import { UIForm, InputField, ComponentType, UIFormField } from 'mithril-ui-form-plugin';
 
 export const capitalizeFirstLetter = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-export const isComponentType = (x?: ComponentType | UIForm): x is ComponentType => typeof x === 'string';
+export const isComponentType = <T extends object>(x?: ComponentType | UIForm<T>): x is ComponentType =>
+  typeof x === 'string';
 
 /**
  * Pad the string with padding character.
@@ -254,27 +255,60 @@ export const deepCopy = <T>(target: T): T => {
   return target;
 };
 
+// Type guard: tells TS whether a field is a nested form (type is UIForm<...>, not a string)
+function isNestedField<O extends Record<string, any>>(
+  f: UIFormField<O, keyof O>
+): f is UIFormField<O, keyof O> & { type: UIForm<any> } {
+  return typeof (f as any).type !== 'string';
+}
+
 /**
  * Create a resolver that translates an ID and value (or values) to a human readable representation
  * by replacing the keys with their form labels, making it easier to render the object into a human
  * readable form.
  */
 export const labelResolver = <O extends Record<string, any>>(form: UIForm<O>) => {
-  const createDict = (ff: UIForm<O | O[keyof O]>, label = '') => {
+  // Flattens a UIForm<O> into a dictionary keyed by dotted paths, with fields as values.
+  // We intentionally widen the value type to `InputField<any>` because nested fields
+  // come from different sub-objects (not all are InputField<O>).
+  function createDict<O extends Record<string, any>>(ff: UIForm<O>, label = ''): Record<string, InputField<any>> {
     const d = ff
-      .filter((f) => f.type !== 'section' && f.type !== 'md')
+      // avoid filter overload issues by narrowing first
+      .filter((f) => (typeof f.type === 'string' ? f.type !== 'section' && f.type !== 'md' : true))
       .reduce((acc, cur) => {
         const fieldId = (label ? `${label}.` : '') + String(cur.id);
-        const type = cur.type || (cur.options && cur.options.length > 0 ? 'select' : 'text');
-        if (typeof type === 'string') {
-          acc[fieldId] = cur;
+
+        if (isNestedField(cur)) {
+          // nested form: recurse (we don't try to preserve exact sub-type here)
+          Object.assign(acc, createDict<any>(cur.type as UIForm<any>, fieldId));
         } else {
-          acc = { ...acc, ...createDict(type as UIForm<O | O[keyof O]>, fieldId) };
+          // primitive/leaf field
+          const inferredType =
+            cur.type ?? ((cur as any).options && (cur as any).options.length > 0 ? 'select' : 'text');
+          // store a normalized field; widen to InputField<any> for compatibility
+          acc[fieldId] = { ...(cur as any), type: inferredType } as InputField<any>;
         }
         return acc;
-      }, {} as { [key: string]: InputField<O> });
+      }, {} as Record<string, InputField<any>>);
+
     return d;
-  };
+  }
+
+  // const createDict = (ff: UIForm<O | O[keyof O]>, label = '') => {
+  //   const d = ff
+  //     .filter((f) => f.type !== 'section' && f.type !== 'md')
+  //     .reduce((acc, cur) => {
+  //       const fieldId = (label ? `${label}.` : '') + String(cur.id);
+  //       const type = cur.type || (cur.options && cur.options.length > 0 ? 'select' : 'text');
+  //       if (typeof type === 'string') {
+  //         acc[fieldId] = cur;
+  //       } else {
+  //         acc = { ...acc, ...createDict(type as UIForm<O | O[keyof O]>, fieldId) };
+  //       }
+  //       return acc;
+  //     }, {} as { [key: string]: InputField<O> });
+  //   return d;
+  // };
 
   const dict = createDict(form);
 
@@ -412,53 +446,75 @@ export const toQueryString = (
 
 /** Extract all query parameters to an object */
 export const getAllUrlParams = (url: string) => {
-  // get query string from url (optional) or window
-  const queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+  // build the raw query string (without leading '?')
+  let queryString = '';
 
-  // we'll store the parameters here
-  const result = {} as Record<string, string | boolean | string[]>;
+  if (url && url.length > 0) {
+    const qIndex = url.indexOf('?');
+    if (qIndex !== -1) {
+      queryString = url.substring(qIndex + 1).split('#')[0];
+    } else if (url.startsWith('?')) {
+      queryString = url.slice(1).split('#')[0];
+    }
+  } else {
+    // prefer location.search, fallback to href, then to hash (which may contain a query)
+    const loc = window.location as Location & { href?: string };
+    let search = loc.search ?? '';
+    if (search.startsWith('?')) search = search.slice(1);
 
-  // if query string exists
-  if (queryString) {
-    // split our query string into its component parts
-    const arr = queryString.split('&');
+    if (search) {
+      queryString = search;
+    } else if (typeof loc.href === 'string' && loc.href.indexOf('?') !== -1) {
+      queryString = loc.href.substring(loc.href.indexOf('?') + 1).split('#')[0];
+    } else {
+      const hash = loc.hash ?? '';
+      const hQ = hash.indexOf('?');
+      if (hQ !== -1) queryString = hash.substring(hQ + 1);
+    }
+  }
 
-    for (var i = 0; i < arr.length; i++) {
-      // separate the keys and the values
-      const a = arr[i].split('=');
+  const result = {} as Record<string, string | boolean | (string | boolean)[]>;
 
-      // set parameter name and value (use 'true' if empty)
-      const paramName = a[0];
-      const paramValue = typeof a[1] === 'undefined' ? true : a[1];
+  if (!queryString) return result;
 
-      // if the paramName ends with square brackets, e.g. colors[] or colors[2]
-      if (paramName.match(/\[(\d+)?\]$/)) {
-        // create key if it doesn't exist
-        const key = paramName.replace(/\[(\d+)?\]/, '');
-        const arr = (result[key] || []) as Array<string | boolean>;
+  const parts = queryString.split('&').filter(Boolean);
 
-        // if it's an indexed array e.g. colors[2]
-        if (paramName.match(/\[\d+\]$/)) {
-          // get the index value and add the entry at the appropriate position
-          const index = +/\[(\d+)\]/.exec(paramName)![1];
-          arr[index] = paramValue;
-        } else {
-          // otherwise add the value to the end of the array
-          arr.push(paramValue);
-        }
+  for (const part of parts) {
+    const eq = part.indexOf('=');
+    const rawName = eq === -1 ? part : part.substring(0, eq);
+    const rawValue = eq === -1 ? undefined : part.substring(eq + 1);
+
+    const paramName = decodeURIComponent(rawName);
+    const paramValue = typeof rawValue === 'undefined' ? true : decodeURIComponent(rawValue);
+
+    const arrayMatch = paramName.match(/\[(\d+)?\]$/);
+    if (arrayMatch) {
+      const key = paramName.replace(/\[(\d+)?\]$/, '');
+
+      // ensure we have an array to write into
+      let existing = result[key];
+      if (typeof existing === 'undefined') {
+        existing = [];
+      } else if (typeof existing === 'string' || typeof existing === 'boolean') {
+        existing = [existing];
+      }
+      const arrRef = existing as (string | boolean)[];
+
+      if (/\[\d+\]$/.test(paramName)) {
+        const idx = +/\[(\d+)\]/.exec(paramName)![1];
+        arrRef[idx] = paramValue;
       } else {
-        // we're dealing with a string or true
-        if (!result[paramName]) {
-          // if it doesn't exist, create property
-          result[paramName] = paramValue;
-        } else if (typeof result[paramName] === 'string') {
-          // if property does exist and it's a string, convert it to an array
-          result[paramName] = [result[paramName] as string];
-          (result[paramName] as string[]).push(paramValue as string);
-        } else {
-          // otherwise add the property
-          (result[paramName] as string[]).push(paramValue as string);
-        }
+        arrRef.push(paramValue);
+      }
+
+      result[key] = arrRef;
+    } else {
+      if (typeof result[paramName] === 'undefined') {
+        result[paramName] = paramValue;
+      } else if (typeof result[paramName] === 'string' || typeof result[paramName] === 'boolean') {
+        result[paramName] = [result[paramName] as string | boolean, paramValue];
+      } else {
+        (result[paramName] as (string | boolean)[]).push(paramValue);
       }
     }
   }
@@ -467,12 +523,17 @@ export const getAllUrlParams = (url: string) => {
 };
 
 export const getQueryParamById = (paramId: string): string | null => {
-  const queryString = window.location.hash.split('?')[1]; // Extract everything after the '?' in the fragment identifier
-  if (queryString) {
-    const queryParams = new URLSearchParams(queryString);
-    return queryParams.get(paramId);
+  const hash = window.location.hash || '';
+  const queryIndex = hash.indexOf('?');
+
+  if (queryIndex === -1) {
+    return null; // no query string in hash
   }
-  return null;
+
+  const queryString = hash.substring(queryIndex + 1);
+  const queryParams = new URLSearchParams(queryString);
+
+  return queryParams.get(paramId);
 };
 
 export const extractTitle = (param: unknown): string | undefined => {
@@ -501,7 +562,7 @@ export const arrayUtils = {
     if (fromIndex === toIndex || fromIndex < 0 || toIndex < 0 || fromIndex >= array.length || toIndex >= array.length) {
       return array;
     }
-    
+
     const newArray = [...array];
     const [movedItem] = newArray.splice(fromIndex, 1);
     newArray.splice(toIndex, 0, movedItem);
@@ -536,7 +597,7 @@ export const arrayUtils = {
     if (index1 === index2 || index1 < 0 || index2 < 0 || index1 >= array.length || index2 >= array.length) {
       return array;
     }
-    
+
     const newArray = [...array];
     [newArray[index1], newArray[index2]] = [newArray[index2], newArray[index1]];
     return newArray;
@@ -549,7 +610,7 @@ export const arrayUtils = {
     if (index < 0 || index >= array.length) {
       return array;
     }
-    
+
     const item = array[index];
     const duplicatedItem = typeof item === 'object' ? deepCopy(item) : item;
     return arrayUtils.insertAt(array, index + 1, duplicatedItem);
@@ -560,5 +621,5 @@ export const arrayUtils = {
    */
   isValidArray: <T>(array: T[], min = 0, max?: number): boolean => {
     return array.length >= min && (max === undefined || array.length <= max);
-  }
+  },
 };

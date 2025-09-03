@@ -320,7 +320,7 @@ export const FormFieldFactory =
                   ...props,
                   i18n,
                   readonly,
-                  form: fieldType as UIForm<P>[],
+                  form: fieldType as UIForm<P>,
                   obj: obj[id],
                   context: context instanceof Array ? [obj, ...context] : [obj, context],
                   oninput: () => onFormChange && onFormChange(obj),
@@ -795,9 +795,9 @@ export const FormFieldFactory =
             case 'switch': {
               const checked = iv as boolean;
               // const { options: opt } = field;
-              const left = options && options.length > 0 ? options[0].label : '';
-              const right = options && options.length > 1 ? options[1].label : '';
-              return m(Switch, { ...props, left, right, checked, oninput });
+              const left = options && options.length > 0 ? options[0].label ?? '' : '';
+              const right = options && options.length > 1 ? options[1].label ?? '' : '';
+              return m(Switch, { ...props, left, right, checked, onchange: oninput });
             }
             case 'tags': {
               const value = (iv ? ((iv as any) instanceof Array ? iv : [iv]) : []) as string[];
