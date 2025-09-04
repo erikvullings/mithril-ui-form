@@ -35,7 +35,7 @@
   "license": "MIT",
   "dependencies": {
     "mithril-ui-form-plugin": "workspace:*",
-    "slimdown-js": "1.1.1"
+    "slimdown-js": "1.1.2"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.6",
@@ -49,7 +49,7 @@
     "jsdom": "^26.1.0",
     "jsdom-global": "^3.0.2",
     "mithril": "2.3.7",
-    "mithril-materialized": "3.3.0",
+    "mithril-materialized": "3.3.1",
     "rimraf": "6.0.1",
     "rollup": "^4.50.0",
     "rollup-plugin-typescript2": "^0.36.0",
@@ -60,7 +60,7 @@
   },
   "peerDependencies": {
     "mithril": "^2.3.7",
-    "mithril-materialized": "3.3.0"
+    "mithril-materialized": "3.3.1"
   },
   "browserslist": [
     "last 2 version",

@@ -109,8 +109,8 @@ importers:
         specifier: workspace:*
         version: link:../mithril-ui-form-plugin
       slimdown-js:
-        specifier: 1.1.1
-        version: 1.1.1
+        specifier: 1.1.2
+        version: 1.1.2
     devDependencies:
       '@rollup/plugin-commonjs':
         specifier: ^28.0.6
@@ -146,8 +146,8 @@ importers:
         specifier: 2.3.7
         version: 2.3.7
       mithril-materialized:
-        specifier: 3.3.0
-        version: 3.3.0
+        specifier: 3.3.1
+        version: 3.3.1
       rimraf:
         specifier: 6.0.1
         version: 6.0.1
@@ -3330,8 +3330,8 @@ packages:
   mithril-materialized@3.2.2:
     resolution: {integrity: sha512-UtTorWxzUeVuJLL51ouCNfrqNESZvURXWqVUR76RZ1lW+fOQWA7Ls7GdeukNruZeeaWkUDI7b/y3RPUdCparXQ==}
 
-  mithril-materialized@3.3.0:
-    resolution: {integrity: sha512-u6jqwLhTglxmzBLGU+cKLBlu3ZYr1Ta+262ZprK4icnBKyX70gpPYKPXUsPWoKcjRyo4Fc0SUQTLI9uI/I5GEQ==}
+  mithril-materialized@3.3.1:
+    resolution: {integrity: sha512-vBgCRgJzRh+JLkV7BJIF8/GfjEJLS5t+qe8pUn5/mvCcgx/5f5K7oqcIN3Yo08hSgagEBEfMX8fas6NbqMt+ZQ==}
 
   mithril@2.3.5:
     resolution: {integrity: sha512-wcuBG6S32JwZ6ii+g5lRu0rQnnUtkoZIB3sg7bqnGg38UGC+Y7GIPzc097BBpOn54/mf2CMzS9WlULmTWi2iAQ==}
@@ -4267,8 +4267,8 @@ packages:
     resolution: {integrity: sha512-ZA6oR3T/pEyuqwMgAKT0/hAv8oAXckzbkmR0UkUosQ+Mc4RxGoJkRmwHgHufaenlyAgE1Mxgpdcrf75y6XcnDg==}
     engines: {node: '>=14.16'}
 
-  slimdown-js@1.1.1:
-    resolution: {integrity: sha512-xnG+rkKspNDuf1skgGjTEqKi3K28Mg8k9vd8to7Opl9fmwiZsPqwZyQeNpal8MAHcgBUd5pfgvhBep1hysDd7A==}
+  slimdown-js@1.1.2:
+    resolution: {integrity: sha512-rCxRWYceJr2ks/EfW9nYbLov+JoPHJ+Z8eTIG3q/2yplku3jd3Qn0jwseX3B7NAv63lZQjp1gtzcDN2FX6IQmw==}
     engines: {node: '>=16'}
 
   smob@1.5.0:
@@ -8393,7 +8393,7 @@ snapshots:
     dependencies:
       mithril: 2.3.5
 
-  mithril-materialized@3.3.0:
+  mithril-materialized@3.3.1:
     dependencies:
       mithril: 2.3.7
 
@@ -9283,7 +9283,7 @@ snapshots:
 
   slash@5.1.0: {}
 
-  slimdown-js@1.1.1: {}
+  slimdown-js@1.1.2: {}
 
   smob@1.5.0: {}
 
