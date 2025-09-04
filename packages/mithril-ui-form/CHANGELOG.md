@@ -1,3 +1,10 @@
+## [2.0.7](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.6...v2.0.7) (2025-09-04)
+
+
+### Bug Fixes
+
+* Empty cells in table were not rendered correctly using slimdown-js ([c7af514](https://github.com/erikvullings/mithril-ui-form/commit/c7af514ad5a6c5e457507336405556e85c8f9dfb))
+
 ## [2.0.6](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.5...v2.0.6) (2025-09-03)
 
 
