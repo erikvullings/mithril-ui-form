@@ -2034,7 +2034,7 @@ export const LLFView = () => {
         //   }),
         //   m(TextArea, {
         //     label: 'JSON form',
-        //     initialValue: JSON.stringify(form, null, 2),
+        //     defaultValue: JSON.stringify(form, null, 2),
         //     onchange: (value: string) => (state.form = JSON.parse(value)),
         //   }),
         //   state.error ? m('p', m('em.red', state.error)) : undefined,

@@ -73,7 +73,7 @@ export const GeoJSONFeatureList = <O extends Attributes = {}>() => {
         title: state.raw,
         vnode: m(TextArea, {
           class: 'col s12',
-          initialValue: featureCollection ? JSON.stringify(featureCollection, null, 2) : undefined,
+          defaultValue: featureCollection ? JSON.stringify(featureCollection, null, 2) : undefined,
           placeholder: 'Enter GeoJSON',
           onchange: (v: string) => (obj[id] = v as any),
         }),

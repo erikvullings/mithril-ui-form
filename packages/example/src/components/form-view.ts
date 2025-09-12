@@ -92,7 +92,7 @@ ${result.sources ? result.sources.map((s, i) => `${i + 1}. [${s.title}](${s.url}
           m(TextArea, {
             label: 'JSON form',
             helperText: render('_Switch to another element to show the result._'),
-            initialValue: JSON.stringify(form, null, 2),
+            defaultValue: JSON.stringify(form, null, 2),
             onchange: (value: string) => {
               state.form = JSON.parse(value);
               state.result = {} as any;
