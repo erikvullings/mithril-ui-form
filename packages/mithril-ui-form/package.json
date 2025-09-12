@@ -49,9 +49,9 @@
     "jsdom": "^26.1.0",
     "jsdom-global": "^3.0.2",
     "mithril": "2.3.7",
-    "mithril-materialized": "3.3.1",
+    "mithril-materialized": "3.3.6",
     "rimraf": "6.0.1",
-    "rollup": "^4.50.0",
+    "rollup": "^4.50.1",
     "rollup-plugin-typescript2": "^0.36.0",
     "ts-jest": "^29.4.1",
     "tslib": "2.8.1",
@@ -60,7 +60,7 @@
   },
   "peerDependencies": {
     "mithril": "^2.3.7",
-    "mithril-materialized": "3.3.1"
+    "mithril-materialized": "3.3.6"
   },
   "browserslist": [
     "last 2 version",

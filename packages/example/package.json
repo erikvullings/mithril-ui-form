@@ -29,8 +29,8 @@
     "leaflet": "^1.9.4",
     "leaflet-draw": "^1.0.4",
     "material-icons": "^1.13.14",
-    "mithril": "^2.3.5",
-    "mithril-materialized": "3.2.2",
+    "mithril": "^2.3.7",
+    "mithril-materialized": "3.3.6",
     "mithril-ui-form": "workspace:*",
     "mithril-ui-form-leaflet-plugin": "workspace:*",
     "mithril-ui-form-rating-plugin": "workspace:*"
