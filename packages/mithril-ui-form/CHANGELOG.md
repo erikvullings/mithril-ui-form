@@ -1,3 +1,10 @@
+## [2.0.8](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.7...v2.0.8) (2025-09-12)
+
+
+### Bug Fixes
+
+* bse64 type not working ([2c23231](https://github.com/erikvullings/mithril-ui-form/commit/2c23231ccbfb4dfe9dceb581166c06b8d3375f92))
+
 ## [2.0.7](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.6...v2.0.7) (2025-09-04)
 
 
