@@ -19,7 +19,11 @@ module.exports = (env) => {
     devServer: {
       liveReload: true,
       port: 1233,
-      watchFiles: ['../mithril-ui-form/lib/**/*'],
+      watchFiles: [
+        '../mithril-ui-form/src/**/*',
+        '../mithril-ui-form-leaflet-plugin/src/**/*',
+        '../mithril-ui-form-rating-plugin/src/**/*',
+      ],
     },
     watchOptions: {
       followSymlinks: true,
@@ -126,6 +130,11 @@ module.exports = (env) => {
       extensions: ['.ts', '.js'],
       alias: {
         mithril: path.resolve(__dirname, 'node_modules/mithril'),
+        ...(isProduction ? {} : {
+          'mithril-ui-form': path.resolve(__dirname, '../mithril-ui-form/src'),
+          'mithril-ui-form-leaflet-plugin': path.resolve(__dirname, '../mithril-ui-form-leaflet-plugin/src'),
+          'mithril-ui-form-rating-plugin': path.resolve(__dirname, '../mithril-ui-form-rating-plugin/src'),
+        }),
       },
       symlinks: true,
     },
