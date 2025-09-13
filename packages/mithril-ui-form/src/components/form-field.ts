@@ -724,7 +724,7 @@ export const FormFieldFactory =
             }
             case 'checkbox': {
               const checked = Boolean(iv);
-              return m(InputCheckbox, { ...props, checked, oninput });
+              return m(InputCheckbox, { ...props, checked, onchange: oninput });
             }
             case 'options': {
               const checkedId = iv as Array<string | number>;
