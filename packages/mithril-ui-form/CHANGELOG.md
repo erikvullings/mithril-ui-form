@@ -1,3 +1,10 @@
+## [2.0.10](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.9...v2.0.10) (2025-09-13)
+
+
+### Bug Fixes
+
+* nested objects could not be updated ([747eaaf](https://github.com/erikvullings/mithril-ui-form/commit/747eaaf3fd0e930f3fb7dab6746d4e934adf55ff))
+
 ## [2.0.9](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.8...v2.0.9) (2025-09-13)
 
 
