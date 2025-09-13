@@ -323,7 +323,11 @@ export const FormFieldFactory =
                   form: fieldType as UIForm<P>,
                   obj: obj[id],
                   context: context instanceof Array ? [obj, ...context] : [obj, context],
-                  oninput: () => onFormChange && onFormChange(obj),
+                  onchange: () => onFormChange && onFormChange(obj),
+                  // oninput: (_isValid: boolean, updatedNestedObj: P) => {
+                  //   obj[id] = updatedNestedObj;
+                  //   onFormChange && onFormChange(obj);
+                  // },
                   containerId,
                 } as FormAttributes<P>)
               ),
