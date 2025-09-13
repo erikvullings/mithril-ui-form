@@ -1,3 +1,10 @@
+## [2.0.9](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.8...v2.0.9) (2025-09-13)
+
+
+### Bug Fixes
+
+* checkbox must use onchange ([3fbc5d5](https://github.com/erikvullings/mithril-ui-form/commit/3fbc5d507d8150d442a3f03c37ab03679debe694))
+
 ## [2.0.8](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.7...v2.0.8) (2025-09-12)
 
 
