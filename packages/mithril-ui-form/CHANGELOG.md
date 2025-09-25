@@ -1,3 +1,10 @@
+## [2.0.12](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.11...v2.0.12) (2025-09-25)
+
+
+### Bug Fixes
+
+* Update slimdown to fix issue with rendering hr element ([9cf3628](https://github.com/erikvullings/mithril-ui-form/commit/9cf36281db2c57f0a3cdaf6d3039ade3290673da))
+
 ## [2.0.11](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.10...v2.0.11) (2025-09-17)
 
 
