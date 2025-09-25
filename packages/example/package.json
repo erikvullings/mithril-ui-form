@@ -30,7 +30,7 @@
     "leaflet-draw": "^1.0.4",
     "material-icons": "^1.13.14",
     "mithril": "^2.3.7",
-    "mithril-materialized": "3.4.2",
+    "mithril-materialized": "3.4.5",
     "mithril-ui-form": "workspace:*",
     "mithril-ui-form-leaflet-plugin": "workspace:*",
     "mithril-ui-form-rating-plugin": "workspace:*"
