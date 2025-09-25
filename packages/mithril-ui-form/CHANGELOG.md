@@ -1,3 +1,10 @@
+## [2.0.11](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.10...v2.0.11) (2025-09-17)
+
+
+### Bug Fixes
+
+* use latest version of mm peer dependency ([7717566](https://github.com/erikvullings/mithril-ui-form/commit/77175665f1e6b2a432db5324e089873341708add))
+
 ## [2.0.10](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.9...v2.0.10) (2025-09-13)
 
 
