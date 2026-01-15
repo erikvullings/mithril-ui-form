@@ -37,11 +37,11 @@
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "pnpm": "^10.16.1",
-    "rimraf": "^6.0.1",
-    "semantic-release": "^24.2.8",
+    "pnpm": "^10.28.0",
+    "rimraf": "^6.1.2",
+    "semantic-release": "^25.0.2",
     "semantic-release-monorepo": "^8.0.2",
-    "typedoc": "0.28.13",
+    "typedoc": "0.28.16",
     "typedoc-github-theme": "^0.3.1"
   }
 }

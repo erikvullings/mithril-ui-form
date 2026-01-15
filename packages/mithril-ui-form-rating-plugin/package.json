@@ -38,15 +38,15 @@
   "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
   "license": "MIT",
   "dependencies": {
-    "mithril": "^2.3.7"
+    "mithril": "^2.3.8"
   },
   "devDependencies": {
     "@types/mithril": "^2.2.7",
-    "@types/node": "^24.5.1",
-    "tsup": "^8.5.0",
+    "@types/node": "^25.0.8",
+    "tsup": "^8.5.1",
     "mithril-ui-form-plugin": "workspace:*",
-    "rimraf": "^6.0.1",
+    "rimraf": "^6.1.2",
     "tslib": "^2.8.1",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
   }
 }

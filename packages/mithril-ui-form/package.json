@@ -38,29 +38,29 @@
     "slimdown-js": "1.1.3"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.6",
-    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@types/geojson": "7946.0.16",
     "@types/jest": "^30.0.0",
     "@types/mithril": "2.2.7",
-    "jest": "^30.1.3",
-    "jest-environment-jsdom": "^30.1.2",
-    "jsdom": "^27.0.0",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
+    "jsdom": "^27.4.0",
     "jsdom-global": "^3.0.2",
-    "mithril": "2.3.7",
-    "mithril-materialized": "3.4.5",
-    "rimraf": "6.0.1",
-    "rollup": "^4.52.2",
+    "mithril": "^2.3.8",
+    "mithril-materialized": "^3.13.0",
+    "rimraf": "6.1.2",
+    "rollup": "^4.55.1",
     "rollup-plugin-typescript2": "^0.36.0",
-    "ts-jest": "^29.4.4",
+    "ts-jest": "^29.4.6",
     "tslib": "2.8.1",
-    "typescript": "5.9.2",
-    "typescript-json-schema": "0.65.1"
+    "typescript": "5.9.3",
+    "typescript-json-schema": "0.67.1"
   },
   "peerDependencies": {
-    "mithril": "^2.3.7",
-    "mithril-materialized": "^3.4.5"
+    "mithril": "^2.3.8",
+    "mithril-materialized": "^3.13.0"
   },
   "browserslist": [
     "last 2 version",

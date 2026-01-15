@@ -11,7 +11,7 @@ import { leafletPlugin } from 'mithril-ui-form-leaflet-plugin';
 import { ratingPlugin } from 'mithril-ui-form-rating-plugin';
 
 registerPlugin('map', leafletPlugin);
-registerPlugin('rating', ratingPlugin);
+registerPlugin('custom-rating', ratingPlugin);
 
 // Set the language attribute on the html element to English.
 document.documentElement.setAttribute('lang', 'en');

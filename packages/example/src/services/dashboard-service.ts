@@ -6,19 +6,24 @@ import { AboutPage } from '../components/about/about-page';
 import { FormView } from '../components/form-view';
 import { CreateForm } from '../components/create-form/create-form';
 import { LLFView } from '../components/llf-test';
+import { CommonExamples } from '../components/common-examples';
 
 export const enum Dashboards {
   HOME = 'HOME',
   FORM = 'FORM',
   LLF = 'LLF',
   EDITOR = 'EDITOR',
+  EXAMPLES = 'EXAMPLES',
   ABOUT = 'ABOUT',
 }
 
 class DashboardService {
   private dashboards!: ReadonlyArray<IDashboard>;
 
-  constructor(private layout: ComponentTypes, dashboards: IDashboard[]) {
+  constructor(
+    private layout: ComponentTypes,
+    dashboards: IDashboard[]
+  ) {
     this.setList(dashboards);
   }
 
@@ -83,6 +88,14 @@ export const dashboardSvc: DashboardService = new DashboardService(Layout, [
     route: '/editor',
     visible: true,
     component: CreateForm,
+  },
+  {
+    id: Dashboards.EXAMPLES,
+    title: 'EXAMPLES',
+    icon: 'list',
+    route: '/examples',
+    visible: true,
+    component: CommonExamples,
   },
   {
     id: Dashboards.ABOUT,

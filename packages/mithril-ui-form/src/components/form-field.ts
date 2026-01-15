@@ -22,6 +22,8 @@ import {
   uniqueId,
   FlatButton,
   Autocomplete,
+  Rating,
+  LikertScale,
 } from 'mithril-materialized';
 import {
   capitalizeFirstLetter,
@@ -69,6 +71,9 @@ const unwrapComponent = <O extends Record<string, any> = {}>(
     dateTimeSeconds,
     dateFormat,
     twelveHour,
+    startLabel,
+    middleLabel,
+    endLabel,
   } = field;
   const result = {
     id: stableId || generateFormFieldId(String(id), formContext),
@@ -79,6 +84,15 @@ const unwrapComponent = <O extends Record<string, any> = {}>(
   }
   if (description) {
     result.helperText = render(description, true);
+  }
+  if (startLabel) {
+    result.startLabel = render(startLabel, true);
+  }
+  if (endLabel) {
+    result.endLabel = render(endLabel, true);
+  }
+  if (middleLabel) {
+    result.middleLabel = render(middleLabel, true);
   }
   if (className) {
     result.className = className;
@@ -267,8 +281,12 @@ export const FormFieldFactory =
         if (label) {
           props.label = render(resolvePlaceholders(props.label || label, obj, ...context), true);
         }
-        if (value) {
-          props.value = resolvePlaceholders(props.value || value, obj, ...context);
+        if (typeof value !== 'undefined') {
+          if (typeof value === 'string') {
+            props.value = resolvePlaceholders(props.value || value, obj, ...context);
+          } else {
+            props.value = value;
+          }
         }
         if (description) {
           props.description = render(resolvePlaceholders(props.description || description, obj, ...context), true);
@@ -456,8 +474,8 @@ export const FormFieldFactory =
                 selected && selected.length === 0
                   ? '?'
                   : selected.length === 1
-                  ? selected[0].label
-                  : selected.map((o) => o.label);
+                    ? selected[0].label
+                    : selected.map((o) => o.label);
               return m(ReadonlyComponent, {
                 props,
                 label: props.label,
@@ -473,6 +491,10 @@ export const FormFieldFactory =
                 label: props.label,
                 initialValue,
               });
+            }
+            case 'likert': {
+              const initialValue = typeof iv === 'string' ? parseInt(iv) : typeof iv === 'number' ? iv : '';
+              return m(ReadonlyComponent, { props, initialValue, label: props.label });
             }
             case 'base64': {
               const value = iv as string | undefined;
@@ -730,6 +752,18 @@ export const FormFieldFactory =
               const checked = Boolean(iv);
               return m(InputCheckbox, { ...props, checked, onchange: oninput });
             }
+            case 'likert': {
+              const value = typeof iv === 'string' ? parseInt(iv) : typeof iv === 'number' ? iv : undefined;
+              return m('.col.s12', m(LikertScale, { min: 0, max: 5, ...props, value, label, onchange: oninput }));
+            }
+            case 'rating': {
+              const value = typeof iv === 'string' ? parseInt(iv) : typeof iv === 'number' ? iv : undefined;
+              return m(
+                '.col.s12',
+                { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' } },
+                [m('.label', label), m(Rating, { ...props, value, onchange: oninput })]
+              );
+            }
             case 'options': {
               const checkedId = iv as Array<string | number>;
               return [
@@ -799,8 +833,8 @@ export const FormFieldFactory =
             case 'switch': {
               const checked = iv as boolean;
               // const { options: opt } = field;
-              const left = options && options.length > 0 ? options[0].label ?? '' : '';
-              const right = options && options.length > 1 ? options[1].label ?? '' : '';
+              const left = options && options.length > 0 ? (options[0].label ?? '') : '';
+              const right = options && options.length > 1 ? (options[1].label ?? '') : '';
               return m(Switch, { ...props, left, right, checked, onchange: oninput });
             }
             case 'tags': {
@@ -809,10 +843,13 @@ export const FormFieldFactory =
               const autocompleteOptions =
                 options && options.length > 0
                   ? {
-                      data: options.reduce((acc, cur) => {
-                        acc[cur.id] = null;
-                        return acc;
-                      }, {} as { [key: string]: null }),
+                      data: options.reduce(
+                        (acc, cur) => {
+                          acc[cur.id] = null;
+                          return acc;
+                        },
+                        {} as { [key: string]: null }
+                      ),
                       limit: field.maxLength || Infinity,
                       minLength: field.minLength || 1,
                     }
@@ -836,10 +873,13 @@ export const FormFieldFactory =
               const autocompleteOptions =
                 options && options.length > 0
                   ? {
-                      data: options.reduce((acc, cur) => {
-                        acc[cur.id] = null;
-                        return acc;
-                      }, {} as { [key: string]: null }),
+                      data: options.reduce(
+                        (acc, cur) => {
+                          acc[cur.id] = null;
+                          return acc;
+                        },
+                        {} as { [key: string]: null }
+                      ),
                       limit: field.maxLength || Infinity,
                       minLength: field.minLength || 1,
                     }

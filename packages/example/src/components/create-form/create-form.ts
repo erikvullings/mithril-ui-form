@@ -2,10 +2,6 @@ import m, { FactoryComponent } from 'mithril';
 import { FlatButton, Tabs } from 'mithril-materialized';
 import { FormAttributes, LayoutForm, UIForm } from 'mithril-ui-form';
 import { llf, tartan } from '../../utils/examples';
-import { ratingPlugin } from 'mithril-ui-form-rating-plugin';
-import { registerPlugin } from 'mithril-ui-form';
-
-registerPlugin('rating', ratingPlugin);
 
 type UILabel = {
   id: string;
