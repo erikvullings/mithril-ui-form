@@ -37,7 +37,7 @@
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "pnpm": "^10.28.0",
+    "pnpm": "^10.28.2",
     "rimraf": "^6.1.2",
     "semantic-release": "^25.0.2",
     "semantic-release-monorepo": "^8.0.2",
