@@ -24,9 +24,9 @@ export default {
         mithril: 'm',
         'mithril-materialized': 'm',
         'mithril-leaflet': 'm',
-        'leaflet': 'L',
+        leaflet: 'L',
         'leaflet-draw': 'L',
-      }
+      },
     },
     {
       file: pkg.module,
@@ -36,7 +36,7 @@ export default {
   ],
   watch: {
     include: 'src/**',
-    clearScreen: false
+    clearScreen: false,
   },
   external: ['mithril', 'mithril-materialized', 'mithril-leaflet', 'leaflet', 'leaflet-draw'],
   plugins: [

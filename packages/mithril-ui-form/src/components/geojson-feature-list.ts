@@ -105,9 +105,7 @@ export const GeoJSONFeatureList = <O extends Attributes = {}>() => {
                 return {
                   id: 'erik_' + i,
                   key: i,
-                  header: firstTypeId
-                    ? feature.properties[firstTypeId as string] || geometryType
-                    : geometryType,
+                  header: firstTypeId ? feature.properties[firstTypeId as string] || geometryType : geometryType,
                   body: m(
                     '.row',
                     m(LayoutForm, {

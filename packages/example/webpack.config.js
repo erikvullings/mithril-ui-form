@@ -132,11 +132,13 @@ module.exports = (env) => {
       extensions: ['.ts', '.js'],
       alias: {
         mithril: path.resolve(__dirname, 'node_modules/mithril'),
-        ...(isProduction ? {} : {
-          'mithril-ui-form': path.resolve(__dirname, '../mithril-ui-form/src'),
-          'mithril-ui-form-leaflet-plugin': path.resolve(__dirname, '../mithril-ui-form-leaflet-plugin/src'),
-          'mithril-ui-form-rating-plugin': path.resolve(__dirname, '../mithril-ui-form-rating-plugin/src'),
-        }),
+        ...(isProduction
+          ? {}
+          : {
+              'mithril-ui-form': path.resolve(__dirname, '../mithril-ui-form/src'),
+              'mithril-ui-form-leaflet-plugin': path.resolve(__dirname, '../mithril-ui-form-leaflet-plugin/src'),
+              'mithril-ui-form-rating-plugin': path.resolve(__dirname, '../mithril-ui-form-rating-plugin/src'),
+            }),
       },
       symlinks: true,
     },
