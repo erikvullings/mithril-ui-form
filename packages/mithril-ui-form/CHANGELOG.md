@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/erikvullings/mithril-ui-form/compare/v2.1.1...v2.1.2) (2026-04-08)
+
+
+### Bug Fixes
+
+* configure npm registry authentication before pnpm publish ([30fce32](https://github.com/erikvullings/mithril-ui-form/commit/30fce32fabdf54a8a53e38e5871f6abd6bcca9b8))
+
 ## [2.1.1](https://github.com/erikvullings/mithril-ui-form/compare/v2.1.0...v2.1.1) (2026-04-08)
 
 
