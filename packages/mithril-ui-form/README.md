@@ -401,7 +401,7 @@ Each type supports a `className` property to set the input's class value (defaul
     "options": [
       { "id": "o1", "label": "Reading" },
       { "id": "o2", "label": "Watching TV", "disabled": true },
-      { "id": "o3", "label": "Walking" },
+      { "id": "o3", "label": "Walking" }
     ]
   }
 ]
@@ -420,7 +420,7 @@ Each type supports a `className` property to set the input's class value (defaul
     "options": [
       { "id": "o1", "label": "Reading" },
       { "id": "o2", "label": "Watching TV" },
-      { "id": "o3", "label": "Walking" },
+      { "id": "o3", "label": "Walking" }
     ]
   }
 ]
@@ -648,6 +648,35 @@ The `type: 'map'` has been removed, and you now need to import it explicitly. Se
 - **Mobile**: iOS Safari 12+, Chrome Mobile 60+
 - **Bundlers**: Webpack, Rollup, Vite, Parcel
 - **Environments**: Browser, Node.js, Electron, React Native (with polyfills)
+
+## Releasing To npm
+
+This repository uses `semantic-release` to decide whether a new version should be created.
+
+### Why CI can pass without publishing a new npm version
+
+- A release only happens when commit messages follow Conventional Commits and imply a version bump (`fix:`, `feat:`, or `BREAKING CHANGE`).
+- If semantic-release determines there is no releasable change, CI still succeeds, but no new npm version is published.
+
+### Required repository secrets
+
+- `NPM_TOKEN`: npm automation token for publishing.
+- `GITHUB_TOKEN`: provided by GitHub Actions automatically.
+
+### How to trigger a release intentionally
+
+1. Merge a commit to `master` (or `main`, `alpha`, `beta`, `rc`) with a Conventional Commit message.
+2. Ensure package changes are included in `packages/mithril-ui-form`.
+3. Let the `Release` workflow run; it will:
+  - run semantic-release,
+  - detect whether `packages/mithril-ui-form/package.json` version changed,
+  - publish to npm only when a new version was generated.
+
+Example releasable commit messages:
+
+- `fix: resolve array item aria-label handling`
+- `feat: add support for custom readonly renderer`
+- `feat!: remove deprecated map field type`
 
 ## Contributing
 
