@@ -1,3 +1,12 @@
+## [2.1.1](https://github.com/erikvullings/mithril-ui-form/compare/v2.1.0...v2.1.1) (2026-04-08)
+
+
+### Bug Fixes
+
+* correct shell syntax in semantic-release version capture steps ([acacbf5](https://github.com/erikvullings/mithril-ui-form/commit/acacbf598831bf61b3e9a00e6ad82427855b3d9f))
+* make npm publish depend on semantic-release version bump ([cd17284](https://github.com/erikvullings/mithril-ui-form/commit/cd1728422c5e56703e551be2c32f2f4f3a97c27d))
+* update slimdown-js dependency to version 1.2.0 and improve library description ([8fe524c](https://github.com/erikvullings/mithril-ui-form/commit/8fe524c02e11be52281aebe62fc8c79d302097fc))
+
 # [2.1.0](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.12...v2.1.0) (2026-04-08)
 
 
