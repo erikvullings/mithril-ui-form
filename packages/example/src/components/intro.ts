@@ -8,7 +8,7 @@ export const Intro = () => {
       const md = `
 # MITHRIL-UI-FORM
 
-This library converts a JSON description to a form, allowing you to:
+This library, together with [Mithril](https://mithriljs.org) and [Mithril-materialized](https://github.com/erikvullings/mithril-materialized), converts a JSON description to a form, allowing you to:
 
 1. Quickly create GUI forms without the normal hassle.
 1. Comes with basic validation support (it checks whether all required properties are specified).
@@ -18,17 +18,7 @@ This library converts a JSON description to a form, allowing you to:
 1. Can **generate IDs automatically** (of type \`GUID\` or a shorter version).
 1. Upon changes, the result object is updated.
 
-Give it a go at the [playground](#!/playground).
-
-## Use cases
-
-While creating this, I had the following use cases in mind:
-
-1. I'm currently working on a [scenario editor](https://github.com/DRIVER-EU/scenario-manager), which requires me to define a GUI for each message that can be send. Preferably, I would like to use a JSON form that will generate the GUI for me, so I can quickly add new message types.
-2. I'm also working on a [Lessons' Learned Framework](https://github.com/DRIVER-EU) (LLF, a GUI with lesson's learned stored in a database). Since different organisations will have different kinds of lessons, it is easier if I make the LLF agnostic for the specific kind of form.
-3. A slight adaptation of the previous is an online questionnaire: Although there are many open or paid alternatives, like SurveyMonkey or Google Forms, they require you to host your service online. However, when security is important, this may not be an option, so it is better to host it locally on your Intranet or within your VPN.
-4. Yet another project involves a [specification editor](https://github.com/TNOCS/spec-tool): The end user specifies the form, and a specification object is generated. This generated object is processed and rendered to a document. Features I still need to implement are presets, support for a map, and output generation.
-`;
+Give it a go at the [playground](#!/playground).`;
 
       return m('.row', [
         m('.col.s12.m7.l8', m(SlimdownView, { md })),
