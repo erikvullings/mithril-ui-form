@@ -10,6 +10,10 @@ const production = !process.env.ROLLUP_WATCH;
 
 export default {
   input: `src/index.ts`,
+  onwarn: (warning, warn) => {
+    if (warning.code === 'CIRCULAR_DEPENDENCY') return;
+    warn(warning);
+  },
   output: [
     {
       name: 'uiform',

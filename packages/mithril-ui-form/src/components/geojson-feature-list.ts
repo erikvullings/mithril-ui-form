@@ -1,7 +1,8 @@
 import m, { Attributes, Component } from 'mithril';
+import type { Feature, FeatureCollection } from 'geojson';
 import { TabItem, TextArea, Tabs, Collapsible } from 'mithril-materialized';
 import { FormAttributes, I18n, InputField } from 'mithril-ui-form-plugin';
-import { LayoutForm } from '.';
+import { LayoutForm } from './layout-form';
 
 export interface IGeoJSONFeatureList<O extends Attributes = {}, K extends keyof O = keyof O> extends Attributes {
   id?: K;
@@ -66,8 +67,8 @@ export const GeoJSONFeatureList = <O extends Attributes = {}>() => {
 
       if (obj instanceof Array) return;
       const iv = obj[id] as string;
-      const featureCollection = iv ? (JSON.parse(iv) as GeoJSON.FeatureCollection) : undefined;
-      const features = featureCollection ? featureCollection.features || [] : [];
+      const featureCollection = iv ? (JSON.parse(iv) as FeatureCollection) : undefined;
+      const features: Feature[] = featureCollection ? featureCollection.features || [] : [];
       const tabs = [] as TabItem[];
       const rawTab = {
         title: state.raw,
@@ -100,12 +101,13 @@ export const GeoJSONFeatureList = <O extends Attributes = {}>() => {
               className: 'geojson-feature-list',
               items: features.map((feature, i) => {
                 if (!feature.properties) feature.properties = {};
+                const geometryType = feature.geometry ? feature.geometry.type : 'Feature';
                 return {
                   id: 'erik_' + i,
                   key: i,
                   header: firstTypeId
-                    ? feature.properties[firstTypeId as string] || feature.geometry.type
-                    : feature.geometry.type,
+                    ? feature.properties[firstTypeId as string] || geometryType
+                    : geometryType,
                   body: m(
                     '.row',
                     m(LayoutForm, {

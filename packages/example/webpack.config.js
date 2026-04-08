@@ -30,7 +30,9 @@ module.exports = (env) => {
       ignored: /node_modules\/(?!mithril-ui-form)/,
     },
     plugins: [
-      new Dotenv(),
+      new Dotenv({
+        silent: true,
+      }),
       new HtmlWebpackPlugin({
         title: 'Mithril UI Form',
         favicon: './src/favicon.ico',
@@ -144,6 +146,9 @@ module.exports = (env) => {
         // `...`,
         new CssMinimizerPlugin(),
       ],
+    },
+    performance: {
+      hints: false,
     },
     output: {
       filename: 'bundle.js',
