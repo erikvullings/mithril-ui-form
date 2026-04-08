@@ -125,7 +125,6 @@ export const RepeatList = <O extends Attributes>() => {
         obj,
         context,
         className = field.className || 'col s12',
-        section,
         containerId,
         disabled = typeof field.disabled === 'boolean' ? field.disabled : undefined,
         readonly: r,
@@ -256,7 +255,11 @@ export const RepeatList = <O extends Attributes>() => {
                         [
                           m(
                             '.row.repeat-item',
-                            { className: repeatItemClass, key: `repeat-${page}-${pageSize ? (curPage - 1) * pageSize + index : index}`, style: 'flex: 1;' },
+                            {
+                              className: repeatItemClass,
+                              key: `repeat-${page}-${pageSize ? (curPage - 1) * pageSize + index : index}`,
+                              style: 'flex: 1;',
+                            },
                             [
                               type &&
                                 m(LayoutForm, {
@@ -264,7 +267,6 @@ export const RepeatList = <O extends Attributes>() => {
                                   obj: item,
                                   i18n,
                                   context: context instanceof Array ? [obj, ...context] : [obj, context],
-                                  section,
                                   containerId,
                                   disabled,
                                   readonly,
@@ -319,7 +321,6 @@ export const RepeatList = <O extends Attributes>() => {
               form: type,
               obj: items[state.curItemIdx] as O[keyof O],
               context: context instanceof Array ? [obj, ...context] : [obj, context],
-              section,
               containerId,
               readonly: true,
               i18n,
