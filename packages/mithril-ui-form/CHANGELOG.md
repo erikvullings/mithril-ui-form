@@ -1,3 +1,16 @@
+# [2.1.0](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.12...v2.1.0) (2026-04-08)
+
+
+### Bug Fixes
+
+* restore clean TS6/TS7 builds across workspace ([b4ba21f](https://github.com/erikvullings/mithril-ui-form/commit/b4ba21fad5c957000e3de9c959d176e7f9b9b32f))
+* update Node.js version to 24.10.0 in release workflow ([31ecca2](https://github.com/erikvullings/mithril-ui-form/commit/31ecca22f6a2598f3bae18e218bbffd26f74883d))
+
+
+### Features
+
+* Add Likert-scale, type: 'likert' ([61bc13d](https://github.com/erikvullings/mithril-ui-form/commit/61bc13ded66ac48cb30328e893eae9d44526bbb0))
+
 ## [2.0.12](https://github.com/erikvullings/mithril-ui-form/compare/v2.0.11...v2.0.12) (2025-09-25)
 
 
