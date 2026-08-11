@@ -1,9 +1,8 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import typescript from 'rollup-plugin-typescript2';
+import esbuild from 'rollup-plugin-esbuild';
 import terser from '@rollup/plugin-terser';
 import { readFileSync } from 'fs';
-import typescript_lib from 'typescript';
 
 const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
 const production = !process.env.ROLLUP_WATCH;
@@ -49,11 +48,7 @@ export default {
     // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
     commonjs(),
     // Compile TypeScript files
-    typescript({
-      // objectHashIgnoreUnknownHack: true,
-      // tsconfigOverride: { compilerOptions: { module: 'ES2015' } },
-      typescript: typescript_lib,
-    }),
+    esbuild({ target: 'esnext', tsconfig: './tsconfig.json' }),
     // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
     // commonjs(),
     // Allow node_modules resolution, so you can use 'external' to control
