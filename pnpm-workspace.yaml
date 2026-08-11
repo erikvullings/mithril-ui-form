@@ -1,18 +1,16 @@
 packages:
   - packages/**
-  - '!**/test/**'
+  - "!**/test/**"
 
 allowBuilds:
   esbuild: true
   unrs-resolver: true
 
 minimumReleaseAgeExclude:
-  - '@types/mithril@2.2.9'
+  - "@types/mithril@2.2.9"
   - slimdown-js@1.5.0
+  - mithril-markdown-wysiwyg@0.2.4 || 0.2.5
 
 onlyBuiltDependencies:
   - esbuild
   - unrs-resolver
-
-patchedDependencies:
-  mithril-markdown-wysiwyg@0.2.3: patches/mithril-markdown-wysiwyg@0.2.3.patch

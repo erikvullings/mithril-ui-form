@@ -41,12 +41,12 @@
   "dependencies": {
     "dompurify": "^3.4.13",
     "mithril": "2.3.8",
-    "mithril-markdown-wysiwyg": "^0.2.3",
+    "mithril-markdown-wysiwyg": "^0.2.5",
     "mithril-ui-form-plugin": "workspace:*"
   },
   "devDependencies": {
     "@types/mithril": "^2.2.9",
-    "@types/node": "^25.5.2",
+    "@types/node": "^26.2.0",
     "jsdom": "^30.0.1",
     "tsup": "^8.5.1",
     "rimraf": "^6.1.3",

@@ -31,7 +31,7 @@
     "material-icons": "^1.13.14",
     "mithril": "^2.3.8",
     "mithril-materialized": "3.17.9",
-    "mithril-markdown-wysiwyg": "^0.2.3",
+    "mithril-markdown-wysiwyg": "^0.2.5",
     "mithril-ui-form": "workspace:*",
     "mithril-ui-form-leaflet-plugin": "workspace:*",
     "mithril-ui-form-markdown-plugin": "workspace:*",
