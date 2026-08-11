@@ -2,7 +2,15 @@ import m, { Attributes, Component } from 'mithril';
 import { FlatButton, ModalPanel, Pagination, RoundIconButton, TextInput } from 'mithril-materialized';
 import { FormAttributes, I18n, InputField } from 'mithril-ui-form-plugin';
 import { LayoutForm } from './layout-form';
-import { range, stripSpaces, getAllUrlParams, toQueryString, getQueryParamById } from '../utils';
+import {
+  range,
+  stripSpaces,
+  getAllUrlParams,
+  toQueryString,
+  getQueryParamById,
+  arrayUtils,
+  dragDropUtils,
+} from '../utils';
 
 export interface IRepeatList<O extends Attributes = {}> extends Attributes {
   id?: keyof O;
@@ -62,16 +70,15 @@ export const RepeatList = <O extends Attributes>() => {
   };
 
   const addEmptyItem = (obj: O, id: keyof O) => {
-    const index = obj instanceof Array ? obj.length : obj.hasOwnProperty(id) ? obj[id].length : 0;
+    const existing = getItems(obj, id);
+    const index = existing.length;
     const newItem = state.onNewItem ? state.onNewItem(obj, id, index) : ({} as O[keyof O]);
     if (obj instanceof Array) {
+      // `obj` is itself the array here, so mutation is the only way to propagate the
+      // change: there's no property on `obj` to reassign a new array into.
       obj.push(newItem);
     } else {
-      if (!obj.hasOwnProperty(id) || !Array.isArray(obj[id])) {
-        obj[id] = [newItem] as O[keyof O];
-      } else {
-        obj[id].push(newItem);
-      }
+      obj[id] = arrayUtils.insertAt(existing, index, newItem) as O[keyof O];
     }
   };
 
@@ -89,23 +96,16 @@ export const RepeatList = <O extends Attributes>() => {
 
   let compareFn: (a: O, b: O) => number;
 
-  const handleDragStart = (event: DragEvent, index: number) => {
-    event.dataTransfer?.setData('text/plain', index.toString());
-  };
+  const handleDragStart = dragDropUtils.handleDragStart;
 
   const handleDrop = (event: DragEvent, index: number, obj: O, id: keyof O, onchange?: (obj: O) => void) => {
-    const draggedIndex = parseInt(event.dataTransfer?.getData('text') || '0', 10);
-    const newItems: any = [...obj[id]];
-    const [movedItem] = newItems.splice(draggedIndex, 1);
-    newItems.splice(index, 0, movedItem);
-    obj[id] = newItems;
+    const draggedIndex = dragDropUtils.getDragIndex(event, 0);
+    obj[id] = arrayUtils.moveItem(obj[id], draggedIndex, index) as O[keyof O];
     onchange && onchange(obj);
     event.preventDefault();
   };
 
-  const handleDragOver = (event: DragEvent) => {
-    event.preventDefault();
-  };
+  const handleDragOver = dragDropUtils.handleDragOver;
 
   return {
     oninit: ({
@@ -336,11 +336,11 @@ export const RepeatList = <O extends Attributes>() => {
                 label: i18n.agree || 'Agree',
                 onclick: () => {
                   if (typeof state.curItemIdx !== 'undefined') {
-                    items.splice(state.curItemIdx, 1);
+                    const newItems = arrayUtils.removeAt(items, state.curItemIdx);
                     if (obj instanceof Array) {
-                      obj = [...items] as O[keyof O];
+                      obj = newItems as O[keyof O];
                     } else {
-                      obj[id as keyof O] = [...items] as O[keyof O];
+                      obj[id as keyof O] = newItems as O[keyof O];
                     }
                     state.curItemIdx = undefined;
                     onchange && onchange(obj);

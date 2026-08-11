@@ -1,5 +1,5 @@
 // Core types and interfaces from plugin package (with enhanced documentation)
-export {
+export type {
   UIForm,
   I18n,
   InputField,
@@ -10,13 +10,15 @@ export {
 } from 'mithril-ui-form-plugin';
 
 // Main form components and utilities
-export {
+export type {
   FormComponent,
   IFormField,
   SlimdownAttrs,
   IReadonlyComponent,
   IRepeatList,
   IArrayLayoutForm,
+} from './components';
+export {
   FormFieldFactory,
   LayoutForm,
   ArrayLayoutForm,
@@ -27,7 +29,8 @@ export {
 } from './components';
 
 // Markdown rendering functions from slimdown-js (re-exported with documentation)
-export { render, addRule, RegexReplacer } from 'slimdown-js';
+export type { RegexReplacer } from 'slimdown-js';
+export { render, addRule } from 'slimdown-js';
 export {
   isComponentType,
   capitalizeFirstLetter,
@@ -43,4 +46,5 @@ export {
   flatten,
   formatExpression,
   arrayUtils,
+  dragDropUtils,
 } from './utils';

@@ -3,6 +3,7 @@ import { FormAttributes, I18n, UIForm } from 'mithril-ui-form-plugin';
 import { FlatButton, RoundIconButton } from 'mithril-materialized';
 import { isValid, LayoutForm } from './layout-form';
 import { uniqueId } from 'mithril-materialized';
+import { arrayUtils, dragDropUtils } from '../utils';
 
 export interface IArrayLayoutForm<T extends Record<string, any> = {}> extends Attributes {
   /** The form definition for each array element */
@@ -49,12 +50,10 @@ export const ArrayLayoutForm = <T extends Record<string, any> = {}>(): Component
 
   const handleDragStart = (event: DragEvent, index: number) => {
     state.dragIndex = index;
-    event.dataTransfer?.setData('text/plain', index.toString());
+    dragDropUtils.handleDragStart(event, index);
   };
 
-  const handleDragOver = (event: DragEvent) => {
-    event.preventDefault();
-  };
+  const handleDragOver = dragDropUtils.handleDragOver;
 
   const handleDrop = (
     event: DragEvent,
@@ -64,14 +63,11 @@ export const ArrayLayoutForm = <T extends Record<string, any> = {}>(): Component
     onchange?: (isValid: boolean, items?: T[]) => void
   ) => {
     event.preventDefault();
-    const dragIndex = parseInt(event.dataTransfer?.getData('text') || '-1', 10);
+    const dragIndex = dragDropUtils.getDragIndex(event);
 
     if (dragIndex === -1 || dragIndex === dropIndex) return;
 
-    const newItems = [...items];
-    const [draggedItem] = newItems.splice(dragIndex, 1);
-    newItems.splice(dropIndex, 0, draggedItem);
-
+    const newItems = arrayUtils.moveItem(items, dragIndex, dropIndex);
     onchange?.(newItems.every((it) => isValid(it, form)), newItems);
     state.dragIndex = -1;
   };
@@ -102,13 +98,13 @@ export const ArrayLayoutForm = <T extends Record<string, any> = {}>(): Component
       const addItem = () => {
         if (!canAdd) return;
         const newItem = createItem();
-        const newItems = [...items, newItem];
+        const newItems = arrayUtils.insertAt(items, items.length, newItem);
         onchange?.(newItems.every((it) => isValid(it, form)), newItems);
       };
 
       const removeItem = (index: number) => {
         if (!canRemove) return;
-        const newItems = items.filter((_, i) => i !== index);
+        const newItems = arrayUtils.removeAt(items, index);
         onchange?.(newItems.every((it) => isValid(it, form)), newItems);
       };
 

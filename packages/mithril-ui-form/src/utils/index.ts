@@ -623,3 +623,22 @@ export const arrayUtils = {
     return array.length >= min && (max === undefined || array.length <= max);
   },
 };
+
+// Shared HTML5 drag-and-drop handlers for reordering array items (ArrayLayoutForm, RepeatList)
+export const dragDropUtils = {
+  /** Record which index is being dragged, so `getDragIndex` can read it back on drop. */
+  handleDragStart: (event: DragEvent, index: number): void => {
+    event.dataTransfer?.setData('text/plain', index.toString());
+  },
+
+  /** Allow the element to receive a drop. */
+  handleDragOver: (event: DragEvent): void => {
+    event.preventDefault();
+  },
+
+  /** Read back the index recorded by `handleDragStart`. */
+  getDragIndex: (event: DragEvent, fallback = -1): number => {
+    const raw = event.dataTransfer?.getData('text/plain');
+    return raw ? parseInt(raw, 10) : fallback;
+  },
+};
