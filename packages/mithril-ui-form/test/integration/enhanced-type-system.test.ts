@@ -12,23 +12,23 @@ type DiscriminatedFieldType<T extends Record<string, any>> = UIFormField<T>;
 const typeValidator = {
   validateFormConfiguration: vi.fn((form) => {
     // Check for invalid form structures
-    const hasInvalidField = form.some((field: any) => 
-      field === null || 
+    const hasInvalidField = form.some((field: any) =>
+      field === null ||
       field === undefined ||
       typeof field === 'string' ||
       !field.type ||
       (field.type && !field.id)
     );
-    
+
     if (hasInvalidField) {
-      return { 
-        isValid: false, 
+      return {
+        isValid: false,
         errors: [{ message: 'Invalid field structure' }]
       };
     }
     return { isValid: true, errors: [] };
   }),
-  
+
   validateFieldType: vi.fn((field, value, _context?) => {
     // Mock email validation
     if (field.type === 'email' && typeof value === 'string') {
@@ -40,7 +40,7 @@ const typeValidator = {
         };
       }
     }
-    
+
     // Mock number validation
     if (field.type === 'number' && typeof value === 'number') {
       if (field.min !== undefined && value < field.min) {
@@ -56,7 +56,7 @@ const typeValidator = {
         };
       }
     }
-    
+
     // Mock tags validation
     if (field.type === 'tags' && !Array.isArray(value)) {
       return {
@@ -64,7 +64,7 @@ const typeValidator = {
         errors: [{ message: 'Tags must be an array' }]
       };
     }
-    
+
     // Mock unknown plugin type validation
     if (field.type === 'unknown-plugin') {
       return {
@@ -72,7 +72,7 @@ const typeValidator = {
         errors: [{ message: 'Unknown plugin type: unknown-plugin' }]
       };
     }
-    
+
     // Mock text field validation - should fail for invalid inputs
     if (field.type === 'text' && field.required && (value === null || value === undefined || typeof value === 'number' || Array.isArray(value) || (typeof value === 'object' && value !== null) || typeof value === 'symbol')) {
       return {
@@ -80,10 +80,10 @@ const typeValidator = {
         errors: [{ message: 'Text field validation failed' }]
       };
     }
-    
+
     return { isValid: true, errors: [] };
   }),
-  
+
   registerPluginType: vi.fn((_type) => ({ isValid: true })),
   isRegisteredPluginType: vi.fn((_type) => true),
   validatePluginRegistration: vi.fn((_type, _plugin) => ({ isValid: true })),
@@ -93,7 +93,7 @@ const schemaValidator = {
   generateSchemaFromForm: vi.fn((form, _schemaName) => {
     const properties: Record<string, any> = {};
     const required: string[] = [];
-    
+
     form.forEach((field: any) => {
       if (field.id) {
         properties[field.id] = {
@@ -104,20 +104,20 @@ const schemaValidator = {
         }
       }
     });
-    
+
     return {
       type: 'object',
       properties,
       required,
     };
   }),
-  
+
   validateAgainstSchema: vi.fn((data, _schemaName) => {
     // Mock validation - check for empty required fields
     if (data.name === '' || data.email === 'invalid-email' || (data.age && data.age > 120)) {
-      return { 
-        isValid: false, 
-        errors: [{ message: 'Validation failed' }] 
+      return {
+        isValid: false,
+        errors: [{ message: 'Validation failed' }]
       };
     }
     return { isValid: true, errors: [] };

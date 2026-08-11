@@ -8,6 +8,7 @@ allowBuilds:
 
 minimumReleaseAgeExclude:
   - '@types/mithril@2.2.9'
+  - slimdown-js@1.5.0
 
 onlyBuiltDependencies:
   - esbuild

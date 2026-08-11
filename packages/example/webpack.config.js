@@ -141,10 +141,10 @@ module.exports = (env) => {
         ...(isProduction
           ? {}
           : {
-              'mithril-ui-form': path.resolve(__dirname, '../mithril-ui-form/src'),
-              'mithril-ui-form-leaflet-plugin': path.resolve(__dirname, '../mithril-ui-form-leaflet-plugin/src'),
-              'mithril-ui-form-rating-plugin': path.resolve(__dirname, '../mithril-ui-form-rating-plugin/src'),
-            }),
+            'mithril-ui-form': path.resolve(__dirname, '../mithril-ui-form/src'),
+            'mithril-ui-form-leaflet-plugin': path.resolve(__dirname, '../mithril-ui-form-leaflet-plugin/src'),
+            'mithril-ui-form-rating-plugin': path.resolve(__dirname, '../mithril-ui-form-rating-plugin/src'),
+          }),
       },
       symlinks: true,
     },

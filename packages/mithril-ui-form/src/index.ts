@@ -29,8 +29,7 @@ export {
 } from './components';
 
 // Markdown rendering functions from slimdown-js (re-exported with documentation)
-export type { RegexReplacer } from 'slimdown-js';
-export { render, addRule } from 'slimdown-js';
+export { type RegexReplacer, render, addRule } from 'slimdown-js';
 export {
   isComponentType,
   capitalizeFirstLetter,

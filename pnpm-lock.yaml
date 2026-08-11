@@ -121,8 +121,8 @@ importers:
         specifier: workspace:*
         version: link:../mithril-ui-form-plugin
       slimdown-js:
-        specifier: 1.4.1
-        version: 1.4.1
+        specifier: 1.5.0
+        version: 1.5.0
     devDependencies:
       '@rollup/plugin-commonjs':
         specifier: ^29.0.3
@@ -4330,8 +4330,8 @@ packages:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
 
-  slimdown-js@1.4.1:
-    resolution: {integrity: sha512-qdGdU2tBILnvMMo2PM/kc0l3+yhRh/3Oogb8+ZZociZhQbq+gEXsCrTYGMOiZfUV6Zb5z427S0p7gmgB3nR5Sg==}
+  slimdown-js@1.5.0:
+    resolution: {integrity: sha512-D/MfWv0+MPeYm2sNrw8A7hG39s22Q903VBjD8gG/LNuEm+JtPlx4TeueElqAZ3Hbp2/8dPr5O7hRin7+jJE7/A==}
     engines: {node: '>=16'}
 
   smob@1.5.0:
@@ -9008,7 +9008,7 @@ snapshots:
 
   slash@3.0.0: {}
 
-  slimdown-js@1.4.1: {}
+  slimdown-js@1.5.0: {}
 
   smob@1.5.0: {}
 
