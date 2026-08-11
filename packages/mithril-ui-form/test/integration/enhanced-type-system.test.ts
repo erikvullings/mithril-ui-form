@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import { UIForm, UIFormField } from 'mithril-ui-form-plugin';
 
 // Mock missing types and functions for tests
@@ -9,7 +10,7 @@ const createEnhancedFormField = <T extends Record<string, any>>(field: UIFormFie
 const isValidEnhancedUIForm = <T extends Record<string, any>>(_form: any): _form is EnhancedUIForm<T> => true;
 type DiscriminatedFieldType<T extends Record<string, any>> = UIFormField<T>;
 const typeValidator = {
-  validateFormConfiguration: jest.fn((form) => {
+  validateFormConfiguration: vi.fn((form) => {
     // Check for invalid form structures
     const hasInvalidField = form.some((field: any) => 
       field === null || 
@@ -28,7 +29,7 @@ const typeValidator = {
     return { isValid: true, errors: [] };
   }),
   
-  validateFieldType: jest.fn((field, value, _context?) => {
+  validateFieldType: vi.fn((field, value, _context?) => {
     // Mock email validation
     if (field.type === 'email' && typeof value === 'string') {
       const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -83,13 +84,13 @@ const typeValidator = {
     return { isValid: true, errors: [] };
   }),
   
-  registerPluginType: jest.fn((_type) => ({ isValid: true })),
-  isRegisteredPluginType: jest.fn((_type) => true),
-  validatePluginRegistration: jest.fn((_type, _plugin) => ({ isValid: true })),
+  registerPluginType: vi.fn((_type) => ({ isValid: true })),
+  isRegisteredPluginType: vi.fn((_type) => true),
+  validatePluginRegistration: vi.fn((_type, _plugin) => ({ isValid: true })),
 };
 
 const schemaValidator = {
-  generateSchemaFromForm: jest.fn((form, _schemaName) => {
+  generateSchemaFromForm: vi.fn((form, _schemaName) => {
     const properties: Record<string, any> = {};
     const required: string[] = [];
     
@@ -111,7 +112,7 @@ const schemaValidator = {
     };
   }),
   
-  validateAgainstSchema: jest.fn((data, _schemaName) => {
+  validateAgainstSchema: vi.fn((data, _schemaName) => {
     // Mock validation - check for empty required fields
     if (data.name === '' || data.email === 'invalid-email' || (data.age && data.age > 120)) {
       return { 
@@ -382,7 +383,7 @@ describe('Enhanced Type System Integration', () => {
   describe('Plugin Integration', () => {
     it('should handle custom plugin types', () => {
       // Register custom plugin
-      const mockPlugin = jest.fn();
+      const mockPlugin = vi.fn();
       const registrationResult = typeValidator.validatePluginRegistration('custom-slider', mockPlugin);
 
       expect(registrationResult.isValid).toBe(true);

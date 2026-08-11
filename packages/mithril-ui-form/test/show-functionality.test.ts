@@ -1,8 +1,9 @@
+import { vi } from 'vitest';
 import { UIForm } from 'mithril-ui-form-plugin';
 import { evalExpression } from '../src/utils';
 
 // Mock mithril-materialized components
-jest.mock('mithril-materialized', () => ({
+vi.mock('mithril-materialized', () => ({
   InputCheckbox: 'input-checkbox',
   TextInput: 'text-input',
   Select: 'select',

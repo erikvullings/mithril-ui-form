@@ -1,4 +1,6 @@
-// Jest setup for Mithril testing
+import { vi } from 'vitest';
+
+// Setup for Mithril testing
 
 // Mock window.requestAnimationFrame
 (globalThis as any).requestAnimationFrame = (callback: FrameRequestCallback): number => {
@@ -11,7 +13,7 @@
 
 // Setup for mithril-materialized components testing
 Object.defineProperty(HTMLElement.prototype, 'getBoundingClientRect', {
-  value: jest.fn(() => ({
+  value: vi.fn(() => ({
     bottom: 0,
     height: 0,
     left: 0,
@@ -44,7 +46,7 @@ delete (window as any).location;
   port: '',
   protocol: 'http:',
   pathname: '/',
-  assign: jest.fn(),
-  reload: jest.fn(),
-  replace: jest.fn(),
+  assign: vi.fn(),
+  reload: vi.fn(),
+  replace: vi.fn(),
 };
