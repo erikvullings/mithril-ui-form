@@ -4,6 +4,7 @@ import {
   padLeft,
   toHourMin,
   getPath,
+  getPathFuzzy,
   flatten,
   evalExpression,
   resolveExpression,
@@ -159,6 +160,51 @@ describe('Comprehensive Utils Tests', () => {
     it('should handle array bracket notation', () => {
       expect(getPath(testObj, 'hobbies[1]')).toBe('gaming');
       expect(getPath(testObj, 'friends[0]')).toEqual({ name: 'Alice', age: 30 });
+    });
+
+    describe('dynamic-key (fuzzy) array segments', () => {
+      // A capitalized array segment is looked up by value, not by index: `list.Country`
+      // means "the item in `list` whose (lowercased-key) property equals the literal
+      // string 'Country'" - see getPathFuzzy's own doc comment for the exact rule.
+      const withDynamicKey = {
+        countries: [
+          { country: 'Country', population: 1 },
+          { country: 'Other', population: 2 },
+        ],
+      };
+
+      it('resolves a capitalized array segment by matching the lowercased property to the literal segment string', () => {
+        expect(getPath(withDynamicKey, 'countries.Country')).toEqual({ country: 'Country', population: 1 });
+      });
+
+      it('returns undefined when no item matches, even though the array is non-empty', () => {
+        expect(getPath(withDynamicKey, 'countries.NoMatch')).toBeUndefined();
+      });
+
+      it('does not fall back to index access once a segment is recognized as a dynamic key', () => {
+        // 'Country' is not a valid array index, and unlike a plain numeric segment this must
+        // not resolve via current[parseInt(key, 10)] (which would be current[NaN] = undefined
+        // for every capitalized segment) - it must go through the value-matching lookup instead.
+        expect(getPath(withDynamicKey, 'countries.Country')).not.toBeUndefined();
+      });
+
+      it('treats plain lowercase or numeric segments as indices, not dynamic keys', () => {
+        expect(getPath(testObj, 'hobbies[0]')).toBe('reading');
+      });
+
+      it('getPathFuzzy matches the property equal to the literal (still-capitalized) key, not a lowercased value', () => {
+        expect(getPathFuzzy(withDynamicKey.countries, 'Country')).toEqual({ country: 'Country', population: 1 });
+        // The item's `country` value is 'country' (lowercase) rather than 'Country' - no match.
+        expect(getPathFuzzy([{ country: 'country' }], 'Country')).toBeUndefined();
+      });
+
+      it('getPathFuzzy returns undefined for a segment with no capitalized run', () => {
+        expect(getPathFuzzy(withDynamicKey.countries, '0')).toBeUndefined();
+      });
+
+      it('getPathFuzzy ignores non-object array items', () => {
+        expect(getPathFuzzy(['Country', 42, null, undefined], 'Country')).toBeUndefined();
+      });
     });
   });
 

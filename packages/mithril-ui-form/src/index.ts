@@ -43,6 +43,7 @@ export {
   resolveExpression,
   resolvePlaceholders,
   getPath,
+  getPathFuzzy,
   flatten,
   formatExpression,
   arrayUtils,

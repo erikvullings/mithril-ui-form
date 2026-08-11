@@ -1,6 +1,6 @@
 # 0005 Document or remove getPath's undocumented fuzzy ID-matching heuristic
 
-Status: open
+Status: done
 Priority: low
 Subsystem: mithril-ui-form
 Depends on: none
@@ -19,4 +19,9 @@ Depends on: none
 - Low priority relative to 0001-0004 since no bug report currently points at this — it's a clarity/documentation risk, not a known-broken behavior.
 
 ## Agent Notes
-- (none yet)
+- Skipped the "search examples for real usage" step in the acceptance criteria — the user confirmed directly that the heuristic is load-bearing ("used to resolve a dynamic key"), and a grep of `packages/example/src` and `docs/` turned up no capitalized `show`/path expressions anyway, consistent with this being used by consumer forms not present in this repo.
+- Given "both versions are needed" (plain index access AND the fuzzy dynamic-key lookup, used together depending on the segment), did **not** split `getPath` into two functions callers must choose between — that would require every existing dynamic-key-based `show`/path expression to be rewritten to call a different function, a behavior-breaking migration for exactly the use case the user said is load-bearing. Instead: `getPath`'s public signature and behavior are unchanged (byte-for-byte — same routing decision, same fallback-to-index-when-not-capitalized logic), and the previously-inline regex block is extracted into a new named, documented, and separately exported function `getPathFuzzy(array, key)` in [utils/index.ts](packages/mithril-ui-form/src/utils/index.ts), which `getPath` calls internally. This satisfies the acceptance criteria's "split it into an explicitly named function... document the matching rule inline" without an API break.
+- Preserved the exact original gating regex (`/([A-Z]\w+)/`, capital letter + at least one more word char) at the call site in `getPath`, rather than loosening it to a plain `/[A-Z]/` test — even though `getPathFuzzy`'s own internal regex would safely return `undefined` for a stray single trailing capital either way, keeping the outer gate identical to the original avoids any risk of behavioral drift for edge-case keys.
+- `getPathFuzzy` is also exported from [index.ts](packages/mithril-ui-form/src/index.ts) alongside `getPath`, so it's independently visible/importable/testable — matching how `arrayUtils`/`dragDropUtils` were surfaced in tasks 0002/0003 — but `getPath` remains the function every existing caller (`evalExpression`/`checkExpression`, `resolveExpression`, and every `show`/placeholder evaluation in `form-field.ts`/`layout-form.ts`) continues to use unchanged.
+- Added a `describe('dynamic-key (fuzzy) array segments', ...)` block in [test/utils/comprehensive-utils.test.ts](packages/mithril-ui-form/test/utils/comprehensive-utils.test.ts) pinning down: a capitalized segment matches an item whose lowercased-property value equals the *literal capitalized segment string itself* (not some separate id); no match returns `undefined` rather than falling back to index access; non-object array items are skipped safely; and a plain lowercase/numeric segment is unaffected (still treated as an index).
+- `tsc --noEmit -p . --rootDir .` clean; full vitest suite 147/147 (140 prior + 7 new for the dynamic-key behavior).

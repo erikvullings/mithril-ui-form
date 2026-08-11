@@ -17,12 +17,45 @@ export const padLeft = (str: string | number, length = 2, padding = '0'): string
 export const toHourMin = (d?: Date) => (d ? `${padLeft(d.getHours())}:${padLeft(d.getMinutes())}` : '00:00');
 
 /**
+ * Resolves a "dynamic key" path segment against an array: a *capitalized* segment (e.g.
+ * `Country`) is treated as a value to search for, not an index. This is how a path like
+ * `list.Country` can mean "the item in `list` whose id-like property equals `Country`"
+ * without the path needing to name that property up front.
+ *
+ * Matching rule: the leading capitalized word of `key` (via `/([A-Z]\w+)/`) is lowercased
+ * to derive the property name to check (`Country` -> `country`), and the array is scanned
+ * for the first item whose `country` property strictly equals the *original, still-capitalized*
+ * `key` string itself (not some separate id value) — e.g. `{ country: 'Country' }`.
+ *
+ * Only called by `getPath` when a path segment contains an uppercase letter; plain lowercase
+ * segments are treated as array indices instead (see `getPath`). Exported separately so this
+ * behavior has a name and can be tested/reasoned about on its own, but `getPath` is still the
+ * function to call for normal path resolution — it already applies this automatically.
+ */
+export const getPathFuzzy = (array: unknown[], key: string): any => {
+  const m = /([A-Z]\w+)/.exec(key);
+  if (!m) return undefined;
+  const matchKey = m[0][0].toLowerCase() + m[0].substr(1) || key;
+  return array.find(
+    (item) =>
+      typeof item === 'object' &&
+      item !== null &&
+      matchKey in (item as Record<string, unknown>) &&
+      (item as Record<string, unknown>)[matchKey] === key
+  );
+};
+
+/**
  * Retreive a value from an object using a dynamic path.
  * If the attribute does not exist, return undefined.
  * @param obj - The object to search in
  * @param path - The path to traverse, e.g. a.b[0].c
  * @returns The value at the given path or undefined
  * @see https://stackoverflow.com/a/6491621/319711
+ *
+ * For array segments, a capitalized key (e.g. `a.Country`) is resolved via the "dynamic key"
+ * lookup in {@link getPathFuzzy} instead of being treated as an index — see there for the
+ * exact matching rule.
  */
 export const getPath = <O extends Record<string, any>>(obj: O, path: string): any => {
   // Early return for empty or invalid inputs
@@ -41,13 +74,11 @@ export const getPath = <O extends Record<string, any>>(obj: O, path: string): an
 
     // Specific handling for arrays with potential object matching
     if (Array.isArray(current)) {
-      // Check for ID-based object lookup
-      const m = /([A-Z]\w+)/.exec(key);
-      if (m) {
-        const matchKey = m[0][0].toLowerCase() + m[0].substr(1) || key;
-        return current.find(
-          (item) => typeof item === 'object' && item !== null && matchKey in item && item[matchKey] === key
-        );
+      // A capitalized segment (capital letter followed by at least one more word
+      // character — matching getPathFuzzy's own regex) is a dynamic-key lookup, not an
+      // index (see getPathFuzzy).
+      if (/([A-Z]\w+)/.test(key)) {
+        return getPathFuzzy(current, key);
       }
 
       // Standard array index access
