@@ -175,6 +175,52 @@ export interface IFormField<O extends Attributes = {}> extends Attributes {
   i18n?: I18n;
 }
 
+/**
+ * Whether a plugin is being invoked from the `readonlyPlugins` registry (must not mutate
+ * the value) or the `plugins` registry (may mutate via `onchange`). This is independent of
+ * whether the field itself is rendered in the outer `readonly` DOM branch: a `plugins`-registry
+ * component invoked as a fallback (no dedicated readonly plugin registered) still gets
+ * `onchange`, matching the pre-existing behavior this helper replaces.
+ */
+type PluginInvocationMode = 'readonly' | 'editable';
+
+/**
+ * Builds the props for invoking a registered field plugin, matching the `PluginType`
+ * contract in `mithril-ui-form-plugin/src/plugin.ts`: every plugin receives `iv`, `field`,
+ * `props`, `label`, `obj`, and `context`; only `'editable'`-mode invocations also receive
+ * `onchange`.
+ */
+const invokePlugin = <O extends Attributes = {}, V = unknown>(
+  plugin: PluginType,
+  mode: PluginInvocationMode,
+  iv: unknown,
+  field: InputField<O>,
+  props: InputField<O>,
+  obj: O,
+  context: Array<O | O[keyof O]>,
+  onchange: (value: V) => Promise<void> | void
+) => {
+  const attrs = {
+    iv,
+    field,
+    props,
+    label: props.label,
+    obj,
+    context,
+    ...(mode === 'editable' ? { onchange } : {}),
+  };
+  // `PluginType`'s declared attrs type is `InputField & F` / `InputField` (bare, F/O default
+  // to `any`), and `InputField.type` self-references `InputField` through `UIForm<...>`.
+  // Checking `attrs` (built from the generic `InputField<O>` above) against that recursive,
+  // `any`-erased shape trips a TS structural-variance false positive that doesn't occur at a
+  // literal call site with a concrete `O`. Routing the cast through `unknown` (rather than
+  // widening a parameter to `any`) keeps it scoped to this one call, not the function's
+  // public signature, so callers of `invokePlugin` are still fully type-checked; the real,
+  // checked contract for plugin authors remains `PluginType` in
+  // `mithril-ui-form-plugin/src/plugin.ts`.
+  return m(plugin, attrs as unknown as Parameters<typeof plugin>[0]['attrs']);
+};
+
 export const FormFieldFactory =
   (plugins: Record<string, PluginType> = {}, readonlyPlugins: Record<string, PluginType> = {}) =>
   <O extends Attributes = {}>(): Component<IFormField<O>> => {
@@ -374,24 +420,9 @@ export const FormFieldFactory =
 
         if (readonly && fieldType && ['md', 'none'].indexOf(fieldType as string) < 0) {
           if (readonlyPlugins.hasOwnProperty(fieldType))
-            return m(readonlyPlugins[fieldType], {
-              iv,
-              field,
-              props,
-              label: props.label,
-              obj,
-              context,
-            });
+            return invokePlugin(readonlyPlugins[fieldType], 'readonly', iv, field, props, obj, context, oninput);
           if (fieldType && plugins.hasOwnProperty(fieldType)) {
-            return m(plugins[fieldType], {
-              iv,
-              field,
-              props,
-              label: props.label,
-              onchange: oninput,
-              obj,
-              context,
-            });
+            return invokePlugin(plugins[fieldType], 'editable', iv, field, props, obj, context, oninput);
           }
           switch (fieldType) {
             case 'time': {
@@ -563,15 +594,7 @@ export const FormFieldFactory =
         } else {
           // Editable
           if (fieldType && plugins.hasOwnProperty(fieldType)) {
-            return m(plugins[fieldType], {
-              iv,
-              field,
-              props,
-              label: props.label,
-              onchange: oninput,
-              obj,
-              context,
-            });
+            return invokePlugin(plugins[fieldType], 'editable', iv, field, props, obj, context, oninput);
           }
           switch (fieldType) {
             case 'colour':
