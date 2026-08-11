@@ -430,22 +430,32 @@ export const FormFieldFactory =
           state,
         };
 
-        if (readonly && fieldType && ['md', 'none'].indexOf(fieldType as string) < 0) {
+        if (readonly && fieldType) {
           if (readonlyPlugins.hasOwnProperty(fieldType))
             return invokePlugin(readonlyPlugins[fieldType], 'readonly', iv, field, props, obj, context, oninput);
-          if (fieldType && plugins.hasOwnProperty(fieldType)) {
+          if (plugins.hasOwnProperty(fieldType)) {
             return invokePlugin(plugins[fieldType], 'editable', iv, field, props, obj, context, oninput);
           }
-          const renderer = readonlyFieldRenderers[fieldType as string];
-          return runFieldRenderer(renderer || defaultReadonly, renderCtx);
-        } else {
-          // Editable
-          if (fieldType && plugins.hasOwnProperty(fieldType)) {
-            return invokePlugin(plugins[fieldType], 'editable', iv, field, props, obj, context, oninput);
+          if (['md', 'none'].indexOf(fieldType as string) < 0) {
+            const renderer = readonlyFieldRenderers[fieldType as string];
+            return runFieldRenderer(renderer || defaultReadonly, renderCtx);
           }
-          const renderer = editableFieldRenderers[fieldType as string];
-          return renderer && runFieldRenderer(renderer, renderCtx);
+          // 'md'/'none' with no plugin registered: fall through to the editable dispatch
+          // below. The built-in markdown renderer is display-only regardless of `readonly`
+          // (see field-types/markdown.ts), and 'none' has no editable renderer either
+          // (renders nothing either way) - so this preserves prior behavior for both. A
+          // registered `readonlyPlugins['md']`/`plugins['md']` is still checked above first,
+          // which is the whole point of allowing 'md' into this branch: previously this
+          // guard excluded 'md' from ever reaching the plugin registries at all, so a
+          // dedicated readonly markdown plugin (e.g. a WYSIWYG editor's readonly variant)
+          // could never fire.
         }
+        // Editable
+        if (fieldType && plugins.hasOwnProperty(fieldType)) {
+          return invokePlugin(plugins[fieldType], 'editable', iv, field, props, obj, context, oninput);
+        }
+        const renderer = editableFieldRenderers[fieldType as string];
+        return renderer && runFieldRenderer(renderer, renderCtx);
       },
     } as Component<IFormField<O>>;
   };

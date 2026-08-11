@@ -502,6 +502,14 @@ registerPlugin('rating', myRatingPlugin, myReadonlyRatingPlugin);
 
 Since each plugin is a Mithril FactoryComponent, i.e. a function that returns a Component object with a view method, it is very easy to roll your own. See [Mithril-ui-form-plugin](https://www.npmjs.com/package/mithril-ui-form-plugin) for more information.
 
+The built-in `md`/`markdown` type only ever renders static HTML - it has no editing UI. For a real markdown editor, register [mithril-ui-form-markdown-plugin](https://www.npmjs.com/package/mithril-ui-form-markdown-plugin), which wires in a WYSIWYG markdown editor for editable fields and a sanitized static display for readonly ones:
+
+```ts
+import { markdownEditorPlugin, markdownReadonlyPlugin } from 'mithril-ui-form-markdown-plugin';
+
+registerPlugin('md', markdownEditorPlugin, markdownReadonlyPlugin);
+```
+
 ## ⚡ Performance Improvements (v2.x)
 
 The latest version includes significant performance optimizations:

@@ -1,0 +1,57 @@
+{
+  "name": "mithril-ui-form-markdown-plugin",
+  "version": "0.1.0",
+  "description": "Plugin to add a WYSIWYG markdown editor (mithril-markdown-wysiwyg) to Mithril-UI-Form, with a sanitized readonly display.",
+  "main": "lib/index.js",
+  "module": "lib/index.mjs",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erikvullings/mithril-ui-form.git"
+  },
+  "scripts": {
+    "clean": "rimraf lib dist",
+    "build": "tsup && tsc --project tsconfig.build.json --emitDeclarationOnly --declaration --declarationMap false --outDir lib",
+    "start": "tsup --watch",
+    "dev": "npm start",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "dry-run": "npm publish --dry-run",
+    "patch-release": "npm run clean && npm run build && npm version patch --force -m \"Patch release\" && npm publish && git push --follow-tags",
+    "minor-release": "npm run clean && npm run build && npm version minor --force -m \"Minor release\" && npm publish && git push --follow-tags",
+    "major-release": "npm run clean && npm run build && npm version major --force -m \"Major release\" && npm publish && git push --follow-tags"
+  },
+  "keywords": [
+    "mithril",
+    "ui",
+    "form",
+    "markdown",
+    "wysiwyg",
+    "plugin"
+  ],
+  "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
+  "license": "MIT",
+  "dependencies": {
+    "dompurify": "^3.4.13",
+    "mithril": "2.3.8",
+    "mithril-markdown-wysiwyg": "^0.2.3",
+    "mithril-ui-form-plugin": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/mithril": "^2.2.9",
+    "@types/node": "^25.5.2",
+    "jsdom": "^30.0.1",
+    "tsup": "^8.5.1",
+    "rimraf": "^6.1.3",
+    "tslib": "^2.8.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}
