@@ -2,7 +2,6 @@ import m, { Attributes, Component } from 'mithril';
 import { FormAttributes, I18n, UIForm } from 'mithril-ui-form-plugin';
 import { FlatButton, RoundIconButton } from 'mithril-materialized';
 import { isValid, LayoutForm } from './layout-form';
-import { uniqueId } from 'mithril-materialized';
 import { arrayUtils, dragDropUtils } from '../utils';
 
 export interface IArrayLayoutForm<T extends Record<string, any> = {}> extends Attributes {
@@ -35,6 +34,11 @@ export interface IArrayLayoutForm<T extends Record<string, any> = {}> extends At
   allowReorder?: boolean;
   /** Custom CSS class */
   className?: string;
+  /**
+   * Render items as slim rows instead of padded cards - suited to small, single-line item
+   * forms (e.g. a coordinate pair) where the default card layout is unnecessarily spacious.
+   */
+  compact?: boolean;
 }
 
 /**
@@ -88,8 +92,9 @@ export const ArrayLayoutForm = <T extends Record<string, any> = {}>(): Component
         min = 0,
         showNumbers = true,
         allowReorder = true,
-        className = 'array-layout-form'
-      } 
+        className = 'array-layout-form',
+        compact = false,
+      }
     }) => {
       const canAdd = !disabled && !readonly && (!max || items.length < max);
       const canRemove = !disabled && !readonly && items.length > min;
@@ -115,13 +120,100 @@ export const ArrayLayoutForm = <T extends Record<string, any> = {}>(): Component
         onchange?.(newItems.every((it) => isValid(it, form)), newItems);
       };
 
+      const itemForm = (item: T, index: number) =>
+        m(LayoutForm, {
+          form,
+          obj: item,
+          onchange: updateItem(index),
+          disabled,
+          readonly,
+          i18n,
+          containerId,
+        } as FormAttributes<T>);
+
+      const dragHandlers = (index: number) => ({
+        draggable: canDrag,
+        ondragstart: canDrag ? (event: DragEvent) => handleDragStart(event, index) : undefined,
+        ondragover: canDrag ? handleDragOver : undefined,
+        ondrop: canDrag ? (event: DragEvent) => handleDrop(event, index, items, form, onchange) : undefined,
+      });
+
+      const compactItem = (item: T, index: number) =>
+        m(
+          '.array-item.compact-item',
+          {
+            key: index,
+            ...dragHandlers(index),
+            style: {
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '0.5rem',
+              padding: '0.25rem 0',
+              cursor: canDrag ? 'move' : 'default',
+            },
+          },
+          [
+            showNumbers && m('span.compact-item-number.grey-text', { style: 'flex: none; padding-top: 1rem;' }, `${index + 1}`),
+            m('.row.compact-item-content', { style: 'flex: 1 1 auto; margin-bottom: 0;' }, itemForm(item, index)),
+            canRemove &&
+              m(FlatButton, {
+                iconName: 'delete',
+                iconClass: 'red-text',
+                onclick: () => removeItem(index),
+                className: 'remove-item-btn',
+                title: (i18n as any).remove || 'Remove item',
+              }),
+          ]
+        );
+
+      const cardItem = (item: T, index: number) =>
+        m(
+          '.array-item.card',
+          {
+            key: index,
+            ...dragHandlers(index),
+            style: {
+              cursor: canDrag ? 'move' : 'default',
+              marginBottom: '1rem',
+            },
+          },
+          [
+            m('.card-content', [
+              // Item header with number and remove button
+              m('.row.item-header', [
+                showNumbers &&
+                  m('.col.s2', [
+                    m('span.item-number.badge', `${index + 1}`),
+                  ]),
+                m('.col', {
+                  class: showNumbers ? 's8' : 's10',
+                }),
+                canRemove &&
+                  m(
+                    '.col.s2.right-align',
+                    m(FlatButton, {
+                      iconName: 'delete',
+                      iconClass: 'red-text',
+                      onclick: () => removeItem(index),
+                      className: 'remove-item-btn',
+                      title: (i18n as any).remove || 'Remove item',
+                    })
+                  ),
+              ]),
+
+              // Form content
+              m('.row.item-content', [itemForm(item, index)]),
+            ]),
+          ]
+        );
+
       return m(
         'div',
         { className: `${className} col s12` },
         [
           // Header with add button
-          m('.array-form-header.row', [
-            m('.col.s6', m('h6', label)),
+          m('.array-form-header.row', { style: compact ? 'margin-bottom: 0.5rem;' : undefined }, [
+            m('.col.s6', m(compact ? 'span' : 'h6', label)),
             canAdd &&
               m(
                 '.col.s6.right-align',
@@ -147,74 +239,26 @@ export const ArrayLayoutForm = <T extends Record<string, any> = {}>(): Component
                     title: (i18n as any).addFirst || 'Add first item',
                   }),
               ])
-            : items.map((item, index) =>
-                m(
-                  '.array-item.card',
-                  {
-                    key: `item-${index}-${uniqueId()}`,
-                    draggable: canDrag,
-                    ondragstart: canDrag ? (event: DragEvent) => handleDragStart(event, index) : undefined,
-                    ondragover: canDrag ? handleDragOver : undefined,
-                    ondrop: canDrag
-                      ? (event: DragEvent) => handleDrop(event, index, items, form, onchange)
-                      : undefined,
-                    style: {
-                      cursor: canDrag ? 'move' : 'default',
-                      marginBottom: '1rem',
-                    },
-                  },
-                  [
-                    m('.card-content', [
-                      // Item header with number and remove button
-                      m('.row.item-header', [
-                        showNumbers &&
-                          m('.col.s2', [
-                            m('span.item-number.badge', `${index + 1}`),
-                          ]),
-                        m('.col', {
-                          class: showNumbers ? 's8' : 's10',
-                        }),
-                        canRemove &&
-                          m(
-                            '.col.s2.right-align',
-                            m(FlatButton, {
-                              iconName: 'delete',
-                              iconClass: 'red-text',
-                              onclick: () => removeItem(index),
-                              className: 'remove-item-btn',
-                              title: (i18n as any).remove || 'Remove item',
-                            })
-                          ),
-                      ]),
-
-                      // Form content
-                      m('.row.item-content', [
-                        m(LayoutForm<T>(), {
-                          form,
-                          obj: item,
-                          onchange: updateItem(index),
-                          disabled,
-                          readonly,
-                          i18n,
-                          containerId,
-                        } as FormAttributes<T>),
-                      ]),
-                    ]),
-                  ]
-                )
-              ),
+            : items.map((item, index) => (compact ? compactItem(item, index) : cardItem(item, index))),
 
           // Footer add button for non-empty lists
           items.length > 0 &&
             canAdd &&
             m(
               '.array-form-footer.center-align',
-              { style: 'margin-top: 1rem' },
-              m(RoundIconButton, {
-                iconName: 'add',
-                onclick: addItem,
-                title: (i18n as any).addAnother || 'Add another item',
-              })
+              { style: `margin-top: ${compact ? '0.5rem' : '1rem'}` },
+              compact
+                ? m(FlatButton, {
+                    iconName: 'add',
+                    iconClass: 'left',
+                    label: (i18n as any).addAnother || 'Add Item',
+                    onclick: addItem,
+                  })
+                : m(RoundIconButton, {
+                    iconName: 'add',
+                    onclick: addItem,
+                    title: (i18n as any).addAnother || 'Add another item',
+                  })
             ),
         ]
       );

@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  mithril-markdown-wysiwyg@0.2.3: e8dcce2be9075394aad4a04690a721ef4bb6d5a55de1eec8fddbbf0df7ee5e0c
+
 importers:
 
   .:
@@ -49,7 +52,7 @@ importers:
         version: 2.3.8
       mithril-markdown-wysiwyg:
         specifier: ^0.2.3
-        version: 0.2.3(mithril@2.3.8)
+        version: 0.2.3(patch_hash=e8dcce2be9075394aad4a04690a721ef4bb6d5a55de1eec8fddbbf0df7ee5e0c)(mithril@2.3.8)
       mithril-materialized:
         specifier: 3.17.9
         version: 3.17.9
@@ -229,7 +232,7 @@ importers:
         version: 2.3.8
       mithril-markdown-wysiwyg:
         specifier: ^0.2.3
-        version: 0.2.3(mithril@2.3.8)
+        version: 0.2.3(patch_hash=e8dcce2be9075394aad4a04690a721ef4bb6d5a55de1eec8fddbbf0df7ee5e0c)(mithril@2.3.8)
       mithril-ui-form-plugin:
         specifier: workspace:*
         version: link:../mithril-ui-form-plugin
@@ -8057,7 +8060,7 @@ snapshots:
       leaflet-draw: 1.0.4
       mithril: 2.3.8
 
-  mithril-markdown-wysiwyg@0.2.3(mithril@2.3.8):
+  mithril-markdown-wysiwyg@0.2.3(patch_hash=e8dcce2be9075394aad4a04690a721ef4bb6d5a55de1eec8fddbbf0df7ee5e0c)(mithril@2.3.8):
     dependencies:
       mithril: 2.3.8
 

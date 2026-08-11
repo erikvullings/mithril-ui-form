@@ -1,5 +1,6 @@
 import m from 'mithril';
 import { FormAttributes, LayoutForm, UIForm } from 'mithril-ui-form';
+import { geojsonInfo } from '../utils/examples';
 
 const examples = [
   {
@@ -183,6 +184,11 @@ const examples = [
         value: '# Try me\n\nThis field is editable - switch between **wysiwyg** and *markdown* mode below.',
       },
     ] as UIForm<{ notes: string }>,
+    obj: {},
+  },
+  {
+    title: 'GeoJSON Editor',
+    json: geojsonInfo,
     obj: {},
   },
   {

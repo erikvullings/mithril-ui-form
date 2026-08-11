@@ -13,3 +13,6 @@ minimumReleaseAgeExclude:
 onlyBuiltDependencies:
   - esbuild
   - unrs-resolver
+
+patchedDependencies:
+  mithril-markdown-wysiwyg@0.2.3: patches/mithril-markdown-wysiwyg@0.2.3.patch
