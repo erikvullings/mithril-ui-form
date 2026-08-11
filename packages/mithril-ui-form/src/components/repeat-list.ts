@@ -328,6 +328,9 @@ export const RepeatList = <O extends Attributes>() => {
             buttons: [
               {
                 label: i18n.disagree || 'Disagree',
+                onclick: () => {
+                  state.curItemIdx = undefined;
+                },
               },
               {
                 label: i18n.agree || 'Agree',
@@ -339,6 +342,7 @@ export const RepeatList = <O extends Attributes>() => {
                     } else {
                       obj[id as keyof O] = [...items] as O[keyof O];
                     }
+                    state.curItemIdx = undefined;
                     onchange && onchange(obj);
                   }
                 },
