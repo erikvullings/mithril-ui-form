@@ -1,1 +1,1 @@
-{"root":["./src/component-type.ts","./src/form.ts","./src/i18n.ts","./src/index.ts","./src/input-field.ts","./src/plugin.ts"],"version":"6.0.2"}
+{"version":"7.0.2","root":["./src/component-type.ts","./src/form.ts","./src/i18n.ts","./src/index.ts","./src/input-field.ts","./src/plugin.ts"],"packageJsons":["../../node_modules/.pnpm/@types+mithril@2.2.9/node_modules/@types/mithril/package.json","../../node_modules/.pnpm/tslib@2.8.1/node_modules/tslib/package.json","./package.json"],"missingPackageJsons":["./node_modules/mithril/package.json"]}

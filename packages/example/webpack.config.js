@@ -99,7 +99,13 @@ module.exports = (env) => {
       rules: [
         {
           test: /\.ts$/,
-          use: 'ts-loader',
+          use: {
+            loader: 'esbuild-loader',
+            options: {
+              loader: 'ts',
+              target: 'esnext',
+            },
+          },
           exclude: /node_modules/,
         },
         {
