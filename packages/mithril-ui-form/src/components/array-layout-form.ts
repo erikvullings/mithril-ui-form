@@ -1,7 +1,7 @@
 import m, { Attributes, Component } from 'mithril';
 import { FormAttributes, I18n, UIForm } from 'mithril-ui-form-plugin';
 import { FlatButton, RoundIconButton } from 'mithril-materialized';
-import { LayoutForm } from './layout-form';
+import { isValid, LayoutForm } from './layout-form';
 import { uniqueId } from 'mithril-materialized';
 
 export interface IArrayLayoutForm<T extends Record<string, any> = {}> extends Attributes {
@@ -9,8 +9,9 @@ export interface IArrayLayoutForm<T extends Record<string, any> = {}> extends At
   form: UIForm<T>;
   /** The array of objects to render */
   items: T[];
-  /** Callback function, invoked every time the array has changed */
-  onchange?: (items: T[]) => void;
+  /** Callback function, invoked every time the array has changed. `isValid` reflects the
+   * `required` fields of `form` for every item, including fields nested inside each item. */
+  onchange?: (isValid: boolean, items?: T[]) => void;
   /** Function to create new items */
   createItem?: () => T;
   /** Disable the form, disallowing edits */
@@ -55,17 +56,23 @@ export const ArrayLayoutForm = <T extends Record<string, any> = {}>(): Component
     event.preventDefault();
   };
 
-  const handleDrop = (event: DragEvent, dropIndex: number, items: T[], onchange?: (items: T[]) => void) => {
+  const handleDrop = (
+    event: DragEvent,
+    dropIndex: number,
+    items: T[],
+    form: UIForm<T>,
+    onchange?: (isValid: boolean, items?: T[]) => void
+  ) => {
     event.preventDefault();
     const dragIndex = parseInt(event.dataTransfer?.getData('text') || '-1', 10);
-    
+
     if (dragIndex === -1 || dragIndex === dropIndex) return;
 
     const newItems = [...items];
     const [draggedItem] = newItems.splice(dragIndex, 1);
     newItems.splice(dropIndex, 0, draggedItem);
-    
-    onchange?.(newItems);
+
+    onchange?.(newItems.every((it) => isValid(it, form)), newItems);
     state.dragIndex = -1;
   };
 
@@ -96,20 +103,20 @@ export const ArrayLayoutForm = <T extends Record<string, any> = {}>(): Component
         if (!canAdd) return;
         const newItem = createItem();
         const newItems = [...items, newItem];
-        onchange?.(newItems);
+        onchange?.(newItems.every((it) => isValid(it, form)), newItems);
       };
 
       const removeItem = (index: number) => {
         if (!canRemove) return;
         const newItems = items.filter((_, i) => i !== index);
-        onchange?.(newItems);
+        onchange?.(newItems.every((it) => isValid(it, form)), newItems);
       };
 
       const updateItem = (index: number) => (_isValid: boolean, item?: T) => {
         if (!item) return;
         const newItems = [...items];
         newItems[index] = item;
-        onchange?.(newItems);
+        onchange?.(newItems.every((it) => isValid(it, form)), newItems);
       };
 
       return m(
@@ -153,7 +160,7 @@ export const ArrayLayoutForm = <T extends Record<string, any> = {}>(): Component
                     ondragstart: canDrag ? (event: DragEvent) => handleDragStart(event, index) : undefined,
                     ondragover: canDrag ? handleDragOver : undefined,
                     ondrop: canDrag
-                      ? (event: DragEvent) => handleDrop(event, index, items, onchange)
+                      ? (event: DragEvent) => handleDrop(event, index, items, form, onchange)
                       : undefined,
                     style: {
                       cursor: canDrag ? 'move' : 'default',

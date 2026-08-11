@@ -17,20 +17,46 @@ export const registerPlugin = (name: string, plugin: PluginType, readonlyPlugin?
   if (readonlyPlugin) readonlyPlugins[name] = readonlyPlugin;
 };
 
-const isValid = <O extends Attributes = {}>(item: O, form: UIForm<O>) => {
-  return form
-    .filter((f) => f.required && typeof f.id !== undefined)
-    .reduce(
-      (acc, cur) =>
-        acc &&
-        !(
-          cur.id &&
-          (typeof item[cur.id] === 'undefined' ||
-            ((item[cur.id] as any) instanceof Array && item[cur.id].length === 0) ||
-            (typeof item[cur.id] === 'string' && (item[cur.id] as string).length === 0))
-        ),
-      true
-    );
+/**
+ * Recursively determines whether `item` satisfies the `required` fields of `form`,
+ * descending into nested object fields (`field.type` is itself a sub-form), repeated
+ * items (`field.repeat`), and geojson feature properties (`field.repeat === 'geojson'`)
+ * so that a required field nested inside any of those also invalidates the parent form.
+ */
+export const isValid = <O extends Attributes = {}>(item: O, form: UIForm<O>): boolean => {
+  if (!item) return true;
+  return form.every((f) => {
+    const { id, required, type: fieldType, repeat } = f;
+    if (!id) return true;
+    const value = item[id] as any;
+
+    if (
+      required &&
+      (typeof value === 'undefined' ||
+        (value instanceof Array && value.length === 0) ||
+        (typeof value === 'string' && value.length === 0))
+    ) {
+      return false;
+    }
+
+    if (!(fieldType instanceof Array)) return true;
+    const subForm = fieldType as UIForm<any>;
+
+    if (repeat) {
+      if (repeat === 'geojson') {
+        if (typeof value !== 'string' || !value) return true;
+        try {
+          const collection = JSON.parse(value) as { features?: Array<{ properties?: any }> };
+          return (collection.features || []).every((feature) => isValid(feature.properties || {}, subForm));
+        } catch {
+          return true;
+        }
+      }
+      return !(value instanceof Array) || value.every((it: any) => isValid(it, subForm));
+    }
+
+    return typeof value === 'undefined' || isValid(value, subForm);
+  });
 };
 
 const guessType = <O extends Attributes = {}>(field: InputField<O>) => {
