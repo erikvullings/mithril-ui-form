@@ -1,3 +1,18 @@
+# [2.2.0](https://github.com/erikvullings/mithril-ui-form/compare/v2.1.2...v2.2.0) (2026-08-11)
+
+
+### Bug Fixes
+
+* **repeat-list:** reset curItemIdx after delete confirmation so modal closes ([590dcc0](https://github.com/erikvullings/mithril-ui-form/commit/590dcc0351a03918781ce62732f190b003efd97f))
+* **slimdown-view:** sanitize rendered markdown HTML with DOMPurify by default ([3201ac0](https://github.com/erikvullings/mithril-ui-form/commit/3201ac04c648fb56f33ca0fe36976af6e2c89839))
+* **validity:** propagate required-field validity from nested forms ([5a990b0](https://github.com/erikvullings/mithril-ui-form/commit/5a990b02ef22c245a0e03e3ce84f89d4634ee17c))
+
+
+### Features
+
+* **geojson-feature-list:** overhaul GeoJSON editor with structured coordinate editing ([b40e85a](https://github.com/erikvullings/mithril-ui-form/commit/b40e85a394fb4e33ead95361d11c04d5b0a8b0b4))
+* **markdown-plugin:** add mithril-ui-form-markdown-plugin, fix readonly-plugin dispatch for 'md' ([ee484e5](https://github.com/erikvullings/mithril-ui-form/commit/ee484e5f4bb4aabaa6dfc847f013713eac0f0247))
+
 ## [2.1.2](https://github.com/erikvullings/mithril-ui-form/compare/v2.1.1...v2.1.2) (2026-04-08)
 
 
