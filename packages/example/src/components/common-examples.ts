@@ -164,6 +164,28 @@ const examples = [
     obj: {},
   },
   {
+    title: 'Markdown (static display)',
+    json: [
+      {
+        type: 'md',
+        value: 'A short passage of **bold**, *italic* and `code` markdown, rendered as static HTML - no editing UI.',
+      },
+    ] as UIForm<{}>,
+    obj: {},
+  },
+  {
+    title: 'Markdown Editor (mithril-ui-form-markdown-plugin)',
+    json: [
+      {
+        id: 'notes',
+        label: 'Notes',
+        type: 'md-editor',
+        value: '# Try me\n\nThis field is editable - switch between **wysiwyg** and *markdown* mode below.',
+      },
+    ] as UIForm<{ notes: string }>,
+    obj: {},
+  },
+  {
     title: 'Checkboxes',
     json: [
       {

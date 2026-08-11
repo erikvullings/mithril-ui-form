@@ -47,6 +47,9 @@ importers:
       mithril:
         specifier: ^2.3.8
         version: 2.3.8
+      mithril-markdown-wysiwyg:
+        specifier: ^0.2.3
+        version: 0.2.3(mithril@2.3.8)
       mithril-materialized:
         specifier: 3.17.9
         version: 3.17.9
@@ -56,6 +59,9 @@ importers:
       mithril-ui-form-leaflet-plugin:
         specifier: workspace:*
         version: link:../mithril-ui-form-leaflet-plugin
+      mithril-ui-form-markdown-plugin:
+        specifier: workspace:*
+        version: link:../mithril-ui-form-markdown-plugin
       mithril-ui-form-rating-plugin:
         specifier: workspace:*
         version: link:../mithril-ui-form-rating-plugin
