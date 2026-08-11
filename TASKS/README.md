@@ -12,5 +12,5 @@ build confidence with the vitest setup before tackling it.
 - [x] 0001 Propagate nested-form validity instead of dropping it
 - [x] 0002 Unify array-item mutation logic between ArrayLayoutForm and RepeatList
 - [x] 0003 Single plugin-invocation helper instead of three duplicated call sites
-- [ ] 0004 Split FormFieldFactory's per-type rendering out of one 850-line dual switch *(design discussion needed first)*
+- [x] 0004 Split FormFieldFactory's per-type rendering out of one 850-line dual switch
 - [x] 0005 Document or remove getPath's undocumented fuzzy ID-matching heuristic

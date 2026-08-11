@@ -1,42 +1,22 @@
 import m, { Attributes, Component } from 'mithril';
 import { PluginType, InputField, I18n, FormAttributes, UIForm, Option } from 'mithril-ui-form-plugin';
 import { render } from 'slimdown-js';
-import {
-  InputCheckbox,
-  TextInput,
-  TextArea,
-  FileInput,
-  UrlInput,
-  NumberInput,
-  DatePicker,
-  TimePicker,
-  ColorInput,
-  EmailInput,
-  RadioButtons,
-  Select,
-  Chips,
-  ChipData,
-  Options,
-  Switch,
-  uuid4,
-  uniqueId,
-  FlatButton,
-  Autocomplete,
-  Rating,
-  LikertScale,
-} from 'mithril-materialized';
+import { uuid4, uniqueId } from 'mithril-materialized';
 import {
   capitalizeFirstLetter,
-  toHourMin,
   evalExpression,
   canResolvePlaceholders,
   resolvePlaceholders,
   resolveExpression,
-  extractTitle,
 } from '../utils';
 import { LayoutForm } from './layout-form';
-import { ReadonlyComponent } from './readonly';
-import { SlimdownView } from './slimdown-view';
+import {
+  editableFieldRenderers,
+  readonlyFieldRenderers,
+  defaultReadonly,
+  FieldRenderContext,
+  FieldRenderer,
+} from './field-types';
 
 // Generate a unique ID with form-level scope to prevent collisions
 const generateFormFieldId = (fieldId: string, formContext = 'default'): string => {
@@ -220,6 +200,16 @@ const invokePlugin = <O extends Attributes = {}, V = unknown>(
   // `mithril-ui-form-plugin/src/plugin.ts`.
   return m(plugin, attrs as unknown as Parameters<typeof plugin>[0]['attrs']);
 };
+
+/**
+ * Calls a registered field-type renderer with the render context built for this field.
+ * Like `invokePlugin` above, `FieldRenderContext<O>` (built with the view's own concrete
+ * `O`) can't be passed directly to a `FieldRenderer<any>` parameter without tripping the
+ * same `InputField.type`-self-references-`InputField`-via-`UIForm` recursive-generic false
+ * positive - routed through `unknown` here too, scoped to this one call.
+ */
+const runFieldRenderer = <O extends Attributes = {}>(renderer: FieldRenderer, ctx: FieldRenderContext<O>) =>
+  renderer(ctx as unknown as FieldRenderContext<any>);
 
 export const FormFieldFactory =
   (plugins: Record<string, PluginType> = {}, readonlyPlugins: Record<string, PluginType> = {}) =>
@@ -418,635 +408,43 @@ export const FormFieldFactory =
 
         const [selectAll, unselectAll] = checkAllOptions ? checkAllOptions.split('|') : ['', ''];
 
+        const renderCtx: FieldRenderContext<O> = {
+          fieldType: fieldType as string,
+          field,
+          obj,
+          id: String(id),
+          iv,
+          props,
+          options,
+          i18n,
+          context,
+          oninput,
+          onblur,
+          onkeyup,
+          onkeydown,
+          autofocus,
+          containerId,
+          validate,
+          selectAll,
+          unselectAll,
+          state,
+        };
+
         if (readonly && fieldType && ['md', 'none'].indexOf(fieldType as string) < 0) {
           if (readonlyPlugins.hasOwnProperty(fieldType))
             return invokePlugin(readonlyPlugins[fieldType], 'readonly', iv, field, props, obj, context, oninput);
           if (fieldType && plugins.hasOwnProperty(fieldType)) {
             return invokePlugin(plugins[fieldType], 'editable', iv, field, props, obj, context, oninput);
           }
-          switch (fieldType) {
-            case 'time': {
-              const d = iv as Date | number | string | undefined;
-              const dto: Intl.DateTimeFormatOptions | undefined = i18n.dateTimeOptions
-                ? {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: undefined,
-                    ...i18n.dateTimeOptions,
-                    weekday: undefined,
-                    month: undefined,
-                    day: undefined,
-                    year: undefined,
-                  }
-                : undefined;
-              const date =
-                typeof d === 'number' || typeof d === 'string' || d instanceof Date ? new Date(d) : undefined;
-              const initialValue = date ? date.toLocaleTimeString(i18n.locales, dto) : '';
-              return m(ReadonlyComponent, {
-                props,
-                label: props.label,
-                initialValue,
-              });
-            }
-            case 'date': {
-              const d = iv as Date | number | string | undefined;
-              const dto: Intl.DateTimeFormatOptions | undefined = i18n.dateTimeOptions
-                ? { ...i18n.dateTimeOptions, hour: undefined, hour12: undefined, minute: undefined, second: undefined }
-                : undefined;
-              const date =
-                typeof d === 'number' || typeof d === 'string' || d instanceof Date ? new Date(d) : undefined;
-              const initialValue = date ? date.toLocaleDateString(i18n.locales, dto) : '';
-              return m(ReadonlyComponent, {
-                props,
-                label: props.label,
-                initialValue,
-              });
-            }
-            case 'datetime': {
-              const d = iv as Date | number | string | undefined;
-              const dto: Intl.DateTimeFormatOptions | undefined = i18n.dateTimeOptions
-                ? { hour: '2-digit', minute: '2-digit', month: 'numeric', day: 'numeric', ...i18n.dateTimeOptions }
-                : undefined;
-              const date =
-                typeof d === 'number' || typeof d === 'string' || d instanceof Date ? new Date(d) : undefined;
-              const initialValue = date ? date.toLocaleTimeString(i18n.locales, dto) : '';
-              return m(ReadonlyComponent, {
-                props,
-                label: props.label,
-                initialValue,
-              });
-            }
-            case 'switch':
-            case 'checkbox': {
-              const checked = iv as boolean;
-              const initialValue = checked ? '✔' : '✘';
-              return m(ReadonlyComponent, {
-                props,
-                label: props.label,
-                initialValue,
-                inline: true,
-              });
-            }
-            case 'tags': {
-              const initialValue = (iv || []) as string[];
-              return m(ReadonlyComponent, {
-                props,
-                label: props.label,
-                initialValue,
-              });
-            }
-            case 'options':
-            case 'select': {
-              const checkedIds = (typeof iv !== 'undefined' ? ((iv as any) instanceof Array ? iv : [iv]) : []) as Array<
-                string | number
-              >;
-              const selected = options.filter((o) => checkedIds.indexOf(o.id) >= 0);
-              const initialValue =
-                selected && selected.length === 0
-                  ? '?'
-                  : selected.length === 1
-                    ? selected[0].label
-                    : selected.map((o) => o.label);
-              return m(ReadonlyComponent, {
-                props,
-                label: props.label,
-                initialValue,
-              });
-            }
-            case 'radio': {
-              const checkedId = iv as string | number;
-              const selected = options.filter((o) => o.id === checkedId);
-              const initialValue = selected && selected.length ? selected[0].label : '?';
-              return m(ReadonlyComponent, {
-                props,
-                label: props.label,
-                initialValue,
-              });
-            }
-            case 'likert': {
-              const initialValue = typeof iv === 'string' ? parseInt(iv) : typeof iv === 'number' ? iv : '';
-              return m(ReadonlyComponent, { props, initialValue, label: props.label });
-            }
-            case 'base64': {
-              const value = iv as string | undefined;
-              const isImg = value && /data:image/i.test(value) ? true : false;
-              const altText = field.label || extractTitle(obj) || field.placeholder || 'Uploaded image';
-              return (
-                isImg &&
-                m(
-                  'div',
-                  { role: 'img', 'aria-label': typeof altText === 'string' ? altText : 'Image' },
-                  m('img.responsive-img', {
-                    src: value,
-                    alt: typeof altText === 'string' ? altText : 'Image',
-                    style: { maxHeight: `${field.max || 50}px` },
-                  })
-                )
-              );
-            }
-            case 'file': {
-              const value = iv as string | string[] | undefined;
-              const ivFinal = value instanceof Array ? value : [value];
-              return m(
-                'div',
-                props,
-                ivFinal.map((f = '') => {
-                  const isImg = /data:image|.jpg$|.jpeg$|.png$|.gif$|.svg$|.bmp$|.tif$|.tiff$/i.test(f);
-                  const origin = new URL(field.url!).origin;
-                  const url = `${origin}${f}`;
-                  return m(
-                    'a[target=_blank]',
-                    { href: url },
-                    isImg
-                      ? m('img', {
-                          src: url,
-                          alt: field.label || field.placeholder || f || 'File image',
-                          style: { maxHeight: `${field.max || 50}px` },
-                        })
-                      : m(ReadonlyComponent, {
-                          props,
-                          label: field.placeholder || 'File',
-                          initialValue: f,
-                        })
-                  );
-                })
-              );
-            }
-            case 'md':
-            case 'markdown': {
-              const initialValue = typeof iv === 'string' && iv ? render(iv as string) : '';
-              return m(ReadonlyComponent, {
-                props,
-                label: props.label,
-                initialValue,
-              });
-            }
-            default: {
-              const initialValue = iv as string;
-              return m(ReadonlyComponent, {
-                props,
-                type: fieldType,
-                label: props.label,
-                initialValue,
-              });
-            }
-          }
+          const renderer = readonlyFieldRenderers[fieldType as string];
+          return runFieldRenderer(renderer || defaultReadonly, renderCtx);
         } else {
           // Editable
           if (fieldType && plugins.hasOwnProperty(fieldType)) {
             return invokePlugin(plugins[fieldType], 'editable', iv, field, props, obj, context, oninput);
           }
-          switch (fieldType) {
-            case 'colour':
-            case 'color': {
-              const value = iv as string;
-              return m(ColorInput, { ...props, value, oninput, onblur });
-            }
-            case 'time': {
-              const { twelveHour = false } = props;
-              const date: Date = iv
-                ? typeof iv === 'number' || typeof iv === 'string'
-                  ? new Date(iv)
-                  : (iv as Date)
-                : new Date();
-              const value = toHourMin(date);
-              (obj[id] as any) = transform ? transform('to', date) : date;
-              return m(TimePicker, {
-                ...props,
-                twelveHour,
-                value,
-                oninput: (time: string) => {
-                  const tt = time.split(':').map((n) => +n);
-                  date.setHours(tt[0], tt[1]);
-                  oninput(date);
-                },
-                container: containerId,
-              });
-            }
-            case 'date': {
-              const { format = 'mmmm d, yyyy' } = props;
-              const value: Date = typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : (iv as Date);
-              (obj[id] as any) = value ? (transform ? transform('to', value.valueOf()) : value.valueOf()) : value;
-              // console.log(value && value.toUTCString());
-              const { min, max } = props;
-              const minDate = min ? (!value || min < value.valueOf() ? new Date(min) : value) : undefined;
-              const maxDate = max ? (!value || max > value.valueOf() ? new Date(max) : value) : undefined;
-              return m(DatePicker as any, {
-                ...props,
-                minDate,
-                maxDate,
-                setDefaultDate: value ? true : false,
-                format,
-                value,
-                oninput: (date: Date | string) => {
-                  oninput(new Date(date));
-                  // m.redraw();
-                },
-                container: containerId as any,
-              });
-            }
-            case 'datetime': {
-              const {
-                label,
-                className = 'col s12',
-                dateTimeSeconds = false,
-                twelveHour = false,
-                format = 'mmmm d, yyyy',
-                ...params
-              } = props;
-              const initialDateTime: Date =
-                typeof iv === 'number' || typeof iv === 'string' ? new Date(iv) : (iv as Date);
-              const state = { initialDateTime };
-              const initialDate = initialDateTime ? initialDateTime : undefined;
-              const initialTime = initialDateTime ? toHourMin(initialDateTime) : '';
-              const { min, max } = props;
-              const minDate = min
-                ? !initialDateTime || min < initialDateTime.valueOf()
-                  ? new Date(min)
-                  : initialDateTime
-                : undefined;
-              const maxDate = max
-                ? !initialDateTime || max > initialDateTime.valueOf()
-                  ? new Date(max)
-                  : initialDateTime
-                : undefined;
-              const outputFormat = props.dateTimeOutput || 'UTC';
-              const notify = (d: Date) => {
-                state.initialDateTime = d;
-                oninput(
-                  outputFormat === 'UTC' ? d.toUTCString() : outputFormat === 'ISO' ? d.toISOString() : d.valueOf()
-                );
-              };
-              return m(
-                'div',
-                { className },
-                m('.row', [
-                  m(
-                    dateTimeSeconds ? '.col.s6' : '.col.s8',
-                    { style: 'padding: 0' },
-                    m(DatePicker as any, {
-                      ...params,
-                      label,
-                      minDate,
-                      maxDate,
-                      setDefaultDate: initialDateTime ? true : false,
-                      format,
-                      value: initialDate,
-                      container: containerId as any,
-                      oninput: (date: Date) => {
-                        const d = new Date(state.initialDateTime);
-                        d.setFullYear(date.getFullYear());
-                        d.setMonth(date.getMonth());
-                        d.setDate(date.getDate());
-                        notify(d);
-                      },
-                    })
-                  ),
-                  m(
-                    '.col.s4',
-                    { style: 'min-width: 6rem; padding-right: 0; padding-left: 0' },
-                    m(TimePicker, {
-                      ...params,
-                      label: '',
-                      helperText: '',
-                      twelveHour,
-                      value: initialTime,
-                      container: containerId,
-                      oninput: (time: string) => {
-                        const tt = time.split(':').map((n) => +n);
-                        const d = state.initialDateTime || new Date(new Date().setSeconds(0, 0));
-                        d.setHours(tt[0], tt[1]);
-                        notify(d);
-                      },
-                    })
-                  ),
-                  dateTimeSeconds &&
-                    m(NumberInput, {
-                      style: 'min-width: 4rem; padding-right: 0; padding-left: 0',
-                      className: 'col s2',
-                      min: 0,
-                      max: 59,
-                      oninput: (n: number) => {
-                        const d = state.initialDateTime || new Date(new Date().setSeconds(0, 0));
-                        d.setSeconds(n, 0);
-                        notify(d);
-                      },
-                    }),
-                ])
-              );
-            }
-            case 'email': {
-              const value = iv as string;
-              return m(EmailInput, {
-                ...props,
-                validate,
-                autofocus,
-                oninput,
-                value,
-                onkeydown,
-                onkeyup,
-                onblur,
-              });
-            }
-            case 'number': {
-              const value = iv as number;
-              return m(NumberInput, {
-                ...props,
-                validate,
-                autofocus,
-                oninput,
-                value,
-                onkeydown,
-                onkeyup,
-                onblur,
-              });
-            }
-            case 'radio': {
-              const checkedId = iv as string | number;
-              return m(RadioButtons, {
-                label: '',
-                ...props,
-                options,
-                checkedId,
-                onchange: oninput,
-              });
-            }
-            case 'checkbox': {
-              const checked = Boolean(iv);
-              return m(InputCheckbox, { ...props, checked, onchange: oninput });
-            }
-            case 'likert': {
-              const value = typeof iv === 'string' ? parseInt(iv) : typeof iv === 'number' ? iv : undefined;
-              return m('.col.s12', m(LikertScale, { min: 0, max: 5, ...props, value, label, onchange: oninput }));
-            }
-            case 'rating': {
-              const value = typeof iv === 'string' ? parseInt(iv) : typeof iv === 'number' ? iv : undefined;
-              return m(
-                '.col.s12',
-                { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' } },
-                [m('.label', label), m(Rating, { ...props, value, onchange: oninput })]
-              );
-            }
-            case 'options': {
-              const checkedId = iv as Array<string | number>;
-              return [
-                [
-                  m(Options<any>, {
-                    key: state.key,
-                    checkboxClass: 'col s6 m4 l3',
-                    className: 'input-field col s12',
-                    ...props,
-                    disabled: props.disabled || !options || options.length === 0,
-                    options,
-                    checkedId,
-                    onchange: (checkedIds: string[]) =>
-                      oninput(checkedIds.length === 1 ? checkedIds[0] : checkedIds.filter((v) => v !== null)),
-                  }),
-                ],
-                typeof checkAllOptions !== 'undefined' &&
-                  m('.col.s12.option-buttons', [
-                    m(FlatButton, {
-                      disabled: props.disabled,
-                      label: selectAll,
-                      iconName: 'check',
-                      onclick: () => {
-                        state.key = Date.now();
-                        oninput(options.map((o) => (typeof o === 'string' ? o : o.id)));
-                      },
-                    }),
-                    unselectAll &&
-                      m(FlatButton, {
-                        disabled: props.disabled,
-                        label: unselectAll,
-                        iconName: 'check_box_outline_blank',
-                        onclick: () => {
-                          const ids = (obj[id] || []) as Array<string | number>;
-                          ids.length = 0;
-                          state.key = Date.now();
-                          oninput(ids);
-                        },
-                      }),
-                  ]),
-              ];
-            }
-            case 'select': {
-              const checkedId = iv as Array<string | number>;
-              return m(Select<any>, {
-                placeholder: props.multiple ? i18n.pickOneOrMore || 'Pick one or more' : i18n.pickOne || 'Pick one',
-                ...props,
-                disabled: props.disabled || !options || options.length === 0,
-                options,
-                checkedId,
-                onchange: (checkedIds: string[]) =>
-                  oninput(
-                    checkedIds.length === 1 && !props.multiple
-                      ? checkedIds[0]
-                      : checkedIds.filter((v) => v !== null || typeof v !== 'undefined')
-                  ),
-              });
-            }
-            case 'markdown':
-            case 'md': {
-              const { label, className = 'col s12' } = props;
-              const md = resolvePlaceholders((id ? iv : value || label) || '', obj, ...context);
-              return m(SlimdownView, { md, className });
-            }
-            case 'section':
-              return m('.divider');
-            case 'switch': {
-              const checked = iv as boolean;
-              // const { options: opt } = field;
-              const left = options && options.length > 0 ? (options[0].label ?? '') : '';
-              const right = options && options.length > 1 ? (options[1].label ?? '') : '';
-              return m(Switch, { ...props, left, right, checked, onchange: oninput });
-            }
-            case 'tags': {
-              const value = (iv ? ((iv as any) instanceof Array ? iv : [iv]) : []) as string[];
-              const data = value.map((chip) => ({ tag: chip }));
-              const autocompleteOptions =
-                options && options.length > 0
-                  ? {
-                      data: options.reduce(
-                        (acc, cur) => {
-                          acc[cur.id] = null;
-                          return acc;
-                        },
-                        {} as { [key: string]: null }
-                      ),
-                      limit: field.maxLength || Infinity,
-                      minLength: field.minLength || 1,
-                    }
-                  : undefined;
-              const { label, isMandatory, className, helperText } = props;
-              return m(Chips, {
-                className,
-                label,
-                isMandatory,
-                helperText,
-                placeholder: field.placeholder || 'Add a tag',
-                secondaryPlaceholder: field.secondaryPlaceholder || '+tag',
-                data,
-                onchange: (chips: ChipData[]) => oninput(chips.map((chip) => chip.tag)),
-                autocompleteOptions,
-                // onblur,
-              });
-            }
-            case 'autocomplete': {
-              const value = iv as string;
-              const autocompleteOptions =
-                options && options.length > 0
-                  ? {
-                      data: options.reduce(
-                        (acc, cur) => {
-                          acc[cur.id] = null;
-                          return acc;
-                        },
-                        {} as { [key: string]: null }
-                      ),
-                      limit: field.maxLength || Infinity,
-                      minLength: field.minLength || 1,
-                    }
-                  : { data: {} };
-              const { label, isMandatory, className, helperText } = props;
-              return m(Autocomplete, {
-                value,
-                className,
-                label,
-                isMandatory,
-                helperText,
-                oninput,
-                onblur,
-                placeholder: field.placeholder || '...',
-                ...autocompleteOptions,
-              });
-            }
-            case 'textarea': {
-              const value = iv as string;
-              return m(TextArea, {
-                ...props,
-                validate,
-                autofocus,
-                oninput,
-                value,
-                onkeyup,
-                onkeydown,
-                onblur,
-              });
-            }
-            case 'file': {
-              const value = iv as string;
-              const { url, placeholder } = field;
-              if (!url) {
-                throw Error('Input field "url" not defined, which indicates the URL to the upload folder.');
-              }
-              const accept = options ? options.map((o) => (typeof o === 'string' ? o : String(o.id))) : undefined;
-              const upload = (file: FileList) => {
-                if (!file || file.length < 1) {
-                  oninput('');
-                  return;
-                }
-                const body = new FormData();
-                body.append('file', file[0]);
-                m.request<string>({
-                  method: 'POST',
-                  url,
-                  body,
-                })
-                  .then((res) => oninput(res))
-                  .catch(console.error);
-              };
-              return m(FileInput, {
-                ...props,
-                accept,
-                placeholder,
-                onchange: upload,
-                value,
-              });
-            }
-            case 'base64': {
-              const value = iv as string;
-              const isImg = value && /data:image/i.test(value) ? true : false;
-              const { placeholder } = field;
-              const accept = options
-                ? options.map((o) => (typeof o === 'string' ? o : String(o.id))).join(',')
-                : undefined;
-              const upload = (file: FileList) => {
-                if (!file || file.length < 1) {
-                  oninput('');
-                  return;
-                }
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                  typeof reader.result === 'string' && oninput(reader.result);
-                  m.redraw();
-                };
-
-                reader.readAsDataURL(file[0]);
-              };
-              const altText = field.label || extractTitle(obj) || field.placeholder || 'Uploaded image';
-              const className = props.className || props.class || 'col s12';
-              return isImg
-                ? m('div', { className, style: { position: 'relative' } }, [
-                    m('img.responsive-img', {
-                      src: value,
-                      alt: typeof altText === 'string' ? altText : 'Uploaded image',
-                      style: { maxHeight: `${field.max || 50}px` },
-                    }),
-                    m(FlatButton, {
-                      iconName: 'close',
-                      'aria-label': 'Remove image',
-                      onclick: () => oninput(''),
-                      className: 'btn-floating btn-small red darken-2',
-                      style: {
-                        position: 'absolute',
-                        top: '4px',
-                        right: '4px',
-                        width: '32px',
-                        height: '32px',
-                      },
-                    }),
-                  ])
-                : m(FileInput, {
-                    ...props,
-                    accept,
-                    placeholder,
-                    onchange: upload,
-                    value,
-                  });
-            }
-            case 'url': {
-              const value = iv as string;
-              return m(UrlInput, {
-                placeholder: 'http(s)://www.example.com',
-                // dataError: 'http(s)://www.example.com',
-                // dataSuccess: 'OK',
-                ...props,
-                validate,
-                autofocus,
-                oninput,
-                value,
-                onkeydown,
-                onkeyup,
-                onblur,
-              });
-            }
-            case 'text': {
-              const value = iv as string;
-              return m(TextInput, {
-                ...props,
-                maxLength: field.max || undefined,
-                validate,
-                autofocus,
-                oninput,
-                value,
-                onkeydown,
-                onkeyup,
-                onblur,
-              });
-            }
-            default:
-              return undefined;
-          }
+          const renderer = editableFieldRenderers[fieldType as string];
+          return renderer && runFieldRenderer(renderer, renderCtx);
         }
       },
     } as Component<IFormField<O>>;
