@@ -127,8 +127,8 @@ const checkExpression = <O>(expression: string, obj: O) => {
         ? matchValue === 'true'
           ? true
           : matchValue === 'false'
-          ? false
-          : matchValue
+            ? false
+            : matchValue
         : +matchValue;
       switch (operand) {
         case '=':
@@ -369,9 +369,9 @@ export const labelResolver = <O extends Record<string, any>>(form: UIForm<O>) =>
         const opt =
           typeof ff.options === 'string'
             ? (resolveExpression(ff.options, [dict]) as Array<{
-                id: string;
-                label?: string | undefined;
-              }>)
+              id: string;
+              label?: string | undefined;
+            }>)
             : ff.options;
         return values
           .map((v) =>

@@ -589,9 +589,9 @@ describe('Comprehensive Utils Tests', () => {
       // Temporarily modify the hash for this specific test
       const originalHash = (window.location as any).hash;
       (window.location as any).hash = '#section';
-      
+
       expect(getQueryParamById('id')).toBe(null);
-      
+
       // Restore original hash
       (window.location as any).hash = originalHash;
     });
