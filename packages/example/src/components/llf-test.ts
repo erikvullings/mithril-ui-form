@@ -693,7 +693,7 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
         label: 'Subcategories',
         repeat: true,
         tabindex: 2,
-        className: 'col s8',
+        className: 'col offset-s1 s11',
         type: [
           { id: 'id', type: 'none', autogenerate: 'id' },
           { id: 'label', type: 'text', label: 'Name', className: 'col s4' },
@@ -740,7 +740,7 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
         id: 'subcategoryId',
         label: 'Subcategory',
         type: 'select',
-        options: 'categories.categoryId.subcategories',
+        options: 'subcategoryOptions',
         className: 'col s12 m3',
       },
       {
@@ -1936,6 +1936,25 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
   },
 ] as UIForm<ILessonLearned>;
 
+/**
+ * Builds subcategory options from categories array with show conditions
+ * Each subcategory is shown only when its parent category is selected
+ */
+const buildSubcategoryOptions = (categories: Category[]): Array<{ id: string; label: string; show: string }> => {
+  return (categories || []).reduce((acc: any[], cat: Category) => {
+    if (cat.subcategories) {
+      cat.subcategories.forEach((sub: Category) => {
+        acc.push({
+          id: sub.id,
+          label: sub.label,
+          show: `categoryId===${cat.id}`, // Only show if this category is selected
+        });
+      });
+    }
+    return acc;
+  }, []);
+};
+
 export const LLFView = () => {
   const state = {
     result: {} as ILessonLearned,
@@ -1981,8 +2000,22 @@ export const LLFView = () => {
       properties: { name: 'Central European Region' },
     },
     categories: [
-      { id: 'flood', label: 'Flood' },
-      { id: 'infra', label: 'Infrastructure' },
+      {
+        id: 'flood',
+        label: 'Flood',
+        subcategories: [
+          { id: 'flash-flood', label: 'Flash Flood' },
+          { id: 'river-flood', label: 'River Flood' },
+        ],
+      },
+      {
+        id: 'infra',
+        label: 'Infrastructure',
+        subcategories: [
+          { id: 'water-infra', label: 'Water Infrastructure' },
+          { id: 'power-infra', label: 'Power Infrastructure' },
+        ],
+      },
     ],
     measures: [{ id: 'meas1', label: 'Measure 1', type: 'hw' }],
     incidentType: ['flash', 'river'],
@@ -2020,6 +2053,9 @@ export const LLFView = () => {
     ],
     cipInfo:
       'Multiple critical infrastructure sectors were affected, including water treatment facilities, transportation networks, and telecommunications. The flooding demonstrated the cascading effects of extreme weather on interconnected systems.',
+    capabilities: [
+      { id: 'CAP1', mark: 'Audi', name: 'Capability 1', categoryId: 'flood', subcategoryId: '', desc: '' },
+    ],
   } as ILessonLearned;
   return {
     view: () => {
@@ -2049,6 +2085,7 @@ export const LLFView = () => {
             context: [
               {
                 catTypes,
+                subcategoryOptions: buildSubcategoryOptions(result.categories),
               },
             ],
             onchange: print,
