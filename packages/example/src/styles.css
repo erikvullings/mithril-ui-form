@@ -89,6 +89,11 @@
   margin: 0 !important;
 }
 
+/* Pull add button up so its icon-centre gap equals the [N]-to-trash gap */
+.mui-repeat-actions .btn-flat:not(.btn-icon) {
+  margin-top: -9px;
+}
+
 .mui-repeat-item:hover > .mui-item-side-col .mui-repeat-actions {
   visibility: visible;
 }
