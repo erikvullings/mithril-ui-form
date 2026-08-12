@@ -28,7 +28,7 @@
     "dry-run": "pnpm -r --parallel dry-run",
     "patch-release": "pnpm  -r --parallel patch-release",
     "minor-release": "pnpm  -r --parallel minor-release",
-    "docs": "rimraf docs/api && npx typedoc --entryPoints ./packages/mithril-ui-form/src/index.ts --entryPointStrategy resolve --excludeExternals false --html ./docs/api/ --tsconfig ./packages/mithril-ui-form/tsconfig.json",
+    "docs": "rimraf docs/api && npx typedoc --entryPoints ./packages/mithril-ui-form/src/index.ts --entryPointStrategy resolve --excludeExternals false --html ./docs/api/ --tsconfig ./packages/mithril-ui-form/tsconfig.build.json",
     "docs:serve": "npx http-server docs/api -p 8081 -o",
     "docs:build": "npm run build && npm run docs",
     "test": "pnpm -r test",
