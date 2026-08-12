@@ -696,8 +696,8 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
         className: 'col offset-s1 s11',
         type: [
           { id: 'id', type: 'none', autogenerate: 'id' },
-          { id: 'label', type: 'text', label: 'Name', className: 'col s4' },
-          { id: 'desc', type: 'textarea', className: 'col s8' },
+          { id: 'label', type: 'text', label: 'Name', className: 'col s3' },
+          { id: 'desc', type: 'textarea', className: 'col s9' },
         ],
       },
     ],

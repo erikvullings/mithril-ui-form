@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>capitalizeFirstLetter | mithril-ui-form</title><meta name="description" content="Documentation for mithril-ui-form"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>getPathFuzzy | mithril-ui-form</title><meta name="description" content="Documentation for mithril-ui-form"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container"><a href="../index.html" class="title">mithril-ui-form</a>
 <div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/>
 <ul role="listbox" id="tsd-search-results"></ul>
@@ -8,20 +8,34 @@
 <div class="col-content">
 <div class="tsd-page-title">
 <ul class="tsd-breadcrumb" aria-label="Breadcrumb">
-<li><a href="" aria-current="page">capitalizeFirstLetter</a></li></ul>
-<h1>Function capitalizeFirstLetter</h1></div>
+<li><a href="" aria-current="page">getPathFuzzy</a></li></ul>
+<h1>Function getPathFuzzy</h1></div>
 <section class="tsd-panel">
 <ul class="tsd-signatures">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="capitalizefirstletter"><span class="tsd-kind-call-signature">capitalizeFirstLetter</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">s</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><a href="#capitalizefirstletter" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="getpathfuzzy"><span class="tsd-kind-call-signature">getPathFuzzy</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">array</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">key</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><a href="#getpathfuzzy" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Resolves a &quot;dynamic key&quot; path segment against an array: a <em>capitalized</em> segment (e.g.
+<code>Country</code>) is treated as a value to search for, not an index. This is how a path like
+<code>list.Country</code> can mean &quot;the item in <code>list</code> whose id-like property equals <code>Country</code>&quot;
+without the path needing to name that property up front.</p>
+<p>Matching rule: the leading capitalized word of <code>key</code> (via <code>/([A-Z]\w+)/</code>) is lowercased
+to derive the property name to check (<code>Country</code> -&gt; <code>country</code>), and the array is scanned
+for the first item whose <code>country</code> property strictly equals the <em>original, still-capitalized</em>
+<code>key</code> string itself (not some separate id value) — e.g. <code>{ country: 'Country' }</code>.</p>
+<p>Only called by <code>getPath</code> when a path segment contains an uppercase letter; plain lowercase
+segments are treated as array indices instead (see <code>getPath</code>). Exported separately so this
+behavior has a name and can be tested/reasoned about on its own, but <code>getPath</code> is still the
+function to call for normal path resolution — it already applies this automatically.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">s</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<li><span><span class="tsd-kind-parameter">array</span>: <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span></span></li>
+<li><span><span class="tsd-kind-parameter">key</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/erikvullings/mithril-ui-form/blob/f2d77f364dc66e96fab4bcfca036ffff447cd4cb/packages/mithril-ui-form/src/utils/index.ts#L3">packages/mithril-ui-form/src/utils/index.ts:3</a></li></ul></aside></div></li></ul></section></div>
+<li>Defined in <a href="https://github.com/erikvullings/mithril-ui-form/blob/f2d77f364dc66e96fab4bcfca036ffff447cd4cb/packages/mithril-ui-form/src/utils/index.ts#L35">packages/mithril-ui-form/src/utils/index.ts:35</a></li></ul></aside></div></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

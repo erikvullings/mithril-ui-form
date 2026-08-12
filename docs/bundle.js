@@ -14546,6 +14546,66 @@ body.dark {
 
 /***/ },
 
+/***/ 305
+(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_pnpm_css_loader_7_1_4_webpack_5_109_2_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(875);
+/* harmony import */ var _node_modules_pnpm_css_loader_7_1_4_webpack_5_109_2_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_pnpm_css_loader_7_1_4_webpack_5_109_2_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_pnpm_css_loader_7_1_4_webpack_5_109_2_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(505);
+/* harmony import */ var _node_modules_pnpm_css_loader_7_1_4_webpack_5_109_2_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_pnpm_css_loader_7_1_4_webpack_5_109_2_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_pnpm_css_loader_7_1_4_webpack_5_109_2_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_pnpm_css_loader_7_1_4_webpack_5_109_2_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, `.mui-repeat-list-controls {
+  margin-bottom: 0;
+}
+
+.mui-item-side-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mui-show-item-number {
+  line-height: 1.2;
+  padding-bottom: 0;
+}
+
+.mui-repeat-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  visibility: hidden;
+}
+
+.mui-repeat-item:hover > .mui-item-side-col .mui-repeat-actions {
+  visibility: visible;
+}
+
+/* Remove FlatButton's default i.left float that misaligns the + icon */
+.mui-repeat-actions i {
+  float: none !important;
+  margin: 0 !important;
+}
+
+/* Pull add button up so its icon-centre gap equals the [N]-to-trash gap */
+.mui-repeat-actions .btn-flat:not(.btn-icon) {
+  margin-top: -12px;
+}
+`, "",{"version":3,"sources":["webpack://./../mithril-ui-form/styles.css"],"names":[],"mappings":"AAAA;EACE,gBAAgB;AAClB;;AAEA;EACE,aAAa;EACb,sBAAsB;EACtB,mBAAmB;AACrB;;AAEA;EACE,gBAAgB;EAChB,iBAAiB;AACnB;;AAEA;EACE,aAAa;EACb,sBAAsB;EACtB,mBAAmB;EACnB,kBAAkB;AACpB;;AAEA;EACE,mBAAmB;AACrB;;AAEA,uEAAuE;AACvE;EACE,sBAAsB;EACtB,oBAAoB;AACtB;;AAEA,0EAA0E;AAC1E;EACE,iBAAiB;AACnB","sourcesContent":[".mui-repeat-list-controls {\n  margin-bottom: 0;\n}\n\n.mui-item-side-col {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.mui-show-item-number {\n  line-height: 1.2;\n  padding-bottom: 0;\n}\n\n.mui-repeat-actions {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  visibility: hidden;\n}\n\n.mui-repeat-item:hover > .mui-item-side-col .mui-repeat-actions {\n  visibility: visible;\n}\n\n/* Remove FlatButton's default i.left float that misaligns the + icon */\n.mui-repeat-actions i {\n  float: none !important;\n  margin: 0 !important;\n}\n\n/* Pull add button up so its icon-centre gap equals the [N]-to-trash gap */\n.mui-repeat-actions .btn-flat:not(.btn-icon) {\n  margin-top: -12px;\n}\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, [
+/* harmony export */   "A", 0, /* export default binding */ __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ ]);
+
+
+/***/ },
+
 /***/ 292
 (module, __webpack_exports__, __webpack_require__) {
 
@@ -14573,7 +14633,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `*,
   display: table;
 }
 
-.markdown ul > li {
+.markdown ul>li {
   list-style-type: circle !important;
   text-indent: 2em;
 }
@@ -14583,7 +14643,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `*,
 }
 
 /* For the options' label */
-.input-field.options > label {
+.input-field.options>label {
   top: -2.5rem;
 }
 
@@ -14594,31 +14654,36 @@ ___CSS_LOADER_EXPORT___.push([module.id, `*,
   justify-content: flex-start;
   align-items: flex-end;
 }
-.muf-rating > .label {
+
+.muf-rating>.label {
   width: 50%;
 }
-.muf-rating > .radios {
+
+.muf-rating>.radios {
   width: 50%;
   display: flex;
   justify-content: space-evenly;
   align-items: flex-end;
 }
-.muf-rating > .radios > label {
+
+.muf-rating>.radios>label {
   display: inline-block;
   padding: 0 0.1rem 1rem 0.1rem;
   text-align: center;
 }
-.muf-rating > .radios > label > input[type='radio'] {
-  opacity: 1; /* only needed when using materialize-css */
+
+.muf-rating>.radios>label>input[type='radio'] {
+  opacity: 1;
+  /* only needed when using materialize-css */
 }
 
 .geojson-feature-list .collapsible-body {
   padding: 0 1rem;
 }
+
 .mui-repeat-list-controls {
   margin-bottom: 0;
-}
-`, "",{"version":3,"sources":["webpack://./src/styles.css"],"names":[],"mappings":"AAAA;;;EAGE,8BAA8B;EAC9B,2BAA2B;EAC3B,sBAAsB;AACxB;;AAEA;EACE,WAAW;EACX,WAAW;EACX,cAAc;AAChB;;AAEA;EACE,kCAAkC;EAClC,gBAAgB;AAClB;;AAEA;EACE,SAAS;AACX;;AAEA,2BAA2B;AAC3B;EACE,YAAY;AACd;;AAEA;EACE,WAAW;EACX,iBAAiB;EACjB,aAAa;EACb,2BAA2B;EAC3B,qBAAqB;AACvB;AACA;EACE,UAAU;AACZ;AACA;EACE,UAAU;EACV,aAAa;EACb,6BAA6B;EAC7B,qBAAqB;AACvB;AACA;EACE,qBAAqB;EACrB,6BAA6B;EAC7B,kBAAkB;AACpB;AACA;EACE,UAAU,EAAE,2CAA2C;AACzD;;AAEA;EACE,eAAe;AACjB;AACA;EACE,gBAAgB;AAClB","sourcesContent":["*,\r\n*:before,\r\n*:after {\r\n  -webkit-box-sizing: border-box;\r\n  -moz-box-sizing: border-box;\r\n  box-sizing: border-box;\r\n}\r\n\r\n.clearfix::after {\r\n  content: '';\r\n  clear: both;\r\n  display: table;\r\n}\r\n\r\n.markdown ul > li {\r\n  list-style-type: circle !important;\r\n  text-indent: 2em;\r\n}\r\n\r\n.repeat-list .pagination {\r\n  margin: 0;\r\n}\r\n\r\n/* For the options' label */\r\n.input-field.options > label {\r\n  top: -2.5rem;\r\n}\r\n\r\n.muf-rating {\r\n  width: 100%;\r\n  padding: 0.5rem 0;\r\n  display: flex;\r\n  justify-content: flex-start;\r\n  align-items: flex-end;\r\n}\r\n.muf-rating > .label {\r\n  width: 50%;\r\n}\r\n.muf-rating > .radios {\r\n  width: 50%;\r\n  display: flex;\r\n  justify-content: space-evenly;\r\n  align-items: flex-end;\r\n}\r\n.muf-rating > .radios > label {\r\n  display: inline-block;\r\n  padding: 0 0.1rem 1rem 0.1rem;\r\n  text-align: center;\r\n}\r\n.muf-rating > .radios > label > input[type='radio'] {\r\n  opacity: 1; /* only needed when using materialize-css */\r\n}\r\n\r\n.geojson-feature-list .collapsible-body {\r\n  padding: 0 1rem;\r\n}\r\n.mui-repeat-list-controls {\r\n  margin-bottom: 0;\r\n}\r\n"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/styles.css"],"names":[],"mappings":"AAAA;;;EAGE,8BAA8B;EAC9B,2BAA2B;EAC3B,sBAAsB;AACxB;;AAEA;EACE,WAAW;EACX,WAAW;EACX,cAAc;AAChB;;AAEA;EACE,kCAAkC;EAClC,gBAAgB;AAClB;;AAEA;EACE,SAAS;AACX;;AAEA,2BAA2B;AAC3B;EACE,YAAY;AACd;;AAEA;EACE,WAAW;EACX,iBAAiB;EACjB,aAAa;EACb,2BAA2B;EAC3B,qBAAqB;AACvB;;AAEA;EACE,UAAU;AACZ;;AAEA;EACE,UAAU;EACV,aAAa;EACb,6BAA6B;EAC7B,qBAAqB;AACvB;;AAEA;EACE,qBAAqB;EACrB,6BAA6B;EAC7B,kBAAkB;AACpB;;AAEA;EACE,UAAU;EACV,2CAA2C;AAC7C;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,gBAAgB;AAClB","sourcesContent":["*,\r\n*:before,\r\n*:after {\r\n  -webkit-box-sizing: border-box;\r\n  -moz-box-sizing: border-box;\r\n  box-sizing: border-box;\r\n}\r\n\r\n.clearfix::after {\r\n  content: '';\r\n  clear: both;\r\n  display: table;\r\n}\r\n\r\n.markdown ul>li {\r\n  list-style-type: circle !important;\r\n  text-indent: 2em;\r\n}\r\n\r\n.repeat-list .pagination {\r\n  margin: 0;\r\n}\r\n\r\n/* For the options' label */\r\n.input-field.options>label {\r\n  top: -2.5rem;\r\n}\r\n\r\n.muf-rating {\r\n  width: 100%;\r\n  padding: 0.5rem 0;\r\n  display: flex;\r\n  justify-content: flex-start;\r\n  align-items: flex-end;\r\n}\r\n\r\n.muf-rating>.label {\r\n  width: 50%;\r\n}\r\n\r\n.muf-rating>.radios {\r\n  width: 50%;\r\n  display: flex;\r\n  justify-content: space-evenly;\r\n  align-items: flex-end;\r\n}\r\n\r\n.muf-rating>.radios>label {\r\n  display: inline-block;\r\n  padding: 0 0.1rem 1rem 0.1rem;\r\n  text-align: center;\r\n}\r\n\r\n.muf-rating>.radios>label>input[type='radio'] {\r\n  opacity: 1;\r\n  /* only needed when using materialize-css */\r\n}\r\n\r\n.geojson-feature-list .collapsible-body {\r\n  padding: 0 1rem;\r\n}\r\n\r\n.mui-repeat-list-controls {\r\n  margin-bottom: 0;\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14777,7 +14842,7 @@ module.exports = function (item) {
 
 /***/ },
 
-/***/ 148
+/***/ 200
 (module, __unused_webpack___webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15083,6 +15148,35 @@ var dist_update = injectStylesIntoStyleTag_default()(dist/* default */.A, dist_o
 
        /* harmony default export */ const mithril_materialized_dist = (dist/* default */.A && dist/* default */.A.locals ? dist/* default */.A.locals : undefined);
 
+// EXTERNAL MODULE: ../../node_modules/.pnpm/css-loader@7.1.4_webpack@5.109.2/node_modules/css-loader/dist/cjs.js!../mithril-ui-form/styles.css
+var styles = __webpack_require__(305);
+;// ../mithril-ui-form/styles.css
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+var styles_options = {};
+
+styles_options.styleTagTransform = (styleTagTransform_default());
+styles_options.setAttributes = (setAttributesWithoutAttributes_default());
+styles_options.insert = insertBySelector_default().bind(null, "head");
+styles_options.domAPI = (styleDomAPI_default());
+styles_options.insertStyleElement = (insertStyleElement_default());
+
+var styles_update = injectStylesIntoStyleTag_default()(styles/* default */.A, styles_options);
+
+
+
+
+       /* harmony default export */ const mithril_ui_form_styles = (styles/* default */.A && styles/* default */.A.locals ? styles/* default */.A.locals : undefined);
+
 // EXTERNAL MODULE: ../../node_modules/.pnpm/css-loader@7.1.4_webpack@5.109.2/node_modules/css-loader/dist/cjs.js!../../node_modules/.pnpm/leaflet@1.9.4/node_modules/leaflet/dist/leaflet.css
 var leaflet = __webpack_require__(304);
 ;// ../../node_modules/.pnpm/leaflet@1.9.4/node_modules/leaflet/dist/leaflet.css
@@ -15142,7 +15236,7 @@ var leaflet_draw_update = injectStylesIntoStyleTag_default()(leaflet_draw/* defa
        /* harmony default export */ const dist_leaflet_draw = (leaflet_draw/* default */.A && leaflet_draw/* default */.A.locals ? leaflet_draw/* default */.A.locals : undefined);
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/css-loader@7.1.4_webpack@5.109.2/node_modules/css-loader/dist/cjs.js!./src/styles.css
-var styles = __webpack_require__(292);
+var cjs_js_src_styles = __webpack_require__(292);
 ;// ./src/styles.css
 
       
@@ -15155,20 +15249,20 @@ var styles = __webpack_require__(292);
       
       
 
-var styles_options = {};
+var src_styles_options = {};
 
-styles_options.styleTagTransform = (styleTagTransform_default());
-styles_options.setAttributes = (setAttributesWithoutAttributes_default());
-styles_options.insert = insertBySelector_default().bind(null, "head");
-styles_options.domAPI = (styleDomAPI_default());
-styles_options.insertStyleElement = (insertStyleElement_default());
+src_styles_options.styleTagTransform = (styleTagTransform_default());
+src_styles_options.setAttributes = (setAttributesWithoutAttributes_default());
+src_styles_options.insert = insertBySelector_default().bind(null, "head");
+src_styles_options.domAPI = (styleDomAPI_default());
+src_styles_options.insertStyleElement = (insertStyleElement_default());
 
-var styles_update = injectStylesIntoStyleTag_default()(styles/* default */.A, styles_options);
-
-
+var src_styles_update = injectStylesIntoStyleTag_default()(cjs_js_src_styles/* default */.A, src_styles_options);
 
 
-       /* harmony default export */ const src_styles = (styles/* default */.A && styles/* default */.A.locals ? styles/* default */.A.locals : undefined);
+
+
+       /* harmony default export */ const src_styles = (cjs_js_src_styles/* default */.A && cjs_js_src_styles/* default */.A.locals ? cjs_js_src_styles/* default */.A.locals : undefined);
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/mithril@2.3.8/node_modules/mithril/index.js
 var mithril = __webpack_require__(361);
@@ -16003,7 +16097,7 @@ const ConfirmButton = () => {
     const reset = () => {
         isConfirming = false;
         isBlocked = false;
-        m.redraw();
+        mithril_default().redraw();
     };
     const unblock = () => {
         isBlocked = false;
@@ -16047,7 +16141,7 @@ const ConfirmButton = () => {
             // Add square styling for icon-only confirming state
             const buttonStyle = !label && isConfirming
                 ? Object.assign(Object.assign({}, props.style), { width: '36px', height: '36px', padding: '0', minWidth: '28px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '2px' }) : props.style;
-            return m(ButtonComponent, Object.assign(Object.assign({}, props), { style: buttonStyle, className: `${props.className || ''} ${cn}`, iconName: currentIconName, iconClass: label ? iconClass || 'left' : '', label, onclick: handleClick }));
+            return mithril_default()(ButtonComponent, Object.assign(Object.assign({}, props), { style: buttonStyle, className: `${props.className || ''} ${cn}`, iconName: currentIconName, iconClass: label ? iconClass || 'left' : '', label, onclick: handleClick }));
         },
     };
 };
@@ -20583,7 +20677,7 @@ const ModalPanel = () => {
         // Restore body scroll
         document.body.style.overflow = '';
         restoreFocusToInvoker();
-        mithril_default().redraw();
+        m.redraw();
     };
     const openModal = (attrs) => {
         const activeElement = document.activeElement;
@@ -20642,14 +20736,14 @@ const ModalPanel = () => {
                 .join(' ')
                 .trim();
             const overlayClasses = ['modal-overlay', 'mm-modal-overlay', state.isOpen ? 'active' : ''].filter(Boolean).join(' ').trim() || undefined;
-            return mithril_default()('div', { className: 'modal-container' }, [
+            return m('div', { className: 'modal-container' }, [
                 // Modal overlay
-                mithril_default()('div', {
+                m('div', {
                     className: overlayClasses,
                     onclick: closeOnBackdropClick ? () => closeModal(attrs) : undefined,
                 }),
                 // Modal content
-                mithril_default()('div', {
+                m('div', {
                     id,
                     className: modalClasses,
                     oncreate: ({ dom }) => {
@@ -20665,27 +20759,27 @@ const ModalPanel = () => {
                 }, [
                     // Close button
                     showCloseButton &&
-                        mithril_default()('button', {
+                        m('button', {
                             className: 'modal-close btn-flat mm-modal-close-button',
                             onclick: () => closeModal(attrs),
                             'aria-label': 'Close modal',
                         }, '×'),
                     // Modal content
-                    mithril_default()('div', {
+                    m('div', {
                         className: ['modal-content', 'mm-modal-content', showCloseButton ? 'mm-modal-content-with-close' : '']
                             .filter(Boolean)
                             .join(' '),
                     }, [
-                        mithril_default()('h4', { id: `${id}-title`, className: 'mm-modal-title' }, title),
+                        m('h4', { id: `${id}-title`, className: 'mm-modal-title' }, title),
                         description &&
-                            mithril_default()('div', Object.assign({ id: `${id}-desc` }, (richContent && typeof description === 'string' ? { innerHTML: description } : {})), richContent && typeof description === 'string' ? undefined : description),
+                            m('div', Object.assign({ id: `${id}-desc` }, (richContent && typeof description === 'string' ? { innerHTML: description } : {})), richContent && typeof description === 'string' ? undefined : description),
                     ]),
                     // Modal footer with buttons
                     buttons &&
                         buttons.length > 0 &&
-                        mithril_default()('.modal-footer', {
+                        m('.modal-footer', {
                             className: 'modal-footer mm-modal-footer',
-                        }, buttons.map((buttonProps) => mithril_default()(FlatButton, Object.assign(Object.assign({}, buttonProps), { className: `modal-close ${buttonProps.className || ''}`, onclick: (e) => {
+                        }, buttons.map((buttonProps) => m(FlatButton, Object.assign(Object.assign({}, buttonProps), { className: `modal-close ${buttonProps.className || ''}`, onclick: (e) => {
                                 if (buttonProps.onclick)
                                     buttonProps.onclick(e);
                                 closeOnButtonClick && closeModal(attrs);
@@ -27163,11 +27257,9 @@ const Layout = () => ({
 });
 
 ;// ../mithril-ui-form/lib/index.esm.js
-/* unused harmony import specifier */ var e;
-/* unused harmony import specifier */ var a;
-/* unused harmony import specifier */ var I;
-/* unused harmony import specifier */ var n;
-var D=[],S=[],A=[],L=[],j=[],T={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"},C=new RegExp(`[${Object.keys(T).join("")}]`,"g"),M=e=>e.replace(C,e=>T[e]),H=(e,t)=>{const n=t.trim();return/^<\/?(ul|ol|li|h|p|bl|table|tbody|tr|td|th|caption)/i.test(n)||""===n?`\n${t}\n`:`\n<p>\n${n}\n</p>\n`},E=(e,t,n,r)=>`\n{{LISTITEM:ol:${Math.floor(e.length/2)}:${t}:${n}:${r.trim()}}}\n`,P=e=>{const t=e.match(/^( *)([A-Za-z][.)]|\([A-Za-z]\)) (.*)$/);if(!t)return;const n=t[2].match(/[A-Za-z]/)?.[0]??"a",r=n===n.toUpperCase()?"A":"a";return{indent:t[1],orderedStyle:r,start:n.toLowerCase().charCodeAt(0)-96,item:t[3]}},_=e=>{if(0===e.length)return"";let t="";const n=[];for(let r=0;r<e.length;r++){const o=e[r],a=r<e.length-1?e[r+1]:null;for(;n.length>0&&n[n.length-1].level>o.level;){const e=n.pop();e.hasOpenLi&&(t+="</li>"),t+=`</${e.type}>`}if(n.length>0&&n[n.length-1].level===o.level&&(n[n.length-1].type!==o.type||n[n.length-1].orderedStyle!==o.orderedStyle)){const e=n.pop();e.hasOpenLi&&(t+="</li>"),t+=`</${e.type}>`}if(0===n.length||n[n.length-1].level<o.level){const e="ol"===o.type&&o.orderedStyle?` type="${o.orderedStyle}"`:"",r="ol"===o.type&&o.start&&1!==o.start?` start="${o.start}"`:"";t+=`<${o.type}${e}${r}>`,n.push({type:o.type,level:o.level,orderedStyle:o.orderedStyle,hasOpenLi:!1})}n.length>0&&n[n.length-1].hasOpenLi&&n[n.length-1].level===o.level&&(t+="</li>",n[n.length-1].hasOpenLi=!1),t+=`<li>${o.content}`,n[n.length-1].hasOpenLi=!0,(!a||a.level<=o.level)&&(t+="</li>",n[n.length-1].hasOpenLi=!1)}for(;n.length>0;){const e=n.pop();e.hasOpenLi&&(t+="</li>"),t+=`</${e.type}>`}return t},V=(e,t,n,r="")=>{const o=n.split("|").filter((e,t,n)=>t>0&&t<n.length-1).map(e=>/:-+:/g.test(e)?"center":/-+:/g.test(e)?"right":/:-+/.test(e)?"left":""),a=e=>{const t=o[e];return t?` align="${t}"`:""},i=t.split("|").slice(1,-1),l=i.map(e=>e.trim()),s=[];let c=0;for(let e=0;e<l.length;e++){if(c>0){c--;continue}const t=l[e];i[e];if(t&&t.length){let n=1,r=!1;for(let t=e+1;t<l.length&&0===l[t].length;t++)if(""===i[t]){r=!0;break}if(r)for(let t=e+1;t<l.length&&0===l[t].length;t++)n++;n>1?(c=n-1,s.push(`<th${a(e)} colspan="${n}">${t}</th>`)):s.push(`<th${a(e)}>${t}</th>`)}else s.push(`<th${a(e)}></th>`)}return`\n<table><tbody>${`<tr>\n  ${s.join("\n  ")}\n</tr>\n`}${r.split("\n").map(e=>e.trim()).filter(e=>e&&e.length).map(e=>{const t=e.split("|").slice(1,-1),n=t.map(e=>e.trim()),r=[];let o=0;for(let e=0;e<n.length;e++){if(o>0){o--;continue}const i=n[e];t[e];if(i&&i.length){let l=1,s=!1;for(let r=e+1;r<n.length&&0===n[r].length;r++)if(""===t[r]){s=!0;break}if(s)for(let t=e+1;t<n.length&&0===n[t].length;t++)l++;l>1?(o=l-1,r.push(`<td${a(e)} colspan="${l}">${i}</td>`)):r.push(`<td${a(e)}>${i}</td>`)}else r.push(`<td${a(e)}></td>`)}return`<tr>\n  ${r.join("\n  ")}\n</tr>\n`}).join("")}</tbody></table>\n`},R=(e,t,n,r)=>{for(const r of e){const e=r[t],o=e?.(n);if("string"==typeof o)return o}return r()},U=[[/\r\n/g,"\n"],[/\n(#+)(.*)/g,(e,t,n="")=>{const r=t.length;return`<h${r}>${n.trim()}</h${r}>`}],[/<(https?:\/\/[^\s>]+)>/g,'<a href="$1">$1</a>'],[/!\[([^\[]*)\]\((?:javascript:)?([^\)]+)\)/g,'<img src="$2" alt="$1">'],[/\[([^\[]+)\]\((?:javascript:)?([^\)]+)\)/g,'<a href="$2">$1</a>'],[/([^\s]) {2,}\n/g,"$1<br>\n"],[/([^\\])(\*\*|__)(.*?(_|\*)?)\2/g,"$1<strong>$3</strong>"],[/([^\\])(\*|_)(.*?)\2/g,"$1<em>$3</em>"],[/\\_/g,"&#95;"],[/\~\~(.*?)\~\~/g,"<del>$1</del>"],[/\:\"(.*?)\"\:/g,"<q>$1</q>"],[/\n-{3,}/g,"\n<hr />"],[/\n( *)[-*+] \[([xX ])\](.*)/g,(e,t,n,r)=>`\n{{LISTITEM:ul:${Math.floor(t.length/2)}:::${`<input type="checkbox"${"x"===n.toLowerCase()?" checked":""} disabled>`} ${r.trim()}}}\n`],[/\n( *)(\*|-|\+)(.*)/g,(e,t,n,r)=>`\n{{LISTITEM:ul:${Math.floor(t.length/2)}:::${r.trim()}}}\n`],[/\n( *)([0-9]+[.)]) (.*)/g,(e,t,n,r)=>`\n{{LISTITEM:ol:${Math.floor(t.length/2)}::${Number.parseInt(n,10)}:${r.trim()}}}\n`],[/\n(&gt;|\>)(.*)/g,(e,t,n="")=>`\n<blockquote>${n.trim()}</blockquote>`],[/(\^)(.*?)\1/g,"<sup>$2</sup>"],[/(\~)(.*?)\1/g,"<sub>$2</sub>"],[/\n\[(.+?)\]\n( *\|[^\n]+\|\r?\n)((?: *\|:?[ -]+:?)+ *\|)(\n(?: *\|[^\n]+\|\r?\n?)*)?/g,(e,t,n,r,o="")=>V(0,n,r,o).replace("<table>",`<table><caption>${t.trim()}</caption>`)],[/( *\|[^\n]+\|\r?\n)((?: *\|:?[ -]+:?)+ *\|)(\n(?: *\|[^\n]+\|\r?\n?)*)?/g,V],[/\[\^([^\]]+)\](?!:)/g,(e,t)=>`<sup id="fnref:${t}"><a href="#fn:${t}">[${t}]</a></sup>`],[/\[\^([^\]]+)\]:\s*((?:[^\n]*\n?)*)/g,(e,t,n)=>(j.push([t,n.trim()]),"")],[/\n([A-Z][A-Za-z\s]*?)\s:\s*([A-Z][^\n]*)/g,(e,t,n)=>`\n<dl><dt>${t.trim()}</dt><dd>${n.trim()}</dd></dl>\n`]],q=[[/\s?<\/[ou]l>\s?<[ou]l>/g,"",3],[/<\/blockquote>\n<blockquote>/g,"<br>\n"],[/https?:\/\/[^"']*/g,e=>e.replace(/<\/?em>/g,"_")],[/&#95;/g,"_"]];function F(e,t=!1,n=!1){let r,o,a,i;return"object"==typeof t?(r=t.removeParagraphs??!1,o=t.externalLinks??!1,a=t.alphaLists??!1,i=t.extensions??[]):(r=t,o=n,a=!1,i=[]),D.length=0,S.length=0,A.length=0,L.length=0,j.length=0,e=(e=>e.replace(/\$([^$\n]+)\$/g,(e,t)=>(L.push(t),`{{INLINEMATHPH${L.length-1}}}`)))(e=(e=>e.replace(/`([^`]+)`/g,(e,t)=>(S.push(t),`{{INLINECODEPH${S.length-1}}}`)))(e=(e=>e.replace(/\n\s*\$\$([^]*?)\$\$\s*\n/g,(e,t)=>(A.push(t.trim()),`\n{{MATHBLOCKPH${A.length-1}}}\n`)))(e=(e=>e.replace(/\n\s*```(\w*)\n([^]*?)\n\s*```\s*\n/g,(e,t,n)=>(D.push({lang:t,code:n}),`\n<pre>{{CODEBLOCKPH${D.length-1}}}</pre>\n`)))(`\n${e}\n`)))),a&&(e=(e=>{const t=e.split("\n");for(let e=0;e<t.length;e++){const n=P(t[e]);if(!n)continue;const r=[e];let o=n.start+1;const a=n.indent.length;for(let i=e+1;i<t.length;i++){const e=P(t[i]);if(e&&e.indent===n.indent&&e.orderedStyle===n.orderedStyle&&e.start===o)r.push(i),o++;else{if(!t[i].trim())break;if((e||!(t[i].match(/^ */)[0].length>a))&&!(e&&e.indent.length>a))break}}if(!(r.length<2)){for(const e of r){const n=P(t[e]);t[e]=E(n.indent,n.orderedStyle,n.start,n.item)}e=r[r.length-1]}}return t.join("\n")})(e)),U.forEach(([t,n,r=1])=>{for(let o=0;o<r;o++)e=e.replace(t,n)}),e=(e=(e=>{if(!e.includes("{{LISTITEM:"))return e;const t=e.split("\n"),n=[];let r=[],o=!1;for(const e of t){const t=e.match(/\{\{LISTITEM:([^:]+):([^:]+):([^:]*):([^:]*):(.+)\}\}/);if(t){const a=t[1],i=parseInt(t[2]),l=t[3],s=t[4]?parseInt(t[4]):void 0;if(o&&r.length>0){const e=r[r.length-1];e.type!==a&&e.level===i&&(n.push([...r]),r=[])}r.push({type:a,level:i,orderedStyle:l||void 0,start:s,content:t[5],originalLine:e}),o=!1}else""!==e.trim()?(r.length>0&&(n.push([...r]),r=[]),o=!1):""===e.trim()&&(o=!0)}if(r.length>0&&n.push(r),0===n.length)return e;for(const t of n){const n=_(t),r=t[0];e=e.replace(r.originalLine,n);for(let n=1;n<t.length;n++)e=e.replace(t[n].originalLine,"")}return e})(e)).replace(/\n([^\n]+)\n/g,H),q.forEach(([t,n,r=1])=>{for(let o=0;o<r;o++)e=e.replace(t,n)}),e=((e,t)=>e.replace(/<pre>{{CODEBLOCKPH(\d+)}}<\/pre>/g,(e,n)=>{const{lang:r,code:o}=D[parseInt(n)];return R(t,"renderCodeBlock",{lang:r,code:o,escapeHtml:M},()=>`<pre><code${r?` class="language-${r}"`:""}>${M(o)}</code></pre>`)}))(e,i),e=((e,t)=>e.replace(/{{MATHBLOCKPH(\d+)}}/g,(e,n)=>{const r=A[parseInt(n)];return R(t,"renderMathBlock",{math:r,escapeHtml:M},()=>`<div class="math-block">${M(r)}</div>`)}))(e,i),e=((e,t)=>e.replace(/{{INLINEMATHPH(\d+)}}/g,(e,n)=>{const r=L[parseInt(n)];return R(t,"renderInlineMath",{math:r,escapeHtml:M},()=>`<span class="math-inline">${M(r)}</span>`)}))(e=(e=>e.replace(/{{INLINECODEPH(\d+)}}/g,(e,t)=>{const n=S[parseInt(t)];return`<code>${M(n)}</code>`}))(e),i),e=e.trim()+(0===j.length?"":`\n<div class="footnotes">\n  <hr>\n  <ol>\n    ${j.map(([e,t])=>`\n    <li id="fn:${e}">\n      ${t}\n      <sup><a href="#fnref:${e}">↩</a></sup>\n    </li>`).join("\n")}\n  </ol>\n</div>`),r&&(e=e.replace(/^<p>(.*)<\/p>$/s,"$1")),o&&(e=e.replace(/<a href="/g,'<a target="_blank" href="')),e}var B=(e,t)=>{U.push([e,t])};const z=e=>e.charAt(0).toUpperCase()+e.slice(1),Z=e=>"string"==typeof e,J=(e,t=2,n="0")=>e.toString().length>=t?e.toString():J(n+e,t,n),W=e=>e?`${J(e.getHours())}:${J(e.getMinutes())}`:"00:00",K=(e,t)=>{if(!e||!t)return;return t.replace(/\[(\w+)\]/g,".$1").replace(/^\./,"").split(".").reduce((e,t)=>{if(null!=e){if(Array.isArray(e)){const n=/([A-Z]\w+)/.exec(t);if(n){const r=n[0][0].toLowerCase()+n[0].substr(1)||t;return e.find(e=>"object"==typeof e&&null!==e&&r in e&&e[r]===t)}return e[parseInt(t,10)]}return"object"==typeof e&&null!==e&&t in e?e[t]:void 0}},e)},Y=e=>e.reduce((e,t)=>t instanceof Array?[...e,...t]:[...e,t],[]),G=/([^ =><!]*)\s*([=><!]*)\s*(\S*)/i,X=/^\s*!\s*/,Q=(e,t)=>e.split(/&|;/).map(e=>e.trim()).reduce((e,n)=>{const r=X.test(n),o=r?n.replace(X,""):n;return e=e&&t.filter(Boolean).reduce((e,t)=>e||((e,t)=>{if(!t||0===Object.keys(t).length)return!1;const n=G.exec(e);if(n){const[e,r,o,a]=n,i=K(t,r.trim());if(void 0===i||"string"==typeof i&&0===i.length)return!1;if(!o||!a)return!0;{const t=isNaN(+a)?"true"===a||"false"!==a&&a:+a;switch(o){case"=":case"==":case"===":return i instanceof Array?i.indexOf(t)>=0:i===t;case"!=":case"!==":return i instanceof Array?i.indexOf(t)>=0:i!==t;case"<=":return i<=t;case">=":return i>=t;case"<":return i<t;case">":return i>t;default:return console.error(`Unrecognized operand (${o}) in expression: ${e}`),!1}}}return!0})(o.trim(),t),!1),r?!e:e},!0),ee=/===?|[^<>=]/i,te=(e,...t)=>{const n=e instanceof Array?e:[e];return 0===e.length||n.some(e=>Q(e,ee.test(e)?[t[0]]:Y(t)))},ne=(e,t)=>K(t.filter(Boolean).reduceRight((e,t)=>({...t,...e})),e.trim()),re=(e,t)=>void 0!==ne(e,t),oe=/{{\s*([^\s"'`:]*):?([^\s]*)\s*}}/g,ae=(e,...t)=>{if(!oe.test(e))return!0;let n;oe.lastIndex=0;let r=!0;do{n=oe.exec(e),n&&(n.index===oe.lastIndex&&oe.lastIndex++,n.forEach((e,n,[,o])=>{r=r&&re(o,t)}))}while(r&&null!==n);return r},ie=(e,t)=>{if(void 0===e)return"";if(e instanceof Array)return e.map(e=>ie(e,t)).join(", ");if(!t)return e.toString();if("boolean"==typeof e){const n=t.indexOf(":");return e?t.substring(0,n):t.substring(n+1)}switch(t){default:return e.toString();case"date":return new Date(e).toLocaleDateString();case"time":return new Date(e).toLocaleTimeString();case"iso":return new Date(e).toISOString();case"utc":return new Date(e).toUTCString()}},le=(e,...t)=>e.replace(oe,(e,n,r)=>{const o=ne(n.trim(),t);return!o||o instanceof Array?e:ie(o,r)}),se=e=>{if(null===e)return e;if(e instanceof Date)return new Date(e.getTime());if(e instanceof Array){const t=[];return e.forEach(e=>{t.push(e)}),t.map(e=>se(e))}if("object"==typeof e){const t={...e};return Object.keys(t).forEach(e=>{t[e]=se(t[e])}),t}return e};const ce=e=>{const t=function e(t,n=""){return t.filter(e=>"string"!=typeof e.type||"section"!==e.type&&"md"!==e.type).reduce((t,r)=>{const o=(n?`${n}.`:"")+String(r.id);if("string"!=typeof r.type)Object.assign(t,e(r.type,o));else{const e=r.type??(r.options&&r.options.length>0?"select":"text");t[o]={...r,type:e}}return t},{})}(e),n=(e,n)=>{if(!t.hasOwnProperty(e)||void 0===n)return n;const r=t[e],o=n instanceof Array?n.filter(e=>null!=e):[n];switch(r.type||(r.options?"options":"none")){default:return n;case"radio":case"select":case"options":const e="string"==typeof r.options?ne(r.options,[t]):r.options;return o.map(t=>e.filter(e=>"string"==typeof e?e===t:e.id===t).map(e=>"string"==typeof e?z(e):e.label||z(e.id)).shift()).filter(e=>void 0!==e)}},r=(e,t="")=>{if(e&&("object"!=typeof e||0!==Object.keys(e).length)){if(e instanceof Array)return e.map(e=>r(e,t));{const o={};return Object.keys(e).forEach(a=>{const i=t?`${t}.${a}`:a,l=e[a];if("boolean"==typeof l)o[a]=l;else if("number"==typeof l||"string"==typeof l){const e=n(i,l);e&&(o[a]=e instanceof Array&&1===e.length?e[0]:e)}else if(l instanceof Array)if("string"==typeof l[0]||null===l[0]){const e=n(i,l);e&&(o[a]=e)}else o[a]=r(l,a);else"object"==typeof l&&(o[a]=l)}),o}}};return r},de=(e="")=>e.replace(/\s|,|\./g,"").toLowerCase(),pe=(e,t,n=1)=>{const r=[];for(let o=e;o<=t;o+=n)r.push(o);return r},ue=(e,t,n)=>{const r=Object.assign({},t,n);return`${e}?${Object.keys(r).map(e=>`${e}=${r[e]}`).join("&")}`},ge=e=>{if(null!==e&&"object"==typeof e){const t=["title","label","alt","name"];for(const n of t)if(n in e&&"string"==typeof e[n])return e[n]}},fe={moveItem:(e,t,n)=>{if(t===n||t<0||n<0||t>=e.length||n>=e.length)return e;const r=[...e],[o]=r.splice(t,1);return r.splice(n,0,o),r},insertAt:(e,t,n)=>{const r=[...e];return r.splice(t,0,n),r},removeAt:(e,t)=>{if(t<0||t>=e.length)return e;const n=[...e];return n.splice(t,1),n},swap:(e,t,n)=>{if(t===n||t<0||n<0||t>=e.length||n>=e.length)return e;const r=[...e];return[r[t],r[n]]=[r[n],r[t]],r},duplicate:(e,t)=>{if(t<0||t>=e.length)return e;const n=e[t],r="object"==typeof n?se(n):n;return fe.insertAt(e,t+1,r)},isValidArray:(e,t=0,n)=>e.length>=t&&(void 0===n||e.length<=n)},me={handleDragStart:(e,t)=>{e.dataTransfer?.setData("text/plain",t.toString())},handleDragOver:e=>{e.preventDefault()},getDragIndex:(e,t=-1)=>{const n=e.dataTransfer?.getData("text/plain");return n?parseInt(n,10):t}},he=()=>({view:({attrs:{md:t="",removeParagraphs:n=!1,externalLinks:r=!1,...o}})=>mithril_default()(".slimdown-view.markdown",o,mithril_default().trust(F(t,n,r)))}),ye=()=>({view:({attrs:{type:t,props:n,label:r="",initialValue:o,inline:a=!1}})=>{const i={className:n.className||"col s12"};if(o instanceof Array&&o.length>3)return mithril_default()(".readonly",i,[mithril_default()("label",r),mithril_default()(he,{md:"\n- "+o.join("\n- ")})]);if("string"==typeof o){const n=`${r.trim()}: `;return mithril_default()(".readonly",i,"url"===t?[mithril_default()("label",n),mithril_default()("a[target=_blank]",{href:o},o)]:"color"===t?[mithril_default()("label",n),mithril_default()(".color",{style:{height:"1rem",width:"40px",borderRadius:"4px",backgroundColor:o}})]:[mithril_default()("label",r),mithril_default()(he,{md:o})])}const l=o instanceof Array?o.join(", "):o;return mithril_default()(".readonly",i,[r&&mithril_default()("label",r),a?mithril_default()("span",l?`: ${l}`:mithril_default().trust("&nbsp;")):mithril_default()("p",l||mithril_default().trust("&nbsp;"))])}}),be=(e,t="default")=>`mui_${t}_${e}_${uniqueId()}`,ve=(x={},I={})=>()=>{const k={key:Date.now(),stableId:void 0};return{oninit:({attrs:{field:e,obj:t}})=>{const{id:n=""}=e,r=t&&"object"==typeof t&&"id"in t?String(t.id):"default";k.stableId=be(String(n),r)},view:({attrs:{i18n:O,field:N,obj:D,autofocus:S,onchange:A,context:L=[],containerId:j,disabled:T,readonly:C}})=>{const{id:M="",type:H,disabled:E=T,readonly:P=C,value:_,required:V,autogenerate:R,show:U,label:q,description:B,i18n:Z=O||{},checkAllOptions:J,transform:K,effect:Y,onkeyup:G,onkeydown:X,onblur:Q}=N,ee=!U||te(U,D,...L);if(U&&!ee||q&&!ae(q,D,...L)||_&&!ae(_,D,...L)||B&&!ae(B,D,...L))return;const re="string"==typeof N.options?ne(N.options,[D,...L]):N.options,oe=re&&re instanceof Array?re.filter(e=>"string"==typeof e||void 0!==e.id&&(e.label||isNaN(Number(e.id)))&&(!e.show||te(e.show,D,...L))).map(e=>"string"==typeof e?{id:e,label:z(e)}:e.label?e:{...e,label:z(e.id)}):[],ie="boolean"==typeof T&&T,se=D&&"object"==typeof D&&"id"in D?String(D.id):"default",ce=((e,t=!1,n=!1,r="default",o,a)=>{const{id:i="",label:l,description:s,required:c,multiple:d,className:p,checkboxClass:u,icon:g,iconClass:f,placeholder:m,maxLength:h,minLength:y,max:b,min:v,step:$,dateTimeOutput:w,dateTimeSeconds:x,dateFormat:I,twelveHour:k,startLabel:O,middleLabel:N,endLabel:D}=e,S={id:a||be(String(i),r),label:l};return void 0===l&&i&&(S.label=z(String(i))),s&&(S.helperText=F(s,!0)),O&&(S.startLabel=F(O,!0)),D&&(S.endLabel=F(D,!0)),N&&(S.middleLabel=F(N,!0)),p&&(S.className=p),g&&(S.iconName=g),f&&(S.iconClass=f),u&&(S.checkboxClass=u),m&&(S.placeholder=m),c&&(S.isMandatory=!0,S["aria-required"]="true"),d&&(S.multiple=d),n&&(S.disabled=!0,S["aria-disabled"]="true"),t&&(S.autofocus=!0),void 0!==h&&(S.maxLength=h),void 0!==y&&(S.minLength=y),void 0!==b&&(S.max=b),void 0!==v&&(S.min=v),void 0!==$&&(S.step=$),w&&(S.dateTimeOutput=w),x&&(S.dateTimeSeconds=x),I&&(S.dateFormat=I),k&&(S.twelveHour=k),S})(N,S,"boolean"==typeof E||void 0===E?ie||E:ie||te(E,D,...L),se,0,k.stableId);q&&(ce.label=F(le(ce.label||q,D,...L),!0)),void 0!==_&&(ce.value="string"==typeof _?le(ce.value||_,D,...L):_),B&&(ce.description=F(le(ce.description||B,D,...L),!0));const de=V?e=>e instanceof Array?e&&e.length>0:void 0!==typeof e:void 0;if(D instanceof Array)return void console.warn("Only a repeat list can deal with arrays!");const pe=async e=>{if(void 0===e||"undefined"===e)return delete D[M],void A(D);if(D[M]=K?K("to",e):e,!Y)return A(D);const t=await Y(D,D[M],L);A(void 0!==t?t:D)};if(H instanceof Array)return M?("object"!=typeof D||D.hasOwnProperty(M)||(D[M]={}),mithril_default()(".muf-form",{className:N.className},[mithril_default()(".muf-form-header",mithril_default().trust(F(ce.label||z(String(M)),!0))),ce.description&&mithril_default()("div",mithril_default().trust(F(ce.description))),mithril_default()(".row",mithril_default()(Se,{...ce,i18n:Z,readonly:P,form:H,obj:D[M],context:L instanceof Array?[D,...L]:[D,L],onchange:()=>A&&A(D),containerId:j}))])):void console.warn("Missing ID for type "+JSON.stringify(H));R&&!D[M]&&(D[M]="guid"===R?uuid4():"id"===R?uniqueId():Date.now());const ue="object"==typeof D&&D.hasOwnProperty(M)&&void 0!==D[M]?K?K("from",D[M]):D[M]:ce.value;M&&void 0!==_&&void 0!==ue&&(D[M]=K?K("to",ue):ue);const[fe,me]=J?J.split("|"):["",""];if(P&&H&&["md","none"].indexOf(H)<0){if(I.hasOwnProperty(H))return mithril_default()(I[H],{iv:ue,field:N,props:ce,label:ce.label,obj:D,context:L});if(H&&x.hasOwnProperty(H))return mithril_default()(x[H],{iv:ue,field:N,props:ce,label:ce.label,onchange:pe,obj:D,context:L});switch(H){case"time":{const t=ue,n=Z.dateTimeOptions?{hour:"2-digit",minute:"2-digit",second:void 0,...Z.dateTimeOptions,weekday:void 0,month:void 0,day:void 0,year:void 0}:void 0,r="number"==typeof t||"string"==typeof t||t instanceof Date?new Date(t):void 0,o=r?r.toLocaleTimeString(Z.locales,n):"";return mithril_default()(ye,{props:ce,label:ce.label,initialValue:o})}case"date":{const t=ue,n=Z.dateTimeOptions?{...Z.dateTimeOptions,hour:void 0,hour12:void 0,minute:void 0,second:void 0}:void 0,r="number"==typeof t||"string"==typeof t||t instanceof Date?new Date(t):void 0,o=r?r.toLocaleDateString(Z.locales,n):"";return mithril_default()(ye,{props:ce,label:ce.label,initialValue:o})}case"datetime":{const t=ue,n=Z.dateTimeOptions?{hour:"2-digit",minute:"2-digit",month:"numeric",day:"numeric",...Z.dateTimeOptions}:void 0,r="number"==typeof t||"string"==typeof t||t instanceof Date?new Date(t):void 0,o=r?r.toLocaleTimeString(Z.locales,n):"";return mithril_default()(ye,{props:ce,label:ce.label,initialValue:o})}case"switch":case"checkbox":{const t=ue?"✔":"✘";return mithril_default()(ye,{props:ce,label:ce.label,initialValue:t,inline:!0})}case"tags":{const t=ue||[];return mithril_default()(ye,{props:ce,label:ce.label,initialValue:t})}case"options":case"select":{const t=void 0!==ue?ue instanceof Array?ue:[ue]:[],n=oe.filter(e=>t.indexOf(e.id)>=0),r=n&&0===n.length?"?":1===n.length?n[0].label:n.map(e=>e.label);return mithril_default()(ye,{props:ce,label:ce.label,initialValue:r})}case"radio":{const t=ue,n=oe.filter(e=>e.id===t),r=n&&n.length?n[0].label:"?";return mithril_default()(ye,{props:ce,label:ce.label,initialValue:r})}case"likert":{const t="string"==typeof ue?parseInt(ue):"number"==typeof ue?ue:"";return mithril_default()(ye,{props:ce,initialValue:t,label:ce.label})}case"base64":{const t=ue,n=!(!t||!/data:image/i.test(t)),r=N.label||ge(D)||N.placeholder||"Uploaded image";return n&&mithril_default()("div",{role:"img","aria-label":"string"==typeof r?r:"Image"},mithril_default()("img.responsive-img",{src:t,alt:"string"==typeof r?r:"Image",style:{maxHeight:`${N.max||50}px`}}))}case"file":return mithril_default()("div",ce,(ue instanceof Array?ue:[ue]).map((t="")=>{const n=/data:image|.jpg$|.jpeg$|.png$|.gif$|.svg$|.bmp$|.tif$|.tiff$/i.test(t),r=`${new URL(N.url).origin}${t}`;return mithril_default()("a[target=_blank]",{href:r},n?mithril_default()("img",{src:r,alt:N.label||N.placeholder||t||"File image",style:{maxHeight:`${N.max||50}px`}}):mithril_default()(ye,{props:ce,label:N.placeholder||"File",initialValue:t}))}));case"md":case"markdown":{const t="string"==typeof ue&&ue?F(ue):"";return mithril_default()(ye,{props:ce,label:ce.label,initialValue:t})}default:{const t=ue;return mithril_default()(ye,{props:ce,type:H,label:ce.label,initialValue:t})}}}else{if(H&&x.hasOwnProperty(H))return mithril_default()(x[H],{iv:ue,field:N,props:ce,label:ce.label,onchange:pe,obj:D,context:L});switch(H){case"colour":case"color":{const t=ue;return mithril_default()(ColorInput,{...ce,value:t,oninput:pe,onblur:Q})}case"time":{const{twelveHour:t=!1}=ce,n=ue?"number"==typeof ue||"string"==typeof ue?new Date(ue):ue:new Date,r=W(n);return D[M]=K?K("to",n):n,mithril_default()(TimePicker,{...ce,twelveHour:t,value:r,oninput:e=>{const t=e.split(":").map(e=>+e);n.setHours(t[0],t[1]),pe(n)},container:j})}case"date":{const{format:t="mmmm d, yyyy"}=ce,n="number"==typeof ue||"string"==typeof ue?new Date(ue):ue;D[M]=n?K?K("to",n.valueOf()):n.valueOf():n;const{min:r,max:o}=ce,a=r?!n||r<n.valueOf()?new Date(r):n:void 0,i=o?!n||o>n.valueOf()?new Date(o):n:void 0;return mithril_default()(DatePicker,{...ce,minDate:a,maxDate:i,setDefaultDate:!!n,format:t,value:n,oninput:e=>{pe(new Date(e))},container:j})}case"datetime":{const{label:t,className:n="col s12",dateTimeSeconds:r=!1,twelveHour:o=!1,format:a="mmmm d, yyyy",...i}=ce,l="number"==typeof ue||"string"==typeof ue?new Date(ue):ue,s={initialDateTime:l},c=l||void 0,d=l?W(l):"",{min:p,max:u}=ce,g=p?!l||p<l.valueOf()?new Date(p):l:void 0,f=u?!l||u>l.valueOf()?new Date(u):l:void 0,m=ce.dateTimeOutput||"UTC",h=e=>{s.initialDateTime=e,pe("UTC"===m?e.toUTCString():"ISO"===m?e.toISOString():e.valueOf())};return mithril_default()("div",{className:n},mithril_default()(".row",[mithril_default()(r?".col.s6":".col.s8",{style:"padding: 0"},mithril_default()(DatePicker,{...i,label:t,minDate:g,maxDate:f,setDefaultDate:!!l,format:a,value:c,container:j,oninput:e=>{const t=new Date(s.initialDateTime);t.setFullYear(e.getFullYear()),t.setMonth(e.getMonth()),t.setDate(e.getDate()),h(t)}})),mithril_default()(".col.s4",{style:"min-width: 6rem; padding-right: 0; padding-left: 0"},mithril_default()(TimePicker,{...i,label:"",helperText:"",twelveHour:o,value:d,container:j,oninput:e=>{const t=e.split(":").map(e=>+e),n=s.initialDateTime||new Date((new Date).setSeconds(0,0));n.setHours(t[0],t[1]),h(n)}})),r&&mithril_default()(NumberInput,{style:"min-width: 4rem; padding-right: 0; padding-left: 0",className:"col s2",min:0,max:59,oninput:e=>{const t=s.initialDateTime||new Date((new Date).setSeconds(0,0));t.setSeconds(e,0),h(t)}})]))}case"email":{const t=ue;return mithril_default()(EmailInput,{...ce,validate:de,autofocus:S,oninput:pe,value:t,onkeydown:X,onkeyup:G,onblur:Q})}case"number":{const t=ue;return mithril_default()(NumberInput,{...ce,validate:de,autofocus:S,oninput:pe,value:t,onkeydown:X,onkeyup:G,onblur:Q})}case"radio":{const t=ue;return mithril_default()(RadioButtons,{label:"",...ce,options:oe,checkedId:t,onchange:pe})}case"checkbox":{const t=Boolean(ue);return mithril_default()(InputCheckbox,{...ce,checked:t,onchange:pe})}case"likert":{const t="string"==typeof ue?parseInt(ue):"number"==typeof ue?ue:void 0;return mithril_default()(".col.s12",mithril_default()(LikertScale,{min:0,max:5,...ce,value:t,label:q,onchange:pe}))}case"rating":{const t="string"==typeof ue?parseInt(ue):"number"==typeof ue?ue:void 0;return mithril_default()(".col.s12",{style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},[mithril_default()(".label",q),mithril_default()(Rating,{...ce,value:t,onchange:pe})])}case"options":{const t=ue;return[[mithril_default()(Options,{key:k.key,checkboxClass:"col s6 m4 l3",className:"input-field col s12",...ce,disabled:ce.disabled||!oe||0===oe.length,options:oe,checkedId:t,onchange:e=>pe(1===e.length?e[0]:e.filter(e=>null!==e))})],void 0!==J&&mithril_default()(".col.s12.option-buttons",[mithril_default()(FlatButton,{disabled:ce.disabled,label:fe,iconName:"check",onclick:()=>{k.key=Date.now(),pe(oe.map(e=>"string"==typeof e?e:e.id))}}),me&&mithril_default()(FlatButton,{disabled:ce.disabled,label:me,iconName:"check_box_outline_blank",onclick:()=>{const e=D[M]||[];e.length=0,k.key=Date.now(),pe(e)}})])]}case"select":{const t=ue;return mithril_default()(Select,{placeholder:ce.multiple?Z.pickOneOrMore||"Pick one or more":Z.pickOne||"Pick one",...ce,disabled:ce.disabled||!oe||0===oe.length,options:oe,checkedId:t,onchange:e=>pe(1!==e.length||ce.multiple?e.filter(e=>null!==e||void 0!==e):e[0])})}case"markdown":case"md":{const{label:t,className:n="col s12"}=ce,r=le((M?ue:_||t)||"",D,...L);return mithril_default()(he,{md:r,className:n})}case"section":return mithril_default()(".divider");case"switch":{const t=ue,n=oe&&oe.length>0?oe[0].label??"":"",r=oe&&oe.length>1?oe[1].label??"":"";return mithril_default()(Switch,{...ce,left:n,right:r,checked:t,onchange:pe})}case"tags":{const t=(ue?ue instanceof Array?ue:[ue]:[]).map(e=>({tag:e})),n=oe&&oe.length>0?{data:oe.reduce((e,t)=>(e[t.id]=null,e),{}),limit:N.maxLength||1/0,minLength:N.minLength||1}:void 0,{label:r,isMandatory:o,className:a,helperText:i}=ce;return mithril_default()(Chips,{className:a,label:r,isMandatory:o,helperText:i,placeholder:N.placeholder||"Add a tag",secondaryPlaceholder:N.secondaryPlaceholder||"+tag",data:t,onchange:e=>pe(e.map(e=>e.tag)),autocompleteOptions:n})}case"autocomplete":{const t=ue,n=oe&&oe.length>0?{data:oe.reduce((e,t)=>(e[t.id]=null,e),{}),limit:N.maxLength||1/0,minLength:N.minLength||1}:{data:{}},{label:r,isMandatory:o,className:a,helperText:i}=ce;return mithril_default()(Autocomplete,{value:t,className:a,label:r,isMandatory:o,helperText:i,oninput:pe,onblur:Q,placeholder:N.placeholder||"...",...n})}case"textarea":{const t=ue;return mithril_default()(TextArea,{...ce,validate:de,autofocus:S,oninput:pe,value:t,onkeyup:G,onkeydown:X,onblur:Q})}case"file":{const t=ue,{url:n,placeholder:r}=N;if(!n)throw Error('Input field "url" not defined, which indicates the URL to the upload folder.');const o=oe?oe.map(e=>"string"==typeof e?e:String(e.id)):void 0,a=t=>{if(!t||t.length<1)return void pe("");const r=new FormData;r.append("file",t[0]),mithril_default().request({method:"POST",url:n,body:r}).then(e=>pe(e)).catch(console.error)};return mithril_default()(FileInput,{...ce,accept:o,placeholder:r,onchange:a,value:t})}case"base64":{const t=ue,n=!(!t||!/data:image/i.test(t)),{placeholder:r}=N,o=oe?oe.map(e=>"string"==typeof e?e:String(e.id)).join(","):void 0,l=t=>{if(!t||t.length<1)return void pe("");const n=new FileReader;n.onloadend=()=>{"string"==typeof n.result&&pe(n.result),mithril_default().redraw()},n.readAsDataURL(t[0])},s=N.label||ge(D)||N.placeholder||"Uploaded image",c=ce.className||ce.class||"col s12";return n?mithril_default()("div",{className:c,style:{position:"relative"}},[mithril_default()("img.responsive-img",{src:t,alt:"string"==typeof s?s:"Uploaded image",style:{maxHeight:`${N.max||50}px`}}),mithril_default()(FlatButton,{iconName:"close","aria-label":"Remove image",onclick:()=>pe(""),className:"btn-floating btn-small red darken-2",style:{position:"absolute",top:"4px",right:"4px",width:"32px",height:"32px"}})]):mithril_default()(FileInput,{...ce,accept:o,placeholder:r,onchange:l,value:t})}case"url":{const t=ue;return mithril_default()(UrlInput,{placeholder:"http(s)://www.example.com",...ce,validate:de,autofocus:S,oninput:pe,value:t,onkeydown:X,onkeyup:G,onblur:Q})}case"text":{const t=ue;return mithril_default()(TextInput,{...ce,maxLength:N.max||void 0,validate:de,autofocus:S,oninput:pe,value:t,onkeydown:X,onkeyup:G,onblur:Q})}default:return}}}}},$e=()=>{const t={},n=(e,t)=>e instanceof Array?e:(e.hasOwnProperty(t)&&Array.isArray(e[t])||(e[t]=[]),e[t]),o=(e,r)=>{const o=n(e,r),a=o.length,i=t.onNewItem?t.onNewItem(e,r,a):{};e instanceof Array?e.push(i):e[r]=fe.insertAt(o,a,i)};let i;const l=me.handleDragStart,s=me.handleDragOver;return{oninit:({attrs:{i18n:e={},field:{id:n="",sortProperty:r,onNewItem:o}}})=>{t.editLabel=e.editRepeat||`Edit ${String(n)}`,t.createLabel=e.createRepeat||`Create new ${String(n)}`,t.onNewItem=o,i=(e=>{if(!e)return(e,t)=>0;const t="!"===e[0],n=t?e.substring(1):e;return t?(e,t)=>e[n]>t[n]?-1:e[n]<t[n]?1:0:(e,t)=>e[n]>t[n]?1:e[n]<t[n]?-1:0})(r)},view:({attrs:{field:c,obj:d,context:p,className:u=c.className||"col s12",containerId:g,disabled:f=("boolean"==typeof c.disabled?c.disabled:void 0),readonly:m,i18n:h={},onchange:y}})=>{const{filterValue:b}=t,{id:v,label:$,type:w,min:O,max:N,pageSize:D,propertyFilter:S,filterLabel:A,readonly:L=m,repeatItemClass:j=""}=c,T=n(d,v),C=b?de(b):void 0,M=S&&C&&C.length>2?T.filter(e=>de(`${e[S]}`).indexOf(C)>=0):T,H=(e=>{const t=window.location.hash||"",n=t.indexOf("?");if(-1===n)return null;const r=t.substring(n+1);return new URLSearchParams(r).get(e)})(String(v)),E=H?Math.min(M.length,+H):1,P=D&&M&&(E-1)*D<M.length?E:1,_=D?(e,t)=>(P-1)*D<=t&&t<P*D:()=>!0,V=D?Math.ceil(M.length/D):0,R=!!(N&&M.length>=N),U=!f&&!L&&(!O||M.length>O),q=location.hash?location.hash.split("?")[0].replace("#!",""):"",F=(e=>{let t="";if(e&&e.length>0){const n=e.indexOf("?");-1!==n?t=e.substring(n+1).split("#")[0]:e.startsWith("?")&&(t=e.slice(1).split("#")[0])}else{const e=window.location;let n=e.search??"";if(n.startsWith("?")&&(n=n.slice(1)),n)t=n;else if("string"==typeof e.href&&-1!==e.href.indexOf("?"))t=e.href.substring(e.href.indexOf("?")+1).split("#")[0];else{const n=e.hash??"",r=n.indexOf("?");-1!==r&&(t=n.substring(r+1))}}const n={};if(!t)return n;const r=t.split("&").filter(Boolean);for(const e of r){const t=e.indexOf("="),r=-1===t?e:e.substring(0,t),o=-1===t?void 0:e.substring(t+1),a=decodeURIComponent(r),i=void 0===o||decodeURIComponent(o);if(a.match(/\[(\d+)?\]$/)){const e=a.replace(/\[(\d+)?\]$/,"");let t=n[e];void 0===t?t=[]:"string"!=typeof t&&"boolean"!=typeof t||(t=[t]);const r=t;/\[\d+\]$/.test(a)?r[+/\[(\d+)\]/.exec(a)[1]]=i:r.push(i),n[e]=r}else void 0===n[a]?n[a]=i:"string"==typeof n[a]||"boolean"==typeof n[a]?n[a]=[n[a],i]:n[a].push(i)}return n})(location.hash),B=30+10*Math.floor(Math.log10(M.length)),z=0===V;return[[mithril_default()("div",{id:String(v),className:"mui-repeat-list "+u},[mithril_default()(".row.mui-repeat-list-controls",mithril_default()(".col.s12",[mithril_default()(FlatButton,{iconName:f||L||R?"":"add",iconClass:"right",label:$,onclick:()=>{o(d,String(v)),v&&mithril_default().route.set(q,Object.assign(F,{[v]:M.length})),y&&y(d)},style:{padding:0},className:"left",disabled:f||R,readonly:L}),V>1&&mithril_default()(".right",mithril_default()(Pagination,{curPage:P,items:pe(1,V).map(e=>({href:ue(q,F,{[v]:e})}))})),(M.length>1||b)&&S&&!f&&mithril_default()(TextInput,{style:"margin-top: -6px; margin-bottom: -1rem;",iconName:"filter_list",iconClass:"small",placeholder:A,onkeyup:(e,n)=>t.filterValue=n,className:"right",disabled:f,readonly:L})])),M&&M.length>0&&"string"!=typeof w&&M.sort(i).filter(_).map((n,r)=>mithril_default()(".mui-repeat-item",{key:`item-${E}-${D?(P-1)*D+r:r}`,draggable:z,ondragstart:z?e=>l(e,r):void 0,ondragover:z?s:void 0,ondrop:z?e=>((e,t,n,r,o)=>{const a=me.getDragIndex(e,0);n[r]=fe.moveItem(n[r],a,t),o&&o(n),e.preventDefault()})(e,r,d,v,y):void 0,style:{display:"flex",cursor:z?"move":void 0}},[U&&[(!D||D>1)&&mithril_default()("span.mui-show-item-number left",{style:`flex: 0 0 ${B}px;`},`[${(D?(P-1)*D+r:r)+1}]`)],[mithril_default()(".row.repeat-item",{className:j,key:`repeat-${E}-${D?(P-1)*D+r:r}`,style:"flex: 1;"},[w&&mithril_default()(Se,{form:w,obj:n,i18n:h,context:p instanceof Array?[d,...p]:[d,p],containerId:g,disabled:f,readonly:L,onchange:()=>y&&y(d)})])],U&&[mithril_default()(FlatButton,{iconName:"delete",className:"mui-delete-item",iconClass:"mui-delete-icon",style:{flex:"0 0 20px",padding:0},disabled:f,readonly:L,onclick:()=>{t.curItemIdx=D?(P-1)*D+r:r}})]])),!(f||R||L||!M||0===M.length||1===D)&&mithril_default()(RoundIconButton,{iconName:"add",className:"row mui-add-new-item btn-small right",title:$,style:"padding: 0; margin-top: -10px; margin-right: -25px",onclick:()=>{o(d,String(v)),mithril_default().route.set(q,Object.assign(F,{[v]:M.length})),y&&y(d)}})])],void 0!==t.curItemIdx&&mithril_default()(ModalPanel,{id:"deleteItem",isOpen:void 0!==t.curItemIdx,onClose:()=>{t.curItemIdx=void 0,mithril_default().redraw()},fixedFooter:!0,title:h.deleteItem||"Delete item",description:mithril_default()(Se,{form:w,obj:M[t.curItemIdx],context:p instanceof Array?[d,...p]:[d,p],containerId:g,readonly:!0,i18n:h}),buttons:[{label:h.disagree||"Disagree",onclick:()=>{t.curItemIdx=void 0}},{label:h.agree||"Agree",onclick:()=>{if(void 0!==t.curItemIdx){const e=fe.removeAt(M,t.curItemIdx);d instanceof Array?d=e:d[v]=e,t.curItemIdx=void 0,y&&y(d)}}}]})]}}},we=()=>{const t={};return{oninit:({attrs:{i18n:e={}}})=>{const{raw:n="RAW",view:r="VIEW"}=e;t.raw=n,t.view=r},view:({attrs:{field:{id:n="",type:r,onSelect:o},obj:a,context:i,containerId:s,disabled:c,readonly:d,i18n:p,onchange:u}})=>{if(a instanceof Array)return;const g=a[n],f=g?JSON.parse(g):void 0,m=f&&f.features||[],h=[],y={title:t.raw,vnode:mithril_default()(TextArea,{class:"col s12",defaultValue:f?JSON.stringify(f,null,2):void 0,placeholder:"Enter GeoJSON",onchange:e=>a[n]=e})};if(!r||"string"==typeof r)return;const b=r,v=b.length>0?b[0].id:void 0,$={title:t.view,vnode:m.length?mithril_default()(Collapsible,{oncreate:({dom:e})=>t.dom=e,onOpenStart:o?e=>{const n=t.dom.children||[];for(let t=0;t<n.length;t++)if(n[t]===e)return void o(t,m[t])}:void 0,className:"geojson-feature-list",items:m.map((t,r)=>{t.properties||(t.properties={});const o=t.geometry?t.geometry.type:"Feature";return{id:"erik_"+r,key:r,header:v&&t.properties[v]||o,body:mithril_default()(".row",mithril_default()(Se,{class:"col s12",form:b,obj:t.properties,i18n:p,context:i instanceof Array?[a,...i]:[a,i],containerId:s,disabled:c,readonly:d,onchange:(e,t)=>{t&&(m[r].properties=t),a[n]=JSON.stringify(f,null,2),u&&u(a)}}))}})}):mithril_default()("span","...")};return h.push($),h.push(y),mithril_default()(Tabs,{tabs:h,tabWidth:"fill"})}}},xe={},Ie={},ke=(e,t,n)=>{xe[e]=t,n&&(Ie[e]=n)},Oe=(e,t)=>!e||t.every(t=>{const{id:n,required:r,type:o,repeat:a}=t;if(!n)return!0;const i=e[n];if(r&&(void 0===i||i instanceof Array&&0===i.length||"string"==typeof i&&0===i.length))return!1;if(!(o instanceof Array))return!0;const l=o;if(a){if("geojson"===a){if("string"!=typeof i||!i)return!0;try{return(JSON.parse(i).features||[]).every(e=>Oe(e.properties||{},l))}catch{return!0}}return!(i instanceof Array)||i.every(e=>Oe(e,l))}return void 0===i||Oe(i,l)}),Ne=e=>{const{autogenerate:t,value:n,options:r}=e;return t?"none":n?"string"==typeof n?"md":"number"==typeof n?"number":"boolean"==typeof n?"checkbox":"none":r&&r.length>0?"select":"none"},De=ve(xe,Ie),Se=()=>{const t=new Map;return{view:({attrs:{i18n:n,form:r,obj:o,onchange:a,disabled:i,readonly:l,context:s,section:c}})=>{const d=e=>a&&a(Oe(e,r),e),p=(e=>{if(t.has(e))return t.get(e);const n=e?(()=>{let t=!1;return({type:n,id:r})=>"section"===n?(t=r===e,!1):t})():e=>!0;return t.set(e,n),n})(c),u=s||[],g=[];for(const t of r){if(!p(t))continue;if(t.show&&!te(t.show,o,...u.filter(e=>"object"==typeof e&&null!==e&&!("id"in e&&"label"in e))))continue;t.type||(t.type=Ne(t));const r={i18n:n,field:t,obj:o,onchange:d,disabled:i,readonly:l,context:u,section:c,containerId:"body"};void 0===t.repeat||!1===t.repeat?g.push(mithril_default()(De,r)):"geojson"===t.repeat?g.push(mithril_default()(we,r)):g.push(mithril_default()($e,r))}return g}}},Ae=()=>{const t=()=>({}),r=me.handleDragOver;return{view:({attrs:{form:o,items:i,onchange:l,createItem:s=t,disabled:c=!1,readonly:d=!1,i18n:p={},containerId:u="body",label:g="Items",max:f,min:m=0,showNumbers:h=!0,allowReorder:y=!0,className:b="array-layout-form"}})=>{const v=!c&&!d&&(!f||i.length<f),$=!c&&!d&&i.length>m,w=y&&!c&&!d&&i.length>1,x=()=>{if(!v)return;const e=s(),t=fe.insertAt(i,i.length,e);l?.(t.every(e=>Oe(e,o)),t)},k=e=>(t,n)=>{if(!n)return;const r=[...i];r[e]=n,l?.(r.every(e=>Oe(e,o)),r)};return e("div",{className:`${b} col s12`},[e(".array-form-header.row",[e(".col.s6",e("h6",g)),v&&e(".col.s6.right-align",e(a,{iconName:"add",iconClass:"left",label:p.add||"Add Item",onclick:x,className:"add-item-btn"}))]),0===i.length?e(".empty-state.center-align",[e("p.grey-text",p.noItems||"No items yet"),v&&e(I,{iconName:"add",onclick:x,className:"btn-large",title:p.addFirst||"Add first item"})]):i.map((t,s)=>e(".array-item.card",{key:`item-${s}-${n()}`,draggable:w,ondragstart:w?e=>((e,t)=>{me.handleDragStart(e,t)})(e,s):void 0,ondragover:w?r:void 0,ondrop:w?e=>((e,t,n,r,o)=>{e.preventDefault();const a=me.getDragIndex(e);if(-1===a||a===t)return;const i=fe.moveItem(n,a,t);o?.(i.every(e=>Oe(e,r)),i)})(e,s,i,o,l):void 0,style:{cursor:w?"move":"default",marginBottom:"1rem"}},[e(".card-content",[e(".row.item-header",[h&&e(".col.s2",[e("span.item-number.badge",`${s+1}`)]),e(".col",{class:h?"s8":"s10"}),$&&e(".col.s2.right-align",e(a,{iconName:"delete",iconClass:"red-text",onclick:()=>(e=>{if(!$)return;const t=fe.removeAt(i,e);l?.(t.every(e=>Oe(e,o)),t)})(s),className:"remove-item-btn",title:p.remove||"Remove item"}))]),e(".row.item-content",[e(Se(),{form:o,obj:t,onchange:k(s),disabled:c,readonly:d,i18n:p,containerId:u})])])])),i.length>0&&v&&e(".array-form-footer.center-align",{style:"margin-top: 1rem"},e(I,{iconName:"add",onclick:x,title:p.addAnother||"Add another item"}))])}}};
+var I=[],E=[],D=[],L=[],C=[],_={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"},$=new RegExp(`[${Object.keys(_).join("")}]`,"g"),R=e=>e.replace($,e=>_[e]),M=(e,t)=>{const n=t.trim();return/^<\/?(ul|ol|li|h|p|bl|table|tbody|tr|td|th|caption)/i.test(n)||""===n?`\n${t}\n`:`\n<p>\n${n}\n</p>\n`},P=(e,t,n,o)=>`\n{{LISTITEM:ol:${Math.floor(e.length/2)}:${t}:${n}:${o.trim()}}}\n`,j=e=>{const t=e.match(/^( *)([A-Za-z][.)]|\([A-Za-z]\)) (.*)$/);if(!t)return;const n=t[2].match(/[A-Za-z]/)?.[0]??"a",o=n===n.toUpperCase()?"A":"a";return{indent:t[1],orderedStyle:o,start:n.toLowerCase().charCodeAt(0)-96,item:t[3]}},z=e=>{if(0===e.length)return"";let t="";const n=[];for(let o=0;o<e.length;o++){const r=e[o],i=o<e.length-1?e[o+1]:null;for(;n.length>0&&n[n.length-1].level>r.level;){const e=n.pop();e.hasOpenLi&&(t+="</li>"),t+=`</${e.type}>`}if(n.length>0&&n[n.length-1].level===r.level&&(n[n.length-1].type!==r.type||n[n.length-1].orderedStyle!==r.orderedStyle)){const e=n.pop();e.hasOpenLi&&(t+="</li>"),t+=`</${e.type}>`}if(0===n.length||n[n.length-1].level<r.level){const e="ol"===r.type&&r.orderedStyle?` type="${r.orderedStyle}"`:"",o="ol"===r.type&&r.start&&1!==r.start?` start="${r.start}"`:"";t+=`<${r.type}${e}${o}>`,n.push({type:r.type,level:r.level,orderedStyle:r.orderedStyle,hasOpenLi:!1})}n.length>0&&n[n.length-1].hasOpenLi&&n[n.length-1].level===r.level&&(t+="</li>",n[n.length-1].hasOpenLi=!1),t+=`<li>${r.content}`,n[n.length-1].hasOpenLi=!0,(!i||i.level<=r.level)&&(t+="</li>",n[n.length-1].hasOpenLi=!1)}for(;n.length>0;){const e=n.pop();e.hasOpenLi&&(t+="</li>"),t+=`</${e.type}>`}return t},F=(e,t,n,o="")=>{const r=n.split("|").filter((e,t,n)=>t>0&&t<n.length-1).map(e=>/:-+:/g.test(e)?"center":/-+:/g.test(e)?"right":/:-+/.test(e)?"left":""),i=e=>{const t=r[e];return t?` align="${t}"`:""},a=t.split("|").slice(1,-1),l=a.map(e=>e.trim()),s=[];let c=0;for(let e=0;e<l.length;e++){if(c>0){c--;continue}const t=l[e];a[e];if(t&&t.length){let n=1,o=!1;for(let t=e+1;t<l.length&&0===l[t].length;t++)if(""===a[t]){o=!0;break}if(o)for(let t=e+1;t<l.length&&0===l[t].length;t++)n++;n>1?(c=n-1,s.push(`<th${i(e)} colspan="${n}">${t}</th>`)):s.push(`<th${i(e)}>${t}</th>`)}else s.push(`<th${i(e)}></th>`)}return`\n<table><tbody>${`<tr>\n  ${s.join("\n  ")}\n</tr>\n`}${o.split("\n").map(e=>e.trim()).filter(e=>e&&e.length).map(e=>{const t=e.split("|").slice(1,-1),n=t.map(e=>e.trim()),o=[];let r=0;for(let e=0;e<n.length;e++){if(r>0){r--;continue}const a=n[e];t[e];if(a&&a.length){let l=1,s=!1;for(let o=e+1;o<n.length&&0===n[o].length;o++)if(""===t[o]){s=!0;break}if(s)for(let t=e+1;t<n.length&&0===n[t].length;t++)l++;l>1?(r=l-1,o.push(`<td${i(e)} colspan="${l}">${a}</td>`)):o.push(`<td${i(e)}>${a}</td>`)}else o.push(`<td${i(e)}></td>`)}return`<tr>\n  ${o.join("\n  ")}\n</tr>\n`}).join("")}</tbody></table>\n`},U=(e,t,n,o)=>{for(const o of e){const e=o[t],r=e?.(n);if("string"==typeof r)return r}return o()},H=[[/\r\n/g,"\n"],[/\n(#+)(.*)/g,(e,t,n="")=>{const o=t.length;return`<h${o}>${n.trim()}</h${o}>`}],[/<(https?:\/\/[^\s>]+)>/g,'<a href="$1">$1</a>'],[/!\[([^\[]*)\]\((?:javascript:)?([^\)]+)\)/g,'<img src="$2" alt="$1">'],[/\[([^\[]+)\]\((?:javascript:)?([^\)]+)\)/g,'<a href="$2">$1</a>'],[/([^\s]) {2,}\n/g,"$1<br>\n"],[/([^\\])(\*\*|__)(.*?(_|\*)?)\2/g,"$1<strong>$3</strong>"],[/([^\\])(\*|_)(.*?)\2/g,"$1<em>$3</em>"],[/\\_/g,"&#95;"],[/\~\~(.*?)\~\~/g,"<del>$1</del>"],[/\:\"(.*?)\"\:/g,"<q>$1</q>"],[/\n-{3,}/g,"\n<hr />"],[/\n( *)[-*+] \[([xX ])\](.*)/g,(e,t,n,o)=>`\n{{LISTITEM:ul:${Math.floor(t.length/2)}:::${`<input type="checkbox"${"x"===n.toLowerCase()?" checked":""} disabled>`} ${o.trim()}}}\n`],[/\n( *)(\*|-|\+)(.*)/g,(e,t,n,o)=>`\n{{LISTITEM:ul:${Math.floor(t.length/2)}:::${o.trim()}}}\n`],[/\n( *)([0-9]+[.)]) (.*)/g,(e,t,n,o)=>`\n{{LISTITEM:ol:${Math.floor(t.length/2)}::${Number.parseInt(n,10)}:${o.trim()}}}\n`],[/\n(&gt;|\>)(.*)/g,(e,t,n="")=>`\n<blockquote>${n.trim()}</blockquote>`],[/(\^)(.*?)\1/g,"<sup>$2</sup>"],[/(\~)(.*?)\1/g,"<sub>$2</sub>"],[/\n\[(.+?)\]\n( *\|[^\n]+\|\r?\n)((?: *\|:?[ -]+:?)+ *\|)(\n(?: *\|[^\n]+\|\r?\n?)*)?/g,(e,t,n,o,r="")=>F(0,n,o,r).replace("<table>",`<table><caption>${t.trim()}</caption>`)],[/( *\|[^\n]+\|\r?\n)((?: *\|:?[ -]+:?)+ *\|)(\n(?: *\|[^\n]+\|\r?\n?)*)?/g,F],[/\[\^([^\]]+)\](?!:)/g,(e,t)=>`<sup id="fnref:${t}"><a href="#fn:${t}">[${t}]</a></sup>`],[/\[\^([^\]]+)\]:\s*((?:[^\n]*\n?)*)/g,(e,t,n)=>(C.push([t,n.trim()]),"")],[/\n([A-Z][A-Za-z\s]*?)\s:\s*([A-Z][^\n]*)/g,(e,t,n)=>`\n<dl><dt>${t.trim()}</dt><dd>${n.trim()}</dd></dl>\n`]],B=[[/\s?<\/[ou]l>\s?<[ou]l>/g,"",3],[/<\/blockquote>\n<blockquote>/g,"<br>\n"],[/https?:\/\/[^"']*/g,e=>e.replace(/<\/?em>/g,"_")],[/&#95;/g,"_"]];function G(e,t=!1,n=!1){let o,r,i,a,l;return"object"==typeof t?(o=t.removeParagraphs??!1,r=t.externalLinks??!1,i=t.alphaLists??!1,a=t.headingIds??!1,l=t.extensions??[]):(o=t,r=n,i=!1,a=!1,l=[]),I.length=0,E.length=0,D.length=0,L.length=0,C.length=0,e=(e=>e.replace(/\$([^$\n]+)\$/g,(e,t)=>(L.push(t),`{{INLINEMATHPH${L.length-1}}}`)))(e=(e=>e.replace(/`([^`]+)`/g,(e,t)=>(E.push(t),`{{INLINECODEPH${E.length-1}}}`)))(e=(e=>e.replace(/\n\s*\$\$([^]*?)\$\$\s*\n/g,(e,t)=>(D.push(t.trim()),`\n{{MATHBLOCKPH${D.length-1}}}\n`)))(e=(e=>e.replace(/\n\s*```(\w*)\n([^]*?)\n\s*```\s*\n/g,(e,t,n)=>(I.push({lang:t,code:n}),`\n<pre>{{CODEBLOCKPH${I.length-1}}}</pre>\n`)))(`\n${e}\n`)))),i&&(e=(e=>{const t=e.split("\n");for(let e=0;e<t.length;e++){const n=j(t[e]);if(!n)continue;const o=[e];let r=n.start+1;const i=n.indent.length;for(let a=e+1;a<t.length;a++){const e=j(t[a]);if(e&&e.indent===n.indent&&e.orderedStyle===n.orderedStyle&&e.start===r)o.push(a),r++;else{if(!t[a].trim())break;if((e||!(t[a].match(/^ */)[0].length>i))&&!(e&&e.indent.length>i))break}}if(!(o.length<2)){for(const e of o){const n=j(t[e]);t[e]=P(n.indent,n.orderedStyle,n.start,n.item)}e=o[o.length-1]}}return t.join("\n")})(e)),H.forEach(([t,n,o=1])=>{for(let r=0;r<o;r++)e=e.replace(t,n)}),e=(e=>{if(!e.includes("{{LISTITEM:"))return e;const t=e.split("\n"),n=[];let o=[],r=!1;for(const e of t){const t=e.match(/\{\{LISTITEM:([^:]+):([^:]+):([^:]*):([^:]*):(.+)\}\}/);if(t){const i=t[1],a=parseInt(t[2]),l=t[3],s=t[4]?parseInt(t[4]):void 0;if(r&&o.length>0){const e=o[o.length-1];e.type!==i&&e.level===a&&(n.push([...o]),o=[])}o.push({type:i,level:a,orderedStyle:l||void 0,start:s,content:t[5],originalLine:e}),r=!1}else""!==e.trim()?(o.length>0&&(n.push([...o]),o=[]),r=!1):""===e.trim()&&(r=!0)}if(o.length>0&&n.push(o),0===n.length)return e;for(const t of n){const n=z(t),o=t[0];e=e.replace(o.originalLine,n);for(let n=1;n<t.length;n++)e=e.replace(t[n].originalLine,"")}return e})(e),e=e.replace(/\n([^\n]+)\n/g,M),B.forEach(([t,n,o=1])=>{for(let r=0;r<o;r++)e=e.replace(t,n)}),e=((e,t)=>e.replace(/<pre>{{CODEBLOCKPH(\d+)}}<\/pre>/g,(e,n)=>{const{lang:o,code:r}=I[parseInt(n)];return U(t,"renderCodeBlock",{lang:o,code:r,escapeHtml:R},()=>`<pre><code${o?` class="language-${o}"`:""}>${R(r)}</code></pre>`)}))(e,l),e=((e,t)=>e.replace(/{{MATHBLOCKPH(\d+)}}/g,(e,n)=>{const o=D[parseInt(n)];return U(t,"renderMathBlock",{math:o,escapeHtml:R},()=>`<div class="math-block">${R(o)}</div>`)}))(e,l),e=((e,t)=>e.replace(/{{INLINEMATHPH(\d+)}}/g,(e,n)=>{const o=L[parseInt(n)];return U(t,"renderInlineMath",{math:o,escapeHtml:R},()=>`<span class="math-inline">${R(o)}</span>`)}))(e=(e=>e.replace(/{{INLINECODEPH(\d+)}}/g,(e,t)=>{const n=E[parseInt(t)];return`<code>${R(n)}</code>`}))(e),l),e=e.trim()+(()=>{if(0===C.length)return"";const e=C.map(([e,t])=>`\n    <li id="fn:${e}">\n      ${t}\n      <sup><a href="#fnref:${e}">↩</a></sup>\n    </li>`).join("\n");return`\n<div class="footnotes">\n  <hr>\n  <ol>\n    ${e}\n  </ol>\n</div>`})(),a&&(e=(e=>{const t=new Map;return e.replace(/<(h[1-6])>([\s\S]*?)<\/\1>/g,(e,n,o)=>{const r=(e=>e.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")||"section")(o.replace(/<[^>]+>/g,"")),i=t.get(r)??0;return t.set(r,i+1),`<${n} id="${0===i?r:`${r}-${i+1}`}">${o}</${n}>`})})(e)),o&&(e=e.replace(/^<p>(.*)<\/p>$/s,"$1")),r&&(e=e.replace(/<a href="/g,'<a target="_blank" href="')),e}var W=(e,t)=>{H.push([e,t])};const Y=e=>e.charAt(0).toUpperCase()+e.slice(1),V=e=>"string"==typeof e,q=(e,t=2,n="0")=>e.toString().length>=t?e.toString():q(n+e,t,n),J=e=>e?`${q(e.getHours())}:${q(e.getMinutes())}`:"00:00",X=(e,t)=>{const n=/([A-Z]\w+)/.exec(t);if(!n)return;const o=n[0][0].toLowerCase()+n[0].substr(1)||t;return e.find(e=>"object"==typeof e&&null!==e&&o in e&&e[o]===t)},Z=(e,t)=>{if(!e||!t)return;return t.replace(/\[(\w+)\]/g,".$1").replace(/^\./,"").split(".").reduce((t,n)=>{if(null!=t){if(Array.isArray(t)){if(n in e){const o=e[n],r=t.find(e=>"object"==typeof e&&null!==e&&e.id===o);if(void 0!==r)return r}return/([A-Z]\w+)/.test(n)?X(t,n):t[parseInt(n,10)]}return"object"==typeof t&&null!==t&&n in t?t[n]:void 0}},e)},K=e=>e.reduce((e,t)=>t instanceof Array?[...e,...t]:[...e,t],[]),Q=/([^ =><!]*)\s*([=><!]*)\s*(\S*)/i,ee=/^\s*!\s*/,te=(e,t)=>e.split(/&|;/).map(e=>e.trim()).reduce((e,n)=>{const o=ee.test(n),r=o?n.replace(ee,""):n;return e=e&&t.filter(Boolean).reduce((e,t)=>e||((e,t)=>{if(!t||0===Object.keys(t).length)return!1;const n=Q.exec(e);if(n){const[e,o,r,i]=n,a=Z(t,o.trim());if(void 0===a||"string"==typeof a&&0===a.length)return!1;if(!r||!i)return!0;{const t=isNaN(+i)?"true"===i||"false"!==i&&i:+i;switch(r){case"=":case"==":case"===":return a instanceof Array?a.indexOf(t)>=0:a===t;case"!=":case"!==":return a instanceof Array?a.indexOf(t)>=0:a!==t;case"<=":return a<=t;case">=":return a>=t;case"<":return a<t;case">":return a>t;default:return console.error(`Unrecognized operand (${r}) in expression: ${e}`),!1}}}return!0})(r.trim(),t),!1),o?!e:e},!0),ne=/===?|[^<>=]/i,oe=(e,...t)=>{const n=e instanceof Array?e:[e];return 0===e.length||n.some(e=>te(e,ne.test(e)?[t[0]]:K(t)))},re=(e,t)=>Z(t.filter(Boolean).reduceRight((e,t)=>({...t,...e})),e.trim()),ie=(e,t)=>void 0!==re(e,t),ae=/{{\s*([^\s"'`:]*):?([^\s]*)\s*}}/g,le=(e,...t)=>{if(!ae.test(e))return!0;let n;ae.lastIndex=0;let o=!0;do{n=ae.exec(e),n&&(n.index===ae.lastIndex&&ae.lastIndex++,n.forEach((e,n,[,r])=>{o=o&&ie(r,t)}))}while(o&&null!==n);return o},se=(e,t)=>{if(void 0===e)return"";if(e instanceof Array)return e.map(e=>se(e,t)).join(", ");if(!t)return e.toString();if("boolean"==typeof e){const n=t.indexOf(":");return e?t.substring(0,n):t.substring(n+1)}switch(t){default:return e.toString();case"date":return new Date(e).toLocaleDateString();case"time":return new Date(e).toLocaleTimeString();case"iso":return new Date(e).toISOString();case"utc":return new Date(e).toUTCString()}},ce=(e,...t)=>e.replace(ae,(e,n,o)=>{const r=re(n.trim(),t);return!r||r instanceof Array?e:se(r,o)}),ue=e=>{if(null===e)return e;if(e instanceof Date)return new Date(e.getTime());if(e instanceof Array){const t=[];return e.forEach(e=>{t.push(e)}),t.map(e=>ue(e))}if("object"==typeof e){const t={...e};return Object.keys(t).forEach(e=>{t[e]=ue(t[e])}),t}return e};const pe=e=>{const t=function e(t,n=""){return t.filter(e=>"string"!=typeof e.type||"section"!==e.type&&"md"!==e.type).reduce((t,o)=>{const r=(n?`${n}.`:"")+String(o.id);if("string"!=typeof o.type)Object.assign(t,e(o.type,r));else{const e=o.type??(o.options&&o.options.length>0?"select":"text");t[r]={...o,type:e}}return t},{})}(e),n=(e,n)=>{if(!t.hasOwnProperty(e)||void 0===n)return n;const o=t[e],r=n instanceof Array?n.filter(e=>null!=e):[n];switch(o.type||(o.options?"options":"none")){default:return n;case"radio":case"select":case"options":const e="string"==typeof o.options?re(o.options,[t]):o.options;return r.map(t=>e.filter(e=>"string"==typeof e?e===t:e.id===t).map(e=>"string"==typeof e?Y(e):e.label||Y(e.id)).shift()).filter(e=>void 0!==e)}},o=(e,t="")=>{if(e&&("object"!=typeof e||0!==Object.keys(e).length)){if(e instanceof Array)return e.map(e=>o(e,t));{const r={};return Object.keys(e).forEach(i=>{const a=t?`${t}.${i}`:i,l=e[i];if("boolean"==typeof l)r[i]=l;else if("number"==typeof l||"string"==typeof l){const e=n(a,l);e&&(r[i]=e instanceof Array&&1===e.length?e[0]:e)}else if(l instanceof Array)if("string"==typeof l[0]||null===l[0]){const e=n(a,l);e&&(r[i]=e)}else r[i]=o(l,i);else"object"==typeof l&&(r[i]=l)}),r}}};return o},de=(e="")=>e.replace(/\s|,|\./g,"").toLowerCase(),fe=(e,t,n=1)=>{const o=[];for(let r=e;r<=t;r+=n)o.push(r);return o},me=(e,t,n)=>{const o=Object.assign({},t,n);return`${e}?${Object.keys(o).map(e=>`${e}=${o[e]}`).join("&")}`},ge=e=>{if(null!==e&&"object"==typeof e){const t=["title","label","alt","name"];for(const n of t)if(n in e&&"string"==typeof e[n])return e[n]}},he={moveItem:(e,t,n)=>{if(t===n||t<0||n<0||t>=e.length||n>=e.length)return e;const o=[...e],[r]=o.splice(t,1);return o.splice(n,0,r),o},insertAt:(e,t,n)=>{const o=[...e];return o.splice(t,0,n),o},removeAt:(e,t)=>{if(t<0||t>=e.length)return e;const n=[...e];return n.splice(t,1),n},swap:(e,t,n)=>{if(t===n||t<0||n<0||t>=e.length||n>=e.length)return e;const o=[...e];return[o[t],o[n]]=[o[n],o[t]],o},duplicate:(e,t)=>{if(t<0||t>=e.length)return e;const n=e[t],o="object"==typeof n?ue(n):n;return he.insertAt(e,t+1,o)},isValidArray:(e,t=0,n)=>e.length>=t&&(void 0===n||e.length<=n)},ye={handleDragStart:(e,t)=>{e.dataTransfer?.setData("text/plain",t.toString())},handleDragOver:e=>{e.preventDefault()},getDragIndex:(e,t=-1)=>{const n=e.dataTransfer?.getData("text/plain");return n?parseInt(n,10):t}},be=({iv:n,props:o,oninput:r,onblur:i})=>mithril_default()(ColorInput,{...o,value:n,oninput:r,onblur:i});
+/*! @license DOMPurify 3.4.13 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.4.13/LICENSE */
+function ve(e,t){(null==t||t>e.length)&&(t=e.length);for(var n=0,o=Array(t);n<t;n++)o[n]=e[n];return o}function we(e,t){return function(e){if(Array.isArray(e))return e}(e)||function(e,t){var n=null==e?null:"undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(null!=n){var o,r,i,a,l=[],s=!0,c=!1;try{if(i=(n=n.call(e)).next,0===t);else for(;!(s=(o=i.call(n)).done)&&(l.push(o.value),l.length!==t);s=!0);}catch(e){c=!0,r=e}finally{try{if(!s&&null!=n.return&&(a=n.return(),Object(a)!==a))return}finally{if(c)throw r}}return l}}(e,t)||function(e,t){if(e){if("string"==typeof e)return ve(e,t);var n={}.toString.call(e).slice(8,-1);return"Object"===n&&e.constructor&&(n=e.constructor.name),"Map"===n||"Set"===n?Array.from(e):"Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)?ve(e,t):void 0}}(e,t)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}const Se=Object.entries,Te=Object.setPrototypeOf,Ne=Object.isFrozen,Ae=Object.getPrototypeOf,xe=Object.getOwnPropertyDescriptor;let Oe=Object.freeze,ke=Object.seal,Ie=Object.create,Ee="undefined"!=typeof Reflect&&Reflect,De=Ee.apply,Le=Ee.construct;Oe||(Oe=function(e){return e}),ke||(ke=function(e){return e}),De||(De=function(e,t){for(var n=arguments.length,o=new Array(n>2?n-2:0),r=2;r<n;r++)o[r-2]=arguments[r];return e.apply(t,o)}),Le||(Le=function(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),o=1;o<t;o++)n[o-1]=arguments[o];return new e(...n)});const Ce=Qe(Array.prototype.forEach),_e=Qe(Array.prototype.lastIndexOf),$e=Qe(Array.prototype.pop),Re=Qe(Array.prototype.push),Me=Qe(Array.prototype.splice),Pe=Array.isArray,je=Qe(String.prototype.toLowerCase),ze=Qe(String.prototype.toString),Fe=Qe(String.prototype.match),Ue=Qe(String.prototype.replace),He=Qe(String.prototype.indexOf),Be=Qe(String.prototype.trim),Ge=Qe(Number.prototype.toString),We=Qe(Boolean.prototype.toString),Ye="undefined"==typeof BigInt?null:Qe(BigInt.prototype.toString),Ve="undefined"==typeof Symbol?null:Qe(Symbol.prototype.toString),qe=Qe(Object.prototype.hasOwnProperty),Je=Qe(Object.prototype.toString),Xe=Qe(RegExp.prototype.test),Ze=(Ke=TypeError,function(){for(var e=arguments.length,t=new Array(e),n=0;n<e;n++)t[n]=arguments[n];return Le(Ke,t)});var Ke;function Qe(e){return function(t){t instanceof RegExp&&(t.lastIndex=0);for(var n=arguments.length,o=new Array(n>1?n-1:0),r=1;r<n;r++)o[r-1]=arguments[r];return De(e,t,o)}}function et(e,t){let n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:je;if(Te&&Te(e,null),!Pe(t))return e;let o=t.length;for(;o--;){let r=t[o];if("string"==typeof r){const e=n(r);e!==r&&(Ne(t)||(t[o]=e),r=e)}e[r]=!0}return e}function tt(e){for(let t=0;t<e.length;t++){qe(e,t)||(e[t]=null)}return e}function nt(e){const t=Ie(null);for(const o of Se(e)){var n=we(o,2);const r=n[0],i=n[1];qe(e,r)&&(Pe(i)?t[r]=tt(i):i&&"object"==typeof i&&i.constructor===Object?t[r]=nt(i):t[r]=i)}return t}function ot(e,t){for(;null!==e;){const n=xe(e,t);if(n){if(n.get)return Qe(n.get);if("function"==typeof n.value)return Qe(n.value)}e=Ae(e)}return function(){return null}}const rt=Oe(["a","abbr","acronym","address","area","article","aside","audio","b","bdi","bdo","big","blink","blockquote","body","br","button","canvas","caption","center","cite","code","col","colgroup","content","data","datalist","dd","decorator","del","details","dfn","dialog","dir","div","dl","dt","element","em","fieldset","figcaption","figure","font","footer","form","h1","h2","h3","h4","h5","h6","head","header","hgroup","hr","html","i","img","input","ins","kbd","label","legend","li","main","map","mark","marquee","menu","menuitem","meter","nav","nobr","ol","optgroup","option","output","p","picture","pre","progress","q","rp","rt","ruby","s","samp","search","section","select","shadow","slot","small","source","spacer","span","strike","strong","style","sub","summary","sup","table","tbody","td","template","textarea","tfoot","th","thead","time","tr","track","tt","u","ul","var","video","wbr"]),it=Oe(["svg","a","altglyph","altglyphdef","altglyphitem","animatecolor","animatemotion","animatetransform","circle","clippath","defs","desc","ellipse","enterkeyhint","exportparts","filter","font","g","glyph","glyphref","hkern","image","inputmode","line","lineargradient","marker","mask","metadata","mpath","part","path","pattern","polygon","polyline","radialgradient","rect","stop","style","switch","symbol","text","textpath","title","tref","tspan","view","vkern"]),at=Oe(["feBlend","feColorMatrix","feComponentTransfer","feComposite","feConvolveMatrix","feDiffuseLighting","feDisplacementMap","feDistantLight","feDropShadow","feFlood","feFuncA","feFuncB","feFuncG","feFuncR","feGaussianBlur","feImage","feMerge","feMergeNode","feMorphology","feOffset","fePointLight","feSpecularLighting","feSpotLight","feTile","feTurbulence"]),lt=Oe(["animate","color-profile","cursor","discard","font-face","font-face-format","font-face-name","font-face-src","font-face-uri","foreignobject","hatch","hatchpath","mesh","meshgradient","meshpatch","meshrow","missing-glyph","script","set","solidcolor","unknown","use"]),st=Oe(["math","menclose","merror","mfenced","mfrac","mglyph","mi","mlabeledtr","mmultiscripts","mn","mo","mover","mpadded","mphantom","mroot","mrow","ms","mspace","msqrt","mstyle","msub","msup","msubsup","mtable","mtd","mtext","mtr","munder","munderover","mprescripts"]),ct=Oe(["maction","maligngroup","malignmark","mlongdiv","mscarries","mscarry","msgroup","mstack","msline","msrow","semantics","annotation","annotation-xml","mprescripts","none"]),ut=Oe(["#text"]),pt=Oe(["accept","action","align","alt","autocapitalize","autocomplete","autopictureinpicture","autoplay","background","bgcolor","border","capture","cellpadding","cellspacing","checked","cite","class","clear","color","cols","colspan","command","commandfor","controls","controlslist","coords","crossorigin","datetime","decoding","default","dir","disabled","disablepictureinpicture","disableremoteplayback","download","draggable","enctype","enterkeyhint","exportparts","face","for","headers","height","hidden","high","href","hreflang","id","inert","inputmode","integrity","ismap","kind","label","lang","list","loading","loop","low","max","maxlength","media","method","min","minlength","multiple","muted","name","nonce","noshade","novalidate","nowrap","open","optimum","part","pattern","placeholder","playsinline","popover","popovertarget","popovertargetaction","poster","preload","pubdate","radiogroup","readonly","rel","required","rev","reversed","role","rows","rowspan","spellcheck","scope","selected","shape","size","sizes","slot","span","srclang","start","src","srcset","step","style","summary","tabindex","title","translate","type","usemap","valign","value","width","wrap","xmlns"]),dt=Oe(["accent-height","accumulate","additive","alignment-baseline","amplitude","ascent","attributename","attributetype","azimuth","basefrequency","baseline-shift","begin","bias","by","class","clip","clippathunits","clip-path","clip-rule","color","color-interpolation","color-interpolation-filters","color-profile","color-rendering","cx","cy","d","dx","dy","diffuseconstant","direction","display","divisor","dominant-baseline","dur","edgemode","elevation","end","exponent","fill","fill-opacity","fill-rule","filter","filterunits","flood-color","flood-opacity","font-family","font-size","font-size-adjust","font-stretch","font-style","font-variant","font-weight","fx","fy","g1","g2","glyph-name","glyphref","gradientunits","gradienttransform","height","href","id","image-rendering","in","in2","intercept","k","k1","k2","k3","k4","kerning","keypoints","keysplines","keytimes","lang","lengthadjust","letter-spacing","kernelmatrix","kernelunitlength","lighting-color","local","marker-end","marker-mid","marker-start","markerheight","markerunits","markerwidth","maskcontentunits","maskunits","max","mask","mask-type","media","method","mode","min","name","numoctaves","offset","operator","opacity","order","orient","orientation","origin","overflow","paint-order","path","pathlength","patterncontentunits","patterntransform","patternunits","points","preservealpha","preserveaspectratio","primitiveunits","r","rx","ry","radius","refx","refy","repeatcount","repeatdur","restart","result","rotate","scale","seed","shape-rendering","slope","specularconstant","specularexponent","spreadmethod","startoffset","stddeviation","stitchtiles","stop-color","stop-opacity","stroke-dasharray","stroke-dashoffset","stroke-linecap","stroke-linejoin","stroke-miterlimit","stroke-opacity","stroke","stroke-width","style","surfacescale","systemlanguage","tabindex","tablevalues","targetx","targety","transform","transform-origin","text-anchor","text-decoration","text-orientation","text-rendering","textlength","type","u1","u2","unicode","values","viewbox","visibility","version","vert-adv-y","vert-origin-x","vert-origin-y","width","word-spacing","wrap","writing-mode","xchannelselector","ychannelselector","x","x1","x2","xmlns","y","y1","y2","z","zoomandpan"]),ft=Oe(["accent","accentunder","align","bevelled","close","columnalign","columnlines","columnspacing","columnspan","denomalign","depth","dir","display","displaystyle","encoding","fence","frame","height","href","id","largeop","length","linethickness","lquote","lspace","mathbackground","mathcolor","mathsize","mathvariant","maxsize","minsize","movablelimits","notation","numalign","open","rowalign","rowlines","rowspacing","rowspan","rspace","rquote","scriptlevel","scriptminsize","scriptsizemultiplier","selection","separator","separators","stretchy","subscriptshift","supscriptshift","symmetric","voffset","width","xmlns"]),mt=Oe(["xlink:href","xml:id","xlink:title","xml:space","xmlns:xlink"]),gt=ke(/{{[\w\W]*|^[\w\W]*}}/g),ht=ke(/<%[\w\W]*|^[\w\W]*%>/g),yt=ke(/\${[\w\W]*/g),bt=ke(/^data-[\-\w.\u00B7-\uFFFF]+$/),vt=ke(/^aria-[\-\w]+$/),wt=ke(/^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp|matrix):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i),St=ke(/^(?:\w+script|data):/i),Tt=ke(/[\u0000-\u0020\u00A0\u1680\u180E\u2000-\u2029\u205F\u3000]/g),Nt=ke(/^html$/i),At=ke(/^[a-z][.\w]*(-[.\w]+)+$/i),xt=ke(/<[/\w!]/g),Ot=ke(/<[/\w]/g),kt=ke(/<\/no(script|embed|frames)/i),It=ke(/\/>/i),Et=1,Dt=3,Lt=7,Ct=8,_t=9,$t=11,Rt=function(){return"undefined"==typeof window?null:window},Mt=function(e,t,n,o){return qe(e,t)&&Pe(e[t])?et(o.base?nt(o.base):{},e[t],o.transform):n};var Pt=function e(){let t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:Rt();const n=t=>e(t);if(n.version="3.4.13",n.removed=[],!t||!t.document||t.document.nodeType!==_t||!t.Element)return n.isSupported=!1,n;let o=t.document;const r=o,i=r.currentScript;t.DocumentFragment;const a=t.HTMLTemplateElement,l=t.Node,s=t.Element,c=t.NodeFilter,u=t.NamedNodeMap;void 0===u&&(t.NamedNodeMap||t.MozNamedAttrMap),t.HTMLFormElement;const p=t.DOMParser,d=t.trustedTypes,f=s.prototype,m=ot(f,"cloneNode"),g=ot(f,"remove"),h=ot(f,"nextSibling"),y=ot(f,"childNodes"),b=ot(f,"parentNode"),v=ot(f,"shadowRoot"),w=ot(f,"attributes"),S=l&&l.prototype?ot(l.prototype,"nodeType"):null,T=l&&l.prototype?ot(l.prototype,"nodeName"):null,N=l&&l.prototype?ot(l.prototype,"ownerDocument"):null;if("function"==typeof a){const e=o.createElement("template");e.content&&e.content.ownerDocument&&(o=e.content.ownerDocument)}let A,x,O="",k=!1,I=0;const E=function(){if(I>0)throw Ze('A configured TRUSTED_TYPES_POLICY callback (createHTML or createScriptURL) must not call DOMPurify.sanitize, as that causes infinite recursion. Do not pass a policy whose callbacks wrap DOMPurify as TRUSTED_TYPES_POLICY; see the "DOMPurify and Trusted Types" section of the README.')},D=function(e){E(),I++;try{return A.createHTML(e)}finally{I--}},L=function(){return k||(x=function(e,t){if("object"!=typeof e||"function"!=typeof e.createPolicy)return null;let n=null;const o="data-tt-policy-suffix";t&&t.hasAttribute(o)&&(n=t.getAttribute(o));const r="dompurify"+(n?"#"+n:"");try{return e.createPolicy(r,{createHTML:e=>e,createScriptURL:e=>e})}catch(e){return console.warn("TrustedTypes policy "+r+" could not be created."),null}}(d,i),k=!0),x},C=o,_=C.implementation,$=C.createNodeIterator,R=C.createDocumentFragment,M=C.getElementsByTagName,P=r.importNode;let j={afterSanitizeAttributes:[],afterSanitizeElements:[],afterSanitizeShadowDOM:[],beforeSanitizeAttributes:[],beforeSanitizeElements:[],beforeSanitizeShadowDOM:[],uponSanitizeAttribute:[],uponSanitizeElement:[],uponSanitizeShadowNode:[]};n.isSupported="function"==typeof Se&&"function"==typeof b&&_&&void 0!==_.createHTMLDocument;const z=gt,F=ht,U=yt,H=bt,B=vt,G=St,W=Tt,Y=At;let V=wt,q=null;const J=et({},[...rt,...it,...at,...st,...ut]);let X=null;const Z=et({},[...pt,...dt,...ft,...mt]);let K=Object.seal(Ie(null,{tagNameCheck:{writable:!0,configurable:!1,enumerable:!0,value:null},attributeNameCheck:{writable:!0,configurable:!1,enumerable:!0,value:null},allowCustomizedBuiltInElements:{writable:!0,configurable:!1,enumerable:!0,value:!1}})),Q=null,ee=null;const te=Object.seal(Ie(null,{tagCheck:{writable:!0,configurable:!1,enumerable:!0,value:null},attributeCheck:{writable:!0,configurable:!1,enumerable:!0,value:null}}));let ne=!0,oe=!0,re=!1,ie=!0,ae=!1,le=!0,se=!1,ce=!1,ue=null,pe=null,de=!1,fe=!1,me=!1,ge=!1,he=!0,ye=!1;const be="user-content-";let ve=!0,we=!1,Te={},Ne=null;const Ae=et({},["annotation-xml","audio","colgroup","desc","foreignobject","head","iframe","math","mi","mn","mo","ms","mtext","noembed","noframes","noscript","plaintext","script","selectedcontent","style","svg","template","thead","title","video","xmp"]);let xe=null;const Ee=et({},["audio","video","img","source","image","track"]);let De=null;const Le=et({},["alt","class","for","id","label","name","pattern","placeholder","role","summary","title","value","style","xmlns"]),Ke="http://www.w3.org/1998/Math/MathML",Qe="http://www.w3.org/2000/svg",tt="http://www.w3.org/1999/xhtml";let Pt=tt,jt=!1,zt=null;const Ft=et({},[Ke,Qe,tt],ze),Ut=Oe(["mi","mo","mn","ms","mtext"]);let Ht=et({},Ut);const Bt=Oe(["annotation-xml"]);let Gt=et({},Bt);const Wt=et({},["title","style","font","a","script"]);let Yt=null;const Vt=["application/xhtml+xml","text/html"];let qt=null,Jt=null;const Xt=o.createElement("form"),Zt=function(e){return e instanceof RegExp||e instanceof Function},Kt=function(){let e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};if(Jt&&Jt===e)return;e&&"object"==typeof e||(e={}),e=nt(e),Yt=-1===Vt.indexOf(e.PARSER_MEDIA_TYPE)?"text/html":e.PARSER_MEDIA_TYPE,qt="application/xhtml+xml"===Yt?ze:je,q=Mt(e,"ALLOWED_TAGS",J,{transform:qt}),X=Mt(e,"ALLOWED_ATTR",Z,{transform:qt}),zt=Mt(e,"ALLOWED_NAMESPACES",Ft,{transform:ze}),De=Mt(e,"ADD_URI_SAFE_ATTR",Le,{transform:qt,base:Le}),xe=Mt(e,"ADD_DATA_URI_TAGS",Ee,{transform:qt,base:Ee}),Ne=Mt(e,"FORBID_CONTENTS",Ae,{transform:qt}),Q=Mt(e,"FORBID_TAGS",nt({}),{transform:qt}),ee=Mt(e,"FORBID_ATTR",nt({}),{transform:qt}),Te=!!qe(e,"USE_PROFILES")&&(e.USE_PROFILES&&"object"==typeof e.USE_PROFILES?nt(e.USE_PROFILES):e.USE_PROFILES),ne=!1!==e.ALLOW_ARIA_ATTR,oe=!1!==e.ALLOW_DATA_ATTR,re=e.ALLOW_UNKNOWN_PROTOCOLS||!1,ie=!1!==e.ALLOW_SELF_CLOSE_IN_ATTR,ae=e.SAFE_FOR_TEMPLATES||!1,le=!1!==e.SAFE_FOR_XML,se=e.WHOLE_DOCUMENT||!1,fe=e.RETURN_DOM||!1,me=e.RETURN_DOM_FRAGMENT||!1,ge=e.RETURN_TRUSTED_TYPE||!1,de=e.FORCE_BODY||!1,he=!1!==e.SANITIZE_DOM,ye=e.SANITIZE_NAMED_PROPS||!1,ve=!1!==e.KEEP_CONTENT,we=e.IN_PLACE||!1,V=function(e){try{return Xe(e,""),!0}catch(e){return!1}}(e.ALLOWED_URI_REGEXP)?e.ALLOWED_URI_REGEXP:wt,Pt="string"==typeof e.NAMESPACE?e.NAMESPACE:tt,Ht=qe(e,"MATHML_TEXT_INTEGRATION_POINTS")&&e.MATHML_TEXT_INTEGRATION_POINTS&&"object"==typeof e.MATHML_TEXT_INTEGRATION_POINTS?nt(e.MATHML_TEXT_INTEGRATION_POINTS):et({},Ut),Gt=qe(e,"HTML_INTEGRATION_POINTS")&&e.HTML_INTEGRATION_POINTS&&"object"==typeof e.HTML_INTEGRATION_POINTS?nt(e.HTML_INTEGRATION_POINTS):et({},Bt);const t=qe(e,"CUSTOM_ELEMENT_HANDLING")&&e.CUSTOM_ELEMENT_HANDLING&&"object"==typeof e.CUSTOM_ELEMENT_HANDLING?nt(e.CUSTOM_ELEMENT_HANDLING):Ie(null);if(K=Ie(null),qe(t,"tagNameCheck")&&Zt(t.tagNameCheck)&&(K.tagNameCheck=t.tagNameCheck),qe(t,"attributeNameCheck")&&Zt(t.attributeNameCheck)&&(K.attributeNameCheck=t.attributeNameCheck),qe(t,"allowCustomizedBuiltInElements")&&"boolean"==typeof t.allowCustomizedBuiltInElements&&(K.allowCustomizedBuiltInElements=t.allowCustomizedBuiltInElements),ke(K),ae&&(oe=!1),me&&(fe=!0),Te&&(q=et({},ut),X=Ie(null),!0===Te.html&&(et(q,rt),et(X,pt)),!0===Te.svg&&(et(q,it),et(X,dt),et(X,mt)),!0===Te.svgFilters&&(et(q,at),et(X,dt),et(X,mt)),!0===Te.mathMl&&(et(q,st),et(X,ft),et(X,mt))),te.tagCheck=null,te.attributeCheck=null,qe(e,"ADD_TAGS")&&("function"==typeof e.ADD_TAGS?te.tagCheck=e.ADD_TAGS:Pe(e.ADD_TAGS)&&(q===J&&(q=nt(q)),et(q,e.ADD_TAGS,qt))),qe(e,"ADD_ATTR")&&("function"==typeof e.ADD_ATTR?te.attributeCheck=e.ADD_ATTR:Pe(e.ADD_ATTR)&&(X===Z&&(X=nt(X)),et(X,e.ADD_ATTR,qt))),qe(e,"ADD_URI_SAFE_ATTR")&&Pe(e.ADD_URI_SAFE_ATTR)&&et(De,e.ADD_URI_SAFE_ATTR,qt),qe(e,"FORBID_CONTENTS")&&Pe(e.FORBID_CONTENTS)&&(Ne===Ae&&(Ne=nt(Ne)),et(Ne,e.FORBID_CONTENTS,qt)),qe(e,"ADD_FORBID_CONTENTS")&&Pe(e.ADD_FORBID_CONTENTS)&&(Ne===Ae&&(Ne=nt(Ne)),et(Ne,e.ADD_FORBID_CONTENTS,qt)),ve&&(q["#text"]=!0),se&&et(q,["html","head","body"]),q.table&&(et(q,["tbody"]),delete Q.tbody),e.TRUSTED_TYPES_POLICY){if("function"!=typeof e.TRUSTED_TYPES_POLICY.createHTML)throw Ze('TRUSTED_TYPES_POLICY configuration option must provide a "createHTML" hook.');if("function"!=typeof e.TRUSTED_TYPES_POLICY.createScriptURL)throw Ze('TRUSTED_TYPES_POLICY configuration option must provide a "createScriptURL" hook.');const t=A;A=e.TRUSTED_TYPES_POLICY;try{O=D("")}catch(e){throw A=t,e}}else null===e.TRUSTED_TYPES_POLICY?(A=void 0,O=""):(void 0===A&&(A=L()),A&&"string"==typeof O&&(O=D("")));Oe&&Oe(e),Jt=e},Qt=et({},[...it,...at,...lt]),en=et({},[...st,...ct]),tn=function(e){let t=b(e);t&&t.tagName||(t={namespaceURI:Pt,tagName:"template"});const n=je(e.tagName),o=je(t.tagName);return!!zt[e.namespaceURI]&&(e.namespaceURI===Qe?function(e,t,n){return t.namespaceURI===tt?"svg"===e:t.namespaceURI===Ke?"svg"===e&&("annotation-xml"===n||Ht[n]):Boolean(Qt[e])}(n,t,o):e.namespaceURI===Ke?function(e,t,n){return t.namespaceURI===tt?"math"===e:t.namespaceURI===Qe?"math"===e&&Gt[n]:Boolean(en[e])}(n,t,o):e.namespaceURI===tt?function(e,t,n){return!(t.namespaceURI===Qe&&!Gt[n])&&!(t.namespaceURI===Ke&&!Ht[n])&&!en[e]&&(Wt[e]||!Qt[e])}(n,t,o):!("application/xhtml+xml"!==Yt||!zt[e.namespaceURI]))},nn=function(e){Re(n.removed,{element:e});try{b(e).removeChild(e)}catch(t){if(g(e),!b(e))throw Ze("a node selected for removal could not be detached from its tree and cannot be safely returned; refusing to sanitize in place")}},on=function(e){ln(e);const t=y(e);if(t){const e=[];Ce(t,t=>{Re(e,t)}),Ce(e,e=>{try{g(e)}catch(e){}})}const n=w(e);if(n)for(let t=n.length-1;t>=0;--t){const o=n[t],r=o&&o.name;if("string"==typeof r)try{e.removeAttribute(r)}catch(e){}}},rn=function(e,t){try{Re(n.removed,{attribute:t.getAttributeNode(e),from:t})}catch(e){Re(n.removed,{attribute:null,from:t})}if(t.removeAttribute(e),"is"===e)if(fe||me)try{nn(t)}catch(e){}else try{t.setAttribute(e,"")}catch(e){}},an=function(e){const t=w(e);if(t)for(let n=t.length-1;n>=0;--n){const o=t[n],r=o&&o.name;if("string"==typeof r&&!X[qt(r)])try{e.removeAttribute(r)}catch(e){}}},ln=function(e){const t=[e];for(;t.length>0;){const e=t.pop();(S?S(e):e.nodeType)===Et&&an(e);const n=y(e);if(n)for(let e=n.length-1;e>=0;--e)t.push(n[e])}},sn=function(e){let t=null,n=null;if(de)e="<remove></remove>"+e;else{const t=Fe(e,/^[\r\n\t ]+/);n=t&&t[0]}"application/xhtml+xml"===Yt&&Pt===tt&&(e='<html xmlns="http://www.w3.org/1999/xhtml"><head></head><body>'+e+"</body></html>");const r=A?D(e):e;if(Pt===tt)try{t=(new p).parseFromString(r,Yt)}catch(e){}if(!t||!t.documentElement){t=_.createDocument(Pt,"template",null);try{t.documentElement.innerHTML=jt?O:r}catch(e){}}const i=t.body||t.documentElement;return e&&n&&i.insertBefore(o.createTextNode(n),i.childNodes[0]||null),Pt===tt?M.call(t,se?"html":"body")[0]:se?t.documentElement:i},cn=function(e){const t=N?N(e):e.ownerDocument;return $.call(t||e,e,c.SHOW_ELEMENT|c.SHOW_COMMENT|c.SHOW_TEXT|c.SHOW_PROCESSING_INSTRUCTION|c.SHOW_CDATA_SECTION,null)},un=function(e){return e=Ue(e,z," "),e=Ue(e,F," "),e=Ue(e,U," ")},pn=function(e){var t;e.normalize();const n=N?N(e):e.ownerDocument,o=$.call(n||e,e,c.SHOW_TEXT|c.SHOW_COMMENT|c.SHOW_CDATA_SECTION|c.SHOW_PROCESSING_INSTRUCTION,null);let r=o.nextNode();for(;r;)r.data=un(r.data),r=o.nextNode();const i=null===(t=e.querySelectorAll)||void 0===t?void 0:t.call(e,"template");i&&Ce(i,e=>{fn(e.content)&&pn(e.content)})},dn=function(e){const t=T?T(e):null;return"string"==typeof t&&("form"===qt(t)&&("string"!=typeof e.nodeName||"string"!=typeof e.textContent||"function"!=typeof e.removeChild||e.attributes!==w(e)||"function"!=typeof e.removeAttribute||"function"!=typeof e.setAttribute||"string"!=typeof e.namespaceURI||"function"!=typeof e.insertBefore||"function"!=typeof e.hasChildNodes||e.nodeType!==S(e)||e.childNodes!==y(e)))},fn=function(e){if(!S||"object"!=typeof e||null===e)return!1;try{return S(e)===$t}catch(e){return!1}},mn=function(e){if(!S||"object"!=typeof e||null===e)return!1;try{return"number"==typeof S(e)}catch(e){return!1}};function gn(e,t,o){0!==e.length&&Ce(e,e=>{e.call(n,t,o,Jt)})}const hn=function(e,t,n,o){return 0===e.length?t:t===n||t===o?nt(t):t},yn=function(e,t){if(gn(j.beforeSanitizeElements,e,null),e!==t&&null===b(e))return we&&ln(e),!0;if(dn(e))return nn(e),!0;const o=qt(T?T(e):e.nodeName);if(q=hn(j.uponSanitizeElement,q,J,ue),gn(j.uponSanitizeElement,e,{tagName:o,allowedTags:q}),e!==t&&null===b(e))return we&&ln(e),!0;if(function(e,t){return!!(le&&e.hasChildNodes()&&!mn(e.firstElementChild)&&Xe(xt,e.textContent)&&Xe(xt,e.innerHTML))||!(!le||e.namespaceURI!==tt||"style"!==t||!mn(e.firstElementChild))||e.nodeType===Lt||!(!le||e.nodeType!==Ct||!Xe(Ot,e.data))}(e,o))return nn(e),!0;if(Q[o]||!(te.tagCheck instanceof Function&&te.tagCheck(o))&&!q[o]){const n=function(e,t,n){if(!Q[t]&&wn(t)){if(K.tagNameCheck instanceof RegExp&&Xe(K.tagNameCheck,t))return!1;if(K.tagNameCheck instanceof Function&&K.tagNameCheck(t))return!1}if(ve&&!Ne[t]){const t=b(e),o=y(e);if(o&&t)for(let r=o.length-1;r>=0;--r){const i=e===n?m(o[r],!0):o[r];t.insertBefore(i,h(e))}}return nn(e),!0}(e,o,t);return!1===n&&gn(j.afterSanitizeElements,e,null),n}if((S?S(e):e.nodeType)===Et&&!tn(e))return nn(e),!0;if(("noscript"===o||"noembed"===o||"noframes"===o)&&Xe(kt,e.innerHTML))return nn(e),!0;if(ae&&e.nodeType===Dt){const t=un(e.textContent);e.textContent!==t&&(Re(n.removed,{element:e.cloneNode()}),e.textContent=t)}return gn(j.afterSanitizeElements,e,null),!1},bn=function(e,t,n){if(ee[t])return!1;if(le&&"patchsrc"===t)return!1;if(le&&"for"===t&&"label"!==e&&"output"!==e)return!1;if(he&&("id"===t||"name"===t)&&(n in o||n in Xt))return!1;const r=X[t]||te.attributeCheck instanceof Function&&te.attributeCheck(t,e);if(oe&&Xe(H,t));else if(ne&&Xe(B,t));else if(r)if(De[t]);else if(Xe(V,Ue(n,W,"")));else if("src"!==t&&"xlink:href"!==t&&"href"!==t||"script"===e||0!==He(n,"data:")||!xe[e]){if(re&&!Xe(G,Ue(n,W,"")));else if(n)return!1}else;else if(!(wn(e)&&(K.tagNameCheck instanceof RegExp&&Xe(K.tagNameCheck,e)||K.tagNameCheck instanceof Function&&K.tagNameCheck(e))&&(K.attributeNameCheck instanceof RegExp&&Xe(K.attributeNameCheck,t)||K.attributeNameCheck instanceof Function&&K.attributeNameCheck(t,e))||"is"===t&&K.allowCustomizedBuiltInElements&&(K.tagNameCheck instanceof RegExp&&Xe(K.tagNameCheck,n)||K.tagNameCheck instanceof Function&&K.tagNameCheck(n))))return!1;return!0},vn=et({},["annotation-xml","color-profile","font-face","font-face-format","font-face-name","font-face-src","font-face-uri","missing-glyph"]),wn=function(e){return!vn[je(e)]&&Xe(Y,e)},Sn=function(e,t,n,o){if(A&&"object"==typeof d&&"function"==typeof d.getAttributeType&&!n)switch(d.getAttributeType(e,t)){case"TrustedHTML":return D(o);case"TrustedScriptURL":return function(e){E(),I++;try{return A.createScriptURL(e)}finally{I--}}(o)}return o},Tn=function(e,t,o,r){try{o?e.setAttributeNS(o,t,r):e.setAttribute(t,r),dn(e)?nn(e):$e(n.removed)}catch(n){rn(t,e)}},Nn=function(e){gn(j.beforeSanitizeAttributes,e,null);const t=e.attributes;if(!t||dn(e))return;X=hn(j.uponSanitizeAttribute,X,Z,pe);const n={attrName:"",attrValue:"",keepAttr:!0,allowedAttributes:X,forceKeepAttr:void 0};let o=t.length;const r=qt(e.nodeName);for(;o--;){const i=t[o],a=i.name,l=i.namespaceURI,s=i.value,c=qt(a),u=s;let p="value"===a?u:Be(u);n.attrName=c,n.attrValue=p,n.keepAttr=!0,n.forceKeepAttr=void 0,gn(j.uponSanitizeAttribute,e,n),p=n.attrValue,!ye||"id"!==c&&"name"!==c||0===He(p,be)||(rn(a,e),p=be+p),le&&Xe(/((--!?|])>)|<\/(style|script|title|xmp|textarea|noscript|iframe|noembed|noframes)/i,p)?rn(a,e):"attributename"===c&&Fe(p,"href")?rn(a,e):n.forceKeepAttr||(n.keepAttr&&(ie||!Xe(It,p))?(ae&&(p=un(p)),bn(r,c,p)?(p=Sn(r,c,l,p),p!==u&&Tn(e,a,l,p)):rn(a,e)):rn(a,e))}gn(j.afterSanitizeAttributes,e,null)},An=function(e){let t=null;const n=cn(e);for(gn(j.beforeSanitizeShadowDOM,e,null);t=n.nextNode();){gn(j.uponSanitizeShadowNode,t,null),yn(t,e),Nn(t),fn(t.content)&&An(t.content);if((S?S(t):t.nodeType)===Et){const e=v(t);fn(e)&&(xn(e),An(e))}}gn(j.afterSanitizeShadowDOM,e,null)},xn=function(e){const t=[{node:e,shadow:null}];for(;t.length>0;){const e=t.pop();if(e.shadow){An(e.shadow);continue}const n=e.node,o=(S?S(n):n.nodeType)===Et,r=y(n);if(r)for(let e=r.length-1;e>=0;--e)t.push({node:r[e],shadow:null});if(o){const e=T?T(n):null;if("string"==typeof e&&"template"===qt(e)){const e=n.content;fn(e)&&t.push({node:e,shadow:null})}}if(o){const e=v(n);fn(e)&&t.push({node:null,shadow:e},{node:e,shadow:null})}}};return n.sanitize=function(e){let t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},o=null,i=null,a=null,l=null;if(jt=!e,jt&&(e="\x3c!--\x3e"),"string"!=typeof e&&!mn(e)&&"string"!=typeof(e=function(e){switch(typeof e){case"string":return e;case"number":return Ge(e);case"boolean":return We(e);case"bigint":return Ye?Ye(e):"0";case"symbol":return Ve?Ve(e):"Symbol()";case"undefined":default:return Je(e);case"function":case"object":{if(null===e)return Je(e);const t=e,n=ot(t,"toString");if("function"==typeof n){const e=n(t);return"string"==typeof e?e:Je(e)}return Je(e)}}}(e)))throw Ze("dirty is not a string, aborting");if(!n.isSupported)return e;ce?(q=ue,X=pe):Kt(t),(j.uponSanitizeElement.length>0||j.uponSanitizeAttribute.length>0)&&(q=nt(q)),j.uponSanitizeAttribute.length>0&&(X=nt(X)),n.removed=[];const s=we&&"string"!=typeof e&&mn(e);if(s){!function(e){if(!le)return;const t=[e];for(;t.length>0;){const e=t.pop(),n=S?S(e):e.nodeType;if(n===Lt||n===Ct&&Xe(Ot,e.data)){try{g(e)}catch(e){}continue}if(n===Et){const t=e,n=qt(T?T(e):e.nodeName);try{t.hasAttribute&&t.hasAttribute("patchsrc")&&t.removeAttribute("patchsrc"),t.hasAttribute&&t.hasAttribute("for")&&"label"!==n&&"output"!==n&&t.removeAttribute("for")}catch(e){}}const o=y(e);if(o)for(let e=o.length-1;e>=0;--e)t.push(o[e])}}(e);const t=T?T(e):e.nodeName;if("string"==typeof t){const n=qt(t);if(!q[n]||Q[n])throw on(e),Ze("root node is forbidden and cannot be sanitized in-place")}if(dn(e))throw on(e),Ze("root node is clobbered and cannot be sanitized in-place");try{xn(e)}catch(t){throw on(e),t}}else if(mn(e))o=sn("\x3c!----\x3e"),i=o.ownerDocument.importNode(e,!0),i.nodeType===Et&&"BODY"===i.nodeName||"HTML"===i.nodeName?o=i:o.appendChild(i),xn(i);else{if(!fe&&!ae&&!se&&-1===e.indexOf("<"))return A&&ge?D(e):e;if(o=sn(e),!o)return fe?null:ge?O:""}o&&de&&nn(o.firstChild);const c=s?e:o;try{const e=cn(c);for(;a=e.nextNode();)yn(a,c),Nn(a),fn(a.content)&&An(a.content)}catch(t){throw s&&(on(e),Ce(n.removed,e=>{e.element&&ln(e.element)})),t}if(s)return Ce(n.removed,e=>{e.element&&ln(e.element)}),ae&&pn(e),e;if(fe){if(ae&&pn(o),me)for(l=R.call(o.ownerDocument);o.firstChild;)l.appendChild(o.firstChild);else l=o;return(X.shadowroot||X.shadowrootmode)&&(l=P.call(r,l,!0)),l}let u=se?o.outerHTML:o.innerHTML;return se&&q["!doctype"]&&o.ownerDocument&&o.ownerDocument.doctype&&o.ownerDocument.doctype.name&&Xe(Nt,o.ownerDocument.doctype.name)&&(u="<!DOCTYPE "+o.ownerDocument.doctype.name+">\n"+u),ae&&(u=un(u)),A&&ge?D(u):u},n.setConfig=function(){Kt(arguments.length>0&&void 0!==arguments[0]?arguments[0]:{}),ce=!0,ue=q,pe=X},n.clearConfig=function(){Jt=null,ce=!1,ue=null,pe=null,A=x,O=""},n.isValidAttribute=function(e,t,n){Jt||Kt({});const o=qt(e),r=qt(t);return bn(o,r,n)},n.addHook=function(e,t){"function"==typeof t&&qe(j,e)&&Re(j[e],t)},n.removeHook=function(e,t){if(qe(j,e)){if(void 0!==t){const n=_e(j[e],t);return-1===n?void 0:Me(j[e],n,1)[0]}return $e(j[e])}},n.removeHooks=function(e){qe(j,e)&&(j[e]=[])},n.removeAllHooks=function(){j={afterSanitizeAttributes:[],afterSanitizeElements:[],afterSanitizeShadowDOM:[],beforeSanitizeAttributes:[],beforeSanitizeElements:[],beforeSanitizeShadowDOM:[],uponSanitizeAttribute:[],uponSanitizeElement:[],uponSanitizeShadowNode:[]}},n}();const jt=()=>({view:({attrs:{md:t="",removeParagraphs:n=!1,externalLinks:o=!1,trustHtml:r=!1,...i}})=>{const a=G(t,n,o);return mithril_default()(".slimdown-view.markdown",i,mithril_default().trust(r?a:Pt.sanitize(a)))}}),zt=()=>({view:({attrs:{type:t,props:n,label:o="",initialValue:r,inline:i=!1}})=>{const a={className:n.className||"col s12"};if(r instanceof Array&&r.length>3)return mithril_default()(".readonly",a,[mithril_default()("label",o),mithril_default()(jt,{md:"\n- "+r.join("\n- ")})]);if("string"==typeof r){const n=`${o.trim()}: `;return mithril_default()(".readonly",a,"url"===t?[mithril_default()("label",n),mithril_default()("a[target=_blank]",{href:r},r)]:"color"===t?[mithril_default()("label",n),mithril_default()(".color",{style:{height:"1rem",width:"40px",borderRadius:"4px",backgroundColor:r}})]:[mithril_default()("label",o),mithril_default()(jt,{md:r})])}const l=r instanceof Array?r.join(", "):r;return mithril_default()(".readonly",a,[o&&mithril_default()("label",o),i?mithril_default()("span",l?`: ${l}`:mithril_default().trust("&nbsp;")):mithril_default()("p",l||mithril_default().trust("&nbsp;"))])}}),Ft=({iv:t,props:n})=>{const o=t?"✔":"✘";return mithril_default()(zt,{props:n,label:n.label,initialValue:o,inline:!0})},Ut=({iv:t,props:n,options:o})=>{const r=void 0!==t?t instanceof Array?t:[t]:[],i=o.filter(e=>r.indexOf(e.id)>=0),a=i&&0===i.length?"?":1===i.length?i[0].label:i.map(e=>e.label);return mithril_default()(zt,{props:n,label:n.label,initialValue:a})},Ht=({iv:t,props:n,field:o,obj:r,id:i,context:a})=>{const{label:l,className:s="col s12"}=n,c=ce((i?t:o.value||l)||"",r,...a);return mithril_default()(jt,{md:c,className:s})},Bt=({iv:t,props:n,fieldType:o})=>{const r=t;return mithril_default()(zt,{props:n,type:o,label:n.label,initialValue:r})},Gt={colour:be,color:be,time:({iv:t,props:o,obj:r,id:i,field:a,oninput:l,containerId:s})=>{const{twelveHour:c=!1}=o,u=t?"number"==typeof t||"string"==typeof t?new Date(t):t:new Date,p=J(u);return r[i]=a.transform?a.transform("to",u):u,mithril_default()(TimePicker,{...o,twelveHour:c,value:p,oninput:e=>{const t=e.split(":").map(e=>+e);u.setHours(t[0],t[1]),l(u)},container:s})},date:({iv:t,props:n,obj:r,id:i,field:a,oninput:l,containerId:s})=>{const{format:c="mmmm d, yyyy"}=n,u="number"==typeof t||"string"==typeof t?new Date(t):t;r[i]=u?a.transform?a.transform("to",u.valueOf()):u.valueOf():u;const{min:p,max:d}=n,f=p?!u||p<u.valueOf()?new Date(p):u:void 0,m=d?!u||d>u.valueOf()?new Date(d):u:void 0;return mithril_default()(DatePicker,{...n,minDate:f,maxDate:m,setDefaultDate:!!u,format:c,value:u,oninput:e=>{l(new Date(e))},container:s})},datetime:({iv:t,props:i,oninput:a,containerId:l})=>{const{label:s,className:c="col s12",dateTimeSeconds:u=!1,twelveHour:p=!1,format:d="mmmm d, yyyy",...f}=i,m="number"==typeof t||"string"==typeof t?new Date(t):t,g={initialDateTime:m},h=m||void 0,y=m?J(m):"",{min:b,max:v}=i,w=b?!m||b<m.valueOf()?new Date(b):m:void 0,S=v?!m||v>m.valueOf()?new Date(v):m:void 0,T=i.dateTimeOutput||"UTC",N=e=>{g.initialDateTime=e,a("UTC"===T?e.toUTCString():"ISO"===T?e.toISOString():e.valueOf())};return mithril_default()("div",{className:c},mithril_default()(".row",[mithril_default()(u?".col.s6":".col.s8",{style:"padding: 0"},mithril_default()(DatePicker,{...f,label:s,minDate:w,maxDate:S,setDefaultDate:!!m,format:d,value:h,container:l,oninput:e=>{const t=new Date(g.initialDateTime);t.setFullYear(e.getFullYear()),t.setMonth(e.getMonth()),t.setDate(e.getDate()),N(t)}})),mithril_default()(".col.s4",{style:"min-width: 6rem; padding-right: 0; padding-left: 0"},mithril_default()(TimePicker,{...f,label:"",helperText:"",twelveHour:p,value:y,container:l,oninput:e=>{const t=e.split(":").map(e=>+e),n=g.initialDateTime||new Date((new Date).setSeconds(0,0));n.setHours(t[0],t[1]),N(n)}})),u&&mithril_default()(NumberInput,{style:"min-width: 4rem; padding-right: 0; padding-left: 0",className:"col s2",min:0,max:59,oninput:e=>{const t=g.initialDateTime||new Date((new Date).setSeconds(0,0));t.setSeconds(e,0),N(t)}})]))},email:({iv:t,props:n,validate:o,autofocus:r,oninput:a,onkeydown:l,onkeyup:s,onblur:c})=>mithril_default()(EmailInput,{...n,validate:o,autofocus:r,oninput:a,value:t,onkeydown:l,onkeyup:s,onblur:c}),number:({iv:t,props:n,validate:o,autofocus:i,oninput:a,onkeydown:l,onkeyup:s,onblur:c})=>mithril_default()(NumberInput,{...n,validate:o,autofocus:i,oninput:a,value:t,onkeydown:l,onkeyup:s,onblur:c}),radio:({iv:t,props:n,options:o,oninput:r})=>mithril_default()(RadioButtons,{label:"",...n,options:o,checkedId:t,onchange:r}),checkbox:({iv:t,props:n,oninput:o})=>{const r=Boolean(t);return mithril_default()(InputCheckbox,{...n,checked:r,onchange:o})},likert:({iv:t,props:n,field:o,oninput:r})=>{const i="string"==typeof t?parseInt(t):"number"==typeof t?t:void 0;return mithril_default()(".col.s12",mithril_default()(LikertScale,{min:0,max:5,...n,value:i,label:o.label,onchange:r}))},rating:({iv:t,props:n,field:o,oninput:r})=>{const i="string"==typeof t?parseInt(t):"number"==typeof t?t:void 0;return mithril_default()(".col.s12",{style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},[mithril_default()(".label",o.label),mithril_default()(Rating,{...n,value:i,onchange:r})])},options:({iv:t,props:n,options:o,oninput:r,obj:i,id:a,field:l,selectAll:s,unselectAll:c,state:u})=>{const f=t;return[[mithril_default()(Options,{key:u.key,checkboxClass:"col s6 m4 l3",className:"input-field col s12",...n,disabled:n.disabled||!o||0===o.length,options:o,checkedId:f,onchange:e=>r(1===e.length?e[0]:e.filter(e=>null!==e))})],void 0!==l.checkAllOptions&&mithril_default()(".col.s12.option-buttons",[mithril_default()(FlatButton,{disabled:n.disabled,label:s,iconName:"check",onclick:()=>{u.key=Date.now(),r(o.map(e=>"string"==typeof e?e:e.id))}}),c&&mithril_default()(FlatButton,{disabled:n.disabled,label:c,iconName:"check_box_outline_blank",onclick:()=>{const e=i[a]||[];e.length=0,u.key=Date.now(),r(e)}})])]},select:({iv:t,props:n,options:o,i18n:r,oninput:i})=>{const a=t;return mithril_default()(Select,{placeholder:n.multiple?r.pickOneOrMore||"Pick one or more":r.pickOne||"Pick one",...n,disabled:n.disabled||!o||0===o.length,options:o,checkedId:a,onchange:e=>i(1!==e.length||n.multiple?e.filter(e=>null!==e||void 0!==e):e[0])})},markdown:Ht,md:Ht,section:()=>mithril_default()(".divider"),switch:({iv:t,props:n,options:o,oninput:r})=>{const i=t,a=o&&o.length>0?o[0].label??"":"",l=o&&o.length>1?o[1].label??"":"";return mithril_default()(Switch,{...n,left:a,right:l,checked:i,onchange:r})},tags:({iv:t,props:n,options:o,field:r,oninput:i})=>{const a=(t?t instanceof Array?t:[t]:[]).map(e=>({tag:e})),l=o&&o.length>0?{data:o.reduce((e,t)=>(e[t.id]=null,e),{}),limit:r.maxLength||1/0,minLength:r.minLength||1}:void 0,{label:s,isMandatory:c,className:u,helperText:p}=n;return mithril_default()(Chips,{className:u,label:s,isMandatory:c,helperText:p,placeholder:r.placeholder||"Add a tag",secondaryPlaceholder:r.secondaryPlaceholder||"+tag",data:a,onchange:e=>i(e.map(e=>e.tag)),autocompleteOptions:l})},autocomplete:({iv:t,props:n,options:o,field:r,oninput:i,onblur:a})=>{const l=t,s=o&&o.length>0?{data:o.reduce((e,t)=>(e[t.id]=null,e),{}),limit:r.maxLength||1/0,minLength:r.minLength||1}:{data:{}},{label:c,isMandatory:u,className:p,helperText:d}=n;return mithril_default()(Autocomplete,{value:l,className:p,label:c,isMandatory:u,helperText:d,oninput:i,onblur:a,placeholder:r.placeholder||"...",...s})},textarea:({iv:t,props:n,validate:o,autofocus:r,oninput:i,onkeyup:a,onkeydown:l,onblur:s})=>mithril_default()(TextArea,{...n,validate:o,autofocus:r,oninput:i,value:t,onkeyup:a,onkeydown:l,onblur:s}),file:({iv:t,props:n,options:o,field:r,oninput:i})=>{const a=t,{url:l,placeholder:s}=r;if(!l)throw Error('Input field "url" not defined, which indicates the URL to the upload folder.');const c=o?o.map(e=>"string"==typeof e?e:String(e.id)):void 0;return mithril_default()(FileInput,{...n,accept:c,placeholder:s,onchange:t=>{if(!t||t.length<1)return void i("");const n=new FormData;n.append("file",t[0]),mithril_default().request({method:"POST",url:l,body:n}).then(e=>i(e)).catch(console.error)},value:a})},base64:({iv:t,props:n,options:o,field:r,obj:i,oninput:a})=>{const l=t,s=!(!l||!/data:image/i.test(l)),{placeholder:c}=r,u=o?o.map(e=>"string"==typeof e?e:String(e.id)).join(","):void 0,p=r.label||ge(i)||r.placeholder||"Uploaded image",f=n.className||n.class||"col s12";return s?mithril_default()("div",{className:f,style:{position:"relative"}},[mithril_default()("img.responsive-img",{src:l,alt:"string"==typeof p?p:"Uploaded image",style:{maxHeight:`${r.max||50}px`}}),mithril_default()(FlatButton,{iconName:"close","aria-label":"Remove image",onclick:()=>a(""),className:"btn-floating btn-small red darken-2",style:{position:"absolute",top:"4px",right:"4px",width:"32px",height:"32px"}})]):mithril_default()(FileInput,{...n,accept:u,placeholder:c,onchange:t=>{if(!t||t.length<1)return void a("");const n=new FileReader;n.onloadend=()=>{"string"==typeof n.result&&a(n.result),mithril_default().redraw()},n.readAsDataURL(t[0])},value:l})},url:({iv:t,props:n,validate:o,autofocus:r,oninput:i,onkeydown:a,onkeyup:l,onblur:s})=>mithril_default()(UrlInput,{placeholder:"http(s)://www.example.com",...n,validate:o,autofocus:r,oninput:i,value:t,onkeydown:a,onkeyup:l,onblur:s}),text:({iv:t,props:n,field:o,validate:r,autofocus:i,oninput:a,onkeydown:l,onkeyup:s,onblur:c})=>{const u=t;return mithril_default()(TextInput,{...n,maxLength:o.max||void 0,validate:r,autofocus:i,oninput:a,value:u,onkeydown:l,onkeyup:s,onblur:c})}},Wt={time:({iv:t,props:n,i18n:o})=>{const r=t,i=o.dateTimeOptions?{hour:"2-digit",minute:"2-digit",second:void 0,...o.dateTimeOptions,weekday:void 0,month:void 0,day:void 0,year:void 0}:void 0,a="number"==typeof r||"string"==typeof r||r instanceof Date?new Date(r):void 0,l=a?a.toLocaleTimeString(o.locales,i):"";return mithril_default()(zt,{props:n,label:n.label,initialValue:l})},date:({iv:t,props:n,i18n:o})=>{const r=t,i=o.dateTimeOptions?{...o.dateTimeOptions,hour:void 0,hour12:void 0,minute:void 0,second:void 0}:void 0,a="number"==typeof r||"string"==typeof r||r instanceof Date?new Date(r):void 0,l=a?a.toLocaleDateString(o.locales,i):"";return mithril_default()(zt,{props:n,label:n.label,initialValue:l})},datetime:({iv:t,props:n,i18n:o})=>{const r=t,i=o.dateTimeOptions?{hour:"2-digit",minute:"2-digit",month:"numeric",day:"numeric",...o.dateTimeOptions}:void 0,a="number"==typeof r||"string"==typeof r||r instanceof Date?new Date(r):void 0,l=a?a.toLocaleTimeString(o.locales,i):"";return mithril_default()(zt,{props:n,label:n.label,initialValue:l})},switch:Ft,checkbox:Ft,tags:({iv:t,props:n})=>{const o=t||[];return mithril_default()(zt,{props:n,label:n.label,initialValue:o})},options:Ut,select:Ut,radio:({iv:t,props:n,options:o})=>{const r=t,i=o.filter(e=>e.id===r),a=i&&i.length?i[0].label:"?";return mithril_default()(zt,{props:n,label:n.label,initialValue:a})},likert:({iv:t,props:n})=>{const o="string"==typeof t?parseInt(t):"number"==typeof t?t:"";return mithril_default()(zt,{props:n,initialValue:o,label:n.label})},base64:({iv:t,field:n,obj:o})=>{const r=t,i=!(!r||!/data:image/i.test(r)),a=n.label||ge(o)||n.placeholder||"Uploaded image";return i&&mithril_default()("div",{role:"img","aria-label":"string"==typeof a?a:"Image"},mithril_default()("img.responsive-img",{src:r,alt:"string"==typeof a?a:"Image",style:{maxHeight:`${n.max||50}px`}}))},file:({iv:t,props:n,field:o})=>mithril_default()("div",n,(t instanceof Array?t:[t]).map((t="")=>{const r=/data:image|.jpg$|.jpeg$|.png$|.gif$|.svg$|.bmp$|.tif$|.tiff$/i.test(t),i=`${new URL(o.url).origin}${t}`;return mithril_default()("a[target=_blank]",{href:i},r?mithril_default()("img",{src:i,alt:o.label||o.placeholder||t||"File image",style:{maxHeight:`${o.max||50}px`}}):mithril_default()(zt,{props:n,label:o.placeholder||"File",initialValue:t}))}))},Yt=(e,t="default")=>`mui_${t}_${e}_${uniqueId()}`,Vt=(t,n,o,r,i,a,l,s)=>{const c={iv:o,field:r,props:i,label:i.label,obj:a,context:l,..."editable"===n?{onchange:s}:{}};return mithril_default()(t,c)},qt=(e,t)=>e(t),Jt=(t={},n={})=>()=>{const o={key:Date.now(),stableId:void 0};return{oninit:({attrs:{field:e,obj:t}})=>{const{id:n=""}=e,r=t&&"object"==typeof t&&"id"in t?String(t.id):"default";o.stableId=Yt(String(n),r)},view:({attrs:{i18n:r,field:i,obj:a,autofocus:l,onchange:s,context:c=[],containerId:u,disabled:p,readonly:d}})=>{const{id:f="",type:m,disabled:g=p,readonly:h=d,value:y,required:b,autogenerate:v,show:T,label:N,description:A,i18n:x=r||{},checkAllOptions:O,transform:k,effect:I,onkeyup:E,onkeydown:D,onblur:L}=i,C=!T||oe(T,a,...c);if(T&&!C||N&&!le(N,a,...c)||y&&!le(y,a,...c)||A&&!le(A,a,...c))return;const _="string"==typeof i.options?re(i.options,[a,...c]):i.options,$=_&&_ instanceof Array?_.filter(e=>"string"==typeof e||void 0!==e.id&&(e.label||isNaN(Number(e.id)))&&(!e.show||oe(e.show,a,...c))).map(e=>"string"==typeof e?{id:e,label:Y(e)}:e.label?e:{...e,label:Y(e.id)}):[],R="boolean"==typeof p&&p,M=a&&"object"==typeof a&&"id"in a?String(a.id):"default",P=((e,t=!1,n=!1,o="default",r,i)=>{const{id:a="",label:l,description:s,required:c,multiple:u,className:p,checkboxClass:d,icon:f,iconClass:m,placeholder:g,maxLength:h,minLength:y,max:b,min:v,step:w,dateTimeOutput:S,dateTimeSeconds:T,dateFormat:N,twelveHour:A,startLabel:x,middleLabel:O,endLabel:k}=e,I={id:i||Yt(String(a),o),label:l};return void 0===l&&a&&(I.label=Y(String(a))),s&&(I.helperText=G(s,!0)),x&&(I.startLabel=G(x,!0)),k&&(I.endLabel=G(k,!0)),O&&(I.middleLabel=G(O,!0)),p&&(I.className=p),f&&(I.iconName=f),m&&(I.iconClass=m),d&&(I.checkboxClass=d),g&&(I.placeholder=g),c&&(I.isMandatory=!0,I["aria-required"]="true"),u&&(I.multiple=u),n&&(I.disabled=!0,I["aria-disabled"]="true"),t&&(I.autofocus=!0),void 0!==h&&(I.maxLength=h),void 0!==y&&(I.minLength=y),void 0!==b&&(I.max=b),void 0!==v&&(I.min=v),void 0!==w&&(I.step=w),S&&(I.dateTimeOutput=S),T&&(I.dateTimeSeconds=T),N&&(I.dateFormat=N),A&&(I.twelveHour=A),I})(i,l,"boolean"==typeof g||void 0===g?R||g:R||oe(g,a,...c),M,0,o.stableId);N&&(P.label=G(ce(P.label||N,a,...c),!0)),void 0!==y&&(P.value="string"==typeof y?ce(P.value||y,a,...c):y),A&&(P.description=G(ce(P.description||A,a,...c),!0));const j=b?e=>e instanceof Array?e&&e.length>0:void 0!==typeof e:void 0;if(a instanceof Array)return void console.warn("Only a repeat list can deal with arrays!");const z=async e=>{if(void 0===e||"undefined"===e)return delete a[f],void s(a);if(a[f]=k?k("to",e):e,!I)return s(a);const t=await I(a,a[f],c);s(void 0!==t?t:a)};if(m instanceof Array)return f?("object"!=typeof a||a.hasOwnProperty(f)||(a[f]={}),mithril_default()(".muf-form",{className:i.className},[mithril_default()(".muf-form-header",mithril_default().trust(G(P.label||Y(String(f)),!0))),P.description&&mithril_default()("div",mithril_default().trust(G(P.description))),mithril_default()(".row",mithril_default()(fn,{...P,i18n:x,readonly:h,form:m,obj:a[f],context:c instanceof Array?[a,...c]:[a,c],onchange:()=>s&&s(a),containerId:u}))])):void console.warn("Missing ID for type "+JSON.stringify(m));v&&!a[f]&&(a[f]="guid"===v?uuid4():"id"===v?uniqueId():Date.now());const F="object"==typeof a&&a.hasOwnProperty(f)&&void 0!==a[f]?k?k("from",a[f]):a[f]:P.value;f&&void 0!==y&&void 0!==F&&(a[f]=k?k("to",F):F);const[U,H]=O?O.split("|"):["",""],B={fieldType:m,field:i,obj:a,id:String(f),iv:F,props:P,options:$,i18n:x,context:c,oninput:z,onblur:L,onkeyup:E,onkeydown:D,autofocus:l,containerId:u,validate:j,selectAll:U,unselectAll:H,state:o};if(h&&m){if(n.hasOwnProperty(m))return Vt(n[m],"readonly",F,i,P,a,c,z);if(t.hasOwnProperty(m))return Vt(t[m],"editable",F,i,P,a,c,z);if(["md","none"].indexOf(m)<0){return qt(Wt[m]||Bt,B)}}if(m&&t.hasOwnProperty(m))return Vt(t[m],"editable",F,i,P,a,c,z);const W=Gt[m];return W&&qt(W,B)}}},Xt=()=>{const t={},n=(e,t)=>e instanceof Array?e:(e.hasOwnProperty(t)&&Array.isArray(e[t])||(e[t]=[]),e[t]),o=(e,o)=>{const r=n(e,o),i=r.length,a=t.onNewItem?t.onNewItem(e,o,i):{};e instanceof Array?e.push(a):e[o]=he.insertAt(r,i,a)};let r;const i=ye.handleDragStart,a=ye.handleDragOver;return{oninit:({attrs:{i18n:e={},field:{id:n="",sortProperty:o,onNewItem:i}}})=>{t.editLabel=e.editRepeat||`Edit ${String(n)}`,t.createLabel=e.createRepeat||`Create new ${String(n)}`,t.onNewItem=i,r=(e=>{if(!e)return(e,t)=>0;const t="!"===e[0],n=t?e.substring(1):e;return t?(e,t)=>e[n]>t[n]?-1:e[n]<t[n]?1:0:(e,t)=>e[n]>t[n]?1:e[n]<t[n]?-1:0})(o)},view:({attrs:{field:l,obj:s,context:c,className:u=l.className||"col s12",containerId:p,disabled:f=("boolean"==typeof l.disabled?l.disabled:void 0),readonly:m,i18n:g={},onchange:h}})=>{const{filterValue:y}=t,{id:b,label:w,type:S,min:A,max:x,pageSize:O,propertyFilter:k,filterLabel:I,readonly:E=m,repeatItemClass:D=""}=l,L=n(s,b),C=y?de(y):void 0,_=k&&C&&C.length>2?L.filter(e=>de(`${e[k]}`).indexOf(C)>=0):L,$=(e=>{const t=window.location.hash||"",n=t.indexOf("?");if(-1===n)return null;const o=t.substring(n+1);return new URLSearchParams(o).get(e)})(String(b)),R=$?Math.min(_.length,+$):1,M=O&&_&&(R-1)*O<_.length?R:1,P=O?(e,t)=>(M-1)*O<=t&&t<M*O:()=>!0,j=O?Math.ceil(_.length/O):0,z=!!(x&&_.length>=x),F=!f&&!E&&(!A||_.length>A),U=location.hash?location.hash.split("?")[0].replace("#!",""):"",H=(e=>{let t="";if(e&&e.length>0){const n=e.indexOf("?");-1!==n?t=e.substring(n+1).split("#")[0]:e.startsWith("?")&&(t=e.slice(1).split("#")[0])}else{const e=window.location;let n=e.search??"";if(n.startsWith("?")&&(n=n.slice(1)),n)t=n;else if("string"==typeof e.href&&-1!==e.href.indexOf("?"))t=e.href.substring(e.href.indexOf("?")+1).split("#")[0];else{const n=e.hash??"",o=n.indexOf("?");-1!==o&&(t=n.substring(o+1))}}const n={};if(!t)return n;const o=t.split("&").filter(Boolean);for(const e of o){const t=e.indexOf("="),o=-1===t?e:e.substring(0,t),r=-1===t?void 0:e.substring(t+1),i=decodeURIComponent(o),a=void 0===r||decodeURIComponent(r);if(i.match(/\[(\d+)?\]$/)){const e=i.replace(/\[(\d+)?\]$/,"");let t=n[e];void 0===t?t=[]:"string"!=typeof t&&"boolean"!=typeof t||(t=[t]);const o=t;/\[\d+\]$/.test(i)?o[+/\[(\d+)\]/.exec(i)[1]]=a:o.push(a),n[e]=o}else void 0===n[i]?n[i]=a:"string"==typeof n[i]||"boolean"==typeof n[i]?n[i]=[n[i],a]:n[i].push(a)}return n})(location.hash),B=30+10*Math.floor(Math.log10(_.length)),G=0===j;return[[mithril_default()("div",{id:String(b),className:"mui-repeat-list "+u},[mithril_default()(".row.mui-repeat-list-controls",mithril_default()(".col.s12",[mithril_default()(FlatButton,{iconName:f||E||z?"":"add",iconClass:"right",label:w,onclick:()=>{o(s,String(b)),b&&mithril_default().route.set(U,Object.assign(H,{[b]:n(s,String(b)).length})),h&&h(s)},style:{padding:0},className:"left",disabled:f||z,readonly:E}),j>1&&mithril_default()(".right",mithril_default()(Pagination,{curPage:M,items:fe(1,j).map(e=>({href:me(U,H,{[b]:e})}))})),(_.length>1||y)&&k&&!f&&mithril_default()(TextInput,{style:"margin-top: -6px; margin-bottom: -1rem;",iconName:"filter_list",iconClass:"small",placeholder:I,onkeyup:(e,n)=>t.filterValue=n,className:"right",disabled:f,readonly:E})])),_&&_.length>0&&"string"!=typeof S&&(()=>{const t=_.sort(r).filter(P);return t.map((r,l)=>mithril_default()(".mui-repeat-item",{key:`item-${R}-${O?(M-1)*O+l:l}`,draggable:G,ondragstart:G?e=>i(e,l):void 0,ondragover:G?a:void 0,ondrop:G?e=>((e,t,n,o,r)=>{const i=ye.getDragIndex(e,0);n[o]=he.moveItem(n[o],i,t),r&&r(n),e.preventDefault()})(e,l,s,b,h):void 0,style:{display:"flex",cursor:G?"move":void 0}},[mithril_default()(".mui-item-side-col",{style:`flex: 0 0 ${B}px;`},[mithril_default()("span.mui-show-item-number",{style:(!O||O>1)&&_.length>1?void 0:{visibility:"hidden"}},`[${(O?(M-1)*O+l:l)+1}]`),mithril_default()(".mui-repeat-actions",{},[F&&mithril_default()(ConfirmButton,{iconName:"delete",confirmIconName:"check",style:{padding:0},disabled:f,readonly:E,onclick:()=>{const e=O?(M-1)*O+l:l;s instanceof Array?s.splice(e,1):s[b]=he.removeAt(_,e),h&&h(s)}}),!f&&!E&&!z&&l===t.length-1&&mithril_default()(FlatButton,{iconName:"add",style:{padding:0},onclick:()=>{o(s,String(b)),b&&mithril_default().route.set(U,Object.assign(H,{[b]:n(s,String(b)).length})),h&&h(s)}})])]),mithril_default()(".row.repeat-item",{className:D,style:"flex: 1;"},[S&&mithril_default()(fn,{form:S,obj:r,i18n:g,context:c instanceof Array?[s,...c]:[s,c],containerId:p,disabled:f,readonly:E,onchange:()=>h&&h(s)})])]))})()])]]}}},Zt=()=>{const t=()=>({}),n=ye.handleDragOver;return{view:({attrs:{form:o,items:r,onchange:i,createItem:a=t,disabled:l=!1,readonly:s=!1,i18n:c={},containerId:u="body",label:p="Items",max:f,min:m=0,showNumbers:g=!0,allowReorder:h=!0,className:y="array-layout-form",compact:b=!1}})=>{const v=!l&&!s&&(!f||r.length<f),w=!l&&!s&&r.length>m,S=h&&!l&&!s&&r.length>1,T=()=>{if(!v)return;const e=a(),t=he.insertAt(r,r.length,e);i?.(t.every(e=>un(e,o)),t)},N=e=>{if(!w)return;const t=he.removeAt(r,e);i?.(t.every(e=>un(e,o)),t)},x=e=>(t,n)=>{if(!n)return;const a=[...r];a[e]=n,i?.(a.every(e=>un(e,o)),a)},O=(t,n)=>mithril_default()(fn,{form:o,obj:t,onchange:x(n),disabled:l,readonly:s,i18n:c,containerId:u}),k=e=>({draggable:S,ondragstart:S?t=>((e,t)=>{ye.handleDragStart(e,t)})(t,e):void 0,ondragover:S?n:void 0,ondrop:S?t=>((e,t,n,o,r)=>{e.preventDefault();const i=ye.getDragIndex(e);if(-1===i||i===t)return;const a=he.moveItem(n,i,t);r?.(a.every(e=>un(e,o)),a)})(t,e,r,o,i):void 0});return mithril_default()("div",{className:`${y} col s12`},[mithril_default()(".array-form-header.row",{style:b?"margin-bottom: 0.5rem;":void 0},[mithril_default()(".col.s6",mithril_default()(b?"span":"h6",p)),v&&mithril_default()(".col.s6.right-align",mithril_default()(FlatButton,{iconName:"add",iconClass:"left",label:c.add||"Add Item",onclick:T,className:"add-item-btn"}))]),0===r.length?mithril_default()(".empty-state.center-align",[mithril_default()("p.grey-text",c.noItems||"No items yet"),v&&mithril_default()(RoundIconButton,{iconName:"add",onclick:T,className:"btn-large",title:c.addFirst||"Add first item"})]):r.map((t,n)=>b?((t,n)=>mithril_default()(".array-item.compact-item",{key:n,...k(n),style:{display:"flex",alignItems:"flex-start",gap:"0.5rem",padding:"0.25rem 0",cursor:S?"move":"default"}},[g&&mithril_default()("span.compact-item-number.grey-text",{style:"flex: none; padding-top: 1rem;"},`${n+1}`),mithril_default()(".row.compact-item-content",{style:"flex: 1 1 auto; margin-bottom: 0;"},O(t,n)),w&&mithril_default()(FlatButton,{iconName:"delete",iconClass:"red-text",onclick:()=>N(n),className:"remove-item-btn",title:c.remove||"Remove item"})]))(t,n):((t,n)=>mithril_default()(".array-item.card",{key:n,...k(n),style:{cursor:S?"move":"default",marginBottom:"1rem"}},[mithril_default()(".card-content",[mithril_default()(".row.item-header",[g&&mithril_default()(".col.s2",[mithril_default()("span.item-number.badge",`${n+1}`)]),mithril_default()(".col",{class:g?"s8":"s10"}),w&&mithril_default()(".col.s2.right-align",mithril_default()(FlatButton,{iconName:"delete",iconClass:"red-text",onclick:()=>N(n),className:"remove-item-btn",title:c.remove||"Remove item"}))]),mithril_default()(".row.item-content",[O(t,n)])])]))(t,n)),r.length>0&&v&&mithril_default()(".array-form-footer.center-align",{style:"margin-top: "+(b?"0.5rem":"1rem")},b?mithril_default()(FlatButton,{iconName:"add",iconClass:"left",label:c.addAnother||"Add Item",onclick:T}):mithril_default()(RoundIconButton,{iconName:"add",onclick:T,title:c.addAnother||"Add another item"}))])}}},Kt=[{id:"Point",label:"Point"},{id:"LineString",label:"Line"},{id:"Polygon",label:"Polygon"}],Qt=e=>{switch(e){case"LineString":return{type:"LineString",coordinates:[[0,0],[1,1]]};case"Polygon":return{type:"Polygon",coordinates:[[[0,0],[1,0],[1,1],[0,0]]]};default:return{type:"Point",coordinates:[0,0]}}},en=e=>{switch(e){case"LineString":case"MultiLineString":return"timeline";case"Polygon":case"MultiPolygon":return"change_history";case"Point":case"MultiPoint":return"place";default:return"layers"}},tn=[{id:"lng",label:"Longitude",type:"number",className:"col s12 m6"},{id:"lat",label:"Latitude",type:"number",className:"col s12 m6"}],nn=([e=0,t=0])=>({lng:e,lat:t}),on=({lng:e,lat:t})=>[e,t],rn=e=>e.length>=3?[...e,e[0]]:e,an=()=>{const t={};return{oninit:({attrs:{i18n:e={}}})=>{const{raw:n="RAW",view:o="VIEW"}=e;t.raw=n,t.view=o,t.filterValue="",t.newGeometryType="Point"},view:({attrs:{field:{id:n="",type:o,onSelect:i},obj:a,context:l,containerId:s,disabled:c,readonly:u,i18n:p,onchange:d}})=>{if(a instanceof Array)return;if(!o||"string"==typeof o)return;const m=o,g=m.length>0?m[0].id:void 0,y=c||u,{fc:b,isString:v}=(e=>{if("string"==typeof e){if(!e.trim())return{fc:{type:"FeatureCollection",features:[]},isString:!0};try{return{fc:JSON.parse(e),isString:!0}}catch{return{fc:{type:"FeatureCollection",features:[]},isString:!0}}}return e&&"object"==typeof e?{fc:e,isString:!1}:{fc:{type:"FeatureCollection",features:[]},isString:!1}})(a[n]),w=b.features||[],S=e=>{a[n]=v?JSON.stringify(e,null,2):e,t.rawText=void 0,t.rawError=void 0,d&&d(a)},T=e=>{const t=e.geometry?e.geometry.type:"Feature";return{geometryType:t,label:(g?e.properties?.[g]:void 0)||t}},A=t.filterValue.trim().toLowerCase(),I=(e,t)=>{w[e]={...w[e],geometry:t},S({...b,type:"FeatureCollection",features:w})},E=(t,n)=>{const o=t.geometry;if(o){if("Point"===o.type){const[t=0,i=0]=o.coordinates;return[mithril_default()(NumberInput,{className:"col s12 m6",label:"Longitude",value:t,disabled:y,onchange:e=>I(n,{type:"Point",coordinates:[e,i]})}),mithril_default()(NumberInput,{className:"col s12 m6",label:"Latitude",value:i,disabled:y,onchange:e=>I(n,{type:"Point",coordinates:[t,e]})})]}if("LineString"===o.type){const t=o.coordinates.map(nn);return mithril_default()(Zt,{form:tn,items:t,label:"Points",disabled:y,readonly:y,min:2,compact:!0,createItem:()=>({lng:0,lat:0}),onchange:(e,t)=>t&&I(n,{type:"LineString",coordinates:t.map(on)})})}if("Polygon"===o.type){const t=(i=o.coordinates[0]??[],(e=>e.length>1&&e[0][0]===e[e.length-1][0]&&e[0][1]===e[e.length-1][1])(i)?i.slice(0,-1):i).map(nn);return mithril_default()(Zt,{form:tn,items:t,label:"Vertices",disabled:y,readonly:y,min:3,compact:!0,createItem:()=>({lng:0,lat:0}),onchange:(e,t)=>t&&I(n,{type:"Polygon",coordinates:[rn(t.map(on))]})})}var i;return mithril_default()(TextArea,{class:"col s12",label:`Geometry (${o.type}, raw GeoJSON)`,readOnly:y,defaultValue:JSON.stringify(o,null,2),onchange:e=>((e,t)=>{try{I(e,JSON.parse(t))}catch{}})(n,e)})}},D={title:t.raw,vnode:mithril_default()(".row",[mithril_default()(TextArea,{class:"col s12",label:"GeoJSON",readOnly:y,value:t.rawText??JSON.stringify(b,null,2),placeholder:"Enter a GeoJSON FeatureCollection",onchange:e=>{t.rawText=e;try{const t=JSON.parse(e);if("FeatureCollection"!==t.type||!Array.isArray(t.features))throw new Error('Expected a GeoJSON object of type "FeatureCollection" with a "features" array');S(t)}catch(e){t.rawError=e instanceof Error?e.message:"Invalid JSON"}}}),t.rawError?mithril_default()(".red-text.text-darken-2",t.rawError):void 0])},L=w.map((e,t)=>({feature:e,i:t})).filter(({feature:e})=>(e=>{if(!A)return!0;const{label:t,geometryType:n}=T(e);return!(!String(t).toLowerCase().includes(A)&&!n.toLowerCase().includes(A))||Object.values(e.properties||{}).some(e=>String(e).toLowerCase().includes(A))})(e)),C={title:`${t.view}${w.length?` (${w.length})`:""}`,vnode:mithril_default()(".row",[!y&&mithril_default()(".col.s12.geojson-toolbar",{style:"display:flex; gap:.5rem; align-items:center; margin-bottom:.5rem;"},[mithril_default()(".geojson-toolbar-select",{style:"width: 140px;"},mithril_default()(Select,{label:"New geometry",options:Kt,checkedId:t.newGeometryType,onchange:([e])=>t.newGeometryType=e})),mithril_default()(Button,{label:"Add feature",iconName:"add",onclick:()=>{const e={type:"Feature",properties:{},geometry:Qt(t.newGeometryType)};S({...b,type:"FeatureCollection",features:[...w,e]})}}),w.length>1&&mithril_default()("input.geojson-filter[type=text]",{placeholder:"Filter features...",value:t.filterValue,style:"flex: 1;",oninput:e=>t.filterValue=e.target.value})]),mithril_default()(".col.s12",w.length?L.length?mithril_default()(Collapsible,{oncreate:({dom:e})=>t.dom=e,onOpenStart:i?e=>{const n=t.dom.children||[];for(let t=0;t<n.length;t++){if(n[t]!==e)continue;const o=L[t]?.i;return void(void 0!==o&&i(o,w[o]))}}:void 0,className:"geojson-feature-list",items:L.map(({feature:t,i:n})=>{t.properties||(t.properties={});const{geometryType:o,label:r}=T(t);return{id:`geojson-feature-${n}`,key:n,iconName:en(o),header:mithril_default()(".geojson-feature-header",{style:"display:flex; align-items:center; gap:.5rem;"},[mithril_default()("span",r),mithril_default()("span.grey-text",`(${o})`),!y&&mithril_default()(".right",{style:"margin-left:auto;"},mithril_default()(ConfirmButton,{iconName:"delete",confirmIconName:"check",tooltip:"Delete this feature",onclick:e=>{e.stopPropagation(),(e=>{S({...b,type:"FeatureCollection",features:w.filter((t,n)=>n!==e)})})(n)}}))]),body:mithril_default()(".row",[mithril_default()(fn,{class:"col s12",form:m,obj:t.properties,i18n:p,context:l instanceof Array?[a,...l]:[a,l],containerId:s,disabled:c,readonly:u,onchange:(e,t)=>{t&&(w[n].properties=t),S({...b,type:"FeatureCollection",features:w})}}),mithril_default()("h6.col.s12",{style:"margin: 0.5rem 0;"},"Geometry"),E(t,n)])}})}):mithril_default()("span.grey-text","No features match your filter."):mithril_default()("span.grey-text",'No features yet. Use "Add feature" to create one.'))])};return mithril_default()(Tabs,{tabs:[C,D],tabWidth:"fill"})}}},ln={},sn={},cn=(e,t,n)=>{ln[e]=t,n&&(sn[e]=n)},un=(e,t)=>!e||t.every(t=>{const{id:n,required:o,type:r,repeat:i}=t;if(!n)return!0;const a=e[n];if(o&&(void 0===a||a instanceof Array&&0===a.length||"string"==typeof a&&0===a.length))return!1;if(!(r instanceof Array))return!0;const l=r;if(i){if("geojson"===i){if("string"!=typeof a||!a)return!0;try{return(JSON.parse(a).features||[]).every(e=>un(e.properties||{},l))}catch{return!0}}return!(a instanceof Array)||a.every(e=>un(e,l))}return void 0===a||un(a,l)}),pn=e=>{const{autogenerate:t,value:n,options:o}=e;return t?"none":n?"string"==typeof n?"md":"number"==typeof n?"number":"boolean"==typeof n?"checkbox":"none":o&&o.length>0?"select":"none"},dn=Jt(ln,sn),fn=()=>{const t=new Map;return{view:({attrs:{i18n:n,form:o,obj:r,onchange:i,disabled:a,readonly:l,context:s,section:c}})=>{const u=e=>i&&i(un(e,o),e),p=(e=>{if(t.has(e))return t.get(e);const n=e?(()=>{let t=!1;return({type:n,id:o})=>"section"===n?(t=o===e,!1):t})():e=>!0;return t.set(e,n),n})(c),d=s||[],f=[];for(const t of o){if(!p(t))continue;if(t.show&&!oe(t.show,r,...d.filter(e=>"object"==typeof e&&null!==e&&!("id"in e&&"label"in e))))continue;t.type||(t.type=pn(t));const o={i18n:n,field:t,obj:r,onchange:u,disabled:a,readonly:l,context:d,section:c,containerId:"body"};void 0===t.repeat||!1===t.repeat?f.push(mithril_default()(dn,o)):"geojson"===t.repeat?f.push(mithril_default()(an,o)):f.push(mithril_default()(Xt,o))}return f}}};
 //# sourceMappingURL=index.esm.js.map
 
 ;// ./src/components/intro.ts
@@ -27193,7 +27285,7 @@ This library, together with [Mithril](https://mithriljs.org) and [Mithril-materi
 
 Give it a go at the [playground](#!/playground).`;
       return mithril_default()(".row", [
-        mithril_default()(".col.s12.m7.l8", mithril_default()(he, { md })),
+        mithril_default()(".col.s12.m7.l8", mithril_default()(jt, { md })),
         mithril_default()(".col.s12.m5.l4", [
           mithril_default()("h1", "Contents"),
           mithril_default()("ul.collection", [
@@ -27217,7 +27309,7 @@ When dealing with complex forms, I noticed that I often needed to implement the 
 The form supports markdown input, repeating elements, and conditionally displaying certain elements. For an example of a project implementing this approach, have a look [here](https://github.com/DRIVER-EU/lessons-learned-framework). It is a small project consisting of an in-memory database ([lokijs](http://lokijs.org)), a REST interface ([rest-easy-loki](https://www.npmjs.com/package/rest-easy-loki)), and a dynamic form to enter lesson's learned. As the form is dynamic, it is easy to tune it into a specific one more appropriate to your customer's needs.`;
 const AboutPage = () => ({
   view: () => mithril_default()(".row", [
-    mithril_default()(".col.s12", mithril_default()(he, { md }))
+    mithril_default()(".col.s12", mithril_default()(jt, { md }))
     // m('h1', 'About'),
     // m('h1', 'Attribution'),
     // m('ul.collection', [m('li.collection-item', 'Logo: ideation by Vytautas Alech from the Noun Project.')]),
@@ -27273,7 +27365,7 @@ const source = [
   { id: "title", label: "Title", type: "text", maxLength: 80, required: true, icon: "title", className: "col s4" },
   { id: "url", label: "URL", type: "url", maxLength: 80, required: true, icon: "link", className: "col s8" }
 ];
-const geojsonInfo = (/* unused pure expression or super */ null && ([
+const geojsonInfo = [
   {
     id: "geojson",
     label: "GeoJSON editor",
@@ -27302,7 +27394,7 @@ const geojsonInfo = (/* unused pure expression or super */ null && ([
       }
     ]
   }
-]));
+];
 const tartan = [
   {
     id: "vignettes",
@@ -27436,7 +27528,7 @@ You can also include _markdown_ in your UIForm.`
   },
   { id: "id", type: "text", disabled: true, autogenerate: "guid", required: true, className: "col m6" },
   { id: "event", type: "text", maxLength: 80, required: true, className: "col m6" },
-  // { id: 'area', type: 'map', required: true, className: 'col s12' },
+  ...geojsonInfo,
   { id: "categories", type: "tags" },
   { id: "description", type: "textarea", maxLength: 500, required: false, icon: "note", show: "event" },
   { id: "created", label: 'Created "{{event}}" event on:', type: "date", required: true },
@@ -27526,14 +27618,14 @@ ${result.sources ? result.sources.map((s, i) => `${i + 1}. [${s.title}](${s.url}
       ` : "**Warning** _form is invalid!_ Please edit me.";
       return mithril_default()(".row", [
         mithril_default()(".col.s12.m4", [
-          mithril_default()(he, {
+          mithril_default()(jt, {
             md: `##### JSON FORM
 
           Feel free to edit me.`
           }),
           mithril_default()(TextArea, {
             label: "JSON form",
-            helperText: F("_Switch to another element to show the result._"),
+            helperText: G("_Switch to another element to show the result._"),
             defaultValue: JSON.stringify(form, null, 2),
             onchange: (value) => {
               state.form = JSON.parse(value);
@@ -27546,7 +27638,7 @@ ${result.sources ? result.sources.map((s, i) => `${i + 1}. [${s.title}](${s.url}
           mithril_default()("h5", "Generated Form"),
           mithril_default()(
             ".row",
-            mithril_default()(Se, {
+            mithril_default()(fn, {
               form,
               obj: result,
               onchange: print,
@@ -27563,7 +27655,7 @@ ${result.sources ? result.sources.map((s, i) => `${i + 1}. [${s.title}](${s.url}
         mithril_default()(".col.s12", [
           mithril_default()("h5", "Resulting object"),
           mithril_default()("pre", JSON.stringify(state.result, null, 2)),
-          mithril_default()(he, { md: md2 })
+          mithril_default()(jt, { md: md2 })
         ])
       ]);
     }
@@ -27785,7 +27877,7 @@ const CreateForm = () => {
               tabs: [
                 {
                   title: "Create Form",
-                  vnode: mithril_default()(Se, {
+                  vnode: mithril_default()(fn, {
                     form: fullLabelGeneratorForm,
                     obj: form,
                     onchange
@@ -27830,7 +27922,7 @@ const CreateForm = () => {
               tabs: [
                 {
                   title: "Form",
-                  vnode: mithril_default()(Se, { form: form.properties, obj: result, onchange })
+                  vnode: mithril_default()(fn, { form: form.properties, obj: result, onchange })
                 },
                 { title: "JSON Output", vnode: mithril_default()("pre", JSON.stringify(result, null, 2)) },
                 { title: "JSON Form", vnode: mithril_default()("pre", JSON.stringify(form.properties, null, 2)) }
@@ -28489,11 +28581,11 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
         label: "Subcategories",
         repeat: true,
         tabindex: 2,
-        className: "col s8",
+        className: "col offset-s1 s11",
         type: [
           { id: "id", type: "none", autogenerate: "id" },
-          { id: "label", type: "text", label: "Name", className: "col s4" },
-          { id: "desc", type: "textarea", className: "col s8" }
+          { id: "label", type: "text", label: "Name", className: "col s3" },
+          { id: "desc", type: "textarea", className: "col s9" }
         ]
       }
     ]
@@ -28504,7 +28596,7 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
     pageSize: 1,
     repeat: true,
     repeatItemClass: "",
-    onNewItem: (_, __, i) => ({ id: `CAP${i || 0 + 1}`, name: "New capability name: " + i }),
+    onNewItem: (_, __, i) => ({ id: `CAP${(i || 0) + 1}`, name: "New capability name: " + i }),
     type: [
       {
         id: "id",
@@ -29770,8 +29862,35 @@ const LLFView = () => {
       properties: { name: "Central European Region" }
     },
     categories: [
-      { id: "flood", label: "Flood" },
-      { id: "infra", label: "Infrastructure" }
+      {
+        id: "flood",
+        label: "Flood",
+        subcategories: [
+          { id: "flash-flood", label: "Flash Flood" },
+          { id: "river-flood", label: "River Flood" }
+        ]
+      },
+      {
+        id: "infra",
+        label: "Infrastructure",
+        subcategories: [
+          { id: "water-infra", label: "Water Infrastructure" },
+          { id: "power-infra", label: "Power Infrastructure" }
+        ]
+      },
+      {
+        id: "response",
+        label: "Emergency Response",
+        subcategories: [
+          { id: "evacuation", label: "Evacuation" },
+          { id: "communication", label: "Communication" }
+        ]
+      },
+      {
+        id: "recovery",
+        label: "Recovery",
+        subcategories: []
+      }
     ],
     measures: [{ id: "meas1", label: "Measure 1", type: "hw" }],
     incidentType: ["flash", "river"],
@@ -29807,7 +29926,10 @@ const LLFView = () => {
         url: "https://weather.gov/reports/flooding-2023"
       }
     ],
-    cipInfo: "Multiple critical infrastructure sectors were affected, including water treatment facilities, transportation networks, and telecommunications. The flooding demonstrated the cascading effects of extreme weather on interconnected systems."
+    cipInfo: "Multiple critical infrastructure sectors were affected, including water treatment facilities, transportation networks, and telecommunications. The flooding demonstrated the cascading effects of extreme weather on interconnected systems.",
+    capabilities: [
+      { id: "CAP1", mark: "Audi", name: "Capability 1", categoryId: "flood", subcategoryId: "", desc: "" }
+    ]
   };
   return {
     view: () => {
@@ -29828,7 +29950,7 @@ const LLFView = () => {
         // m('.col.s12', m(LayoutForm, { form, obj: result, onchange: print, context, section: 'geo' })),
         mithril_default()(
           ".col.s12",
-          mithril_default()(Se, {
+          mithril_default()(fn, {
             form,
             // section: 'intake',
             obj: result,
@@ -29846,6 +29968,7 @@ const LLFView = () => {
 };
 
 ;// ./src/components/common-examples.ts
+
 
 
 
@@ -30012,6 +30135,33 @@ const examples = [
     obj: {}
   },
   {
+    title: "Markdown (static display)",
+    json: [
+      {
+        type: "md",
+        value: "A short passage of **bold**, *italic* and `code` markdown, rendered as static HTML - no editing UI."
+      }
+    ],
+    obj: {}
+  },
+  {
+    title: "Markdown Editor (mithril-ui-form-markdown-plugin)",
+    json: [
+      {
+        id: "notes",
+        label: "Notes",
+        type: "md-editor",
+        value: "# Try me\n\nThis field is editable - switch between **wysiwyg** and *markdown* mode below."
+      }
+    ],
+    obj: {}
+  },
+  {
+    title: "GeoJSON Editor",
+    json: geojsonInfo,
+    obj: {}
+  },
+  {
     title: "Checkboxes",
     json: [
       {
@@ -30124,7 +30274,7 @@ const CommonExamples = {
               ".card-content",
               mithril_default()(".row", [
                 mithril_default()("h4.card-title.col.s12", example.title),
-                mithril_default()(Se, {
+                mithril_default()(fn, {
                   form: example.json,
                   obj: example.obj,
                   onchange: () => {
@@ -30245,7 +30395,7 @@ var leaflet_src_default = /*#__PURE__*/__webpack_require__.n(leaflet_src);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/leaflet-draw@1.0.4/node_modules/leaflet-draw/dist/leaflet.draw.js
 var leaflet_draw_dist_leaflet_draw = __webpack_require__(279);
 ;// ../../node_modules/.pnpm/mithril-leaflet@0.4.3_leaflet-draw@1.0.4_leaflet@1.9.4_mithril@2.3.8/node_modules/mithril-leaflet/dist/index.m.js
-function r(){return(r=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var o=arguments[t];for(var r in o)Object.prototype.hasOwnProperty.call(o,r)&&(e[r]=o[r])}return e}).apply(this,arguments)}var index_m_n,index_m_a=function(){return"idxxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx".replace(/[xy]/g,function(e){var t=16*Math.random()|0;return("x"===e?t:3&t|8).toString(16)})};!function(e){e.CREATED="draw:created",e.DELETED="draw:deleted",e.DELETESTART="draw:deletestart",e.DELETESTOP="draw:deletestop",e.DRAWSTART="draw:drawstart",e.DRAWSTOP="draw:drawstop",e.DRAWVERTEX="draw:drawvertex",e.EDITED="draw:edited",e.EDITMOVE="draw:editmove",e.EDITRESIZE="draw:editresize",e.EDITSTART="draw:editstart",e.EDITSTOP="draw:editstop",e.EDITVERTEX="draw:editvertex",e.MARKERCONTEXT="draw:markercontext",e.TOOLBARCLOSED="draw:toolbarclosed",e.TOOLBAROPENED="draw:toolbaropened"}(index_m_n||(index_m_n={}));var i=function(){var i={},l=function(t,o){var r=i.map;i.layerCtrl=leaflet_src_default().control.layers(t,o).addTo(r)},d=function(e,t){var o=e.name,r=i.visible,n=i.onVisibilityChanged;t?r.indexOf(o)<0&&r.push(o):i.visible=r.filter(function(e){return e!==o}),n&&n([].concat(i.visible))},c=function(e){var t=i.overlays,o=i.map;i.visible||(i.visible=[]),e&&t&&(Object.keys(t).filter(function(t){return e.indexOf(t)>=0&&i.visible.indexOf(t)<0}).forEach(function(e){i.visible.push(e),o.addLayer(t[e])}),Object.keys(t).filter(function(t){return e.indexOf(t)<0&&i.visible.indexOf(t)>=0}).forEach(function(e){i.visible=i.visible.filter(function(t){return t!==e}),o.removeLayer(t[e])}))},s={osm:leaflet_src_default().tileLayer("http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",{subdomains:["a","b"],attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',maxZoom:19,maxNativeZoom:17})},u=function(t,o){var r=Object.keys(o).reduce(function(e,t){return e.push.apply(e,o[t].getLayers()),e},[]),n=leaflet_src_default().featureGroup(r).getBounds();n&&n.isValid()&&t.fitBounds(n,{padding:new (leaflet_src_default()).Point(20,20)})};return{oninit:function(e){i.id=e.attrs.id||index_m_a()},onupdate:function(e){var t=e.attrs,o=t.visible,r=t.overlays,n=t.autoFit;!function(e){var t=i.map,o=i.overlays,r=void 0===o?{}:o;e&&Object.keys(e).forEach(function(t){r[t]!==e[t]&&(r[t]=e[t],i.layerCtrl||l(),i.layerCtrl&&i.layerCtrl.addOverlay(e[t],t))}),Object.keys(r).forEach(function(o){e&&e.hasOwnProperty(o)||(i.layerCtrl&&i.layerCtrl.removeLayer(r[o]),t.removeLayer(r[o]),delete r[o])})}(r),c(o),n&&r&&u(i.map,r)},view:function(e){var t=e.attrs,r=t.style;return mithril_default()("div[id="+i.id+"]",{style:void 0===r?"height: 400px":r,className:t.className})},oncreate:function(o){var a=o.attrs,f=a.view,v=a.zoom,m=a.autoFit,y=a.fallbackViewZoom,p=void 0===y?[52.373,4.893,13]:y,E=a.baseLayers,x=a.overlays,T=a.visible,O=a.editable,b=a.onMapClicked,w=a.onMapDblClicked,D=a.showScale,h=a.onLayerEdited,C=a.onLoadedOverlaysChanged,g=a.onZoomlevelsChange,L=a.onResize,k=a.onUnload,R=a.onLoad,S=a.onZoomStart,A=a.onMoveStart,j=a.onZoom,P=a.onMove,z=a.onZoomEnd,I=a.onMoveEnd,M=a.onLoaded,V=leaflet_src_default().map(i.id,a.mapOptions);V.on("load",function(e){setTimeout(function(){V.invalidateSize()},0),R&&R(e)}),k&&V.on("unload",function(e){return k(e)}),f?V.setView(f,v||13):m&&x&&Object.keys(x).length>0?u(V,x):p&&V.setView([p[0],p[1]],p[2]),i.map=V,i.onVisibilityChanged=C,i.overlays=r({},x),i.editable=O,V.on("overlayadd",function(o){(function(o,r){var a=i.overlays,l=i.editable,d=o.name;!l||l.indexOf(d)<0||a&&a.hasOwnProperty(d)&&(function(o,r){var a=i.map,l=i.drawCtrl;l&&a.removeControl(l);var d=new (leaflet_src_default()).Control.Draw({draw:{circle:!1,circlemarker:!1,marker:{icon:leaflet_src.Marker.prototype.options.icon}},edit:{featureGroup:o}});a.addControl(d),a.on(index_m_n.CREATED,function(e){o.addLayer(e.layer)}),r&&(a.on(index_m_n.CREATED,function(){r(o,index_m_n.CREATED)}),a.on(index_m_n.DELETED,function(){r(o,index_m_n.DELETED)}),a.on(index_m_n.EDITSTOP,function(){r(o,index_m_n.EDITSTOP)})),i.drawCtrl=d}(a[d],r),i.editingOverlay=d)})(o,h),d(o,!0)}),V.on("overlayremove",function(e){!function(e){var t=i.map,o=i.drawCtrl;i.editingOverlay===e.name&&o&&(t.off(index_m_n.CREATED),t.off(index_m_n.EDITSTOP),t.off(index_m_n.DELETED),t.removeControl(o),i.drawCtrl=void 0,i.editingOverlay=void 0)}(e),d(e,!1)}),b&&V.on("click",function(e){return b(e)}),w&&V.on("dblclick",function(e){return w(e)}),g&&V.on("zoomlevelschange",function(e){return g(e)}),L&&V.on("resize",function(e){return L(e)}),S&&V.on("zoomstart",function(e){return S(e)}),A&&V.on("movestart",function(e){return A(e)}),j&&V.on("zoom",function(e){return j(e)}),P&&V.on("move",function(e){return P(e)}),z&&V.on("zoomend",function(e){return z(e)}),I&&V.on("moveend",function(e){return I(e)});var Z=E?Object.keys(E).reduce(function(t,o){var r=E[o];return t[o]=leaflet_src_default().tileLayer(r.url,r.options),t},{}):s,N=Object.keys(Z).map(function(e){return Z[e]}).shift();N&&N.addTo(V),(E&&Object.keys(E).length>1||x&&Object.keys(x).length>0)&&l(Z,x),c(T),D&&("boolean"==typeof D?leaflet_src_default().control.scale().addTo(V):leaflet_src_default().control.scale(D).addTo(V)),M&&M(V)}}};
+function r(){return(r=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var o=arguments[t];for(var r in o)Object.prototype.hasOwnProperty.call(o,r)&&(e[r]=o[r])}return e}).apply(this,arguments)}var n,a=function(){return"idxxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx".replace(/[xy]/g,function(e){var t=16*Math.random()|0;return("x"===e?t:3&t|8).toString(16)})};!function(e){e.CREATED="draw:created",e.DELETED="draw:deleted",e.DELETESTART="draw:deletestart",e.DELETESTOP="draw:deletestop",e.DRAWSTART="draw:drawstart",e.DRAWSTOP="draw:drawstop",e.DRAWVERTEX="draw:drawvertex",e.EDITED="draw:edited",e.EDITMOVE="draw:editmove",e.EDITRESIZE="draw:editresize",e.EDITSTART="draw:editstart",e.EDITSTOP="draw:editstop",e.EDITVERTEX="draw:editvertex",e.MARKERCONTEXT="draw:markercontext",e.TOOLBARCLOSED="draw:toolbarclosed",e.TOOLBAROPENED="draw:toolbaropened"}(n||(n={}));var i=function(){var i={},l=function(t,o){var r=i.map;i.layerCtrl=leaflet_src_default().control.layers(t,o).addTo(r)},d=function(e,t){var o=e.name,r=i.visible,n=i.onVisibilityChanged;t?r.indexOf(o)<0&&r.push(o):i.visible=r.filter(function(e){return e!==o}),n&&n([].concat(i.visible))},c=function(e){var t=i.overlays,o=i.map;i.visible||(i.visible=[]),e&&t&&(Object.keys(t).filter(function(t){return e.indexOf(t)>=0&&i.visible.indexOf(t)<0}).forEach(function(e){i.visible.push(e),o.addLayer(t[e])}),Object.keys(t).filter(function(t){return e.indexOf(t)<0&&i.visible.indexOf(t)>=0}).forEach(function(e){i.visible=i.visible.filter(function(t){return t!==e}),o.removeLayer(t[e])}))},s={osm:leaflet_src_default().tileLayer("http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",{subdomains:["a","b"],attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',maxZoom:19,maxNativeZoom:17})},u=function(t,o){var r=Object.keys(o).reduce(function(e,t){return e.push.apply(e,o[t].getLayers()),e},[]),n=leaflet_src_default().featureGroup(r).getBounds();n&&n.isValid()&&t.fitBounds(n,{padding:new (leaflet_src_default()).Point(20,20)})};return{oninit:function(e){i.id=e.attrs.id||a()},onupdate:function(e){var t=e.attrs,o=t.visible,r=t.overlays,n=t.autoFit;!function(e){var t=i.map,o=i.overlays,r=void 0===o?{}:o;e&&Object.keys(e).forEach(function(t){r[t]!==e[t]&&(r[t]=e[t],i.layerCtrl||l(),i.layerCtrl&&i.layerCtrl.addOverlay(e[t],t))}),Object.keys(r).forEach(function(o){e&&e.hasOwnProperty(o)||(i.layerCtrl&&i.layerCtrl.removeLayer(r[o]),t.removeLayer(r[o]),delete r[o])})}(r),c(o),n&&r&&u(i.map,r)},view:function(e){var t=e.attrs,r=t.style;return mithril_default()("div[id="+i.id+"]",{style:void 0===r?"height: 400px":r,className:t.className})},oncreate:function(o){var a=o.attrs,f=a.view,v=a.zoom,m=a.autoFit,y=a.fallbackViewZoom,p=void 0===y?[52.373,4.893,13]:y,E=a.baseLayers,x=a.overlays,T=a.visible,O=a.editable,b=a.onMapClicked,w=a.onMapDblClicked,D=a.showScale,h=a.onLayerEdited,C=a.onLoadedOverlaysChanged,g=a.onZoomlevelsChange,L=a.onResize,k=a.onUnload,R=a.onLoad,S=a.onZoomStart,A=a.onMoveStart,j=a.onZoom,P=a.onMove,z=a.onZoomEnd,I=a.onMoveEnd,M=a.onLoaded,V=leaflet_src_default().map(i.id,a.mapOptions);V.on("load",function(e){setTimeout(function(){V.invalidateSize()},0),R&&R(e)}),k&&V.on("unload",function(e){return k(e)}),f?V.setView(f,v||13):m&&x&&Object.keys(x).length>0?u(V,x):p&&V.setView([p[0],p[1]],p[2]),i.map=V,i.onVisibilityChanged=C,i.overlays=r({},x),i.editable=O,V.on("overlayadd",function(o){(function(o,r){var a=i.overlays,l=i.editable,d=o.name;!l||l.indexOf(d)<0||a&&a.hasOwnProperty(d)&&(function(o,r){var a=i.map,l=i.drawCtrl;l&&a.removeControl(l);var d=new (leaflet_src_default()).Control.Draw({draw:{circle:!1,circlemarker:!1,marker:{icon:leaflet_src.Marker.prototype.options.icon}},edit:{featureGroup:o}});a.addControl(d),a.on(n.CREATED,function(e){o.addLayer(e.layer)}),r&&(a.on(n.CREATED,function(){r(o,n.CREATED)}),a.on(n.DELETED,function(){r(o,n.DELETED)}),a.on(n.EDITSTOP,function(){r(o,n.EDITSTOP)})),i.drawCtrl=d}(a[d],r),i.editingOverlay=d)})(o,h),d(o,!0)}),V.on("overlayremove",function(e){!function(e){var t=i.map,o=i.drawCtrl;i.editingOverlay===e.name&&o&&(t.off(n.CREATED),t.off(n.EDITSTOP),t.off(n.DELETED),t.removeControl(o),i.drawCtrl=void 0,i.editingOverlay=void 0)}(e),d(e,!1)}),b&&V.on("click",function(e){return b(e)}),w&&V.on("dblclick",function(e){return w(e)}),g&&V.on("zoomlevelschange",function(e){return g(e)}),L&&V.on("resize",function(e){return L(e)}),S&&V.on("zoomstart",function(e){return S(e)}),A&&V.on("movestart",function(e){return A(e)}),j&&V.on("zoom",function(e){return j(e)}),P&&V.on("move",function(e){return P(e)}),z&&V.on("zoomend",function(e){return z(e)}),I&&V.on("moveend",function(e){return I(e)});var Z=E?Object.keys(E).reduce(function(t,o){var r=E[o];return t[o]=leaflet_src_default().tileLayer(r.url,r.options),t},{}):s,N=Object.keys(Z).map(function(e){return Z[e]}).shift();N&&N.addTo(V),(E&&Object.keys(E).length>1||x&&Object.keys(x).length>0)&&l(Z,x),c(T),D&&("boolean"==typeof D?leaflet_src_default().control.scale().addTo(V):leaflet_src_default().control.scale(D).addTo(V)),M&&M(V)}}};
 //# sourceMappingURL=index.m.js.map
 
 ;// ../mithril-ui-form-leaflet-plugin/lib/index.mjs
@@ -30389,6 +30539,6780 @@ var ratingPlugin = () => {
 };
 
 //# sourceMappingURL=index.mjs.map
+;// ../../node_modules/.pnpm/mithril-markdown-wysiwyg@0.2.5_mithril@2.3.8/node_modules/mithril-markdown-wysiwyg/dist/index.esm.js
+
+//#region src/toolbar-config.ts
+var ICON_HEADING_MENU = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" fill="none"><path d="M6 4V20 M18 4V20 M6 12H18"/></svg>`;
+var ICON_H1 = `<svg viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4V20 M18 4V20 M6 12H18"/><text x="20" y="10" font-size="10" stroke-width="1" fill="currentColor">1</text></svg>`;
+var ICON_H2 = `<svg viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4V20 M18 4V20 M6 12H18"/><text x="20" y="10" font-size="10" stroke-width="1" fill="currentColor">2</text></svg>`;
+var ICON_H3 = `<svg viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4V20 M18 4V20 M6 12H18"/><text x="20" y="10" font-size="10" stroke-width="1" fill="currentColor">3</text></svg>`;
+var ICON_H4 = `<svg viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4V20 M18 4V20 M6 12H18"/><text x="20" y="10" font-size="10" stroke-width="1" fill="currentColor">4</text></svg>`;
+var ICON_H5 = `<svg viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4V20 M18 4V20 M6 12H18"/><text x="20" y="10" font-size="10" stroke-width="1" fill="currentColor">5</text></svg>`;
+var ICON_H6 = `<svg viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4V20 M18 4V20 M6 12H18"/><text x="20" y="10" font-size="10" stroke-width="1" fill="currentColor">6</text></svg>`;
+var ICON_PARAGRAPH = `<svg viewBox="0 0 100 100" stroke="currentColor" stroke-width="2"><path d="M74 21H44c-10 0-17 8-17 18s7 17 17 17h5v23h6V27h8v52h6V27h5z"/></svg>`;
+var ICON_BOLD = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/></svg>`;
+var ICON_ITALIC = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="4" x2="10" y2="4"/><line x1="14" y1="20" x2="5" y2="20"/><line x1="15" y1="4" x2="9" y2="20"/></svg>`;
+var ICON_STRIKETHROUGH = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4H9a3 3 0 0 0-2.83 4"/><path d="M14 12a4 4 0 0 1 0 8H6"/><line x1="4" y1="12" x2="20" y2="12"/></svg>`;
+var ICON_LINK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`;
+var ICON_INLINECODE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.75 4.75L9 19.25"/><path d="M15.25 4.75L13.5 19.25"/><path d="M19.25 7.5L22 10.5L19.25 13.5"/><path d="M4.75 7.5L2 10.5L4.75 13.5"/></svg>`;
+var ICON_CODEBLOCK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>`;
+var ICON_UL = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="4" cy="6" r="1" fill="currentColor"/><circle cx="4" cy="12" r="1" fill="currentColor"/><circle cx="4" cy="18" r="1" fill="currentColor"/></svg>`;
+var ICON_OL = `<svg viewBox="0 0 24 24" fill="none"><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="10" y1="6" x2="22" y2="6"/><line x1="10" y1="12" x2="22" y2="12"/><line x1="10" y1="18" x2="22" y2="18"/></g><g fill="currentColor" font-family="sans-serif" font-size="6" text-anchor="middle" dominant-baseline="middle"><text x="5" y="6.5">1</text><text x="5" y="12.5">2</text><text x="5" y="18.5">3</text></g></svg>`;
+var ICON_CHECKLIST = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,11 12,14 22,4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>`;
+var ICON_OUTDENT = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 8 3 12 7 16"></polyline><line x1="21" y1="12" x2="3" y2="12"></line><line x1="21" y1="5" x2="9" y2="5"></line><line x1="21" y1="19" x2="9" y2="19"></line></svg>`;
+var ICON_INDENT = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 8 21 12 17 16"></polyline><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="5" x2="15" y2="5"></line><line x1="3" y1="19" x2="15" y2="19"></line></svg>`;
+var ICON_BLOCKQUOTE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1zM15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>`;
+var ICON_HR = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="12" x2="20" y2="12"/></svg>`;
+var ICON_IMAGE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`;
+var ICON_TABLE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>`;
+var ICON_UNDO = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>`;
+var ICON_REDO = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>`;
+var ICON_CLEAR_FORMAT = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><line x1="2" y1="2" x2="22" y2="22"/></svg>`;
+var headingOptions = [
+	{
+		name: "paragraph",
+		icon: ICON_PARAGRAPH,
+		title: "Paragraph",
+		action: "paragraph",
+		shortcut: "Ctrl+0"
+	},
+	{
+		name: "heading-1",
+		icon: ICON_H1,
+		title: "Heading 1",
+		action: "heading-1",
+		shortcut: "Ctrl+1"
+	},
+	{
+		name: "heading-2",
+		icon: ICON_H2,
+		title: "Heading 2",
+		action: "heading-2",
+		shortcut: "Ctrl+2"
+	},
+	{
+		name: "heading-3",
+		icon: ICON_H3,
+		title: "Heading 3",
+		action: "heading-3",
+		shortcut: "Ctrl+3"
+	},
+	{
+		name: "heading-4",
+		icon: ICON_H4,
+		title: "Heading 4",
+		action: "heading-4",
+		shortcut: "Ctrl+4"
+	},
+	{
+		name: "heading-5",
+		icon: ICON_H5,
+		title: "Heading 5",
+		action: "heading-5",
+		shortcut: "Ctrl+5"
+	},
+	{
+		name: "heading-6",
+		icon: ICON_H6,
+		title: "Heading 6",
+		action: "heading-6",
+		shortcut: "Ctrl+6"
+	}
+];
+var toolbarButtonGroups = [
+	[{
+		name: "heading-dropdown",
+		icon: ICON_HEADING_MENU,
+		title: "Heading",
+		action: "toggleHeading",
+		dropdown: headingOptions,
+		shortcut: "Ctrl+H"
+	}],
+	[
+		{
+			name: "bold",
+			icon: ICON_BOLD,
+			title: "Bold",
+			action: "bold",
+			shortcut: "Ctrl+B",
+			toggle: true
+		},
+		{
+			name: "italic",
+			icon: ICON_ITALIC,
+			title: "Italic",
+			action: "italic",
+			shortcut: "Ctrl+I",
+			toggle: true
+		},
+		{
+			name: "strikethrough",
+			icon: ICON_STRIKETHROUGH,
+			title: "Strikethrough",
+			action: "strikethrough",
+			shortcut: "Ctrl+U",
+			toggle: true
+		}
+	],
+	[
+		{
+			name: "link",
+			icon: ICON_LINK,
+			title: "Insert Link",
+			action: "link",
+			shortcut: "Ctrl+K",
+			modal: true
+		},
+		{
+			name: "inline-code",
+			icon: ICON_INLINECODE,
+			title: "Inline Code",
+			action: "inlineCode",
+			shortcut: "Ctrl+`",
+			toggle: true
+		},
+		{
+			name: "code-block",
+			icon: ICON_CODEBLOCK,
+			title: "Code Block",
+			action: "codeBlock",
+			shortcut: "Ctrl+Shift+`"
+		}
+	],
+	[
+		{
+			name: "unordered-list",
+			icon: ICON_UL,
+			title: "Bullet List",
+			action: "unorderedList",
+			shortcut: "Ctrl+L",
+			toggle: true
+		},
+		{
+			name: "ordered-list",
+			icon: ICON_OL,
+			title: "Numbered List",
+			action: "orderedList",
+			shortcut: "Ctrl+Shift+L",
+			toggle: true
+		},
+		{
+			name: "checklist",
+			icon: ICON_CHECKLIST,
+			title: "Task List",
+			action: "taskList",
+			shortcut: "Ctrl+Shift+T",
+			toggle: true
+		},
+		{
+			name: "outdent",
+			icon: ICON_OUTDENT,
+			title: "Decrease Indent",
+			action: "outdent",
+			shortcut: "Shift+Tab"
+		},
+		{
+			name: "indent",
+			icon: ICON_INDENT,
+			title: "Increase Indent",
+			action: "indent",
+			shortcut: "Tab"
+		}
+	],
+	[{
+		name: "blockquote",
+		icon: ICON_BLOCKQUOTE,
+		title: "Quote",
+		action: "blockquote",
+		shortcut: "Ctrl+Q",
+		toggle: true
+	}, {
+		name: "horizontal-rule",
+		icon: ICON_HR,
+		title: "Horizontal Rule",
+		action: "horizontalRule",
+		shortcut: "Ctrl+R"
+	}],
+	[{
+		name: "image",
+		icon: ICON_IMAGE,
+		title: "Insert Image",
+		action: "image",
+		shortcut: "Ctrl+G",
+		modal: true
+	}, {
+		name: "table",
+		icon: ICON_TABLE,
+		title: "Insert Table",
+		action: "table",
+		shortcut: "Ctrl+T",
+		modal: true
+	}],
+	[
+		{
+			name: "undo",
+			icon: ICON_UNDO,
+			title: "Undo",
+			action: "undo",
+			shortcut: "Ctrl+Z"
+		},
+		{
+			name: "redo",
+			icon: ICON_REDO,
+			title: "Redo",
+			action: "redo",
+			shortcut: "Ctrl+Y"
+		},
+		{
+			name: "clear-format",
+			icon: ICON_CLEAR_FORMAT,
+			title: "Clear Formatting",
+			action: "removeFormat"
+		}
+	]
+];
+toolbarButtonGroups.flat();
+toolbarButtonGroups.slice(0, -1);
+var isDropdownButton = (button) => {
+	return !!button.dropdown;
+};
+var BUTTON_I18N_KEY = {
+	bold: "bold",
+	italic: "italic",
+	strikethrough: "strikethrough",
+	link: "link",
+	"inline-code": "inlineCode",
+	"code-block": "codeBlock",
+	"unordered-list": "unorderedList",
+	"ordered-list": "orderedList",
+	checklist: "checklist",
+	outdent: "outdent",
+	indent: "indent",
+	blockquote: "blockquote",
+	"horizontal-rule": "horizontalRule",
+	image: "image",
+	table: "table",
+	undo: "undo",
+	redo: "redo",
+	"clear-format": "clearFormat"
+};
+var translateHeadingOptions = (t) => headingOptions.map((option) => ({
+	...option,
+	title: option.name === "paragraph" ? t("paragraph") : `${t("heading")} ${option.name.replace("heading-", "")}`
+}));
+var createI18nToolbarConfig = (t) => {
+	return {
+		groups: toolbarButtonGroups.map((group) => group.map((button) => {
+			if (button.name === "heading-dropdown") return {
+				...button,
+				title: t("heading"),
+				dropdown: translateHeadingOptions(t)
+			};
+			const i18nKey = BUTTON_I18N_KEY[button.name];
+			return i18nKey ? {
+				...button,
+				title: t(i18nKey)
+			} : button;
+		})),
+		compact: false
+	};
+};
+//#endregion
+//#region src/utils/text-manipulation.ts
+/**
+* Get current text selection from textarea
+*/
+var getSelection = (textarea) => ({
+	start: textarea.selectionStart,
+	end: textarea.selectionEnd,
+	text: textarea.value.substring(textarea.selectionStart, textarea.selectionEnd)
+});
+/**
+* Insert text at current selection, replacing selected text
+*/
+var insertText = (textarea, text, cursorOffsetStart = 0, cursorOffsetEnd = 0) => {
+	const { start, end } = getSelection(textarea);
+	const value = textarea.value;
+	const newValue = value.slice(0, start) + text + value.slice(end);
+	textarea.value = newValue;
+	textarea.setSelectionRange(start + cursorOffsetStart, start + text.length + cursorOffsetEnd);
+	textarea.focus();
+	return newValue;
+};
+/**
+* Wrap selected text with prefix and suffix
+*/
+var wrapText = (textarea, prefix, suffix, placeholder) => {
+	const selection = getSelection(textarea);
+	return insertText(textarea, prefix + (selection.text || placeholder || "") + suffix, selection.text ? 0 : prefix.length, selection.text ? 0 : -suffix.length);
+};
+/**
+* Insert text at the beginning of each line in selection
+*/
+var prefixLines = (textarea, prefix, placeholder) => {
+	let text = getSelection(textarea).text;
+	if (!text && placeholder) text = placeholder;
+	if (!text) return insertText(textarea, prefix, prefix.length, 0);
+	return insertText(textarea, text.split("\n").map((line) => prefix + line).join("\n"), 0, 0);
+};
+/**
+* Remove prefix from lines if present, or add if not present
+*/
+var toggleLinePrefix = (textarea, prefix, placeholder) => {
+	let text = getSelection(textarea).text;
+	if (!text && placeholder) text = placeholder;
+	if (!text) return insertText(textarea, prefix, prefix.length, 0);
+	const lines = text.split("\n");
+	const hasPrefix = lines.every((line) => line.startsWith(prefix));
+	let modifiedText;
+	if (hasPrefix) modifiedText = lines.map((line) => line.slice(prefix.length)).join("\n");
+	else modifiedText = lines.map((line) => prefix + line).join("\n");
+	return insertText(textarea, modifiedText, 0, 0);
+};
+/**
+* Check if current line or selection has specific prefix
+*/
+var hasLinePrefix = (textarea, prefix) => {
+	const selection = getSelection(textarea);
+	if (selection.text) return selection.text.split("\n").every((line) => line.startsWith(prefix));
+	const { value, selectionStart } = textarea;
+	const lineStart = value.lastIndexOf("\n", selectionStart - 1) + 1;
+	const lineEnd = value.indexOf("\n", selectionStart);
+	return value.slice(lineStart, lineEnd === -1 ? void 0 : lineEnd).startsWith(prefix);
+};
+/**
+* Get current line content and position
+*/
+var getCurrentLine = (textarea) => {
+	const { value, selectionStart } = textarea;
+	const lineStart = value.lastIndexOf("\n", selectionStart - 1) + 1;
+	const lineEnd = value.indexOf("\n", selectionStart);
+	const actualLineEnd = lineEnd === -1 ? value.length : lineEnd;
+	return {
+		line: value.slice(lineStart, actualLineEnd),
+		start: lineStart,
+		end: actualLineEnd
+	};
+};
+/**
+* Replace current line with new content
+*/
+var replaceLine = (textarea, newLine) => {
+	const { start, end } = getCurrentLine(textarea);
+	const value = textarea.value;
+	const newValue = value.slice(0, start) + newLine + value.slice(end);
+	textarea.value = newValue;
+	textarea.setSelectionRange(start + newLine.length, start + newLine.length);
+	textarea.focus();
+	return newValue;
+};
+/**
+* Insert text at the beginning of current line
+*/
+var insertAtLineStart = (textarea, text) => {
+	const { line, start } = getCurrentLine(textarea);
+	return replaceLine(textarea, text + line);
+};
+/**
+* Check if selection spans multiple lines
+*/
+var isMultilineSelection = (textarea) => {
+	return getSelection(textarea).text.includes("\n");
+};
+/**
+* Indent selected lines or current line
+*/
+var indentLines = (textarea, indent = "  ") => {
+	return prefixLines(textarea, indent);
+};
+/**
+* Outdent selected lines or current line
+*/
+var outdentLines = (textarea, indent = "  ") => {
+	let text = getSelection(textarea).text;
+	if (!text) {
+		const { line } = getCurrentLine(textarea);
+		if (line.startsWith(indent)) return replaceLine(textarea, line.slice(indent.length));
+		return textarea.value;
+	}
+	return insertText(textarea, text.split("\n").map((line) => line.startsWith(indent) ? line.slice(indent.length) : line).join("\n"), 0, 0);
+};
+//#endregion
+//#region src/utils/markdown-formatting.ts
+/**
+* Pure functions for markdown syntax operations
+* These functions work with strings and return new content without side effects
+*/
+/**
+* Apply bold formatting (**text**)
+*/
+var formatBold = (textarea) => {
+	return wrapText(textarea, "**", "**", "bold text");
+};
+/**
+* Apply italic formatting (*text*)
+*/
+var formatItalic = (textarea) => {
+	return wrapText(textarea, "*", "*", "italic text");
+};
+/**
+* Apply strikethrough formatting (~~text~~)
+*/
+var formatStrikethrough = (textarea) => {
+	return wrapText(textarea, "~~", "~~", "strikethrough text");
+};
+/**
+* Apply inline code formatting (`code`)
+*/
+var formatInlineCode = (textarea) => {
+	return wrapText(textarea, "`", "`", "code");
+};
+/**
+* Apply code block formatting (```\ncode\n```)
+*/
+var formatCodeBlock = (textarea) => {
+	const selection = getSelection(textarea);
+	return insertText(textarea, `\`\`\`\n${selection.text || "code block"}\n\`\`\``, selection.text ? 0 : 4, 0);
+};
+/**
+* Toggle heading level (cycles through H1-H6, then removes)
+*/
+var toggleHeading = (textarea) => {
+	const { line } = getCurrentLine(textarea);
+	const headingMatch = line.match(/^(#{1,6})\s/);
+	if (headingMatch) {
+		const currentLevel = headingMatch[1].length;
+		if (currentLevel < 6) return replaceLine(textarea, "#".repeat(currentLevel + 1) + line.slice(currentLevel));
+		else return replaceLine(textarea, line.slice(7));
+	} else return replaceLine(textarea, line.trim() ? `# ${line}` : "# Heading");
+};
+/**
+* Apply specific heading level (1-6)
+*/
+var formatHeading = (level) => (textarea) => {
+	if (level < 1 || level > 6) return textarea.value;
+	const { line } = getCurrentLine(textarea);
+	const headingPrefix = "#".repeat(level) + " ";
+	const cleanLine = line.replace(/^#{1,6}\s*/, "");
+	return replaceLine(textarea, cleanLine ? `${headingPrefix}${cleanLine}` : `${headingPrefix}Heading ${level}`);
+};
+/**
+* Toggle unordered list formatting
+*/
+var toggleUnorderedList = (textarea) => {
+	return toggleLinePrefix(textarea, "- ", "List item");
+};
+/**
+* Toggle ordered list formatting
+*/
+var toggleOrderedList = (textarea) => {
+	const selection = getSelection(textarea);
+	if (selection.text) {
+		const lines = selection.text.split("\n");
+		const isOrderedList = lines.every((line, index) => line.match(new RegExp(`^${index + 1}\\. `)));
+		let modifiedText;
+		if (isOrderedList) modifiedText = lines.map((line) => line.replace(/^\d+\. /, "")).join("\n");
+		else modifiedText = lines.map((line, index) => `${index + 1}. ${line}`).join("\n");
+		return insertText(textarea, modifiedText, 0, 0);
+	} else return insertText(textarea, "1. List item", 3, 0);
+};
+/**
+* Toggle blockquote formatting
+*/
+var toggleBlockquote = (textarea) => {
+	return toggleLinePrefix(textarea, "> ", "Quote");
+};
+/**
+* Insert horizontal rule
+*/
+var insertHorizontalRule = (textarea) => {
+	return insertText(textarea, "\n---\n", 0, 0);
+};
+/**
+* Insert link formatting [text](url)
+*/
+var insertLink = (textarea) => {
+	const linkText = getSelection(textarea).text || "link text";
+	return insertText(textarea, `[${linkText}](url)`, linkText.length + 2, -4);
+};
+/**
+* Insert image formatting ![alt](src)
+*/
+var insertImage = (textarea) => {
+	const altText = getSelection(textarea).text || "alt text";
+	return insertText(textarea, `![${altText}](image-url)`, altText.length + 3, -11);
+};
+/**
+* Insert table with specified dimensions
+*/
+var insertTable = (rows = 3, cols = 3) => (textarea) => {
+	return insertText(textarea, `\n${[
+		`| ${Array(cols).fill("Header").map((h, i) => `${h} ${i + 1}`).join(" | ")} |`,
+		`| ${Array(cols).fill("-------").join(" | ")} |`,
+		...Array(rows - 1).fill(null).map((_, rowIndex) => {
+			return `| ${Array(cols).fill("Cell").map((c, colIndex) => `${c} ${rowIndex + 1}-${colIndex + 1}`).join(" | ")} |`;
+		})
+	].join("\n")}\n`, 0, 0);
+};
+/**
+* Apply or remove formatting based on current state
+*/
+var toggleFormatting = (textarea, startMarker, endMarker, placeholder) => {
+	const selection = getSelection(textarea);
+	const { value, selectionStart, selectionEnd } = textarea;
+	const beforeStart = value.slice(Math.max(0, selectionStart - startMarker.length), selectionStart);
+	const afterEnd = value.slice(selectionEnd, selectionEnd + endMarker.length);
+	if (beforeStart === startMarker && afterEnd === endMarker) {
+		const newValue = value.slice(0, selectionStart - startMarker.length) + selection.text + value.slice(selectionEnd + endMarker.length);
+		textarea.value = newValue;
+		textarea.setSelectionRange(selectionStart - startMarker.length, selectionEnd - startMarker.length);
+		return newValue;
+	} else return wrapText(textarea, startMarker, endMarker, placeholder);
+};
+/**
+* Smart list handling - converts between list types or adds lists
+*/
+var smartList = (listType) => (textarea) => {
+	const { line } = getCurrentLine(textarea);
+	const isUnordered = /^-\s/.test(line);
+	const isOrdered = /^\d+\.\s/.test(line);
+	if (listType === "unordered") {
+		if (isUnordered) return replaceLine(textarea, line.slice(2));
+		else if (isOrdered) return replaceLine(textarea, line.replace(/^\d+\.\s/, "- "));
+		else return replaceLine(textarea, line ? `- ${line}` : "- List item");
+	} else if (isOrdered) return replaceLine(textarea, line.replace(/^\d+\.\s/, ""));
+	else if (isUnordered) return replaceLine(textarea, line.replace(/^-\s/, "1. "));
+	else return replaceLine(textarea, line ? `1. ${line}` : "1. List item");
+};
+/**
+* Toggle a task-list checkbox on the current line: turns a plain, unordered,
+* or ordered line into `- [ ] text`, or strips the marker back to plain text
+* when the line is already a task item.
+*/
+var smartTaskList = (textarea) => {
+	const { line } = getCurrentLine(textarea);
+	const isTask = /^-\s\[[ xX]\]\s/.test(line);
+	const isUnordered = /^-\s/.test(line);
+	const isOrdered = /^\d+\.\s/.test(line);
+	if (isTask) return replaceLine(textarea, line.replace(/^-\s\[[ xX]\]\s/, ""));
+	else if (isUnordered) return replaceLine(textarea, line.replace(/^-\s/, "- [ ] "));
+	else if (isOrdered) return replaceLine(textarea, line.replace(/^\d+\.\s/, "- [ ] "));
+	else return replaceLine(textarea, line ? `- [ ] ${line}` : "- [ ] Task item");
+};
+/**
+* Check if current selection/line has specific formatting
+*/
+var hasFormatting = (textarea, startMarker, endMarker) => {
+	getSelection(textarea);
+	const { value, selectionStart, selectionEnd } = textarea;
+	const beforeStart = value.slice(Math.max(0, selectionStart - startMarker.length), selectionStart);
+	const afterEnd = value.slice(selectionEnd, selectionEnd + endMarker.length);
+	return beforeStart === startMarker && afterEnd === endMarker;
+};
+/**
+* Get current formatting state for toolbar button states
+*/
+var getFormattingState = (textarea) => {
+	const { line } = getCurrentLine(textarea);
+	return {
+		bold: hasFormatting(textarea, "**", "**"),
+		italic: hasFormatting(textarea, "*", "*"),
+		strikethrough: hasFormatting(textarea, "~~", "~~"),
+		inlineCode: hasFormatting(textarea, "`", "`"),
+		heading: /^#{1,6}\s/.test(line),
+		headingLevel: (() => {
+			const match = line.match(/^(#{1,6})\s/);
+			return match ? match[1].length : 0;
+		})(),
+		unorderedList: hasLinePrefix(textarea, "- "),
+		orderedList: /^\d+\.\s/.test(line),
+		blockquote: hasLinePrefix(textarea, "> ")
+	};
+};
+//#endregion
+//#region src/utils/dom-commands.ts
+/**
+* Execute a document command and return the updated HTML
+*/
+var execCommand = (element, command, value) => {
+	element.focus();
+	const selection = document.getSelection();
+	selection && selection.rangeCount > 0 && selection.getRangeAt(0);
+	document.execCommand(command, false, value);
+	return element.innerHTML;
+};
+/**
+* Insert HTML at current cursor position
+*/
+var insertHTML = (element, html) => {
+	return execCommand(element, "insertHTML", html);
+};
+/**
+* Apply bold formatting
+*/
+var formatBoldWYSIWYG = (element) => {
+	return execCommand(element, "bold");
+};
+/**
+* Apply italic formatting
+*/
+var formatItalicWYSIWYG = (element) => {
+	return execCommand(element, "italic");
+};
+/**
+* Apply strikethrough formatting
+*/
+var formatStrikethroughWYSIWYG = (element) => {
+	return execCommand(element, "strikeThrough");
+};
+/**
+* Apply underline formatting
+*/
+var formatUnderlineWYSIWYG = (element) => {
+	return execCommand(element, "underline");
+};
+/**
+* Apply heading formatting (H1-H6)
+*/
+var formatHeadingWYSIWYG = (level) => (element) => {
+	if (level < 1 || level > 6) return element.innerHTML;
+	return execCommand(element, "formatBlock", `h${level}`);
+};
+/**
+* Apply paragraph formatting
+*/
+var formatParagraphWYSIWYG = (element) => {
+	return execCommand(element, "formatBlock", "p");
+};
+/**
+* Whether the current selection sits inside a `<blockquote>`.
+*/
+var isCursorInBlockquote = () => {
+	const selection = document.getSelection();
+	if (!selection || selection.rangeCount === 0) return false;
+	const node = selection.getRangeAt(0).commonAncestorContainer;
+	return (node.nodeType === Node.TEXT_NODE ? node.parentElement : node)?.closest("blockquote") != null;
+};
+/**
+* Toggle blockquote formatting: wraps the current block in a `<blockquote>`,
+* or reverts it to a plain paragraph if it's already inside one. Without
+* this, repeatedly pressing the toolbar button nests another blockquote each
+* time instead of toggling it off.
+*/
+var formatBlockquoteWYSIWYG = (element) => {
+	if (isCursorInBlockquote()) return execCommand(element, "formatBlock", "p");
+	return execCommand(element, "formatBlock", "blockquote");
+};
+/**
+* Insert unordered list
+*/
+var insertUnorderedListWYSIWYG = (element) => {
+	return execCommand(element, "insertUnorderedList");
+};
+/**
+* Insert ordered list
+*/
+var insertOrderedListWYSIWYG = (element) => {
+	return execCommand(element, "insertOrderedList");
+};
+/**
+* Indent current line/selection
+*/
+var indentWYSIWYG = (element) => {
+	return execCommand(element, "indent");
+};
+/**
+* Outdent current line/selection
+*/
+var outdentWYSIWYG = (element) => {
+	return execCommand(element, "outdent");
+};
+/**
+* Whether a collapsed range sits at the very start (or end) of `block`'s
+* text content, regardless of how many nested inline elements/text nodes it
+* takes to get there.
+*/
+var isRangeAtBlockStart = (range, block) => {
+	const preRange = document.createRange();
+	preRange.selectNodeContents(block);
+	preRange.setEnd(range.startContainer, range.startOffset);
+	return preRange.toString().length === 0;
+};
+var isRangeAtBlockEnd = (range, block) => {
+	const postRange = document.createRange();
+	postRange.selectNodeContents(block);
+	postRange.setStart(range.startContainer, range.startOffset);
+	return postRange.toString().length === 0;
+};
+/**
+* Find an `<hr>` immediately adjacent to a collapsed cursor: either directly
+* bordering it (cursor sitting between block-level siblings) or just outside
+* the block whose start/end the cursor is touching.
+*/
+var findAdjacentHorizontalRule = () => {
+	const selection = document.getSelection();
+	if (!selection || selection.rangeCount === 0 || !selection.isCollapsed) return null;
+	const range = selection.getRangeAt(0);
+	const { startContainer, startOffset } = range;
+	if (startContainer.nodeType === Node.ELEMENT_NODE) {
+		const prev = startContainer.childNodes[startOffset - 1];
+		const next = startContainer.childNodes[startOffset];
+		if (prev instanceof HTMLElement && prev.tagName === "HR") return prev;
+		if (next instanceof HTMLElement && next.tagName === "HR") return next;
+		return null;
+	}
+	const block = startContainer.parentElement;
+	if (!block) return null;
+	if (isRangeAtBlockStart(range, block)) {
+		const prev = block.previousElementSibling;
+		if (prev?.tagName === "HR") return prev;
+	}
+	if (isRangeAtBlockEnd(range, block)) {
+		const next = block.nextElementSibling;
+		if (next?.tagName === "HR") return next;
+	}
+	return null;
+};
+/**
+* Insert a horizontal rule, or remove one the cursor is already sitting
+* right next to instead of inserting a second one at the same spot.
+*/
+var insertHorizontalRuleWYSIWYG = (element) => {
+	const adjacent = findAdjacentHorizontalRule();
+	if (adjacent) {
+		adjacent.remove();
+		return element.innerHTML;
+	}
+	return insertHTML(element, "<hr>");
+};
+/**
+* Insert inline code
+*/
+var insertInlineCodeWYSIWYG = (element) => {
+	return insertHTML(element, `<code>${document.getSelection()?.toString() || "code"}</code>`);
+};
+/**
+* Insert code block
+*/
+var insertCodeBlockWYSIWYG = (element) => {
+	return insertHTML(element, `<pre><code>${document.getSelection()?.toString() || "code block"}</code></pre>`);
+};
+/**
+* Insert link
+*/
+var insertLinkWYSIWYG = (url, text) => (element) => {
+	const selection = document.getSelection();
+	return insertHTML(element, `<a href="${url}">${text || selection?.toString() || "link text"}</a>`);
+};
+/**
+* Insert image
+*/
+var insertImageWYSIWYG = (src, alt = "", title) => (element) => {
+	return insertHTML(element, `<img src="${src}" alt="${alt}"${title ? ` title="${title}"` : ""}>`);
+};
+/**
+* Insert table
+*/
+var insertTableWYSIWYG = (rows = 3, cols = 3) => (element) => {
+	return insertHTML(element, `<table><thead>${`<tr>${Array(cols).fill(null).map((_, i) => `<th>Header ${i + 1}</th>`).join("")}</tr>`}</thead><tbody>${Array(rows - 1).fill(null).map((_, rowIndex) => {
+		return `<tr>${Array(cols).fill(null).map((_, colIndex) => `<td>Cell ${rowIndex + 1}-${colIndex + 1}</td>`).join("")}</tr>`;
+	}).join("")}</tbody></table>`);
+};
+/**
+* Remove formatting from selection
+*/
+var removeFormattingWYSIWYG = (element) => {
+	return execCommand(element, "removeFormat");
+};
+/**
+* Check if undo is available
+*/
+var canUndoWYSIWYG = (element) => {
+	return document.queryCommandEnabled("undo");
+};
+/**
+* Check if redo is available
+*/
+var canRedoWYSIWYG = (element) => {
+	return document.queryCommandEnabled("redo");
+};
+/**
+* Undo last action
+*/
+var undoWYSIWYG = (element) => {
+	return execCommand(element, "undo");
+};
+/**
+* Redo last undone action
+*/
+var redoWYSIWYG = (element) => {
+	return execCommand(element, "redo");
+};
+/**
+* Select all content
+*/
+var selectAllWYSIWYG = (element) => {
+	return execCommand(element, "selectAll");
+};
+/**
+* Get current selection information
+*/
+var getSelectionInfo = (element) => {
+	const selection = document.getSelection();
+	if (!selection || selection.rangeCount === 0) return null;
+	const range = selection.getRangeAt(0);
+	const selectedText = selection.toString();
+	if (!element.contains(range.commonAncestorContainer)) return null;
+	return {
+		text: selectedText,
+		range,
+		collapsed: selection.isCollapsed,
+		anchorNode: selection.anchorNode,
+		focusNode: selection.focusNode,
+		anchorOffset: selection.anchorOffset,
+		focusOffset: selection.focusOffset
+	};
+};
+/**
+* Restore selection to a specific range
+*/
+var restoreSelection = (range) => {
+	const selection = document.getSelection();
+	if (selection) {
+		selection.removeAllRanges();
+		selection.addRange(range);
+	}
+};
+/**
+* Get formatting state of current selection
+*/
+var getFormattingStateWYSIWYG = (element) => {
+	return {
+		bold: document.queryCommandState("bold"),
+		italic: document.queryCommandState("italic"),
+		strikethrough: document.queryCommandState("strikeThrough"),
+		underline: document.queryCommandState("underline"),
+		unorderedList: document.queryCommandState("insertUnorderedList"),
+		orderedList: document.queryCommandState("insertOrderedList"),
+		blockquote: (() => {
+			const selection = document.getSelection();
+			if (selection && selection.rangeCount > 0) {
+				const node = selection.getRangeAt(0).commonAncestorContainer;
+				return (node.nodeType === Node.TEXT_NODE ? node.parentElement : node)?.closest("blockquote") !== null;
+			}
+			return false;
+		})(),
+		heading: (() => {
+			const selection = document.getSelection();
+			if (selection && selection.rangeCount > 0) {
+				const node = selection.getRangeAt(0).commonAncestorContainer;
+				const headingElement = (node.nodeType === Node.TEXT_NODE ? node.parentElement : node)?.closest("h1, h2, h3, h4, h5, h6");
+				if (headingElement) return {
+					isHeading: true,
+					level: parseInt(headingElement.tagName.charAt(1))
+				};
+			}
+			return {
+				isHeading: false,
+				level: 0
+			};
+		})()
+	};
+};
+/**
+* Check if browser supports specific command
+*/
+var supportsCommand = (command) => {
+	try {
+		return document.queryCommandSupported(command);
+	} catch {
+		return false;
+	}
+};
+/**
+* Clean up common contentEditable artifacts
+*/
+var cleanupHTML = (html) => {
+	return html.replace(/<p><\/p>/g, "").replace(/<div><\/div>/g, "").replace(/<div>/g, "<p>").replace(/<\/div>/g, "</p>").replace(/<span>(.*?)<\/span>/g, "$1").replace(/\s+/g, " ").trim();
+};
+/**
+* Focus element and place cursor at end
+*/
+var focusAtEnd = (element) => {
+	element.focus();
+	const selection = document.getSelection();
+	if (selection) {
+		selection.selectAllChildren(element);
+		selection.collapseToEnd();
+	}
+};
+/**
+* Focus element and place cursor at beginning
+*/
+var focusAtStart = (element) => {
+	element.focus();
+	const selection = document.getSelection();
+	if (selection) {
+		selection.selectAllChildren(element);
+		selection.collapseToStart();
+	}
+};
+/**
+* Task list utilities for WYSIWYG mode
+*/
+/**
+* Find the list item (LI) that contains the current cursor position
+*/
+var findCurrentListItem = () => {
+	const selection = document.getSelection();
+	if (!selection || selection.rangeCount === 0) return null;
+	let node = selection.getRangeAt(0).startContainer;
+	while (node && node !== document.body) {
+		if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "LI") return node;
+		node = node.parentNode;
+	}
+	return null;
+};
+/**
+* If the cursor sits inside a non-empty task list item (an `<li>` starting
+* with a checkbox `<input>`), split it in two: the text after the cursor
+* moves into a new task item with a fresh, unchecked checkbox, and the
+* cursor moves there. Returns the updated `innerHTML`, or `null` when the
+* cursor isn't inside a task item or the item is empty - callers should fall
+* back to the browser's native Enter handling in that case (which already
+* exits an empty list item correctly).
+*/
+var continueTaskListItem = (element) => {
+	const li = findCurrentListItem();
+	if (!li) return null;
+	const checkbox = li.firstElementChild;
+	if (!(checkbox?.nodeName === "INPUT" && checkbox.type === "checkbox")) return null;
+	if ((li.textContent ?? "").trim() === "") return null;
+	const selection = document.getSelection();
+	if (!selection || selection.rangeCount === 0 || !selection.isCollapsed) return null;
+	const range = selection.getRangeAt(0);
+	if (!li.contains(range.startContainer) || !li.lastChild) return null;
+	const newLi = document.createElement("li");
+	const newCheckbox = document.createElement("input");
+	newCheckbox.type = "checkbox";
+	newCheckbox.disabled = true;
+	newLi.appendChild(newCheckbox);
+	newLi.appendChild(document.createTextNode(" "));
+	const moveRange = document.createRange();
+	moveRange.setStart(range.startContainer, range.startOffset);
+	moveRange.setEndAfter(li.lastChild);
+	newLi.appendChild(moveRange.extractContents());
+	li.parentNode?.insertBefore(newLi, li.nextSibling);
+	const caretRange = document.createRange();
+	caretRange.setStart(newLi, 2);
+	caretRange.collapse(true);
+	selection.removeAllRanges();
+	selection.addRange(caretRange);
+	return element.innerHTML;
+};
+/**
+* Toggle a checkbox on the current list item, turning it into a task item
+* (or, if it already is one, back into a plain item). If the cursor isn't
+* inside a list yet, one is created first via the native list command.
+*/
+var insertTaskListWYSIWYG = (element) => {
+	let li = findCurrentListItem();
+	if (!li) {
+		execCommand(element, "insertUnorderedList");
+		li = findCurrentListItem();
+		if (!li) return element.innerHTML;
+	}
+	const existingCheckbox = li.firstElementChild?.nodeName === "INPUT" && li.firstElementChild.type === "checkbox" ? li.firstElementChild : null;
+	if (existingCheckbox) {
+		const spaceNode = existingCheckbox.nextSibling;
+		if (spaceNode?.nodeType === Node.TEXT_NODE && spaceNode.textContent?.startsWith(" ")) spaceNode.textContent = spaceNode.textContent.slice(1);
+		existingCheckbox.remove();
+	} else {
+		const checkbox = document.createElement("input");
+		checkbox.type = "checkbox";
+		checkbox.disabled = true;
+		li.insertBefore(document.createTextNode(" "), li.firstChild);
+		li.insertBefore(checkbox, li.firstChild);
+	}
+	return element.innerHTML;
+};
+/**
+* Table manipulation utilities for WYSIWYG mode
+*/
+/**
+* Find the table element that contains the current cursor position
+*/
+var findTableAtCursor = () => {
+	const selection = document.getSelection();
+	if (!selection || selection.rangeCount === 0) return null;
+	let node = selection.getRangeAt(0).commonAncestorContainer;
+	while (node && node !== document.body) {
+		if (node.nodeType === Node.ELEMENT_NODE) {
+			const element = node;
+			if (element.tagName === "TABLE") return element;
+			if (element.tagName === "TD" || element.tagName === "TH") return element.closest("table");
+		}
+		node = node.parentNode;
+	}
+	return null;
+};
+/**
+* Find the current table cell (TD or TH) that contains the cursor
+*/
+var findCurrentTableCell = () => {
+	const selection = document.getSelection();
+	if (!selection || selection.rangeCount === 0) return null;
+	let node = selection.getRangeAt(0).commonAncestorContainer;
+	while (node && node !== document.body) {
+		if (node.nodeType === Node.ELEMENT_NODE) {
+			const element = node;
+			if (element.tagName === "TD" || element.tagName === "TH") return element;
+		}
+		node = node.parentNode;
+	}
+	return null;
+};
+/**
+* Get the row and column index of a table cell
+*/
+var getCellPosition = (cell) => {
+	const row = cell.closest("tr");
+	const table = cell.closest("table");
+	return {
+		row: Array.from(table.rows).indexOf(row),
+		col: Array.from(row.cells).indexOf(cell)
+	};
+};
+/**
+* Insert a row above the row containing the given cell.
+* If the row is the header row, the new row's cells are also `th` elements.
+*/
+var insertRowAbove = (element, cell) => {
+	const table = cell.closest("table");
+	const { row: rowIndex } = getCellPosition(cell);
+	if (!table) return element.innerHTML;
+	const currentRow = table.rows[rowIndex];
+	const cellCount = currentRow.cells.length;
+	const newRow = table.insertRow(rowIndex);
+	const isHeaderRow = rowIndex === 0 && currentRow.querySelector("th");
+	for (let i = 0; i < cellCount; i++) {
+		const newCell = newRow.insertCell(i);
+		newCell.innerHTML = "&nbsp;";
+		if (isHeaderRow) {
+			const th = document.createElement("th");
+			th.innerHTML = "&nbsp;";
+			newCell.parentNode?.replaceChild(th, newCell);
+		}
+	}
+	return element.innerHTML;
+};
+/**
+* Insert a row below the row containing the given cell.
+*/
+var insertRowBelow = (element, cell) => {
+	const table = cell.closest("table");
+	const { row: rowIndex } = getCellPosition(cell);
+	if (!table) return element.innerHTML;
+	const cellCount = table.rows[rowIndex].cells.length;
+	const newRow = table.insertRow(rowIndex + 1);
+	for (let i = 0; i < cellCount; i++) {
+		const newCell = newRow.insertCell(i);
+		newCell.innerHTML = "&nbsp;";
+	}
+	return element.innerHTML;
+};
+/**
+* Insert a column to the left of the column containing the given cell.
+* If the first row is a header row, the new column's first cell is a `th` too.
+*/
+var insertColumnLeft = (element, cell) => {
+	const table = cell.closest("table");
+	const { col: colIndex } = getCellPosition(cell);
+	if (!table) return element.innerHTML;
+	for (let i = 0; i < table.rows.length; i++) {
+		const row = table.rows[i];
+		const newCell = row.insertCell(colIndex);
+		if (i === 0 && row.querySelector("th")) {
+			const th = document.createElement("th");
+			th.innerHTML = "&nbsp;";
+			newCell.parentNode?.replaceChild(th, newCell);
+		} else newCell.innerHTML = "&nbsp;";
+	}
+	return element.innerHTML;
+};
+/**
+* Insert a column to the right of the column containing the given cell.
+* If the first row is a header row, the new column's first cell is a `th` too.
+*/
+var insertColumnRight = (element, cell) => {
+	const table = cell.closest("table");
+	const { col: colIndex } = getCellPosition(cell);
+	if (!table) return element.innerHTML;
+	for (let i = 0; i < table.rows.length; i++) {
+		const row = table.rows[i];
+		const newCell = row.insertCell(colIndex + 1);
+		if (i === 0 && row.querySelector("th")) {
+			const th = document.createElement("th");
+			th.innerHTML = "&nbsp;";
+			newCell.parentNode?.replaceChild(th, newCell);
+		} else newCell.innerHTML = "&nbsp;";
+	}
+	return element.innerHTML;
+};
+/**
+* Delete the row containing the given cell. No-op if it's the only row.
+*/
+var deleteCurrentRow = (element, cell) => {
+	const table = cell.closest("table");
+	const { row: rowIndex } = getCellPosition(cell);
+	if (!table || table.rows.length <= 1) return element.innerHTML;
+	table.deleteRow(rowIndex);
+	return element.innerHTML;
+};
+/**
+* Delete the column containing the given cell. No-op if it's the only column.
+*/
+var deleteCurrentColumn = (element, cell) => {
+	const table = cell.closest("table");
+	const { col: colIndex } = getCellPosition(cell);
+	if (!table || table.rows[0] && table.rows[0].cells.length <= 1) return element.innerHTML;
+	for (let i = 0; i < table.rows.length; i++) {
+		const row = table.rows[i];
+		if (row.cells[colIndex]) row.deleteCell(colIndex);
+	}
+	return element.innerHTML;
+};
+/**
+* Delete the table containing the given cell.
+*/
+var deleteCurrentTable = (element, cell) => {
+	const table = cell.closest("table");
+	if (!table) return element.innerHTML;
+	table.remove();
+	return element.innerHTML;
+};
+//#endregion
+//#region src/utils/content-history.ts
+var createContentHistory = (initial, limit = 100) => {
+	let current = initial;
+	let undoStack = [];
+	let redoStack = [];
+	const record = (content) => {
+		if (content === current) return;
+		undoStack.push(current);
+		if (undoStack.length > limit) undoStack.shift();
+		redoStack = [];
+		current = content;
+	};
+	const undo = () => {
+		const previous = undoStack.pop();
+		if (previous === void 0) return void 0;
+		redoStack.push(current);
+		current = previous;
+		return current;
+	};
+	const redo = () => {
+		const next = redoStack.pop();
+		if (next === void 0) return void 0;
+		undoStack.push(current);
+		current = next;
+		return current;
+	};
+	const canUndo = () => undoStack.length > 0;
+	const canRedo = () => redoStack.length > 0;
+	const reset = (content) => {
+		current = content;
+		undoStack = [];
+		redoStack = [];
+	};
+	return {
+		record,
+		undo,
+		redo,
+		canUndo,
+		canRedo,
+		reset
+	};
+};
+//#endregion
+//#region src/utils/keyboard-shortcuts.ts
+/**
+* Default keyboard shortcuts for markdown editor
+*/
+var defaultShortcuts = [
+	{
+		key: "b",
+		ctrl: true,
+		action: "bold",
+		description: "Bold text"
+	},
+	{
+		key: "i",
+		ctrl: true,
+		action: "italic",
+		description: "Italic text"
+	},
+	{
+		key: "u",
+		ctrl: true,
+		action: "strikethrough",
+		description: "Strikethrough text"
+	},
+	{
+		key: "`",
+		ctrl: true,
+		action: "inlineCode",
+		description: "Inline code"
+	},
+	{
+		key: "1",
+		ctrl: true,
+		action: "heading-1",
+		description: "Heading 1"
+	},
+	{
+		key: "2",
+		ctrl: true,
+		action: "heading-2",
+		description: "Heading 2"
+	},
+	{
+		key: "3",
+		ctrl: true,
+		action: "heading-3",
+		description: "Heading 3"
+	},
+	{
+		key: "4",
+		ctrl: true,
+		action: "heading-4",
+		description: "Heading 4"
+	},
+	{
+		key: "5",
+		ctrl: true,
+		action: "heading-5",
+		description: "Heading 5"
+	},
+	{
+		key: "6",
+		ctrl: true,
+		action: "heading-6",
+		description: "Heading 6"
+	},
+	{
+		key: "0",
+		ctrl: true,
+		action: "paragraph",
+		description: "Paragraph"
+	},
+	{
+		key: "l",
+		ctrl: true,
+		action: "unorderedList",
+		description: "Unordered list"
+	},
+	{
+		key: "l",
+		ctrl: true,
+		shift: true,
+		action: "orderedList",
+		description: "Ordered list"
+	},
+	{
+		key: "Tab",
+		action: "indent",
+		description: "Indent"
+	},
+	{
+		key: "Tab",
+		shift: true,
+		action: "outdent",
+		description: "Outdent"
+	},
+	{
+		key: "]",
+		ctrl: true,
+		action: "indent",
+		description: "Indent"
+	},
+	{
+		key: "[",
+		ctrl: true,
+		action: "outdent",
+		description: "Outdent"
+	},
+	{
+		key: "q",
+		ctrl: true,
+		action: "blockquote",
+		description: "Blockquote"
+	},
+	{
+		key: "k",
+		ctrl: true,
+		action: "link",
+		description: "Insert link"
+	},
+	{
+		key: "g",
+		ctrl: true,
+		action: "image",
+		description: "Insert image"
+	},
+	{
+		key: "t",
+		ctrl: true,
+		action: "table",
+		description: "Insert table"
+	},
+	{
+		key: "r",
+		ctrl: true,
+		action: "horizontalRule",
+		description: "Horizontal rule"
+	},
+	{
+		key: "`",
+		ctrl: true,
+		shift: true,
+		action: "codeBlock",
+		description: "Code block"
+	},
+	{
+		key: "z",
+		ctrl: true,
+		action: "undo",
+		description: "Undo"
+	},
+	{
+		key: "z",
+		ctrl: true,
+		shift: true,
+		action: "redo",
+		description: "Redo"
+	},
+	{
+		key: "y",
+		ctrl: true,
+		action: "redo",
+		description: "Redo"
+	},
+	{
+		key: "a",
+		ctrl: true,
+		action: "selectAll",
+		description: "Select all"
+	},
+	{
+		key: "m",
+		ctrl: true,
+		action: "toggleMode",
+		description: "Toggle mode"
+	}
+];
+/**
+* Mac-specific shortcuts (using cmd instead of ctrl)
+*/
+var macShortcuts = defaultShortcuts.map((shortcut) => ({
+	...shortcut,
+	ctrl: false,
+	meta: shortcut.ctrl
+}));
+/**
+* Check if a keyboard event matches a shortcut
+*/
+var matchesShortcut = (event, shortcut) => {
+	if (event.key.toLowerCase() !== shortcut.key.toLowerCase()) return false;
+	const ctrlMatch = (shortcut.ctrl ?? false) === event.ctrlKey;
+	const altMatch = (shortcut.alt ?? false) === event.altKey;
+	const shiftMatch = (shortcut.shift ?? false) === event.shiftKey;
+	const metaMatch = (shortcut.meta ?? false) === event.metaKey;
+	return ctrlMatch && altMatch && shiftMatch && metaMatch;
+};
+/**
+* Find matching shortcut for keyboard event
+*/
+var findMatchingShortcut = (event, shortcuts = defaultShortcuts) => {
+	return shortcuts.find((shortcut) => matchesShortcut(event, shortcut)) || null;
+};
+/**
+* Handle keyboard event and execute corresponding action
+*/
+var handleKeyboardShortcut = (event, actionHandler, shortcuts = defaultShortcuts) => {
+	const matchingShortcut = findMatchingShortcut(event, shortcuts);
+	if (matchingShortcut) {
+		event.preventDefault();
+		event.stopPropagation();
+		actionHandler(matchingShortcut.action);
+		return true;
+	}
+	return false;
+};
+/**
+* Create keyboard event handler for specific element
+*/
+var createKeyboardHandler = (actionHandler, shortcuts = defaultShortcuts) => {
+	return (event) => {
+		handleKeyboardShortcut(event, actionHandler, shortcuts);
+	};
+};
+/**
+* Format shortcut for display (e.g., "Ctrl+B" or "⌘B")
+*/
+var formatShortcutDisplay = (shortcut, isMac = false) => {
+	const parts = [];
+	if (isMac) {
+		if (shortcut.meta) parts.push("⌘");
+		if (shortcut.ctrl) parts.push("⌃");
+		if (shortcut.alt) parts.push("⌥");
+		if (shortcut.shift) parts.push("⇧");
+	} else {
+		if (shortcut.ctrl || shortcut.meta) parts.push("Ctrl");
+		if (shortcut.alt) parts.push("Alt");
+		if (shortcut.shift) parts.push("Shift");
+	}
+	let keyDisplay = shortcut.key;
+	switch (shortcut.key.toLowerCase()) {
+		case " ":
+			keyDisplay = "Space";
+			break;
+		case "tab":
+			keyDisplay = "Tab";
+			break;
+		case "enter":
+			keyDisplay = "Enter";
+			break;
+		case "escape":
+			keyDisplay = "Esc";
+			break;
+		case "arrowup":
+			keyDisplay = "↑";
+			break;
+		case "arrowdown":
+			keyDisplay = "↓";
+			break;
+		case "arrowleft":
+			keyDisplay = "←";
+			break;
+		case "arrowright":
+			keyDisplay = "→";
+			break;
+		default: keyDisplay = shortcut.key.toUpperCase();
+	}
+	parts.push(keyDisplay);
+	return isMac ? parts.join("") : parts.join("+");
+};
+/**
+* Get shortcuts grouped by category
+*/
+var getShortcutsByCategory = (shortcuts = defaultShortcuts) => {
+	return {
+		formatting: shortcuts.filter((s) => [
+			"bold",
+			"italic",
+			"strikethrough",
+			"inlineCode",
+			"codeBlock"
+		].includes(s.action)),
+		headings: shortcuts.filter((s) => s.action.startsWith("heading-") || s.action === "paragraph"),
+		lists: shortcuts.filter((s) => [
+			"unorderedList",
+			"orderedList",
+			"indent",
+			"outdent"
+		].includes(s.action)),
+		blocks: shortcuts.filter((s) => [
+			"blockquote",
+			"horizontalRule",
+			"table"
+		].includes(s.action)),
+		media: shortcuts.filter((s) => ["link", "image"].includes(s.action)),
+		editor: shortcuts.filter((s) => [
+			"undo",
+			"redo",
+			"selectAll",
+			"toggleMode"
+		].includes(s.action))
+	};
+};
+/**
+* Detect if running on Mac for shortcut display
+*/
+var isMacOS = () => {
+	return typeof navigator !== "undefined" && /Mac|iPhone|iPad|iPod/.test(navigator.platform);
+};
+/**
+* Get platform-specific shortcuts
+*/
+var getPlatformShortcuts = () => {
+	return isMacOS() ? macShortcuts : defaultShortcuts;
+};
+/**
+* Smart tab handling for markdown editor
+*/
+var handleTabKey = (event, element, isShift = false) => {
+	if (element instanceof HTMLTextAreaElement) {
+		const { value, selectionStart } = element;
+		const lineStart = value.lastIndexOf("\n", selectionStart - 1) + 1;
+		const lineEnd = value.indexOf("\n", selectionStart);
+		const currentLine = value.slice(lineStart, lineEnd === -1 ? void 0 : lineEnd);
+		const inList = /^\s*[-*+]\s/.test(currentLine) || /^\s*\d+\.\s/.test(currentLine);
+		const inCodeBlock = (() => {
+			return (value.slice(0, selectionStart).match(/```/g) || []).length % 2 === 1;
+		})();
+		if (inList || inCodeBlock) {
+			event.preventDefault();
+			if (isShift) {
+				const indentMatch = currentLine.match(/^(\s+)/);
+				if (indentMatch) {
+					const indent = indentMatch[1];
+					const newLine = (indent.length >= 2 ? indent.slice(2) : "") + currentLine.slice(indent.length);
+					element.value = value.slice(0, lineStart) + newLine + value.slice(lineEnd === -1 ? value.length : lineEnd);
+					element.setSelectionRange(selectionStart - Math.min(2, indent.length), selectionStart - Math.min(2, indent.length));
+				}
+			} else {
+				const newLine = currentLine.replace(/^(\s*)/, `$1  `);
+				element.value = value.slice(0, lineStart) + newLine + value.slice(lineEnd === -1 ? value.length : lineEnd);
+				element.setSelectionRange(selectionStart + 2, selectionStart + 2);
+			}
+			return true;
+		}
+	}
+	return false;
+};
+/**
+* Handle Enter key for smart list continuation
+*/
+var handleEnterKey = (event, element) => {
+	const { value, selectionStart } = element;
+	const lineStart = value.lastIndexOf("\n", selectionStart - 1) + 1;
+	const lineEnd = value.indexOf("\n", selectionStart);
+	const currentLine = value.slice(lineStart, lineEnd === -1 ? void 0 : lineEnd);
+	const taskMatch = currentLine.match(/^(\s*)([-*+])\s\[[ xX]\]\s(.*)$/);
+	const unorderedMatch = currentLine.match(/^(\s*)([-*+])\s(.*)$/);
+	const orderedMatch = currentLine.match(/^(\s*)(\d+)\.\s(.*)$/);
+	if (taskMatch) {
+		const [, indent, marker, content] = taskMatch;
+		if (content.trim() === "") {
+			event.preventDefault();
+			element.value = value.slice(0, lineStart) + indent + value.slice(lineEnd === -1 ? value.length : lineEnd);
+			element.setSelectionRange(lineStart + indent.length, lineStart + indent.length);
+			return true;
+		} else {
+			event.preventDefault();
+			const newListItem = `\n${indent}${marker} [ ] `;
+			const insertPos = lineEnd === -1 ? value.length : lineEnd;
+			element.value = value.slice(0, insertPos) + newListItem + value.slice(insertPos);
+			element.setSelectionRange(insertPos + newListItem.length, insertPos + newListItem.length);
+			return true;
+		}
+	} else if (unorderedMatch) {
+		const [, indent, marker, content] = unorderedMatch;
+		if (content.trim() === "") {
+			event.preventDefault();
+			element.value = value.slice(0, lineStart) + indent + value.slice(lineEnd === -1 ? value.length : lineEnd);
+			element.setSelectionRange(lineStart + indent.length, lineStart + indent.length);
+			return true;
+		} else {
+			event.preventDefault();
+			const newListItem = `\n${indent}${marker} `;
+			const insertPos = lineEnd === -1 ? value.length : lineEnd;
+			element.value = value.slice(0, insertPos) + newListItem + value.slice(insertPos);
+			element.setSelectionRange(insertPos + newListItem.length, insertPos + newListItem.length);
+			return true;
+		}
+	} else if (orderedMatch) {
+		const [, indent, number, content] = orderedMatch;
+		if (content.trim() === "") {
+			event.preventDefault();
+			element.value = value.slice(0, lineStart) + indent + value.slice(lineEnd === -1 ? value.length : lineEnd);
+			element.setSelectionRange(lineStart + indent.length, lineStart + indent.length);
+			return true;
+		} else {
+			event.preventDefault();
+			const newListItem = `\n${indent}${parseInt(number) + 1}. `;
+			const insertPos = lineEnd === -1 ? value.length : lineEnd;
+			element.value = value.slice(0, insertPos) + newListItem + value.slice(insertPos);
+			element.setSelectionRange(insertPos + newListItem.length, insertPos + newListItem.length);
+			return true;
+		}
+	}
+	return false;
+};
+//#endregion
+//#region src/editor-actions.ts
+/**
+* Editor actions using functional utilities
+* Coordinates between markdown and WYSIWYG operations
+*/
+var EditorActions = class {
+	constructor(onContentChange) {
+		this.mode = "wysiwyg";
+		this.textarea = null;
+		this.contentEditable = null;
+		this.history = createContentHistory("");
+		this.isRestoringHistory = false;
+		this.onContentChange = onContentChange;
+	}
+	setOnContentChange(fn) {
+		this.onContentChange = fn;
+	}
+	/** Called when the "toggleMode" keyboard shortcut (Ctrl/Cmd+M) fires. */
+	setOnToggleMode(fn) {
+		this.onToggleMode = fn;
+	}
+	setTextarea(element) {
+		this.textarea = element;
+	}
+	getTextarea() {
+		return this.textarea;
+	}
+	setContentEditable(element) {
+		this.contentEditable = element;
+	}
+	getContentEditable() {
+		return this.contentEditable;
+	}
+	/** Establish the undo/redo baseline. Call once with the loaded WYSIWYG content. */
+	initHistory(content) {
+		this.history.reset(content);
+	}
+	/**
+	* Record a WYSIWYG content change (from typing or a toolbar action) for
+	* undo/redo. Calls made while `undo`/`redo` are themselves restoring a
+	* snapshot are ignored, so re-feeding that content through the normal
+	* change pipeline doesn't corrupt the history stacks.
+	*/
+	recordHistory(content) {
+		if (this.isRestoringHistory) return;
+		this.history.record(content);
+	}
+	setMode(mode) {
+		this.mode = mode;
+	}
+	getMode() {
+		return this.mode;
+	}
+	executeAndNotify(action) {
+		try {
+			const newContent = action();
+			this.onContentChange?.(newContent);
+		} catch (error) {
+			console.error("Editor action failed:", error);
+		}
+	}
+	/**
+	* Handle a keydown event from either the markdown textarea or the WYSIWYG
+	* contentEditable element. Wire this through the element's `onkeydown`
+	* vnode attribute (not a raw `addEventListener`) so Mithril's own
+	* autoredraw scheduling covers content changes made here too - otherwise a
+	* consumer whose `onContentChange` doesn't itself call `m.redraw()` (or
+	* relies on some other redraw trigger, e.g. a state-stream subscription)
+	* would never see the resulting DOM/state changes reflected.
+	*/
+	handleKeyDown(event) {
+		const keyboardEvent = event;
+		if (handleKeyboardShortcut(keyboardEvent, (action) => this.executeAction(action), getPlatformShortcuts())) return;
+		if (keyboardEvent.key === "Enter" && !keyboardEvent.shiftKey && !keyboardEvent.ctrlKey && !keyboardEvent.metaKey && !keyboardEvent.altKey && this.mode === "wysiwyg" && this.contentEditable) {
+			const newContent = continueTaskListItem(this.contentEditable);
+			if (newContent !== null) {
+				keyboardEvent.preventDefault();
+				this.onContentChange?.(newContent);
+				return;
+			}
+		}
+		if (this.mode === "markdown" && this.textarea) {
+			const textarea = this.textarea;
+			if (keyboardEvent.key === "Tab") {
+				if (handleTabKey(keyboardEvent, textarea, keyboardEvent.shiftKey)) this.onContentChange?.(textarea.value);
+				return;
+			}
+			if (keyboardEvent.key === "Enter") {
+				if (handleEnterKey(keyboardEvent, textarea)) this.onContentChange?.(textarea.value);
+				return;
+			}
+		}
+	}
+	/**
+	* Handle a paste event from the markdown textarea, cleaning up common
+	* clipboard artifacts (literal `\n`/`\t`/`\r` escape sequences). Wire this
+	* through the textarea's `onpaste` vnode attribute for the same autoredraw
+	* reason as `handleKeyDown`.
+	*/
+	handlePaste(event) {
+		const clipboardEvent = event;
+		if (this.mode !== "markdown" || !this.textarea) return;
+		const textarea = this.textarea;
+		const pastedText = clipboardEvent.clipboardData?.getData("text/plain");
+		if (!pastedText) return;
+		const cleanedText = pastedText.replace(/\\n/g, "\n").replace(/\\t/g, "	").replace(/\\r/g, "\r");
+		if (cleanedText === pastedText) return;
+		clipboardEvent.preventDefault();
+		const start = textarea.selectionStart;
+		const end = textarea.selectionEnd;
+		const currentValue = textarea.value;
+		textarea.value = currentValue.substring(0, start) + cleanedText + currentValue.substring(end);
+		const newCursorPos = start + cleanedText.length;
+		textarea.setSelectionRange(newCursorPos, newCursorPos);
+		this.onContentChange?.(textarea.value);
+	}
+	executeAction(action) {
+		switch (action) {
+			case "bold":
+				this.bold();
+				break;
+			case "italic":
+				this.italic();
+				break;
+			case "strikethrough":
+				this.strikethrough();
+				break;
+			case "inlineCode":
+				this.inlineCode();
+				break;
+			case "codeBlock":
+				this.codeBlock();
+				break;
+			case "heading":
+			case "toggleHeading":
+				this.toggleHeading();
+				break;
+			case "heading-1":
+				this.heading(1);
+				break;
+			case "heading-2":
+				this.heading(2);
+				break;
+			case "heading-3":
+				this.heading(3);
+				break;
+			case "heading-4":
+				this.heading(4);
+				break;
+			case "heading-5":
+				this.heading(5);
+				break;
+			case "heading-6":
+				this.heading(6);
+				break;
+			case "paragraph":
+				this.paragraph();
+				break;
+			case "unorderedList":
+				this.unorderedList();
+				break;
+			case "orderedList":
+				this.orderedList();
+				break;
+			case "taskList":
+				this.taskList();
+				break;
+			case "indent":
+				this.indent();
+				break;
+			case "outdent":
+				this.outdent();
+				break;
+			case "blockquote":
+				this.blockquote();
+				break;
+			case "horizontalRule":
+				this.horizontalRule();
+				break;
+			case "link":
+				this.link();
+				break;
+			case "image":
+				this.image();
+				break;
+			case "table":
+				this.table();
+				break;
+			case "undo":
+				this.undo();
+				break;
+			case "redo":
+				this.redo();
+				break;
+			case "selectAll":
+				this.selectAll();
+				break;
+			case "removeFormat":
+				this.removeFormat();
+				break;
+			case "toggleMode":
+				this.onToggleMode?.();
+				break;
+			default: console.warn(`Unknown action: ${action}`);
+		}
+	}
+	bold() {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => formatBoldWYSIWYG(this.contentEditable));
+		else if (this.textarea) this.executeAndNotify(() => formatBold(this.textarea));
+	}
+	italic() {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => formatItalicWYSIWYG(this.contentEditable));
+		else if (this.textarea) this.executeAndNotify(() => formatItalic(this.textarea));
+	}
+	strikethrough() {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => formatStrikethroughWYSIWYG(this.contentEditable));
+		else if (this.textarea) this.executeAndNotify(() => formatStrikethrough(this.textarea));
+	}
+	inlineCode() {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => insertInlineCodeWYSIWYG(this.contentEditable));
+		else if (this.textarea) this.executeAndNotify(() => formatInlineCode(this.textarea));
+	}
+	codeBlock() {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => insertCodeBlockWYSIWYG(this.contentEditable));
+		else if (this.textarea) this.executeAndNotify(() => formatCodeBlock(this.textarea));
+	}
+	toggleHeading() {
+		if (this.textarea) this.executeAndNotify(() => toggleHeading(this.textarea));
+	}
+	heading(level) {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => formatHeadingWYSIWYG(level)(this.contentEditable));
+		else if (this.textarea) this.executeAndNotify(() => formatHeading(level)(this.textarea));
+	}
+	paragraph() {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => formatParagraphWYSIWYG(this.contentEditable));
+	}
+	unorderedList() {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => insertUnorderedListWYSIWYG(this.contentEditable));
+		else if (this.textarea) this.executeAndNotify(() => smartList("unordered")(this.textarea));
+	}
+	orderedList() {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => insertOrderedListWYSIWYG(this.contentEditable));
+		else if (this.textarea) this.executeAndNotify(() => smartList("ordered")(this.textarea));
+	}
+	taskList() {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => insertTaskListWYSIWYG(this.contentEditable));
+		else if (this.textarea) this.executeAndNotify(() => smartTaskList(this.textarea));
+	}
+	indent() {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => indentWYSIWYG(this.contentEditable));
+		else if (this.textarea) this.executeAndNotify(() => {
+			return indentLines(this.textarea);
+		});
+	}
+	outdent() {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => outdentWYSIWYG(this.contentEditable));
+		else if (this.textarea) this.executeAndNotify(() => {
+			return outdentLines(this.textarea);
+		});
+	}
+	blockquote() {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => formatBlockquoteWYSIWYG(this.contentEditable));
+		else if (this.textarea) this.executeAndNotify(() => toggleBlockquote(this.textarea));
+	}
+	horizontalRule() {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => insertHorizontalRuleWYSIWYG(this.contentEditable));
+		else if (this.textarea) this.executeAndNotify(() => insertHorizontalRule(this.textarea));
+	}
+	link(url, text) {
+		if (url && text) {
+			if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => insertLinkWYSIWYG(url, text)(this.contentEditable));
+			else if (this.textarea) this.executeAndNotify(() => {
+				const linkMarkdown = `[${text}](${url})`;
+				return insertText(this.textarea, linkMarkdown, 0, 0);
+			});
+		} else if (this.textarea) this.executeAndNotify(() => insertLink(this.textarea));
+	}
+	image(src, alt, title) {
+		if (src) {
+			const altText = alt || "";
+			if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => insertImageWYSIWYG(src, altText, title)(this.contentEditable));
+			else if (this.textarea) this.executeAndNotify(() => {
+				const titlePart = title ? ` "${title}"` : "";
+				const imageMarkdown = `![${altText}](${src}${titlePart})`;
+				return insertText(this.textarea, imageMarkdown, 0, 0);
+			});
+		} else if (this.textarea) this.executeAndNotify(() => insertImage(this.textarea));
+	}
+	table(rows = 3, cols = 3) {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => insertTableWYSIWYG(rows, cols)(this.contentEditable));
+		else if (this.textarea) this.executeAndNotify(() => insertTable(rows, cols)(this.textarea));
+	}
+	undo() {
+		if (this.mode !== "wysiwyg" || !this.contentEditable) return;
+		const previous = this.history.undo();
+		if (previous === void 0) return;
+		this.isRestoringHistory = true;
+		try {
+			this.contentEditable.innerHTML = previous;
+			this.onContentChange?.(previous);
+		} finally {
+			this.isRestoringHistory = false;
+		}
+	}
+	redo() {
+		if (this.mode !== "wysiwyg" || !this.contentEditable) return;
+		const next = this.history.redo();
+		if (next === void 0) return;
+		this.isRestoringHistory = true;
+		try {
+			this.contentEditable.innerHTML = next;
+			this.onContentChange?.(next);
+		} finally {
+			this.isRestoringHistory = false;
+		}
+	}
+	selectAll() {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => selectAllWYSIWYG(this.contentEditable));
+		else if (this.mode === "markdown" && this.textarea) this.textarea.select();
+	}
+	removeFormat() {
+		if (this.mode === "wysiwyg" && this.contentEditable) this.executeAndNotify(() => removeFormattingWYSIWYG(this.contentEditable));
+	}
+	getFormattingState() {
+		if (this.mode === "wysiwyg" && this.contentEditable) return getFormattingStateWYSIWYG(this.contentEditable);
+		else if (this.textarea) return getFormattingState(this.textarea);
+		return {};
+	}
+	canUndo() {
+		if (this.mode === "wysiwyg" && this.contentEditable) return this.history.canUndo();
+		return false;
+	}
+	canRedo() {
+		if (this.mode === "wysiwyg" && this.contentEditable) return this.history.canRedo();
+		return false;
+	}
+	code() {
+		this.inlineCode();
+	}
+	quote() {
+		this.blockquote();
+	}
+	withCurrentCell(run) {
+		if (this.mode !== "wysiwyg" || !this.contentEditable) return;
+		const cell = findCurrentTableCell();
+		if (!cell) return;
+		const element = this.contentEditable;
+		this.executeAndNotify(() => run(element, cell));
+	}
+	insertRowAbove() {
+		this.withCurrentCell(insertRowAbove);
+	}
+	insertRowBelow() {
+		this.withCurrentCell(insertRowBelow);
+	}
+	insertColumnLeft() {
+		this.withCurrentCell(insertColumnLeft);
+	}
+	insertColumnRight() {
+		this.withCurrentCell(insertColumnRight);
+	}
+	deleteCurrentRow() {
+		this.withCurrentCell(deleteCurrentRow);
+	}
+	deleteCurrentColumn() {
+		this.withCurrentCell(deleteCurrentColumn);
+	}
+	deleteCurrentTable() {
+		this.withCurrentCell(deleteCurrentTable);
+	}
+};
+//#endregion
+//#region src/components/modal.ts
+var Modal = { view: ({ attrs, children }) => {
+	const { isOpen, title, onClose, onConfirm, confirmText = "OK", cancelText = "Cancel", size = "medium" } = attrs;
+	if (!isOpen) return null;
+	const handleBackdropClick = (e) => {
+		if (e.target === e.currentTarget) onClose();
+	};
+	const handleKeyDown = (e) => {
+		if (e.key === "Escape") onClose();
+		else if (e.key === "Enter" && onConfirm) onConfirm();
+	};
+	return mithril(".md-modal-overlay", {
+		onclick: handleBackdropClick,
+		onkeydown: handleKeyDown,
+		tabindex: -1,
+		style: {
+			position: "fixed",
+			top: 0,
+			left: 0,
+			right: 0,
+			bottom: 0,
+			backgroundColor: "rgba(0, 0, 0, 0.5)",
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center",
+			zIndex: 1e3
+		}
+	}, [mithril(`.md-modal.md-modal--${size}`, {
+		onclick: (e) => e.stopPropagation(),
+		style: {
+			backgroundColor: "var(--bg-color, white)",
+			color: "var(--text-color, black)",
+			borderRadius: "8px",
+			padding: "20px",
+			minWidth: size === "small" ? "300px" : size === "large" ? "600px" : "450px",
+			maxWidth: "90vw",
+			maxHeight: "90vh",
+			overflow: "auto",
+			boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2)",
+			border: "1px solid var(--border-color, #e0e0e0)"
+		}
+	}, [
+		mithril(".md-modal-header", { style: {
+			display: "flex",
+			justifyContent: "space-between",
+			alignItems: "center",
+			marginBottom: "20px",
+			paddingBottom: "15px",
+			borderBottom: "1px solid var(--border-color, #e0e0e0)"
+		} }, [mithril("h3.md-modal-title", { style: {
+			margin: 0,
+			fontSize: "18px",
+			fontWeight: "600"
+		} }, title), mithril("button.md-modal-close", {
+			onclick: onClose,
+			style: {
+				background: "none",
+				border: "none",
+				fontSize: "24px",
+				cursor: "pointer",
+				padding: "0",
+				width: "30px",
+				height: "30px",
+				display: "flex",
+				alignItems: "center",
+				justifyContent: "center",
+				borderRadius: "4px",
+				color: "var(--text-color, #666)"
+			}
+		}, "×")]),
+		mithril(".md-modal-content", { style: { marginBottom: onConfirm ? "20px" : "0" } }, children),
+		onConfirm && mithril(".md-modal-footer", { style: {
+			display: "flex",
+			justifyContent: "flex-end",
+			gap: "10px",
+			paddingTop: "15px",
+			borderTop: "1px solid var(--border-color, #e0e0e0)"
+		} }, [mithril("button.md-modal-cancel", {
+			onclick: onClose,
+			style: {
+				padding: "8px 16px",
+				border: "1px solid var(--border-color, #ddd)",
+				backgroundColor: "var(--button-bg, #f5f5f5)",
+				color: "var(--text-color, #333)",
+				borderRadius: "4px",
+				cursor: "pointer"
+			}
+		}, cancelText), mithril("button.md-modal-confirm", {
+			onclick: onConfirm,
+			style: {
+				padding: "8px 16px",
+				border: "none",
+				backgroundColor: "var(--primary-color, #007bff)",
+				color: "white",
+				borderRadius: "4px",
+				cursor: "pointer"
+			}
+		}, confirmText)])
+	])]);
+} };
+//#endregion
+//#region src/components/modal-form-field.ts
+/** Shared styling for a labeled input row inside a modal form. */
+var fieldStyle = { marginBottom: "15px" };
+var labelStyle = {
+	display: "block",
+	marginBottom: "5px",
+	fontWeight: "500",
+	fontSize: "14px"
+};
+var inputStyle = {
+	width: "100%",
+	padding: "8px 12px",
+	border: "1px solid var(--border-color, #ddd)",
+	borderRadius: "4px",
+	fontSize: "14px",
+	backgroundColor: "var(--input-bg, white)",
+	color: "var(--text-color, black)"
+};
+/** A labeled input row, styled consistently across modal forms (link, image, ...). */
+var FormField = (label, input) => mithril(".md-field", { style: fieldStyle }, [mithril("label", { style: labelStyle }, label), input]);
+//#endregion
+//#region src/components/image-modal.ts
+var ImageModal = () => {
+	const state = {
+		src: "",
+		alt: "",
+		title: ""
+	};
+	return {
+		oninit: ({ attrs }) => {
+			state.src = attrs.initialValues?.src || "";
+			state.alt = attrs.initialValues?.alt || "";
+			state.title = attrs.initialValues?.title || "";
+		},
+		view: ({ attrs }) => {
+			const { isOpen, t, onClose, onInsert } = attrs;
+			const handleInsert = () => {
+				if (state.src.trim()) {
+					onInsert(state.src.trim(), state.alt.trim(), state.title.trim() || void 0);
+					onClose();
+					state.src = "";
+					state.alt = "";
+					state.title = "";
+				}
+			};
+			return mithril(Modal, {
+				isOpen,
+				title: t("insertImageTitle"),
+				onClose,
+				onConfirm: handleInsert,
+				confirmText: t("insert"),
+				cancelText: t("cancel"),
+				size: "medium"
+			}, [mithril(".md-image-form", [
+				FormField(t("imageUrl") + " *", mithril("input[type=url]", {
+					style: inputStyle,
+					placeholder: t("imageUrlPlaceholder"),
+					value: state.src,
+					oninput: (e) => {
+						state.src = e.target.value;
+					},
+					oncreate: ({ dom }) => {
+						setTimeout(() => dom.focus(), 100);
+					}
+				})),
+				FormField(t("imageAlt"), mithril("input[type=text]", {
+					style: inputStyle,
+					placeholder: t("imageAltPlaceholder"),
+					value: state.alt,
+					oninput: (e) => {
+						state.alt = e.target.value;
+					}
+				})),
+				FormField(t("imageTitle"), mithril("input[type=text]", {
+					style: inputStyle,
+					placeholder: t("imageTitlePlaceholder"),
+					value: state.title,
+					oninput: (e) => {
+						state.title = e.target.value;
+					}
+				})),
+				state.src && mithril(".md-image-preview", { style: {
+					marginTop: "15px",
+					padding: "10px",
+					border: "1px dashed var(--border-color, #ddd)",
+					borderRadius: "4px",
+					backgroundColor: "var(--preview-bg, #f9f9f9)"
+				} }, [mithril("div", { style: {
+					marginBottom: "8px",
+					fontSize: "12px",
+					color: "var(--text-muted, #666)"
+				} }, "Preview:"), mithril("img", {
+					src: state.src,
+					alt: state.alt,
+					title: state.title,
+					style: {
+						maxWidth: "100%",
+						maxHeight: "200px",
+						objectFit: "contain"
+					},
+					onerror: (e) => {
+						const target = e.target;
+						target.style.display = "none";
+					},
+					onload: (e) => {
+						const target = e.target;
+						target.style.display = "block";
+					}
+				})])
+			])]);
+		}
+	};
+};
+//#endregion
+//#region src/components/link-modal.ts
+var LinkModal = () => {
+	const state = {
+		url: "",
+		text: "",
+		title: ""
+	};
+	return {
+		oninit: ({ attrs }) => {
+			state.url = attrs.initialValues?.url || "";
+			state.text = attrs.initialValues?.text || "";
+			state.title = attrs.initialValues?.title || "";
+		},
+		view: ({ attrs }) => {
+			const { isOpen, t, onClose, onInsert } = attrs;
+			const handleInsert = () => {
+				if (state.url.trim() && state.text.trim()) {
+					onInsert(state.url.trim(), state.text.trim(), state.title.trim() || void 0);
+					onClose();
+					state.url = "";
+					state.text = "";
+					state.title = "";
+				}
+			};
+			return mithril(Modal, {
+				isOpen,
+				title: t("insertLinkTitle"),
+				onClose,
+				onConfirm: handleInsert,
+				confirmText: t("insert"),
+				cancelText: t("cancel"),
+				size: "medium"
+			}, [mithril(".md-link-form", [
+				FormField(t("linkText") + " *", mithril("input[type=text]", {
+					style: inputStyle,
+					placeholder: t("linkTextPlaceholder"),
+					value: state.text,
+					oninput: (e) => {
+						state.text = e.target.value;
+					},
+					oncreate: ({ dom }) => {
+						setTimeout(() => dom.focus(), 100);
+					}
+				})),
+				FormField(t("linkUrl") + " *", mithril("input[type=url]", {
+					style: inputStyle,
+					placeholder: t("linkUrlPlaceholder"),
+					value: state.url,
+					oninput: (e) => {
+						state.url = e.target.value;
+					}
+				})),
+				FormField(t("linkTitle"), mithril("input[type=text]", {
+					style: inputStyle,
+					placeholder: t("linkTitlePlaceholder"),
+					value: state.title,
+					oninput: (e) => {
+						state.title = e.target.value;
+					}
+				})),
+				state.url && state.text && mithril(".md-link-preview", { style: {
+					marginTop: "15px",
+					padding: "10px",
+					border: "1px dashed var(--border-color, #ddd)",
+					borderRadius: "4px",
+					backgroundColor: "var(--preview-bg, #f9f9f9)"
+				} }, [mithril("div", { style: {
+					marginBottom: "8px",
+					fontSize: "12px",
+					color: "var(--text-muted, #666)"
+				} }, "Preview:"), mithril("a", {
+					href: state.url,
+					title: state.title,
+					target: "_blank",
+					rel: "noopener noreferrer",
+					style: {
+						color: "var(--link-color, #007bff)",
+						textDecoration: "underline"
+					},
+					onclick: (e) => e.preventDefault()
+				}, state.text)])
+			])]);
+		}
+	};
+};
+//#endregion
+//#region src/components/table-selector.ts
+var TableSelector = {
+	oninit: ({ state }) => {
+		state.hoverRows = 0;
+		state.hoverCols = 0;
+	},
+	view: ({ state, attrs }) => {
+		const { isOpen, onClose, onSelect, maxRows = 8, maxCols = 8, position, t } = attrs;
+		if (!isOpen) return null;
+		const handleCellHover = (row, col) => {
+			state.hoverRows = row;
+			state.hoverCols = col;
+		};
+		const handleCellClick = (row, col) => {
+			onSelect(row, col);
+			onClose();
+		};
+		const handleBackdropClick = (e) => {
+			if (e.target === e.currentTarget) onClose();
+		};
+		const cellStyle = (row, col) => ({
+			width: "20px",
+			height: "20px",
+			border: "1px solid var(--border-color, #ddd)",
+			backgroundColor: row <= state.hoverRows && col <= state.hoverCols ? "var(--primary-color, #007bff)" : "var(--cell-bg, white)",
+			cursor: "pointer",
+			transition: "background-color 0.1s ease"
+		});
+		return mithril(".md-table-selector-overlay", {
+			onclick: handleBackdropClick,
+			style: {
+				position: "fixed",
+				top: 0,
+				left: 0,
+				right: 0,
+				bottom: 0,
+				zIndex: 999,
+				backgroundColor: "rgba(0, 0, 0, 0.1)"
+			}
+		}, [mithril(".md-table-selector", {
+			style: {
+				position: "absolute",
+				backgroundColor: "var(--bg-color, white)",
+				border: "1px solid var(--border-color, #ddd)",
+				borderRadius: "6px",
+				padding: "15px",
+				boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+				zIndex: 1e3,
+				...position ? {
+					left: `${position.x}px`,
+					top: `${position.y + 10}px`,
+					transform: "translateX(-50%)"
+				} : {
+					top: "50px",
+					left: "50%",
+					transform: "translateX(-50%)"
+				}
+			},
+			onclick: (e) => e.stopPropagation()
+		}, [
+			mithril(".md-table-selector-header", { style: {
+				marginBottom: "10px",
+				fontSize: "14px",
+				fontWeight: "500",
+				color: "var(--text-color, #333)",
+				textAlign: "center"
+			} }, [state.hoverRows > 0 && state.hoverCols > 0 ? t("tableSelectSize").replace("{rows}", state.hoverRows.toString()).replace("{cols}", state.hoverCols.toString()) : t("tableSelectSizeDefault")]),
+			mithril(".md-table-grid", { style: {
+				display: "grid",
+				gridTemplateRows: `repeat(${maxRows}, 20px)`,
+				gridTemplateColumns: `repeat(${maxCols}, 20px)`,
+				gap: "2px",
+				marginBottom: "10px"
+			} }, Array.from({ length: maxRows }, (_, row) => Array.from({ length: maxCols }, (_, col) => mithril(".md-table-cell", {
+				style: cellStyle(row + 1, col + 1),
+				onmouseover: () => handleCellHover(row + 1, col + 1),
+				onclick: () => handleCellClick(row + 1, col + 1),
+				key: `${row}-${col}`
+			}))).flat()),
+			mithril(".md-table-selector-footer", { style: {
+				borderTop: "1px solid var(--border-color, #e0e0e0)",
+				paddingTop: "10px",
+				fontSize: "12px",
+				color: "var(--text-muted, #666)",
+				textAlign: "center"
+			} }, [mithril("div", t("tableClickToInsert")), mithril("button", {
+				style: {
+					marginTop: "5px",
+					padding: "4px 8px",
+					fontSize: "11px",
+					border: "1px solid var(--border-color, #ddd)",
+					backgroundColor: "var(--button-bg, #f5f5f5)",
+					color: "var(--text-color, #333)",
+					borderRadius: "3px",
+					cursor: "pointer"
+				},
+				onclick: () => {
+					const rows = prompt(t("tableCustomRowsPrompt"), "3");
+					const cols = prompt(t("tableCustomColsPrompt"), "3");
+					if (rows && cols) {
+						const numRows = parseInt(rows);
+						const numCols = parseInt(cols);
+						if (numRows > 0 && numCols > 0 && numRows <= 20 && numCols <= 20) {
+							onSelect(numRows, numCols);
+							onClose();
+						}
+					}
+				}
+			}, t("tableCustomSize"))])
+		])]);
+	}
+};
+//#endregion
+//#region src/components/table-menu.ts
+var ICON_TABLE_INSERT_ROW_ABOVE = `<svg viewBox="0 0 24 24" fill="none"><g fill="#4a90e2"><rect x="3" y="10" width="5" height="3" rx=".5"/><rect x="9" y="10" width="5" height="3" rx=".5"/><rect x="15" y="10" width="5" height="3" rx=".5"/></g><g fill="#999"><rect x="3" y="15" width="5" height="3" rx=".5"/><rect x="9" y="15" width="5" height="3" rx=".5"/><rect x="15" y="15" width="5" height="3" rx=".5"/></g><path stroke="#4a90e2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 8V4M10 5l2-2 2 2"/></svg>`;
+var ICON_TABLE_INSERT_ROW_BELOW = `<svg viewBox="0 0 24 24" fill="none"><g fill="#999"><rect x="3" y="6" width="5" height="3" rx=".5"/><rect x="9" y="6" width="5" height="3" rx=".5"/><rect x="15" y="6" width="5" height="3" rx=".5"/></g><g fill="#4a90e2"><rect x="3" y="11" width="5" height="3" rx=".5"/><rect x="9" y="11" width="5" height="3" rx=".5"/><rect x="15" y="11" width="5" height="3" rx=".5"/></g><path stroke="#4a90e2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 16v4M10 19l2 2 2-2"/></svg>`;
+var ICON_TABLE_INSERT_COL_LEFT = `<svg viewBox="0 0 24 24" fill="none"><g fill="#4a90e2"><rect x="9" y="6" width="3" height="4" rx=".5"/><rect x="9" y="11" width="3" height="4" rx=".5"/><rect x="9" y="16" width="3" height="4" rx=".5"/></g><g fill="#999"><rect x="14" y="6" width="3" height="4" rx=".5"/><rect x="14" y="11" width="3" height="4" rx=".5"/><rect x="14" y="16" width="3" height="4" rx=".5"/></g><path stroke="#4a90e2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 12H3M4 10l-2 2 2 2"/></svg>`;
+var ICON_TABLE_INSERT_COL_RIGHT = `<svg viewBox="0 0 24 24" fill="none"><g fill="#999"><rect x="7" y="6" width="3" height="4" rx=".5"/><rect x="7" y="11" width="3" height="4" rx=".5"/><rect x="7" y="16" width="3" height="4" rx=".5"/></g><g fill="#4a90e2"><rect x="12" y="6" width="3" height="4" rx=".5"/><rect x="12" y="11" width="3" height="4" rx=".5"/><rect x="12" y="16" width="3" height="4" rx=".5"/></g><path stroke="#4a90e2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M17 12h4M20 10l2 2-2 2"/></svg>`;
+var TableMenu = { view: ({ attrs }) => {
+	if (!attrs.isVisible) return mithril("");
+	const menuItems = [
+		{
+			label: attrs.t("insertRowAbove"),
+			action: attrs.onInsertRowAbove,
+			icon: ICON_TABLE_INSERT_ROW_ABOVE
+		},
+		{
+			label: attrs.t("insertRowBelow"),
+			action: attrs.onInsertRowBelow,
+			icon: ICON_TABLE_INSERT_ROW_BELOW
+		},
+		{ type: "separator" },
+		{
+			label: attrs.t("insertColumnLeft"),
+			action: attrs.onInsertColumnLeft,
+			icon: ICON_TABLE_INSERT_COL_LEFT
+		},
+		{
+			label: attrs.t("insertColumnRight"),
+			action: attrs.onInsertColumnRight,
+			icon: ICON_TABLE_INSERT_COL_RIGHT
+		},
+		{ type: "separator" },
+		{
+			label: attrs.t("deleteRow"),
+			action: attrs.onDeleteRow,
+			icon: "✕",
+			danger: true
+		},
+		{
+			label: attrs.t("deleteColumn"),
+			action: attrs.onDeleteColumn,
+			icon: "✕",
+			danger: true
+		},
+		{ type: "separator" },
+		{
+			label: attrs.t("deleteTable"),
+			action: attrs.onDeleteTable,
+			icon: "🗑",
+			danger: true
+		}
+	];
+	return mithril(".table-context-menu", { style: {
+		left: `${attrs.position.x}px`,
+		top: `${attrs.position.y}px`
+	} }, [mithril(".table-menu-backdrop", {
+		onclick: attrs.onClose,
+		oncontextmenu: (e) => {
+			e.preventDefault();
+			attrs.onClose();
+		}
+	}, mithril(".table-menu-content", menuItems.map((item) => {
+		if (item.type === "separator") return mithril(".table-menu-separator");
+		return mithril(".table-menu-item", {
+			class: item.danger ? "danger" : "",
+			onclick: (e) => {
+				console.log("Clicked .table-menu-item");
+				e.preventDefault();
+				e.stopPropagation();
+				item.action && item.action();
+				attrs.onClose();
+			},
+			onkeydown: (e) => {
+				if (e.key === "Enter" || e.key === " ") {
+					e.preventDefault();
+					item.action && item.action();
+					attrs.onClose();
+				}
+			},
+			tabindex: 0
+		}, [item.icon && mithril(".table-menu-icon", mithril.trust(item.icon)), mithril(".table-menu-label", item.label)]);
+	})))]);
+} };
+//#endregion
+//#region src/components/dropdown-menu.ts
+var DropdownMenu = {
+	oninit: ({ state }) => {
+		state.selectedIndex = -1;
+	},
+	oncreate: ({ attrs, state, dom }) => {
+		if (attrs.isVisible) {
+			const handleKeyDown = (e) => {
+				if (!attrs.isVisible) return;
+				switch (e.key) {
+					case "ArrowDown":
+						e.preventDefault();
+						state.selectedIndex = Math.min(state.selectedIndex + 1, attrs.options.length - 1);
+						mithril.redraw();
+						break;
+					case "ArrowUp":
+						e.preventDefault();
+						state.selectedIndex = Math.max(state.selectedIndex - 1, 0);
+						mithril.redraw();
+						break;
+					case "Enter":
+					case " ":
+						e.preventDefault();
+						if (state.selectedIndex >= 0 && state.selectedIndex < attrs.options.length) attrs.onSelect(attrs.options[state.selectedIndex]);
+						break;
+					case "Escape":
+						e.preventDefault();
+						attrs.onClose();
+				}
+			};
+			document.addEventListener("keydown", handleKeyDown);
+			dom._keydownHandler = handleKeyDown;
+		}
+	},
+	onremove: ({ dom }) => {
+		const handler = dom._keydownHandler;
+		if (handler) document.removeEventListener("keydown", handler);
+	},
+	view: ({ attrs, state }) => {
+		if (!attrs.isVisible || attrs.options.length === 0) return mithril("");
+		let menuPosition = attrs.position;
+		if (attrs.triggerElement) {
+			const rect = attrs.triggerElement.getBoundingClientRect();
+			menuPosition = {
+				x: rect.left,
+				y: rect.bottom + 4
+			};
+		}
+		return mithril(".dropdown-menu-container", {
+			style: {
+				position: "fixed",
+				left: `${menuPosition.x}px`,
+				top: `${menuPosition.y}px`,
+				zIndex: 1e3
+			},
+			onclick: (e) => {
+				e.stopPropagation();
+			}
+		}, [mithril(".dropdown-backdrop", {
+			onclick: (e) => {
+				attrs.onClose();
+			},
+			oncontextmenu: (e) => {
+				e.preventDefault();
+				attrs.onClose();
+			}
+		}), mithril(".dropdown-menu-content", attrs.options.map((option, index) => {
+			const isSelected = index === state.selectedIndex;
+			return mithril(".dropdown-menu-item", {
+				key: option.name,
+				class: isSelected ? "selected" : "",
+				onclick: (e) => {
+					e.preventDefault();
+					e.stopPropagation();
+					attrs.onSelect(option);
+				},
+				onmouseenter: () => {
+					state.selectedIndex = index;
+					mithril.redraw();
+				},
+				onkeydown: (e) => {
+					if (e.key === "Enter" || e.key === " ") {
+						e.preventDefault();
+						attrs.onSelect(option);
+					}
+				},
+				tabindex: isSelected ? 0 : -1
+			}, [
+				mithril(".dropdown-menu-icon", { innerHTML: option.icon }),
+				mithril(".dropdown-menu-label", option.title),
+				option.shortcut && mithril(".dropdown-menu-shortcut", option.shortcut)
+			]);
+		}))]);
+	}
+};
+//#endregion
+//#region src/utils/builtin-html-to-markdown.ts
+/**
+* Built-in HTML to Markdown conversion, walking the DOM directly (`document`,
+* `DOMParser`) rather than using regex. This is `MarkdownEditor`'s default
+* `htmlToMarkdown` implementation when a consumer doesn't supply their own,
+* eliminating the need for every client to provide one. Browser-only; for a
+* DOM-free (regex-based) alternative see `html-to-markdown.ts`.
+*/
+var BuiltinHtmlToMarkdown = class {
+	/**
+	* Main conversion function - converts HTML string or element to markdown
+	*/
+	htmlToMarkdown(elementOrHtml) {
+		let tempDiv;
+		if (typeof elementOrHtml === "string") {
+			tempDiv = document.createElement("div");
+			tempDiv.innerHTML = elementOrHtml;
+		} else tempDiv = elementOrHtml.cloneNode(true);
+		tempDiv.innerHTML = tempDiv.innerHTML.replace(/\u200B/g, "");
+		let markdown = "";
+		this._normalizeNodes(tempDiv);
+		Array.from(tempDiv.childNodes).forEach((child) => {
+			markdown += this._nodeToMarkdownRecursive(child);
+		});
+		markdown = markdown.replace(/\n\s*\n\s*\n+/g, "\n\n");
+		markdown = markdown.replace(/ +\n/g, "\n");
+		return markdown.trim();
+	}
+	/**
+	* Normalize nodes by merging adjacent text nodes and handling BR elements
+	*/
+	_normalizeNodes(parentElement) {
+		let currentNode = parentElement.firstChild;
+		while (currentNode) {
+			let nextNode = currentNode.nextSibling;
+			if (currentNode.nodeType === Node.TEXT_NODE && nextNode && nextNode.nodeType === Node.TEXT_NODE) {
+				currentNode.textContent = (currentNode.textContent || "") + (nextNode.textContent || "");
+				parentElement.removeChild(nextNode);
+				nextNode = currentNode.nextSibling;
+			} else if (currentNode.nodeName === "BR") {
+				if (!nextNode || nextNode.nodeName === "BR" || this._isBlockElement(nextNode)) {
+					const textNode = document.createTextNode("\n");
+					parentElement.insertBefore(textNode, currentNode);
+				} else if (nextNode.nodeType === Node.TEXT_NODE && !nextNode.textContent.startsWith("\n")) nextNode.textContent = "\n" + nextNode.textContent;
+				else if (nextNode.nodeType === Node.ELEMENT_NODE && !this._isBlockElement(nextNode)) {
+					const textNode = document.createTextNode("\n");
+					parentElement.insertBefore(textNode, nextNode);
+				}
+				parentElement.removeChild(currentNode);
+				currentNode = nextNode;
+				continue;
+			}
+			if (currentNode && currentNode.childNodes && currentNode.childNodes.length > 0 && currentNode.nodeType === Node.ELEMENT_NODE) this._normalizeNodes(currentNode);
+			currentNode = nextNode;
+		}
+	}
+	/**
+	* Check if a node is a block-level element
+	*/
+	_isBlockElement(node) {
+		if (!node || node.nodeType !== Node.ELEMENT_NODE) return false;
+		return [
+			"P",
+			"H1",
+			"H2",
+			"H3",
+			"H4",
+			"H5",
+			"H6",
+			"UL",
+			"OL",
+			"LI",
+			"BLOCKQUOTE",
+			"PRE",
+			"HR",
+			"TABLE",
+			"THEAD",
+			"TBODY",
+			"TR",
+			"DIV",
+			"IMG"
+		].includes(node.nodeName);
+	}
+	/**
+	* Find parent element with specified tag name(s)
+	*/
+	_findParentElement(node, tagNameOrNames) {
+		const tagNames = Array.isArray(tagNameOrNames) ? tagNameOrNames : [tagNameOrNames];
+		let current = node.parentNode;
+		while (current) {
+			if (current.nodeType === Node.ELEMENT_NODE && tagNames.includes(current.nodeName)) return current;
+			current = current.parentNode;
+		}
+		return null;
+	}
+	/**
+	* Main recursive conversion function for individual nodes
+	*/
+	_nodeToMarkdownRecursive(node, options = {}) {
+		switch (node.nodeName) {
+			case "#text":
+				let text = node.textContent || "";
+				if (options.inTableCell) {
+					text = text.replace(/\|/g, "\\|");
+					if (!this._findParentElement(node, "PRE") && !this._findParentElement(node, "CODE")) text = text.replace(/\n/g, "<br>");
+				} else if (!this._findParentElement(node, "PRE") && !this._findParentElement(node, "CODE")) text = text.replace(/  +/g, " ");
+				return text;
+			case "BR": return options.inTableCell ? "<br>" : "\n";
+			case "IMG":
+				if (options.inTableCell) return node.outerHTML;
+				const imgElement = node;
+				const imgSrc = imgElement.getAttribute("src") || "";
+				return `![${imgElement.getAttribute("alt") || ""}](${imgSrc})\n\n`;
+			case "B":
+			case "STRONG": return `**${this._processInlineContainerRecursive(node, options).trim()}**`;
+			case "I":
+			case "EM": return `*${this._processInlineContainerRecursive(node, options).trim()}*`;
+			case "S":
+			case "DEL":
+			case "STRIKE": return `~~${this._processInlineContainerRecursive(node, options).trim()}~~`;
+			case "A":
+				const href = node.getAttribute("href") || "";
+				return `[${this._processInlineContainerRecursive(node, options).trim()}](${href})`;
+			case "CODE":
+				if (!this._findParentElement(node, "PRE")) {
+					let codeContent = node.textContent || "";
+					if (options.inTableCell) codeContent = codeContent.replace(/\|/g, "\\|");
+					return `\`${codeContent.trim()}\``;
+				}
+				return "";
+			case "P":
+				if (options.inTableCell) return this._nodeToHtmlForTableCell(node);
+				const pParent = node.parentNode;
+				const isInsideListItemOrBlockquote = pParent && (pParent.nodeName === "LI" || pParent.nodeName === "BLOCKQUOTE");
+				let pContent = this._processInlineContainerRecursive(node, options).trim();
+				if (isInsideListItemOrBlockquote) return pContent.replace(/\n\s*\n/g, "\n").trim() + (pContent ? "\n" : "");
+				return pContent ? `${pContent}\n\n` : "";
+			case "UL":
+			case "OL":
+				if (options.inTableCell) return this._nodeToHtmlForTableCell(node);
+				let listMd = this._listToMarkdownRecursive(node, "", node.nodeName, 1, options);
+				if (listMd.trim().length > 0 && !listMd.endsWith("\n\n")) {
+					if (!listMd.endsWith("\n")) listMd += "\n";
+					listMd += "\n";
+				}
+				return listMd;
+			case "BLOCKQUOTE":
+				if (options.inTableCell) return this._nodeToHtmlForTableCell(node);
+				const nonEmptyLines = this._processInlineContainerRecursive(node, options).split("\n").map((line) => line.trim()).filter((line) => line.length > 0);
+				return nonEmptyLines.map((line) => `> ${line}`).join("\n") + (nonEmptyLines.length > 0 ? "\n\n" : "");
+			case "PRE":
+				if (options.inTableCell) return this._nodeToHtmlForTableCell(node);
+				const preElement = node;
+				if (preElement.firstChild && preElement.firstChild.nodeName === "CODE") {
+					const codeElement = preElement.firstChild;
+					const langMatch = codeElement.className.match(/language-(\S+)/);
+					const lang = langMatch ? langMatch[1] : "";
+					let preContent = codeElement.textContent || "";
+					if (preContent.length > 0 && !preContent.endsWith("\n")) preContent += "\n";
+					return `\`\`\`${lang}\n${preContent}\`\`\`\n\n`;
+				}
+				let preTextContent = preElement.textContent || "";
+				if (preTextContent.length > 0 && !preTextContent.endsWith("\n")) preTextContent += "\n";
+				return `\`\`\`\n${preTextContent}\`\`\`\n\n`;
+			case "H1":
+			case "H2":
+			case "H3":
+			case "H4":
+			case "H5":
+			case "H6":
+				if (options.inTableCell) return this._nodeToHtmlForTableCell(node);
+				const level = parseInt(node.nodeName[1]);
+				return `${"#".repeat(level)} ${this._processInlineContainerRecursive(node, options).trim()}\n\n`;
+			case "HR":
+				if (options.inTableCell) return this._nodeToHtmlForTableCell(node);
+				return "\n---\n\n";
+			case "DIV":
+				if (options.inTableCell) return this._nodeToHtmlForTableCell(node);
+				const divElement = node;
+				const divContent = this._processInlineContainerRecursive(node, options).trim();
+				if (divElement.classList.contains("md-editable-area")) return divContent;
+				return divContent ? `${divContent}\n\n` : "";
+			case "TABLE": return this._tableToMarkdown(node, options);
+			case "LI": return this._processInlineContainerRecursive(node, options).trim();
+			default:
+				if (node.childNodes && node.childNodes.length > 0) return this._processInlineContainerRecursive(node, options);
+				let defaultText = node.textContent || "";
+				if (!options.inTableCell && !this._findParentElement(node, "PRE") && !this._findParentElement(node, "CODE")) defaultText = defaultText.replace(/  +/g, " ");
+				if (options.inTableCell) {
+					defaultText = defaultText.replace(/\|/g, "\\|");
+					if (!this._findParentElement(node, "PRE") && !this._findParentElement(node, "CODE")) defaultText = defaultText.replace(/\n/g, "<br>");
+				}
+				return defaultText;
+		}
+	}
+	/**
+	* Process inline container elements recursively
+	*/
+	_processInlineContainerRecursive(node, options = {}) {
+		let result = "";
+		Array.from(node.childNodes).forEach((child) => {
+			result += this._nodeToMarkdownRecursive(child, options);
+		});
+		return result;
+	}
+	/**
+	* Convert list to markdown recursively
+	*/
+	_listToMarkdownRecursive(listNode, prefix, listType, depth, options = {}) {
+		let markdown = "";
+		let counter = 1;
+		Array.from(listNode.children).forEach((listItem) => {
+			if (listItem.nodeName === "LI") {
+				const taskCheckbox = listItem.firstElementChild?.nodeName === "INPUT" && listItem.firstElementChild.type === "checkbox" ? listItem.firstElementChild : null;
+				const marker = listType === "OL" ? `${counter}. ` : taskCheckbox ? `- [${taskCheckbox.checked ? "x" : " "}] ` : "- ";
+				const itemContent = this._processInlineContainerRecursive(listItem, options).trim();
+				if (itemContent) itemContent.split("\n").forEach((line, index) => {
+					if (index === 0) markdown += `${prefix}${marker}${line}\n`;
+					else markdown += `${prefix}  ${line}\n`;
+				});
+				listItem.querySelectorAll("ul, ol").forEach((nestedList) => {
+					if (nestedList.parentNode === listItem) markdown += this._listToMarkdownRecursive(nestedList, prefix + "  ", nestedList.nodeName, depth + 1, options);
+				});
+				if (listType === "OL") counter++;
+			}
+		});
+		return markdown;
+	}
+	/**
+	* Convert table to markdown
+	*/
+	_tableToMarkdown(tableNode, options = {}) {
+		let tableMarkdown = "";
+		const tHeadNode = tableNode.querySelector("thead");
+		const tBodyNode = tableNode.querySelector("tbody") || tableNode;
+		let colCount = 0;
+		let headerMdContent = "";
+		let bodyMdContent = "";
+		if (tHeadNode) Array.from(tHeadNode.querySelectorAll("tr")).forEach((headerRowNode) => {
+			const headerCells = Array.from(headerRowNode.querySelectorAll("th, td")).map((cell) => this._cellContentToMarkdown(cell));
+			if (headerCells.length > 0) {
+				headerMdContent += `| ${headerCells.join(" | ")} |\n`;
+				if (colCount === 0) colCount = headerCells.length;
+			}
+		});
+		let firstTBodyRowUsedAsHeader = false;
+		if (colCount === 0 && tBodyNode) {
+			const firstRow = tBodyNode.querySelector("tr");
+			if (firstRow) {
+				if (Array.from(firstRow.children).some((cell) => cell.nodeName === "TH") || Array.from(firstRow.children).every((cell) => cell.children.length === 1 && [
+					"STRONG",
+					"B",
+					"EM",
+					"I"
+				].includes(cell.firstElementChild?.nodeName))) {
+					const potentialHeaderCells = Array.from(firstRow.querySelectorAll("th, td")).map((cell) => this._cellContentToMarkdown(cell));
+					if (potentialHeaderCells.length > 0) {
+						headerMdContent += `| ${potentialHeaderCells.join(" | ")} |\n`;
+						colCount = potentialHeaderCells.length;
+						firstTBodyRowUsedAsHeader = true;
+					}
+				}
+			}
+		}
+		if (colCount === 0 && tBodyNode) {
+			const firstDataRow = tBodyNode.querySelector("tr");
+			if (firstDataRow) colCount = firstDataRow.querySelectorAll("td, th").length;
+		}
+		if (colCount === 0 && headerMdContent.trim() === "") {
+			let fallbackContent = "";
+			Array.from(tableNode.querySelectorAll("tr")).forEach((trNode) => {
+				Array.from(trNode.querySelectorAll("th, td")).forEach((cellNode) => {
+					fallbackContent += this._nodeToMarkdownRecursive(cellNode, {
+						...options,
+						inTableCell: false
+					});
+				});
+			});
+			return fallbackContent.trim() ? fallbackContent.trim() + "\n\n" : "";
+		}
+		tableMarkdown = headerMdContent;
+		if (headerMdContent.trim() !== "" || colCount > 0) tableMarkdown += `|${" --- |".repeat(colCount)}\n`;
+		Array.from(tBodyNode.querySelectorAll("tr")).forEach((bodyRowNode, index) => {
+			if (firstTBodyRowUsedAsHeader && index === 0) return;
+			let bodyCellsMd = Array.from(bodyRowNode.querySelectorAll("td, th")).map((cell) => this._cellContentToMarkdown(cell));
+			const finalCells = [];
+			for (let k = 0; k < colCount; k++) finalCells.push(bodyCellsMd[k] || "");
+			bodyMdContent += `| ${finalCells.join(" | ")} |\n`;
+		});
+		tableMarkdown += bodyMdContent;
+		return tableMarkdown.trim() ? tableMarkdown.trim() + "\n\n" : "";
+	}
+	/**
+	* Convert table cell content to markdown
+	*/
+	_cellContentToMarkdown(cell) {
+		return this._processInlineContainerRecursive(cell, { inTableCell: true }).replace(/\n/g, " ").trim();
+	}
+	/**
+	* Convert node to HTML for table cells (preserves some HTML in table cells)
+	*/
+	_nodeToHtmlForTableCell(node) {
+		return node.outerHTML;
+	}
+};
+var builtinConverter = new BuiltinHtmlToMarkdown();
+/**
+* Built-in HTML to markdown conversion function
+* This replaces the need for clients to provide their own htmlToMarkdown function
+*/
+var builtinHtmlToMarkdown = (html) => {
+	return builtinConverter.htmlToMarkdown(html);
+};
+var detectContentType = (text) => {
+	const trimmed = text.trim();
+	const doc = new DOMParser().parseFromString(trimmed, "text/html");
+	if (doc.body.children.length > 0 || doc.body.querySelector("*") !== null) return "html";
+	if (/(^#{1,6}\s)|(\*\*[^*]+\*\*)|(\*[^*]+\*)|(\[[^\]]+\]\([^)]+\))|(^\s*[-*+]\s+)/m.test(trimmed)) return "markdown";
+	return "plain";
+};
+//#endregion
+//#region ../../node_modules/.pnpm/slimdown-js@1.5.0/node_modules/slimdown-js/dist/slimdown.mjs
+var codeBlocks = [];
+var inlineCode = [];
+var mathBlocks = [];
+var inlineMath = [];
+var footnotes = [];
+var escapeMap = {
+	"&": "&amp;",
+	"<": "&lt;",
+	">": "&gt;",
+	"\"": "&quot;",
+	"'": "&#39;"
+};
+var escRegex = new RegExp(`[${Object.keys(escapeMap).join("")}]`, "g");
+var escapeHtml = (s) => s.replace(escRegex, (match) => escapeMap[match]);
+var para = (_, line) => {
+	const trimmed = line.trim();
+	return /^<\/?(ul|ol|li|h|p|bl|table|tbody|tr|td|th|caption)/i.test(trimmed) || trimmed === "" ? `
+${line}
+` : `
+<p>
+${trimmed}
+</p>
+`;
+};
+var ulList = (_text, indent, _bullet, item) => {
+	return `
+{{LISTITEM:ul:${Math.floor(indent.length / 2)}:::${item.trim()}}}
+`;
+};
+var olList = (_text, indent, bullet, item) => {
+	return `
+{{LISTITEM:ol:${Math.floor(indent.length / 2)}::${Number.parseInt(bullet, 10)}:${item.trim()}}}
+`;
+};
+var alphaOlList = (indent, orderedStyle, start, item) => {
+	return `
+{{LISTITEM:ol:${Math.floor(indent.length / 2)}:${orderedStyle}:${start}:${item.trim()}}}
+`;
+};
+var parseAlphaListLine = (line) => {
+	const match = line.match(/^( *)([A-Za-z][.)]|\([A-Za-z]\)) (.*)$/);
+	if (!match) return void 0;
+	const letter = match[2].match(/[A-Za-z]/)?.[0] ?? "a";
+	const orderedStyle = letter === letter.toUpperCase() ? "A" : "a";
+	return {
+		indent: match[1],
+		orderedStyle,
+		start: letter.toLowerCase().charCodeAt(0) - 96,
+		item: match[3]
+	};
+};
+var processAlphaListItems = (markdown) => {
+	const lines = markdown.split("\n");
+	for (let i = 0; i < lines.length; i++) {
+		const first = parseAlphaListLine(lines[i]);
+		if (!first) continue;
+		const run = [i];
+		let expectedStart = first.start + 1;
+		const baseIndent = first.indent.length;
+		for (let j = i + 1; j < lines.length; j++) {
+			const next = parseAlphaListLine(lines[j]);
+			if (next && next.indent === first.indent && next.orderedStyle === first.orderedStyle && next.start === expectedStart) {
+				run.push(j);
+				expectedStart++;
+				continue;
+			}
+			if (!lines[j].trim()) break;
+			if (!next && lines[j].match(/^ */)[0].length > baseIndent) continue;
+			if (next && next.indent.length > baseIndent) continue;
+			break;
+		}
+		if (run.length < 2) continue;
+		for (const index of run) {
+			const parsed = parseAlphaListLine(lines[index]);
+			lines[index] = alphaOlList(parsed.indent, parsed.orderedStyle, parsed.start, parsed.item);
+		}
+		i = run[run.length - 1];
+	}
+	return lines.join("\n");
+};
+var blockquote = (_, __, item = "") => `
+<blockquote>${item.trim()}</blockquote>`;
+var taskList = (_text, indent, checkboxState, item) => {
+	return `
+{{LISTITEM:ul:${Math.floor(indent.length / 2)}:::${`<input type="checkbox"${checkboxState.toLowerCase() === "x" ? " checked" : ""} disabled>`} ${item.trim()}}}
+`;
+};
+var definitionList = (_, term, definition) => {
+	return `
+<dl><dt>${term.trim()}</dt><dd>${definition.trim()}</dd></dl>
+`;
+};
+var processListItems = (markdown) => {
+	if (!markdown.includes("{{LISTITEM:")) return markdown;
+	const lines = markdown.split("\n");
+	const groups = [];
+	let currentGroup = [];
+	let hasEmptyLineSinceLastItem = false;
+	for (const line of lines) {
+		const listMatch = line.match(/\{\{LISTITEM:([^:]+):([^:]+):([^:]*):([^:]*):(.+)\}\}/);
+		if (listMatch) {
+			const itemType = listMatch[1];
+			const itemLevel = parseInt(listMatch[2]);
+			const itemOrderedStyle = listMatch[3];
+			const itemStart = listMatch[4] ? parseInt(listMatch[4]) : void 0;
+			if (hasEmptyLineSinceLastItem && currentGroup.length > 0) {
+				const lastItem = currentGroup[currentGroup.length - 1];
+				if (lastItem.type !== itemType && lastItem.level === itemLevel) {
+					groups.push([...currentGroup]);
+					currentGroup = [];
+				}
+			}
+			currentGroup.push({
+				type: itemType,
+				level: itemLevel,
+				orderedStyle: itemOrderedStyle || void 0,
+				start: itemStart,
+				content: listMatch[5],
+				originalLine: line
+			});
+			hasEmptyLineSinceLastItem = false;
+		} else if (line.trim() !== "") {
+			if (currentGroup.length > 0) {
+				groups.push([...currentGroup]);
+				currentGroup = [];
+			}
+			hasEmptyLineSinceLastItem = false;
+		} else if (line.trim() === "") hasEmptyLineSinceLastItem = true;
+	}
+	if (currentGroup.length > 0) groups.push(currentGroup);
+	if (groups.length === 0) return markdown;
+	for (const group of groups) {
+		const html = buildNestedList(group);
+		const firstItem = group[0];
+		markdown = markdown.replace(firstItem.originalLine, html);
+		for (let i = 1; i < group.length; i++) markdown = markdown.replace(group[i].originalLine, "");
+	}
+	return markdown;
+};
+var buildNestedList = (listItems) => {
+	if (listItems.length === 0) return "";
+	let html = "";
+	const stack = [];
+	for (let i = 0; i < listItems.length; i++) {
+		const item = listItems[i];
+		const nextItem = i < listItems.length - 1 ? listItems[i + 1] : null;
+		while (stack.length > 0 && stack[stack.length - 1].level > item.level) {
+			const last = stack.pop();
+			if (last.hasOpenLi) html += "</li>";
+			html += `</${last.type}>`;
+		}
+		if (stack.length > 0 && stack[stack.length - 1].level === item.level && (stack[stack.length - 1].type !== item.type || stack[stack.length - 1].orderedStyle !== item.orderedStyle)) {
+			const last = stack.pop();
+			if (last.hasOpenLi) html += "</li>";
+			html += `</${last.type}>`;
+		}
+		if (stack.length === 0 || stack[stack.length - 1].level < item.level) {
+			const styleAttr = item.type === "ol" && item.orderedStyle ? ` type="${item.orderedStyle}"` : "";
+			const startAttr = item.type === "ol" && item.start && item.start !== 1 ? ` start="${item.start}"` : "";
+			html += `<${item.type}${styleAttr}${startAttr}>`;
+			stack.push({
+				type: item.type,
+				level: item.level,
+				orderedStyle: item.orderedStyle,
+				hasOpenLi: false
+			});
+		}
+		if (stack.length > 0 && stack[stack.length - 1].hasOpenLi && stack[stack.length - 1].level === item.level) {
+			html += "</li>";
+			stack[stack.length - 1].hasOpenLi = false;
+		}
+		html += `<li>${item.content}`;
+		stack[stack.length - 1].hasOpenLi = true;
+		if (!nextItem || nextItem.level <= item.level) {
+			html += "</li>";
+			stack[stack.length - 1].hasOpenLi = false;
+		}
+	}
+	while (stack.length > 0) {
+		const last = stack.pop();
+		if (last.hasOpenLi) html += "</li>";
+		html += `</${last.type}>`;
+	}
+	return html;
+};
+var footnoteReferenceReplacer = (_match, id) => {
+	return `<sup id="fnref:${id}"><a href="#fn:${id}">[${id}]</a></sup>`;
+};
+var footnoteDefinitionReplacer = (_match, id, text) => {
+	footnotes.push([id, text.trim()]);
+	return "";
+};
+var generateFootnotesSection = () => {
+	if (footnotes.length === 0) return "";
+	return `
+<div class="footnotes">
+  <hr>
+  <ol>
+    ${footnotes.map(([id, text]) => `
+    <li id="fn:${id}">
+      ${text}
+      <sup><a href="#fnref:${id}">\u21A9</a></sup>
+    </li>`).join("\n")}
+  </ol>
+</div>`;
+};
+var table = (_, headers, format, content = "") => {
+	const align = format.split("|").filter((__, i, arr) => i > 0 && i < arr.length - 1).map((col) => /:-+:/g.test(col) ? "center" : /-+:/g.test(col) ? "right" : /:-+/.test(col) ? "left" : "");
+	const td = (col) => {
+		const a = align[col];
+		return a ? ` align="${a}"` : "";
+	};
+	const rawHeaderCells = headers.split("|").slice(1, -1);
+	const headerCells = rawHeaderCells.map((hd) => hd.trim());
+	const headerResults = [];
+	let skipNext = 0;
+	for (let i = 0; i < headerCells.length; i++) {
+		if (skipNext > 0) {
+			skipNext--;
+			continue;
+		}
+		const hd = headerCells[i];
+		const rawHd = rawHeaderCells[i];
+		if (hd && hd.length) {
+			let spanCount = 1;
+			let hasTrulyEmptyCell = false;
+			for (let j = i + 1; j < headerCells.length && headerCells[j].length === 0; j++) if (rawHeaderCells[j] === "") {
+				hasTrulyEmptyCell = true;
+				break;
+			}
+			if (hasTrulyEmptyCell) for (let j = i + 1; j < headerCells.length && headerCells[j].length === 0; j++) spanCount++;
+			if (spanCount > 1) {
+				skipNext = spanCount - 1;
+				headerResults.push(`<th${td(i)} colspan="${spanCount}">${hd}</th>`);
+			} else headerResults.push(`<th${td(i)}>${hd}</th>`);
+		} else if (rawHd === "") headerResults.push(`<th${td(i)}></th>`);
+		else headerResults.push(`<th${td(i)}></th>`);
+	}
+	return `
+<table><tbody>${`<tr>
+  ${headerResults.join("\n  ")}
+</tr>
+`}${content.split("\n").map((row) => row.trim()).filter((row) => row && row.length).map((row) => {
+		const rawCells = row.split("|").slice(1, -1);
+		const cells = rawCells.map((cell) => cell.trim());
+		const cellResults = [];
+		let skipNext2 = 0;
+		for (let i = 0; i < cells.length; i++) {
+			if (skipNext2 > 0) {
+				skipNext2--;
+				continue;
+			}
+			const cell = cells[i];
+			const rawCell = rawCells[i];
+			if (cell && cell.length) {
+				let spanCount = 1;
+				let hasTrulyEmptyCell = false;
+				for (let j = i + 1; j < cells.length && cells[j].length === 0; j++) if (rawCells[j] === "") {
+					hasTrulyEmptyCell = true;
+					break;
+				}
+				if (hasTrulyEmptyCell) for (let j = i + 1; j < cells.length && cells[j].length === 0; j++) spanCount++;
+				if (spanCount > 1) {
+					skipNext2 = spanCount - 1;
+					cellResults.push(`<td${td(i)} colspan="${spanCount}">${cell}</td>`);
+				} else cellResults.push(`<td${td(i)}>${cell}</td>`);
+			} else if (rawCell === "") cellResults.push(`<td${td(i)}></td>`);
+			else cellResults.push(`<td${td(i)}></td>`);
+		}
+		return `<tr>
+  ${cellResults.join("\n  ")}
+</tr>
+`;
+	}).join("")}</tbody></table>
+`;
+};
+var tableWithCaption = (_, caption, headers, format, content = "") => {
+	return table(_, headers, format, content).replace("<table>", `<table><caption>${caption.trim()}</caption>`);
+};
+var cleanUpUrl = (link) => link.replace(/<\/?em>/g, "_");
+var header = (_, match, h = "") => {
+	const level = match.length;
+	return `<h${level}>${h.trim()}</h${level}>`;
+};
+var slugify = (text) => {
+	return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "section";
+};
+var addHeadingIds = (html) => {
+	const slugCounts = /* @__PURE__ */ new Map();
+	return html.replace(/<(h[1-6])>([\s\S]*?)<\/\1>/g, (_match, tag, inner) => {
+		const base = slugify(inner.replace(/<[^>]+>/g, ""));
+		const count = slugCounts.get(base) ?? 0;
+		slugCounts.set(base, count + 1);
+		return `<${tag} id="${count === 0 ? base : `${base}-${count + 1}`}">${inner}</${tag}>`;
+	});
+};
+var extractCodeBlocks = (markdown) => {
+	return markdown.replace(/\n\s*```(\w*)\n([^]*?)\n\s*```\s*\n/g, (_match, lang, code) => {
+		codeBlocks.push({
+			lang,
+			code
+		});
+		return `
+<pre>{{CODEBLOCKPH${codeBlocks.length - 1}}}</pre>
+`;
+	});
+};
+var extractInlineCode = (markdown) => {
+	return markdown.replace(/`([^`]+)`/g, (_match, code) => {
+		inlineCode.push(code);
+		return `{{INLINECODEPH${inlineCode.length - 1}}}`;
+	});
+};
+var renderWithExtension = (extensions, method, input, fallback) => {
+	for (const extension of extensions) {
+		const renderer = extension[method];
+		const html = renderer?.(input);
+		if (typeof html === "string") return html;
+	}
+	return fallback();
+};
+var restoreCodeBlocks = (markdown, extensions) => {
+	return markdown.replace(/<pre>{{CODEBLOCKPH(\d+)}}<\/pre>/g, (_match, index) => {
+		const { lang, code } = codeBlocks[parseInt(index)];
+		return renderWithExtension(extensions, "renderCodeBlock", {
+			lang,
+			code,
+			escapeHtml
+		}, () => {
+			return `<pre><code${lang ? ` class="language-${lang}"` : ""}>${escapeHtml(code)}</code></pre>`;
+		});
+	});
+};
+var restoreInlineCode = (markdown) => {
+	return markdown.replace(/{{INLINECODEPH(\d+)}}/g, (_match, index) => {
+		const code = inlineCode[parseInt(index)];
+		return `<code>${escapeHtml(code)}</code>`;
+	});
+};
+var extractMathBlocks = (markdown) => {
+	return markdown.replace(/\n\s*\$\$([^]*?)\$\$\s*\n/g, (_match, math) => {
+		mathBlocks.push(math.trim());
+		return `
+{{MATHBLOCKPH${mathBlocks.length - 1}}}
+`;
+	});
+};
+var extractInlineMath = (markdown) => {
+	return markdown.replace(/\$([^$\n]+)\$/g, (_match, math) => {
+		inlineMath.push(math);
+		return `{{INLINEMATHPH${inlineMath.length - 1}}}`;
+	});
+};
+var restoreMathBlocks = (markdown, extensions) => {
+	return markdown.replace(/{{MATHBLOCKPH(\d+)}}/g, (_match, index) => {
+		const math = mathBlocks[parseInt(index)];
+		return renderWithExtension(extensions, "renderMathBlock", {
+			math,
+			escapeHtml
+		}, () => `<div class="math-block">${escapeHtml(math)}</div>`);
+	});
+};
+var restoreInlineMath = (markdown, extensions) => {
+	return markdown.replace(/{{INLINEMATHPH(\d+)}}/g, (_match, index) => {
+		const math = inlineMath[parseInt(index)];
+		return renderWithExtension(extensions, "renderInlineMath", {
+			math,
+			escapeHtml
+		}, () => `<span class="math-inline">${escapeHtml(math)}</span>`);
+	});
+};
+var preParaRules = [
+	[/\r\n/g, "\n"],
+	[/\n(#+)(.*)/g, header],
+	[/<(https?:\/\/[^\s>]+)>/g, "<a href=\"$1\">$1</a>"],
+	[/!\[([^\[]*)\]\((?:javascript:)?([^\)]+)\)/g, "<img src=\"$2\" alt=\"$1\">"],
+	[/\[([^\[]+)\]\((?:javascript:)?([^\)]+)\)/g, "<a href=\"$2\">$1</a>"],
+	[/([^\s]) {2,}\n/g, "$1<br>\n"],
+	[/([^\\])(\*\*|__)(.*?(_|\*)?)\2/g, "$1<strong>$3</strong>"],
+	[/([^\\])(\*|_)(.*?)\2/g, "$1<em>$3</em>"],
+	[/\\_/g, "&#95;"],
+	[/\~\~(.*?)\~\~/g, "<del>$1</del>"],
+	[/\:\"(.*?)\"\:/g, "<q>$1</q>"],
+	[/\n-{3,}/g, "\n<hr />"],
+	[/\n( *)[-*+] \[([xX ])\](.*)/g, taskList],
+	[/\n( *)(\*|-|\+)(.*)/g, ulList],
+	[/\n( *)([0-9]+[.)]) (.*)/g, olList],
+	[/\n(&gt;|\>)(.*)/g, blockquote],
+	[/(\^)(.*?)\1/g, "<sup>$2</sup>"],
+	[/(\~)(.*?)\1/g, "<sub>$2</sub>"],
+	[/\n\[(.+?)\]\n( *\|[^\n]+\|\r?\n)((?: *\|:?[ -]+:?)+ *\|)(\n(?: *\|[^\n]+\|\r?\n?)*)?/g, tableWithCaption],
+	[/( *\|[^\n]+\|\r?\n)((?: *\|:?[ -]+:?)+ *\|)(\n(?: *\|[^\n]+\|\r?\n?)*)?/g, table],
+	[/\[\^([^\]]+)\](?!:)/g, footnoteReferenceReplacer],
+	[/\[\^([^\]]+)\]:\s*((?:[^\n]*\n?)*)/g, footnoteDefinitionReplacer],
+	[/\n([A-Z][A-Za-z\s]*?)\s:\s*([A-Z][^\n]*)/g, definitionList]
+];
+var postParaRules = [
+	[
+		/\s?<\/[ou]l>\s?<[ou]l>/g,
+		"",
+		3
+	],
+	[/<\/blockquote>\n<blockquote>/g, "<br>\n"],
+	[/https?:\/\/[^"']*/g, cleanUpUrl],
+	[/&#95;/g, "_"]
+];
+function render(markdown, optionsOrRemoveParagraphs = false, externalLinksArg = false) {
+	let removeParagraphs;
+	let externalLinks;
+	let alphaLists;
+	let headingIds;
+	let extensions;
+	if (typeof optionsOrRemoveParagraphs === "object") {
+		removeParagraphs = optionsOrRemoveParagraphs.removeParagraphs ?? false;
+		externalLinks = optionsOrRemoveParagraphs.externalLinks ?? false;
+		alphaLists = optionsOrRemoveParagraphs.alphaLists ?? false;
+		headingIds = optionsOrRemoveParagraphs.headingIds ?? false;
+		extensions = optionsOrRemoveParagraphs.extensions ?? [];
+	} else {
+		removeParagraphs = optionsOrRemoveParagraphs;
+		externalLinks = externalLinksArg;
+		alphaLists = false;
+		headingIds = false;
+		extensions = [];
+	}
+	codeBlocks.length = 0;
+	inlineCode.length = 0;
+	mathBlocks.length = 0;
+	inlineMath.length = 0;
+	footnotes.length = 0;
+	markdown = extractCodeBlocks(`
+${markdown}
+`);
+	markdown = extractMathBlocks(markdown);
+	markdown = extractInlineCode(markdown);
+	markdown = extractInlineMath(markdown);
+	if (alphaLists) markdown = processAlphaListItems(markdown);
+	preParaRules.forEach(([regex, subst, repeat = 1]) => {
+		for (let i = 0; i < repeat; i++) markdown = markdown.replace(regex, subst);
+	});
+	markdown = processListItems(markdown);
+	markdown = markdown.replace(/\n([^\n]+)\n/g, para);
+	postParaRules.forEach(([regex, subst, repeat = 1]) => {
+		for (let i = 0; i < repeat; i++) markdown = markdown.replace(regex, subst);
+	});
+	markdown = restoreCodeBlocks(markdown, extensions);
+	markdown = restoreMathBlocks(markdown, extensions);
+	markdown = restoreInlineCode(markdown);
+	markdown = restoreInlineMath(markdown, extensions);
+	markdown = markdown.trim() + generateFootnotesSection();
+	if (headingIds) markdown = addHeadingIds(markdown);
+	if (removeParagraphs) markdown = markdown.replace(/^<p>(.*)<\/p>$/s, "$1");
+	if (externalLinks) markdown = markdown.replace(/<a href="/g, "<a target=\"_blank\" href=\"");
+	return markdown;
+}
+var addRule = (regex, replacement) => {
+	preParaRules.push([regex, replacement]);
+};
+//#endregion
+//#region src/utils/markdown-to-html.ts
+/**
+* Markdown to HTML conversion, backed by slimdown-js
+* (https://github.com/erikvullings/slimdown-js).
+*/
+/**
+* Convert a Markdown string to HTML.
+*/
+var markdownToHtml = (markdown, options) => {
+	if (!markdown || markdown.trim() === "") return "";
+	return render(markdown, options);
+};
+/**
+* Convert Markdown to HTML for display inside the WYSIWYG editor: links are
+* not opened in a new tab, since the editor handles them in place.
+*/
+var markdownToWysiwygHtml = (markdown) => markdownToHtml(markdown, { externalLinks: false });
+//#endregion
+//#region src/utils/cursor-position-store.ts
+var createCursorPositionStore = () => {
+	let savedSelection = null;
+	let savedRange = null;
+	let savedRangeInfo = null;
+	let savedScrollPosition = null;
+	const clear = () => {
+		savedSelection = null;
+		savedRange = null;
+		savedRangeInfo = null;
+		savedScrollPosition = null;
+	};
+	const save = ({ mode, contentEditable, textarea }) => {
+		const scrollElement = mode === "wysiwyg" ? contentEditable : textarea;
+		if (scrollElement) savedScrollPosition = {
+			top: scrollElement.scrollTop,
+			left: scrollElement.scrollLeft
+		};
+		if (mode === "markdown" && document.activeElement instanceof HTMLTextAreaElement) {
+			const activeTextarea = document.activeElement;
+			savedSelection = {
+				start: activeTextarea.selectionStart,
+				end: activeTextarea.selectionEnd
+			};
+		} else if (mode === "wysiwyg") {
+			const selection = document.getSelection();
+			if (selection && selection.rangeCount > 0) {
+				const range = selection.getRangeAt(0);
+				savedRange = range.cloneRange();
+				savedRangeInfo = {
+					startContainer: range.startContainer,
+					startOffset: range.startOffset,
+					endContainer: range.endContainer,
+					endOffset: range.endOffset
+				};
+			}
+		}
+	};
+	const restoreMarkdown = (textarea) => {
+		if (!textarea || !savedSelection) return;
+		textarea.setSelectionRange(savedSelection.start, savedSelection.end);
+		textarea.focus();
+	};
+	const restoreWysiwygSelection = (contentEditable) => {
+		contentEditable.focus();
+		const selection = document.getSelection();
+		if (!selection || !savedRange) return;
+		try {
+			selection.removeAllRanges();
+			const newRange = document.createRange();
+			if (savedRangeInfo && savedRangeInfo.startContainer.parentNode && contentEditable.contains(savedRangeInfo.startContainer)) {
+				newRange.setStart(savedRangeInfo.startContainer, Math.min(savedRangeInfo.startOffset, savedRangeInfo.startContainer.textContent?.length || 0));
+				if (savedRangeInfo.endContainer.parentNode && contentEditable.contains(savedRangeInfo.endContainer)) newRange.setEnd(savedRangeInfo.endContainer, Math.min(savedRangeInfo.endOffset, savedRangeInfo.endContainer.textContent?.length || 0));
+				else newRange.collapse(true);
+				selection.addRange(newRange);
+			} else {
+				newRange.selectNodeContents(contentEditable);
+				newRange.collapse(false);
+				selection.addRange(newRange);
+			}
+		} catch {
+			const range = document.createRange();
+			range.selectNodeContents(contentEditable);
+			range.collapse(false);
+			selection.removeAllRanges();
+			selection.addRange(range);
+		}
+	};
+	const restoreScroll = (element) => {
+		if (!element || !savedScrollPosition) return;
+		element.scrollTop = savedScrollPosition.top;
+		element.scrollLeft = savedScrollPosition.left;
+	};
+	const restore = ({ mode, contentEditable, textarea }) => {
+		return new Promise((resolve) => {
+			if (mode === "markdown" && savedSelection) {
+				setTimeout(() => {
+					restoreMarkdown(textarea);
+					restoreScroll(textarea);
+					clear();
+					resolve();
+				}, 0);
+				return;
+			}
+			if (mode === "wysiwyg" && savedRange) {
+				setTimeout(() => {
+					if (contentEditable) restoreWysiwygSelection(contentEditable);
+					restoreScroll(contentEditable);
+					clear();
+					resolve();
+				}, 10);
+				return;
+			}
+			restoreScroll(mode === "markdown" ? textarea : contentEditable);
+			clear();
+			resolve();
+		});
+	};
+	return {
+		save,
+		restore
+	};
+};
+//#endregion
+//#region src/i18n/index.ts
+var defaultStrings = {
+	bold: "Bold",
+	italic: "Italic",
+	strikethrough: "Strikethrough",
+	inlineCode: "Inline Code",
+	codeBlock: "Code Block",
+	link: "Insert Link",
+	image: "Insert Image",
+	table: "Insert Table",
+	unorderedList: "Unordered List",
+	orderedList: "Ordered List",
+	blockquote: "Blockquote",
+	horizontalRule: "Horizontal Rule",
+	undo: "Undo",
+	redo: "Redo",
+	heading: "Heading",
+	paragraph: "Paragraph",
+	indent: "Increase Indent",
+	outdent: "Decrease Indent",
+	checklist: "Task List",
+	clearFormat: "Clear Formatting",
+	insertRowAbove: "Insert Row Above",
+	insertRowBelow: "Insert Row Below",
+	insertColumnLeft: "Insert Column Left",
+	insertColumnRight: "Insert Column Right",
+	deleteRow: "Delete Row",
+	deleteColumn: "Delete Column",
+	deleteTable: "Delete Table",
+	wysiwyg: "WYSIWYG",
+	markdown: "Markdown",
+	preview: "Preview",
+	insertLinkTitle: "Insert Link",
+	insertImageTitle: "Insert Image",
+	insertTableTitle: "Insert Table",
+	linkText: "Link Text",
+	linkUrl: "URL",
+	linkTitle: "Title (optional)",
+	imageAlt: "Alt Text",
+	imageUrl: "Image URL",
+	imageTitle: "Title (optional)",
+	tableRows: "Rows",
+	tableCols: "Columns",
+	cancel: "Cancel",
+	insert: "Insert",
+	linkTextPlaceholder: "Enter link text",
+	linkUrlPlaceholder: "https://example.com",
+	linkTitlePlaceholder: "Link title for tooltip",
+	imageAltPlaceholder: "Alt text",
+	imageUrlPlaceholder: "https://example.com/image.jpg",
+	imageTitlePlaceholder: "Image title",
+	tableSelectSize: "{rows} × {cols} Table",
+	tableSelectSizeDefault: "Select table size",
+	tableClickToInsert: "Click to insert table",
+	tableCustomSize: "Custom size...",
+	tableCustomRowsPrompt: "Number of rows:",
+	tableCustomColsPrompt: "Number of columns:"
+};
+var createI18n = (customStrings = {}) => {
+	const strings = {
+		...defaultStrings,
+		...customStrings
+	};
+	return (key) => {
+		return strings[key] || key;
+	};
+};
+//#endregion
+//#region src/editor.ts
+var MarkdownEditor = () => {
+	let wysiwygContent = "";
+	let markdownContent = "";
+	let initialized = false;
+	let editorActions = null;
+	let internalMode = null;
+	const cursorPositionStore = createCursorPositionStore();
+	const safeMarkdownToHtml = (markdown, markdownToHtml) => {
+		if (!markdown || markdown.trim() === "") return "";
+		return markdownToHtml ? markdownToHtml(markdown) : markdownToWysiwygHtml(markdown);
+	};
+	let showImageModal = false;
+	let showLinkModal = false;
+	let showTableSelector = false;
+	let showTableMenu = false;
+	let tableMenuPosition = {
+		x: 0,
+		y: 0
+	};
+	let tableSelectorPosition = {
+		x: 0,
+		y: 0
+	};
+	let showDropdown = false;
+	let dropdownOptions = [];
+	let dropdownPosition = {
+		x: 0,
+		y: 0
+	};
+	let dropdownTriggerElement = null;
+	let activeDropdownButton = null;
+	let tableContextTarget = null;
+	return { view: ({ attrs }) => {
+		const { mode = "wysiwyg", theme = "light", toolbar = true, showTabs = true, placeholder = "Start writing...", content = "", isPreview = false, markdownToHtml, htmlToMarkdown, onContentChange, onModeChange, i18n } = attrs;
+		if (!initialized) {
+			if (!onModeChange) internalMode = mode;
+			if (detectContentType(content) === "html") {
+				wysiwygContent = content;
+				markdownContent = htmlToMarkdown ? htmlToMarkdown(content) : builtinHtmlToMarkdown(content);
+			} else {
+				markdownContent = content;
+				wysiwygContent = safeMarkdownToHtml(content, markdownToHtml);
+			}
+			initialized = true;
+		}
+		const currentMode = onModeChange ? mode : internalMode || mode;
+		const t = createI18n(i18n);
+		const currentToolbarGroups = createI18nToolbarConfig(t).groups;
+		const handleContentChange = (newContent, contentMode) => {
+			if (contentMode === "wysiwyg") {
+				wysiwygContent = newContent;
+				markdownContent = htmlToMarkdown ? htmlToMarkdown(newContent) : builtinHtmlToMarkdown(newContent);
+				editorActions?.recordHistory(newContent);
+				onContentChange?.(markdownContent);
+			} else {
+				markdownContent = newContent;
+				wysiwygContent = safeMarkdownToHtml(newContent, markdownToHtml);
+				onContentChange?.(markdownContent);
+			}
+		};
+		if (!editorActions) {
+			editorActions = new EditorActions((newContent) => {
+				handleContentChange(newContent, editorActions.getMode());
+			});
+			editorActions.initHistory(wysiwygContent);
+		}
+		editorActions.setMode(currentMode);
+		const handleModeChange = (newMode) => {
+			if (newMode !== currentMode) {
+				if (newMode === "markdown" && currentMode === "wysiwyg") markdownContent = htmlToMarkdown ? htmlToMarkdown(wysiwygContent) : builtinHtmlToMarkdown(wysiwygContent);
+				else if (newMode === "wysiwyg" && currentMode === "markdown") {
+					wysiwygContent = safeMarkdownToHtml(markdownContent, markdownToHtml);
+					editorActions?.initHistory(wysiwygContent);
+				}
+				if (!onModeChange) internalMode = newMode;
+				editorActions?.setMode(newMode);
+				onModeChange?.(newMode);
+			}
+		};
+		editorActions.setOnToggleMode(() => handleModeChange(currentMode === "wysiwyg" ? "markdown" : "wysiwyg"));
+		const handleImageInsert = async (src, alt, title) => {
+			if (editorActions) {
+				await restoreCursorPosition();
+				editorActions.image(src, alt, title);
+			}
+		};
+		const handleLinkInsert = async (url, text, title) => {
+			if (editorActions) {
+				await restoreCursorPosition();
+				editorActions.link(url, text);
+			}
+		};
+		const handleTableInsert = async (rows, cols) => {
+			if (editorActions) {
+				await restoreCursorPosition();
+				editorActions.table(rows, cols);
+			}
+		};
+		const cursorTarget = () => ({
+			mode: currentMode,
+			contentEditable: editorActions?.getContentEditable() ?? null,
+			textarea: editorActions?.getTextarea() ?? null
+		});
+		const saveCursorPosition = () => cursorPositionStore.save(cursorTarget());
+		const restoreCursorPosition = () => cursorPositionStore.restore(cursorTarget());
+		const tableOperations = {
+			insertRowAbove,
+			insertRowBelow,
+			insertColumnLeft,
+			insertColumnRight,
+			deleteRow: deleteCurrentRow,
+			deleteColumn: deleteCurrentColumn,
+			deleteTable: deleteCurrentTable
+		};
+		const performTableOperation = (operation) => {
+			if (!tableContextTarget || !editorActions) return;
+			const contentEditable = editorActions.getContentEditable();
+			if (!contentEditable) return;
+			const cell = tableContextTarget;
+			const run = tableOperations[operation];
+			if (!run) return;
+			const scrollTop = contentEditable.scrollTop;
+			const scrollLeft = contentEditable.scrollLeft;
+			try {
+				const newContent = run(contentEditable, cell);
+				onContentChange?.(newContent);
+				setTimeout(() => {
+					contentEditable.scrollTop = scrollTop;
+					contentEditable.scrollLeft = scrollLeft;
+				}, 10);
+			} catch (error) {
+				console.error("Table operation failed:", error);
+			}
+		};
+		const handleToolbarAction = (action, button, event) => {
+			if (button && isDropdownButton(button)) {
+				if (action === "toggleHeading") {
+					saveCursorPosition();
+					const target = event?.target;
+					if (target) {
+						const rect = target.getBoundingClientRect();
+						dropdownOptions = currentToolbarGroups[0][0].dropdown || headingOptions;
+						dropdownPosition = {
+							x: rect.left,
+							y: rect.bottom + 4
+						};
+						dropdownTriggerElement = target;
+						activeDropdownButton = button.name;
+						showDropdown = true;
+						mithril.redraw();
+						return;
+					}
+				}
+			}
+			switch (action) {
+				case "image":
+					saveCursorPosition();
+					showImageModal = true;
+					mithril.redraw();
+					break;
+				case "link":
+					saveCursorPosition();
+					showLinkModal = true;
+					mithril.redraw();
+					break;
+				case "table":
+					saveCursorPosition();
+					const target = event?.target;
+					if (target) {
+						const rect = target.getBoundingClientRect();
+						tableSelectorPosition = {
+							x: rect.left + rect.width / 2,
+							y: rect.bottom
+						};
+					}
+					showTableSelector = true;
+					mithril.redraw();
+					break;
+				default: editorActions?.executeAction(action);
+			}
+		};
+		const handleDropdownSelect = async (option) => {
+			showDropdown = false;
+			activeDropdownButton = null;
+			if (editorActions) {
+				await restoreCursorPosition();
+				editorActions.executeAction(option.action);
+			}
+			mithril.redraw();
+		};
+		return mithril(".md-wysiwyg-editor-wrapper", { "data-theme": theme }, [
+			toolbar && mithril(".md-toolbar", [currentToolbarGroups.map((group, groupIndex) => [...group.map((button) => {
+				let isDisabled = false;
+				if (button.action === "undo") isDisabled = !editorActions?.canUndo();
+				else if (button.action === "redo") isDisabled = !editorActions?.canRedo();
+				return mithril("button", {
+					type: "button",
+					class: [
+						"md-toolbar-button",
+						isDropdownButton(button) ? "has-dropdown" : "",
+						isDropdownButton(button) && showDropdown && activeDropdownButton === button.name ? "dropdown-open" : "",
+						isDisabled ? "disabled" : ""
+					].join(" ").trim(),
+					disabled: isDisabled,
+					title: `${button.title}${button.shortcut ? ` (${button.shortcut})` : ""}`,
+					onclick: (e) => {
+						e.preventDefault();
+						if (!isDisabled) handleToolbarAction(button.action, button, e);
+					},
+					innerHTML: button.icon
+				});
+			}), groupIndex < currentToolbarGroups.length - 1 && mithril(".md-toolbar-separator")]).flat().filter(Boolean)]),
+			mithril(".md-editor-content-area", [currentMode === "markdown" ? mithril(".md-markdown-editor-container", {
+				key: "markdown-editor",
+				style: { display: "flex" }
+			}, mithril("textarea.md-markdown-area[name=markdown-area]", {
+				placeholder,
+				value: markdownContent,
+				oninput: (e) => {
+					const target = e.target;
+					handleContentChange(target.value, "markdown");
+				},
+				onkeydown: (e) => {
+					const target = e.target;
+					editorActions?.handleKeyDown(e);
+					mithril.redraw.sync();
+					target.focus();
+				},
+				onpaste: (e) => editorActions?.handlePaste(e),
+				oncreate: (vnode) => {
+					editorActions?.setTextarea(vnode.dom);
+				}
+			})) : mithril("div.md-editable-area", {
+				key: "wysiwyg-editor",
+				contenteditable: true,
+				"data-placeholder": placeholder,
+				oninput: (e) => {
+					const target = e.target;
+					handleContentChange(target.innerHTML, "wysiwyg");
+				},
+				onkeydown: (e) => editorActions?.handleKeyDown(e),
+				oncontextmenu: (e) => {
+					const target = e.target;
+					if (target.closest("table") && currentMode === "wysiwyg") {
+						e.preventDefault();
+						e.stopPropagation();
+						tableContextTarget = target.closest("td, th") || target;
+						saveCursorPosition();
+						showDropdown = false;
+						activeDropdownButton = null;
+						showTableMenu = true;
+						tableMenuPosition = {
+							x: e.clientX,
+							y: e.clientY
+						};
+						mithril.redraw();
+						return false;
+					}
+				},
+				onclick: (e) => {
+					e.stopPropagation();
+					let needsRedraw = false;
+					if (showTableMenu) {
+						showTableMenu = false;
+						needsRedraw = true;
+					}
+					if (showDropdown) {
+						showDropdown = false;
+						activeDropdownButton = null;
+						needsRedraw = true;
+					}
+					if (needsRedraw) mithril.redraw();
+				},
+				oncreate: (vnode) => {
+					const element = vnode.dom;
+					element.innerHTML = wysiwygContent;
+					editorActions?.setContentEditable(element);
+				},
+				onupdate: (vnode) => {
+					const element = vnode.dom;
+					if (element.innerHTML !== wysiwygContent && !document.getSelection()?.rangeCount) element.innerHTML = wysiwygContent;
+				}
+			})]),
+			showTabs && mithril(".md-tabs", [mithril("button.md-tab-button", {
+				type: "button",
+				class: currentMode === "wysiwyg" ? "active" : "",
+				onclick: () => handleModeChange("wysiwyg")
+			}, t("wysiwyg")), mithril("button.md-tab-button", {
+				type: "button",
+				class: currentMode === "markdown" ? "active" : "",
+				onclick: () => handleModeChange("markdown")
+			}, t("markdown"))]),
+			isPreview && mithril(".editor-preview", { innerHTML: currentMode === "markdown" ? safeMarkdownToHtml(markdownContent, markdownToHtml) : wysiwygContent }),
+			mithril(ImageModal, {
+				isOpen: showImageModal,
+				t,
+				onClose: () => {
+					showImageModal = false;
+					mithril.redraw();
+				},
+				onInsert: handleImageInsert
+			}),
+			mithril(LinkModal, {
+				isOpen: showLinkModal,
+				t,
+				onClose: () => {
+					showLinkModal = false;
+					mithril.redraw();
+				},
+				onInsert: handleLinkInsert
+			}),
+			mithril(TableSelector, {
+				isOpen: showTableSelector,
+				position: tableSelectorPosition,
+				t,
+				onClose: () => {
+					showTableSelector = false;
+					mithril.redraw();
+				},
+				onSelect: handleTableInsert
+			}),
+			mithril(TableMenu, {
+				isVisible: showTableMenu,
+				position: tableMenuPosition,
+				t,
+				onClose: () => {
+					showTableMenu = false;
+					tableContextTarget = null;
+					mithril.redraw();
+				},
+				onInsertRowAbove: () => {
+					performTableOperation("insertRowAbove");
+					showTableMenu = false;
+					tableContextTarget = null;
+					mithril.redraw();
+				},
+				onInsertRowBelow: () => {
+					performTableOperation("insertRowBelow");
+					showTableMenu = false;
+					tableContextTarget = null;
+					mithril.redraw();
+				},
+				onInsertColumnLeft: () => {
+					performTableOperation("insertColumnLeft");
+					showTableMenu = false;
+					tableContextTarget = null;
+					mithril.redraw();
+				},
+				onInsertColumnRight: () => {
+					performTableOperation("insertColumnRight");
+					showTableMenu = false;
+					tableContextTarget = null;
+					mithril.redraw();
+				},
+				onDeleteRow: () => {
+					performTableOperation("deleteRow");
+					showTableMenu = false;
+					tableContextTarget = null;
+					mithril.redraw();
+				},
+				onDeleteColumn: () => {
+					performTableOperation("deleteColumn");
+					showTableMenu = false;
+					tableContextTarget = null;
+					mithril.redraw();
+				},
+				onDeleteTable: () => {
+					performTableOperation("deleteTable");
+					showTableMenu = false;
+					tableContextTarget = null;
+					mithril.redraw();
+				}
+			}),
+			mithril(DropdownMenu, {
+				isVisible: showDropdown,
+				position: dropdownPosition,
+				options: dropdownOptions,
+				triggerElement: dropdownTriggerElement,
+				onClose: () => {
+					showDropdown = false;
+					activeDropdownButton = null;
+					mithril.redraw();
+				},
+				onSelect: handleDropdownSelect
+			})
+		]);
+	} };
+};
+//#endregion
+//#region src/utils/html-to-markdown.ts
+var index_esm_defaultOptions = (/* unused pure expression or super */ null && ({
+	preserveWhitespace: false,
+	gfmTables: true,
+	taskLists: true,
+	strikethrough: true,
+	codeBlocks: true,
+	headingStyle: "atx",
+	bulletListMarker: "-",
+	emDelimiter: "*",
+	strongDelimiter: "**",
+	codeDelimiter: "`",
+	linkStyle: "inline"
+}));
+/**
+* Advanced HTML to Markdown converter
+*/
+var HTMLToMarkdownConverter = class {
+	constructor(options = index_esm_defaultOptions) {
+		this.linkReferences = /* @__PURE__ */ new Map();
+		this.linkCounter = 0;
+		this.options = {
+			...index_esm_defaultOptions,
+			...options
+		};
+	}
+	/**
+	* Convert HTML string to Markdown
+	*/
+	convert(html) {
+		if (!html || html.trim() === "") return "";
+		this.linkReferences.clear();
+		this.linkCounter = 0;
+		let cleaned = this.cleanupHTML(html);
+		let markdown = this.processHTML(cleaned);
+		markdown = this.cleanupMarkdown(markdown);
+		if (this.options.linkStyle === "reference" && this.linkReferences.size > 0) markdown += "\n\n" + this.generateReferenceLinks();
+		return markdown.trim();
+	}
+	/**
+	* Clean up HTML before processing
+	*/
+	cleanupHTML(html) {
+		return html.replace(/<div>/gi, "<p>").replace(/<\/div>/gi, "</p>").replace(/<br\s*\/?>/gi, "\n").replace(/<p>\s*<\/p>/gi, "").replace(/<div>\s*<\/div>/gi, "").replace(/>\s+</g, "><").replace(/\s+/g, " ").replace(/<!--[\s\S]*?-->/g, "").replace(/<span(?:\s+[^>]*)?>([^<]*)<\/span>/gi, "$1").trim();
+	}
+	/**
+	* Process HTML and convert to markdown
+	*/
+	processHTML(html) {
+		let markdown = html;
+		markdown = this.processCodeBlocks(markdown);
+		markdown = this.processInlineCode(markdown);
+		markdown = this.processTables(markdown);
+		markdown = this.processLists(markdown);
+		markdown = this.processHeaders(markdown);
+		markdown = this.processBlockquotes(markdown);
+		markdown = this.processLinks(markdown);
+		markdown = this.processImages(markdown);
+		markdown = this.processEmphasis(markdown);
+		markdown = this.processHorizontalRules(markdown);
+		markdown = this.processParagraphs(markdown);
+		markdown = markdown.replace(/<[^>]*>/g, "");
+		return markdown;
+	}
+	/**
+	* Process code blocks
+	*/
+	processCodeBlocks(markdown) {
+		if (!this.options.codeBlocks) return markdown;
+		return markdown.replace(/<pre[^>]*><code(?:\s+class="language-([^"]*)")?[^>]*>([\s\S]*?)<\/code><\/pre>/gi, (_, language, code) => {
+			const cleanCode = this.unescapeHTML(code).replace(/^\n|\n$/g, "");
+			const lang = language || "";
+			return `\n\n${this.options.codeDelimiter}${this.options.codeDelimiter}${this.options.codeDelimiter}${lang}\n${cleanCode}\n${this.options.codeDelimiter}${this.options.codeDelimiter}${this.options.codeDelimiter}\n\n`;
+		});
+	}
+	/**
+	* Process inline code
+	*/
+	processInlineCode(markdown) {
+		return markdown.replace(/<code[^>]*>([\s\S]*?)<\/code>/gi, (_, code) => {
+			const cleanCode = this.unescapeHTML(code);
+			const delimiter = this.options.codeDelimiter;
+			if (cleanCode.includes(delimiter)) {
+				const extraTicks = delimiter.repeat(2);
+				return ` ${extraTicks}${cleanCode}${extraTicks} `;
+			}
+			return `${delimiter}${cleanCode}${delimiter}`;
+		});
+	}
+	/**
+	* Process tables
+	*/
+	processTables(markdown) {
+		if (!this.options.gfmTables) return markdown;
+		return markdown.replace(/<table[^>]*>([\s\S]*?)<\/table>/gi, (_, tableContent) => {
+			const rows = this.extractTableRows(tableContent);
+			if (rows.length === 0) return "";
+			let result = "\n\n";
+			rows.forEach((row, index) => {
+				result += "| " + row.join(" | ") + " |\n";
+				if (index === 0) result += "| " + row.map(() => "---").join(" | ") + " |\n";
+			});
+			result += "\n";
+			return result;
+		});
+	}
+	/**
+	* Extract table rows and cells
+	*/
+	extractTableRows(tableContent) {
+		const rows = [];
+		const rowMatches = tableContent.match(/<tr[^>]*>([\s\S]*?)<\/tr>/gi);
+		if (rowMatches) rowMatches.forEach((rowHtml) => {
+			const cellMatches = rowHtml.match(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/gi);
+			if (cellMatches) {
+				const cells = cellMatches.map((cellHtml) => {
+					return this.processHTML(cellHtml.replace(/<t[hd][^>]*>|<\/t[hd]>/gi, "")).replace(/\|/g, "\\|").trim();
+				});
+				if (cells.length > 0) rows.push(cells);
+			}
+		});
+		return rows;
+	}
+	/**
+	* Process lists (ordered and unordered)
+	*/
+	processLists(markdown) {
+		markdown = this.processNestedLists(markdown, 0);
+		if (this.options.taskLists) markdown = this.processTaskLists(markdown);
+		return markdown;
+	}
+	/**
+	* Process nested lists with proper indentation
+	*/
+	processNestedLists(markdown, depth) {
+		const indent = "  ".repeat(depth);
+		markdown = markdown.replace(/<ul[^>]*>([\s\S]*?)<\/ul>/gi, (_, listContent) => {
+			return this.processListItems(listContent, this.options.bulletListMarker, indent);
+		});
+		markdown = markdown.replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gi, (_, listContent) => {
+			return this.processOrderedListItems(listContent, indent);
+		});
+		return markdown;
+	}
+	/**
+	* Process list items
+	*/
+	processListItems(listContent, marker, indent) {
+		const items = listContent.match(/<li[^>]*>([\s\S]*?)<\/li>/gi);
+		if (!items) return "";
+		let result = "\n";
+		items.forEach((itemHtml) => {
+			const content = itemHtml.replace(/<\/?li[^>]*>/gi, "");
+			const processedContent = this.processNestedLists(content, indent.length / 2 + 1);
+			const cleanContent = this.processHTML(processedContent).trim();
+			if (cleanContent) result += `${indent}${marker} ${cleanContent}\n`;
+		});
+		return result + "\n";
+	}
+	/**
+	* Process ordered list items
+	*/
+	processOrderedListItems(listContent, indent) {
+		const items = listContent.match(/<li[^>]*>([\s\S]*?)<\/li>/gi);
+		if (!items) return "";
+		let result = "\n";
+		let counter = 1;
+		items.forEach((itemHtml) => {
+			const content = itemHtml.replace(/<\/?li[^>]*>/gi, "");
+			const processedContent = this.processNestedLists(content, indent.length / 2 + 1);
+			const cleanContent = this.processHTML(processedContent).trim();
+			if (cleanContent) {
+				result += `${indent}${counter}. ${cleanContent}\n`;
+				counter++;
+			}
+		});
+		return result + "\n";
+	}
+	/**
+	* Process task lists (GitHub-style checkboxes)
+	*/
+	processTaskLists(markdown) {
+		markdown = markdown.replace(/<input[^>]*type=['"']checkbox['"'][^>]*checked[^>]*>\s*/gi, "- [x] ");
+		markdown = markdown.replace(/<input[^>]*type=['"']checkbox['"'][^>]*>\s*/gi, "- [ ] ");
+		return markdown;
+	}
+	/**
+	* Process headers
+	*/
+	processHeaders(markdown) {
+		for (let level = 6; level >= 1; level--) {
+			const regex = new RegExp(`<h${level}[^>]*>([\s\S]*?)<\/h${level}>`, "gi");
+			markdown = markdown.replace(regex, (_, content) => {
+				const cleanContent = this.processHTML(content).trim();
+				if (this.options.headingStyle === "setext" && level <= 2) return `\n\n${cleanContent}\n${(level === 1 ? "=" : "-").repeat(cleanContent.length)}\n\n`;
+				else return `\n\n${"#".repeat(level)} ${cleanContent}\n\n`;
+			});
+		}
+		return markdown;
+	}
+	/**
+	* Process blockquotes
+	*/
+	processBlockquotes(markdown) {
+		return markdown.replace(/<blockquote[^>]*>([\s\S]*?)<\/blockquote>/gi, (_, content) => {
+			return `\n\n${this.processHTML(content).split("\n").map((line) => "> " + line.trim()).join("\n")}\n\n`;
+		});
+	}
+	/**
+	* Process links
+	*/
+	processLinks(markdown) {
+		return markdown.replace(/<a[^>]*href=['"]([^'"]*)['"'][^>]*(?:title=['"]([^'"]*)['"])?[^>]*>([\s\S]*?)<\/a>/gi, (_, href, title, text) => {
+			const linkText = this.processHTML(text).trim();
+			if (this.options.linkStyle === "reference") return this.createReferenceLink(href, linkText, title);
+			else return `[${linkText}](${href}${title ? ` "${title}"` : ""})`;
+		});
+	}
+	/**
+	* Create reference-style link
+	*/
+	createReferenceLink(href, text, title) {
+		this.linkCounter++;
+		const refId = this.linkCounter.toString();
+		this.linkReferences.set(refId, {
+			url: href,
+			title
+		});
+		return `[${text}][${refId}]`;
+	}
+	/**
+	* Generate reference links section
+	*/
+	generateReferenceLinks() {
+		let result = "";
+		this.linkReferences.forEach((ref, id) => {
+			const titlePart = ref.title ? ` "${ref.title}"` : "";
+			result += `[${id}]: ${ref.url}${titlePart}\n`;
+		});
+		return result;
+	}
+	/**
+	* Process images
+	*/
+	processImages(markdown) {
+		return markdown.replace(/<img[^>]*src=['"]([^'"]*)['"'][^>]*(?:alt=['"]([^'"]*)['"])?[^>]*(?:title=['"]([^'"]*)['"])?[^>]*\/?>/gi, (_, src, alt, title) => {
+			return `![${alt || ""}](${src}${title ? ` "${title}"` : ""})`;
+		});
+	}
+	/**
+	* Process emphasis (bold and italic)
+	*/
+	processEmphasis(markdown) {
+		markdown = markdown.replace(/<(strong|b)[^>]*>([\s\S]*?)<\/(strong|b)>/gi, (_, __, content) => {
+			const processedContent = this.processHTML(content);
+			return `${this.options.strongDelimiter}${processedContent}${this.options.strongDelimiter}`;
+		});
+		markdown = markdown.replace(/<(em|i)[^>]*>([\s\S]*?)<\/(em|i)>/gi, (_, __, content) => {
+			const processedContent = this.processHTML(content);
+			return `${this.options.emDelimiter}${processedContent}${this.options.emDelimiter}`;
+		});
+		if (this.options.strikethrough) markdown = markdown.replace(/<(s|del|strike)[^>]*>([\s\S]*?)<\/(s|del|strike)>/gi, (_, __, content) => {
+			return `~~${this.processHTML(content)}~~`;
+		});
+		return markdown;
+	}
+	/**
+	* Process horizontal rules
+	*/
+	processHorizontalRules(markdown) {
+		return markdown.replace(/<hr[^>]*\/?>/gi, "\n\n---\n\n");
+	}
+	/**
+	* Process paragraphs
+	*/
+	processParagraphs(markdown) {
+		return markdown.replace(/<p[^>]*>([\s\S]*?)<\/p>/gi, (_, content) => {
+			const processedContent = this.processHTML(content).trim();
+			return processedContent ? `\n\n${processedContent}\n\n` : "";
+		});
+	}
+	/**
+	* Clean up markdown output
+	*/
+	cleanupMarkdown(markdown) {
+		return markdown.replace(/\n{3,}/g, "\n\n").replace(/^\n+|\n+$/g, "").replace(/\n(\s*[-*+]\s)/g, "\n$1").replace(/\n(\s*\d+\.\s)/g, "\n$1").replace(/(\*\*|__|\*|_)(\s+)/g, "$2$1").replace(/(\s+)(\*\*|__|\*|_)/g, "$1$2").replace(/[ \t]+$/gm, "").replace(/^[ \t]+/gm, "").trim();
+	}
+	/**
+	* Unescape HTML entities
+	*/
+	unescapeHTML(text) {
+		const entities = {
+			"&amp;": "&",
+			"&lt;": "<",
+			"&gt;": ">",
+			"&quot;": "\"",
+			"&#39;": "'",
+			"&nbsp;": " ",
+			"&#x2F;": "/",
+			"&#x60;": "`",
+			"&#x3D;": "="
+		};
+		return text.replace(/&[^;]+;/g, (match) => entities[match] || match);
+	}
+};
+/**
+* Convenience function for converting HTML to Markdown
+*/
+var htmlToMarkdown = (html, options) => {
+	return new HTMLToMarkdownConverter(options).convert(html);
+};
+/**
+* Enhanced conversion specifically for contentEditable output
+*/
+var contentEditableToMarkdown = (html) => {
+	return htmlToMarkdown(html, {
+		preserveWhitespace: false,
+		gfmTables: true,
+		taskLists: true,
+		strikethrough: true,
+		codeBlocks: true,
+		headingStyle: "atx",
+		bulletListMarker: "-",
+		emDelimiter: "*",
+		strongDelimiter: "**"
+	});
+};
+//#endregion
+
+
+;// ../../node_modules/.pnpm/dompurify@3.4.13/node_modules/dompurify/dist/purify.es.mjs
+/*! @license DOMPurify 3.4.13 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.4.13/LICENSE */
+
+function _arrayLikeToArray(r, a) {
+  (null == a || a > r.length) && (a = r.length);
+  for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+  return n;
+}
+function _arrayWithHoles(r) {
+  if (Array.isArray(r)) return r;
+}
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = true,
+      o = false;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) ; else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+    } catch (r) {
+      o = true, n = r;
+    } finally {
+      try {
+        if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
+    }
+    return a;
+  }
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _slicedToArray(r, e) {
+  return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest();
+}
+function _unsupportedIterableToArray(r, a) {
+  if (r) {
+    if ("string" == typeof r) return _arrayLikeToArray(r, a);
+    var t = {}.toString.call(r).slice(8, -1);
+    return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
+  }
+}
+
+const entries = Object.entries,
+  setPrototypeOf = Object.setPrototypeOf,
+  isFrozen = Object.isFrozen,
+  getPrototypeOf = Object.getPrototypeOf,
+  getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+let freeze = Object.freeze,
+  seal = Object.seal,
+  create = Object.create; // eslint-disable-line import/no-mutable-exports
+let _ref = typeof Reflect !== 'undefined' && Reflect,
+  apply = _ref.apply,
+  construct = _ref.construct;
+if (!freeze) {
+  freeze = function freeze(x) {
+    return x;
+  };
+}
+if (!seal) {
+  seal = function seal(x) {
+    return x;
+  };
+}
+if (!apply) {
+  apply = function apply(func, thisArg) {
+    for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+      args[_key - 2] = arguments[_key];
+    }
+    return func.apply(thisArg, args);
+  };
+}
+if (!construct) {
+  construct = function construct(Func) {
+    for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+      args[_key2 - 1] = arguments[_key2];
+    }
+    return new Func(...args);
+  };
+}
+const arrayForEach = unapply(Array.prototype.forEach);
+const arrayLastIndexOf = unapply(Array.prototype.lastIndexOf);
+const arrayPop = unapply(Array.prototype.pop);
+const arrayPush = unapply(Array.prototype.push);
+const arraySplice = unapply(Array.prototype.splice);
+const arrayIsArray = Array.isArray;
+const stringToLowerCase = unapply(String.prototype.toLowerCase);
+const stringToString = unapply(String.prototype.toString);
+const stringMatch = unapply(String.prototype.match);
+const stringReplace = unapply(String.prototype.replace);
+const stringIndexOf = unapply(String.prototype.indexOf);
+const stringTrim = unapply(String.prototype.trim);
+const numberToString = unapply(Number.prototype.toString);
+const booleanToString = unapply(Boolean.prototype.toString);
+const bigintToString = typeof BigInt === 'undefined' ? null : unapply(BigInt.prototype.toString);
+const symbolToString = typeof Symbol === 'undefined' ? null : unapply(Symbol.prototype.toString);
+const objectHasOwnProperty = unapply(Object.prototype.hasOwnProperty);
+const objectToString = unapply(Object.prototype.toString);
+const regExpTest = unapply(RegExp.prototype.test);
+const typeErrorCreate = unconstruct(TypeError);
+/**
+ * Creates a new function that calls the given function with a specified thisArg and arguments.
+ *
+ * @param func - The function to be wrapped and called.
+ * @returns A new function that calls the given function with a specified thisArg and arguments.
+ */
+function unapply(func) {
+  return function (thisArg) {
+    if (thisArg instanceof RegExp) {
+      thisArg.lastIndex = 0;
+    }
+    for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+      args[_key3 - 1] = arguments[_key3];
+    }
+    return apply(func, thisArg, args);
+  };
+}
+/**
+ * Creates a new function that constructs an instance of the given constructor function with the provided arguments.
+ *
+ * @param func - The constructor function to be wrapped and called.
+ * @returns A new function that constructs an instance of the given constructor function with the provided arguments.
+ */
+function unconstruct(Func) {
+  return function () {
+    for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+      args[_key4] = arguments[_key4];
+    }
+    return construct(Func, args);
+  };
+}
+/**
+ * Add properties to a lookup table
+ *
+ * @param set - The set to which elements will be added.
+ * @param array - The array containing elements to be added to the set.
+ * @param transformCaseFunc - An optional function to transform the case of each element before adding to the set.
+ * @returns The modified set with added elements.
+ */
+function addToSet(set, array) {
+  let transformCaseFunc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : stringToLowerCase;
+  if (setPrototypeOf) {
+    // Make 'in' and truthy checks like Boolean(set.constructor)
+    // independent of any properties defined on Object.prototype.
+    // Prevent prototype setters from intercepting set as a this value.
+    setPrototypeOf(set, null);
+  }
+  if (!arrayIsArray(array)) {
+    return set;
+  }
+  let l = array.length;
+  while (l--) {
+    let element = array[l];
+    if (typeof element === 'string') {
+      const lcElement = transformCaseFunc(element);
+      if (lcElement !== element) {
+        // Config presets (e.g. tags.js, attrs.js) are immutable.
+        if (!isFrozen(array)) {
+          array[l] = lcElement;
+        }
+        element = lcElement;
+      }
+    }
+    set[element] = true;
+  }
+  return set;
+}
+/**
+ * Clean up an array to harden against CSPP
+ *
+ * @param array - The array to be cleaned.
+ * @returns The cleaned version of the array
+ */
+function cleanArray(array) {
+  for (let index = 0; index < array.length; index++) {
+    const isPropertyExist = objectHasOwnProperty(array, index);
+    if (!isPropertyExist) {
+      array[index] = null;
+    }
+  }
+  return array;
+}
+/**
+ * Shallow clone an object
+ *
+ * @param object - The object to be cloned.
+ * @returns A new object that copies the original.
+ */
+function clone(object) {
+  const newObject = create(null);
+  for (const _ref2 of entries(object)) {
+    var _ref3 = _slicedToArray(_ref2, 2);
+    const property = _ref3[0];
+    const value = _ref3[1];
+    const isPropertyExist = objectHasOwnProperty(object, property);
+    if (isPropertyExist) {
+      if (arrayIsArray(value)) {
+        newObject[property] = cleanArray(value);
+      } else if (value && typeof value === 'object' && value.constructor === Object) {
+        newObject[property] = clone(value);
+      } else {
+        newObject[property] = value;
+      }
+    }
+  }
+  return newObject;
+}
+/**
+ * Convert non-node values into strings without depending on direct property access.
+ *
+ * @param value - The value to stringify.
+ * @returns A string representation of the provided value.
+ */
+function stringifyValue(value) {
+  switch (typeof value) {
+    case 'string':
+      {
+        return value;
+      }
+    case 'number':
+      {
+        return numberToString(value);
+      }
+    case 'boolean':
+      {
+        return booleanToString(value);
+      }
+    case 'bigint':
+      {
+        return bigintToString ? bigintToString(value) : '0';
+      }
+    case 'symbol':
+      {
+        return symbolToString ? symbolToString(value) : 'Symbol()';
+      }
+    case 'undefined':
+      {
+        return objectToString(value);
+      }
+    case 'function':
+    case 'object':
+      {
+        if (value === null) {
+          return objectToString(value);
+        }
+        const valueAsRecord = value;
+        const valueToString = lookupGetter(valueAsRecord, 'toString');
+        if (typeof valueToString === 'function') {
+          const stringified = valueToString(valueAsRecord);
+          return typeof stringified === 'string' ? stringified : objectToString(stringified);
+        }
+        return objectToString(value);
+      }
+    default:
+      {
+        return objectToString(value);
+      }
+  }
+}
+/**
+ * This method automatically checks if the prop is function or getter and behaves accordingly.
+ *
+ * @param object - The object to look up the getter function in its prototype chain.
+ * @param prop - The property name for which to find the getter function.
+ * @returns The getter function found in the prototype chain or a fallback function.
+ */
+function lookupGetter(object, prop) {
+  while (object !== null) {
+    const desc = getOwnPropertyDescriptor(object, prop);
+    if (desc) {
+      if (desc.get) {
+        return unapply(desc.get);
+      }
+      if (typeof desc.value === 'function') {
+        return unapply(desc.value);
+      }
+    }
+    object = getPrototypeOf(object);
+  }
+  function fallbackValue() {
+    return null;
+  }
+  return fallbackValue;
+}
+function isRegex(value) {
+  try {
+    regExpTest(value, '');
+    return true;
+  } catch (_unused) {
+    return false;
+  }
+}
+
+const html$1 = freeze(['a', 'abbr', 'acronym', 'address', 'area', 'article', 'aside', 'audio', 'b', 'bdi', 'bdo', 'big', 'blink', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'center', 'cite', 'code', 'col', 'colgroup', 'content', 'data', 'datalist', 'dd', 'decorator', 'del', 'details', 'dfn', 'dialog', 'dir', 'div', 'dl', 'dt', 'element', 'em', 'fieldset', 'figcaption', 'figure', 'font', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hgroup', 'hr', 'html', 'i', 'img', 'input', 'ins', 'kbd', 'label', 'legend', 'li', 'main', 'map', 'mark', 'marquee', 'menu', 'menuitem', 'meter', 'nav', 'nobr', 'ol', 'optgroup', 'option', 'output', 'p', 'picture', 'pre', 'progress', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'search', 'section', 'select', 'shadow', 'slot', 'small', 'source', 'spacer', 'span', 'strike', 'strong', 'style', 'sub', 'summary', 'sup', 'table', 'tbody', 'td', 'template', 'textarea', 'tfoot', 'th', 'thead', 'time', 'tr', 'track', 'tt', 'u', 'ul', 'var', 'video', 'wbr']);
+const svg$1 = freeze(['svg', 'a', 'altglyph', 'altglyphdef', 'altglyphitem', 'animatecolor', 'animatemotion', 'animatetransform', 'circle', 'clippath', 'defs', 'desc', 'ellipse', 'enterkeyhint', 'exportparts', 'filter', 'font', 'g', 'glyph', 'glyphref', 'hkern', 'image', 'inputmode', 'line', 'lineargradient', 'marker', 'mask', 'metadata', 'mpath', 'part', 'path', 'pattern', 'polygon', 'polyline', 'radialgradient', 'rect', 'stop', 'style', 'switch', 'symbol', 'text', 'textpath', 'title', 'tref', 'tspan', 'view', 'vkern']);
+const svgFilters = freeze(['feBlend', 'feColorMatrix', 'feComponentTransfer', 'feComposite', 'feConvolveMatrix', 'feDiffuseLighting', 'feDisplacementMap', 'feDistantLight', 'feDropShadow', 'feFlood', 'feFuncA', 'feFuncB', 'feFuncG', 'feFuncR', 'feGaussianBlur', 'feImage', 'feMerge', 'feMergeNode', 'feMorphology', 'feOffset', 'fePointLight', 'feSpecularLighting', 'feSpotLight', 'feTile', 'feTurbulence']);
+// List of SVG elements that are disallowed by default.
+// We still need to know them so that we can do namespace
+// checks properly in case one wants to add them to
+// allow-list.
+const svgDisallowed = freeze(['animate', 'color-profile', 'cursor', 'discard', 'font-face', 'font-face-format', 'font-face-name', 'font-face-src', 'font-face-uri', 'foreignobject', 'hatch', 'hatchpath', 'mesh', 'meshgradient', 'meshpatch', 'meshrow', 'missing-glyph', 'script', 'set', 'solidcolor', 'unknown', 'use']);
+const mathMl$1 = freeze(['math', 'menclose', 'merror', 'mfenced', 'mfrac', 'mglyph', 'mi', 'mlabeledtr', 'mmultiscripts', 'mn', 'mo', 'mover', 'mpadded', 'mphantom', 'mroot', 'mrow', 'ms', 'mspace', 'msqrt', 'mstyle', 'msub', 'msup', 'msubsup', 'mtable', 'mtd', 'mtext', 'mtr', 'munder', 'munderover', 'mprescripts']);
+// Similarly to SVG, we want to know all MathML elements,
+// even those that we disallow by default.
+const mathMlDisallowed = freeze(['maction', 'maligngroup', 'malignmark', 'mlongdiv', 'mscarries', 'mscarry', 'msgroup', 'mstack', 'msline', 'msrow', 'semantics', 'annotation', 'annotation-xml', 'mprescripts', 'none']);
+const purify_es_text = freeze(['#text']);
+
+const html = freeze(['accept', 'action', 'align', 'alt', 'autocapitalize', 'autocomplete', 'autopictureinpicture', 'autoplay', 'background', 'bgcolor', 'border', 'capture', 'cellpadding', 'cellspacing', 'checked', 'cite', 'class', 'clear', 'color', 'cols', 'colspan', 'command', 'commandfor', 'controls', 'controlslist', 'coords', 'crossorigin', 'datetime', 'decoding', 'default', 'dir', 'disabled', 'disablepictureinpicture', 'disableremoteplayback', 'download', 'draggable', 'enctype', 'enterkeyhint', 'exportparts', 'face', 'for', 'headers', 'height', 'hidden', 'high', 'href', 'hreflang', 'id', 'inert', 'inputmode', 'integrity', 'ismap', 'kind', 'label', 'lang', 'list', 'loading', 'loop', 'low', 'max', 'maxlength', 'media', 'method', 'min', 'minlength', 'multiple', 'muted', 'name', 'nonce', 'noshade', 'novalidate', 'nowrap', 'open', 'optimum', 'part', 'pattern', 'placeholder', 'playsinline', 'popover', 'popovertarget', 'popovertargetaction', 'poster', 'preload', 'pubdate', 'radiogroup', 'readonly', 'rel', 'required', 'rev', 'reversed', 'role', 'rows', 'rowspan', 'spellcheck', 'scope', 'selected', 'shape', 'size', 'sizes', 'slot', 'span', 'srclang', 'start', 'src', 'srcset', 'step', 'style', 'summary', 'tabindex', 'title', 'translate', 'type', 'usemap', 'valign', 'value', 'width', 'wrap', 'xmlns']);
+const svg = freeze(['accent-height', 'accumulate', 'additive', 'alignment-baseline', 'amplitude', 'ascent', 'attributename', 'attributetype', 'azimuth', 'basefrequency', 'baseline-shift', 'begin', 'bias', 'by', 'class', 'clip', 'clippathunits', 'clip-path', 'clip-rule', 'color', 'color-interpolation', 'color-interpolation-filters', 'color-profile', 'color-rendering', 'cx', 'cy', 'd', 'dx', 'dy', 'diffuseconstant', 'direction', 'display', 'divisor', 'dominant-baseline', 'dur', 'edgemode', 'elevation', 'end', 'exponent', 'fill', 'fill-opacity', 'fill-rule', 'filter', 'filterunits', 'flood-color', 'flood-opacity', 'font-family', 'font-size', 'font-size-adjust', 'font-stretch', 'font-style', 'font-variant', 'font-weight', 'fx', 'fy', 'g1', 'g2', 'glyph-name', 'glyphref', 'gradientunits', 'gradienttransform', 'height', 'href', 'id', 'image-rendering', 'in', 'in2', 'intercept', 'k', 'k1', 'k2', 'k3', 'k4', 'kerning', 'keypoints', 'keysplines', 'keytimes', 'lang', 'lengthadjust', 'letter-spacing', 'kernelmatrix', 'kernelunitlength', 'lighting-color', 'local', 'marker-end', 'marker-mid', 'marker-start', 'markerheight', 'markerunits', 'markerwidth', 'maskcontentunits', 'maskunits', 'max', 'mask', 'mask-type', 'media', 'method', 'mode', 'min', 'name', 'numoctaves', 'offset', 'operator', 'opacity', 'order', 'orient', 'orientation', 'origin', 'overflow', 'paint-order', 'path', 'pathlength', 'patterncontentunits', 'patterntransform', 'patternunits', 'points', 'preservealpha', 'preserveaspectratio', 'primitiveunits', 'r', 'rx', 'ry', 'radius', 'refx', 'refy', 'repeatcount', 'repeatdur', 'restart', 'result', 'rotate', 'scale', 'seed', 'shape-rendering', 'slope', 'specularconstant', 'specularexponent', 'spreadmethod', 'startoffset', 'stddeviation', 'stitchtiles', 'stop-color', 'stop-opacity', 'stroke-dasharray', 'stroke-dashoffset', 'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit', 'stroke-opacity', 'stroke', 'stroke-width', 'style', 'surfacescale', 'systemlanguage', 'tabindex', 'tablevalues', 'targetx', 'targety', 'transform', 'transform-origin', 'text-anchor', 'text-decoration', 'text-orientation', 'text-rendering', 'textlength', 'type', 'u1', 'u2', 'unicode', 'values', 'viewbox', 'visibility', 'version', 'vert-adv-y', 'vert-origin-x', 'vert-origin-y', 'width', 'word-spacing', 'wrap', 'writing-mode', 'xchannelselector', 'ychannelselector', 'x', 'x1', 'x2', 'xmlns', 'y', 'y1', 'y2', 'z', 'zoomandpan']);
+const mathMl = freeze(['accent', 'accentunder', 'align', 'bevelled', 'close', 'columnalign', 'columnlines', 'columnspacing', 'columnspan', 'denomalign', 'depth', 'dir', 'display', 'displaystyle', 'encoding', 'fence', 'frame', 'height', 'href', 'id', 'largeop', 'length', 'linethickness', 'lquote', 'lspace', 'mathbackground', 'mathcolor', 'mathsize', 'mathvariant', 'maxsize', 'minsize', 'movablelimits', 'notation', 'numalign', 'open', 'rowalign', 'rowlines', 'rowspacing', 'rowspan', 'rspace', 'rquote', 'scriptlevel', 'scriptminsize', 'scriptsizemultiplier', 'selection', 'separator', 'separators', 'stretchy', 'subscriptshift', 'supscriptshift', 'symmetric', 'voffset', 'width', 'xmlns']);
+const xml = freeze(['xlink:href', 'xml:id', 'xlink:title', 'xml:space', 'xmlns:xlink']);
+
+const MUSTACHE_EXPR = seal(/{{[\w\W]*|^[\w\W]*}}/g);
+const ERB_EXPR = seal(/<%[\w\W]*|^[\w\W]*%>/g);
+const TMPLIT_EXPR = seal(/\${[\w\W]*/g);
+const DATA_ATTR = seal(/^data-[\-\w.\u00B7-\uFFFF]+$/); // eslint-disable-line no-useless-escape
+const ARIA_ATTR = seal(/^aria-[\-\w]+$/); // eslint-disable-line no-useless-escape
+const IS_ALLOWED_URI = seal(/^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp|matrix):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i // eslint-disable-line no-useless-escape
+);
+const IS_SCRIPT_OR_DATA = seal(/^(?:\w+script|data):/i);
+const ATTR_WHITESPACE = seal(/[\u0000-\u0020\u00A0\u1680\u180E\u2000-\u2029\u205F\u3000]/g // eslint-disable-line no-control-regex
+);
+const DOCTYPE_NAME = seal(/^html$/i);
+const CUSTOM_ELEMENT = seal(/^[a-z][.\w]*(-[.\w]+)+$/i);
+// Markup-significant character probes used by _sanitizeElements.
+// Shared module-level instances are safe despite the sticky /g flags:
+// unapply() resets lastIndex for RegExp receivers before every call.
+const ELEMENT_MARKUP_PROBE = seal(/<[/\w!]/g);
+const COMMENT_MARKUP_PROBE = seal(/<[/\w]/g);
+const FALLBACK_TAG_CLOSE = seal(/<\/no(script|embed|frames)/i);
+const SELF_CLOSING_TAG = seal(/\/>/i);
+
+// https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
+const NODE_TYPE = {
+  element: 1,
+  attribute: 2,
+  text: 3,
+  cdataSection: 4,
+  entityReference: 5,
+  // Deprecated
+  entityNode: 6,
+  // Deprecated
+  processingInstruction: 7,
+  comment: 8,
+  document: 9,
+  documentType: 10,
+  documentFragment: 11,
+  notation: 12 // Deprecated
+};
+const getGlobal = function getGlobal() {
+  return typeof window === 'undefined' ? null : window;
+};
+/**
+ * Creates a no-op policy for internal use only.
+ * Don't export this function outside this module!
+ * @param trustedTypes The policy factory.
+ * @param purifyHostElement The Script element used to load DOMPurify (to determine policy name suffix).
+ * @return The policy created (or null, if Trusted Types
+ * are not supported or creating the policy failed).
+ */
+const _createTrustedTypesPolicy = function _createTrustedTypesPolicy(trustedTypes, purifyHostElement) {
+  if (typeof trustedTypes !== 'object' || typeof trustedTypes.createPolicy !== 'function') {
+    return null;
+  }
+  // Allow the callers to control the unique policy name
+  // by adding a data-tt-policy-suffix to the script element with the DOMPurify.
+  // Policy creation with duplicate names throws in Trusted Types.
+  let suffix = null;
+  const ATTR_NAME = 'data-tt-policy-suffix';
+  if (purifyHostElement && purifyHostElement.hasAttribute(ATTR_NAME)) {
+    suffix = purifyHostElement.getAttribute(ATTR_NAME);
+  }
+  const policyName = 'dompurify' + (suffix ? '#' + suffix : '');
+  try {
+    return trustedTypes.createPolicy(policyName, {
+      createHTML(html) {
+        return html;
+      },
+      createScriptURL(scriptUrl) {
+        return scriptUrl;
+      }
+    });
+  } catch (_) {
+    // Policy creation failed (most likely another DOMPurify script has
+    // already run). Skip creating the policy, as this will only cause errors
+    // if TT are enforced.
+    console.warn('TrustedTypes policy ' + policyName + ' could not be created.');
+    return null;
+  }
+};
+const _createHooksMap = function _createHooksMap() {
+  return {
+    afterSanitizeAttributes: [],
+    afterSanitizeElements: [],
+    afterSanitizeShadowDOM: [],
+    beforeSanitizeAttributes: [],
+    beforeSanitizeElements: [],
+    beforeSanitizeShadowDOM: [],
+    uponSanitizeAttribute: [],
+    uponSanitizeElement: [],
+    uponSanitizeShadowNode: []
+  };
+};
+/**
+ * Resolve a set-valued configuration option: a fresh set built from
+ * cfg[key] when it is an own array property (seeded with a clone of
+ * options.base when given, case-normalized via options.transform),
+ * the fallback set otherwise.
+ *
+ * @param cfg the cloned, prototype-free configuration object
+ * @param key the configuration property to read
+ * @param fallback the set to use when the option is absent or not an array
+ * @param options transform and optional base set to merge into
+ * @returns the resolved set
+ */
+const _resolveSetOption = function _resolveSetOption(cfg, key, fallback, options) {
+  return objectHasOwnProperty(cfg, key) && arrayIsArray(cfg[key]) ? addToSet(options.base ? clone(options.base) : {}, cfg[key], options.transform) : fallback;
+};
+function createDOMPurify() {
+  let window = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : getGlobal();
+  const DOMPurify = root => createDOMPurify(root);
+  DOMPurify.version = '3.4.13';
+  DOMPurify.removed = [];
+  if (!window || !window.document || window.document.nodeType !== NODE_TYPE.document || !window.Element) {
+    // Not running in a browser, provide a factory function
+    // so that you can pass your own Window
+    DOMPurify.isSupported = false;
+    return DOMPurify;
+  }
+  let document = window.document;
+  const originalDocument = document;
+  const currentScript = originalDocument.currentScript;
+  window.DocumentFragment;
+    const HTMLTemplateElement = window.HTMLTemplateElement,
+    Node = window.Node,
+    Element = window.Element,
+    NodeFilter = window.NodeFilter,
+    _window$NamedNodeMap = window.NamedNodeMap;
+    _window$NamedNodeMap === void 0 ? window.NamedNodeMap || window.MozNamedAttrMap : _window$NamedNodeMap;
+    window.HTMLFormElement;
+    const DOMParser = window.DOMParser,
+    trustedTypes = window.trustedTypes;
+  const ElementPrototype = Element.prototype;
+  const cloneNode = lookupGetter(ElementPrototype, 'cloneNode');
+  const remove = lookupGetter(ElementPrototype, 'remove');
+  const getNextSibling = lookupGetter(ElementPrototype, 'nextSibling');
+  const getChildNodes = lookupGetter(ElementPrototype, 'childNodes');
+  const getParentNode = lookupGetter(ElementPrototype, 'parentNode');
+  const getShadowRoot = lookupGetter(ElementPrototype, 'shadowRoot');
+  const getAttributes = lookupGetter(ElementPrototype, 'attributes');
+  const getNodeType = Node && Node.prototype ? lookupGetter(Node.prototype, 'nodeType') : null;
+  const getNodeName = Node && Node.prototype ? lookupGetter(Node.prototype, 'nodeName') : null;
+  const getOwnerDocument = Node && Node.prototype ? lookupGetter(Node.prototype, 'ownerDocument') : null;
+  // As per issue #47, the web-components registry is inherited by a
+  // new document created via createHTMLDocument. As per the spec
+  // (http://w3c.github.io/webcomponents/spec/custom/#creating-and-passing-registries)
+  // a new empty registry is used when creating a template contents owner
+  // document, so we use that as our parent document to ensure nothing
+  // is inherited.
+  if (typeof HTMLTemplateElement === 'function') {
+    const template = document.createElement('template');
+    if (template.content && template.content.ownerDocument) {
+      document = template.content.ownerDocument;
+    }
+  }
+  let trustedTypesPolicy;
+  let emptyHTML = '';
+  // The instance's own internal Trusted Types policy. Unlike a caller-supplied
+  // `TRUSTED_TYPES_POLICY`, this is created at most once — Trusted Types throws
+  // on duplicate policy names — and is the only policy allowed to persist
+  // across configurations and survive `clearConfig()`.
+  let defaultTrustedTypesPolicy;
+  let defaultTrustedTypesPolicyResolved = false;
+  // Tracks whether we are already inside a call to the configured Trusted Types
+  // policy (`createHTML` or `createScriptURL`). If a supplied policy callback
+  // itself calls `DOMPurify.sanitize` (the cause of #1422), `sanitize` would
+  // re-enter the policy and recurse until the stack overflows. We detect that
+  // re-entry and throw a clear, actionable error instead. The guard is shared
+  // across both callbacks, because either one re-entering `sanitize` triggers
+  // the same unbounded recursion.
+  let IN_TRUSTED_TYPES_POLICY = 0;
+  const _assertNotInTrustedTypesPolicy = function _assertNotInTrustedTypesPolicy() {
+    if (IN_TRUSTED_TYPES_POLICY > 0) {
+      throw typeErrorCreate('A configured TRUSTED_TYPES_POLICY callback (createHTML or ' + 'createScriptURL) must not call DOMPurify.sanitize, as that causes ' + 'infinite recursion. Do not pass a policy whose callbacks wrap ' + 'DOMPurify as TRUSTED_TYPES_POLICY; see the "DOMPurify and Trusted ' + 'Types" section of the README.');
+    }
+  };
+  const _createTrustedHTML = function _createTrustedHTML(html) {
+    _assertNotInTrustedTypesPolicy();
+    IN_TRUSTED_TYPES_POLICY++;
+    try {
+      return trustedTypesPolicy.createHTML(html);
+    } finally {
+      IN_TRUSTED_TYPES_POLICY--;
+    }
+  };
+  const _createTrustedScriptURL = function _createTrustedScriptURL(scriptUrl) {
+    _assertNotInTrustedTypesPolicy();
+    IN_TRUSTED_TYPES_POLICY++;
+    try {
+      return trustedTypesPolicy.createScriptURL(scriptUrl);
+    } finally {
+      IN_TRUSTED_TYPES_POLICY--;
+    }
+  };
+  // Lazily resolve (and cache) the instance's internal default policy.
+  // Resolution is attempted at most once: a successful `createPolicy` cannot be
+  // repeated (Trusted Types throws on duplicate names), and a failed or
+  // unsupported attempt must not be retried on every parse.
+  const _getDefaultTrustedTypesPolicy = function _getDefaultTrustedTypesPolicy() {
+    if (!defaultTrustedTypesPolicyResolved) {
+      defaultTrustedTypesPolicy = _createTrustedTypesPolicy(trustedTypes, currentScript);
+      defaultTrustedTypesPolicyResolved = true;
+    }
+    return defaultTrustedTypesPolicy;
+  };
+  const _document = document,
+    implementation = _document.implementation,
+    createNodeIterator = _document.createNodeIterator,
+    createDocumentFragment = _document.createDocumentFragment,
+    getElementsByTagName = _document.getElementsByTagName;
+  const importNode = originalDocument.importNode;
+  let hooks = _createHooksMap();
+  /**
+   * Expose whether this browser supports running the full DOMPurify.
+   */
+  DOMPurify.isSupported = typeof entries === 'function' && typeof getParentNode === 'function' && implementation && implementation.createHTMLDocument !== undefined;
+  const MUSTACHE_EXPR$1 = MUSTACHE_EXPR,
+    ERB_EXPR$1 = ERB_EXPR,
+    TMPLIT_EXPR$1 = TMPLIT_EXPR,
+    DATA_ATTR$1 = DATA_ATTR,
+    ARIA_ATTR$1 = ARIA_ATTR,
+    IS_SCRIPT_OR_DATA$1 = IS_SCRIPT_OR_DATA,
+    ATTR_WHITESPACE$1 = ATTR_WHITESPACE,
+    CUSTOM_ELEMENT$1 = CUSTOM_ELEMENT;
+  let IS_ALLOWED_URI$1 = IS_ALLOWED_URI;
+  /**
+   * We consider the elements and attributes below to be safe. Ideally
+   * don't add any new ones but feel free to remove unwanted ones.
+   */
+  /* allowed element names */
+  let ALLOWED_TAGS = null;
+  const DEFAULT_ALLOWED_TAGS = addToSet({}, [...html$1, ...svg$1, ...svgFilters, ...mathMl$1, ...purify_es_text]);
+  /* Allowed attribute names */
+  let ALLOWED_ATTR = null;
+  const DEFAULT_ALLOWED_ATTR = addToSet({}, [...html, ...svg, ...mathMl, ...xml]);
+  /*
+   * Configure how DOMPurify should handle custom elements and their attributes as well as customized built-in elements.
+   * @property {RegExp|Function|null} tagNameCheck one of [null, regexPattern, predicate]. Default: `null` (disallow any custom elements)
+   * @property {RegExp|Function|null} attributeNameCheck one of [null, regexPattern, predicate]. Default: `null` (disallow any attributes not on the allow list)
+   * @property {boolean} allowCustomizedBuiltInElements allow custom elements derived from built-ins if they pass CUSTOM_ELEMENT_HANDLING.tagNameCheck. Default: `false`.
+   */
+  let CUSTOM_ELEMENT_HANDLING = Object.seal(create(null, {
+    tagNameCheck: {
+      writable: true,
+      configurable: false,
+      enumerable: true,
+      value: null
+    },
+    attributeNameCheck: {
+      writable: true,
+      configurable: false,
+      enumerable: true,
+      value: null
+    },
+    allowCustomizedBuiltInElements: {
+      writable: true,
+      configurable: false,
+      enumerable: true,
+      value: false
+    }
+  }));
+  /* Explicitly forbidden tags (overrides ALLOWED_TAGS/ADD_TAGS) */
+  let FORBID_TAGS = null;
+  /* Explicitly forbidden attributes (overrides ALLOWED_ATTR/ADD_ATTR) */
+  let FORBID_ATTR = null;
+  /* Config object to store ADD_TAGS/ADD_ATTR functions (when used as functions) */
+  const EXTRA_ELEMENT_HANDLING = Object.seal(create(null, {
+    tagCheck: {
+      writable: true,
+      configurable: false,
+      enumerable: true,
+      value: null
+    },
+    attributeCheck: {
+      writable: true,
+      configurable: false,
+      enumerable: true,
+      value: null
+    }
+  }));
+  /* Decide if ARIA attributes are okay */
+  let ALLOW_ARIA_ATTR = true;
+  /* Decide if custom data attributes are okay */
+  let ALLOW_DATA_ATTR = true;
+  /* Decide if unknown protocols are okay */
+  let ALLOW_UNKNOWN_PROTOCOLS = false;
+  /* Decide if self-closing tags in attributes are allowed.
+   * Usually removed due to a mXSS issue in jQuery 3.0 */
+  let ALLOW_SELF_CLOSE_IN_ATTR = true;
+  /* Output should be safe for common template engines.
+   * This means, DOMPurify removes data attributes, mustaches and ERB
+   */
+  let SAFE_FOR_TEMPLATES = false;
+  /* Output should be safe even for XML used within HTML and alike.
+   * This means, DOMPurify removes comments when containing risky content.
+   */
+  let SAFE_FOR_XML = true;
+  /* Decide if document with <html>... should be returned */
+  let WHOLE_DOCUMENT = false;
+  /* Track whether config is already set on this instance of DOMPurify. */
+  let SET_CONFIG = false;
+  /* Pristine allowlist bindings captured at setConfig() time. On the
+   * persistent-config path sanitize() restores the sets from these before
+   * the per-walk hook clone-guard, so a hook's in-call widening cannot
+   * carry across calls. Null until setConfig() is called; reset by
+   * clearConfig(). */
+  let SET_CONFIG_ALLOWED_TAGS = null;
+  let SET_CONFIG_ALLOWED_ATTR = null;
+  /* Decide if all elements (e.g. style, script) must be children of
+   * document.body. By default, browsers might move them to document.head */
+  let FORCE_BODY = false;
+  /* Decide if a DOM `HTMLBodyElement` should be returned, instead of a html
+   * string (or a TrustedHTML object if Trusted Types are supported).
+   * If `WHOLE_DOCUMENT` is enabled a `HTMLHtmlElement` will be returned instead
+   */
+  let RETURN_DOM = false;
+  /* Decide if a DOM `DocumentFragment` should be returned, instead of a html
+   * string  (or a TrustedHTML object if Trusted Types are supported) */
+  let RETURN_DOM_FRAGMENT = false;
+  /* Try to return a Trusted Type object instead of a string, return a string in
+   * case Trusted Types are not supported  */
+  let RETURN_TRUSTED_TYPE = false;
+  /* Output should be free from DOM clobbering attacks?
+   * This sanitizes markups named with colliding, clobberable built-in DOM APIs.
+   */
+  let SANITIZE_DOM = true;
+  /* Achieve full DOM Clobbering protection by isolating the namespace of named
+   * properties and JS variables, mitigating attacks that abuse the HTML/DOM spec rules.
+   *
+   * HTML/DOM spec rules that enable DOM Clobbering:
+   *   - Named Access on Window (§7.3.3)
+   *   - DOM Tree Accessors (§3.1.5)
+   *   - Form Element Parent-Child Relations (§4.10.3)
+   *   - Iframe srcdoc / Nested WindowProxies (§4.8.5)
+   *   - HTMLCollection (§4.2.10.2)
+   *
+   * Namespace isolation is implemented by prefixing `id` and `name` attributes
+   * with a constant string, i.e., `user-content-`
+   */
+  let SANITIZE_NAMED_PROPS = false;
+  const SANITIZE_NAMED_PROPS_PREFIX = 'user-content-';
+  /* Keep element content when removing element? */
+  let KEEP_CONTENT = true;
+  /* If a `Node` is passed to sanitize(), then performs sanitization in-place instead
+   * of importing it into a new Document and returning a sanitized copy */
+  let IN_PLACE = false;
+  /* Allow usage of profiles like html, svg and mathMl */
+  let USE_PROFILES = {};
+  /* Tags to ignore content of when KEEP_CONTENT is true */
+  let FORBID_CONTENTS = null;
+  const DEFAULT_FORBID_CONTENTS = addToSet({}, ['annotation-xml', 'audio', 'colgroup', 'desc', 'foreignobject', 'head', 'iframe', 'math', 'mi', 'mn', 'mo', 'ms', 'mtext', 'noembed', 'noframes', 'noscript', 'plaintext', 'script',
+  // <selectedcontent> mirrors the selected <option>'s subtree, cloned by
+  // the UA (customizable <select>) — including any on* handlers — and the
+  // engine re-mirrors synchronously whenever a removal changes which
+  // option/selectedcontent is current, even inside DOMPurify's inert
+  // DOMParser document. Hoisting its children on removal re-inserts a fresh
+  // mirror target ahead of the walk, which the engine refills, looping
+  // forever (DoS) and amplifying output. Dropping its content on removal
+  // (rather than hoisting) breaks that cascade; the content is a duplicate
+  // of the option, which is sanitized on its own. See campaign-3 F1/F6.
+  'selectedcontent', 'style', 'svg', 'template', 'thead', 'title', 'video', 'xmp']);
+  /* Tags that are safe for data: URIs */
+  let DATA_URI_TAGS = null;
+  const DEFAULT_DATA_URI_TAGS = addToSet({}, ['audio', 'video', 'img', 'source', 'image', 'track']);
+  /* Attributes safe for values like "javascript:" */
+  let URI_SAFE_ATTRIBUTES = null;
+  const DEFAULT_URI_SAFE_ATTRIBUTES = addToSet({}, ['alt', 'class', 'for', 'id', 'label', 'name', 'pattern', 'placeholder', 'role', 'summary', 'title', 'value', 'style', 'xmlns']);
+  const MATHML_NAMESPACE = 'http://www.w3.org/1998/Math/MathML';
+  const SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
+  const HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
+  /* Document namespace */
+  let NAMESPACE = HTML_NAMESPACE;
+  let IS_EMPTY_INPUT = false;
+  /* Allowed XHTML+XML namespaces */
+  let ALLOWED_NAMESPACES = null;
+  const DEFAULT_ALLOWED_NAMESPACES = addToSet({}, [MATHML_NAMESPACE, SVG_NAMESPACE, HTML_NAMESPACE], stringToString);
+  const DEFAULT_MATHML_TEXT_INTEGRATION_POINTS = freeze(['mi', 'mo', 'mn', 'ms', 'mtext']);
+  let MATHML_TEXT_INTEGRATION_POINTS = addToSet({}, DEFAULT_MATHML_TEXT_INTEGRATION_POINTS);
+  const DEFAULT_HTML_INTEGRATION_POINTS = freeze(['annotation-xml']);
+  let HTML_INTEGRATION_POINTS = addToSet({}, DEFAULT_HTML_INTEGRATION_POINTS);
+  // Certain elements are allowed in both SVG and HTML
+  // namespace. We need to specify them explicitly
+  // so that they don't get erroneously deleted from
+  // HTML namespace.
+  const COMMON_SVG_AND_HTML_ELEMENTS = addToSet({}, ['title', 'style', 'font', 'a', 'script']);
+  /* Parsing of strict XHTML documents */
+  let PARSER_MEDIA_TYPE = null;
+  const SUPPORTED_PARSER_MEDIA_TYPES = ['application/xhtml+xml', 'text/html'];
+  const DEFAULT_PARSER_MEDIA_TYPE = 'text/html';
+  let transformCaseFunc = null;
+  /* Keep a reference to config to pass to hooks */
+  let CONFIG = null;
+  /* Ideally, do not touch anything below this line */
+  /* ______________________________________________ */
+  const formElement = document.createElement('form');
+  const isRegexOrFunction = function isRegexOrFunction(testValue) {
+    return testValue instanceof RegExp || testValue instanceof Function;
+  };
+  /**
+   * _parseConfig
+   *
+   * @param cfg optional config literal
+   */
+  // eslint-disable-next-line complexity
+  const _parseConfig = function _parseConfig() {
+    let cfg = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    if (CONFIG && CONFIG === cfg) {
+      return;
+    }
+    /* Shield configuration object from tampering */
+    if (!cfg || typeof cfg !== 'object') {
+      cfg = {};
+    }
+    /* Shield configuration object from prototype pollution */
+    cfg = clone(cfg);
+    PARSER_MEDIA_TYPE =
+    // eslint-disable-next-line unicorn/prefer-includes
+    SUPPORTED_PARSER_MEDIA_TYPES.indexOf(cfg.PARSER_MEDIA_TYPE) === -1 ? DEFAULT_PARSER_MEDIA_TYPE : cfg.PARSER_MEDIA_TYPE;
+    // HTML tags and attributes are not case-sensitive, converting to lowercase. Keeping XHTML as is.
+    transformCaseFunc = PARSER_MEDIA_TYPE === 'application/xhtml+xml' ? stringToString : stringToLowerCase;
+    /* Set configuration parameters */
+    ALLOWED_TAGS = _resolveSetOption(cfg, 'ALLOWED_TAGS', DEFAULT_ALLOWED_TAGS, {
+      transform: transformCaseFunc
+    });
+    ALLOWED_ATTR = _resolveSetOption(cfg, 'ALLOWED_ATTR', DEFAULT_ALLOWED_ATTR, {
+      transform: transformCaseFunc
+    });
+    ALLOWED_NAMESPACES = _resolveSetOption(cfg, 'ALLOWED_NAMESPACES', DEFAULT_ALLOWED_NAMESPACES, {
+      transform: stringToString
+    });
+    URI_SAFE_ATTRIBUTES = _resolveSetOption(cfg, 'ADD_URI_SAFE_ATTR', DEFAULT_URI_SAFE_ATTRIBUTES, {
+      transform: transformCaseFunc,
+      base: DEFAULT_URI_SAFE_ATTRIBUTES
+    });
+    DATA_URI_TAGS = _resolveSetOption(cfg, 'ADD_DATA_URI_TAGS', DEFAULT_DATA_URI_TAGS, {
+      transform: transformCaseFunc,
+      base: DEFAULT_DATA_URI_TAGS
+    });
+    FORBID_CONTENTS = _resolveSetOption(cfg, 'FORBID_CONTENTS', DEFAULT_FORBID_CONTENTS, {
+      transform: transformCaseFunc
+    });
+    FORBID_TAGS = _resolveSetOption(cfg, 'FORBID_TAGS', clone({}), {
+      transform: transformCaseFunc
+    });
+    FORBID_ATTR = _resolveSetOption(cfg, 'FORBID_ATTR', clone({}), {
+      transform: transformCaseFunc
+    });
+    USE_PROFILES = objectHasOwnProperty(cfg, 'USE_PROFILES') ? cfg.USE_PROFILES && typeof cfg.USE_PROFILES === 'object' ? clone(cfg.USE_PROFILES) : cfg.USE_PROFILES : false;
+    ALLOW_ARIA_ATTR = cfg.ALLOW_ARIA_ATTR !== false; // Default true
+    ALLOW_DATA_ATTR = cfg.ALLOW_DATA_ATTR !== false; // Default true
+    ALLOW_UNKNOWN_PROTOCOLS = cfg.ALLOW_UNKNOWN_PROTOCOLS || false; // Default false
+    ALLOW_SELF_CLOSE_IN_ATTR = cfg.ALLOW_SELF_CLOSE_IN_ATTR !== false; // Default true
+    SAFE_FOR_TEMPLATES = cfg.SAFE_FOR_TEMPLATES || false; // Default false
+    SAFE_FOR_XML = cfg.SAFE_FOR_XML !== false; // Default true
+    WHOLE_DOCUMENT = cfg.WHOLE_DOCUMENT || false; // Default false
+    RETURN_DOM = cfg.RETURN_DOM || false; // Default false
+    RETURN_DOM_FRAGMENT = cfg.RETURN_DOM_FRAGMENT || false; // Default false
+    RETURN_TRUSTED_TYPE = cfg.RETURN_TRUSTED_TYPE || false; // Default false
+    FORCE_BODY = cfg.FORCE_BODY || false; // Default false
+    SANITIZE_DOM = cfg.SANITIZE_DOM !== false; // Default true
+    SANITIZE_NAMED_PROPS = cfg.SANITIZE_NAMED_PROPS || false; // Default false
+    KEEP_CONTENT = cfg.KEEP_CONTENT !== false; // Default true
+    IN_PLACE = cfg.IN_PLACE || false; // Default false
+    IS_ALLOWED_URI$1 = isRegex(cfg.ALLOWED_URI_REGEXP) ? cfg.ALLOWED_URI_REGEXP : IS_ALLOWED_URI; // Default regexp
+    NAMESPACE = typeof cfg.NAMESPACE === 'string' ? cfg.NAMESPACE : HTML_NAMESPACE; // Default HTML namespace
+    MATHML_TEXT_INTEGRATION_POINTS = objectHasOwnProperty(cfg, 'MATHML_TEXT_INTEGRATION_POINTS') && cfg.MATHML_TEXT_INTEGRATION_POINTS && typeof cfg.MATHML_TEXT_INTEGRATION_POINTS === 'object' ? clone(cfg.MATHML_TEXT_INTEGRATION_POINTS) : addToSet({}, DEFAULT_MATHML_TEXT_INTEGRATION_POINTS); // Default built-in map
+    HTML_INTEGRATION_POINTS = objectHasOwnProperty(cfg, 'HTML_INTEGRATION_POINTS') && cfg.HTML_INTEGRATION_POINTS && typeof cfg.HTML_INTEGRATION_POINTS === 'object' ? clone(cfg.HTML_INTEGRATION_POINTS) : addToSet({}, DEFAULT_HTML_INTEGRATION_POINTS); // Default built-in map
+    const customElementHandling = objectHasOwnProperty(cfg, 'CUSTOM_ELEMENT_HANDLING') && cfg.CUSTOM_ELEMENT_HANDLING && typeof cfg.CUSTOM_ELEMENT_HANDLING === 'object' ? clone(cfg.CUSTOM_ELEMENT_HANDLING) : create(null);
+    CUSTOM_ELEMENT_HANDLING = create(null);
+    if (objectHasOwnProperty(customElementHandling, 'tagNameCheck') && isRegexOrFunction(customElementHandling.tagNameCheck)) {
+      CUSTOM_ELEMENT_HANDLING.tagNameCheck = customElementHandling.tagNameCheck; // Default undefined
+    }
+    if (objectHasOwnProperty(customElementHandling, 'attributeNameCheck') && isRegexOrFunction(customElementHandling.attributeNameCheck)) {
+      CUSTOM_ELEMENT_HANDLING.attributeNameCheck = customElementHandling.attributeNameCheck; // Default undefined
+    }
+    if (objectHasOwnProperty(customElementHandling, 'allowCustomizedBuiltInElements') && typeof customElementHandling.allowCustomizedBuiltInElements === 'boolean') {
+      CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements = customElementHandling.allowCustomizedBuiltInElements; // Default undefined
+    }
+    seal(CUSTOM_ELEMENT_HANDLING);
+    if (SAFE_FOR_TEMPLATES) {
+      ALLOW_DATA_ATTR = false;
+    }
+    if (RETURN_DOM_FRAGMENT) {
+      RETURN_DOM = true;
+    }
+    /* Parse profile info */
+    if (USE_PROFILES) {
+      ALLOWED_TAGS = addToSet({}, purify_es_text);
+      ALLOWED_ATTR = create(null);
+      if (USE_PROFILES.html === true) {
+        addToSet(ALLOWED_TAGS, html$1);
+        addToSet(ALLOWED_ATTR, html);
+      }
+      if (USE_PROFILES.svg === true) {
+        addToSet(ALLOWED_TAGS, svg$1);
+        addToSet(ALLOWED_ATTR, svg);
+        addToSet(ALLOWED_ATTR, xml);
+      }
+      if (USE_PROFILES.svgFilters === true) {
+        addToSet(ALLOWED_TAGS, svgFilters);
+        addToSet(ALLOWED_ATTR, svg);
+        addToSet(ALLOWED_ATTR, xml);
+      }
+      if (USE_PROFILES.mathMl === true) {
+        addToSet(ALLOWED_TAGS, mathMl$1);
+        addToSet(ALLOWED_ATTR, mathMl);
+        addToSet(ALLOWED_ATTR, xml);
+      }
+    }
+    /* Always reset function-based ADD_TAGS / ADD_ATTR checks to prevent
+     * leaking across calls when switching from function to array config */
+    EXTRA_ELEMENT_HANDLING.tagCheck = null;
+    EXTRA_ELEMENT_HANDLING.attributeCheck = null;
+    /* Merge configuration parameters */
+    if (objectHasOwnProperty(cfg, 'ADD_TAGS')) {
+      if (typeof cfg.ADD_TAGS === 'function') {
+        EXTRA_ELEMENT_HANDLING.tagCheck = cfg.ADD_TAGS;
+      } else if (arrayIsArray(cfg.ADD_TAGS)) {
+        if (ALLOWED_TAGS === DEFAULT_ALLOWED_TAGS) {
+          ALLOWED_TAGS = clone(ALLOWED_TAGS);
+        }
+        addToSet(ALLOWED_TAGS, cfg.ADD_TAGS, transformCaseFunc);
+      }
+    }
+    if (objectHasOwnProperty(cfg, 'ADD_ATTR')) {
+      if (typeof cfg.ADD_ATTR === 'function') {
+        EXTRA_ELEMENT_HANDLING.attributeCheck = cfg.ADD_ATTR;
+      } else if (arrayIsArray(cfg.ADD_ATTR)) {
+        if (ALLOWED_ATTR === DEFAULT_ALLOWED_ATTR) {
+          ALLOWED_ATTR = clone(ALLOWED_ATTR);
+        }
+        addToSet(ALLOWED_ATTR, cfg.ADD_ATTR, transformCaseFunc);
+      }
+    }
+    if (objectHasOwnProperty(cfg, 'ADD_URI_SAFE_ATTR') && arrayIsArray(cfg.ADD_URI_SAFE_ATTR)) {
+      addToSet(URI_SAFE_ATTRIBUTES, cfg.ADD_URI_SAFE_ATTR, transformCaseFunc);
+    }
+    if (objectHasOwnProperty(cfg, 'FORBID_CONTENTS') && arrayIsArray(cfg.FORBID_CONTENTS)) {
+      if (FORBID_CONTENTS === DEFAULT_FORBID_CONTENTS) {
+        FORBID_CONTENTS = clone(FORBID_CONTENTS);
+      }
+      addToSet(FORBID_CONTENTS, cfg.FORBID_CONTENTS, transformCaseFunc);
+    }
+    if (objectHasOwnProperty(cfg, 'ADD_FORBID_CONTENTS') && arrayIsArray(cfg.ADD_FORBID_CONTENTS)) {
+      if (FORBID_CONTENTS === DEFAULT_FORBID_CONTENTS) {
+        FORBID_CONTENTS = clone(FORBID_CONTENTS);
+      }
+      addToSet(FORBID_CONTENTS, cfg.ADD_FORBID_CONTENTS, transformCaseFunc);
+    }
+    /* Add #text in case KEEP_CONTENT is set to true */
+    if (KEEP_CONTENT) {
+      ALLOWED_TAGS['#text'] = true;
+    }
+    /* Add html, head and body to ALLOWED_TAGS in case WHOLE_DOCUMENT is true */
+    if (WHOLE_DOCUMENT) {
+      addToSet(ALLOWED_TAGS, ['html', 'head', 'body']);
+    }
+    /* Add tbody to ALLOWED_TAGS in case tables are permitted, see #286, #365 */
+    if (ALLOWED_TAGS.table) {
+      addToSet(ALLOWED_TAGS, ['tbody']);
+      delete FORBID_TAGS.tbody;
+    }
+    // Re-derive the active Trusted Types policy from this configuration on
+    // every parse. The active policy must never be sticky closure state that
+    // outlives the config that set it: a caller-supplied policy left in place
+    // after `clearConfig()` — or after a later call that supplied none, or
+    // `TRUSTED_TYPES_POLICY: null` — could sign a subsequent "default"
+    // `RETURN_TRUSTED_TYPE` result with a foreign, possibly unsafe policy.
+    // See GHSA-vxr8-fq34-vvx9.
+    if (cfg.TRUSTED_TYPES_POLICY) {
+      if (typeof cfg.TRUSTED_TYPES_POLICY.createHTML !== 'function') {
+        throw typeErrorCreate('TRUSTED_TYPES_POLICY configuration option must provide a "createHTML" hook.');
+      }
+      if (typeof cfg.TRUSTED_TYPES_POLICY.createScriptURL !== 'function') {
+        throw typeErrorCreate('TRUSTED_TYPES_POLICY configuration option must provide a "createScriptURL" hook.');
+      }
+      // A caller-supplied policy applies to this configuration only.
+      const previousTrustedTypesPolicy = trustedTypesPolicy;
+      trustedTypesPolicy = cfg.TRUSTED_TYPES_POLICY;
+      // Sign local variables required by `sanitize`. If the supplied policy's
+      // `createHTML` is circular (i.e. it calls `DOMPurify.sanitize`), this
+      // throws via the re-entrancy guard. Restore the previous policy first so
+      // the instance is not left in a poisoned state. See #1422.
+      try {
+        emptyHTML = _createTrustedHTML('');
+      } catch (error) {
+        trustedTypesPolicy = previousTrustedTypesPolicy;
+        throw error;
+      }
+    } else if (cfg.TRUSTED_TYPES_POLICY === null) {
+      // Explicit opt-out for this call: perform no Trusted Types signing and
+      // create nothing (so a strict `trusted-types` CSP that disallows a
+      // `dompurify` policy can still call `sanitize` from inside its own
+      // policy — see #1422). Resetting to `undefined` rather than a sticky
+      // `null` also drops any previously retained caller policy, so it cannot
+      // resurface on a later call, while still allowing the next config-less
+      // call to restore the internal default policy. See GHSA-vxr8-fq34-vvx9.
+      trustedTypesPolicy = undefined;
+      emptyHTML = '';
+    } else {
+      // No policy supplied: keep the currently active policy if one is set — a
+      // previously supplied policy is intentionally sticky across config-less
+      // calls — otherwise fall back to the instance's own internal policy,
+      // created at most once. (A policy supplied for a *single* call still
+      // lingers by design; what must not linger is a policy whose configuration
+      // has been torn down via `clearConfig()`, which restores the default.)
+      if (trustedTypesPolicy === undefined) {
+        trustedTypesPolicy = _getDefaultTrustedTypesPolicy();
+      }
+      // Sign internal variables only when a policy is active. A falsy policy
+      // (Trusted Types unsupported, creation failed, or an explicit opt-out)
+      // leaves `emptyHTML` as a plain string, so we never call `.createHTML` on
+      // a non-policy and throw. See #1422.
+      if (trustedTypesPolicy && typeof emptyHTML === 'string') {
+        emptyHTML = _createTrustedHTML('');
+      }
+    }
+    // Prevent further manipulation of configuration.
+    // Not available in IE8, Safari 5, etc.
+    if (freeze) {
+      freeze(cfg);
+    }
+    CONFIG = cfg;
+  };
+  /* Keep track of all possible SVG and MathML tags
+   * so that we can perform the namespace checks
+   * correctly. */
+  const ALL_SVG_TAGS = addToSet({}, [...svg$1, ...svgFilters, ...svgDisallowed]);
+  const ALL_MATHML_TAGS = addToSet({}, [...mathMl$1, ...mathMlDisallowed]);
+  /**
+   * Namespace rules for an element in the SVG namespace.
+   *
+   * @param tagName the element's lowercase tag name
+   * @param parent the (possibly simulated) parent node
+   * @param parentTagName the parent's lowercase tag name
+   * @returns true if a spec-compliant parser could produce this element
+   */
+  const _checkSvgNamespace = function _checkSvgNamespace(tagName, parent, parentTagName) {
+    // The only way to switch from HTML namespace to SVG
+    // is via <svg>. If it happens via any other tag, then
+    // it should be killed.
+    if (parent.namespaceURI === HTML_NAMESPACE) {
+      return tagName === 'svg';
+    }
+    // The only way to switch from MathML to SVG is via <svg>
+    // if the parent is either <annotation-xml> or a MathML
+    // text integration point.
+    if (parent.namespaceURI === MATHML_NAMESPACE) {
+      return tagName === 'svg' && (parentTagName === 'annotation-xml' || MATHML_TEXT_INTEGRATION_POINTS[parentTagName]);
+    }
+    // We only allow elements that are defined in SVG
+    // spec. All others are disallowed in SVG namespace.
+    return Boolean(ALL_SVG_TAGS[tagName]);
+  };
+  /**
+   * Namespace rules for an element in the MathML namespace.
+   *
+   * @param tagName the element's lowercase tag name
+   * @param parent the (possibly simulated) parent node
+   * @param parentTagName the parent's lowercase tag name
+   * @returns true if a spec-compliant parser could produce this element
+   */
+  const _checkMathMlNamespace = function _checkMathMlNamespace(tagName, parent, parentTagName) {
+    // The only way to switch from HTML namespace to MathML
+    // is via <math>. If it happens via any other tag, then
+    // it should be killed.
+    if (parent.namespaceURI === HTML_NAMESPACE) {
+      return tagName === 'math';
+    }
+    // The only way to switch from SVG to MathML is via
+    // <math> and HTML integration points
+    if (parent.namespaceURI === SVG_NAMESPACE) {
+      return tagName === 'math' && HTML_INTEGRATION_POINTS[parentTagName];
+    }
+    // We only allow elements that are defined in MathML
+    // spec. All others are disallowed in MathML namespace.
+    return Boolean(ALL_MATHML_TAGS[tagName]);
+  };
+  /**
+   * Namespace rules for an element in the HTML namespace.
+   *
+   * @param tagName the element's lowercase tag name
+   * @param parent the (possibly simulated) parent node
+   * @param parentTagName the parent's lowercase tag name
+   * @returns true if a spec-compliant parser could produce this element
+   */
+  const _checkHtmlNamespace = function _checkHtmlNamespace(tagName, parent, parentTagName) {
+    // The only way to switch from SVG to HTML is via
+    // HTML integration points, and from MathML to HTML
+    // is via MathML text integration points
+    if (parent.namespaceURI === SVG_NAMESPACE && !HTML_INTEGRATION_POINTS[parentTagName]) {
+      return false;
+    }
+    if (parent.namespaceURI === MATHML_NAMESPACE && !MATHML_TEXT_INTEGRATION_POINTS[parentTagName]) {
+      return false;
+    }
+    // We disallow tags that are specific for MathML
+    // or SVG and should never appear in HTML namespace
+    return !ALL_MATHML_TAGS[tagName] && (COMMON_SVG_AND_HTML_ELEMENTS[tagName] || !ALL_SVG_TAGS[tagName]);
+  };
+  /**
+   * @param element a DOM element whose namespace is being checked
+   * @returns Return false if the element has a
+   *  namespace that a spec-compliant parser would never
+   *  return. Return true otherwise.
+   */
+  const _checkValidNamespace = function _checkValidNamespace(element) {
+    let parent = getParentNode(element);
+    // In JSDOM, if we're inside shadow DOM, then parentNode
+    // can be null. We just simulate parent in this case.
+    if (!parent || !parent.tagName) {
+      parent = {
+        namespaceURI: NAMESPACE,
+        tagName: 'template'
+      };
+    }
+    const tagName = stringToLowerCase(element.tagName);
+    const parentTagName = stringToLowerCase(parent.tagName);
+    if (!ALLOWED_NAMESPACES[element.namespaceURI]) {
+      return false;
+    }
+    if (element.namespaceURI === SVG_NAMESPACE) {
+      return _checkSvgNamespace(tagName, parent, parentTagName);
+    }
+    if (element.namespaceURI === MATHML_NAMESPACE) {
+      return _checkMathMlNamespace(tagName, parent, parentTagName);
+    }
+    if (element.namespaceURI === HTML_NAMESPACE) {
+      return _checkHtmlNamespace(tagName, parent, parentTagName);
+    }
+    // For XHTML and XML documents that support custom namespaces
+    if (PARSER_MEDIA_TYPE === 'application/xhtml+xml' && ALLOWED_NAMESPACES[element.namespaceURI]) {
+      return true;
+    }
+    // The code should never reach this place (this means
+    // that the element somehow got namespace that is not
+    // HTML, SVG, MathML or allowed via ALLOWED_NAMESPACES).
+    // Return false just in case.
+    return false;
+  };
+  /**
+   * _forceRemove
+   *
+   * @param node a DOM node
+   */
+  const _forceRemove = function _forceRemove(node) {
+    arrayPush(DOMPurify.removed, {
+      element: node
+    });
+    try {
+      // eslint-disable-next-line unicorn/prefer-dom-node-remove
+      getParentNode(node).removeChild(node);
+    } catch (_) {
+      /* The normal detach failed — this is reached for a parentless node
+         (getParentNode() is null, so .removeChild throws). Element.prototype
+         .remove() is itself a spec no-op on a parentless node, so a recorded
+         "removal" would otherwise hand the caller back an intact,
+         payload-bearing node (e.g. a detached IN_PLACE root the mXSS canary or
+         the style-with-element-child rule decided to kill). Fail closed by
+         throwing — exactly as a clobbered root does at the IN_PLACE entry —
+         rather than trying to "neutralize" the node via its own methods.
+         Neutralizing would mean calling getAttributeNames()/removeAttribute()
+         on the node, both of which a <form> root can clobber via a named child
+         (and _isClobbered does not even probe getAttributeNames), so the
+         neutralize step could itself be silently defeated, leaving the payload
+         intact. A throw touches only the cached, clobber-safe remove() and
+         getParentNode(). Generalizes GHSA-r47g-fvhr-h676 (clobbered-form root)
+         to every root-kill reason. REPORT-3.
+                This lives inside the catch, so it never fires for a normally-removed
+         in-tree node: those have a parent, removeChild() succeeds, and the
+         catch is not entered. Only a kept (parentless) root reaches here. */
+      remove(node);
+      if (!getParentNode(node)) {
+        throw typeErrorCreate('a node selected for removal could not be detached from its tree ' + 'and cannot be safely returned; refusing to sanitize in place');
+      }
+    }
+  };
+  /**
+   * _neutralizeRoot
+   *
+   * Fail-closed teardown of an in-place root after the sanitize walk aborts
+   * (campaign-3 F2). An internal throw mid-walk — e.g. a page-registered
+   * custom element's reaction detaches a node so `_forceRemove`'s deliberate
+   * parentless guard throws, or any other re-entrant engine mutation — would
+   * otherwise leave the caller's *live* tree half-sanitized, with everything
+   * after the abort point still carrying its handlers. There is no safe way
+   * to resume the walk (the tree mutated under us), so we strip the root bare:
+   * remove every child and every attribute, then let the caller's catch see
+   * the original error. Clobber-safe (cached `remove`/`childNodes`/`attributes`
+   * getters; the root was already clobber-pre-flighted at the IN_PLACE entry).
+   *
+   * @param root the in-place root to empty
+   */
+  const _neutralizeRoot = function _neutralizeRoot(root) {
+    /* Strip every disallowed attribute (on* handlers included) off the whole
+       subtree BEFORE detaching anything. Detaching first would hand back
+       handler-bearing originals (e.g. an already-loading `<img onerror>`)
+       whose queued resource event still fires in page scope after we throw.
+       Clobber-safe reads; a doomed clobbered node's own attributes are
+       irrelevant while its non-clobbered descendants are reached and scrubbed. */
+    _neutralizeSubtree(root);
+    const childNodes = getChildNodes(root);
+    if (childNodes) {
+      const snapshot = [];
+      arrayForEach(childNodes, child => {
+        arrayPush(snapshot, child);
+      });
+      arrayForEach(snapshot, child => {
+        try {
+          remove(child);
+        } catch (_) {
+          /* Best-effort teardown; a still-attached child is handled below */
+        }
+      });
+    }
+    const attributes = getAttributes(root);
+    if (attributes) {
+      for (let i = attributes.length - 1; i >= 0; --i) {
+        const attribute = attributes[i];
+        const name = attribute && attribute.name;
+        if (typeof name === 'string') {
+          try {
+            root.removeAttribute(name);
+          } catch (_) {
+            /* Clobbered removeAttribute — ignore (fail-closed best effort) */
+          }
+        }
+      }
+    }
+  };
+  /**
+   * _removeAttribute
+   *
+   * @param name an Attribute name
+   * @param element a DOM node
+   */
+  const _removeAttribute = function _removeAttribute(name, element) {
+    try {
+      arrayPush(DOMPurify.removed, {
+        attribute: element.getAttributeNode(name),
+        from: element
+      });
+    } catch (_) {
+      arrayPush(DOMPurify.removed, {
+        attribute: null,
+        from: element
+      });
+    }
+    element.removeAttribute(name);
+    // We void attribute values for unremovable "is" attributes
+    if (name === 'is') {
+      if (RETURN_DOM || RETURN_DOM_FRAGMENT) {
+        try {
+          _forceRemove(element);
+        } catch (_) {}
+      } else {
+        try {
+          element.setAttribute(name, '');
+        } catch (_) {}
+      }
+    }
+  };
+  /**
+   * _stripDisallowedAttributes
+   *
+   * Removes every attribute the active configuration does not allow from a
+   * single element, using the same allowlist as the main attribute pass (so
+   * `on*` handlers go, but no `/^on/` blocklist is introduced). Used only to
+   * neutralise nodes that are being discarded from an in-place tree.
+   *
+   * @param element the element to strip
+   */
+  const _stripDisallowedAttributes = function _stripDisallowedAttributes(element) {
+    const attributes = getAttributes(element);
+    if (!attributes) {
+      return;
+    }
+    for (let i = attributes.length - 1; i >= 0; --i) {
+      const attribute = attributes[i];
+      const name = attribute && attribute.name;
+      if (typeof name !== 'string' || ALLOWED_ATTR[transformCaseFunc(name)]) {
+        continue;
+      }
+      try {
+        element.removeAttribute(name);
+      } catch (_) {
+        /* Clobbered removeAttribute on a doomed node — ignore */
+      }
+    }
+  };
+  /**
+   * _neutralizeSubtree
+   *
+   * Completes the audit-5 F1 fix across every removal path. The KEEP_CONTENT
+   * move-hoist neutralises only disallowed-tag removals; clobber, mXSS-canary,
+   * namespace, comment, processing-instruction and KEEP_CONTENT:false removals
+   * all drop their subtree wholesale via `_forceRemove`. On the IN_PLACE path
+   * those dropped nodes are detached from the caller's LIVE tree but a
+   * handler-bearing original among them (an `<img onerror>`/`<video>` that was
+   * loading) keeps its queued resource event, which fires in page scope after
+   * sanitize returns. This walks a removed subtree and strips every attribute
+   * the active configuration does not allow — so `on*` handlers are cancelled
+   * through the SAME allowlist that governs kept nodes, not a separate `/^on/`
+   * blocklist. Run synchronously before sanitize returns, i.e. before any
+   * queued event can fire. Hook-free by design: these nodes leave the output,
+   * so firing attribute hooks for them would be surprising. Clobber-safe reads;
+   * a doomed clobbered node may shadow `removeAttribute` (its own attributes are
+   * irrelevant — it is discarded — while its non-clobbered descendants, e.g.
+   * the `<img>`, are reached and scrubbed).
+   *
+   * @param root the root of a removed subtree to neutralise
+   */
+  const _neutralizeSubtree = function _neutralizeSubtree(root) {
+    const stack = [root];
+    while (stack.length > 0) {
+      const node = stack.pop();
+      const nodeType = getNodeType ? getNodeType(node) : node.nodeType;
+      if (nodeType === NODE_TYPE.element) {
+        _stripDisallowedAttributes(node);
+      }
+      const childNodes = getChildNodes(node);
+      if (childNodes) {
+        for (let i = childNodes.length - 1; i >= 0; --i) {
+          stack.push(childNodes[i]);
+        }
+      }
+    }
+  };
+  /**
+   * _neutralizePatchLinkage
+   *
+   * IN_PLACE entry pre-pass (declarative-partial-updates / streaming
+   * hardening, https://github.com/WICG/declarative-partial-updates).
+   *
+   * The main walk strips patch linkage (`for`/`patchsrc`) and removes range
+   * markers (PIs / markup comments) node-by-node, in document order, AS it
+   * reaches each node. On a live in-place root that leaves a window: from the
+   * moment the root is connected until the walk arrives at a given node, that
+   * node's linkage is live. A patch applied on connection/stream can fire as
+   * a microtask during the walk and inject or teleport an unsanitized DOM
+   * range into a region the iterator has already passed and will not revisit,
+   * so the post-return "tree is sanitized" contract is violated. Sweep the
+   * whole tree once up front and sever every linkage before the walk begins,
+   * closing that window.
+   *
+   * This CANNOT undo a patch that already fired before sanitize ran — that is
+   * the irreducible "do not IN_PLACE a live-connected attacker tree" caveat —
+   * but it closes everything from sanitize-start onward. Gated on SAFE_FOR_XML
+   * to group with the rest of the declarative-partial-updates handling and
+   * stay overridable, consistent with the codebase.
+   *
+   * Clobber-safe traversal (cached childNodes getter); per-node try/catch so a
+   * clobbered root cannot defeat the sweep of its non-clobbered descendants.
+   *
+   * NOTE (pending real-Chrome confirmation, see test/declarative-patch-probe
+   * .html Q1): this mirrors the existing policy of keeping `for` on
+   * <label>/<output>. If the shipping feature can drive a patch through a
+   * surviving `for`-on-label/output + `id` pair, this pre-pass and the
+   * attribute check at _isBasicCustomElement's caller must additionally drop
+   * that pair on the IN_PLACE path. Left as-is until the taxonomy is verified.
+   *
+   * @param root the in-place root to sweep
+   */
+  const _neutralizePatchLinkage = function _neutralizePatchLinkage(root) {
+    if (!SAFE_FOR_XML) {
+      return;
+    }
+    const stack = [root];
+    while (stack.length > 0) {
+      const node = stack.pop();
+      const nodeType = getNodeType ? getNodeType(node) : node.nodeType;
+      /* Remove range markers (the target side of a patch linkage): every
+         processing instruction, and any markup-bearing comment. */
+      if (nodeType === NODE_TYPE.processingInstruction || nodeType === NODE_TYPE.comment && regExpTest(COMMENT_MARKUP_PROBE, node.data)) {
+        try {
+          remove(node);
+        } catch (_) {
+          /* Best-effort */
+        }
+        continue;
+      }
+      /* Strip patch-source attributes (the source side) off elements. */
+      if (nodeType === NODE_TYPE.element) {
+        const element = node;
+        const lcTag = transformCaseFunc(getNodeName ? getNodeName(node) : node.nodeName);
+        try {
+          if (element.hasAttribute && element.hasAttribute('patchsrc')) {
+            element.removeAttribute('patchsrc');
+          }
+          if (element.hasAttribute && element.hasAttribute('for') && lcTag !== 'label' && lcTag !== 'output') {
+            element.removeAttribute('for');
+          }
+        } catch (_) {
+          /* Clobbered removeAttribute/hasAttribute on a doomed node — ignore */
+        }
+      }
+      const childNodes = getChildNodes(node);
+      if (childNodes) {
+        for (let i = childNodes.length - 1; i >= 0; --i) {
+          stack.push(childNodes[i]);
+        }
+      }
+    }
+  };
+  /**
+   * _initDocument
+   *
+   * @param dirty - a string of dirty markup
+   * @return a DOM, filled with the dirty markup
+   */
+  const _initDocument = function _initDocument(dirty) {
+    /* Create a HTML document */
+    let doc = null;
+    let leadingWhitespace = null;
+    if (FORCE_BODY) {
+      dirty = '<remove></remove>' + dirty;
+    } else {
+      /* If FORCE_BODY isn't used, leading whitespace needs to be preserved manually */
+      const matches = stringMatch(dirty, /^[\r\n\t ]+/);
+      leadingWhitespace = matches && matches[0];
+    }
+    if (PARSER_MEDIA_TYPE === 'application/xhtml+xml' && NAMESPACE === HTML_NAMESPACE) {
+      // Root of XHTML doc must contain xmlns declaration (see https://www.w3.org/TR/xhtml1/normative.html#strict)
+      dirty = '<html xmlns="http://www.w3.org/1999/xhtml"><head></head><body>' + dirty + '</body></html>';
+    }
+    const dirtyPayload = trustedTypesPolicy ? _createTrustedHTML(dirty) : dirty;
+    /*
+     * Use the DOMParser API by default, fallback later if needs be
+     * DOMParser not work for svg when has multiple root element.
+     */
+    if (NAMESPACE === HTML_NAMESPACE) {
+      try {
+        doc = new DOMParser().parseFromString(dirtyPayload, PARSER_MEDIA_TYPE);
+      } catch (_) {}
+    }
+    /* Use createHTMLDocument in case DOMParser is not available */
+    if (!doc || !doc.documentElement) {
+      doc = implementation.createDocument(NAMESPACE, 'template', null);
+      try {
+        doc.documentElement.innerHTML = IS_EMPTY_INPUT ? emptyHTML : dirtyPayload;
+      } catch (_) {
+        // Syntax error if dirtyPayload is invalid xml
+      }
+    }
+    const body = doc.body || doc.documentElement;
+    if (dirty && leadingWhitespace) {
+      body.insertBefore(document.createTextNode(leadingWhitespace), body.childNodes[0] || null);
+    }
+    /* Work on whole document or just its body */
+    if (NAMESPACE === HTML_NAMESPACE) {
+      return getElementsByTagName.call(doc, WHOLE_DOCUMENT ? 'html' : 'body')[0];
+    }
+    return WHOLE_DOCUMENT ? doc.documentElement : body;
+  };
+  /**
+   * Creates a NodeIterator object that you can use to traverse filtered lists of nodes or elements in a document.
+   *
+   * @param root The root element or node to start traversing on.
+   * @return The created NodeIterator
+   */
+  const _createNodeIterator = function _createNodeIterator(root) {
+    /* Read ownerDocument through the cached Node.prototype getter, never the
+       direct property. HTMLFormElement has [LegacyOverrideBuiltIns], so a
+       clobbering child (<input name="ownerDocument"> or a form-associated
+       external input) shadows the prototype getter and makes a direct read
+       return that <input>. createNodeIterator.call(<input>, ...) then throws
+       "Illegal invocation", and on the IN_PLACE path that throw lands before
+       the walk's fail-closed barrier - leaving the caller's live tree, with
+       any already-armed handler in it, un-neutralized. The cached getter
+       returns the real Document regardless of the clobber. */
+    const doc = getOwnerDocument ? getOwnerDocument(root) : root.ownerDocument;
+    return createNodeIterator.call(doc || root, root,
+    // eslint-disable-next-line no-bitwise
+    NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_COMMENT | NodeFilter.SHOW_TEXT | NodeFilter.SHOW_PROCESSING_INSTRUCTION | NodeFilter.SHOW_CDATA_SECTION, null);
+  };
+  /**
+   * Replace template expression syntax (mustache, ERB, template
+   * literal) with a space; shared by all SAFE_FOR_TEMPLATES scrub
+   * sites. Order matters: mustache, then ERB, then template literal.
+   *
+   * @param value the string to scrub
+   * @returns the scrubbed string
+   */
+  const _stripTemplateExpressions = function _stripTemplateExpressions(value) {
+    value = stringReplace(value, MUSTACHE_EXPR$1, ' ');
+    value = stringReplace(value, ERB_EXPR$1, ' ');
+    value = stringReplace(value, TMPLIT_EXPR$1, ' ');
+    return value;
+  };
+  /**
+   * Strip template-engine expressions ({{...}}, ${...}, <%...%>) from the
+   * character data of an element subtree. Used as the final safety net for
+   * SAFE_FOR_TEMPLATES on every DOM-returning code path so that expressions
+   * which only form after text-node normalization (e.g. fragments split across
+   * stripped elements) cannot survive into a template-evaluating framework.
+   *
+   * Walks text/comment/CDATA/processing-instruction nodes and mutates `.data`
+   * in place rather than round-tripping through innerHTML. This preserves
+   * descendant node references (important for IN_PLACE callers), avoids a
+   * serialize/reparse cycle, and reads literal character data — which means
+   * `<%...%>` in text content matches the ERB regex against its real bytes
+   * instead of the HTML-entity-escaped form innerHTML would produce.
+   *
+   * Attribute values are not visited here; SAFE_FOR_TEMPLATES handling for
+   * attributes is performed during the per-node `_sanitizeAttributes` pass.
+   *
+   * @param node The root element whose character data should be scrubbed.
+   */
+  const _scrubTemplateExpressions2 = function _scrubTemplateExpressions(node) {
+    var _node$querySelectorAl;
+    node.normalize();
+    /* Clobber-safe ownerDocument read, same reasoning as _createNodeIterator:
+       under SAFE_FOR_TEMPLATES this runs on the live IN_PLACE root, which may
+       carry a form-named-getter override of ownerDocument. */
+    const doc = getOwnerDocument ? getOwnerDocument(node) : node.ownerDocument;
+    const walker = createNodeIterator.call(doc || node, node,
+    // eslint-disable-next-line no-bitwise
+    NodeFilter.SHOW_TEXT | NodeFilter.SHOW_COMMENT | NodeFilter.SHOW_CDATA_SECTION | NodeFilter.SHOW_PROCESSING_INSTRUCTION, null);
+    let currentNode = walker.nextNode();
+    while (currentNode) {
+      currentNode.data = _stripTemplateExpressions(currentNode.data);
+      currentNode = walker.nextNode();
+    }
+    // NodeIterator does not descend into <template>.content per the DOM spec,
+    // so we must explicitly recurse into each template's content fragment,
+    // mirroring the approach used by _sanitizeShadowDOM.
+    const templates = (_node$querySelectorAl = node.querySelectorAll) === null || _node$querySelectorAl === void 0 ? void 0 : _node$querySelectorAl.call(node, 'template');
+    if (templates) {
+      arrayForEach(templates, tmpl => {
+        if (_isDocumentFragment(tmpl.content)) {
+          _scrubTemplateExpressions2(tmpl.content);
+        }
+      });
+    }
+  };
+  /**
+   * _isClobbered
+   *
+   * Detect DOM-clobbering on HTMLFormElement nodes. Form is the only HTML
+   * interface with [LegacyOverrideBuiltIns]; a descendant element with a
+   * `name` attribute matching a prototype property shadows that property
+   * on direct reads. We use this check at the IN_PLACE entry-point and
+   * during attribute sanitization to refuse clobbered forms.
+   *
+   * @param element element to check for clobbering attacks
+   * @return true if clobbered, false if safe
+   */
+  const _isClobbered = function _isClobbered(element) {
+    // Realm-independent tag-name probe. If we can't determine the tag
+    // name at all, we can't reason about clobbering — return false
+    // (the caller's other defences still apply).
+    const realTagName = getNodeName ? getNodeName(element) : null;
+    if (typeof realTagName !== 'string') {
+      return false;
+    }
+    if (transformCaseFunc(realTagName) !== 'form') {
+      return false;
+    }
+    return typeof element.nodeName !== 'string' || typeof element.textContent !== 'string' || typeof element.removeChild !== 'function' ||
+    // Realm-safe NamedNodeMap detection: equality against the cached
+    // prototype getter. Clobbered .attributes (e.g. <input name="attributes">)
+    // makes the direct read diverge from the cached read; a clean form
+    // (same-realm OR foreign-realm) has both reads pointing at the same
+    // canonical NamedNodeMap.
+    element.attributes !== getAttributes(element) || typeof element.removeAttribute !== 'function' || typeof element.setAttribute !== 'function' || typeof element.namespaceURI !== 'string' || typeof element.insertBefore !== 'function' || typeof element.hasChildNodes !== 'function' ||
+    // NodeType clobbering probe. Cached Node.prototype.nodeType getter
+    // returns the integer 1 for any Element regardless of realm; direct
+    // read on a clobbered form (e.g. <input name="nodeType">) returns
+    // the named child element. Cheap addition — nodeType is read from
+    // an internal slot, no serialization cost — and removes a residual
+    // clobbering surface used by several mXSS / PI / comment branches
+    // in _sanitizeElements that compare currentNode.nodeType directly.
+    element.nodeType !== getNodeType(element) ||
+    // HTMLFormElement has [LegacyOverrideBuiltIns]: a descendant named
+    // "childNodes" shadows the prototype getter. Direct reads of
+    // form.childNodes from a clobbered form return the named child
+    // instead of the real NodeList, so any walk that reads it directly
+    // skips the form's real children. Compare the direct read to the
+    // cached Node.prototype getter — when the form's named-property
+    // getter intercepts the read, the two values differ and we flag
+    // the form. This catches every clobbering child type (input,
+    // select, etc.) regardless of whether the named child happens to
+    // carry a numeric .length, which a typeof-based probe would miss
+    // (e.g. HTMLSelectElement.length is a defined unsigned-long).
+    element.childNodes !== getChildNodes(element);
+  };
+  /**
+   * Checks whether the given value is a DocumentFragment from any realm.
+   *
+   * The realm-independent replacement reads `nodeType` through the cached
+   * Node.prototype getter and compares to the DOCUMENT_FRAGMENT_NODE
+   * constant (11). nodeType is a numeric value resolved from the node's
+   * internal slot, identical across realms for the same kind of node.
+   *
+   * @param value object to check
+   * @return true if value is a DocumentFragment-shaped node from any realm
+   */
+  const _isDocumentFragment = function _isDocumentFragment(value) {
+    if (!getNodeType || typeof value !== 'object' || value === null) {
+      return false;
+    }
+    try {
+      return getNodeType(value) === NODE_TYPE.documentFragment;
+    } catch (_) {
+      return false;
+    }
+  };
+  /**
+   * Checks whether the given object is a DOM node, including nodes that
+   * originate from a different window/realm (e.g. an iframe's
+   * contentDocument). The previous `value instanceof Node` check was
+   * realm-bound: nodes from a different window failed it, causing
+   * sanitize() to silently stringify them and reset IN_PLACE to false,
+   * returning the original node unsanitized. See GHSA-4w3q-35jp-p934.
+   *
+   * @param value object to check whether it's a DOM node
+   * @return true if value is a DOM node from any realm
+   */
+  const _isNode = function _isNode(value) {
+    if (!getNodeType || typeof value !== 'object' || value === null) {
+      return false;
+    }
+    try {
+      return typeof getNodeType(value) === 'number';
+    } catch (_) {
+      return false;
+    }
+  };
+  function _executeHooks(hooks, currentNode, data) {
+    if (hooks.length === 0) {
+      return;
+    }
+    arrayForEach(hooks, hook => {
+      hook.call(DOMPurify, currentNode, data, CONFIG);
+    });
+  }
+  /**
+   * Structural-threat checks that condemn a node regardless of the
+   * allowlists: mXSS via namespace confusion, risky CSS construction,
+   * processing instructions, markup-bearing comments. Pure predicate;
+   * the caller removes. Check order is load-bearing.
+   *
+   * @param currentNode the node to inspect
+   * @param tagName the node's transformCaseFunc'd tag name
+   * @return true if the node must be removed
+   */
+  const _isUnsafeNode = function _isUnsafeNode(currentNode, tagName) {
+    /* Detect mXSS attempts abusing namespace confusion */
+    if (SAFE_FOR_XML && currentNode.hasChildNodes() && !_isNode(currentNode.firstElementChild) && regExpTest(ELEMENT_MARKUP_PROBE, currentNode.textContent) && regExpTest(ELEMENT_MARKUP_PROBE, currentNode.innerHTML)) {
+      return true;
+    }
+    /* Remove risky CSS construction leading to mXSS */
+    if (SAFE_FOR_XML && currentNode.namespaceURI === HTML_NAMESPACE && tagName === 'style' && _isNode(currentNode.firstElementChild)) {
+      return true;
+    }
+    /* Remove any occurrence of processing instructions */
+    if (currentNode.nodeType === NODE_TYPE.processingInstruction) {
+      return true;
+    }
+    /* Remove any kind of possibly harmful comments */
+    if (SAFE_FOR_XML && currentNode.nodeType === NODE_TYPE.comment && regExpTest(COMMENT_MARKUP_PROBE, currentNode.data)) {
+      return true;
+    }
+    return false;
+  };
+  /**
+   * Handle a node whose tag is forbidden or not allowlisted: keep
+   * allowed custom elements (false return exits _sanitizeElements
+   * early - the namespace and fallback-tag removal checks are
+   * intentionally skipped for kept custom elements), else hoist
+   * content per KEEP_CONTENT and remove.
+   *
+   * A kept custom element is the ONLY case in which this function
+   * returns false, so the caller uses that return value to run the
+   * afterSanitizeElements hook on the kept element and keep the
+   * element-hook lifecycle consistent with normal allowlisted
+   * elements (GHSA-c2j3-45gr-mqc4).
+   *
+   * @param currentNode the disallowed node
+   * @param tagName the node's transformCaseFunc'd tag name
+   * @return true if the node was removed, false if kept
+   */
+  const _sanitizeDisallowedNode = function _sanitizeDisallowedNode(currentNode, tagName, root) {
+    /* Check if we have a custom element to handle */
+    if (!FORBID_TAGS[tagName] && _isBasicCustomElement(tagName)) {
+      if (CUSTOM_ELEMENT_HANDLING.tagNameCheck instanceof RegExp && regExpTest(CUSTOM_ELEMENT_HANDLING.tagNameCheck, tagName)) {
+        return false;
+      }
+      if (CUSTOM_ELEMENT_HANDLING.tagNameCheck instanceof Function && CUSTOM_ELEMENT_HANDLING.tagNameCheck(tagName)) {
+        return false;
+      }
+    }
+    /* Keep content except for bad-listed elements.
+         Use the cached prototype getters exclusively — the previous code
+         had `|| currentNode.parentNode` / `|| currentNode.childNodes`
+         fallbacks, but the cached getters always return the canonical
+         value (or null for a real parent-less node), so the fallback
+         path was dead in safe cases and a clobbering surface in unsafe
+         ones. Falsy cached results stay falsy; the `if (childNodes &&
+         parentNode)` check already gates correctly. */
+    if (KEEP_CONTENT && !FORBID_CONTENTS[tagName]) {
+      const parentNode = getParentNode(currentNode);
+      const childNodes = getChildNodes(currentNode);
+      if (childNodes && parentNode) {
+        const childCount = childNodes.length;
+        /* Hoist by moving each child up one level rather than deep-cloning
+             it. Moving transfers every descendant exactly once, so a chain of
+             nested disallowed elements costs O(n) instead of the O(n^2) that
+             re-cloning the shrinking subtree at each level produced; it also
+             empties the removed original, so `DOMPurify.removed` no longer
+             pins whole subtrees. Moving preserves the in-place guarantee too:
+             an original carrying already-queued resource events (`<img
+             onerror>`, `<video>`/`<audio>` error, lazy/`onload`, …) is
+             relocated and sanitised rather than left detached but still armed.
+                      The sole case that must clone is removing the walk root itself.
+             The result is serialised from the root's subtree, so a restrictive
+             ALLOWED_TAGS that strips the root (`body` on the string path) must
+             leave the content inside it, which only cloning does. In IN_PLACE
+             the root is pre-validated as an allowed tag and so is never removed
+             here, so that path always takes the move branch.
+                      `childNodes` is live; a tail-to-head walk keeps `childNodes[i]`
+             valid whether we move (drops the trailing entry) or clone (leaves
+             the list intact). */
+        for (let i = childCount - 1; i >= 0; --i) {
+          const hoisted = currentNode === root ? cloneNode(childNodes[i], true) : childNodes[i];
+          parentNode.insertBefore(hoisted, getNextSibling(currentNode));
+        }
+      }
+    }
+    _forceRemove(currentNode);
+    return true;
+  };
+  /**
+   * Fork a hook-mutable allowlist off its shared binding the first time a
+   * (possibly lazily-installed) uponSanitize* hook is about to see it, so the
+   * hook cannot widen the per-instance default or the setConfig binding by
+   * reference and leak past the call. Returns the set unchanged once it is
+   * already call-local, so repeated calls across elements are idempotent.
+   *
+   * @param hookList the uponSanitize* hook array for this event
+   * @param set the current ALLOWED_TAGS / ALLOWED_ATTR binding
+   * @param defaultSet the per-instance DEFAULT_ALLOWED_* constant
+   * @param setConfigSet the captured setConfig() binding, or null
+   * @return a call-local clone if a hook is present and set is still shared,
+   *   else set unchanged
+   */
+  const _forkSharedAllowlist = function _forkSharedAllowlist(hookList, set, defaultSet, setConfigSet) {
+    if (hookList.length === 0) {
+      return set;
+    }
+    return set === defaultSet || set === setConfigSet ? clone(set) : set;
+  };
+  /**
+   * _sanitizeElements
+   *
+   * @protect nodeName
+   * @protect textContent
+   * @protect removeChild
+   * @param currentNode to check for permission to exist
+   * @return true if node was killed, false if left alive
+   */
+  // eslint-disable-next-line complexity
+  const _sanitizeElements = function _sanitizeElements(currentNode, root) {
+    /* Execute a hook if present */
+    _executeHooks(hooks.beforeSanitizeElements, currentNode, null);
+    /* A hook may have detached the node - treat it as removed (see the
+       detached-node comment after the uponSanitizeElement hook below). On
+       the IN_PLACE path, neutralize the detached subtree first so a queued
+       resource handler on it cannot fire in page scope after we return. */
+    if (currentNode !== root && getParentNode(currentNode) === null) {
+      if (IN_PLACE) {
+        _neutralizeSubtree(currentNode);
+      }
+      return true;
+    }
+    /* Check if element is clobbered or can clobber */
+    if (_isClobbered(currentNode)) {
+      _forceRemove(currentNode);
+      return true;
+    }
+    /* Now let's check the element's type and name */
+    const tagName = transformCaseFunc(getNodeName ? getNodeName(currentNode) : currentNode.nodeName);
+    /* Close the pre-walk clone-guard's timing gap: an uponSanitizeElement
+       hook may have been installed after that guard sampled the hook arrays
+       (e.g. lazily from beforeSanitizeElements), leaving ALLOWED_TAGS still
+       aliasing a shared binding that a widening hook would mutate by
+       reference. Fork it before exposing it to the hook. */
+    ALLOWED_TAGS = _forkSharedAllowlist(hooks.uponSanitizeElement, ALLOWED_TAGS, DEFAULT_ALLOWED_TAGS, SET_CONFIG_ALLOWED_TAGS);
+    /* Execute a hook if present */
+    _executeHooks(hooks.uponSanitizeElement, currentNode, {
+      tagName,
+      allowedTags: ALLOWED_TAGS
+    });
+    /* A hook may have detached the node from the tree — a long-standing
+       user pattern (issue #469; draw.io-style foreignObject filtering).
+       Per the cached, unclobberable parentNode getter the node is
+       genuinely out of the tree, so it can reach neither the serialized
+       output nor an IN_PLACE live tree; treat it as removed and stop
+       processing it. Without this guard, the unsafe-node / namespace
+       checks below would call _forceRemove on a parentless node and hit
+       the REPORT-3 fail-closed throw — which exists for nodes DOMPurify
+       wants gone but *cannot* detach (clobbered / parentless roots), the
+       opposite of a node that is already safely gone. The walk root is
+       exempt: a detached IN_PLACE root is legitimate input and must still
+       be fully sanitized, and a kill-decision on it must keep hitting the
+       REPORT-3 throw. Nodes detached by hooks stay the hook's
+       responsibility for placement: they are not recorded in
+       DOMPurify.removed, so the post-walk IN_PLACE pass (which iterates
+       DOMPurify.removed) does not reach them. But a hook-detached subtree
+       can still hold a queued resource-event handler - e.g. an <img onload>
+       that began loading when the caller built the live tree - which fires
+       in page scope after sanitize returns even though the handler never
+       reached the returned tree. That is the audit-5 F1 hazard, and the
+       documented node.remove() hook pattern walks straight into it. So on
+       the IN_PLACE path we neutralize the detached subtree inline here,
+       stripping its non-allow-listed attributes before returning, exactly
+       as the post-walk pass does for _forceRemove'd subtrees. */
+    if (currentNode !== root && getParentNode(currentNode) === null) {
+      if (IN_PLACE) {
+        _neutralizeSubtree(currentNode);
+      }
+      return true;
+    }
+    /* Remove mXSS vectors, processing instructions and risky comments */
+    if (_isUnsafeNode(currentNode, tagName)) {
+      _forceRemove(currentNode);
+      return true;
+    }
+    /* Remove element if anything forbids its presence */
+    if (FORBID_TAGS[tagName] || !(EXTRA_ELEMENT_HANDLING.tagCheck instanceof Function && EXTRA_ELEMENT_HANDLING.tagCheck(tagName)) && !ALLOWED_TAGS[tagName]) {
+      const removed = _sanitizeDisallowedNode(currentNode, tagName, root);
+      /* A false return means the node is a custom element kept via
+         CUSTOM_ELEMENT_HANDLING - the only keep path through
+         _sanitizeDisallowedNode. Run afterSanitizeElements on it so the
+         element-hook lifecycle matches normal allowlisted elements: a
+         security policy applied in this hook (e.g. stripping an attribute
+         from every surviving element) must not silently skip kept custom
+         elements (GHSA-c2j3-45gr-mqc4). This mirrors the normal-element
+         tail below - the hook runs, then the walker's subsequent
+         _sanitizeAttributes pass sanitizes the element's attributes. The
+         deliberately skipped namespace and fallback-tag removal checks stay
+         skipped; they are removal decisions, not the hook contract. */
+      if (removed === false) {
+        _executeHooks(hooks.afterSanitizeElements, currentNode, null);
+      }
+      return removed;
+    }
+    /* Check whether element has a valid namespace.
+       Realm-safe check (GHSA-hpcv-96wg-7vj8): use the cached Node.prototype
+       nodeType getter rather than `instanceof Element`, which is realm-
+       bound and short-circuits to false for any node minted in a different
+       realm — letting a foreign-realm element with a forbidden namespace
+       slip past the namespace check entirely. */
+    const nt = getNodeType ? getNodeType(currentNode) : currentNode.nodeType;
+    if (nt === NODE_TYPE.element && !_checkValidNamespace(currentNode)) {
+      _forceRemove(currentNode);
+      return true;
+    }
+    /* Make sure that older browsers don't get fallback-tag mXSS */
+    if ((tagName === 'noscript' || tagName === 'noembed' || tagName === 'noframes') && regExpTest(FALLBACK_TAG_CLOSE, currentNode.innerHTML)) {
+      _forceRemove(currentNode);
+      return true;
+    }
+    /* Sanitize element content to be template-safe */
+    if (SAFE_FOR_TEMPLATES && currentNode.nodeType === NODE_TYPE.text) {
+      /* Get the element's text content */
+      const content = _stripTemplateExpressions(currentNode.textContent);
+      if (currentNode.textContent !== content) {
+        arrayPush(DOMPurify.removed, {
+          element: currentNode.cloneNode()
+        });
+        currentNode.textContent = content;
+      }
+    }
+    /* Execute a hook if present */
+    _executeHooks(hooks.afterSanitizeElements, currentNode, null);
+    return false;
+  };
+  /**
+   * _isValidAttribute
+   *
+   * @param lcTag Lowercase tag name of containing element.
+   * @param lcName Lowercase attribute name.
+   * @param value Attribute value.
+   * @return Returns true if `value` is valid, otherwise false.
+   */
+  // eslint-disable-next-line complexity
+  const _isValidAttribute = function _isValidAttribute(lcTag, lcName, value) {
+    /* FORBID_ATTR must always win, even if ADD_ATTR predicate would allow it */
+    if (FORBID_ATTR[lcName]) {
+      return false;
+    }
+    /* Reject declarative-partial-updates patch-linkage attributes
+       (https://github.com/WICG/declarative-partial-updates).
+            Empirical note (Chrome 150, verified — see
+       test/declarative-patch-probe-v3.html): expansion is NOT applied after
+       sanitization. For the string path it fires during sanitize()'s own
+       parse, so the walk sees and sanitizes the fully materialized expanded
+       tree — teleports into MathML/SVG integration points included; a
+       weaponized `<template for>`->`<img onerror>` comes back with the handler
+       stripped. For the IN_PLACE path it fires on connection, before the walk.
+       Either way DOMPurify is NOT blind to the patch.
+            This removal is therefore defense-in-depth rather than the sole barrier:
+       it prevents live linkage from surviving into the OUTPUT and re-expanding
+       in the caller's context, and keeps behaviour deterministic if a future
+       engine defers expansion. `for` is legitimate only on <label>/<output>;
+       anywhere else (notably <template for>) it links the element to a patch
+       target and teleports or removes an arbitrary DOM range by id/marker name.
+       `patchsrc` fetches remote markup and is treated as a script-loading
+       mechanism (CSP). Gated on SAFE_FOR_XML so the removal groups with the
+       other structural-threat checks and stays overridable, consistent with
+       the rest of the codebase. PI range markers are already removed by
+       _isUnsafeNode. */
+    if (SAFE_FOR_XML && lcName === 'patchsrc') {
+      return false;
+    }
+    if (SAFE_FOR_XML && lcName === 'for' && lcTag !== 'label' && lcTag !== 'output') {
+      return false;
+    }
+    /* Make sure attribute cannot clobber */
+    if (SANITIZE_DOM && (lcName === 'id' || lcName === 'name') && (value in document || value in formElement)) {
+      return false;
+    }
+    const nameIsPermitted = ALLOWED_ATTR[lcName] || EXTRA_ELEMENT_HANDLING.attributeCheck instanceof Function && EXTRA_ELEMENT_HANDLING.attributeCheck(lcName, lcTag);
+    /* Allow valid data-* attributes: At least one character after "-"
+        (https://html.spec.whatwg.org/multipage/dom.html#embedding-custom-non-visible-data-with-the-data-*-attributes)
+        XML-compatible (https://html.spec.whatwg.org/multipage/infrastructure.html#xml-compatible and http://www.w3.org/TR/xml/#d0e804)
+        We don't need to check the value; it's always URI safe. */
+    if (ALLOW_DATA_ATTR && regExpTest(DATA_ATTR$1, lcName)) ; else if (ALLOW_ARIA_ATTR && regExpTest(ARIA_ATTR$1, lcName)) ; else if (!nameIsPermitted) {
+      if (
+      // First condition does a very basic check if a) it's basically a valid custom element tagname AND
+      // b) if the tagName passes whatever the user has configured for CUSTOM_ELEMENT_HANDLING.tagNameCheck
+      // and c) if the attribute name passes whatever the user has configured for CUSTOM_ELEMENT_HANDLING.attributeNameCheck
+      _isBasicCustomElement(lcTag) && (CUSTOM_ELEMENT_HANDLING.tagNameCheck instanceof RegExp && regExpTest(CUSTOM_ELEMENT_HANDLING.tagNameCheck, lcTag) || CUSTOM_ELEMENT_HANDLING.tagNameCheck instanceof Function && CUSTOM_ELEMENT_HANDLING.tagNameCheck(lcTag)) && (CUSTOM_ELEMENT_HANDLING.attributeNameCheck instanceof RegExp && regExpTest(CUSTOM_ELEMENT_HANDLING.attributeNameCheck, lcName) || CUSTOM_ELEMENT_HANDLING.attributeNameCheck instanceof Function && CUSTOM_ELEMENT_HANDLING.attributeNameCheck(lcName, lcTag)) ||
+      // Alternative, second condition checks if it's an `is`-attribute, AND
+      // the value passes whatever the user has configured for CUSTOM_ELEMENT_HANDLING.tagNameCheck
+      lcName === 'is' && CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements && (CUSTOM_ELEMENT_HANDLING.tagNameCheck instanceof RegExp && regExpTest(CUSTOM_ELEMENT_HANDLING.tagNameCheck, value) || CUSTOM_ELEMENT_HANDLING.tagNameCheck instanceof Function && CUSTOM_ELEMENT_HANDLING.tagNameCheck(value))) ; else {
+        return false;
+      }
+      /* Check value is safe. First, is attr inert? If so, is safe */
+    } else if (URI_SAFE_ATTRIBUTES[lcName]) ; else if (regExpTest(IS_ALLOWED_URI$1, stringReplace(value, ATTR_WHITESPACE$1, ''))) ; else if ((lcName === 'src' || lcName === 'xlink:href' || lcName === 'href') && lcTag !== 'script' && stringIndexOf(value, 'data:') === 0 && DATA_URI_TAGS[lcTag]) ; else if (ALLOW_UNKNOWN_PROTOCOLS && !regExpTest(IS_SCRIPT_OR_DATA$1, stringReplace(value, ATTR_WHITESPACE$1, ''))) ; else if (value) {
+      return false;
+    } else ;
+    return true;
+  };
+  /* Names the HTML spec reserves from valid-custom-element-name; these must
+   * never be treated as basic custom elements even when a permissive
+   * CUSTOM_ELEMENT_HANDLING.tagNameCheck is configured. */
+  const RESERVED_CUSTOM_ELEMENT_NAMES = addToSet({}, ['annotation-xml', 'color-profile', 'font-face', 'font-face-format', 'font-face-name', 'font-face-src', 'font-face-uri', 'missing-glyph']);
+  /**
+   * _isBasicCustomElement
+   * checks if at least one dash is included in tagName, and it's not the first char
+   * for more sophisticated checking see https://github.com/sindresorhus/validate-element-name
+   *
+   * @param tagName name of the tag of the node to sanitize
+   * @returns Returns true if the tag name meets the basic criteria for a custom element, otherwise false.
+   */
+  const _isBasicCustomElement = function _isBasicCustomElement(tagName) {
+    return !RESERVED_CUSTOM_ELEMENT_NAMES[stringToLowerCase(tagName)] && regExpTest(CUSTOM_ELEMENT$1, tagName);
+  };
+  /**
+   * Wrap an attribute value in the matching Trusted Types object when
+   * the active policy requires it. Namespaced attributes pass through
+   * unchanged (no TT support yet, see
+   * https://bugs.chromium.org/p/chromium/issues/detail?id=1305293).
+   *
+   * @param lcTag lowercase tag name of the containing element
+   * @param lcName lowercase attribute name
+   * @param namespaceURI the attribute's namespace, if any
+   * @param value the attribute value to wrap
+   * @return the value, wrapped when Trusted Types demand it
+   */
+  const _applyTrustedTypesToAttribute = function _applyTrustedTypesToAttribute(lcTag, lcName, namespaceURI, value) {
+    if (trustedTypesPolicy && typeof trustedTypes === 'object' && typeof trustedTypes.getAttributeType === 'function' && !namespaceURI) {
+      switch (trustedTypes.getAttributeType(lcTag, lcName)) {
+        case 'TrustedHTML':
+          {
+            return _createTrustedHTML(value);
+          }
+        case 'TrustedScriptURL':
+          {
+            return _createTrustedScriptURL(value);
+          }
+      }
+    }
+    return value;
+  };
+  /**
+   * Write a modified attribute value back onto the element. On
+   * success, re-probe for clobbering introduced by the new value and
+   * remove the element when found; otherwise pop the removal entry
+   * recorded by the earlier _removeAttribute (long-standing pairing
+   * with the SANITIZE_NAMED_PROPS path - do not "fix" casually). On
+   * failure, remove the attribute instead.
+   *
+   * @param currentNode the element carrying the attribute
+   * @param name the attribute name as present on the element
+   * @param namespaceURI the attribute's namespace, if any
+   * @param value the new attribute value
+   */
+  const _setAttributeValue = function _setAttributeValue(currentNode, name, namespaceURI, value) {
+    try {
+      if (namespaceURI) {
+        currentNode.setAttributeNS(namespaceURI, name, value);
+      } else {
+        /* Fallback to setAttribute() for browser-unrecognized namespaces e.g. "x-schema". */
+        currentNode.setAttribute(name, value);
+      }
+      if (_isClobbered(currentNode)) {
+        _forceRemove(currentNode);
+      } else {
+        arrayPop(DOMPurify.removed);
+      }
+    } catch (_) {
+      _removeAttribute(name, currentNode);
+    }
+  };
+  /**
+   * _sanitizeAttributes
+   *
+   * @protect attributes
+   * @protect nodeName
+   * @protect removeAttribute
+   * @protect setAttribute
+   *
+   * @param currentNode to sanitize
+   */
+  const _sanitizeAttributes = function _sanitizeAttributes(currentNode) {
+    /* Execute a hook if present */
+    _executeHooks(hooks.beforeSanitizeAttributes, currentNode, null);
+    const attributes = currentNode.attributes;
+    /* Check if we have attributes; if not we might have a text node */
+    if (!attributes || _isClobbered(currentNode)) {
+      return;
+    }
+    /* Same lazy-install guard as uponSanitizeElement (see there): fork the
+       attribute allowlist off its shared binding before a hook can see it. */
+    ALLOWED_ATTR = _forkSharedAllowlist(hooks.uponSanitizeAttribute, ALLOWED_ATTR, DEFAULT_ALLOWED_ATTR, SET_CONFIG_ALLOWED_ATTR);
+    const hookEvent = {
+      attrName: '',
+      attrValue: '',
+      keepAttr: true,
+      allowedAttributes: ALLOWED_ATTR,
+      forceKeepAttr: undefined
+    };
+    let l = attributes.length;
+    const lcTag = transformCaseFunc(currentNode.nodeName);
+    /* Go backwards over all attributes; safely remove bad ones */
+    while (l--) {
+      const attr = attributes[l];
+      const name = attr.name,
+        namespaceURI = attr.namespaceURI,
+        attrValue = attr.value;
+      const lcName = transformCaseFunc(name);
+      const initValue = attrValue;
+      let value = name === 'value' ? initValue : stringTrim(initValue);
+      /* Execute a hook if present */
+      hookEvent.attrName = lcName;
+      hookEvent.attrValue = value;
+      hookEvent.keepAttr = true;
+      hookEvent.forceKeepAttr = undefined; // Allows developers to see this is a property they can set
+      _executeHooks(hooks.uponSanitizeAttribute, currentNode, hookEvent);
+      value = hookEvent.attrValue;
+      /* Full DOM Clobbering protection via namespace isolation,
+       * Prefix id and name attributes with `user-content-`
+       */
+      if (SANITIZE_NAMED_PROPS && (lcName === 'id' || lcName === 'name') && stringIndexOf(value, SANITIZE_NAMED_PROPS_PREFIX) !== 0) {
+        // Remove the attribute with this value
+        _removeAttribute(name, currentNode);
+        // Prefix the value and later re-create the attribute with the sanitized value
+        value = SANITIZE_NAMED_PROPS_PREFIX + value;
+      }
+      // Else: already prefixed, leave the attribute alone — the prefix is
+      // itself the clobbering protection, and re-applying it is incorrect.
+      /* Work around a security issue with comments inside attributes */
+      if (SAFE_FOR_XML && regExpTest(/((--!?|])>)|<\/(style|script|title|xmp|textarea|noscript|iframe|noembed|noframes)/i, value)) {
+        _removeAttribute(name, currentNode);
+        continue;
+      }
+      /* Make sure we cannot easily use animated hrefs, even if animations are allowed */
+      if (lcName === 'attributename' && stringMatch(value, 'href')) {
+        _removeAttribute(name, currentNode);
+        continue;
+      }
+      /* Did the hooks force-keep the attribute? */
+      if (hookEvent.forceKeepAttr) {
+        continue;
+      }
+      /* Did the hooks approve of the attribute? */
+      if (!hookEvent.keepAttr) {
+        _removeAttribute(name, currentNode);
+        continue;
+      }
+      /* Work around a security issue in jQuery 3.0 */
+      if (!ALLOW_SELF_CLOSE_IN_ATTR && regExpTest(SELF_CLOSING_TAG, value)) {
+        _removeAttribute(name, currentNode);
+        continue;
+      }
+      /* Sanitize attribute content to be template-safe */
+      if (SAFE_FOR_TEMPLATES) {
+        value = _stripTemplateExpressions(value);
+      }
+      /* Is `value` valid for this attribute? */
+      if (!_isValidAttribute(lcTag, lcName, value)) {
+        _removeAttribute(name, currentNode);
+        continue;
+      }
+      /* Handle attributes that require Trusted Types */
+      value = _applyTrustedTypesToAttribute(lcTag, lcName, namespaceURI, value);
+      /* Handle invalid data-* attribute set by try-catching it */
+      if (value !== initValue) {
+        _setAttributeValue(currentNode, name, namespaceURI, value);
+      }
+    }
+    /* Execute a hook if present */
+    _executeHooks(hooks.afterSanitizeAttributes, currentNode, null);
+  };
+  /**
+   * _sanitizeShadowDOM
+   *
+   * @param fragment to iterate over recursively
+   */
+  const _sanitizeShadowDOM2 = function _sanitizeShadowDOM(fragment) {
+    let shadowNode = null;
+    const shadowIterator = _createNodeIterator(fragment);
+    /* Execute a hook if present */
+    _executeHooks(hooks.beforeSanitizeShadowDOM, fragment, null);
+    while (shadowNode = shadowIterator.nextNode()) {
+      /* Execute a hook if present */
+      _executeHooks(hooks.uponSanitizeShadowNode, shadowNode, null);
+      /* Sanitize tags and elements */
+      _sanitizeElements(shadowNode, fragment);
+      /* Check attributes next */
+      _sanitizeAttributes(shadowNode);
+      /* Deep shadow DOM detected.
+         Realm-safe check (GHSA-hpcv-96wg-7vj8): use nodeType against the
+         DOCUMENT_FRAGMENT_NODE constant rather than instanceof, so we
+         recurse into <template>.content from foreign realms too. */
+      if (_isDocumentFragment(shadowNode.content)) {
+        _sanitizeShadowDOM2(shadowNode.content);
+      }
+      /* An element iterated here may itself host an attached
+         shadow root. The default NodeIterator does not enter shadow
+         trees, so a shadow root nested inside template.content was
+         previously reached by no walk at all (the pre-pass at
+         _sanitizeAttachedShadowRoots descends via childNodes, which
+         doesn't enter template.content; the template-content recursion
+         above iterates the content but never inspected shadowRoot).
+         Walk it explicitly. The nodeType guard avoids reading
+         shadowRoot off text / comment / CDATA / PI nodes that the
+         iterator also surfaces. */
+      const shadowNodeType = getNodeType ? getNodeType(shadowNode) : shadowNode.nodeType;
+      if (shadowNodeType === NODE_TYPE.element) {
+        const innerSr = getShadowRoot(shadowNode);
+        if (_isDocumentFragment(innerSr)) {
+          _sanitizeAttachedShadowRoots(innerSr);
+          _sanitizeShadowDOM2(innerSr);
+        }
+      }
+    }
+    /* Execute a hook if present */
+    _executeHooks(hooks.afterSanitizeShadowDOM, fragment, null);
+  };
+  /**
+   * _sanitizeAttachedShadowRoots
+   *
+   * Walks `root` and feeds every attached shadow root we encounter into
+   * the existing _sanitizeShadowDOM pipeline. The default node iterator
+   * does not descend into shadow trees, so nodes inside an attached
+   * shadow root would otherwise be skipped entirely.
+   *
+   * Two real input paths put attached shadow roots in front of us:
+   *   1. IN_PLACE on a DOM node that already has shadow roots attached.
+   *   2. DOM-node input where importNode(dirty, true) deep-clones the
+   *      shadow root because it was created with `clonable: true`.
+   *
+   * This pass runs once, up front, so the main iteration loop (and the
+   * existing _sanitizeShadowDOM template-content recursion) stay
+   * untouched — string-input paths are not affected.
+   *
+   * @param root the subtree root to walk for attached shadow roots
+   */
+  const _sanitizeAttachedShadowRoots = function _sanitizeAttachedShadowRoots(root) {
+    /* Iterative (explicit stack) rather than per-child recursion. DOM APIs
+       impose no depth cap, so an attacker-shaped tree (JSON/CRDT/editor data
+       built straight into the DOM — the IN_PLACE surface) deeper than the JS
+       call-stack budget would otherwise overflow native recursion here and
+       throw at the IN_PLACE entry pre-pass, before a single node is
+       sanitized, leaving the caller's live tree untouched (fail-open). See
+       campaign-3 F4. A heap stack keeps depth off the call stack.
+            Each work item is either a node to descend into, or a deferred
+       `_sanitizeShadowDOM` for an already-walked shadow root. The deferred
+       form preserves the original post-order discipline: a shadow root's
+       nested shadow roots are discovered before the outer shadow is
+       sanitized (which may remove hosts). Pushes are in reverse of the
+       desired processing order (LIFO): template content, then children, then
+       the shadow-sanitize, then the shadow walk — so the order matches the
+       previous recursion exactly. */
+    const stack = [{
+      node: root,
+      shadow: null
+    }];
+    while (stack.length > 0) {
+      const item = stack.pop();
+      /* Deferred shadow-DOM sanitisation: runs after its subtree was walked. */
+      if (item.shadow) {
+        _sanitizeShadowDOM2(item.shadow);
+        continue;
+      }
+      const node = item.node;
+      const nodeType = getNodeType ? getNodeType(node) : node.nodeType;
+      const isElement = nodeType === NODE_TYPE.element;
+      /* (pushed last → processed first) Children, snapshotted in reverse so
+         the first child is processed first. Snapshotting matters because a
+         hook may detach siblings mid-walk. */
+      const childNodes = getChildNodes(node);
+      if (childNodes) {
+        for (let i = childNodes.length - 1; i >= 0; --i) {
+          stack.push({
+            node: childNodes[i],
+            shadow: null
+          });
+        }
+      }
+      /* (pushed before children → processed after them, matching the old
+         "template content last" order) When the node is a <template>,
+         descend into its content. */
+      if (isElement) {
+        const rootName = getNodeName ? getNodeName(node) : null;
+        if (typeof rootName === 'string' && transformCaseFunc(rootName) === 'template') {
+          const content = node.content;
+          if (_isDocumentFragment(content)) {
+            stack.push({
+              node: content,
+              shadow: null
+            });
+          }
+        }
+      }
+      /* Shadow root (processed first): walk its subtree, then sanitise it.
+         Realm-safe check (GHSA-hpcv-96wg-7vj8): nodeType-based detection
+         rather than `instanceof DocumentFragment`, which is realm-bound and
+         silently skipped foreign-realm shadow roots (e.g.
+         iframe.contentDocument attachShadow). */
+      if (isElement) {
+        const sr = getShadowRoot(node);
+        if (_isDocumentFragment(sr)) {
+          /* Push the deferred sanitise first so it pops after the shadow
+             walk we push next, i.e. nested shadow roots are discovered
+             before this one is sanitised. */
+          stack.push({
+            node: null,
+            shadow: sr
+          }, {
+            node: sr,
+            shadow: null
+          });
+        }
+      }
+    }
+  };
+  // eslint-disable-next-line complexity
+  DOMPurify.sanitize = function (dirty) {
+    let cfg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    let body = null;
+    let importedNode = null;
+    let currentNode = null;
+    let returnNode = null;
+    /* Make sure we have a string to sanitize.
+      DO NOT return early, as this will return the wrong type if
+      the user has requested a DOM object rather than a string */
+    IS_EMPTY_INPUT = !dirty;
+    if (IS_EMPTY_INPUT) {
+      dirty = '<!-->';
+    }
+    /* Stringify, in case dirty is an object */
+    if (typeof dirty !== 'string' && !_isNode(dirty)) {
+      dirty = stringifyValue(dirty);
+      if (typeof dirty !== 'string') {
+        throw typeErrorCreate('dirty is not a string, aborting');
+      }
+    }
+    /* Return dirty HTML if DOMPurify cannot run */
+    if (!DOMPurify.isSupported) {
+      return dirty;
+    }
+    /* Assign config vars */
+    if (SET_CONFIG) {
+      /* Persistent setConfig() path: _parseConfig is skipped, so the sets are
+       * not re-derived per call. Restore them from the pristine bindings
+       * captured at setConfig() time so a previous call's hook clone (mutated
+       * below) does not carry over. */
+      ALLOWED_TAGS = SET_CONFIG_ALLOWED_TAGS;
+      ALLOWED_ATTR = SET_CONFIG_ALLOWED_ATTR;
+    } else {
+      _parseConfig(cfg);
+    }
+    /* Clone the hook-mutable allowlists before the walk whenever an
+     * uponSanitize* hook is registered. The hook event exposes ALLOWED_TAGS
+     * and ALLOWED_ATTR by reference (as allowedTags / allowedAttributes), so
+     * a hook that widens them would otherwise mutate the shared set
+     * permanently: across later calls and across every element. Cloning per
+     * walk keeps documented in-call widening working while scoping it to the
+     * call. A single guard for both config paths - the per-call path rebinds
+     * the sets in _parseConfig each call, the persistent path restores them
+     * from the captured bindings just above - so the two cannot diverge. */
+    if (hooks.uponSanitizeElement.length > 0 || hooks.uponSanitizeAttribute.length > 0) {
+      ALLOWED_TAGS = clone(ALLOWED_TAGS);
+    }
+    if (hooks.uponSanitizeAttribute.length > 0) {
+      ALLOWED_ATTR = clone(ALLOWED_ATTR);
+    }
+    /* Clean up removed elements */
+    DOMPurify.removed = [];
+    /* Resolve IN_PLACE for this call without mutating persistent config.
+       Writing the IN_PLACE closure variable here leaks under setConfig(),
+       where _parseConfig is skipped on later calls: a single string call would
+       disable in-place mode for every subsequent node call, returning a
+       sanitized copy while leaving the caller's node — which in-place callers
+       keep using and whose return value they ignore — unsanitized. REPORT-2. */
+    const inPlace = IN_PLACE && typeof dirty !== 'string' && _isNode(dirty);
+    if (inPlace) {
+      /* Declarative-partial-updates / streaming pre-pass: sever every patch
+         linkage across the live tree BEFORE the walk, so no patch can fire
+         mid-walk and inject into an already-processed region. Runs first, so
+         it also covers the forbidden/clobbered roots that throw below. */
+      _neutralizePatchLinkage(dirty);
+      /* Do some early pre-sanitization to avoid unsafe root nodes.
+         Read nodeName through the cached prototype getter — a clobbering
+         child named "nodeName" on the form root would otherwise shadow
+         the property and let this check skip the root-allowlist
+         validation entirely. */
+      const nn = getNodeName ? getNodeName(dirty) : dirty.nodeName;
+      if (typeof nn === 'string') {
+        const tagName = transformCaseFunc(nn);
+        if (!ALLOWED_TAGS[tagName] || FORBID_TAGS[tagName]) {
+          /* Fail closed on a live root: neutralize handlers/children before
+             throwing, exactly as the mid-walk abort path does. */
+          _neutralizeRoot(dirty);
+          throw typeErrorCreate('root node is forbidden and cannot be sanitized in-place');
+        }
+      }
+      /* Pre-flight the root through _isClobbered. The iterator-driven
+         removal path can not detach a parent-less root: _forceRemove
+         falls through to Element.prototype.remove(), which per spec
+         is a no-op on a node with no parent. A clobbered root would
+         then survive the main loop with its attributes uninspected,
+         because _sanitizeAttributes early-returns on _isClobbered. The
+         result would be an attacker-controlled form, complete with any
+         event-handler attributes the caller passed in, handed back to
+         the application unsanitized. Refuse to sanitize such a root
+         the same way we refuse a forbidden tag. GHSA-r47g-fvhr-h676. */
+      if (_isClobbered(dirty)) {
+        /* Fail closed on a live clobbered root before throwing.
+           _neutralizeRoot's reads are clobber-safe (cached getters); the
+           form's non-clobbered descendants, e.g. an armed <img>, are scrubbed. */
+        _neutralizeRoot(dirty);
+        throw typeErrorCreate('root node is clobbered and cannot be sanitized in-place');
+      }
+      /* Sanitize attached shadow roots before the main iterator runs.
+         The iterator does not descend into shadow trees. Same fail-closed
+         barrier as the main walk (campaign-3 F2): a custom-element reaction
+         inside a shadow root could abort this pre-pass before the walk runs,
+         which would otherwise leave the entire live tree unsanitized. */
+      try {
+        _sanitizeAttachedShadowRoots(dirty);
+      } catch (error) {
+        _neutralizeRoot(dirty);
+        throw error;
+      }
+    } else if (_isNode(dirty)) {
+      /* If dirty is a DOM element, append to an empty document to avoid
+         elements being stripped by the parser */
+      body = _initDocument('<!---->');
+      importedNode = body.ownerDocument.importNode(dirty, true);
+      if (importedNode.nodeType === NODE_TYPE.element && importedNode.nodeName === 'BODY') {
+        /* Node is already a body, use as is */
+        body = importedNode;
+      } else if (importedNode.nodeName === 'HTML') {
+        body = importedNode;
+      } else {
+        // eslint-disable-next-line unicorn/prefer-dom-node-append
+        body.appendChild(importedNode);
+      }
+      /* Clonable shadow roots are deep-cloned by importNode(); sanitize
+         them before the main iterator runs, since the iterator does not
+         descend into shadow trees. The walk routes every read through a
+         cached prototype getter so clobbering descendants on a form root
+         cannot hide a shadow host from this pass. */
+      _sanitizeAttachedShadowRoots(importedNode);
+    } else {
+      /* Exit directly if we have nothing to do */
+      if (!RETURN_DOM && !SAFE_FOR_TEMPLATES && !WHOLE_DOCUMENT &&
+      // eslint-disable-next-line unicorn/prefer-includes
+      dirty.indexOf('<') === -1) {
+        return trustedTypesPolicy && RETURN_TRUSTED_TYPE ? _createTrustedHTML(dirty) : dirty;
+      }
+      /* Initialize the document to work on */
+      body = _initDocument(dirty);
+      /* Check we have a DOM node from the data */
+      if (!body) {
+        return RETURN_DOM ? null : RETURN_TRUSTED_TYPE ? emptyHTML : '';
+      }
+    }
+    /* Remove first element node (ours) if FORCE_BODY is set */
+    if (body && FORCE_BODY) {
+      _forceRemove(body.firstChild);
+    }
+    /* Get node iterator */
+    const walkRoot = inPlace ? dirty : body;
+    /* Now start iterating over the created document.
+       The walk runs inside an exception barrier (campaign-3 F2): a re-entrant
+       engine/custom-element mutation can detach a node mid-walk so
+       `_forceRemove`'s parentless guard throws, aborting the loop. Without the
+       barrier the caller's in-place tree would be left half-sanitized with the
+       unvisited tail still armed. _createNodeIterator itself is inside the
+       barrier too: constructing the iterator dereferences the root's document,
+       and any failure there (e.g. an exotic/clobbered root) must still fail
+       closed rather than skip the neutralize. On any throw we fail closed -
+       strip the in-place root bare - then rethrow so the existing throw
+       contract is preserved. (String/DOM-copy paths never return the partial
+       body, so the propagating throw is already fail-closed there.) */
+    try {
+      const nodeIterator = _createNodeIterator(walkRoot);
+      while (currentNode = nodeIterator.nextNode()) {
+        /* Sanitize tags and elements */
+        _sanitizeElements(currentNode, walkRoot);
+        /* Check attributes next */
+        _sanitizeAttributes(currentNode);
+        /* Shadow DOM detected, sanitize it.
+           Realm-safe check (GHSA-hpcv-96wg-7vj8): nodeType-based detection
+           instead of instanceof, so foreign-realm <template>.content is
+           walked correctly. */
+        if (_isDocumentFragment(currentNode.content)) {
+          _sanitizeShadowDOM2(currentNode.content);
+        }
+      }
+    } catch (error) {
+      if (inPlace) {
+        _neutralizeRoot(dirty);
+        /* Nodes _forceRemove'd earlier in the aborted walk are already
+           detached from the root, so _neutralizeRoot's subtree pass does not
+           reach them. Defuse them too, mirroring the success-path loop below. */
+        arrayForEach(DOMPurify.removed, entry => {
+          if (entry.element) {
+            _neutralizeSubtree(entry.element);
+          }
+        });
+      }
+      throw error;
+    }
+    /* If we sanitized `dirty` in-place, return it. */
+    if (inPlace) {
+      /* Fail-closed completion of the audit-5 F1 fix: every node removed from
+         the caller's live tree is detached but may still hold a queued
+         resource-event handler that fires in page scope after we return. The
+         move-hoist covers only disallowed-tag KEEP_CONTENT removals; strip the
+         non-allow-listed attributes off every other removed subtree (clobber,
+         mXSS, namespace, comments, KEEP_CONTENT:false, …) so those handlers are
+         cancelled before any event can fire. Runs synchronously, pre-return. */
+      arrayForEach(DOMPurify.removed, entry => {
+        if (entry.element) {
+          _neutralizeSubtree(entry.element);
+        }
+      });
+      if (SAFE_FOR_TEMPLATES) {
+        _scrubTemplateExpressions2(dirty);
+      }
+      return dirty;
+    }
+    /* Return sanitized string or DOM */
+    if (RETURN_DOM) {
+      if (SAFE_FOR_TEMPLATES) {
+        _scrubTemplateExpressions2(body);
+      }
+      if (RETURN_DOM_FRAGMENT) {
+        returnNode = createDocumentFragment.call(body.ownerDocument);
+        while (body.firstChild) {
+          // eslint-disable-next-line unicorn/prefer-dom-node-append
+          returnNode.appendChild(body.firstChild);
+        }
+      } else {
+        returnNode = body;
+      }
+      if (ALLOWED_ATTR.shadowroot || ALLOWED_ATTR.shadowrootmode) {
+        /*
+          AdoptNode() is not used because internal state is not reset
+          (e.g. the past names map of a HTMLFormElement), this is safe
+          in theory but we would rather not risk another attack vector.
+          The state that is cloned by importNode() is explicitly defined
+          by the specs.
+        */
+        returnNode = importNode.call(originalDocument, returnNode, true);
+      }
+      return returnNode;
+    }
+    let serializedHTML = WHOLE_DOCUMENT ? body.outerHTML : body.innerHTML;
+    /* Serialize doctype if allowed */
+    if (WHOLE_DOCUMENT && ALLOWED_TAGS['!doctype'] && body.ownerDocument && body.ownerDocument.doctype && body.ownerDocument.doctype.name && regExpTest(DOCTYPE_NAME, body.ownerDocument.doctype.name)) {
+      serializedHTML = '<!DOCTYPE ' + body.ownerDocument.doctype.name + '>\n' + serializedHTML;
+    }
+    /* Sanitize final string template-safe */
+    if (SAFE_FOR_TEMPLATES) {
+      serializedHTML = _stripTemplateExpressions(serializedHTML);
+    }
+    return trustedTypesPolicy && RETURN_TRUSTED_TYPE ? _createTrustedHTML(serializedHTML) : serializedHTML;
+  };
+  DOMPurify.setConfig = function () {
+    let cfg = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    _parseConfig(cfg);
+    SET_CONFIG = true;
+    SET_CONFIG_ALLOWED_TAGS = ALLOWED_TAGS;
+    SET_CONFIG_ALLOWED_ATTR = ALLOWED_ATTR;
+  };
+  DOMPurify.clearConfig = function () {
+    CONFIG = null;
+    SET_CONFIG = false;
+    SET_CONFIG_ALLOWED_TAGS = null;
+    SET_CONFIG_ALLOWED_ATTR = null;
+    // Drop any caller-supplied Trusted Types policy so it cannot poison later
+    // `RETURN_TRUSTED_TYPE` output. The internal default policy (cached, and
+    // never recreated — Trusted Types throws on duplicate names) is restored by
+    // the next `_parseConfig`. See GHSA-vxr8-fq34-vvx9.
+    trustedTypesPolicy = defaultTrustedTypesPolicy;
+    emptyHTML = '';
+  };
+  DOMPurify.isValidAttribute = function (tag, attr, value) {
+    /* Initialize shared config vars if necessary. */
+    if (!CONFIG) {
+      _parseConfig({});
+    }
+    const lcTag = transformCaseFunc(tag);
+    const lcName = transformCaseFunc(attr);
+    return _isValidAttribute(lcTag, lcName, value);
+  };
+  DOMPurify.addHook = function (entryPoint, hookFunction) {
+    if (typeof hookFunction !== 'function') {
+      return;
+    }
+    /* Reject unknown entry points. Without this, a non-hook key (e.g.
+     * '__proto__') indexes off the prototype chain rather than a real
+     * hook array, and arrayPush then writes to Object.prototype. Guard
+     * with an own-property check against the known hook names. */
+    if (!objectHasOwnProperty(hooks, entryPoint)) {
+      return;
+    }
+    arrayPush(hooks[entryPoint], hookFunction);
+  };
+  DOMPurify.removeHook = function (entryPoint, hookFunction) {
+    if (!objectHasOwnProperty(hooks, entryPoint)) {
+      return undefined;
+    }
+    if (hookFunction !== undefined) {
+      const index = arrayLastIndexOf(hooks[entryPoint], hookFunction);
+      return index === -1 ? undefined : arraySplice(hooks[entryPoint], index, 1)[0];
+    }
+    return arrayPop(hooks[entryPoint]);
+  };
+  DOMPurify.removeHooks = function (entryPoint) {
+    if (!objectHasOwnProperty(hooks, entryPoint)) {
+      return;
+    }
+    hooks[entryPoint] = [];
+  };
+  DOMPurify.removeAllHooks = function () {
+    hooks = _createHooksMap();
+  };
+  return DOMPurify;
+}
+var purify = createDOMPurify();
+
+
+//# sourceMappingURL=purify.es.mjs.map
+
+;// ../mithril-ui-form-markdown-plugin/lib/index.mjs
+// src/plugin.ts
+
+
+
+var markdownEditorPlugin = () => ({
+  view: ({ attrs: { iv, field, props, onchange } }) => mithril(MarkdownEditor, {
+    content: iv || "",
+    placeholder: props.placeholder,
+    mode: field.mode,
+    theme: field.theme,
+    toolbar: field.toolbar,
+    showTabs: field.showTabs,
+    isPreview: field.isPreview,
+    i18n: field.markdownI18n,
+    onContentChange: (md) => onchange?.(md)
+  })
+});
+var markdownReadonlyPlugin = () => ({
+  view: ({ attrs: { iv, props } }) => mithril(
+    ".slimdown-view.markdown",
+    { className: props.className },
+    mithril.trust(purify.sanitize(markdownToHtml(iv || "")))
+  )
+});
+
+//# sourceMappingURL=index.mjs.map
 ;// ./src/app.ts
 
 
@@ -30401,8 +37325,12 @@ var ratingPlugin = () => {
 
 
 
-ke("map", leafletPlugin);
-ke("custom-rating", ratingPlugin);
+
+
+
+cn("map", leafletPlugin);
+cn("custom-rating", ratingPlugin);
+cn("md-editor", markdownEditorPlugin, markdownReadonlyPlugin);
 document.documentElement.setAttribute("lang", "en");
 mithril_default().route(document.body, dashboardSvc.defaultRoute, dashboardSvc.routingTable);
 
@@ -47288,7 +54216,7 @@ module.exports = __webpack_require__.p + "0c35d18bf06992036b69.woff2";
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module used 'module' so it can't be inlined
-/******/ 	let __webpack_exports__ = __webpack_require__(148);
+/******/ 	let __webpack_exports__ = __webpack_require__(200);
 /******/ 	
 /******/ })()
 ;
