@@ -12,7 +12,7 @@
   },
   "scripts": {
     "clean": "rimraf .rpt2_cache lib dist docs",
-    "build": "rollup -c && tsc -p tsconfig.build.json --emitDeclarationOnly --declarationDir lib && cp styles.css lib/styles.css",
+    "build": "rollup -c && tsc -p tsconfig.build.json --emitDeclarationOnly --declarationDir lib && cp src/styles.css styles.css && cp src/styles.css lib/styles.css",
     "start": "rollup -c -w",
     "dev": "npm start",
     "test": "vitest run",
