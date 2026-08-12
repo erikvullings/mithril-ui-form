@@ -57,3 +57,12 @@
 .mui-repeat-list-controls {
   margin-bottom: 0;
 }
+
+.mui-repeat-item:hover .mui-delete-item {
+  visibility: visible !important;
+}
+
+.modal.mui-delete-modal {
+  max-width: 480px !important;
+  width: auto !important;
+}

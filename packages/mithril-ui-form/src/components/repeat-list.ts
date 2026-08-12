@@ -1,5 +1,5 @@
 import m, { Attributes, Component } from 'mithril';
-import { FlatButton, ModalPanel, Pagination, RoundIconButton, TextInput } from 'mithril-materialized';
+import { FlatButton, ModalPanel, Pagination, TextInput } from 'mithril-materialized';
 import { FormAttributes, I18n, InputField } from 'mithril-ui-form-plugin';
 import { LayoutForm } from './layout-form';
 import {
@@ -280,7 +280,7 @@ export const RepeatList = <O extends Attributes>() => {
                             iconName: 'delete',
                             className: 'mui-delete-item',
                             iconClass: 'mui-delete-icon',
-                            style: { flex: '0 0 20px', padding: 0 },
+                            style: { flex: '0 0 20px', padding: 0, visibility: 'hidden' },
                             disabled,
                             readonly,
                             onclick: () => {
@@ -291,24 +291,14 @@ export const RepeatList = <O extends Attributes>() => {
                       ]
                     )
                   ),
-              !(disabled || maxItemsReached || readonly || !items || items.length === 0 || pageSize === 1) &&
-                m(RoundIconButton, {
-                  iconName: 'add',
-                  className: 'row mui-add-new-item btn-small right',
-                  title: label,
-                  style: 'padding: 0; margin-top: -10px; margin-right: -25px',
-                  onclick: () => {
-                    addEmptyItem(obj, String(id));
-                    m.route.set(fragment, Object.assign(params, { [id!]: getItems(obj, String(id)).length }));
-                    onchange && onchange(obj);
-                  },
-                }),
+
             ]
           ),
         ],
         typeof state.curItemIdx !== 'undefined' &&
           m(ModalPanel, {
             id: 'deleteItem',
+            className: 'mui-delete-modal',
             isOpen: typeof state.curItemIdx !== 'undefined',
             onClose: () => {
               // console.log('On Close');
