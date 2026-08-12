@@ -1997,6 +1997,19 @@ export const LLFView = () => {
           { id: 'power-infra', label: 'Power Infrastructure' },
         ],
       },
+      {
+        id: 'response',
+        label: 'Emergency Response',
+        subcategories: [
+          { id: 'evacuation', label: 'Evacuation' },
+          { id: 'communication', label: 'Communication' },
+        ],
+      },
+      {
+        id: 'recovery',
+        label: 'Recovery',
+        subcategories: [],
+      },
     ],
     measures: [{ id: 'meas1', label: 'Measure 1', type: 'hw' }],
     incidentType: ['flash', 'river'],

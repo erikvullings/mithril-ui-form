@@ -237,14 +237,12 @@ export const RepeatList = <O extends Attributes>() => {
                         },
                       },
                       [
-                        canDeleteItems && [
-                          (!pageSize || pageSize > 1) &&
-                            m(
-                              'span.mui-show-item-number left',
-                              { style: `flex: 0 0 ${numberColWidth}px;` },
-                              `[${(pageSize ? (curPage - 1) * pageSize + index : index) + 1}]`
-                            ),
-                        ],
+                        (!pageSize || pageSize > 1) && items.length > 1 &&
+                          m(
+                            'span.mui-show-item-number left',
+                            { style: `flex: 0 0 ${numberColWidth}px;` },
+                            `[${(pageSize ? (curPage - 1) * pageSize + index : index) + 1}]`
+                          ),
                         [
                           m(
                             '.row.repeat-item',
@@ -269,8 +267,8 @@ export const RepeatList = <O extends Attributes>() => {
                           ),
                         ],
                         m(
-                          'div',
-                          { style: { display: 'flex', flexDirection: 'column', flex: '0 0 20px' } },
+                          '.mui-repeat-actions',
+                          {},
                           [
                             canDeleteItems &&
                               m(ConfirmButton, {

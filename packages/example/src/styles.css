@@ -63,3 +63,15 @@
 .mui-repeat-list-controls {
   margin-bottom: 0;
 }
+
+.mui-repeat-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  visibility: hidden;
+}
+
+.mui-repeat-item:hover > .mui-repeat-actions {
+  visibility: visible;
+}
