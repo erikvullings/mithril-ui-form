@@ -284,7 +284,6 @@ export const RepeatList = <O extends Attributes>() => {
                         '.row.repeat-item',
                         {
                           className: repeatItemClass,
-                          key: `repeat-${page}-${pageSize ? (curPage - 1) * pageSize + index : index}`,
                           style: 'flex: 1;',
                         },
                         [
