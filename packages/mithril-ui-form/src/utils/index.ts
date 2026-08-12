@@ -74,6 +74,16 @@ export const getPath = <O extends Record<string, any>>(obj: O, path: string): an
 
     // Specific handling for arrays with potential object matching
     if (Array.isArray(current)) {
+      // Indirect lookup: e.g. 'categories.categoryId.subcategories' — when the key is
+      // a field name present in the root obj, use its value to find an item by id.
+      if (key in obj) {
+        const lookupValue = obj[key];
+        const found = current.find(
+          (item: any) => typeof item === 'object' && item !== null && item.id === lookupValue
+        );
+        if (found !== undefined) return found;
+      }
+
       // A capitalized segment (capital letter followed by at least one more word
       // character — matching getPathFuzzy's own regex) is a dynamic-key lookup, not an
       // index (see getPathFuzzy).

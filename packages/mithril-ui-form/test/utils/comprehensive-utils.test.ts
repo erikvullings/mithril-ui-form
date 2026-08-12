@@ -206,6 +206,33 @@ describe('Comprehensive Utils Tests', () => {
         expect(getPathFuzzy(['Country', 42, null, undefined], 'Country')).toBeUndefined();
       });
     });
+
+    describe('indirect id-based array lookup', () => {
+      // 'categories.categoryId.subcategories' when obj has categoryId='flood' should
+      // find the item in categories whose id === 'flood' and return its subcategories.
+      const capability = {
+        categoryId: 'flood',
+        categories: [
+          { id: 'flood', label: 'Flood', subcategories: [{ id: 'flash', label: 'Flash Flood' }] },
+          { id: 'infra', label: 'Infrastructure', subcategories: [{ id: 'power', label: 'Power' }] },
+        ],
+      };
+
+      it('resolves array.fieldRef.prop by looking up fieldRef value in root obj as id', () => {
+        expect(getPath(capability, 'categories.categoryId.subcategories')).toEqual([
+          { id: 'flash', label: 'Flash Flood' },
+        ]);
+      });
+
+      it('returns undefined when root obj has the field but no array item matches', () => {
+        const noMatch = { ...capability, categoryId: 'unknown' };
+        expect(getPath(noMatch, 'categories.categoryId.subcategories')).toBeUndefined();
+      });
+
+      it('does not interfere with plain numeric index access', () => {
+        expect(getPath(capability, 'categories[0].label')).toBe('Flood');
+      });
+    });
   });
 
   describe('flatten', () => {

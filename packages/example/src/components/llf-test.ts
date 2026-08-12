@@ -740,7 +740,7 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
         id: 'subcategoryId',
         label: 'Subcategory',
         type: 'select',
-        options: 'subcategoryOptions',
+        options: 'categories.categoryId.subcategories',
         className: 'col s12 m3',
       },
       {
@@ -1936,25 +1936,6 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
   },
 ] as UIForm<ILessonLearned>;
 
-/**
- * Builds subcategory options from categories array with show conditions
- * Each subcategory is shown only when its parent category is selected
- */
-const buildSubcategoryOptions = (categories: Category[]): Array<{ id: string; label: string; show: string }> => {
-  return (categories || []).reduce((acc: any[], cat: Category) => {
-    if (cat.subcategories) {
-      cat.subcategories.forEach((sub: Category) => {
-        acc.push({
-          id: sub.id,
-          label: sub.label,
-          show: `categoryId===${cat.id}`, // Only show if this category is selected
-        });
-      });
-    }
-    return acc;
-  }, []);
-};
-
 export const LLFView = () => {
   const state = {
     result: {} as ILessonLearned,
@@ -2085,7 +2066,6 @@ export const LLFView = () => {
             context: [
               {
                 catTypes,
-                subcategoryOptions: buildSubcategoryOptions(result.categories),
               },
             ],
             onchange: print,
