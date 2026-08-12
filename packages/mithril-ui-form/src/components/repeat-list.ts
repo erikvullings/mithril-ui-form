@@ -187,7 +187,7 @@ export const RepeatList = <O extends Attributes>() => {
                     onclick: () => {
                       addEmptyItem(obj, String(id));
                       if (id) {
-                        m.route.set(fragment, Object.assign(params, { [id]: items.length }));
+                        m.route.set(fragment, Object.assign(params, { [id]: getItems(obj, String(id)).length }));
                       }
                       onchange && onchange(obj);
                     },
@@ -299,7 +299,7 @@ export const RepeatList = <O extends Attributes>() => {
                   style: 'padding: 0; margin-top: -10px; margin-right: -25px',
                   onclick: () => {
                     addEmptyItem(obj, String(id));
-                    m.route.set(fragment, Object.assign(params, { [id!]: items.length }));
+                    m.route.set(fragment, Object.assign(params, { [id!]: getItems(obj, String(id)).length }));
                     onchange && onchange(obj);
                   },
                 }),
