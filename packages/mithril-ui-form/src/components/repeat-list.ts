@@ -191,85 +191,63 @@ export const RepeatList = <O extends Attributes>() => {
                     readonly,
                   }),
                   maxPages > 1 &&
-                    m(
-                      '.right',
-                      m(Pagination, {
-                        curPage,
-                        items: range(1, maxPages).map((i) => ({
-                          href: toQueryString(fragment, params, { [id!]: i }),
-                        })),
-                      })
-                    ),
+                  m(
+                    '.right',
+                    m(Pagination, {
+                      curPage,
+                      items: range(1, maxPages).map((i) => ({
+                        href: toQueryString(fragment, params, { [id!]: i }),
+                      })),
+                    })
+                  ),
                   (items.length > 1 || filterValue) &&
-                    propertyFilter &&
-                    !disabled &&
-                    m(TextInput, {
-                      style: 'margin-top: -6px; margin-bottom: -1rem;',
-                      iconName: 'filter_list',
-                      iconClass: 'small',
-                      placeholder: filterLabel,
-                      onkeyup: (_: KeyboardEvent, v?: string) => (state.filterValue = v),
-                      className: 'right',
-                      disabled,
-                      readonly,
-                    }),
+                  propertyFilter &&
+                  !disabled &&
+                  m(TextInput, {
+                    style: 'margin-top: -6px; margin-bottom: -1rem;',
+                    iconName: 'filter_list',
+                    iconClass: 'small',
+                    placeholder: filterLabel,
+                    onkeyup: (_: KeyboardEvent, v?: string) => (state.filterValue = v),
+                    className: 'right',
+                    disabled,
+                    readonly,
+                  }),
                 ])
               ),
               items &&
-                items.length > 0 &&
-                typeof type !== 'string' &&
-                (() => {
-                  const visibleItems = items.sort(compareFn).filter(delimitter);
-                  return visibleItems.map((item, index) =>
-                    m(
-                      '.mui-repeat-item',
-                      {
-                        key: `item-${page}-${pageSize ? (curPage - 1) * pageSize + index : index}`,
-                        draggable: canDrag,
-                        ondragstart: canDrag ? (event: DragEvent) => handleDragStart(event, index) : undefined,
-                        ondragover: canDrag ? handleDragOver : undefined,
-                        ondrop: canDrag
-                          ? (event: DragEvent) => handleDrop(event, index, obj, id!, onchange)
-                          : undefined,
-                        style: {
-                          display: 'flex',
-                          cursor: canDrag ? 'move' : undefined,
-                        },
+              items.length > 0 &&
+              typeof type !== 'string' &&
+              (() => {
+                const visibleItems = items.sort(compareFn).filter(delimitter);
+                return visibleItems.map((item, index) =>
+                  m(
+                    '.mui-repeat-item',
+                    {
+                      key: `item-${page}-${pageSize ? (curPage - 1) * pageSize + index : index}`,
+                      draggable: canDrag,
+                      ondragstart: canDrag ? (event: DragEvent) => handleDragStart(event, index) : undefined,
+                      ondragover: canDrag ? handleDragOver : undefined,
+                      ondrop: canDrag
+                        ? (event: DragEvent) => handleDrop(event, index, obj, id!, onchange)
+                        : undefined,
+                      style: {
+                        display: 'flex',
+                        cursor: canDrag ? 'move' : undefined,
                       },
-                      [
-                        (!pageSize || pageSize > 1) && items.length > 1 &&
-                          m(
-                            'span.mui-show-item-number left',
-                            { style: `flex: 0 0 ${numberColWidth}px;` },
-                            `[${(pageSize ? (curPage - 1) * pageSize + index : index) + 1}]`
-                          ),
+                    },
+                    [
+                      m(
+                        '.mui-item-side-col',
+                        { style: `flex: 0 0 ${numberColWidth}px;` },
                         [
-                          m(
-                            '.row.repeat-item',
-                            {
-                              className: repeatItemClass,
-                              key: `repeat-${page}-${pageSize ? (curPage - 1) * pageSize + index : index}`,
-                              style: 'flex: 1;',
-                            },
-                            [
-                              type &&
-                                m(LayoutForm, {
-                                  form: type,
-                                  obj: item,
-                                  i18n,
-                                  context: context instanceof Array ? [obj, ...context] : [obj, context],
-                                  containerId,
-                                  disabled,
-                                  readonly,
-                                  onchange: () => onchange && onchange(obj),
-                                } as FormAttributes<any>),
-                            ]
-                          ),
-                        ],
-                        m(
-                          '.mui-repeat-actions',
-                          {},
-                          [
+                          (!pageSize || pageSize > 1) && items.length > 1 &&
+                            m(
+                              'span.mui-show-item-number',
+                              {},
+                              `[${(pageSize ? (curPage - 1) * pageSize + index : index) + 1}]`
+                            ),
+                          m('.mui-repeat-actions', {}, [
                             canDeleteItems &&
                               m(ConfirmButton, {
                                 iconName: 'delete',
@@ -299,12 +277,34 @@ export const RepeatList = <O extends Attributes>() => {
                                   onchange && onchange(obj);
                                 },
                               }),
-                          ]
-                        ),
-                      ]
-                    )
-                  );
-                })(),
+                          ]),
+                        ]
+                      ),
+                      m(
+                        '.row.repeat-item',
+                        {
+                          className: repeatItemClass,
+                          key: `repeat-${page}-${pageSize ? (curPage - 1) * pageSize + index : index}`,
+                          style: 'flex: 1;',
+                        },
+                        [
+                          type &&
+                            m(LayoutForm, {
+                              form: type,
+                              obj: item,
+                              i18n,
+                              context: context instanceof Array ? [obj, ...context] : [obj, context],
+                              containerId,
+                              disabled,
+                              readonly,
+                              onchange: () => onchange && onchange(obj),
+                            } as FormAttributes<any>),
+                        ]
+                      ),
+                    ]
+                  )
+                );
+              })(),
 
             ]
           ),

@@ -64,14 +64,19 @@
   margin-bottom: 0;
 }
 
+.mui-item-side-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .mui-repeat-actions {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-shrink: 0;
   visibility: hidden;
 }
 
-.mui-repeat-item:hover > .mui-repeat-actions {
+.mui-repeat-item:hover > .mui-item-side-col .mui-repeat-actions {
   visibility: visible;
 }
