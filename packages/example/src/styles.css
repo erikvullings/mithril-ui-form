@@ -63,37 +63,3 @@
 .mui-repeat-list-controls {
   margin-bottom: 0;
 }
-
-.mui-item-side-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Reduce line-height so [N] sits tight above the action buttons */
-.mui-show-item-number {
-  line-height: 1.2;
-  padding-bottom: 0;
-}
-
-.mui-repeat-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  visibility: hidden;
-}
-
-/* Undo FlatButton's default i.left float that shifts the + icon sideways */
-.mui-repeat-actions i {
-  float: none !important;
-  margin: 0 !important;
-}
-
-/* Pull add button up so its icon-centre gap equals the [N]-to-trash gap */
-.mui-repeat-actions .btn-flat:not(.btn-icon) {
-  margin-top: -9px;
-}
-
-.mui-repeat-item:hover > .mui-item-side-col .mui-repeat-actions {
-  visibility: visible;
-}

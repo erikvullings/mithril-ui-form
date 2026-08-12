@@ -241,12 +241,12 @@ export const RepeatList = <O extends Attributes>() => {
                         '.mui-item-side-col',
                         { style: `flex: 0 0 ${numberColWidth}px;` },
                         [
-                          (!pageSize || pageSize > 1) && items.length > 1 &&
-                            m(
-                              'span.mui-show-item-number',
-                              {},
-                              `[${(pageSize ? (curPage - 1) * pageSize + index : index) + 1}]`
-                            ),
+                          m(
+                            'span.mui-show-item-number',
+                            // always render to reserve space; hide when numbering isn't shown
+                            { style: (!pageSize || pageSize > 1) && items.length > 1 ? undefined : { visibility: 'hidden' } },
+                            `[${(pageSize ? (curPage - 1) * pageSize + index : index) + 1}]`
+                          ),
                           m('.mui-repeat-actions', {}, [
                             canDeleteItems &&
                               m(ConfirmButton, {

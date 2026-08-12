@@ -4,6 +4,7 @@
   "description": "Convert a JSON file or object to a dynamic, materialized form.",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
+  "style": "styles.css",
   "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
@@ -11,7 +12,7 @@
   },
   "scripts": {
     "clean": "rimraf .rpt2_cache lib dist docs",
-    "build": "rollup -c && tsc -p tsconfig.build.json --emitDeclarationOnly --declarationDir lib",
+    "build": "rollup -c && tsc -p tsconfig.build.json --emitDeclarationOnly --declarationDir lib && cp styles.css lib/styles.css",
     "start": "rollup -c -w",
     "dev": "npm start",
     "test": "vitest run",

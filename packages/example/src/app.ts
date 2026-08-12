@@ -1,5 +1,6 @@
 import 'material-icons/iconfont/filled.css';
 import 'mithril-materialized/index.css';
+import 'mithril-ui-form/styles.css';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import 'mithril-markdown-wysiwyg/style.css';

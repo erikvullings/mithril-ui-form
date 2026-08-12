@@ -1,0 +1,36 @@
+.mui-repeat-list-controls {
+  margin-bottom: 0;
+}
+
+.mui-item-side-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mui-show-item-number {
+  line-height: 1.2;
+  padding-bottom: 0;
+}
+
+.mui-repeat-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  visibility: hidden;
+}
+
+.mui-repeat-item:hover > .mui-item-side-col .mui-repeat-actions {
+  visibility: visible;
+}
+
+/* Remove FlatButton's default i.left float that misaligns the + icon */
+.mui-repeat-actions i {
+  float: none !important;
+  margin: 0 !important;
+}
+
+/* Pull add button up so its icon-centre gap equals the [N]-to-trash gap */
+.mui-repeat-actions .btn-flat:not(.btn-icon) {
+  margin-top: -12px;
+}
