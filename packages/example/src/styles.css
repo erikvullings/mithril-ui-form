@@ -12,7 +12,7 @@
   display: table;
 }
 
-.markdown ul > li {
+.markdown ul>li {
   list-style-type: circle !important;
   text-indent: 2em;
 }
@@ -22,7 +22,7 @@
 }
 
 /* For the options' label */
-.input-field.options > label {
+.input-field.options>label {
   top: -2.5rem;
 }
 
@@ -33,36 +33,33 @@
   justify-content: flex-start;
   align-items: flex-end;
 }
-.muf-rating > .label {
+
+.muf-rating>.label {
   width: 50%;
 }
-.muf-rating > .radios {
+
+.muf-rating>.radios {
   width: 50%;
   display: flex;
   justify-content: space-evenly;
   align-items: flex-end;
 }
-.muf-rating > .radios > label {
+
+.muf-rating>.radios>label {
   display: inline-block;
   padding: 0 0.1rem 1rem 0.1rem;
   text-align: center;
 }
-.muf-rating > .radios > label > input[type='radio'] {
-  opacity: 1; /* only needed when using materialize-css */
+
+.muf-rating>.radios>label>input[type='radio'] {
+  opacity: 1;
+  /* only needed when using materialize-css */
 }
 
 .geojson-feature-list .collapsible-body {
   padding: 0 1rem;
 }
+
 .mui-repeat-list-controls {
   margin-bottom: 0;
-}
-
-.mui-repeat-item:hover .mui-delete-item {
-  visibility: visible !important;
-}
-
-.modal.mui-delete-modal {
-  max-width: 480px !important;
-  width: auto !important;
 }

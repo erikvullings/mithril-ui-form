@@ -1,5 +1,5 @@
 import m, { Attributes, Component } from 'mithril';
-import { FlatButton, ModalPanel, Pagination, TextInput } from 'mithril-materialized';
+import { ConfirmButton, FlatButton, Pagination, TextInput } from 'mithril-materialized';
 import { FormAttributes, I18n, InputField } from 'mithril-ui-form-plugin';
 import { LayoutForm } from './layout-form';
 import {
@@ -45,12 +45,6 @@ export interface IRepeatList<O extends Attributes = {}> extends Attributes {
 // export const RepeatList = <O extends Attributes, S = {}>() => {
 export const RepeatList = <O extends Attributes>() => {
   const state = {} as {
-    editItem?: O;
-    curItemIdx?: number;
-    newItem?: O;
-    canSave?: boolean;
-    editModal?: any;
-    modalKey?: string;
     editLabel: string;
     createLabel: string;
     /** When dealing with a large list, you may add a property filter */
@@ -224,10 +218,9 @@ export const RepeatList = <O extends Attributes>() => {
               items &&
                 items.length > 0 &&
                 typeof type !== 'string' &&
-                items
-                  .sort(compareFn)
-                  .filter(delimitter)
-                  .map((item, index) =>
+                (() => {
+                  const visibleItems = items.sort(compareFn).filter(delimitter);
+                  return visibleItems.map((item, index) =>
                     m(
                       '.mui-repeat-item',
                       {
@@ -275,70 +268,49 @@ export const RepeatList = <O extends Attributes>() => {
                             ]
                           ),
                         ],
-                        canDeleteItems && [
-                          m(FlatButton, {
-                            iconName: 'delete',
-                            className: 'mui-delete-item',
-                            iconClass: 'mui-delete-icon',
-                            style: { flex: '0 0 20px', padding: 0, visibility: 'hidden' },
-                            disabled,
-                            readonly,
-                            onclick: () => {
-                              state.curItemIdx = pageSize ? (curPage - 1) * pageSize + index : index;
-                            },
-                          }),
-                        ],
+                        m(
+                          'div',
+                          { style: { display: 'flex', flexDirection: 'column', flex: '0 0 20px' } },
+                          [
+                            canDeleteItems &&
+                              m(ConfirmButton, {
+                                iconName: 'delete',
+                                confirmIconName: 'check',
+                                style: { padding: 0 },
+                                disabled,
+                                readonly,
+                                onclick: () => {
+                                  const itemIdx = pageSize ? (curPage - 1) * pageSize + index : index;
+                                  if (obj instanceof Array) {
+                                    obj.splice(itemIdx, 1);
+                                  } else {
+                                    obj[id as keyof O] = arrayUtils.removeAt(items, itemIdx) as O[keyof O];
+                                  }
+                                  onchange && onchange(obj);
+                                },
+                              }),
+                            !disabled && !readonly && !maxItemsReached && index === visibleItems.length - 1 &&
+                              m(FlatButton, {
+                                iconName: 'add',
+                                style: { padding: 0 },
+                                onclick: () => {
+                                  addEmptyItem(obj, String(id));
+                                  if (id) {
+                                    m.route.set(fragment, Object.assign(params, { [id]: getItems(obj, String(id)).length }));
+                                  }
+                                  onchange && onchange(obj);
+                                },
+                              }),
+                          ]
+                        ),
                       ]
                     )
-                  ),
+                  );
+                })(),
 
             ]
           ),
         ],
-        typeof state.curItemIdx !== 'undefined' &&
-          m(ModalPanel, {
-            id: 'deleteItem',
-            className: 'mui-delete-modal',
-            isOpen: typeof state.curItemIdx !== 'undefined',
-            onClose: () => {
-              // console.log('On Close');
-              state.curItemIdx = undefined;
-              m.redraw();
-            },
-            fixedFooter: true,
-            title: i18n.deleteItem || 'Delete item',
-            description: m(LayoutForm, {
-              form: type,
-              obj: items[state.curItemIdx] as O[keyof O],
-              context: context instanceof Array ? [obj, ...context] : [obj, context],
-              containerId,
-              readonly: true,
-              i18n,
-            } as FormAttributes<any>),
-            buttons: [
-              {
-                label: i18n.disagree || 'Disagree',
-                onclick: () => {
-                  state.curItemIdx = undefined;
-                },
-              },
-              {
-                label: i18n.agree || 'Agree',
-                onclick: () => {
-                  if (typeof state.curItemIdx !== 'undefined') {
-                    const newItems = arrayUtils.removeAt(items, state.curItemIdx);
-                    if (obj instanceof Array) {
-                      obj = newItems as O[keyof O];
-                    } else {
-                      obj[id as keyof O] = newItems as O[keyof O];
-                    }
-                    state.curItemIdx = undefined;
-                    onchange && onchange(obj);
-                  }
-                },
-              },
-            ],
-          }),
       ];
     },
   } as Component<IRepeatList<O>>;
