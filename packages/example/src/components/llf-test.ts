@@ -708,7 +708,7 @@ _Fields marked with a <span style='color: red;'>*</span> are mandatory._
     pageSize: 1,
     repeat: true,
     repeatItemClass: '',
-    onNewItem: (_, __, i) => ({ id: `CAP${i || 0 + 1}`, name: 'New capability name: ' + i }),
+    onNewItem: (_, __, i) => ({ id: `CAP${(i || 0) + 1}`, name: 'New capability name: ' + i }),
     type: [
       {
         id: 'id',
