@@ -1,3 +1,27 @@
+# [2.3.0](https://github.com/erikvullings/mithril-ui-form/compare/v2.2.0...v2.3.0) (2026-08-12)
+
+
+### Bug Fixes
+
+* add src/styles.css so webpack dev alias resolves the CSS import ([d6e4e60](https://github.com/erikvullings/mithril-ui-form/commit/d6e4e60e1594e34cae7dbe73564593c705003e21))
+* dynamic subcategory selection with show conditions ([acf7196](https://github.com/erikvullings/mithril-ui-form/commit/acf719622def4144d1af603e67fcf38fe695b5b2))
+* equalise [N]-trash and trash-+ spacing with margin-top:-9px ([0b43fc3](https://github.com/erikvullings/mithril-ui-form/commit/0b43fc3883cea0b18c54a3dc1d2ff68f05790795))
+* hover-only action buttons with proper alignment ([67d4822](https://github.com/erikvullings/mithril-ui-form/commit/67d482271ce29e6690167a83fd0526a9da4fb773))
+* improve repeat-list UX ([908f4c0](https://github.com/erikvullings/mithril-ui-form/commit/908f4c00f62829382d1bdd3c781052992811e2c4))
+* incorrect ID generation for new capabilities ([1d63cd6](https://github.com/erikvullings/mithril-ui-form/commit/1d63cd6e3bbcbef571ecac62e7334ae362ee769a))
+* move delete/+ into left number column for aligned layout ([cb4a83d](https://github.com/erikvullings/mithril-ui-form/commit/cb4a83d7316434f72d14ff3e6fa8b4d040eae088))
+* pagination regression when adding new repeat items with pageSize ([e32b491](https://github.com/erikvullings/mithril-ui-form/commit/e32b4918650582cccfbd23d4b4de09bcf25cb3f3))
+* remove duplicate key from .row.repeat-item sibling ([de87b10](https://github.com/erikvullings/mithril-ui-form/commit/de87b1029c2be94e8acbc1e83ac333361bd3e869))
+* replace delete modal with ConfirmButton, add inline + after last item ([445178d](https://github.com/erikvullings/mithril-ui-form/commit/445178d7b7a2145f75ef972ddcd79f6557d2bd67))
+* restore dot-path array lookup for nested select options ([546c5ff](https://github.com/erikvullings/mithril-ui-form/commit/546c5ff9877d271a5597dbd0a8c6a993f2d4b48b))
+* tighten [N]-to-trash gap, fix + icon horizontal alignment ([6795e49](https://github.com/erikvullings/mithril-ui-form/commit/6795e49a9ece46b248305ad14384f8edbaebcf59))
+* use tsconfig.build.json for typedoc to exclude vitest.config.ts ([f2d77f3](https://github.com/erikvullings/mithril-ui-form/commit/f2d77f364dc66e96fab4bcfca036ffff447cd4cb))
+
+
+### Features
+
+* move repeat-list styles into library; fix pageSize=1 trash spacing ([59153b9](https://github.com/erikvullings/mithril-ui-form/commit/59153b9f2809ef0c4b633a8671a59de43cd2d97b))
+
 # [2.2.0](https://github.com/erikvullings/mithril-ui-form/compare/v2.1.2...v2.2.0) (2026-08-11)
 
 
