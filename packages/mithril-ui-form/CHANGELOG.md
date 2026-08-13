@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/erikvullings/mithril-ui-form/compare/v2.3.0...v2.3.1) (2026-08-13)
+
+
+### Bug Fixes
+
+* update release scripts to include plugin builds and legacy auth for npm publish ([f4c0ec2](https://github.com/erikvullings/mithril-ui-form/commit/f4c0ec2b7b8fbc00879b51314f4f300e17427a5e))
+
 # [2.3.0](https://github.com/erikvullings/mithril-ui-form/compare/v2.2.0...v2.3.0) (2026-08-12)
 
 
