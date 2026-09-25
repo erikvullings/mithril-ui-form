@@ -1,3 +1,10 @@
+## [2.3.3](https://github.com/erikvullings/mithril-ui-form/compare/v2.3.2...v2.3.3) (2026-09-25)
+
+
+### Bug Fixes
+
+* encode repeat-list pagination query parameters ([646915e](https://github.com/erikvullings/mithril-ui-form/commit/646915eaa6a37873c0a64012e34463a1dee61ee2))
+
 ## [2.3.1](https://github.com/erikvullings/mithril-ui-form/compare/v2.3.0...v2.3.1) (2026-08-13)
 
 
