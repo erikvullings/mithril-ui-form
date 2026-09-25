@@ -480,9 +480,9 @@ export const toQueryString = (
   overrideParams: Record<string, any>
 ) => {
   const mergedObj = Object.assign({}, baseParams, overrideParams);
-  return `${fragment}?${Object.keys(mergedObj)
-    .map((key) => `${key}=${mergedObj[key]}`)
-    .join('&')}`;
+  const query = new URLSearchParams();
+  Object.keys(mergedObj).forEach((key) => query.append(key, mergedObj[key]));
+  return `${fragment}?${query.toString()}`;
 };
 
 /** Extract all query parameters to an object */

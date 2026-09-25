@@ -541,6 +541,19 @@ describe('Comprehensive Utils Tests', () => {
       expect(result).toBe('/path?param1=new&param2=value2');
     });
 
+    it('should encode parameter keys and values while applying page overrides', () => {
+      const base = {
+        id: 'restricted-v1:script:phishing-betaalfraude',
+        page: 3,
+        'search term': 'café & 100%',
+      };
+
+      const result = toQueryString('/path', base, { page: 1 });
+      expect(result).toBe(
+        '/path?id=restricted-v1%3Ascript%3Aphishing-betaalfraude&page=1&search+term=caf%C3%A9+%26+100%25'
+      );
+    });
+
     it('should handle empty parameters', () => {
       const result = toQueryString('/path', {}, {});
       expect(result).toBe('/path?');
